@@ -8,8 +8,8 @@
   width: 100%;
   gap: 1em;
   background-color: #363636;
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
   background: linear-gradient(to top, rgba(0, 0, 0, 0), #363636 5% 95%, rgba(0, 0, 0, 0));;
 }
 
@@ -51,7 +51,7 @@
   z-index: 1;
 }
 
-#progression-effect {
+.effect {
   color: rgb(148, 148, 148);
 }
 
@@ -69,4 +69,27 @@
 #autoresetting-text {
   margin-top: .5em;
   margin-bottom: .5em;
+}
+
+#reset-upgrades {
+  background-color: transparent;
+  gap: 10%;
+}
+
+#reset-upgrades > button {
+  background-color: #202020;
+  width: 40%;
+}
+
+#reset-upgrades > button > p {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.bought-upgrade {
+  background-color: #424242 !important;
+}
+
+.bought-upgrade > * {
+  pointer-events: auto;
 }

@@ -7,7 +7,7 @@ interface PlayerContextType {
 
 export const playerContext = createContext<PlayerContextType | undefined>(undefined);
 
-interface Player {
+export interface Player {
   points: number,
   pointGain: number,
   upgradeLvl: number,
@@ -17,26 +17,36 @@ interface Player {
   bestRun: number | null,
   runEffect: number,
   everMadeRun: boolean,
-  autoresettingEnabled: boolean
+  autoresettingEnabled: boolean,
+  bestPointsOfRun: number,
+  bestPointsOfRunEffect: number,
+  boughtFirstResetUpgrade: boolean,
+  boughtSecondResetUpgrade: boolean
 }
 
 interface PlayerProviderProps {
   children: ReactNode
 }
 
+const defaultPlayer: Player = {
+  points: 0,
+  pointGain: 1,
+  upgradeLvl: 0,
+  upgradeCost: 0,
+  upgradeEffect: 1,
+  startedRun: Date.now(),
+  bestRun: null,
+  runEffect: 1,
+  everMadeRun: false,
+  autoresettingEnabled: true,
+  bestPointsOfRun: 0,
+  bestPointsOfRunEffect: 1,
+  boughtFirstResetUpgrade: false,
+  boughtSecondResetUpgrade: false
+}
+
 export const PlayerProvider: React.FC<PlayerProviderProps> = function({ children }) {
-  const [player, setPlayer] = useState<Player>({
-    points: 0,
-    pointGain: 1,
-    upgradeLvl: 0,
-    upgradeCost: 0,
-    upgradeEffect: 1,
-    startedRun: Date.now(),
-    bestRun: null,
-    runEffect: 1,
-    everMadeRun: false,
-    autoresettingEnabled: true
-  });
+  const [player, setPlayer] = useState<Player>(defaultPlayer);
   
   return (
     <playerContext.Provider value={{ player, setPlayer }}>
@@ -51,7 +61,9 @@ interface Settings {
   upgradeStartingCost: number,
   upgradeScaling: number,
   upgradeEffectScaling: number,
-  finalGoal: number
+  finalGoal: number,
+  resetFirstUpgradeCost: number,
+  resetSecondUpgradeCost: number
 }
 
 export const settings: Readonly<Settings> = {
@@ -60,7 +72,9 @@ export const settings: Readonly<Settings> = {
   upgradeStartingCost: 10,
   upgradeScaling: 1.2,
   upgradeEffectScaling: 1.125,
-  finalGoal: 1e6
+  finalGoal: 1e6,
+  resetFirstUpgradeCost: 1e20,
+  resetSecondUpgradeCost: 1e26
 };
 
 export function savePlayerToLocalStorage(player: Player) {
@@ -73,12 +87,15 @@ export function savePlayerToLocalStorage(player: Player) {
 }
 
 export function loadPlayerFromLocalStorage(): Player | null {
+  const savedData = localStorage.getItem(settings.localStorageName);
+  if (!savedData) {
+    return defaultPlayer;
+  }
   try {
-    const encryptedData = localStorage.getItem(settings.localStorageName);
-    if (!encryptedData) return null;
-    return JSON.parse(atob(encryptedData));
+    const parsedData = JSON.parse(atob(savedData));
+    return { ...defaultPlayer, ...parsedData };
   } catch (error) {
-    console.error("Loading player failed:", error);
-    return null;
+    console.error("Error loading player data:", error);
+    return defaultPlayer;
   }
 }

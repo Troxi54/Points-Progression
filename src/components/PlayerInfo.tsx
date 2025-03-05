@@ -14,7 +14,7 @@ function PlayerInfo() {
 
   return (
     <div id="points-container">
-      <p id="points-counter">Points: {format(player.points, 'auto')}</p>
+      <p id="points-counter">Points: {format(player.points)} (+{format(player.pointGain)}/s)</p>
     </div>
   );
 }

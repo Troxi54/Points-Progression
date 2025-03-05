@@ -1,5 +1,14 @@
 import { useEffect, useRef, useContext } from "react";
-import { loadPlayerFromLocalStorage, playerContext, savePlayerToLocalStorage, settings } from "./PlayerContext";
+import { loadPlayerFromLocalStorage, Player, playerContext, savePlayerToLocalStorage, settings } from "./PlayerContext";
+import { buyMax } from "./UpgradeButton";
+
+export function updateUpgradeValues(setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
+  setPlayer((prev) => ({
+    ...prev,
+    upgradeCost: settings.upgradeStartingCost * settings.upgradeScaling ** prev.upgradeLvl,
+    upgradeEffect: settings.upgradeEffectScaling ** prev.upgradeLvl
+  }));
+}
 
 function GameLoop() {
   const context = useContext(playerContext);
@@ -28,26 +37,26 @@ function GameLoop() {
         });
       }
     }
-    function updateUpgradeValues() {
-      setPlayer((prev) => ({
-        ...prev,
-        upgradeCost: settings.upgradeStartingCost * settings.upgradeScaling ** prev.upgradeLvl,
-        upgradeEffect: settings.upgradeEffectScaling ** prev.upgradeLvl
-      }));
+    function automateUpgrade() {
+      setPlayer(prev => {
+        if (!prev.boughtSecondResetUpgrade) return prev;
+        buyMax(undefined, setPlayer);
+        return prev;
+      });
     }
+    
     function updatePoints(time: number) {
       const deltaTime = (time - lastTimeRef.current) / 1000;
       lastTimeRef.current = time;
 
       setPlayer((prev) => ({ ...prev,
-        pointGain: prev.upgradeEffect * prev.runEffect
+        pointGain: prev.upgradeEffect * prev.runEffect * prev.bestPointsOfRunEffect,
       }));
       setPlayer((prev) => ({ ...prev,
         points: prev.points + deltaTime * prev.pointGain
       }));
     }
     const DAY_IN_MS = 8.64e7;
-    const DAY_IN_MS_LOG = Math.log10(DAY_IN_MS);
     function updateGoal() {
       setPlayer((prev) => {
         if (prev.points < settings.finalGoal || !prev.autoresettingEnabled) return prev;
@@ -55,6 +64,7 @@ function GameLoop() {
         
         return {
           ...prev,
+          bestPointsOfRun: prev.points > prev.bestPointsOfRun ? prev.points : prev.bestPointsOfRun,
           everMadeRun: true,
           upgradeLvl: 0,
           points: 0,
@@ -69,14 +79,16 @@ function GameLoop() {
       const TWO_HOURS_IN_MS = 7.2e6;
       setPlayer((prev) => ({
         ...prev,
-        runEffect: prev.bestRun === null ? 1 : Math.min(1 + Math.log10(TWO_HOURS_IN_MS) / Math.log10(prev.bestRun), 2) * 5 ** (DAY_IN_MS_LOG - Math.log10(prev.bestRun))
+        runEffect: prev.bestRun === null ? 1 : Math.min(1 + Math.log10(TWO_HOURS_IN_MS) / Math.log10(prev.bestRun), 2) * (prev.bestRun <= TWO_HOURS_IN_MS ? 5 ** (Math.log10(TWO_HOURS_IN_MS) - Math.log10(prev.bestRun)) : 1),
+        bestPointsOfRunEffect: 1 + Math.log10(Math.max(prev.bestPointsOfRun, 1e6) / 1e6) ** 1.2
       }));
     }
     
     function updateAll(time: number) {
       updateGoal();
       updateGoalEffect();
-      updateUpgradeValues();
+      automateUpgrade();
+      updateUpgradeValues(setPlayer);
       updatePoints(time);
       savePlayer();
 
