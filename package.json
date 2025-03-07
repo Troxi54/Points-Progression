@@ -12,6 +12,7 @@
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
+    "break_eternity.js": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

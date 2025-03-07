@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { playerContext } from "./PlayerContext";
 
-function StopAutoresettingButton() {
+function AutoresettingButton() {
   const context = useContext(playerContext);
   if (!context) {
     return (
@@ -18,12 +18,12 @@ function StopAutoresettingButton() {
   }
 
   return (
-    <div id="autoresetting-div" style={{display: player.everMadeRun ? '' : 'none'}}>
+    <div id="autoresetting-div">
       <button id="autoresetting-button" onClick={toggleAutoresetting}>
-        <p id="autoresetting-text">{player.autoresettingEnabled ? 'Disable autoresetting' : 'Enable autoresetting'}</p>
+        <p id="autoresetting-text">{player.autoresettingEnabled ? 'Auto Reset: enabled' : 'Auto Reset: disabled'}</p>
       </button>
     </div>
   );
 }
 
-export default StopAutoresettingButton;
+export default AutoresettingButton;

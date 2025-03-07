@@ -1,3 +1,4 @@
+import Decimal from "break_eternity.js";
 import { createContext, ReactNode, useState } from "react";
 
 interface PlayerContextType {
@@ -8,45 +9,72 @@ interface PlayerContextType {
 export const playerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export interface Player {
-  points: number,
-  pointGain: number,
-  upgradeLvl: number,
-  upgradeCost: number,
-  upgradeEffect: number,
+  points: Decimal,
+  pointGain: Decimal,
+  upgradeLvl: Decimal,
+  upgradeCost: Decimal,
+  upgradeEffect: Decimal,
   startedRun: number,
   bestRun: number | null,
-  runEffect: number,
+  runEffect: Decimal,
   everMadeRun: boolean,
   autoresettingEnabled: boolean,
-  bestPointsOfRun: number,
-  bestPointsOfRunEffect: number,
+  bestPointsOfRun: Decimal,
+  bestPointsOfRunEffect: Decimal,
   boughtFirstResetUpgrade: boolean,
-  boughtSecondResetUpgrade: boolean
+  boughtSecondResetUpgrade: boolean,
+  everMadeTier: boolean,
+  tier: Decimal,
+  madeTierTimes: Decimal,
+  tierRequirement: Decimal,
+  autoTierEnabled: boolean,
+  tierEffect: Decimal,
+  tierTimesEffect: Decimal,
+  boughtFirstTierUpgrade: boolean,
+  boughtSecondTierUpgrade: boolean,
+  boughtThirdTierUpgrade: boolean,
+  boughtFourthTierUpgrade: boolean,
+  tierStartedDate: number | null
 }
 
 interface PlayerProviderProps {
   children: ReactNode
 }
 
-const defaultPlayer: Player = {
-  points: 0,
-  pointGain: 1,
-  upgradeLvl: 0,
-  upgradeCost: 0,
-  upgradeEffect: 1,
-  startedRun: Date.now(),
-  bestRun: null,
-  runEffect: 1,
-  everMadeRun: false,
-  autoresettingEnabled: true,
-  bestPointsOfRun: 0,
-  bestPointsOfRunEffect: 1,
-  boughtFirstResetUpgrade: false,
-  boughtSecondResetUpgrade: false
+function getDefaultPlayer(): Player {
+  const defaultPlayer: Player = {
+    points: new Decimal(0),
+    pointGain: new Decimal(1),
+    upgradeLvl: new Decimal(0),
+    upgradeCost: new Decimal(0),
+    upgradeEffect: new Decimal(1),
+    startedRun: Date.now(),
+    bestRun: null,
+    runEffect: new Decimal(1),
+    everMadeRun: false,
+    autoresettingEnabled: true,
+    bestPointsOfRun: new Decimal(0),
+    bestPointsOfRunEffect: new Decimal(1),
+    boughtFirstResetUpgrade: false,
+    boughtSecondResetUpgrade: false,
+    everMadeTier: false,
+    tier: new Decimal(0),
+    madeTierTimes: new Decimal(0),
+    tierRequirement: new Decimal(Infinity),
+    autoTierEnabled: true,
+    tierEffect: new Decimal(1),
+    tierTimesEffect: new Decimal(1),
+    boughtFirstTierUpgrade: false,
+    boughtSecondTierUpgrade: false,
+    boughtThirdTierUpgrade: false,
+    boughtFourthTierUpgrade: false,
+    tierStartedDate: null
+  }
+  return defaultPlayer;
 }
 
 export const PlayerProvider: React.FC<PlayerProviderProps> = function({ children }) {
-  const [player, setPlayer] = useState<Player>(defaultPlayer);
+  const [player, setPlayer] = useState<Player>(getDefaultPlayer());
   
   return (
     <playerContext.Provider value={{ player, setPlayer }}>
@@ -58,44 +86,73 @@ export const PlayerProvider: React.FC<PlayerProviderProps> = function({ children
 interface Settings {
   localStorageName: string,
   saveInterval: number,
-  upgradeStartingCost: number,
-  upgradeScaling: number,
-  upgradeEffectScaling: number,
-  finalGoal: number,
-  resetFirstUpgradeCost: number,
-  resetSecondUpgradeCost: number
+  upgradeStartingCost: Decimal,
+  upgradeScaling: Decimal,
+  upgradeEffectScaling: Decimal,
+  finalGoal: Decimal,
+  resetFirstUpgradeCost: Decimal,
+  resetSecondUpgradeCost: Decimal,
+  firstTierAt: Decimal,
+  tierScaling: Decimal,
+  firstTierUpgradeCost: Decimal,
+  secondTierUpgradeCost: Decimal,
+  thirdTierUpgradeCost: Decimal,
+  fourthTierUpgradeCost: Decimal,
 }
 
 export const settings: Readonly<Settings> = {
   localStorageName: 'PointsProgression',
   saveInterval: 10000,
-  upgradeStartingCost: 10,
-  upgradeScaling: 1.2,
-  upgradeEffectScaling: 1.125,
-  finalGoal: 1e6,
-  resetFirstUpgradeCost: 1e20,
-  resetSecondUpgradeCost: 1e26
+  upgradeStartingCost: new Decimal(10),
+  upgradeScaling: new Decimal(1.2),
+  upgradeEffectScaling: new Decimal(1.125),
+  finalGoal: new Decimal(1e6),
+  resetFirstUpgradeCost: new Decimal(1e20),
+  resetSecondUpgradeCost: new Decimal(1e23),
+  firstTierAt: new Decimal(1e25),
+  tierScaling: new Decimal(1000),
+  firstTierUpgradeCost: new Decimal(1e27),
+  secondTierUpgradeCost: new Decimal(1e32),
+  thirdTierUpgradeCost: new Decimal(1e40),
+  fourthTierUpgradeCost: new Decimal(1e62)
 };
+
+export function getConvertedPlayerData(player: Player): string {
+  return btoa(JSON.stringify(player));
+}
 
 export function savePlayerToLocalStorage(player: Player) {
   try {
-    const encryptedData = btoa(JSON.stringify(player));
+    const encryptedData = getConvertedPlayerData(player);
     localStorage.setItem(settings.localStorageName, encryptedData);
   } catch (error) {
     console.error("Saving player failed:", error);
   }
 }
 
-export function loadPlayerFromLocalStorage(): Player | null {
-  const savedData = localStorage.getItem(settings.localStorageName);
+export function loadPlayer(savedData: string): Player {
   if (!savedData) {
-    return defaultPlayer;
+    return getDefaultPlayer();
   }
   try {
     const parsedData = JSON.parse(atob(savedData));
-    return { ...defaultPlayer, ...parsedData };
+    const merged = { ...getDefaultPlayer(), ...parsedData };
+    for (let property in merged) {
+      if (getDefaultPlayer()[property as keyof Player] instanceof Decimal)
+        merged[property] = new Decimal(merged[property]);
+    }
+    if (merged.bestRun !== null && merged.bestRun < 10) merged.bestRun = 10;
+    return merged;
   } catch (error) {
     console.error("Error loading player data:", error);
-    return defaultPlayer;
+    return getDefaultPlayer();
   }
+}
+
+export function loadPlayerFromLocalStorage(): Player {
+  const savedData = localStorage.getItem(settings.localStorageName);
+  if (!savedData) {
+    return getDefaultPlayer();
+  }
+  return loadPlayer(savedData);
 }

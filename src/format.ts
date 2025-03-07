@@ -1,60 +1,75 @@
-export function format(num: number, precision: number | "auto" = "auto"): string {
+import Decimal, { DecimalSource } from "break_eternity.js";
+
+export function format(num: DecimalSource, precision: number | "auto" = "auto"): string {
+  num = new Decimal(num);
   function removePrecisionIf() {
-    if (divided >= 1000 && precisionWasAuto)
+    if (divided.greaterThanOrEqualTo(1000) && precisionWasAuto)
       precision = 0;
   }
-  if (num === 0) return '0';
-  if (num < 1 && num > -1) {
+  if (num.equals(0)) return '0';
+  if (num.lessThan(1) && num.greaterThan(-1)) {
     if (precision === "auto")
       precision = 2;
     return num.toFixed(precision);
   }
-  if ((num >= 1000 || num <= -1000) && precision === 0) {
+  if ((num.greaterThanOrEqualTo(1000) || num.lessThanOrEqualTo(-1000)) && precision === 0) {
     precision = 'auto';
   }
   let precisionWasAuto = false;
   if (precision === "auto") {
     precisionWasAuto = true;
-    precision = num / 1000 ** Math.floor(Math.log10(Math.abs(num)) / 3);
+    precision = +num.dividedBy(Decimal.pow(1000, num.abs().log10().dividedBy(3).floor()));
     precision = 3 - Math.floor(Math.log10(precision));
   }
   const units = ['', 'k', 'M', 'B', 'T']; 
-  let index = Math.floor(Math.log10(Math.abs(num)) / 3);
-  index = Math.min(units.length - 1, index);
-  let divided = (num / 1000 ** index);
-  if (divided >= 1e6) {
-    const units2 = ['', 'U', 'U+', 'U++', 'U+++', 'OP', 'OP+',
-                    'OP*', 'OP^', 'OP^^', 'OP^^^', 'i'];
-    index = Math.floor(Math.log10(Math.abs(divided)) / 6);
-    index = Math.min(units2.length - 1, index);
-    divided = (divided / 1e6 ** index);
-    if (divided >= 1e9) {
+  let index = num.abs().log10().dividedBy(3).floor();
+  index = Decimal.min(units.length - 1, index);
+  let divided = num.dividedBy(Decimal.pow(1000, index));
+  if (divided.greaterThanOrEqualTo(1e6)) {
+    const units2 = ['', 'U', 'U+', 'U++', 'A', 'A+', 'A++',
+                    'C', 'C+', 'C++', 'S', 'S+', 
+                    'S++', 'OP', 'OP+', 'OP++', 'OP*', 'OP^', 
+                    'OP^^', 'i'];
+    index = divided.abs().log10().dividedBy(6).floor();
+    index = Decimal.min(units2.length - 1, index);
+    divided = divided.dividedBy(Decimal.pow(1e6, index));
+    if (divided.greaterThanOrEqualTo(1e9)) {
       if (precisionWasAuto)
         precision = 2;
       return num.toExponential(precision).replace(/[+]/, '');
     }
     removePrecisionIf();
-    return divided.toFixed(precision) + units2[index];
+    return divided.toFixed(precision) + units2[+index];
   }
   removePrecisionIf();
-  return divided.toFixed(precision) + units[index];
+  return divided.toFixed(precision) + units[+index];
 }
 
-export function formatTime(ms: number): string {
-  if (ms < 1000) {
-    return ms + 'ms';
+export function formatTime(milliseconds: DecimalSource): string {
+  milliseconds = new Decimal(milliseconds);
+  const seconds = milliseconds.dividedBy(1000);
+  const minutes = seconds.dividedBy(60);
+  const hours = minutes.dividedBy(60);
+  const days = hours.dividedBy(24);
+  const years = days.dividedBy(365);
+
+  if (years.greaterThanOrEqualTo(1000)) {
+    return `${format(years.floor())}y`;
   }
-  if (ms < 60000) {
-    return (ms / 1000).toFixed(3) + "s";
+  if (years.greaterThanOrEqualTo(10)) {
+    return `${years.floor()}y`;
   }
-
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor((ms % 3600000) / 60000);
-  const s = Math.floor((ms % 60000) / 1000);
-
-  const hh = h > 0 ? String(h).padStart(2, "0") + ":" : "";
-  const mm = String(m).padStart(2, "0");
-  const ss = String(s).padStart(2, "0");
-
-  return ms >= 600000 ? `${hh}${mm}:${ss}` : `${hh}${mm}:${ss}.${(ms % 1000).toString().padStart(3, "0")}`;
+  if (days.greaterThanOrEqualTo(10)) {
+    return `${days.floor()}d`;
+  }
+  if (hours.greaterThanOrEqualTo(1)) {
+    return `${hours.floor()}h. ${minutes.mod(60).floor()}m${seconds.mod(60).floor().equals(0) ? '' : `. ${seconds.mod(60).floor()}s`}`;
+  }
+  if (minutes.greaterThanOrEqualTo(1)) {
+    return `${minutes.floor()}m${seconds.mod(60).floor().equals(0) ? '' : `. ${seconds.mod(60).floor()}s`}`;
+  }
+  if (seconds.greaterThanOrEqualTo(1)) {
+    return `${seconds.toFixed(3)}s`;
+  }
+  return `${milliseconds.floor()}ms`;
 }

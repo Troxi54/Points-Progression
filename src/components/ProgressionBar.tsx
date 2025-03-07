@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { playerContext, settings } from "./PlayerContext";
 import { format, formatTime } from "../format";
+import Decimal from "break_eternity.js";
 
 function ProgressionBar() {
   const context = useContext(playerContext);
@@ -11,12 +12,12 @@ function ProgressionBar() {
   }
 
   const { player } = context;
-  const progress = Math.min(player.points / settings.finalGoal * 1, 1) * 100;
-  const timeLeft = Math.max(Math.floor((settings.finalGoal - player.points) / player.pointGain * 1000), 0);
+  const progress = +Decimal.min(player.points.dividedBy(settings.finalGoal), 1).multiply(100);
+  const timeLeft = Decimal.max(settings.finalGoal.minus(player.points).div(player.pointGain).multiply(1000), 0);
   return (
-    <div id="progression-div">
-      <p id="progression-info">Goal: {format(settings.finalGoal)} - {timeLeft > 0 ? formatTime(timeLeft) : 'Ready'}<span style={{display: player.everMadeRun ? '' : 'none'}}>&emsp;|&emsp;Best run: {formatTime(player.bestRun === null ? 0 : player.bestRun)} - <span className="effect">Effect: {format(player.runEffect)}x</span>&emsp;|&emsp;Best points: {format(player.bestPointsOfRun)} - <span className="effect">Effect: {format(player.bestPointsOfRunEffect)}x</span></span></p>
-      <div id="progression-bar" style={{width: `${progress}%`}}></div>
+    <div className="progression-div">
+      <p className="progression-info">Goal: {format(settings.finalGoal)} - <span className="time">{timeLeft.greaterThan(0) ? formatTime(timeLeft) : 'Ready'}</span>{player.everMadeRun && (<span>&emsp;|&emsp;Best run: {player.bestRun === null ? 'no' : formatTime(player.bestRun)} - <span className="effect">Effect: {format(player.runEffect)}x</span>&emsp;|&emsp;Best points: {format(player.bestPointsOfRun)} - <span className="effect">Effect: {format(player.bestPointsOfRunEffect)}x</span></span>)}</p>
+      <div className="progression-bar" style={{width: `${progress}%`}}></div>
     </div>
   )
 }

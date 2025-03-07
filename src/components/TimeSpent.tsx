@@ -13,7 +13,7 @@ function TimeSpent() {
   const { player } = context;
   return (
     <div>
-      <p>Time spent this run: {formatTime(Date.now() - player.startedRun)}</p>
+      <p>Time spent this run: {player.tierStartedDate === null ? formatTime(Date.now() - player.startedRun) : <><span>{formatTime(Date.now() - player.tierStartedDate)}</span> <span className="tier">(T)</span></>}</p>
     </div>
   )
 }

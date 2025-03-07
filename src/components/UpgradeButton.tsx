@@ -5,14 +5,14 @@ import { updateUpgradeValues } from "./GameLoop";
 
 export function buyMax(_: React.MouseEvent | undefined, setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
   setPlayer(prev => {
-    if (prev.points < prev.upgradeCost) return prev;
+    if (prev.points.lessThan(prev.upgradeCost)) return prev;
     const SCALING = settings.upgradeScaling;
-    const bulk = Math.floor(Math.log10(prev.points / prev.upgradeCost) / Math.log10(SCALING));
-    const finalCost = prev.upgradeCost * SCALING ** bulk;
+    const bulk = prev.points.dividedBy(prev.upgradeCost).log(SCALING).floor();
+    const finalCost = prev.upgradeCost.multiply(SCALING.pow(bulk));
     return {
       ...prev,
-      points: prev.boughtFirstResetUpgrade ? prev.points : prev.points - finalCost,
-      upgradeLvl: prev.upgradeLvl + bulk + 1
+      points: prev.boughtFirstResetUpgrade ? prev.points : prev.points.minus(finalCost),
+      upgradeLvl: prev.upgradeLvl.plus(bulk.plus(1))
     };
   });
   updateUpgradeValues(setPlayer);
@@ -31,11 +31,11 @@ function UpgradeButton() {
   function buy(event: React.MouseEvent) {
     setPlayer(prev => {
       event.preventDefault();
-      if (prev.points < prev.upgradeCost) return prev;
+      if (prev.points.lessThan(prev.upgradeCost)) return prev;
       return {
         ...prev,
-        points: prev.boughtFirstResetUpgrade ? prev.points : prev.points - prev.upgradeCost,
-        upgradeLvl: prev.upgradeLvl + 1
+        points: prev.boughtFirstResetUpgrade ? prev.points : prev.points.minus(prev.upgradeCost),
+        upgradeLvl: prev.upgradeLvl.plus(1)
       };
     });
   }
@@ -43,7 +43,7 @@ function UpgradeButton() {
   return (
     <div id="upgrade-div">
       <button id="upgrade-button" onClick={(e) => buyMax(e, setPlayer)} onContextMenu={buy}>
-        <p id="upgrade-cost">Upgrade: {format(player.upgradeCost)} <span style={{display: player.upgradeLvl >= 1 ? '' : 'none'}}>({format(player.upgradeLvl, 0)})</span></p>
+        <p id="upgrade-cost">Upgrade: {format(player.upgradeCost)} {player.upgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.upgradeLvl, 0)})</span>)}</p>
         <p id="upgrade-effect">Effect: {format(player.upgradeEffect)}x</p>
       </button>
     </div>

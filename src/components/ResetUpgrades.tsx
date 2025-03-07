@@ -13,11 +13,11 @@ function ResetUpgrades() {
   const { player, setPlayer } = context;
   function buyFirstUpgrade() {
     setPlayer(prev => {
-      if (prev.points < settings.resetFirstUpgradeCost || player.boughtFirstResetUpgrade) return prev;
+      if (prev.points.lessThan(settings.resetFirstUpgradeCost) || player.boughtFirstResetUpgrade) return prev;
       return {
         ...prev,
         boughtFirstResetUpgrade: true,
-        points: prev.points - settings.resetFirstUpgradeCost
+        points: prev.boughtFirstTierUpgrade ? prev.points : prev.points.minus(settings.resetFirstUpgradeCost)
       };
     });
   }
@@ -27,11 +27,11 @@ function ResetUpgrades() {
   }
   function buySecondUpgrade() {
     setPlayer(prev => {
-      if (prev.points < settings.resetSecondUpgradeCost || player.boughtSecondResetUpgrade) return prev;
+      if (prev.points.lessThan(settings.resetSecondUpgradeCost) || player.boughtSecondResetUpgrade) return prev;
       return {
         ...prev,
         boughtSecondResetUpgrade: true,
-        points: prev.points - settings.resetSecondUpgradeCost
+        points: prev.boughtFirstTierUpgrade ? prev.points : prev.points.minus(settings.resetSecondUpgradeCost)
       };
     });
   }
@@ -40,13 +40,13 @@ function ResetUpgrades() {
     buySecondUpgrade();
   }
   return (
-    <div id="reset-upgrades" style={{display: player.everMadeRun ? '' : 'none'}}>
+    <div id="reset-upgrades">
       <button id="reset-upgrade-1" onClick={buyFirstUpgrade} onContextMenu={firstUpgradeContextMenu} className={player.boughtFirstResetUpgrade ? 'bought-upgrade' : ''}>
-        <p className="reset-upgrade-text">Reset upgrade 1: {format(settings.resetFirstUpgradeCost)} - <span className="effect">Upgrade no longer take points</span></p>
+        <p className="reset-upgrade-text">Reset upgrade 1: {format(settings.resetFirstUpgradeCost)} - <span className="reset-upgrade-effect">Upgrade no longer takes points</span></p>
       </button>
-      <button id="reset-upgrade-1" style={{display: player.boughtFirstResetUpgrade ? '' : 'none'}} onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondResetUpgrade ? 'bought-upgrade' : ''}>
-        <p className="reset-upgrade-text">Reset upgrade 2: {format(settings.resetSecondUpgradeCost)} - <span className="effect">Automate upgrade</span></p>
-      </button>
+      {(player.boughtFirstResetUpgrade || player.everMadeTier) && (<button id="reset-upgrade-1" onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondResetUpgrade ? 'bought-upgrade' : ''}>
+        <p className="reset-upgrade-text">Reset upgrade 2: {format(settings.resetSecondUpgradeCost)} - <span className="reset-upgrade-effect">Automate upgrade</span></p>
+      </button>)}
     </div>
   )
 }

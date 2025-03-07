@@ -1,27 +1,55 @@
 import './App.css'
 import GameLoop from './components/GameLoop';
-import { PlayerProvider } from './components/PlayerContext';
+import { playerContext } from './components/PlayerContext';
 import PlayerInfo from './components/PlayerInfo';
 import ProgressionBar from './components/ProgressionBar';
 import ResetUpgrades from './components/ResetUpgrades';
-import StopAutoresettingButton from './components/StopAutoresettingButton';
+import AutoresettingButton from './components/AutoresettingButton';
 import TimeSpent from './components/TimeSpent';
 import UpgradeButton from './components/UpgradeButton';
+import TierBar from './components/TierBar';
+import AutotierButton from './components/AutotierButton';
+import TierUpgrades from './components/TierUpgrades';
+import { useContext } from 'react';
+import DataButtons from './components/DataButtons';
 
 function App() {
+  const context = useContext(playerContext);
+  if (!context) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+  const { player } = context;
   return (
     <>
-      <div className="game-container">
-        <PlayerProvider>
-          <GameLoop/>
-          <TimeSpent/>
-          <PlayerInfo/>
-          <UpgradeButton/>
-          <ProgressionBar/>
-          <StopAutoresettingButton/>
-          <ResetUpgrades/>
-        </PlayerProvider>
+      <div className="layer first-layer">
+        <GameLoop/>
+        <DataButtons/>
+        <TimeSpent/>
+        <PlayerInfo/>
+        <UpgradeButton/>
+        <ProgressionBar/>
+        {player.everMadeRun && (
+          <>
+            {!player.boughtFourthTierUpgrade && (
+              <AutoresettingButton/>
+            )}
+            <ResetUpgrades/>
+          </>
+        )}
       </div>
+      {player.everMadeRun && (
+        <div className="layer second-layer">
+          <TierBar/>
+          {player.everMadeTier && (
+            <>
+              <AutotierButton/>
+              <TierUpgrades/>
+            </>
+          )}
+        </div>
+      )}
     </>
   )
 }
