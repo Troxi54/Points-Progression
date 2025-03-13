@@ -39,7 +39,6 @@ function GameLoop() {
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
       setPlayer(savedPlayer);
-      setPlayer(prev => ({ ...prev, madeTierTimes: new Decimal('1e6') }));
     }
 
     function savePlayer() {
