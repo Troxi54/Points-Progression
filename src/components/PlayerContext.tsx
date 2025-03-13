@@ -1,9 +1,10 @@
 import Decimal from "break_eternity.js";
-import { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 
 interface PlayerContextType {
   player: Player,
-  setPlayer: React.Dispatch<React.SetStateAction<Player>>
+  setPlayer: React.Dispatch<React.SetStateAction<Player>>,
+  playerRef: React.RefObject<Player>
 }
 
 export const playerContext = createContext<PlayerContextType | undefined>(undefined);
@@ -34,7 +35,15 @@ export interface Player {
   boughtSecondTierUpgrade: boolean,
   boughtThirdTierUpgrade: boolean,
   boughtFourthTierUpgrade: boolean,
-  tierStartedDate: number | null
+  tierStartedDate: number | null,
+  ampliflux: Decimal,
+  amplifluxGain: Decimal,
+  amplifluxEffect: Decimal,
+  amplifluxUpgradeLvl: Decimal,
+  amplifluxUpgradeCost: Decimal,
+  amplifluxUpgradeEffect: Decimal,
+  boughtFifthTierUpgrade: boolean,
+  boughtSixthTierUpgrade: boolean
 }
 
 interface PlayerProviderProps {
@@ -68,16 +77,29 @@ function getDefaultPlayer(): Player {
     boughtSecondTierUpgrade: false,
     boughtThirdTierUpgrade: false,
     boughtFourthTierUpgrade: false,
-    tierStartedDate: null
+    tierStartedDate: null,
+    ampliflux: new Decimal(0),
+    amplifluxGain: new Decimal(1),
+    amplifluxEffect: new Decimal(1),
+    amplifluxUpgradeLvl: new Decimal(0),
+    amplifluxUpgradeCost: new Decimal(0),
+    amplifluxUpgradeEffect: new Decimal(1),
+    boughtFifthTierUpgrade: false,
+    boughtSixthTierUpgrade: false
   }
   return defaultPlayer;
 }
 
 export const PlayerProvider: React.FC<PlayerProviderProps> = function({ children }) {
   const [player, setPlayer] = useState<Player>(getDefaultPlayer());
+  const playerRef = React.useRef<Player>(player);
   
+  useEffect(() => {
+    playerRef.current = player;
+  }, [player]);
+
   return (
-    <playerContext.Provider value={{ player, setPlayer }}>
+    <playerContext.Provider value={{ player, setPlayer, playerRef }}>
       { children }
     </playerContext.Provider>
   );
@@ -98,6 +120,11 @@ interface Settings {
   secondTierUpgradeCost: Decimal,
   thirdTierUpgradeCost: Decimal,
   fourthTierUpgradeCost: Decimal,
+  amplifluxUpgradeStartingCost: Decimal,
+  amplifluxUpgradeCostScaling: Decimal,
+  amplifluxUpgradeEffectScaling: Decimal,
+  fifthTierUpgradeCost: Decimal,
+  sixthTierUpgradeCost: Decimal
 }
 
 export const settings: Readonly<Settings> = {
@@ -114,7 +141,12 @@ export const settings: Readonly<Settings> = {
   firstTierUpgradeCost: new Decimal(1e27),
   secondTierUpgradeCost: new Decimal(1e32),
   thirdTierUpgradeCost: new Decimal(1e40),
-  fourthTierUpgradeCost: new Decimal(1e62)
+  fourthTierUpgradeCost: new Decimal(1e62),
+  amplifluxUpgradeStartingCost: new Decimal(10),
+  amplifluxUpgradeCostScaling: new Decimal(1.15),
+  amplifluxUpgradeEffectScaling: new Decimal(1.1),
+  fifthTierUpgradeCost: new Decimal(1e74),
+  sixthTierUpgradeCost: new Decimal(1e82),
 };
 
 export function getConvertedPlayerData(player: Player): string {

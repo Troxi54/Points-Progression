@@ -12,6 +12,9 @@ import AutotierButton from './components/AutotierButton';
 import TierUpgrades from './components/TierUpgrades';
 import { useContext } from 'react';
 import DataButtons from './components/DataButtons';
+import Ampliflux from './components/Ampliflux';
+import AmplifluxUpgrade from './components/AmplifluxUpgrade';
+import MoreTierUpgrades from './components/MoreTierUpgrade';
 
 function App() {
   const context = useContext(playerContext);
@@ -46,6 +49,13 @@ function App() {
             <>
               <AutotierButton/>
               <TierUpgrades/>
+              {player.boughtFourthTierUpgrade && (
+                <>
+                  <Ampliflux/>
+                  <AmplifluxUpgrade/>
+                  <MoreTierUpgrades/>
+                </>
+              )}
             </>
           )}
         </div>

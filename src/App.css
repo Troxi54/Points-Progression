@@ -56,6 +56,7 @@
 
 #upgrade-cost {
   color: yellow;
+  transition: color 250ms linear;
 }
 
 #upgrade-button:hover > #upgrade-cost {
@@ -97,7 +98,7 @@
   margin-bottom: .5em;
 }
 
-#reset-upgrades, #tier-upgrades {
+#reset-upgrades, #tier-upgrades, #more-tier-upgrades {
   background-color: transparent;
 }
 
@@ -176,4 +177,46 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+
+#ampliflux-upgrade-div {
+  background-color: hsl(230, 35%, 13%);
+}
+
+#ampliflux-upgrade-button:hover {
+  border-color: hsl(230, 100%, 50%);
+}
+
+#ampliflux-upgrade-cost {
+  color: hsl(230, 100%, 50%);
+  transition: color 250ms linear;
+}
+
+#ampliflux-upgrade-button:hover > #ampliflux-upgrade-cost {
+  color: hsl(230, 100%, 80%);
+}
+
+#ampliflux-upgrade-effect {
+  color:hsl(230, 20%, 48%);
+}
+
+#ampliflux-container {
+  background-color: hsl(230, 75%, 13%);
+}
+
+#ampliflux-counter {
+  color: hsl(230, 100%, 50%);
+}
+
+.ampliflux-effect {
+  color: hsl(230, 100%, 31%);
+}
+
+#more-tier-upgrades {
+  gap: 10%;
+}
+
+#more-tier-upgrades > button {
+  background-color: #202020;
+  width: 40%;
 }

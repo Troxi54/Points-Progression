@@ -27,8 +27,10 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
   let divided = num.dividedBy(Decimal.pow(1000, index));
   if (divided.greaterThanOrEqualTo(1e6)) {
     const units2 = ['', 'U', 'U+', 'U++', 'A', 'A+', 'A++',
-                    'C', 'C+', 'C++', 'S', 'S+', 
-                    'S++', 'OP', 'OP+', 'OP++', 'OP*', 'OP^', 
+                    'C', 'C+', 'C++', 'S', 'S+', 'S++',
+                    'O', 'O+', 'O++', 'N', 'N+', 'N++',
+                    'D', 'D+', 'D++', 'L', 'L+', 'L++',
+                    'S++', 'OP', 'OP+', 'OP++', 'OP*', 'OP**', 'OP^', 
                     'OP^^', 'i'];
     index = divided.abs().log10().dividedBy(6).floor();
     index = Decimal.min(units2.length - 1, index);

@@ -2,12 +2,21 @@ import { useEffect, useRef, useContext } from "react";
 import { loadPlayerFromLocalStorage, Player, playerContext, savePlayerToLocalStorage, settings } from "./PlayerContext";
 import { buyMax } from "./UpgradeButton";
 import Decimal from "break_eternity.js";
+import { buyMaxAmpliflux } from "./AmplifluxUpgrade";
 
 export function updateUpgradeValues(setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
   setPlayer((prev) => ({
     ...prev,
     upgradeCost: settings.upgradeStartingCost.multiply(Decimal.pow(settings.upgradeScaling, prev.upgradeLvl)),
     upgradeEffect: settings.upgradeEffectScaling.pow(prev.upgradeLvl)
+  }));
+}
+
+export function updateAmplifluxUpgradeValues(setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
+  setPlayer((prev) => ({
+    ...prev,
+    amplifluxUpgradeCost: settings.amplifluxUpgradeStartingCost.multiply(Decimal.pow(settings.amplifluxUpgradeCostScaling, prev.amplifluxUpgradeLvl)),
+    amplifluxUpgradeEffect: settings.amplifluxUpgradeEffectScaling.pow(prev.amplifluxUpgradeLvl)
   }));
 }
 
@@ -19,23 +28,24 @@ function GameLoop() {
     return null;
   }
 
-  const { setPlayer } = context;
+  const { setPlayer, playerRef } = context;
   const lastTimeRef = useRef(performance.now());
   const lastTimeSaveRef = useRef(performance.now());
+  const lastTierTime = useRef(0);
+  const TIER_INTERVAL = 1 / 60;
+  const lastTimeAmplifluxRef = useRef(performance.now());
 
   useEffect(() => {
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
       setPlayer(savedPlayer);
+      setPlayer(prev => ({ ...prev, madeTierTimes: new Decimal('1e6') }));
     }
 
     function savePlayer() {
       if (performance.now() - lastTimeSaveRef.current >= settings.saveInterval) {
         lastTimeSaveRef.current = performance.now();
-        setPlayer(prev => {
-          savePlayerToLocalStorage(prev);
-          return prev;
-        });
+        savePlayerToLocalStorage(playerRef.current);
       }
     }
     function automateUpgrade() {
@@ -45,13 +55,20 @@ function GameLoop() {
         return prev;
       });
     }
+    function automateAmplifluxUpgrade() {
+      setPlayer(prev => {
+        if (!prev.boughtSixthTierUpgrade) return prev;
+        buyMaxAmpliflux(undefined, setPlayer);
+        return prev;
+      });
+    }
     
     function updatePoints(time: number) {
       const deltaTime = (time - lastTimeRef.current) / 1000;
       lastTimeRef.current = time;
 
       setPlayer((prev) => ({ ...prev,
-        pointGain: prev.upgradeEffect.multiply(prev.runEffect).multiply(prev.bestPointsOfRunEffect).multiply(prev.tierEffect).multiply(prev.tierTimesEffect),
+        pointGain: prev.upgradeEffect.multiply(prev.runEffect).multiply(prev.bestPointsOfRunEffect).multiply(prev.tierEffect).multiply(prev.tierTimesEffect).multiply(prev.amplifluxEffect)
       }));
       setPlayer((prev) => ({ ...prev,
         points: prev.points.plus(prev.pointGain.multiply(deltaTime))
@@ -100,8 +117,12 @@ function GameLoop() {
       }))
     }
     function updateTier() {
+      const now = performance.now() / 1000;
+      if (now - lastTierTime.current < TIER_INTERVAL) return;
       setPlayer((prev) => {
         if (prev.points.lessThan(settings.firstTierAt) || !prev.autoTierEnabled) return prev;
+
+        lastTierTime.current = now;
 
         let bulk = prev.points.dividedBy(prev.tierRequirement).log(settings.tierScaling).floor();
         if (prev.points.lessThan(prev.tierRequirement)) bulk = new Decimal(-1);
@@ -128,7 +149,28 @@ function GameLoop() {
       setPlayer((prev) => ({
         ...prev,
         tierEffect: Decimal.pow(3, prev.tier),
-        tierTimesEffect: prev.madeTierTimes.plus(1).pow(1.2)
+        tierTimesEffect: prev.madeTierTimes.softcap(1e6, 0.25, 'pow').plus(1).pow(1.2)
+      }));
+    }
+    function updateAmpliflux(time: number) {
+      const deltaTime = (time - lastTimeAmplifluxRef.current) / 1000;
+      lastTimeAmplifluxRef.current = time;
+
+      setPlayer((prev) => ({ ...prev,
+        amplifluxGain: prev.amplifluxUpgradeEffect
+      }));
+      setPlayer((prev) => { 
+        if (!prev.boughtFourthTierUpgrade) return prev;
+        return {
+          ...prev,
+          ampliflux: prev.ampliflux.plus(prev.amplifluxGain.multiply(deltaTime))
+        };
+      });
+    }
+    function updateAmplifluxEffect() {
+      setPlayer(prev => ({
+        ...prev,
+        amplifluxEffect: Decimal.pow(2, prev.ampliflux.max(0).plus(1).log10())
       }));
     }
     
@@ -139,7 +181,11 @@ function GameLoop() {
       updateGoal();
       updateGoalEffect();
       automateUpgrade();
+      automateAmplifluxUpgrade();
       updateUpgradeValues(setPlayer);
+      updateAmplifluxUpgradeValues(setPlayer);
+      updateAmpliflux(time);
+      updateAmplifluxEffect();
       updatePoints(time);
       savePlayer();
 
