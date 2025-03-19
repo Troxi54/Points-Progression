@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { playerContext } from "./PlayerContext";
+import { playerContext } from "../playerUtils";
 import { format } from "../format";
 
 function Ampliflux() {
@@ -13,7 +13,7 @@ function Ampliflux() {
 
   return (
     <div id="ampliflux-container">
-      <p id="ampliflux-counter">Ampliflux: {format(player.ampliflux)} (+{format(player.amplifluxGain)}/s) - <span className="ampliflux-effect">Effect: {format(player.amplifluxEffect)}x</span></p>
+      <p id="ampliflux-counter">Ampliflux: {format(player.ampliflux)} {player.boughtFourthTierUpgrade ? <span>(+{format(player.amplifluxGain)}/s)</span> : ''} - <span className="ampliflux-effect">Effect: {format(player.amplifluxEffect)}x</span></p>
     </div>
   );
 }

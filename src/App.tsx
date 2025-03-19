@@ -1,6 +1,6 @@
 import './App.css'
 import GameLoop from './components/GameLoop';
-import { playerContext } from './components/PlayerContext';
+import { playerContext } from "./playerUtils";
 import PlayerInfo from './components/PlayerInfo';
 import ProgressionBar from './components/ProgressionBar';
 import ResetUpgrades from './components/ResetUpgrades';
@@ -14,7 +14,13 @@ import { useContext } from 'react';
 import DataButtons from './components/DataButtons';
 import Ampliflux from './components/Ampliflux';
 import AmplifluxUpgrade from './components/AmplifluxUpgrade';
-import MoreTierUpgrades from './components/MoreTierUpgrade';
+import MoreTierUpgrades from './components/MoreTierUpgrades';
+import VermyrosBar from './components/VermyrosBar';
+import Vermora from './components/Vermora';
+import Vermytes from './components/Vermytes';
+import VermyrosUpgrades from './components/VermyrosUpgrades';
+import VermyteUpgrade from './components/VermyteUpgrade';
+import AutoVermyrosButton from './components/AutoVermyrosButton';
 
 function App() {
   const context = useContext(playerContext);
@@ -49,12 +55,28 @@ function App() {
             <>
               <AutotierButton/>
               <TierUpgrades/>
-              {player.boughtFourthTierUpgrade && (
+              {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
                 <>
                   <Ampliflux/>
                   <AmplifluxUpgrade/>
                   <MoreTierUpgrades/>
                 </>
+              )}
+            </>
+          )}
+        </div>
+      )}
+      {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
+        <div className="layer third-layer">
+          <VermyrosBar/>
+          {player.everMadeVermyros && (
+            <>
+              <AutoVermyrosButton/>
+              <Vermora/>
+              <Vermytes/>
+              <VermyrosUpgrades/>
+              {player.boughtFirstVermyrosUpgrade && (
+                <VermyteUpgrade/>
               )}
             </>
           )}

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { playerContext } from "../playerUtils";
 
-function AutoresettingButton() {
+function AutoVermyrosButton() {
   const context = useContext(playerContext);
   if (!context) {
     return (
@@ -13,17 +13,17 @@ function AutoresettingButton() {
   function toggleAutoresetting() {
     setPlayer(prev => ({
       ...prev,
-      autoresettingEnabled: !prev.autoresettingEnabled
+      autoVermyrosEnabled: !prev.autoVermyrosEnabled
     }));
   }
 
   return (
     <div id="autoresetting-div">
       <button id="autoresetting-button" onClick={toggleAutoresetting}>
-        <p id="autoresetting-text">{player.autoresettingEnabled ? 'Auto Reset: enabled' : 'Auto Reset: disabled'}</p>
+        <p id="autoresetting-text">{player.autoVermyrosEnabled ? 'Auto Vermyros: enabled' : 'Auto Vermyros: disabled'}</p>
       </button>
     </div>
   );
 }
 
-export default AutoresettingButton;
+export default AutoVermyrosButton;

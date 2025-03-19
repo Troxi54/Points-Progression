@@ -30,7 +30,7 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
                     'C', 'C+', 'C++', 'S', 'S+', 'S++',
                     'O', 'O+', 'O++', 'N', 'N+', 'N++',
                     'D', 'D+', 'D++', 'L', 'L+', 'L++',
-                    'S++', 'OP', 'OP+', 'OP++', 'OP*', 'OP**', 'OP^', 
+                    'OP', 'OP+', 'OP++', 'OP*', 'OP**', 'OP^',
                     'OP^^', 'i'];
     index = divided.abs().log10().dividedBy(6).floor();
     index = Decimal.min(units2.length - 1, index);
@@ -74,4 +74,11 @@ export function formatTime(milliseconds: DecimalSource): string {
     return `${seconds.toFixed(3)}s`;
   }
   return `${milliseconds.floor()}ms`;
+}
+
+export function formatLeftTime(milliseconds: DecimalSource) {
+  milliseconds = new Decimal(milliseconds);
+  if (milliseconds.lessThanOrEqualTo(0)) return 'Ready';
+  if (milliseconds.greaterThanOrEqualTo('e25')) return 'Never';
+  return formatTime(milliseconds);
 }

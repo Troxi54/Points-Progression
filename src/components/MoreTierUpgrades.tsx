@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { playerContext, settings } from "./PlayerContext";
+import { playerContext, settings } from "../playerUtils";
 import { format } from "../format";
 
 function MoreTierUpgrades() {
@@ -17,7 +17,7 @@ function MoreTierUpgrades() {
       return {
         ...prev,
         boughtFifthTierUpgrade: true,
-        points: prev.points.minus(settings.fifthTierUpgradeCost)
+        points: prev.boughtFirstVermyrosUpgrade ? prev.points : prev.points.minus(settings.fifthTierUpgradeCost)
       };
     });
   }
@@ -31,7 +31,7 @@ function MoreTierUpgrades() {
       return {
         ...prev,
         boughtSixthTierUpgrade: true,
-        points: prev.points.minus(settings.sixthTierUpgradeCost)
+        points: prev.boughtFirstVermyrosUpgrade ? prev.points : prev.points.minus(settings.sixthTierUpgradeCost)
       };
     });
   }
@@ -44,7 +44,7 @@ function MoreTierUpgrades() {
       <button id="tier-upgrade-5" onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthTierUpgrade ? 'bought-upgrade' : ''}>
         <p className="tier-upgrade-text">Tier upgrade 5: {format(settings.fifthTierUpgradeCost)} - <span className="tier-upgrade-effect">Ampliflux upgrade no longer takes ampliflux</span></p>
       </button>
-      {player.boughtFifthTierUpgrade && (<button id="tier-upgrade-6" onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthTierUpgrade ? 'bought-upgrade' : ''}>
+      {(player.boughtFifthTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-6" onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthTierUpgrade ? 'bought-upgrade' : ''}>
         <p className="tier-upgrade-text">Tier upgrade 6: {format(settings.sixthTierUpgradeCost)} - <span className="tier-upgrade-effect">Automate ampliflux upgrade</span></p>
       </button>)}
     </div>

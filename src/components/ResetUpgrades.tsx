@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { playerContext, settings } from "./PlayerContext";
+import { playerContext, settings } from "../playerUtils";
 import { format } from "../format";
 
 function ResetUpgrades() {
@@ -17,7 +17,7 @@ function ResetUpgrades() {
       return {
         ...prev,
         boughtFirstResetUpgrade: true,
-        points: prev.boughtFirstTierUpgrade ? prev.points : prev.points.minus(settings.resetFirstUpgradeCost)
+        points: prev.boughtFirstTierUpgrade || prev.boughtFirstVermyrosUpgrade ? prev.points : prev.points.minus(settings.resetFirstUpgradeCost)
       };
     });
   }
@@ -31,7 +31,7 @@ function ResetUpgrades() {
       return {
         ...prev,
         boughtSecondResetUpgrade: true,
-        points: prev.boughtFirstTierUpgrade ? prev.points : prev.points.minus(settings.resetSecondUpgradeCost)
+        points: prev.boughtFirstTierUpgrade || prev.boughtFirstVermyrosUpgrade ? prev.points : prev.points.minus(settings.resetSecondUpgradeCost)
       };
     });
   }

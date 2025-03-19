@@ -79,10 +79,11 @@
   color: rgb(98, 146, 97);
 }
 
-.progression-bar, .tier-bar {
+.progression-bar {
   left: 0;
   height: 100%;
   position: absolute;
+  overflow: hidden;
 }
 
 .progression-bar {
@@ -98,7 +99,7 @@
   margin-bottom: .5em;
 }
 
-#reset-upgrades, #tier-upgrades, #more-tier-upgrades {
+#reset-upgrades, #tier-upgrades, #more-tier-upgrades, #vermyros-upgrades {
   background-color: transparent;
 }
 
@@ -124,7 +125,7 @@
   pointer-events: auto;
 }
 
-.reset-upgrade-effect, .tier-upgrade-effect {
+.reset-upgrade-effect, .tier-upgrade-effect, .vermyros-upgrade-effect {
   color: rgb(148, 148, 148);
 }
 
@@ -157,7 +158,7 @@
   position: absolute;
   height: 3em;
   top: -4.5em;
-  width: 15%;
+  width: 20%;
   right: 2.5%;
   gap: 5%;
   background-color: #202020;
@@ -170,6 +171,7 @@
   justify-content: center;
   align-content: center;
   text-align: center;
+  position: relative;
 }
 
 .data-button-info {
@@ -219,4 +221,71 @@
 #more-tier-upgrades > button {
   background-color: #202020;
   width: 40%;
+}
+
+.progression-bar-inner {
+  height: 100%;
+  background-color: #202020;
+}
+
+.vermyros-bar-container {
+  --d: 200px;
+  --angle: 90deg;
+  --first-color: rgb(156, 0, 0);
+  --second-color: rgb(255, 0, 0);
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background: linear-gradient(to right, var(--first-color), var(--second-color), var(--first-color));
+  background-size: calc(var(--d) / sin(var(--angle))) 100%;
+  animation: vermyros-bar-container-animation 2s linear infinite;
+}
+
+@keyframes vermyros-bar-container-animation {
+  0% {
+    background-position: calc(var(--d) / sin(var(--angle))) 0;
+  }
+}
+
+.vermyros-bar {
+  right: 0;
+  position: absolute;
+}
+
+.vermyros-effect {
+  color: hsl(0, 22%, 48%);
+}
+
+#vermyros-upgrades {
+  gap: 5%;
+}
+
+#vermyros-upgrades > button {
+  background-color: #202020;
+  width: 20%;
+}
+
+#vermyte-upgrade-div {
+  background-color: hsl(0, 35%, 13%);
+}
+
+#vermyte-upgrade-button:hover {
+  border-color: hsl(0, 100%, 50%);
+}
+
+#vermyte-upgrade-cost {
+  color: hsl(0, 100%, 50%);
+  transition: color 250ms linear;
+}
+
+#vermyte-upgrade-button:hover > #vermyte-upgrade-cost {
+  color: hsl(0, 100%, 80%);
+}
+
+#vermyte-upgrade-effect {
+  color:hsl(0, 20%, 48%);
+}
+
+.vermyros {
+  color: rgb(255, 0, 0);
 }

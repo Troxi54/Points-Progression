@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { format } from "../format";
 import { playerContext } from "../playerUtils";
 
-function PlayerInfo() {
+function Vermytes() {
   const context = useContext(playerContext);
   if (!context) {
     return (
@@ -13,10 +13,10 @@ function PlayerInfo() {
   const { player } = context;
 
   return (
-    <div id="points-container">
-      <p id="points-counter">Points: {format(player.points)} (+{format(player.pointGain)}/s)</p>
+    <div id="vermytes-container">
+      <p id="vermytes-counter">Vermytes: {format(player.vermytes)}{player.vermytesGain.greaterThan(0) && (<span> (+{format(player.vermytesGain)})</span>)}</p>
     </div>
   );
 }
 
-export default PlayerInfo;
+export default Vermytes;
