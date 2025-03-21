@@ -34,7 +34,7 @@ function UpgradeButton() {
   return (
     <div id="upgrade-div">
       <button id="upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="upgrade-cost">Upgrade: {format(player.upgradeCost)} {player.upgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.upgradeLvl, 0)})</span>)}</p>
+        <p id="upgrade-cost">Upgrade: {format(player.upgradeCost)} {player.upgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.upgradeLvl, 0)}{player.upgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.upgradeBulk, 0)}` : ''})</span>)}</p>
         <p id="upgrade-effect">Effect: {format(player.upgradeEffect)}x</p>
       </button>
     </div>

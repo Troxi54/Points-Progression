@@ -48,6 +48,8 @@ function GameLoop() {
       
       const vermyrosUpdate = {
         everMadeVermyros: true,
+        everMadeTier: true,
+        everMadeRun: true,
         vermyrosStartedDate: Date.now(),
         upgradeLvl: new Decimal(0),
         points: new Decimal(0),
@@ -99,6 +101,7 @@ function GameLoop() {
 
       return {
         everMadeTier: true,
+        everMadeRun: true,
         tierStartedDate: Date.now(),
         upgradeLvl: new Decimal(0),
         points: new Decimal(0),
@@ -188,17 +191,21 @@ function GameLoop() {
         updates = {
             ...updates,
             runEffect: updates.bestRun === null ? new Decimal(1) : Decimal.min(Decimal.plus(1, Math.log10(TWO_HOURS_IN_MS) / Math.log10(updates.bestRun)), 2).times(updates.bestRun <= TWO_HOURS_IN_MS ? Decimal.pow(5, Math.log10(TWO_HOURS_IN_MS) - Math.log10(updates.bestRun)) : 1),
-            bestPointsOfRunEffect: Decimal.plus(1, Decimal.max(updates.bestPointsOfRun, 1e6).dividedBy(1e6).log10().pow(1.2))
+            bestPointsOfRunEffect: Decimal.plus(1, Decimal.max(updates.bestPointsOfRun, 1e6).dividedBy(1e6).log10()).pow(1.2)
         };
+        updates.upgradeBulk = updates.points.dividedBy(updates.upgradeCost).log(settings.upgradeScaling).floor().plus(updates.points.greaterThanOrEqualTo(updates.upgradeCost) ? 1 : 0);
         updates = {...updates, ...automateUpgrade(updates)};
         updates.upgradeCost = settings.upgradeStartingCost.multiply(Decimal.pow(settings.upgradeScaling, updates.upgradeLvl));
         updates.upgradeEffect = settings.upgradeEffectScaling.pow(updates.upgradeLvl);
 
+        updates.amplifluxUpgradeBulk = updates.ampliflux.dividedBy(updates.amplifluxUpgradeCost).log(settings.amplifluxUpgradeCostScaling).floor().plus(updates.ampliflux.greaterThanOrEqualTo(updates.amplifluxUpgradeCost) ? 1 : 0);
         updates = {...updates, ...automateAmplifluxUpgrade(updates)};
         updates.amplifluxUpgradeCost = settings.amplifluxUpgradeStartingCost.multiply(Decimal.pow(settings.amplifluxUpgradeCostScaling, updates.amplifluxUpgradeLvl));
         updates.amplifluxUpgradeEffect = settings.amplifluxUpgradeEffectScaling.pow(updates.amplifluxUpgradeLvl);
         
+        
         updates.vermytesUpgradeCost = settings.vermytesUpgradeStartingCost.multiply(Decimal.pow(settings.vermytesUpgradeCostScaling, updates.vermytesUpgradeLvl));
+        updates.vermytesUpgradeBulk = updates.vermytes.dividedBy(updates.vermytesUpgradeCost).log(settings.vermytesUpgradeCostScaling).floor().plus(updates.vermytes.greaterThanOrEqualTo(updates.vermytesUpgradeCost) ? 1 : 0);
         updates.vermytesUpgradeEffect = settings.vermytesUpgradeEffectScaling.pow(updates.vermytesUpgradeLvl);
         
         const amplifluxGain = updates.amplifluxUpgradeEffect.multiply(updates.vermoraEffect);

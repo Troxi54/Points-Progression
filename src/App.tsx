@@ -11,7 +11,6 @@ import TierBar from './components/TierBar';
 import AutotierButton from './components/AutotierButton';
 import TierUpgrades from './components/TierUpgrades';
 import { useContext } from 'react';
-import DataButtons from './components/DataButtons';
 import Ampliflux from './components/Ampliflux';
 import AmplifluxUpgrade from './components/AmplifluxUpgrade';
 import MoreTierUpgrades from './components/MoreTierUpgrades';
@@ -21,6 +20,7 @@ import Vermytes from './components/Vermytes';
 import VermyrosUpgrades from './components/VermyrosUpgrades';
 import VermyteUpgrade from './components/VermyteUpgrade';
 import AutoVermyrosButton from './components/AutoVermyrosButton';
+import Menu from './components/Menu';
 
 function App() {
   const context = useContext(playerContext);
@@ -32,56 +32,58 @@ function App() {
   const { player } = context;
   return (
     <>
-      <div className="layer first-layer">
-        <GameLoop/>
-        <DataButtons/>
-        <TimeSpent/>
-        <PlayerInfo/>
-        <UpgradeButton/>
-        <ProgressionBar/>
+      <Menu/>
+      <div className="layers">
+        <div className="layer first-layer">
+          <GameLoop/>
+          <TimeSpent/>
+          <PlayerInfo/>
+          <UpgradeButton/>
+          <ProgressionBar/>
+          {player.everMadeRun && (
+            <>
+              {!player.boughtFourthTierUpgrade && (
+                <AutoresettingButton/>
+              )}
+              <ResetUpgrades/>
+            </>
+          )}
+        </div>
         {player.everMadeRun && (
-          <>
-            {!player.boughtFourthTierUpgrade && (
-              <AutoresettingButton/>
+          <div className="layer second-layer">
+            <TierBar/>
+            {player.everMadeTier && (
+              <>
+                <AutotierButton/>
+                <TierUpgrades/>
+                {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
+                  <>
+                    <Ampliflux/>
+                    <AmplifluxUpgrade/>
+                    <MoreTierUpgrades/>
+                  </>
+                )}
+              </>
             )}
-            <ResetUpgrades/>
-          </>
+          </div>
+        )}
+        {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
+          <div className="layer third-layer">
+            <VermyrosBar/>
+            {player.everMadeVermyros && (
+              <>
+                <AutoVermyrosButton/>
+                <Vermora/>
+                <Vermytes/>
+                <VermyrosUpgrades/>
+                {player.boughtFirstVermyrosUpgrade && (
+                  <VermyteUpgrade/>
+                )}
+              </>
+            )}
+          </div>
         )}
       </div>
-      {player.everMadeRun && (
-        <div className="layer second-layer">
-          <TierBar/>
-          {player.everMadeTier && (
-            <>
-              <AutotierButton/>
-              <TierUpgrades/>
-              {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
-                <>
-                  <Ampliflux/>
-                  <AmplifluxUpgrade/>
-                  <MoreTierUpgrades/>
-                </>
-              )}
-            </>
-          )}
-        </div>
-      )}
-      {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
-        <div className="layer third-layer">
-          <VermyrosBar/>
-          {player.everMadeVermyros && (
-            <>
-              <AutoVermyrosButton/>
-              <Vermora/>
-              <Vermytes/>
-              <VermyrosUpgrades/>
-              {player.boughtFirstVermyrosUpgrade && (
-                <VermyteUpgrade/>
-              )}
-            </>
-          )}
-        </div>
-      )}
     </>
   )
 }

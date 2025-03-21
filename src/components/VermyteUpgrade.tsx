@@ -34,7 +34,7 @@ function VermyteUpgrade() {
   return (
     <div id="vermyte-upgrade-div">
       <button id="vermyte-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="vermyte-upgrade-cost">Upgrade: {format(player.vermytesUpgradeCost)} Vermytes {player.vermytesUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.vermytesUpgradeLvl, 0)})</span>)}</p>
+        <p id="vermyte-upgrade-cost">Upgrade: {format(player.vermytesUpgradeCost)} Vermytes {player.vermytesUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.vermytesUpgradeLvl, 0)}{player.vermytesUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.vermytesUpgradeBulk, 0)}` : ''})</span>)}</p>
         <p id="vermyte-upgrade-effect">Effect: {format(player.vermytesUpgradeEffect)}x</p>
       </button>
     </div>

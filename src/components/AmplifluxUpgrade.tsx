@@ -36,7 +36,7 @@ function AmplifluxUpgrade() {
   return (
     <div id="ampliflux-upgrade-div">
       <button id="ampliflux-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="ampliflux-upgrade-cost">Upgrade: {format(player.amplifluxUpgradeCost)} Ampliflux {player.amplifluxUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.amplifluxUpgradeLvl, 0)})</span>)}</p>
+        <p id="ampliflux-upgrade-cost">Upgrade: {format(player.amplifluxUpgradeCost)} Ampliflux {player.amplifluxUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.amplifluxUpgradeLvl, 0)}{player.amplifluxUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.amplifluxUpgradeBulk, 0)}` : ''})</span>)}</p>
         <p id="ampliflux-upgrade-effect">Effect: {format(player.amplifluxUpgradeEffect)}x ampliflux</p>
       </button>
     </div>
