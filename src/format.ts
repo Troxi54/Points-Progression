@@ -38,7 +38,9 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
     if (divided.greaterThanOrEqualTo(1e9)) {
       if (precisionWasAuto)
         precision = 2;
-      return num.toExponential(precision).replace(/[+]/, '');
+      const mantissa = num.mantissa;
+      const exponent = num.exponent;
+      return `${mantissa.toFixed(precision)}e${exponent}`;
     }
     removePrecisionIf();
     return divided.toFixed(precision) + units2[+index];

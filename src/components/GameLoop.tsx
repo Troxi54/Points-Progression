@@ -2,7 +2,7 @@ import { useEffect, useRef, useContext } from "react";
 import { Player } from "./PlayerContext";
 import { loadPlayerFromLocalStorage, playerContext, savePlayerToLocalStorage, settings } from "../playerUtils";
 import Decimal from "break_eternity.js";
-import { buyMax, buyMaxAmpliflux } from "../Upgrades";
+import { buyMax, buyMaxAmpliflux, buyMaxVermyte } from "../Upgrades";
 
 function GameLoop() {
   const context = useRef(useContext(playerContext));
@@ -199,7 +199,7 @@ function GameLoop() {
         updates.amplifluxUpgradeCost = settings.amplifluxUpgradeStartingCost.multiply(Decimal.pow(settings.amplifluxUpgradeCostScaling, updates.amplifluxUpgradeLvl));
         updates.amplifluxUpgradeEffect = settings.amplifluxUpgradeEffectScaling.pow(updates.amplifluxUpgradeLvl);
         
-        
+        updates = {...updates, ...buyMaxVermyte(updates, true)};
         updates.vermytesUpgradeCost = settings.vermytesUpgradeStartingCost.multiply(Decimal.pow(settings.vermytesUpgradeCostScaling, updates.vermytesUpgradeLvl));
         updates.vermytesUpgradeEffect = settings.vermytesUpgradeEffectScaling.pow(updates.vermytesUpgradeLvl);
         
@@ -212,7 +212,7 @@ function GameLoop() {
           amplifluxGain: amplifluxGain,
           amplifluxEffect: Decimal.pow(2, newAmpliflux.max(0).plus(1).log10())
         };
-    
+
         const tierResetGenerationUpdates = generateTierResets(updates, deltaTime);
         updates = {...updates, ...tierResetGenerationUpdates};
         
