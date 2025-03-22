@@ -142,12 +142,10 @@ function GameLoop() {
       };
     }
     function automateUpgrade(updates: Player) {
-      if (!updates.boughtSecondResetUpgrade) return;
-      return buyMax(updates);
+      return buyMax(updates, !updates.boughtSecondResetUpgrade);
     }
     function automateAmplifluxUpgrade(updates: Player) {
-      if (!updates.boughtSixthTierUpgrade) return;
-      return buyMaxAmpliflux(updates);
+      return buyMaxAmpliflux(updates, !updates.boughtSixthTierUpgrade);
     }
   
 
