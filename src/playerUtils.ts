@@ -87,8 +87,19 @@ export function loadPlayer(savedData: string): Player {
     for (const property in merged) {
       if (getDefaultPlayer()[property as keyof Player] instanceof Decimal)
         merged[property] = new Decimal(merged[property]);
+      if (merged[property] instanceof Decimal)
+        if (merged[property].isNan()) merged[property] = new Decimal(0);
     }
     if (merged.bestRun !== null && merged.bestRun < 10) merged.bestRun = 10;
+    if (merged.bestVermytes.lessThanOrEqualTo(0) && merged.everMadeVermyros) {
+      merged.everMadeVermyros = false;
+      merged.vermyrosStartedDate = null;
+    }
+    if (!merged.everMadeVermyros && merged.tier.lessThanOrEqualTo(0) && merged.everMadeTier) {
+      merged.everMadeTier = false;
+      merged.tierStartedDate = null;
+    }
+
     return merged;
   } catch (error) {
     console.error("Error loading player data:", error);

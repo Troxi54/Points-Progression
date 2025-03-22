@@ -65,10 +65,13 @@ export function formatTime(milliseconds: DecimalSource): string {
     return `${days.floor()}d`;
   }
   if (hours.greaterThanOrEqualTo(1)) {
-    return `${hours.floor()}h. ${minutes.mod(60).floor()}m${seconds.mod(60).floor().equals(0) ? '' : `. ${seconds.mod(60).floor()}s`}`;
+    const Minutes: Decimal = minutes.mod(60).floor();
+    const Seconds: Decimal = seconds.mod(60).floor();
+    return `${hours.floor()}h${Minutes.equals(0) ? '' : `. ${Minutes}m`}${Seconds.equals(0) ? '' : `. ${Seconds}s`}`;
   }
   if (minutes.greaterThanOrEqualTo(1)) {
-    return `${minutes.floor()}m${seconds.mod(60).floor().equals(0) ? '' : `. ${seconds.mod(60).floor()}s`}`;
+    const Seconds: Decimal = seconds.mod(60).floor();
+    return `${minutes.floor()}m${Seconds.equals(0) ? '' : `. ${Seconds}s`}`;
   }
   if (seconds.greaterThanOrEqualTo(1)) {
     return `${seconds.toFixed(3)}s`;
