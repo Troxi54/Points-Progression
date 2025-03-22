@@ -166,18 +166,18 @@ function GameLoop() {
         const vermoraGain = updates.vermytesBestEffect;
         const newVermora = updates.vermora.plus(vermoraGain.multiply(deltaTime));
         updates = {
-            ...updates,
-            vermora: newVermora,
-            vermoraGain: vermoraGain,
-            vermoraEffect: Decimal.pow(1.75, newVermora.max(0).plus(1).log10()),
-            tierRequirement: settings.firstTierAt.multiply(settings.tierScaling.pow(updates.tier)),
+          ...updates,
+          vermora: newVermora,
+          vermoraGain: vermoraGain,
+          vermoraEffect: Decimal.pow(1.75, newVermora.max(0).plus(1).log10()),
+          tierRequirement: settings.firstTierAt.multiply(settings.tierScaling.pow(updates.tier)),
         };
         const tierUpdates = getTierUpdates(updates);
         updates = {...updates, ...tierUpdates};
         updates = {
-            ...updates,
-            tierEffect: Decimal.pow(3, updates.tier),
-            tierTimesEffect: updates.madeTierTimes.softcap(1e6, 0.25, 'pow').plus(1).pow(1.2)
+          ...updates,
+          tierEffect: Decimal.pow(3, updates.tier),
+          tierTimesEffect: updates.madeTierTimes.softcap(1e6, 0.25, 'pow').plus(1).pow(1.2)
         };
     
         const goalUpdates = getGoalUpdates(updates)
@@ -223,8 +223,7 @@ function GameLoop() {
             .multiply(updates.tierTimesEffect)
             .multiply(updates.amplifluxEffect)
             .multiply(updates.vermytesUpgradeEffect);
-      
-    
+
         updates.points = updates.points.plus(pointGain.multiply(deltaTime));
 
         updates = {

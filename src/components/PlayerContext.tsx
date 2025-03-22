@@ -9,6 +9,7 @@ export interface PlayerContextType {
 }
 
 export interface Player {
+  gameVersion: string,
   points: Decimal,
   pointGain: Decimal,
   upgradeLvl: Decimal,

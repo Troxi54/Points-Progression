@@ -6,6 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
+    gameVersion: '0.1',
     points: new Decimal(0),
     pointGain: new Decimal(1),
     upgradeLvl: new Decimal(0),
