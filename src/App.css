@@ -4,6 +4,7 @@
   flex-direction: column;
   padding-top: 3em;
   gap: .5em;
+  overflow-x: hidden;
 }
 
 .layers {
@@ -384,4 +385,28 @@
 
 #close-info-div > p {
   font-size: 1.5em;
+}
+
+#discord-button {
+  background-color: #363636;
+  height: 100%;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  border: 3px solid transparent;
+  box-sizing: border-box;
+  transition: border-color 0.25s;
+}
+
+#discord-button:hover {
+  border-color: #ffffff;
+}
+
+#discord-button > img {
+  height: 1em;
+  width: initial;
 }

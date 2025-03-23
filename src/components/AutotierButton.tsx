@@ -11,10 +11,13 @@ function AutotierButton() {
   const { player, setPlayer } = context;
 
   function toggleAutoresetting() {
-    setPlayer(prev => ({
-      ...prev,
-      autoTierEnabled: !prev.autoTierEnabled
-    }));
+    setPlayer(prev => {
+      if (!prev.everMadeTier) return prev;
+      return {
+        ...prev,
+        autoTierEnabled: !prev.autoTierEnabled
+      }
+    });
   }
 
   return (

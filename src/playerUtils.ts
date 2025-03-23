@@ -6,7 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.1',
+    gameVersion: '0.1.1',
     points: new Decimal(0),
     pointGain: new Decimal(1),
     upgradeLvl: new Decimal(0),
@@ -100,6 +100,8 @@ export function loadPlayer(savedData: string): Player {
       merged.everMadeTier = false;
       merged.tierStartedDate = null;
     }
+    if (!merged.everMadeTier && !merged.autoTierEnabled) merged.autoTierEnabled = true;
+    if (!merged.everMadeVermyros && !merged.autoVermyrosEnabled) merged.autoVermyrosEnabled = true;
 
     return merged;
   } catch (error) {

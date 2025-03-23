@@ -11,10 +11,13 @@ function AutoVermyrosButton() {
   const { player, setPlayer } = context;
 
   function toggleAutoresetting() {
-    setPlayer(prev => ({
-      ...prev,
-      autoVermyrosEnabled: !prev.autoVermyrosEnabled
-    }));
+    setPlayer(prev => {
+      if (!prev.everMadeVermyros) return prev;
+      return {
+        ...prev,
+        autoVermyrosEnabled: !prev.autoVermyrosEnabled
+      }
+    });
   }
 
   return (

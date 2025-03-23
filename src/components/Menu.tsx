@@ -155,9 +155,10 @@ function Menu() {
         <div></div>
       </button>
       <div id="data-buttons" style={menuStyle}>
-        <button id="discord-button" onClick={() => window.open('https://discord.gg/YT8R2szHXX')}>
+        <a id="discord-button" href="https://discord.gg/YT8R2szHXX" type="button" target="_blank">
           <p className="menu-button-info">Discord</p>
-        </button>
+          <img src="./discord.png" alt="Discord"></img>
+        </a>
         <button id="save-button" onClick={Save}>
           <p className="menu-button-info" style={saveTextStyle}>Saved!</p>
           <p className="menu-button-info" style={saveDefaultTextStyle}>Save</p>
@@ -189,14 +190,14 @@ function Menu() {
             <p>Upgrade cost: {format(settings.upgradeStartingCost)} * {format(settings.upgradeScaling)}<sup>lvl</sup>
               <br/>Upgrade effect: {format(settings.upgradeEffectScaling)}<sup>lvl</sup>
               {player.everMadeRun && <><br/>Best run effect: min(1 + log(TWO_HOURS_IN_MS) / log(best_run_in_ms), 2) * (best_run_in_ms {'<'}= TWO_HOURS_IN_MS ? 5 ^ (log(TWO_HOURS_IN_MS) - log(best_run_in_ms)) : 1)</>}
-              {player.everMadeRun && <><br/>Best points effect: (1 + log(max(best_points, 10<sup>6</sup>) / 10<sup>6</sup>))<sup>1.2</sup></>}
+              {player.everMadeRun && <><br/>Best points effect: (1 + log(max(best_points, 10<sup>6</sup>) / 10<sup>6</sup>))<sup>1.3</sup></>}
               {player.everMadeTier && <><br/>Tier effect: 3<sup>tier</sup>
               <br/>Tier resets made effect: ((tier_resets_made softcap at 10<sup>6</sup>: x<sup>0.25</sup>) + 1)<sup>1.2</sup></>}
               {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && <><br/>Ampliflux upgrade cost: {format(settings.amplifluxUpgradeStartingCost)} * {format(settings.amplifluxUpgradeCostScaling)}<sup>lvl</sup>
               <br/>Ampliflux upgrade effect: {format(settings.amplifluxUpgradeEffectScaling)}<sup>lvl</sup></>}
               {player.everMadeVermyros && <><br/>Vermytes: points {'>'}= {format(settings.vermyrosGoal)} ? 2<sup>max(log<sub>10<sup>6</sup></sub>(points / {format(settings.vermyrosGoal)}), 0)</sup> : 0
               <br/>Best vermytes effect: best_vermytes<sup>3</sup>
-              <br/>Vermora effect: 1.75<sup>log(vermora + 1)</sup></>}
+              <br/>Vermora effect: 2<sup>log(vermora + 1)</sup></>}
               {player.boughtFirstVermyrosUpgrade && <><br/>Vermyte upgrade cost: {format(settings.vermytesUpgradeCostScaling)}<sup>lvl</sup>
               <br/>Vermyte upgrade effect: {format(settings.vermytesUpgradeEffectScaling)}<sup>lvl</sup></>}
             </p>

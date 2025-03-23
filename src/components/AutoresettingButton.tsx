@@ -11,10 +11,13 @@ function AutoresettingButton() {
   const { player, setPlayer } = context;
 
   function toggleAutoresetting() {
-    setPlayer(prev => ({
-      ...prev,
-      autoresettingEnabled: !prev.autoresettingEnabled
-    }));
+    setPlayer(prev => {
+      if (!prev.everMadeRun) return prev;
+      return {
+        ...prev,
+        autoresettingEnabled: !prev.autoresettingEnabled
+      }
+    });
   }
 
   return (

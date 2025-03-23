@@ -39,8 +39,6 @@ function GameLoop() {
     
     function getVermyrosUpdates(updates: Player) {
       const now = performance.now() / 1000;
-      
-      
       //if (now - lastVermyrosTime.current < VERMYROS_INTERVAL) return;
       if (updates.points.lessThan(settings.vermyrosGoal) || !updates.autoVermyrosEnabled) return;
       
@@ -169,7 +167,7 @@ function GameLoop() {
           ...updates,
           vermora: newVermora,
           vermoraGain: vermoraGain,
-          vermoraEffect: Decimal.pow(1.75, newVermora.max(0).plus(1).log10()),
+          vermoraEffect: Decimal.pow(2, newVermora.max(0).plus(1).log10()),
           tierRequirement: settings.firstTierAt.multiply(settings.tierScaling.pow(updates.tier)),
         };
         const tierUpdates = getTierUpdates(updates);
@@ -187,13 +185,12 @@ function GameLoop() {
         updates = {
             ...updates,
             runEffect: updates.bestRun === null ? new Decimal(1) : Decimal.min(Decimal.plus(1, Math.log10(TWO_HOURS_IN_MS) / Math.log10(updates.bestRun)), 2).times(updates.bestRun <= TWO_HOURS_IN_MS ? Decimal.pow(5, Math.log10(TWO_HOURS_IN_MS) - Math.log10(updates.bestRun)) : 1),
-            bestPointsOfRunEffect: Decimal.plus(1, Decimal.max(updates.bestPointsOfRun, 1e6).dividedBy(1e6).log10()).pow(1.2)
+            bestPointsOfRunEffect: Decimal.plus(1, Decimal.max(updates.bestPointsOfRun, 1e6).dividedBy(1e6).log10()).pow(1.3)
         };
         
         updates = {...updates, ...automateUpgrade(updates)};
         updates.upgradeCost = settings.upgradeStartingCost.multiply(Decimal.pow(settings.upgradeScaling, updates.upgradeLvl));
         updates.upgradeEffect = settings.upgradeEffectScaling.pow(updates.upgradeLvl);
-
         
         updates = {...updates, ...automateAmplifluxUpgrade(updates)};
         updates.amplifluxUpgradeCost = settings.amplifluxUpgradeStartingCost.multiply(Decimal.pow(settings.amplifluxUpgradeCostScaling, updates.amplifluxUpgradeLvl));
