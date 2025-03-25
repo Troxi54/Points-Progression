@@ -198,7 +198,7 @@ function Menu() {
               {player.everMadeTier && <><br/>Tier effect:<span className="info-effect"> 3<sup>x</sup>, where x is tier</span>
               <br/>Tier resets made effect:<br/><span className="info-effect">
                       if tier resets made are less than 1,000,000: (x + 1)<sup>1.2</sup>
-                      <br/>Otherwise: 1,000,000 × ((x + 1) / 1,000,000)<sup>0.25</sup>
+                      <br/>Otherwise: (1,000,000 × ((x + 1) / 1,000,000)<sup>0.25</sup>)<sup>1.2</sup>
                       <br/>Where x is tier resets made</span></>}
               {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && <><br/>Ampliflux upgrade cost:<span className="info-effect"> {format(settings.amplifluxUpgradeStartingCost)} × {format(settings.amplifluxUpgradeCostScaling)}<sup>x</sup>, where x is the ampliflux upgrade level</span>
               <br/>Ampliflux upgrade effect:<span className="info-effect"> {format(settings.amplifluxUpgradeEffectScaling)}<sup>x</sup>, where x is the ampliflux upgrade level</span></>}
