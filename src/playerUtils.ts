@@ -6,7 +6,8 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.1.1',
+    gameVersion: '0.1.2',
+    lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
     upgradeLvl: new Decimal(0),
@@ -25,6 +26,7 @@ export function getDefaultPlayer(): Player {
     everMadeTier: false,
     tier: new Decimal(0),
     madeTierTimes: new Decimal(0),
+    approximateTiersPerSecond: new Decimal(0),
     tierRequirement: new Decimal(Infinity),
     autoTierEnabled: true,
     tierEffect: new Decimal(1),

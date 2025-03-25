@@ -2,10 +2,6 @@ import Decimal, { DecimalSource } from "break_eternity.js";
 
 export function format(num: DecimalSource, precision: number | "auto" = "auto"): string {
   num = new Decimal(num);
-  function removePrecisionIf() {
-    if (divided.greaterThanOrEqualTo(1000) && precisionWasAuto)
-      precision = 0;
-  }
   if (num.equals(0)) return '0';
   if (num.lessThan(1) && num.greaterThan(-1)) {
     if (precision === "auto")
@@ -42,10 +38,12 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
       const exponent = num.exponent;
       return `${mantissa.toFixed(precision)}e${exponent}`;
     }
-    removePrecisionIf();
+    if (divided.greaterThanOrEqualTo(1000))
+      return (+divided.floor()).toLocaleString('en-US') + units2[+index];
     return divided.toFixed(precision) + units2[+index];
   }
-  removePrecisionIf();
+  if (divided.greaterThanOrEqualTo(1000))
+    return (+divided.floor()).toLocaleString('en-US') + units[+index];
   return divided.toFixed(precision) + units[+index];
 }
 

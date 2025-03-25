@@ -10,6 +10,7 @@ export interface PlayerContextType {
 
 export interface Player {
   gameVersion: string,
+  lastTick: number,
   points: Decimal,
   pointGain: Decimal,
   upgradeLvl: Decimal,
@@ -28,6 +29,7 @@ export interface Player {
   everMadeTier: boolean,
   tier: Decimal,
   madeTierTimes: Decimal,
+  approximateTiersPerSecond: Decimal,
   tierRequirement: Decimal,
   autoTierEnabled: boolean,
   tierEffect: Decimal,

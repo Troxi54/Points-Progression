@@ -7,9 +7,10 @@ import { buyMax, buyMaxAmpliflux, buyMaxVermyte } from "../Upgrades";
 function GameLoop() {
   const context = useRef(useContext(playerContext));
   
-  const globalDeltaTime = useRef(performance.now());
   const lastTimeSaveRef = useRef(performance.now());
   const lastTierTime = useRef(0);
+  const tierTimes = useRef([0]);
+  const TIER_TIMES_MAX_LENGTH = 20;
   const lastVermyrosTime = useRef(0);
 
   useEffect(() => {
@@ -28,12 +29,19 @@ function GameLoop() {
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
       setPlayer(savedPlayer);
+      calculateOfflineTierResets();
     }
 
     function savePlayer() {
       if (performance.now() - lastTimeSaveRef.current >= settings.saveInterval) {
         lastTimeSaveRef.current = performance.now();
         savePlayerToLocalStorage(playerRef.current);
+      }
+    }
+
+    function onVisibilityChange() {
+      if (!document.hidden) {
+        calculateOfflineTierResets();
       }
     }
     
@@ -95,6 +103,9 @@ function GameLoop() {
         }
       }
 
+      tierTimes.current.push(updates.tierStartedDate === null ? Infinity : Date.now() - updates.tierStartedDate);
+      if (tierTimes.current.length > TIER_TIMES_MAX_LENGTH) tierTimes.current.shift();
+
       return {
         everMadeTier: true,
         everMadeRun: true,
@@ -108,7 +119,7 @@ function GameLoop() {
         tier: updates.tier.plus(bulk.plus(1)),
         madeTierTimes: updates.madeTierTimes.plus(1),
         autoresettingEnabled: !updates.boughtThirdTierUpgrade,
-        bestPointsOfRun: new Decimal(0),
+        bestPointsOfRun: new Decimal(0)
       };
     }
     function getGoalUpdates(updates: Player) {
@@ -139,6 +150,16 @@ function GameLoop() {
         madeTierTimes: updates.madeTierTimes.plus(Decimal.multiply(MAX_TIER_PER_SECOND, deltaTime))
       };
     }
+    function calculateOfflineTierResets() {
+      setPlayer(prev => {
+        if (!prev.boughtThirdTierUpgrade || !prev.autoTierEnabled || prev.boughtSecondVermyrosUpgrade) return prev;
+        const deltaTime = (Date.now() - prev.lastTick) / 1000;
+        return {
+          ...prev,
+          madeTierTimes: prev.madeTierTimes.plus(prev.approximateTiersPerSecond.times(deltaTime).floor())
+        };
+      })
+    }
     function automateUpgrade(updates: Player) {
       return buyMax(updates, !updates.boughtSecondResetUpgrade);
     }
@@ -147,11 +168,11 @@ function GameLoop() {
     }
   
 
-    function updatePlayer(time: number) {
-      const deltaTime = (time - globalDeltaTime.current) / 1000;
-      globalDeltaTime.current = time;
+    function updatePlayer() {
       setPlayer(prev => {
         let updates: Player = { ...prev };
+
+        const deltaTime = (Date.now() - updates.lastTick) / 1000;
     
         updates.vermytesGain = updates.points.greaterThanOrEqualTo(settings.vermyrosGoal)
             ? Decimal.pow(2, updates.points.div(settings.vermyrosGoal).log('e6').max(0))
@@ -172,6 +193,7 @@ function GameLoop() {
         };
         const tierUpdates = getTierUpdates(updates);
         updates = {...updates, ...tierUpdates};
+        updates.approximateTiersPerSecond = new Decimal(1000 / (tierTimes.current.reduce((num, num2) => num + num2, 0) / tierTimes.current.length));
         updates = {
           ...updates,
           tierEffect: Decimal.pow(3, updates.tier),
@@ -227,6 +249,8 @@ function GameLoop() {
           ...updates,
           pointGain: pointGain,
         };
+
+        updates.lastTick = Date.now();
         
         return updates;
       });
@@ -234,10 +258,14 @@ function GameLoop() {
     
       frameId = requestAnimationFrame(updatePlayer);
     }
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     frameId = requestAnimationFrame(updatePlayer);
 
-    return () => cancelAnimationFrame(frameId);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      cancelAnimationFrame(frameId);
+    } 
   }, []);
   return null;
 }

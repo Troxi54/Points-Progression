@@ -76,7 +76,7 @@ function TierUpgrades() {
         <p className="tier-upgrade-text">Tier upgrade 2: {format(settings.secondTierUpgradeCost)} - <span className="tier-upgrade-effect">Keep the second reset upgrade</span></p>
       </button>)}
       {(player.boughtSecondTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-3" onClick={buyThirdUpgrade} onContextMenu={thirdUpgradeContextMenu} className={player.boughtThirdTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 3: {format(settings.thirdTierUpgradeCost)} - <span className="tier-upgrade-effect">Always have 10ms best reset run and disable auto reset</span></p>
+        <p className="tier-upgrade-text">Tier upgrade 3: {format(settings.thirdTierUpgradeCost)} - <span className="tier-upgrade-effect">Always have 10ms best reset run, disable auto reset and unlock offline tier resets</span></p>
       </button>)}
       {(player.boughtThirdTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-4" onClick={buyFourthUpgrade} onContextMenu={fourthUpgradeContextMenu} className={player.boughtFourthTierUpgrade ? 'bought-upgrade' : ''}>
         <p className="tier-upgrade-text">Tier upgrade 4: {format(settings.fourthTierUpgradeCost)} - <span className="tier-upgrade-effect">Automatically update reset best points, remove auto reset toggle and unlock ampliflux</span></p>
