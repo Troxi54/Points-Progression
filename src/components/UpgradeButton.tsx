@@ -16,7 +16,7 @@ function UpgradeButton() {
   function buy(event: React.MouseEvent) {
     setPlayer(prev => {
       event.preventDefault();
-      if (prev.points.lessThan(prev.upgradeCost)) return prev;
+      if (prev.points.lessThan(prev.upgradeCost) || prev.enteredAmplivault) return prev;
       return {
         ...prev,
         points: prev.boughtFirstResetUpgrade ? prev.points : prev.points.minus(prev.upgradeCost),

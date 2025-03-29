@@ -13,6 +13,10 @@ function Menu() {
   const [shouldRender, setShouldRender] = useState(false);
   const [isOpenedInfoMenu, setIsOpenedInfoMenu] = useState(false);
   const [shouldInfoRender, setShouldInfoRender] = useState(false);
+  const [isOpenedImportMenu, setIsOpenedImportMenu] = useState(false);
+  const [shouldImportRender, setShouldImportRender] = useState(false);
+  const [isOpenedExportMenu, setIsOpenedExportMenu] = useState(false);
+  const [shouldExportRender, setShouldExportRender] = useState(false);
 
   const saveTimeout = useRef<number | null>(null);
   const SAVE_WAITING_TIME = 1000;
@@ -35,6 +39,7 @@ function Menu() {
       importTimeout.current = setTimeout(() => {
         setIsImporting(false);
       }, IMPORT_WAITING_TIME);
+      setIsOpenedImportMenu(false);
     }
   }
 
@@ -58,6 +63,24 @@ function Menu() {
     exportTimeout.current = setTimeout(() => {
       setIsExporting(false);
     }, EXPORT_WAITING_TIME);
+    setIsOpenedExportMenu(false);
+  }
+
+  async function ExportText() {
+    try {
+      const text = getConvertedPlayerData(playerRef.current);
+      await navigator.clipboard.writeText(text);
+      setIsExporting(true);
+      if (exportTimeout.current) {
+        clearTimeout(exportTimeout.current);
+      }
+      exportTimeout.current = setTimeout(() => {
+        setIsExporting(false);
+      }, EXPORT_WAITING_TIME);
+      setIsOpenedExportMenu(false);
+    } catch (err) {
+      alert("Unsuccessful copy to clipboard, " + err);
+    }
   }
 
   function Save() {
@@ -125,7 +148,17 @@ function Menu() {
     } else {
       setTimeout(() => setShouldInfoRender(false), 200);
     }
-  }, [isOpenedMenu, isOpenedInfoMenu]);
+    if (isOpenedImportMenu) {
+      setShouldImportRender(true);
+    } else {
+      setTimeout(() => setShouldImportRender(false), 200);
+    }
+    if (isOpenedExportMenu) {
+      setShouldExportRender(true);
+    } else {
+      setTimeout(() => setShouldExportRender(false), 200);
+    }
+  }, [isOpenedMenu, isOpenedInfoMenu, isOpenedImportMenu, isOpenedExportMenu]);
 
   const menuStyle: CSSProperties = {
     visibility: shouldRender ? 'visible' : 'hidden',
@@ -137,6 +170,40 @@ function Menu() {
   const infoDivStyle: CSSProperties = {
     visibility: shouldInfoRender ? 'visible' : 'hidden',
     opacity: isOpenedInfoMenu ? 1 : 0,
+  };
+
+  const importDivStyle: CSSProperties = {
+    visibility: shouldImportRender ? 'visible' : 'hidden',
+    opacity: isOpenedImportMenu ? 1 : 0,
+  };
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (file && file.type === "text/plain") {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const fileContent = e.target?.result as string;
+        const loadedPlayer = loadPlayer(fileContent);
+        setPlayer(() => loadedPlayer);
+        setIsImporting(true);
+        if (importTimeout.current) {
+          clearTimeout(importTimeout.current);
+        }
+        importTimeout.current = setTimeout(() => {
+          setIsImporting(false);
+        }, IMPORT_WAITING_TIME);
+        setIsOpenedImportMenu(false);
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Wrong file type");
+    }
+  }
+
+  const exportDivStyle: CSSProperties = {
+    visibility: shouldExportRender ? 'visible' : 'hidden',
+    opacity: isOpenedExportMenu ? 1 : 0,
   };
 
   if (!context) {
@@ -163,21 +230,54 @@ function Menu() {
           <p className="menu-button-info" style={saveTextStyle}>Saved!</p>
           <p className="menu-button-info" style={saveDefaultTextStyle}>Save</p>
         </button>
-        <button id="import-button" onClick={Import}>
+        <button id="import-button" onClick={() => setIsOpenedImportMenu(true)}>
           <p className="menu-button-info" style={importTextStyle}>Imported!</p>
           <p className="menu-button-info" style={importDefaultTextStyle}>Import</p>
         </button>
-        <button id="export-button" onClick={Export}>
+        <button id="export-button" onClick={() => setIsOpenedExportMenu(true)}>
           <p className="menu-button-info" style={exportTextStyle}>Exported!</p>
           <p className="menu-button-info" style={exportDefaultTextStyle}>Export</p>
         </button>
       </div>
+      <div id="import-overlay" className="overlay" style={importDivStyle}>
+        <div id="import-div" className="overlay-div">
+          <button className="overlay-close-button" onClick={() => setIsOpenedImportMenu(false)}>
+            <p className="menu-button-info">X</p>
+          </button>
+          <h1>Import</h1>
+          <div id="import-buttons">
+            <button id="import-from-text" onClick={Import}>
+              <p className="menu-button-info">From text</p>
+            </button>
+            <button id="import-from-file-container" onClick={() => document.getElementById('import-from-file')?.click()}>
+              <p className="menu-button-info">From file</p>
+              <input id="import-from-file" type="file" hidden onChange={handleFileChange} accept="text/plain"/>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="export-overlay" className="overlay" style={exportDivStyle}>
+        <div id="export-div" className="overlay-div">
+          <button className="overlay-close-button" onClick={() => setIsOpenedExportMenu(false)}>
+            <p className="menu-button-info">X</p>
+          </button>
+          <h1>Export</h1>
+          <div id="export-buttons">
+            <button id="export-to-clipboard" onClick={ExportText}>
+              <p className="menu-button-info">To clipboard</p>
+            </button>
+            <button id="export-file" onClick={Export}>
+              <p className="menu-button-info">File</p>
+            </button>
+          </div>
+        </div>
+      </div>
       <button id="info-button" onClick={() => setIsOpenedInfoMenu(true)}>
         <p className="menu-button-info">?</p>
       </button>
-      <div id="info-overlay" style={infoDivStyle}>
-        <div id="info-div">
-          <button id="close-info-div" onClick={() => setIsOpenedInfoMenu(false)}>
+      <div id="info-overlay" className="overlay" style={infoDivStyle}>
+        <div id="info-div" className="overlay-div">
+          <button className="overlay-close-button" onClick={() => setIsOpenedInfoMenu(false)}>
             <p className="menu-button-info">X</p>
           </button>
           <div id="info-container">
@@ -195,7 +295,8 @@ function Menu() {
                       <br/>Otherwise: min(1 + log(y) / log(x), 2)
                       <br/>Where: x is best run (in milliseconds) and y is 2 hours (in milliseconds)</span></>}
               {player.everMadeRun && <><br/>Best points effect:<span className="info-effect"> (1 + log(max(x, 1,000,000) / 1,000,000))<sup>1.3</sup>, where x is best points</span></>}
-              {player.everMadeTier && <><br/>Tier effect:<span className="info-effect"> 3<sup>x</sup>, where x is tier</span>
+              {player.everMadeTier && <><br/>Tier requirement:<span className="info-effect"> {format(settings.firstTierAt)} × 1,000<sup>x</sup>, where x is tier</span>
+              <br/>Tier effect:<span className="info-effect"> 3<sup>x</sup>, where x is tier</span>
               <br/>Tier resets made effect:<br/><span className="info-effect">
                       if tier resets made are less than 1,000,000: (x + 1)<sup>1.2</sup>
                       <br/>Otherwise: (1,000,000 × ((x + 1) / 1,000,000)<sup>0.25</sup>)<sup>1.2</sup>
@@ -210,6 +311,8 @@ function Menu() {
               <br/>Vermora effect:<span className="info-effect"> 2<sup>log(x + 1)</sup>, where x is vermora</span></>}
               {player.boughtFirstVermyrosUpgrade && <><br/>Vermyte upgrade cost:<span className="info-effect"> {format(settings.vermytesUpgradeCostScaling)}<sup>x</sup>, where x is the vermyte upgrade level</span>
               <br/>Vermyte upgrade effect:<span className="info-effect"> {format(settings.vermytesUpgradeEffectScaling)}<sup>x</sup>, where x is the vermyte upgrade level</span></>}
+              {player.boughtFifthVermyrosUpgrade && <><br/>Amplivault level requirement:<span className="info-effect"> {format(settings.amplivaultRequirementStartsAt)} × 1,000<sup>x</sup>, where x is amplivault level</span></>}
+              {player.amplivaultLevel.greaterThan(0) && <><br/>Amplivault effect:<span className="info-effect"> 2<sup>x</sup>, where x is amplivault level</span></>}
             </p>
             <p>If you find a bug, please report it to Troxi, the developer of the game.</p>
           </div>

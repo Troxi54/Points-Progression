@@ -65,7 +65,18 @@ export interface Player {
   boughtFirstVermyrosUpgrade: boolean,
   boughtSecondVermyrosUpgrade: boolean,
   boughtThirdVermyrosUpgrade: boolean,
-  boughtFourthVermyrosUpgrade: boolean
+  boughtFourthVermyrosUpgrade: boolean,
+  vermytesPerSecond: Decimal,
+  boughtFifthVermyrosUpgrade: boolean,
+  boughtSixthVermyrosUpgrade: boolean,
+  boughtSeventhVermyrosUpgrade: boolean,
+  boughtEighthVermyrosUpgrade: boolean,
+  enteredAmplivault: boolean,
+  amplivaultLevel: Decimal,
+  amplivaultRequirement: Decimal,
+  amplivaultEffect: Decimal,
+  softcapperLevel: Decimal,
+  bestSoftcapperLevel: Decimal
 }
 
 interface PlayerProviderProps {
@@ -114,5 +125,12 @@ export interface Settings {
   firstVermyrosUpgradeCost: Decimal,
   secondVermyrosUpgradeCost: Decimal,
   thirdVermyrosUpgradeCost: Decimal,
-  fourthVermyrosUpgradeCost: Decimal
+  fourthVermyrosUpgradeCost: Decimal,
+  fifthVermyrosUpgradeCost: Decimal,
+  sixthVermyrosUpgradeCost: Decimal,
+  seventhVermyrosUpgradeCost: Decimal,
+  eighthVermyrosUpgradeCost: Decimal,
+  amplivaultRequirementStartsAt: Decimal,
+  firstSoftcapperLevelAt: Decimal,
+  firstSoftcapperLevelPower: Decimal
 }

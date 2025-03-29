@@ -62,7 +62,18 @@ export function getDefaultPlayer(): Player {
     boughtFirstVermyrosUpgrade: false,
     boughtSecondVermyrosUpgrade: false,
     boughtThirdVermyrosUpgrade: false,
-    boughtFourthVermyrosUpgrade: false
+    boughtFourthVermyrosUpgrade: false,
+    vermytesPerSecond: new Decimal(0),
+    boughtFifthVermyrosUpgrade: false,
+    boughtSixthVermyrosUpgrade: false,
+    boughtSeventhVermyrosUpgrade: false,
+    boughtEighthVermyrosUpgrade: false,
+    enteredAmplivault: false,
+    amplivaultLevel: new Decimal(0),
+    amplivaultRequirement: new Decimal(Infinity),
+    amplivaultEffect: new Decimal(1),
+    softcapperLevel: new Decimal(0),
+    bestSoftcapperLevel: new Decimal(0)
   }
   return defaultPlayer;
 }
@@ -87,11 +98,14 @@ export function loadPlayer(savedData: string): Player {
   try {
     const parsedData = JSON.parse(atob(savedData));
     const merged = { ...getDefaultPlayer(), ...parsedData };
+    const ANTI_NEGATIVE = true;
     for (const property in merged) {
       if (getDefaultPlayer()[property as keyof Player] instanceof Decimal)
         merged[property] = new Decimal(merged[property]);
-      if (merged[property] instanceof Decimal)
+      if (merged[property] instanceof Decimal) {
         if (merged[property].isNan()) merged[property] = new Decimal(0);
+        if (merged[property].lessThan(0) && ANTI_NEGATIVE) merged[property] = new Decimal(0);
+      }
     }
     if (merged.bestRun !== null && merged.bestRun < 10) merged.bestRun = 10;
     if (merged.bestVermytes.lessThanOrEqualTo(0) && merged.everMadeVermyros) {
@@ -104,6 +118,9 @@ export function loadPlayer(savedData: string): Player {
     }
     if (!merged.everMadeTier && !merged.autoTierEnabled) merged.autoTierEnabled = true;
     if (!merged.everMadeVermyros && !merged.autoVermyrosEnabled) merged.autoVermyrosEnabled = true;
+    if (Date.now() - merged.startedRun < 0) merged.startedRun = Date.now();
+    if (merged.tierStartedDate !== null && Date.now() - merged.tierStartedDate < 0) merged.tierStartedDate = Date.now();
+    if (merged.vermyrosStartedDate !== null && Date.now() - merged.vermyrosStartedDate < 0) merged.vermyrosStartedDate = Date.now();
 
     return merged;
   } catch (error) {
@@ -147,5 +164,12 @@ export const settings: Readonly<Settings> = {
   firstVermyrosUpgradeCost: new Decimal(1),
   secondVermyrosUpgradeCost: new Decimal(1e90),
   thirdVermyrosUpgradeCost: new Decimal(1e96),
-  fourthVermyrosUpgradeCost: new Decimal(1e114)
+  fourthVermyrosUpgradeCost: new Decimal(1e114),
+  fifthVermyrosUpgradeCost: new Decimal(1e133),
+  sixthVermyrosUpgradeCost: new Decimal(1e162),
+  seventhVermyrosUpgradeCost: new Decimal(1e186),
+  eighthVermyrosUpgradeCost: new Decimal(1e212),
+  amplivaultRequirementStartsAt: new Decimal(1e30),
+  firstSoftcapperLevelAt: new Decimal(1e204),
+  firstSoftcapperLevelPower: new Decimal(0.9)
 };

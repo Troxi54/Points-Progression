@@ -2,25 +2,28 @@ import Decimal, { DecimalSource } from "break_eternity.js";
 
 export function format(num: DecimalSource, precision: number | "auto" = "auto"): string {
   num = new Decimal(num);
+  const abs = num.abs();
+  const isNegative = num.lessThan(0);
+  const prefix = isNegative ? '-' : '';
   if (num.equals(0)) return '0';
-  if (num.lessThan(1) && num.greaterThan(-1)) {
+  if (abs.lessThan(1)) {
     if (precision === "auto")
       precision = 2;
     return num.toFixed(precision);
   }
-  if ((num.greaterThanOrEqualTo(1000) || num.lessThanOrEqualTo(-1000)) && precision === 0) {
+  if (abs.greaterThanOrEqualTo(1000) && precision === 0) {
     precision = 'auto';
   }
   let precisionWasAuto = false;
   if (precision === "auto") {
     precisionWasAuto = true;
-    precision = +num.dividedBy(Decimal.pow(1000, num.abs().log10().dividedBy(3).floor()));
+    precision = +abs.dividedBy(Decimal.pow(1000, abs.log10().dividedBy(3).floor()));
     precision = 3 - Math.floor(Math.log10(precision));
   }
   const units = ['', 'k', 'M', 'B', 'T']; 
-  let index = num.abs().log10().dividedBy(3).floor();
+  let index = abs.log10().dividedBy(3).floor();
   index = Decimal.min(units.length - 1, index);
-  let divided = num.dividedBy(Decimal.pow(1000, index));
+  let divided = abs.dividedBy(Decimal.pow(1000, index));
   if (divided.greaterThanOrEqualTo(1e6)) {
     const units2 = ['', 'U', 'U+', 'U++', 'A', 'A+', 'A++',
                     'C', 'C+', 'C++', 'S', 'S+', 'S++',
@@ -28,7 +31,7 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
                     'D', 'D+', 'D++', 'L', 'L+', 'L++',
                     'OP', 'OP+', 'OP++', 'OP*', 'OP**', 'OP^',
                     'OP^^', 'i'];
-    index = divided.abs().log10().dividedBy(6).floor();
+    index = divided.log10().dividedBy(6).floor();
     index = Decimal.min(units2.length - 1, index);
     divided = divided.dividedBy(Decimal.pow(1e6, index));
     if (divided.greaterThanOrEqualTo(1e9)) {
@@ -36,15 +39,15 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
         precision = 2;
       const mantissa = num.mantissa;
       const exponent = num.exponent;
-      return `${mantissa.toFixed(precision)}e${exponent}`;
+      return `${prefix}${mantissa.toFixed(precision)}e${exponent}`;
     }
     if (divided.greaterThanOrEqualTo(1000))
-      return (+divided.floor()).toLocaleString('en-US') + units2[+index];
-    return divided.toFixed(precision) + units2[+index];
+      return prefix + (+divided.floor()).toLocaleString('en-US') + units2[+index];
+    return prefix + divided.toFixed(precision) + units2[+index];
   }
   if (divided.greaterThanOrEqualTo(1000))
-    return (+divided.floor()).toLocaleString('en-US') + units[+index];
-  return divided.toFixed(precision) + units[+index];
+    return prefix + (+divided.floor()).toLocaleString('en-US') + units[+index];
+  return prefix + divided.toFixed(precision) + units[+index];
 }
 
 export function formatTime(milliseconds: DecimalSource): string {

@@ -84,7 +84,7 @@ function VermyrosUpgrades() {
       )}
       {player.boughtThirdVermyrosUpgrade && (
         <button id="vermyros-upgrade-4" onClick={buyFourthUpgrade} onContextMenu={fourthUpgradeContextMenu} className={player.boughtFourthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 4: {format(settings.fourthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Tier no longer resets anything</span></p>
+          <p className="vermyros-upgrade-text">Vermyros upgrade 4: {format(settings.fourthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Tier no longer resets anything and generate 0.1% of your best vermytes per second</span></p>
         </button>
       )}
     </div>

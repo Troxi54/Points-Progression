@@ -4,7 +4,7 @@ import { settings } from "./playerUtils";
 
 export function buyMax(updates: Player, justUpdateBulk: boolean = false) {
   const array = { upgradeBulk: updates.points.dividedBy(updates.upgradeCost).log(settings.upgradeScaling).floor().plus(updates.points.greaterThanOrEqualTo(updates.upgradeCost) ? 1 : 0)};
-  if (updates.points.lessThan(updates.upgradeCost) || justUpdateBulk) return array;
+  if (updates.points.lessThan(updates.upgradeCost) || justUpdateBulk || updates.enteredAmplivault) return array;
   const finalCost = updates.upgradeCost.multiply(settings.upgradeScaling.pow(array.upgradeBulk.minus(1)));
   return {
     upgradeBulk: new Decimal(0),

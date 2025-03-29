@@ -21,6 +21,9 @@ import VermyrosUpgrades from './components/VermyrosUpgrades';
 import VermyteUpgrade from './components/VermyteUpgrade';
 import AutoVermyrosButton from './components/AutoVermyrosButton';
 import Menu from './components/Menu';
+import MoreVermyrosUpgrades from './components/MoreVermyrosUpgrades';
+import Amplivault from './components/Amplivault';
+import Softcapper from './components/Softcapper';
 
 function App() {
   const context = useContext(playerContext);
@@ -72,15 +75,22 @@ function App() {
             <VermyrosBar/>
             {player.everMadeVermyros && (
               <>
-                <AutoVermyrosButton/>
+                {!player.boughtEighthVermyrosUpgrade && (<AutoVermyrosButton/>)}
                 <Vermora/>
                 <Vermytes/>
                 <VermyrosUpgrades/>
                 {player.boughtFirstVermyrosUpgrade && (
                   <VermyteUpgrade/>
                 )}
+                {player.boughtFourthVermyrosUpgrade && (
+                  <MoreVermyrosUpgrades/>
+                )}
+                {player.boughtFifthVermyrosUpgrade && (
+                  <Amplivault/>
+                )}
               </>
             )}
+            {player.bestSoftcapperLevel.greaterThanOrEqualTo(1) && (<Softcapper/>)}
           </div>
         )}
       </div>
