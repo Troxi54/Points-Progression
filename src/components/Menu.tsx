@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { getConvertedPlayerData, loadPlayer, playerContext, savePlayerToLocalStorage, settings } from "../playerUtils";
 import { CSSProperties } from "react";
 import { format } from "../format";
+import { calculateOfflineTierResets } from "./GameLoop";
 
 function Menu() {
   const context = useContext(playerContext);
@@ -17,6 +18,8 @@ function Menu() {
   const [shouldImportRender, setShouldImportRender] = useState(false);
   const [isOpenedExportMenu, setIsOpenedExportMenu] = useState(false);
   const [shouldExportRender, setShouldExportRender] = useState(false);
+  const [isOpenedMoreMenu, setIsOpenedMoreMenu] = useState(false);
+  const [shouldMoreRender, setShouldMoreRender] = useState(false);
 
   const saveTimeout = useRef<number | null>(null);
   const SAVE_WAITING_TIME = 1000;
@@ -32,6 +35,7 @@ function Menu() {
     if (userText) {
       const loadedPlayer = loadPlayer(userText);
       setPlayer(() => loadedPlayer);
+      calculateOfflineTierResets(setPlayer);
       setIsImporting(true);
       if (importTimeout.current) {
         clearTimeout(importTimeout.current);
@@ -158,7 +162,12 @@ function Menu() {
     } else {
       setTimeout(() => setShouldExportRender(false), 200);
     }
-  }, [isOpenedMenu, isOpenedInfoMenu, isOpenedImportMenu, isOpenedExportMenu]);
+    if (isOpenedMoreMenu) {
+      setShouldMoreRender(true);
+    } else {
+      setTimeout(() => setShouldMoreRender(false), 200);
+    }
+  }, [isOpenedMenu, isOpenedInfoMenu, isOpenedImportMenu, isOpenedExportMenu, isOpenedMoreMenu]);
 
   const menuStyle: CSSProperties = {
     visibility: shouldRender ? 'visible' : 'hidden',
@@ -186,6 +195,7 @@ function Menu() {
         const fileContent = e.target?.result as string;
         const loadedPlayer = loadPlayer(fileContent);
         setPlayer(() => loadedPlayer);
+        calculateOfflineTierResets(setPlayer);
         setIsImporting(true);
         if (importTimeout.current) {
           clearTimeout(importTimeout.current);
@@ -206,6 +216,11 @@ function Menu() {
     opacity: isOpenedExportMenu ? 1 : 0,
   };
 
+  const moreMenuDivStyle: CSSProperties = {
+    visibility: shouldMoreRender ? 'visible' : 'hidden',
+    opacity: isOpenedMoreMenu ? 1 : 0,
+  };
+
   if (!context) {
     return (
       <div>Loading...</div>
@@ -222,10 +237,9 @@ function Menu() {
         <div></div>
       </button>
       <div id="data-buttons" style={menuStyle}>
-        <a id="discord-button" href="https://discord.gg/YT8R2szHXX" type="button" target="_blank">
-          <p className="menu-button-info">Discord</p>
-          <img src="./discord.png" alt="Discord"></img>
-        </a>
+        <button id="open-more-menu" onClick={() => setIsOpenedMoreMenu(true)}>
+          <p className="menu-button-info">More</p>
+        </button>
         <button id="save-button" onClick={Save}>
           <p className="menu-button-info" style={saveTextStyle}>Saved!</p>
           <p className="menu-button-info" style={saveDefaultTextStyle}>Save</p>
@@ -238,6 +252,32 @@ function Menu() {
           <p className="menu-button-info" style={exportTextStyle}>Exported!</p>
           <p className="menu-button-info" style={exportDefaultTextStyle}>Export</p>
         </button>
+      </div>
+      <div id="more-overlay" className="overlay" style={moreMenuDivStyle}>
+        <div id="more-div" className="overlay-div">
+          <button className="overlay-close-button" onClick={() => setIsOpenedMoreMenu(false)}>
+            <p className="menu-button-info">X</p>
+          </button>
+          <div id="more-menu-container">
+            <div className="more-menu-row">
+              <button id="stable-progress-bard-button" className="more-menu-button" onClick={() => {
+                setPlayer(prev => ({
+                  ...prev,
+                  stableProgressBars: !prev.stableProgressBars
+                }));
+              }}>
+                <p className="menu-button-info">Stable progress bars: {player.stableProgressBars ? 'ON' : 'OFF'}</p>
+                <div className="tooltip-trigger">?</div>
+                <div className="tooltip">Prevents rapid updates of progress bars when resets per second exceed 5 by locking them at 100%. Helps reduce potential screen wear</div>
+              </button>
+              <a id="discord-button" className="more-menu-button" href="https://discord.gg/YT8R2szHXX" type="button" target="_blank">
+                <p className="menu-button-info">Discord</p>
+                <img src="./discord.png" alt="Discord"></img>
+              </a>
+            </div>
+            <p>Points Progression by Troxi<br/>Version: {player.gameVersion}</p>
+          </div>
+        </div>
       </div>
       <div id="import-overlay" className="overlay" style={importDivStyle}>
         <div id="import-div" className="overlay-div">

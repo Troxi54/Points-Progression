@@ -18,6 +18,7 @@ export interface Player {
   upgradeEffect: Decimal,
   upgradeBulk: Decimal,
   startedRun: number,
+  approximateResetsPerSecond: Decimal,
   bestRun: number | null,
   runEffect: Decimal,
   everMadeRun: boolean,
@@ -50,6 +51,7 @@ export interface Player {
   boughtSixthTierUpgrade: boolean,
   everMadeVermyros: boolean,
   vermyrosStartedDate: number | null,
+  approximateVermyrosResetsPerSecond: Decimal,
   autoVermyrosEnabled: boolean,
   vermytes: Decimal,
   vermytesGain: Decimal,
@@ -76,7 +78,8 @@ export interface Player {
   amplivaultRequirement: Decimal,
   amplivaultEffect: Decimal,
   softcapperLevel: Decimal,
-  bestSoftcapperLevel: Decimal
+  bestSoftcapperLevel: Decimal,
+  stableProgressBars: boolean
 }
 
 interface PlayerProviderProps {

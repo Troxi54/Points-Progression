@@ -6,7 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.1.2',
+    gameVersion: '0.2.1',
     lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
@@ -15,6 +15,7 @@ export function getDefaultPlayer(): Player {
     upgradeEffect: new Decimal(1),
     upgradeBulk: new Decimal(0),
     startedRun: Date.now(),
+    approximateResetsPerSecond: new Decimal(0),
     bestRun: null,
     runEffect: new Decimal(1),
     everMadeRun: false,
@@ -47,6 +48,7 @@ export function getDefaultPlayer(): Player {
     boughtSixthTierUpgrade: false,
     everMadeVermyros: false,
     vermyrosStartedDate: null,
+    approximateVermyrosResetsPerSecond: new Decimal(0),
     autoVermyrosEnabled: true,
     vermytes: new Decimal(0),
     vermytesGain: new Decimal(0),
@@ -73,7 +75,8 @@ export function getDefaultPlayer(): Player {
     amplivaultRequirement: new Decimal(Infinity),
     amplivaultEffect: new Decimal(1),
     softcapperLevel: new Decimal(0),
-    bestSoftcapperLevel: new Decimal(0)
+    bestSoftcapperLevel: new Decimal(0),
+    stableProgressBars: true
   }
   return defaultPlayer;
 }
@@ -121,6 +124,7 @@ export function loadPlayer(savedData: string): Player {
     if (Date.now() - merged.startedRun < 0) merged.startedRun = Date.now();
     if (merged.tierStartedDate !== null && Date.now() - merged.tierStartedDate < 0) merged.tierStartedDate = Date.now();
     if (merged.vermyrosStartedDate !== null && Date.now() - merged.vermyrosStartedDate < 0) merged.vermyrosStartedDate = Date.now();
+    merged.gameVersion = getDefaultPlayer().gameVersion;
 
     return merged;
   } catch (error) {

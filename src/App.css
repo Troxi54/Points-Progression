@@ -297,7 +297,7 @@
   border-radius: 1em;
 }
 
-#main-buttons > button:hover, .overlay-close-button:hover, #import-buttons > button:hover, #export-buttons > button:hover {
+#main-buttons > button:hover, .overlay-close-button:hover, #import-buttons > button:hover, #export-buttons > button:hover, .more-menu-button:hover {
   background-color: #2c2c2c;
 }
 
@@ -387,30 +387,6 @@
   font-size: 1.5em;
 }
 
-#discord-button {
-  background-color: #363636;
-  height: 100%;
-  padding-left: 1.2em;
-  padding-right: 1.2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5em;
-  border: 3px solid transparent;
-  box-sizing: border-box;
-  transition: border-color 0.25s;
-}
-
-#discord-button:hover {
-  border-color: #ffffff;
-}
-
-#discord-button > img {
-  height: 1em;
-  width: initial;
-}
-
 .info-effect {
   font-family: sans-serif;
   font-size: 0.75em;
@@ -438,7 +414,7 @@
 }
 
 .amplivault-description {
-  color: hsl(256, 100%, 31%);
+  color: hsl(256, 100%, 36%);
 }
 
 #amplivault-animation-div {
@@ -553,11 +529,13 @@
 }
 
 #softcapper > h2 {
+  font-size: 2em;
   background: linear-gradient(to left, blue, rgb(0, 255, 0));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: rgb(0, 255, 255);
+  margin-bottom: .5rem;
 }
 
 .softcap-1 {
@@ -566,4 +544,84 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: rgb(0, 255, 255);
+}
+
+#more-overlay {
+  font-size: 1.6vmin;
+}
+
+#more-menu-container {
+  gap: 2em;
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+  overflow-y: auto;
+}
+
+.more-menu-row {
+  gap: 1em;
+}
+
+.more-menu-button {
+  background-color: #222222;
+  position: relative;
+  border: unset;
+  transition: background-color 100ms linear;
+  padding: 1em;
+}
+
+.more-menu-button > p {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+#discord-button {
+  height: 100%;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .25em;
+  box-sizing: border-box;
+}
+
+#discord-button:hover {
+  border-color: #ffffff;
+}
+
+#discord-button > img {
+  height: 1em;
+  width: initial;
+}
+
+.tooltip-trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #181818;
+  width: 1em;
+  height: 1em;
+}
+
+.tooltip-trigger:hover ~ .tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tooltip {
+  top: 110%;
+  position: absolute;
+  font-size: 0.7em;
+  background-color: #111111;
+  padding: 0.25em;
+  pointer-events: none;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  width: 85%;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease;
 }

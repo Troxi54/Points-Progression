@@ -74,7 +74,7 @@ function VermyrosUpgrades() {
       </button>
       {player.boughtFirstVermyrosUpgrade && (
         <button id="vermyros-upgrade-2" onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 2: {format(settings.secondVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Keep 1st and 2nd reset and tier upgrades, generate 60 tier resets per second and replace 'Auto Tier' toggle with 'Auto Tier Up' toggle</span></p>
+          <p className="vermyros-upgrade-text">Vermyros upgrade 2: {format(settings.secondVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Keep 1st and 2nd reset and tier upgrades, generate 60 tier resets per second and replace the 'Auto Tier' toggle with the 'Auto Tier Up' toggle</span></p>
         </button>
       )}
       {player.boughtSecondVermyrosUpgrade && (

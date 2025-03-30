@@ -4,14 +4,31 @@ import { loadPlayerFromLocalStorage, playerContext, savePlayerToLocalStorage, se
 import Decimal from "break_eternity.js";
 import { buyMax, buyMaxAmpliflux, buyMaxVermyte } from "../Upgrades";
 import { triggerReset, triggerTierReset, triggerVermyrosReset } from "../../Resets";
+import { format } from "../format";
+
+export function calculateOfflineTierResets(setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
+  setPlayer(prev => {
+    if (!prev.boughtThirdTierUpgrade || !prev.autoTierEnabled || prev.boughtSecondVermyrosUpgrade) return prev;
+    const deltaTime = Math.max((Date.now() - prev.lastTick) / 1000, 0);
+    console.log(deltaTime + 's', prev.approximateTiersPerSecond, format(prev.approximateTiersPerSecond.times(deltaTime).floor()))
+    return {
+      ...prev,
+      madeTierTimes: prev.madeTierTimes.plus(prev.approximateTiersPerSecond.times(deltaTime).floor())
+    };
+  })
+}
 
 function GameLoop() {
   const context = useRef(useContext(playerContext));
   
   const lastTimeSaveRef = useRef(performance.now());
   const lastTierTime = useRef(0);
+  const resetTimes = useRef([0]);
+  const RESET_TIMES_MAX_LENGTH = 10;
   const tierTimes = useRef([0]);
-  const TIER_TIMES_MAX_LENGTH = 20;
+  const TIER_TIMES_MAX_LENGTH = 10;
+  const vermyrosTimes = useRef([0]);
+  const VERMYROS_TIMES_MAX_LENGTH = 10;
   const lastVermyrosTime = useRef(0);
 
   useEffect(() => {
@@ -30,17 +47,7 @@ function GameLoop() {
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
       setPlayer(savedPlayer);
-      calculateOfflineTierResets();
-      setPlayer(prev => ({
-        ...prev,
-        /* vermytes: new Decimal(0),
-        bestVermytes: new Decimal(0) */
-        /* madeTierTimes: new Decimal('1e6') */
-        /* vermytes: new Decimal('1e3'),
-        bestVermytes: new Decimal('1e3'),
-        everMadeVermyros: true,
-        vermyrosStartedDate: Date.now() */
-      }))
+      calculateOfflineTierResets(setPlayer);
     }
 
     function savePlayer() {
@@ -52,7 +59,7 @@ function GameLoop() {
 
     function onVisibilityChange() {
       if (!document.hidden) {
-        calculateOfflineTierResets();
+        calculateOfflineTierResets(setPlayer);
       }
     }
     
@@ -61,6 +68,14 @@ function GameLoop() {
       //if (now - lastVermyrosTime.current < VERMYROS_INTERVAL) return;
       if (updates.points.lessThan(settings.vermyrosGoal) || !updates.autoVermyrosEnabled) return;
       
+      const time = updates.vermyrosStartedDate === null ? Infinity : Date.now() - updates.vermyrosStartedDate;
+      vermyrosTimes.current.push(time);
+      setTimeout(() => {
+        const index = vermyrosTimes.current.indexOf(time);
+        if (index !== -1) vermyrosTimes.current.splice(index, 1);
+      }, 1000);
+      if (vermyrosTimes.current.length > VERMYROS_TIMES_MAX_LENGTH) vermyrosTimes.current.shift();
+
       const vermyrosUpdate = {
         ...triggerVermyrosReset(updates),
         everMadeVermyros: true,
@@ -95,7 +110,12 @@ function GameLoop() {
         }
       }
 
-      tierTimes.current.push(updates.tierStartedDate === null ? Infinity : Date.now() - updates.tierStartedDate);
+      const time = updates.tierStartedDate === null ? Infinity : Date.now() - updates.tierStartedDate;
+      tierTimes.current.push(time);
+      setTimeout(() => {
+        const index = tierTimes.current.indexOf(time);
+        if (index !== -1) tierTimes.current.splice(index, 1);
+      }, 1000);
       if (tierTimes.current.length > TIER_TIMES_MAX_LENGTH) tierTimes.current.shift();
 
       return {
@@ -117,6 +137,15 @@ function GameLoop() {
       }
       if (updates.points.lessThan(settings.finalGoal) || !updates.autoresettingEnabled) return autoSet;
       const timeSpent = Math.max(Math.min(Date.now() - updates.startedRun, DAY_IN_MS), 10);
+
+      const time = Date.now() - updates.startedRun;
+      resetTimes.current.push(time);
+      setTimeout(() => {
+        const index = resetTimes.current.indexOf(time);
+        if (index !== -1) resetTimes.current.splice(index, 1);
+      }, 1000);
+      if (resetTimes.current.length > RESET_TIMES_MAX_LENGTH) resetTimes.current.shift();
+
       return {
         ...autoSet,
         ...triggerReset(),
@@ -131,16 +160,6 @@ function GameLoop() {
       return {
         madeTierTimes: updates.madeTierTimes.plus(Decimal.multiply(MAX_TIER_PER_SECOND, deltaTime))
       };
-    }
-    function calculateOfflineTierResets() {
-      setPlayer(prev => {
-        if (!prev.boughtThirdTierUpgrade || !prev.autoTierEnabled || prev.boughtSecondVermyrosUpgrade) return prev;
-        const deltaTime = Math.max((Date.now() - prev.lastTick) / 1000, 0);
-        return {
-          ...prev,
-          madeTierTimes: prev.madeTierTimes.plus(prev.approximateTiersPerSecond.times(deltaTime).floor())
-        };
-      })
     }
     function automateUpgrade(updates: Player) {
       return buyMax(updates, !updates.boughtSecondResetUpgrade);
@@ -193,6 +212,12 @@ function GameLoop() {
     
         const vermyrosUpdates = getVermyrosUpdates(updates);
         updates = { ...updates, ...vermyrosUpdates };
+        const vermyrosTimesSum = vermyrosTimes.current.reduce((num, num2) => num + num2, 0);
+        if (vermyrosTimes.current.length >= 1 && vermyrosTimesSum > 0 && vermyrosTimesSum !== Infinity && updates.autoVermyrosEnabled) {
+          updates.approximateVermyrosResetsPerSecond = new Decimal(1000 / (vermyrosTimesSum / vermyrosTimes.current.length));
+        } else {
+          updates.approximateVermyrosResetsPerSecond = new Decimal(0);
+        }
         updates.vermytesBestEffect = updates.bestVermytes.pow(3);
         updates = { ...updates, ...generateVermytes(updates, deltaTime) };
     
@@ -207,7 +232,13 @@ function GameLoop() {
         };
         const tierUpdates = getTierUpdates(updates);
         updates = {...updates, ...tierUpdates};
-        updates.approximateTiersPerSecond = new Decimal(1000 / (tierTimes.current.reduce((num, num2) => num + num2, 0) / tierTimes.current.length));
+        const tierTimesSum = tierTimes.current.reduce((num, num2) => num + num2, 0);
+        if (tierTimes.current.length >= 1 && tierTimesSum > 0 && tierTimesSum !== Infinity && updates.autoTierEnabled) {
+          updates.approximateTiersPerSecond = new Decimal(1000 / (tierTimesSum / tierTimes.current.length));
+        } else {
+          updates.approximateTiersPerSecond = new Decimal(0);
+        }
+        
         updates = {
           ...updates,
           tierEffect: Decimal.pow(3, updates.tier),
@@ -216,6 +247,12 @@ function GameLoop() {
     
         const goalUpdates = getGoalUpdates(updates)
         updates = {...updates, ...goalUpdates};
+        const resetTimesSum = resetTimes.current.reduce((num, num2) => num + num2, 0);
+        if (resetTimes.current.length >= 1 && resetTimesSum > 0 && updates.autoresettingEnabled) {
+          updates.approximateResetsPerSecond = new Decimal(1000 / (resetTimesSum / resetTimes.current.length));
+        } else {
+          updates.approximateResetsPerSecond = new Decimal(0);
+        }
     
         const TWO_HOURS_IN_MS = 7.2e6;
         updates = {

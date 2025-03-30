@@ -84,7 +84,7 @@ function MoreVermyrosUpgrades() {
       )}
       {player.boughtSeventhVermyrosUpgrade && (
         <button id="vermyros-upgrade-8" onClick={buyEighthUpgrade} onContextMenu={eighthUpgradeContextMenu} className={player.boughtEighthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automatically update best vermytes and remove 'Auto Vermyros' toggle</span></p>
+          <p className="vermyros-upgrade-text">Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automatically update best vermytes and remove the 'Auto Vermyros' toggle</span></p>
         </button>
       )}
     </div>
