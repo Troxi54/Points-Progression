@@ -1,10 +1,18 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
+import { GlobalSettings } from "./playerUtils";
 
 export function format(num: DecimalSource, precision: number | "auto" = "auto"): string {
   num = new Decimal(num);
   const abs = num.abs();
   const isNegative = num.lessThan(0);
   const prefix = isNegative ? '-' : '';
+  function getExponential(num: Decimal, wasPrecisionAuto: boolean): string {
+    if (wasPrecisionAuto || precision === 'auto')
+      precision = 2;
+    const mantissa = num.mantissa;
+    const exponent = num.exponent;
+    return `${prefix}${mantissa.toFixed(precision)}e${exponent}`;
+  }
   if (num.equals(0)) return '0';
   if (abs.lessThan(1)) {
     if (precision === "auto")
@@ -13,6 +21,9 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
   }
   if (abs.greaterThanOrEqualTo(1000) && precision === 0) {
     precision = 'auto';
+  }
+  if (abs.greaterThanOrEqualTo(1000) && GlobalSettings.exponentialNotation) {
+    return getExponential(num, false);
   }
   let precisionWasAuto = false;
   if (precision === "auto") {
@@ -35,11 +46,7 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
     index = Decimal.min(units2.length - 1, index);
     divided = divided.dividedBy(Decimal.pow(1e6, index));
     if (divided.greaterThanOrEqualTo(1e9)) {
-      if (precisionWasAuto)
-        precision = 2;
-      const mantissa = num.mantissa;
-      const exponent = num.exponent;
-      return `${prefix}${mantissa.toFixed(precision)}e${exponent}`;
+      return getExponential(num, precisionWasAuto);
     }
     if (divided.greaterThanOrEqualTo(1000))
       return prefix + (+divided.floor()).toLocaleString('en-US') + units2[+index];

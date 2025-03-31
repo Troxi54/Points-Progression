@@ -24,12 +24,18 @@ import Menu from './components/Menu';
 import MoreVermyrosUpgrades from './components/MoreVermyrosUpgrades';
 import Amplivault from './components/Amplivault';
 import Softcapper from './components/Softcapper';
+import EnergyReactors from './components/EnergyReactors';
+import Energy from './components/Energy';
+import CoreButton from './components/CoreButton';
+import Cores from './components/Cores';
+import CoreUpgrade from './components/CoreUpgrade';
+import MoreVermyrosUpgrades2 from './components/MoreVermyrosUpgrades2';
 
 function App() {
   const context = useContext(playerContext);
   if (!context) {
     return (
-      <div>Loading...</div>
+      <div><h1>Loading...</h1></div>
     )
   }
   const { player } = context;
@@ -91,6 +97,20 @@ function App() {
               </>
             )}
             {player.bestSoftcapperLevel.greaterThanOrEqualTo(1) && (<Softcapper/>)}
+            {player.boughtEighthVermyrosUpgrade && (
+              <>
+                <EnergyReactors/>
+                <Energy/>
+                <CoreButton/>
+                {player.everMadeCoreReset && (
+                  <>
+                    <Cores/>
+                    <CoreUpgrade/>
+                  </>
+                )}
+                <MoreVermyrosUpgrades2/>
+              </>
+            )}
           </div>
         )}
       </div>

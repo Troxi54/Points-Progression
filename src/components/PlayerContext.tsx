@@ -79,7 +79,28 @@ export interface Player {
   amplivaultEffect: Decimal,
   softcapperLevel: Decimal,
   bestSoftcapperLevel: Decimal,
-  stableProgressBars: boolean
+  stableProgressBars: boolean,
+  energyReactors: Decimal,
+  energyReactorGain: Decimal,
+  energy: Decimal,
+  energyGain: Decimal,
+  energyEffect: Decimal,
+  everReachedCores: boolean,
+  everMadeCoreReset: boolean,
+  cores: Decimal,
+  coreGain: Decimal,
+  coreEffect: Decimal,
+  coreUpgradeLvl: Decimal,
+  coreUpgradeCost: Decimal,
+  coreUpgradeEffect: Decimal,
+  coreUpgradeBulk: Decimal,
+  boughtNinthVermyrosUpgrade: boolean,
+  boughtTenthVermyrosUpgrade: boolean,
+  exponentialNotation: boolean
+}
+
+export interface globalSettings {
+  exponentialNotation: boolean
 }
 
 interface PlayerProviderProps {
@@ -135,5 +156,11 @@ export interface Settings {
   eighthVermyrosUpgradeCost: Decimal,
   amplivaultRequirementStartsAt: Decimal,
   firstSoftcapperLevelAt: Decimal,
-  firstSoftcapperLevelPower: Decimal
+  firstSoftcapperLevelPower: Decimal,
+  coresAt: Decimal,
+  coreUpgradeStartingCost: Decimal,
+  coreUpgradeCostScaling: Decimal,
+  coreUpgradeEffectScaling: Decimal,
+  ninthVermyrosUpgradeCost: Decimal,
+  tenthVermyrosUpgradeCost: Decimal
 }

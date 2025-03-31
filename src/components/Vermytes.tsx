@@ -14,7 +14,7 @@ function Vermytes() {
 
   return (
     <div id="vermytes-container">
-      <p id="vermytes-counter">Vermytes: {format(player.vermytes)}{player.vermytesGain.greaterThan(0) && (<span> (+{format(player.vermytesGain)})</span>)}{player.vermytesPerSecond.greaterThan(0) && (<span> (+{format(player.vermytesPerSecond)}/s)</span>)}</p>
+      <p id="vermytes-counter">Vermytes: {format(player.vermytes)}{(player.vermytesGain.greaterThan(0) && !player.boughtEighthVermyrosUpgrade) && (<span> (+{format(player.vermytesGain)})</span>)}{player.vermytesPerSecond.greaterThan(0) && (<span> (+{format(player.vermytesPerSecond)}/s)</span>)}</p>
     </div>
   );
 }

@@ -1,0 +1,46 @@
+import { useContext } from "react";
+import { playerContext } from "../playerUtils";
+import { format } from "../format";
+import { buyMaxCore } from "../Upgrades";
+
+
+
+function CoreUpgrade() {
+  const context = useContext(playerContext);
+  if (!context) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+  const { player, setPlayer } = context;
+  
+  function buy(event: React.MouseEvent) {
+    setPlayer(prev => {
+      event.preventDefault();
+      if (prev.cores.lessThan(prev.coreUpgradeCost) || !prev.everMadeCoreReset) return prev;
+      return {
+        ...prev,
+        cores: prev.cores.minus(prev.coreUpgradeCost),
+        coreUpgradeLvl: prev.coreUpgradeLvl.plus(1)
+      };
+    });
+  }
+
+  function buyMAX() {
+    setPlayer(prev => ({
+      ...prev,
+      ...buyMaxCore(prev)
+    }));
+  }
+
+  return (
+    <div id="core-upgrade-div">
+      <button id="core-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
+        <p id="core-upgrade-cost">Upgrade: {format(player.coreUpgradeCost)} Cores {player.coreUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.coreUpgradeLvl, 0)}{player.coreUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.coreUpgradeBulk, 0)}` : ''})</span>)}</p>
+        <p id="core-upgrade-effect">Effect: x<sup>{format(player.coreUpgradeEffect)}</sup> best points effect</p>
+      </button>
+    </div>
+  )
+}
+
+export default CoreUpgrade;

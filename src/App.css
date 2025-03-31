@@ -108,7 +108,7 @@
   margin-bottom: .5em;
 }
 
-#reset-upgrades, #tier-upgrades, #more-tier-upgrades, #vermyros-upgrades {
+#reset-upgrades, #tier-upgrades, #more-tier-upgrades, #vermyros-upgrades, #more-vermyros-upgrades, #more-vermyros-upgrades-2 {
   background-color: transparent;
 }
 
@@ -246,11 +246,11 @@
   color: hsl(0, 22%, 48%);
 }
 
-#vermyros-upgrades {
+#vermyros-upgrades, #more-vermyros-upgrades {
   gap: 5%;
 }
 
-#vermyros-upgrades > button {
+#vermyros-upgrades > button, #more-vermyros-upgrades > button {
   background-color: #202020;
   width: 20%;
 }
@@ -624,4 +624,57 @@
   width: 85%;
   opacity: 0;
   transition: opacity 200ms ease, transform 200ms ease;
+}
+
+#energy-reactor-container {
+  background-color: hsl(34, 76%, 13%);
+}
+
+#energy-reactor-counter {
+  color: hsl(35, 100%, 50%);
+}
+
+#energy-container {
+  background-color: hsl(60, 76%, 13%);
+}
+
+#energy-counter {
+  color: hsl(60, 100%, 50%);
+}
+
+.energy-effect {
+  color: hsl(60, 100%, 31%);
+}
+
+#cores-div {
+  background-color: #111111;
+}
+
+.cores-description {
+  color: #afafaf;
+}
+
+#core-container {
+  background-color: #111111;
+}
+
+.core-effect {
+  color: hsl(0, 0%, 62%)
+}
+
+#core-upgrade-div {
+  background-color: #111111;
+}
+
+#core-upgrade-effect {
+  color: hsl(0, 0%, 58%);
+}
+
+#more-vermyros-upgrades-2 {
+  gap: 10%;
+}
+
+#more-vermyros-upgrades-2 > button {
+  background-color: #202020;
+  width: 40%;
 }

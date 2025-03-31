@@ -30,7 +30,18 @@ export function buyMaxVermyte(updates: Player, justUpdateBulk: boolean = false) 
   const finalCost = updates.vermytesUpgradeCost.multiply(settings.vermytesUpgradeCostScaling.pow(array.vermytesUpgradeBulk.minus(1)));
   return {
     vermytesUpgradeBulk: new Decimal(0),
-    vermytes: updates.vermytes.minus(finalCost),
+    vermytes: updates.boughtNinthVermyrosUpgrade ? updates.vermytes : updates.vermytes.minus(finalCost),
     vermytesUpgradeLvl: updates.vermytesUpgradeLvl.plus(array.vermytesUpgradeBulk)
+  };
+}
+
+export function buyMaxCore(updates: Player, justUpdateBulk: boolean = false) {
+  const array = { coreUpgradeBulk: updates.cores.dividedBy(updates.coreUpgradeCost).log(settings.coreUpgradeCostScaling).floor().plus(updates.cores.greaterThanOrEqualTo(updates.coreUpgradeCost) ? 1 : 0)};
+  if (updates.cores.lessThan(updates.coreUpgradeCost) || !updates.everMadeCoreReset || justUpdateBulk) return array;
+  const finalCost = updates.coreUpgradeCost.multiply(settings.coreUpgradeCostScaling.pow(array.coreUpgradeBulk.minus(1)));
+  return {
+    coreUpgradeBulk: new Decimal(0),
+    cores: updates.cores.minus(finalCost),
+    coreUpgradeLvl: updates.coreUpgradeLvl.plus(array.coreUpgradeBulk)
   };
 }

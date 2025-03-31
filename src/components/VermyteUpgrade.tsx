@@ -18,7 +18,7 @@ function VermyteUpgrade() {
       if (prev.vermytes.lessThan(prev.vermytesUpgradeCost) || !prev.everMadeVermyros) return prev;
       return {
         ...prev,
-        vermytes: prev.vermytes.minus(prev.vermytesUpgradeCost),
+        vermytes: prev.boughtNinthVermyrosUpgrade ? prev.vermytes : prev.vermytes.minus(prev.vermytesUpgradeCost),
         vermytesUpgradeLvl: prev.vermytesUpgradeLvl.plus(1)
       };
     });

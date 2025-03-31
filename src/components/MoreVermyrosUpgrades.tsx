@@ -68,7 +68,7 @@ function MoreVermyrosUpgrades() {
     buyEighthUpgrade();
   }
   return (
-    <div id="vermyros-upgrades">
+    <div id="more-vermyros-upgrades">
       <button id="vermyros-upgrade-5" onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthVermyrosUpgrade ? 'bought-upgrade' : ''}>
         <p className="vermyros-upgrade-text">Vermyros upgrade 5: {format(settings.fifthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Unlock the Amplivault and generate 1% of your best vermytes per second</span></p>
       </button>
@@ -84,7 +84,7 @@ function MoreVermyrosUpgrades() {
       )}
       {player.boughtSeventhVermyrosUpgrade && (
         <button id="vermyros-upgrade-8" onClick={buyEighthUpgrade} onContextMenu={eighthUpgradeContextMenu} className={player.boughtEighthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automatically update best vermytes and remove the 'Auto Vermyros' toggle</span></p>
+          <p className="vermyros-upgrade-text">Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automatically update best vermytes, remove the 'Auto Vermyros' toggle and unlock energy</span></p>
         </button>
       )}
     </div>

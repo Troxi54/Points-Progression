@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { getConvertedPlayerData, loadPlayer, playerContext, savePlayerToLocalStorage, settings } from "../playerUtils";
 import { CSSProperties } from "react";
 import { format } from "../format";
-import { calculateOfflineTierResets } from "./GameLoop";
+import { calculateOfflineTierResets } from "../offline";
 
 function Menu() {
   const context = useContext(playerContext);
@@ -260,7 +260,15 @@ function Menu() {
           </button>
           <div id="more-menu-container">
             <div className="more-menu-row">
-              <button id="stable-progress-bard-button" className="more-menu-button" onClick={() => {
+              <button id="exponential-notation-button" className="more-menu-button" onClick={() => {
+                setPlayer(prev => ({
+                  ...prev,
+                  exponentialNotation: !prev.exponentialNotation
+                }));
+              }}>
+                <p className="menu-button-info">Exponential notation: {player.exponentialNotation ? 'ON' : 'OFF'}</p>
+              </button>
+              <button id="stable-progress-bar-button" className="more-menu-button" onClick={() => {
                 setPlayer(prev => ({
                   ...prev,
                   stableProgressBars: !prev.stableProgressBars
@@ -341,7 +349,9 @@ function Menu() {
                       if tier resets made are less than 1,000,000: (x + 1)<sup>1.2</sup>
                       <br/>Otherwise: (1,000,000 × ((x + 1) / 1,000,000)<sup>0.25</sup>)<sup>1.2</sup>
                       <br/>Where x is tier resets made</span></>}
-              {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && <><br/>Ampliflux upgrade cost:<span className="info-effect"> {format(settings.amplifluxUpgradeStartingCost)} × {format(settings.amplifluxUpgradeCostScaling)}<sup>x</sup>, where x is the ampliflux upgrade level</span>
+              {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && <>
+              <br/>Ampliflux effect:<span className="info-effect"> 2<sup>log(x + 1)</sup>, where x is ampliflux</span>
+              <br/>Ampliflux upgrade cost:<span className="info-effect"> {format(settings.amplifluxUpgradeStartingCost)} × {format(settings.amplifluxUpgradeCostScaling)}<sup>x</sup>, where x is the ampliflux upgrade level</span>
               <br/>Ampliflux upgrade effect:<span className="info-effect"> {format(settings.amplifluxUpgradeEffectScaling)}<sup>x</sup>, where x is the ampliflux upgrade level</span></>}
               {player.everMadeVermyros && <><br/>Vermytes: <span className="info-effect">
                   <br/>if points are greater than {format(settings.vermyrosGoal)}: 2<sup>max(log<sub>1,000,000</sub>(x / {format(settings.vermyrosGoal)}), 0)</sup>
@@ -353,6 +363,11 @@ function Menu() {
               <br/>Vermyte upgrade effect:<span className="info-effect"> {format(settings.vermytesUpgradeEffectScaling)}<sup>x</sup>, where x is the vermyte upgrade level</span></>}
               {player.boughtFifthVermyrosUpgrade && <><br/>Amplivault level requirement:<span className="info-effect"> {format(settings.amplivaultRequirementStartsAt)} × 1,000<sup>x</sup>, where x is amplivault level</span></>}
               {player.amplivaultLevel.greaterThan(0) && <><br/>Amplivault effect:<span className="info-effect"> 2<sup>x</sup>, where x is amplivault level</span></>}
+              {player.boughtEighthVermyrosUpgrade && <><br/>Energy effect:<span className="info-effect"> 1.75<sup>log(x + 1)</sup>, where x is energy</span></>}
+              {player.everReachedCores && <><br/>Cores:<span className="info-effect"> x / 1,000,000</span>, where x is energy</>}
+              {player.everMadeCoreReset && <><br/>Core effect:<span className="info-effect"> 4<sup>log(x + 1)</sup></span>
+                <br/>Core upgrade cost:<span className="info-effect"> {format(settings.coreUpgradeStartingCost)} × {format(settings.coreUpgradeCostScaling)}<sup>x</sup>, where x is the core upgrade level</span>
+                <br/>Core upgrade effect:<span className="info-effect"> {format(settings.coreUpgradeEffectScaling)}<sup>x</sup>, where x is the core upgrade level</span></>}
             </p>
             <p>If you find a bug, please report it to Troxi, the developer of the game.</p>
           </div>

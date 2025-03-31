@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import { Player, PlayerContextType, Settings } from "./components/PlayerContext";
+import { globalSettings, Player, PlayerContextType, Settings } from "./components/PlayerContext";
 import Decimal from "break_eternity.js";
 
 export const playerContext = createContext<PlayerContextType | undefined>(undefined);
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.2.1',
+    gameVersion: '0.3',
     lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
@@ -76,7 +76,24 @@ export function getDefaultPlayer(): Player {
     amplivaultEffect: new Decimal(1),
     softcapperLevel: new Decimal(0),
     bestSoftcapperLevel: new Decimal(0),
-    stableProgressBars: true
+    stableProgressBars: true,
+    energyReactors: new Decimal(0),
+    energyReactorGain: new Decimal(0),
+    energy: new Decimal(0),
+    energyGain: new Decimal(0),
+    energyEffect: new Decimal(1),
+    everReachedCores: false,
+    everMadeCoreReset: false,
+    cores: new Decimal(0),
+    coreGain: new Decimal(0),
+    coreEffect: new Decimal(0),
+    coreUpgradeLvl: new Decimal(0),
+    coreUpgradeCost: new Decimal(0),
+    coreUpgradeEffect: new Decimal(1),
+    coreUpgradeBulk: new Decimal(0),
+    boughtNinthVermyrosUpgrade: false,
+    boughtTenthVermyrosUpgrade: false,
+    exponentialNotation: false
   }
   return defaultPlayer;
 }
@@ -175,5 +192,15 @@ export const settings: Readonly<Settings> = {
   eighthVermyrosUpgradeCost: new Decimal(1e212),
   amplivaultRequirementStartsAt: new Decimal(1e30),
   firstSoftcapperLevelAt: new Decimal(1e204),
-  firstSoftcapperLevelPower: new Decimal(0.9)
+  firstSoftcapperLevelPower: new Decimal(0.94),
+  coresAt: new Decimal(1e6),
+  coreUpgradeStartingCost: new Decimal(10),
+  coreUpgradeCostScaling: new Decimal(10),
+  coreUpgradeEffectScaling: new Decimal(1.1),
+  ninthVermyrosUpgradeCost: new Decimal(1e230),
+  tenthVermyrosUpgradeCost: new Decimal(1e250)
 };
+
+export const GlobalSettings: globalSettings = {
+  exponentialNotation: getDefaultPlayer().exponentialNotation
+}
