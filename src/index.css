@@ -1,63 +1,358 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 700;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --color-main-text: #ffffffde;
+  --color-bg: #0e0e0e;
+  --color-a: #646cff;
+  --color-a-hover: #535bf2;
+  --color-button-bg: #202020;
+  --color-button-border: white;
+  --color-layer-bg: #363636;
+  --color-layer-div-bg: #202020;
+  --color-point-upgrade-bg: #2e2e16;
+  --color-point-upgrade-hover-border: #ffff00; 
+  --color-point-upgrade-cost: yellow;
+  --color-point-upgrade-hover-cost: #fff598;
+  --color-point-upgrade-effect: #8c9462;
+  --color-time: #979797;
+  --color-reset-bar: #51c451;
+  --color-reset-effect: #629261;
+  --color-bought-upgrade-bg: #424242;
+  --color-buyable-once-upgrade-effect: #949494;
+  --color-tier: #008cff;
+  --color-tier-effect: #608197;
+  --color-ampliflux-upgrade-bg: #16192d;
+  --color-ampliflux-upgrade-hover-border: #002aff;
+  --color-ampliflux-upgrade-cost: #002aff;
+  --color-ampliflux-upgrade-hover-cost: #99aaff;
+  --color-ampliflux-upgrade-effect: #626a93;
+  --color-ampliflux-bg: #08113a;
+  --color-ampliflux-counter: #002aff;
+  --color-ampliflux-effect: #001a9e;
+  --color-vermyros: #ff0000;
+  --color-vermyros-bar-first: #9c0000;
+  --color-vermyros-bar-second: #ff0000;
+  --color-vermyros-effect: #955f5f;
+  --color-vermyte-upgrade-bg: #2d1616;
+  --color-vermyte-upgrade-hover-border: #ff0000;
+  --color-vermyte-upgrade-cost: #ff0000;
+  --color-vermyte-upgrade-hover-cost: #ff9999;
+  --color-vermyte-upgrade-effect: #936262;
+  --color-menu-button: #2c2c2c;
+  --color-data-button: #363636;
+  --color-info-important: #ffbfbf;
+  --color-info-effect: #ffffffbf;
+  --color-amplivault-bg: #141020;
+  --color-amplivault-hover-border: #4400ff;
+  --color-amplivault-info: #4400ff;
+  --color-amplivault-description: #3100b8;
+  
+  --color-amplivault-div-bg: #1a0b44;
+  --color-amplivault-div-border: #4400ff;
+  --color-amplivault-div-2-bg: #251155;
+  --color-amplivault-div-2-border: #002aff;
+  --color-amplivault-div-3-bg: #240053;
+  --color-amplivault-div-3-border: #002aff;
+  --color-amplivault-div-4-bg: #294cff;
+  --color-amplivault-div-5-bg: #150030;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  --color-data-action-button-bg: #222222;
+  --color-tooltip-trigger-bg: #181818;
+  --color-tooltip-bg: #111111;
+  --color-spoiler-bg: #202020;
+
+  --color-softcapper-bg-1: #000033;
+  --color-softcapper-bg-2: #003300;
+  --color-softcapper-h-1: #0000ff;
+  --color-softcapper-h-2: #00ff00;
+  --color-softcapper-level-1-c1: hsl(240, 100%, 40%);
+  --color-softcapper-level-1-c2: hsl(120, 100%, 40%);
+  --color-energy-reactor-bg: #3a2508;
+  --color-energy-reactor-counter: #ff9500;
+  --color-energy-bg: hsl(60, 76%, 13%);
+  --color-energy-counter: #ffff00;
+  --color-energy-effect: #9e9e00;
+  --color-core-bg: #111111;
+  --color-core-description: #afafaf;
+  --color-core-effect: #9e9e9e;
+  --color-core-upgrade-effect: #949494;
+
+  @keyframes vermyros-bar {
+    0% {
+      background-position: calc(var(--d) / sin(var(--angle))) 0;
+    }
+  }
+
+  @keyframes amplivault-animation {
+    0% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(135deg);
+    }
+    100% {
+      transform: rotate(135deg);
+    }
+  }
+
+  @keyframes amplivault-animation-2 {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 0%;
+    }
+    75% {
+      width: 50%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-p {
-  color: rgba(255, 255, 255, 0.87);
+@utility transition-ease {
+  @apply ease-[cubix-bezier(0.25,_0.1,_0.25,_1.0)];
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: rgba(14, 14, 14);
+@utility transition-colors-250 {
+  @apply transition-colors duration-250 transition-ease;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+@utility progress-bar {
+  @apply left-0 h-full absolute;
 }
 
-button {
-  border: 3px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #202020;
-  transition: border-color 0.25s;
-}
-button:not(.bought-upgrade) {
-  cursor: pointer;
-}
-button:not(.bought-upgrade):hover {
-  border-color: #ffffff;
+@utility text-gradient {
+  @apply bg-clip-text text-white;
+  -webkit-text-fill-color: transparent;
 }
 
-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@layer base {
+  :root {
+    @apply font-[system-ui,_Avenir,_Helvetica,_Arial,_sans-serif] scheme-light-dark
+             antialiased ;
+    text-rendering: optimizeLegibility;
+  }
+  
+  * {
+    @apply font-bold text-main-text text-center;
+  }
+  
+  body {
+    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg;
+  }
+  
+  p {
+    @apply my-4;
+  }
+  
+  a {
+    @apply font-medium text-a hover:text-a-hover;
+  }
+  
+  h1 {
+    @apply text-[3.2em] my-[.5em];
+  }
+  h2 {
+    @apply text-[1.5em] my-[.83em];
+  }
+  sup {
+    @apply text-inherit;
+  }
+  
+  button {
+    @apply px-[1.2em] py-[0.6em] text-[1em] bg-button-bg
+            transition-colors-250
+            border-[3px] border-transparent not-[.bought-upgrade]:cursor-pointer hover:not-[.bought-upgrade]:border-button-border;
+  }
+
+  button * {
+    @apply font-medium;
+  }
+  
+  div {
+    @apply flex items-center justify-center;
+  }
+
+  .layer > div {
+    @apply w-full bg-layer-div-bg;
+  }
+  
+  .layer > div > button {
+    @apply w-full bg-transparent;
+  }
+
+  .auto-toggle > button {
+    @apply px-15;
+  }
+
+  .auto-toggle > button > p {
+    @apply my-2;
+  }
+
+  .upgrade-container > button.bought-upgrade > * {
+    @apply pointer-events-auto;
+  }
+
+  .upgrade-container > button * {
+    @apply my-2;
+  }
+
+  #reset-upgrades > button, #more-tier-upgrades > button, #more-vermyros-upgrades-2 > button {
+    @apply w-2/5;
+  }
+
+  #tier-upgrades > button, #vermyros-upgrades > button, #more-vermyros-upgrades > button {
+    @apply w-1/5;
+  }
+
+  #main-buttons > button {
+    @apply p-0 w-16 h-16 border-none transition-colors duration-100 ease-linear rounded-2xl;
+  }
+
+  #menu-toggle > div {
+    @apply w-[65%] h-1 rounded-lg bg-white m-[0_auto];
+  }
+
+  #data-buttons > button {
+    @apply relative h-full bg-data-button items-center justify-center content-center;
+  }
+
+  #amplivault-line-container > div {
+    @apply absolute w-full h-[2px] bg-amplivault-div-4-bg;
+  }
+  
+  #amplivault-line-container > div::after {
+    @apply content-[''] w-0 h-[3px] bg-amplivault-div-5-bg animate-[amplivault-animation-2_1.5s_linear_infinite];
+  }
+
+  #amplivault-line-container > div.paused::after {
+    animation-play-state: paused;
+  }
+
+  #amplivault-line-container > div:nth-child(2) {
+    @apply rotate-90;
+  }
+
+  .more-menu-button > p {
+    @apply py-[.5em];
+  }
+}
+
+@layer components {
+  #root {
+    @apply size-full flex-col pt-12 gap-2 overflow-x-hidden;
+  }
+  
+  .layer {
+    @apply relative flex-col w-full gap-4 bg-layer-bg py-4
+            before:-top-6 before:bg-gradient-to-b before:from-transparent before:to-layer-bg
+            after:-bottom-6 after:bg-gradient-to-t after:from-transparent after:to-layer-bg;
+  }
+  
+  .layer::before, .layer::after {
+    @apply content-[''] w-full absolute h-6;
+  }
+  
+  .auto-toggle {
+    @apply w-fit;
+  }
+
+  .upgrade-container {
+    @apply bg-transparent;
+  }
+  
+  .upgrade-container > button {
+    @apply bg-button-bg;
+  }
+
+  .upgrade-container > button.bought-upgrade {
+    @apply bg-bought-upgrade-bg;
+  }
+
+  .menu-button-info {
+    @apply m-0 text-center items-center justify-center leading-[0.5em];
+  }
+
+  .progress-bar-inner {
+    @apply h-full bg-layer-div-bg;
+  }
+
+  .vermyros-bar-container {
+    --d: 200px;
+    --angle: 90deg;
+    --first-color: rgb(156, 0, 0);
+    --second-color: rgb(255, 0, 0);
+    @apply size-full absolute bg-gradient-to-r from-vermyros-bar-first via-vermyros-bar-second to-vermyros-bar-first
+            bg-size-[calc(var(--d)/sin(var(--angle)))_100%] animate-[vermyros-bar_2s_linear_infinite];
+  }
+
+  .overlay-close-button {
+    @apply absolute p-[.25em] border-none top-[.25em] left-[.25em] flex items-center text-[2.25em] justify-center transition-colors duration-100 ease-linear rounded-[.5em];
+  }
+
+  .overlay {
+    @apply fixed w-screen h-screen bg-[#00000080] left-0 top-0 z-2 transition-ease transition-opacity duration-200;
+  }
+
+  .overlay-div {
+    @apply relative size-2/3 bg-data-button rounded-[1em];
+  }
+
+  .info-important {
+    @apply text-info-important;
+  }
+
+  .info-effect {
+    @apply font-sans text-xs text-info-effect;
+  }
+
+  #main-buttons > button:hover, .overlay-close-button:hover, .data-action-container > button:hover, .more-menu-button:hover {
+    @apply bg-menu-button;
+  }
+
+  .data-div {
+    @apply flex-col w-20/100 h-1/4 gap-y-[5%] text-[1.5vmin];
+  }
+
+  .data-action-container > button {
+    @apply relative bg-data-action-button-bg border-none items-center justify-center content-center transition-colors duration-100 ease-linear;
+  }
+
+  .data-action-container > button * {
+    @apply my-2;
+  }
+
+  .softcap-1 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-1-c1 to-softcapper-level-1-c2;
+  }
+
+  .more-menu-row {
+    @apply gap-[1em];
+  }
+
+  .more-menu-button {
+    @apply relative bg-data-action-button-bg border-none transition-colors duration-100 ease-linear p-[1em];
+  }
+
+  .tooltip-trigger {
+    @apply absolute right-0 top-0 bg-tooltip-trigger-bg w-[1em] h-[1em];
+  }
+
+  .tooltip-trigger:hover ~ .tooltip {
+    @apply opacity-100 translate-y-1/2;
+  }
+
+  .tooltip {
+    @apply absolute top-1/2 left-1/2 text-[0.7em] bg-tooltip-bg pointer-events-none w-85/100 -translate-x-1/2 opacity-0 transition-[transform_opacity] duration-200 transition-ease;
+  }
+
+  .spoiler {
+    @apply text-transparent bg-spoiler-bg transition-colors-250;
+  }
+
+  .spoiler:hover {
+    @apply text-white bg-transparent;
+  }
 }

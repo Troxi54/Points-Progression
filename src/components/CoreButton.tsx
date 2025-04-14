@@ -30,9 +30,9 @@ function CoreButton() {
   }
 
   return (
-    <div id="cores-div">
+    <div className="bg-core-bg">
       <button id="cores-button" onClick={convert} onContextMenu={contextMenu}>
-        <p id="cores-info">{player.everReachedCores ? <><span className="cores-description">Converting energy into cores resets energy reactors</span><br/>You will gain {format(player.coreGain)} cores</> 
+        <p id="cores-info">{player.everReachedCores ? <><span className="text-core-description">Converting energy into cores resets energy reactors</span><br/>You will gain {format(player.coreGain)} cores</> 
                                                     : <>You need {format(settings.coresAt)} energy for this</>}</p>
       </button>
     </div>

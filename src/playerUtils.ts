@@ -6,7 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.3',
+    gameVersion: '0.3.1',
     lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
@@ -158,7 +158,7 @@ export function loadPlayerFromLocalStorage(): Player {
   return loadPlayer(savedData);
 }
 
-export const settings: Readonly<Settings> = {
+export const settings: Settings = {
   localStorageName: 'PointsProgression',
   saveInterval: 10000,
   upgradeStartingCost: new Decimal(10),
@@ -198,8 +198,9 @@ export const settings: Readonly<Settings> = {
   coreUpgradeCostScaling: new Decimal(10),
   coreUpgradeEffectScaling: new Decimal(1.1),
   ninthVermyrosUpgradeCost: new Decimal(1e230),
-  tenthVermyrosUpgradeCost: new Decimal(1e250)
-};
+  tenthVermyrosUpgradeCost: new Decimal(1e250),
+  endgameAt: new Decimal(1e250)
+} as const;
 
 export const GlobalSettings: globalSettings = {
   exponentialNotation: getDefaultPlayer().exponentialNotation

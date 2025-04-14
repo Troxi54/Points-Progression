@@ -12,8 +12,8 @@ function EnergyReactors() {
 
   const { player } = context;
   return (
-    <div id="energy-reactor-container">
-      <p id="energy-reactor-counter">Energy Reactors: {format(player.energyReactors)}{player.energyReactorGain.gt(0) ? ` (+${format(player.energyReactorGain)}/s)` : ''}</p>
+    <div className="bg-energy-reactor-bg">
+      <p className="text-energy-reactor-counter">Energy Reactors: {format(player.energyReactors)}{player.energyReactorGain.gt(0) ? ` (+${format(player.energyReactorGain)}/s)` : ''}</p>
     </div>
   );
 }

@@ -17,10 +17,10 @@ function VermyrosBar() {
   if (stable) progress = 100;
   const timeLeft = Decimal.max(settings.vermyrosGoal.minus(player.points).div(player.pointGain).multiply(1000), 0);
   return (
-    <div className="progression-div">
-      <p className="progression-info">Goal: {format(settings.vermyrosGoal)} - <span className="time">{stable ? 'Ready' : formatLeftTime(timeLeft)}</span>{player.everMadeVermyros && (<span>&emsp;|&emsp;Best vermytes: {format(player.bestVermytes)} - <span className="vermyros-effect">Effect: {format(player.vermytesBestEffect)}x vermora</span></span>)}</p>
+    <div className="relative">
+      <p className="z-1">Goal: {format(settings.vermyrosGoal)} - <span className="text-time">{stable ? 'Ready' : formatLeftTime(timeLeft)}</span>{player.everMadeVermyros && (<span>&emsp;|&emsp;Best vermytes: {format(player.bestVermytes)} - <span className="text-vermyros-effect">Effect: {format(player.vermytesBestEffect)}x vermora</span></span>)}</p>
       <div className="vermyros-bar-container">
-        <div className="progression-bar-inner vermyros-bar" style={{width: `${100 - progress}%`}}></div>
+        <div className="progress-bar progress-bar-inner left-[unset] right-0" style={{width: `${100 - progress}%`}}></div>
       </div>
     </div>
   )

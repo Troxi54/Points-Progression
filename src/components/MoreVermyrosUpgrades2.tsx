@@ -40,13 +40,13 @@ function MoreVermyrosUpgrades2() {
     buyTenthUpgrade();
   }
   return (
-    <div id="more-vermyros-upgrades-2">
-      <button id="vermyros-upgrade-9" onClick={buyNinthUpgrade} onContextMenu={ninthUpgradeContextMenu} className={player.boughtNinthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-        <p className="vermyros-upgrade-text">Vermyros upgrade 9: {format(settings.ninthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Vermyte upgrade no longer takes vermytes</span></p>
+    <div id="more-vermyros-upgrades-2" className="upgrade-container gap-[10%]">
+      <button onClick={buyNinthUpgrade} onContextMenu={ninthUpgradeContextMenu} className={player.boughtNinthVermyrosUpgrade ? 'bought-upgrade' : ''}>
+        <p>Vermyros upgrade 9: {format(settings.ninthVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Vermyte upgrade no longer takes vermytes</span></p>
       </button>
       {player.boughtNinthVermyrosUpgrade && (
-        <button id="vermyros-upgrade-10" onClick={buyTenthUpgrade} onContextMenu={tenthUpgradeContextMenu} className={player.boughtTenthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 10: {format(settings.tenthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automate vermyte upgrade</span></p>
+        <button onClick={buyTenthUpgrade} onContextMenu={tenthUpgradeContextMenu} className={player.boughtTenthVermyrosUpgrade ? 'bought-upgrade' : ''}>
+          <p>Vermyros upgrade 10: {format(settings.tenthVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Automate vermyte upgrade</span></p>
         </button>
       )}
     </div>

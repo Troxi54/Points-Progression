@@ -34,10 +34,10 @@ function CoreUpgrade() {
   }
 
   return (
-    <div id="core-upgrade-div">
+    <div className="bg-core-bg">
       <button id="core-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
         <p id="core-upgrade-cost">Upgrade: {format(player.coreUpgradeCost)} Cores {player.coreUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.coreUpgradeLvl, 0)}{player.coreUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.coreUpgradeBulk, 0)}` : ''})</span>)}</p>
-        <p id="core-upgrade-effect">Effect: x<sup>{format(player.coreUpgradeEffect)}</sup> best points effect</p>
+        <p className="text-core-upgrade-effect">Effect: x<sup>{format(player.coreUpgradeEffect)}</sup> best points effect</p>
       </button>
     </div>
   )

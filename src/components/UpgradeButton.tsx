@@ -32,10 +32,10 @@ function UpgradeButton() {
   }
 
   return (
-    <div id="upgrade-div">
-      <button id="upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="upgrade-cost">Upgrade: {format(player.upgradeCost)} {player.upgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.upgradeLvl, 0)}{player.upgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.upgradeBulk, 0)}` : ''})</span>)}</p>
-        <p id="upgrade-effect">Effect: {format(player.upgradeEffect)}x</p>
+    <div className="bg-point-upgrade-bg">
+      <button className="group hover:border-point-upgrade-hover-border transition-colors-250" onClick={buyMAX} onContextMenu={buy}>
+        <p className="transition-colors-250 text-point-upgrade-cost group-hover:text-point-upgrade-hover-cost">Upgrade: {format(player.upgradeCost)} {player.upgradeLvl.greaterThanOrEqualTo(1) && <>({format(player.upgradeLvl, 0)}{player.upgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.upgradeBulk, 0)}` : ''})</>}</p>
+        <p className="text-point-upgrade-effect">Effect: {format(player.upgradeEffect)}x</p>
       </button>
     </div>
   )

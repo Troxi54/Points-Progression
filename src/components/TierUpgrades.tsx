@@ -68,19 +68,25 @@ function TierUpgrades() {
     buyFourthUpgrade();
   }
   return (
-    <div id="tier-upgrades">
-      <button id="tier-upgrade-1" onClick={buyFirstUpgrade} onContextMenu={firstUpgradeContextMenu} className={player.boughtFirstTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 1: {format(settings.firstTierUpgradeCost)} - <span className="tier-upgrade-effect">Reset upgrades no longer take points and keep the first one</span></p>
+    <div id="tier-upgrades" className="upgrade-container gap-[5%]">
+      <button onClick={buyFirstUpgrade} onContextMenu={firstUpgradeContextMenu} className={player.boughtFirstTierUpgrade ? 'bought-upgrade' : ''}>
+        <p>Tier upgrade 1: {format(settings.firstTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Reset upgrades no longer take points and keep the first one</span></p>
       </button>
-      {(player.boughtFirstTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-2" onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 2: {format(settings.secondTierUpgradeCost)} - <span className="tier-upgrade-effect">Keep the second reset upgrade</span></p>
-      </button>)}
-      {(player.boughtSecondTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-3" onClick={buyThirdUpgrade} onContextMenu={thirdUpgradeContextMenu} className={player.boughtThirdTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 3: {format(settings.thirdTierUpgradeCost)} - <span className="tier-upgrade-effect">Always have 10ms best reset run, disable auto reset and unlock offline tier resets</span></p>
-      </button>)}
-      {(player.boughtThirdTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-4" onClick={buyFourthUpgrade} onContextMenu={fourthUpgradeContextMenu} className={player.boughtFourthTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 4: {format(settings.fourthTierUpgradeCost)} - <span className="tier-upgrade-effect">Automatically update reset best points, remove the 'Auto Reset' toggle and unlock ampliflux</span></p>
-      </button>)}
+      {(player.boughtFirstTierUpgrade || player.everMadeVermyros) && (
+        <button onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondTierUpgrade ? 'bought-upgrade' : ''}>
+          <p>Tier upgrade 2: {format(settings.secondTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Keep the second reset upgrade</span></p>
+        </button>
+      )}
+      {(player.boughtSecondTierUpgrade || player.everMadeVermyros) && (
+        <button onClick={buyThirdUpgrade} onContextMenu={thirdUpgradeContextMenu} className={player.boughtThirdTierUpgrade ? 'bought-upgrade' : ''}>
+          <p>Tier upgrade 3: {format(settings.thirdTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Always have 10ms best reset run, disable auto reset and unlock offline tier resets</span></p>
+        </button>
+      )}
+      {(player.boughtThirdTierUpgrade || player.everMadeVermyros) && (
+        <button onClick={buyFourthUpgrade} onContextMenu={fourthUpgradeContextMenu} className={player.boughtFourthTierUpgrade ? 'bought-upgrade' : ''}>
+          <p>Tier upgrade 4: {format(settings.fourthTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Automatically update reset best points, remove the 'Auto Reset' toggle and unlock ampliflux</span></p>
+        </button>
+      )}
     </div>
   )
 }

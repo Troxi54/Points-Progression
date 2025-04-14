@@ -1,4 +1,3 @@
-import './App.css'
 import GameLoop from './components/GameLoop';
 import { playerContext } from "./playerUtils";
 import PlayerInfo from './components/PlayerInfo';
@@ -42,7 +41,7 @@ function App() {
   return (
     <>
       <Menu/>
-      <div className="layers">
+      <div className="size-full flex-col gap-20 overflow-y-auto pt-6 pb-12">
         <div className="layer first-layer">
           <GameLoop/>
           <TimeSpent/>

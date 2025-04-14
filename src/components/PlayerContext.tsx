@@ -162,5 +162,6 @@ export interface Settings {
   coreUpgradeCostScaling: Decimal,
   coreUpgradeEffectScaling: Decimal,
   ninthVermyrosUpgradeCost: Decimal,
-  tenthVermyrosUpgradeCost: Decimal
+  tenthVermyrosUpgradeCost: Decimal,
+  endgameAt: Decimal
 }

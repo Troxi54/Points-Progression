@@ -21,9 +21,9 @@ function AutoVermyrosButton() {
   }
 
   return (
-    <div id="autoresetting-div">
-      <button id="autoresetting-button" onClick={toggleAutoresetting}>
-        <p id="autoresetting-text">{player.autoVermyrosEnabled ? 'Auto Vermyros: enabled' : 'Auto Vermyros: disabled'}</p>
+    <div className="auto-toggle">
+      <button onClick={toggleAutoresetting}>
+        <p>{player.autoVermyrosEnabled ? 'Auto Vermyros: enabled' : 'Auto Vermyros: disabled'}</p>
       </button>
     </div>
   );

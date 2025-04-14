@@ -21,9 +21,9 @@ function AutoresettingButton() {
   }
 
   return (
-    <div id="autoresetting-div">
-      <button id="autoresetting-button" onClick={toggleAutoresetting}>
-        <p id="autoresetting-text">{player.autoresettingEnabled ? 'Auto Reset: enabled' : 'Auto Reset: disabled'}</p>
+    <div className="auto-toggle">
+      <button onClick={toggleAutoresetting}>
+        <p>{player.autoresettingEnabled ? 'Auto Reset: enabled' : 'Auto Reset: disabled'}</p>
       </button>
     </div>
   );

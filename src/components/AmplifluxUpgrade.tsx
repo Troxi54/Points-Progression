@@ -34,10 +34,10 @@ function AmplifluxUpgrade() {
   }
 
   return (
-    <div id="ampliflux-upgrade-div">
-      <button id="ampliflux-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="ampliflux-upgrade-cost">Upgrade: {format(player.amplifluxUpgradeCost)} Ampliflux {player.amplifluxUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.amplifluxUpgradeLvl, 0)}{player.amplifluxUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.amplifluxUpgradeBulk, 0)}` : ''})</span>)}</p>
-        <p id="ampliflux-upgrade-effect">Effect: {format(player.amplifluxUpgradeEffect)}x ampliflux</p>
+    <div className="bg-ampliflux-upgrade-bg">
+      <button className="group hover:border-ampliflux-upgrade-hover-border transition-colors-250" onClick={buyMAX} onContextMenu={buy}>
+        <p className="transition-colors-250 text-ampliflux-upgrade-cost group-hover:text-ampliflux-upgrade-hover-cost">Upgrade: {format(player.amplifluxUpgradeCost)} Ampliflux {player.amplifluxUpgradeLvl.greaterThanOrEqualTo(1) && (<>({format(player.amplifluxUpgradeLvl, 0)}{player.amplifluxUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.amplifluxUpgradeBulk, 0)}` : ''})</>)}</p>
+        <p className="text-ampliflux-upgrade-effect">Effect: {format(player.amplifluxUpgradeEffect)}x ampliflux</p>
       </button>
     </div>
   )

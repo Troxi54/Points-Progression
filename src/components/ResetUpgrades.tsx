@@ -40,13 +40,15 @@ function ResetUpgrades() {
     buySecondUpgrade();
   }
   return (
-    <div id="reset-upgrades">
-      <button id="reset-upgrade-1" onClick={buyFirstUpgrade} onContextMenu={firstUpgradeContextMenu} className={player.boughtFirstResetUpgrade ? 'bought-upgrade' : ''}>
-        <p className="reset-upgrade-text">Reset upgrade 1: {format(settings.resetFirstUpgradeCost)} - <span className="reset-upgrade-effect">Upgrade no longer takes points</span></p>
+    <div id="reset-upgrades" className="upgrade-container gap-[10%]">
+      <button onClick={buyFirstUpgrade} onContextMenu={firstUpgradeContextMenu} className={player.boughtFirstResetUpgrade ? 'bought-upgrade' : ''}>
+        <p>Reset upgrade 1: {format(settings.resetFirstUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Upgrade no longer takes points</span></p>
       </button>
-      {(player.boughtFirstResetUpgrade || player.everMadeTier) && (<button id="reset-upgrade-1" onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondResetUpgrade ? 'bought-upgrade' : ''}>
-        <p className="reset-upgrade-text">Reset upgrade 2: {format(settings.resetSecondUpgradeCost)} - <span className="reset-upgrade-effect">Automate upgrade</span></p>
-      </button>)}
+      {(player.boughtFirstResetUpgrade || player.everMadeTier) && (
+        <button onClick={buySecondUpgrade} onContextMenu={secondUpgradeContextMenu} className={player.boughtSecondResetUpgrade ? 'bought-upgrade' : ''}>
+          <p>Reset upgrade 2: {format(settings.resetSecondUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Automate upgrade</span></p>
+        </button>
+      )}
     </div>
   )
 }

@@ -40,13 +40,15 @@ function MoreTierUpgrades() {
     buySixthUpgrade();
   }
   return (
-    <div id="more-tier-upgrades">
-      <button id="tier-upgrade-5" onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 5: {format(settings.fifthTierUpgradeCost)} - <span className="tier-upgrade-effect">Ampliflux upgrade no longer takes ampliflux</span></p>
+    <div id="more-tier-upgrades" className="upgrade-container gap-[10%]">
+      <button onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthTierUpgrade ? 'bought-upgrade' : ''}>
+        <p>Tier upgrade 5: {format(settings.fifthTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Ampliflux upgrade no longer takes ampliflux</span></p>
       </button>
-      {(player.boughtFifthTierUpgrade || player.everMadeVermyros) && (<button id="tier-upgrade-6" onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthTierUpgrade ? 'bought-upgrade' : ''}>
-        <p className="tier-upgrade-text">Tier upgrade 6: {format(settings.sixthTierUpgradeCost)} - <span className="tier-upgrade-effect">Automate ampliflux upgrade</span></p>
-      </button>)}
+      {(player.boughtFifthTierUpgrade || player.everMadeVermyros) && (
+        <button onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthTierUpgrade ? 'bought-upgrade' : ''}>
+          <p>Tier upgrade 6: {format(settings.sixthTierUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Automate ampliflux upgrade</span></p>
+        </button>
+      )}
     </div>
   )
 }

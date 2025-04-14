@@ -32,10 +32,10 @@ function VermyteUpgrade() {
   }
 
   return (
-    <div id="vermyte-upgrade-div">
-      <button id="vermyte-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="vermyte-upgrade-cost">Upgrade: {format(player.vermytesUpgradeCost)} Vermytes {player.vermytesUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.vermytesUpgradeLvl, 0)}{player.vermytesUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.vermytesUpgradeBulk, 0)}` : ''})</span>)}</p>
-        <p id="vermyte-upgrade-effect">Effect: {format(player.vermytesUpgradeEffect)}x</p>
+    <div className="bg-vermyte-upgrade-bg">
+      <button className="group hover:border-vermyte-upgrade-hover-border transition-colors-250" onClick={buyMAX} onContextMenu={buy}>
+        <p className="transition-colors-250 text-vermyte-upgrade-cost group-hover:text-vermyte-upgrade-hover-cost">Upgrade: {format(player.vermytesUpgradeCost)} Vermytes {player.vermytesUpgradeLvl.greaterThanOrEqualTo(1) && (<>({format(player.vermytesUpgradeLvl, 0)}{player.vermytesUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.vermytesUpgradeBulk, 0)}` : ''})</>)}</p>
+        <p className="text-vermyte-upgrade-effect">Effect: {format(player.vermytesUpgradeEffect)}x</p>
       </button>
     </div>
   )

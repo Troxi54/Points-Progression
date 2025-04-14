@@ -21,9 +21,9 @@ function AutotierButton() {
   }
 
   return (
-    <div id="autoresetting-div">
-      <button id="autoresetting-button" onClick={toggleAutoresetting}>
-        <p id="autoresetting-text">{player.autoTierEnabled ? player.boughtSecondVermyrosUpgrade ? 'Auto Tier Up: enabled' : 'Auto Tier: enabled'
+    <div className="auto-toggle">
+      <button onClick={toggleAutoresetting}>
+        <p>{player.autoTierEnabled ? player.boughtSecondVermyrosUpgrade ? 'Auto Tier Up: enabled' : 'Auto Tier: enabled'
                                                            : player.boughtSecondVermyrosUpgrade ? 'Auto Tier Up: disabled' : 'Auto Tier: disabled'}</p>
       </button>
     </div>

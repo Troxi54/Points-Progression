@@ -12,8 +12,8 @@ function Cores() {
 
   const { player } = context;
   return (
-    <div id="core-container">
-      <p id="core-counter">Cores: {format(player.cores)}{player.coreEffect.greaterThan(1) && (<span className="core-effect"> - Effect: {format(player.coreEffect)}x energy reactors</span>)}</p>
+    <div className="bg-core-bg">
+      <p id="core-counter">Cores: {format(player.cores)}{player.coreEffect.greaterThan(1) && (<span className="text-core-effect"> - Effect: {format(player.coreEffect)}x energy reactors</span>)}</p>
     </div>
   );
 }

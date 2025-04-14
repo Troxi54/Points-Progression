@@ -68,23 +68,23 @@ function MoreVermyrosUpgrades() {
     buyEighthUpgrade();
   }
   return (
-    <div id="more-vermyros-upgrades">
-      <button id="vermyros-upgrade-5" onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-        <p className="vermyros-upgrade-text">Vermyros upgrade 5: {format(settings.fifthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Unlock the Amplivault and generate 1% of your best vermytes per second</span></p>
+    <div id="more-vermyros-upgrades" className="upgrade-container gap-[5%]">
+      <button onClick={buyFifthUpgrade} onContextMenu={fifthUpgradeContextMenu} className={player.boughtFifthVermyrosUpgrade ? 'bought-upgrade' : ''}>
+        <p>Vermyros upgrade 5: {format(settings.fifthVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Unlock the Amplivault and generate 1% of your best vermytes per second</span></p>
       </button>
       {player.boughtFifthVermyrosUpgrade && (
-        <button id="vermyros-upgrade-6" onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 6: {format(settings.sixthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Generate 10% of your best vermytes per second</span></p>
+        <button onClick={buySixthUpgrade} onContextMenu={sixthUpgradeContextMenu} className={player.boughtSixthVermyrosUpgrade ? 'bought-upgrade' : ''}>
+          <p>Vermyros upgrade 6: {format(settings.sixthVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Generate 10% of your best vermytes per second</span></p>
         </button>
       )}
       {player.boughtSixthVermyrosUpgrade && (
-        <button id="vermyros-upgrade-7" onClick={buySeventhUpgrade} onContextMenu={seventhUpgradeContextMenu} className={player.boughtSeventhVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 7: {format(settings.seventhVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Generate 100% of your best vermytes per second</span></p>
+        <button onClick={buySeventhUpgrade} onContextMenu={seventhUpgradeContextMenu} className={player.boughtSeventhVermyrosUpgrade ? 'bought-upgrade' : ''}>
+          <p>Vermyros upgrade 7: {format(settings.seventhVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Generate 100% of your best vermytes per second</span></p>
         </button>
       )}
       {player.boughtSeventhVermyrosUpgrade && (
-        <button id="vermyros-upgrade-8" onClick={buyEighthUpgrade} onContextMenu={eighthUpgradeContextMenu} className={player.boughtEighthVermyrosUpgrade ? 'bought-upgrade' : ''}>
-          <p className="vermyros-upgrade-text">Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="vermyros-upgrade-effect">Automatically update best vermytes, remove the 'Auto Vermyros' toggle and unlock energy</span></p>
+        <button onClick={buyEighthUpgrade} onContextMenu={eighthUpgradeContextMenu} className={player.boughtEighthVermyrosUpgrade ? 'bought-upgrade' : ''}>
+          <p>Vermyros upgrade 8: {format(settings.eighthVermyrosUpgradeCost)} - <span className="text-buyable-once-upgrade-effect">Automatically update best vermytes, remove the 'Auto Vermyros' toggle and unlock energy</span></p>
         </button>
       )}
     </div>

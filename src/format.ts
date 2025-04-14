@@ -22,7 +22,8 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
   if (abs.greaterThanOrEqualTo(1000) && precision === 0) {
     precision = 'auto';
   }
-  if (abs.greaterThanOrEqualTo(1000) && GlobalSettings.exponentialNotation) {
+  const units = ['', 'k', 'M', 'B', 'T'];
+  if (abs.greaterThanOrEqualTo(Decimal.pow(1000, units.length)) && GlobalSettings.exponentialNotation) {
     return getExponential(num, false);
   }
   let precisionWasAuto = false;
@@ -31,7 +32,7 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
     precision = +abs.dividedBy(Decimal.pow(1000, abs.log10().dividedBy(3).floor()));
     precision = 3 - Math.floor(Math.log10(precision));
   }
-  const units = ['', 'k', 'M', 'B', 'T']; 
+  
   let index = abs.log10().dividedBy(3).floor();
   index = Decimal.min(units.length - 1, index);
   let divided = abs.dividedBy(Decimal.pow(1000, index));
