@@ -96,7 +96,25 @@ export interface Player {
   coreUpgradeBulk: Decimal,
   boughtNinthVermyrosUpgrade: boolean,
   boughtTenthVermyrosUpgrade: boolean,
-  exponentialNotation: boolean
+  everBoughtTenthVermyrosUpgrade: boolean,
+  exponentialNotation: boolean,
+  darkEnergy: Decimal,
+  darkEnergyGain: Decimal,
+  darkEnergyEffect: Decimal,
+  everMadeNullith: boolean,
+  nullithStartedDate: number | null,
+  autoNullithEnabled: boolean,
+  madeNullithResets: Decimal,
+  approximateNullithResetsPerSecond: Decimal,
+  nullithResetsEffect: Decimal,
+  nullithResetsVermyteEffect: Decimal,
+  nullithResetsEnergyEffect: Decimal,
+  boughtFirstNullithUpgrade: boolean
+  boughtSecondNullithUpgrade: boolean,
+  boughtThirdNullithUpgrade: boolean
+  boughtFourthNullithUpgrade: boolean,
+  coresPerSecond: Decimal,
+  hideBoughtUpgrades: boolean
 }
 
 export interface globalSettings {
@@ -163,5 +181,12 @@ export interface Settings {
   coreUpgradeEffectScaling: Decimal,
   ninthVermyrosUpgradeCost: Decimal,
   tenthVermyrosUpgradeCost: Decimal,
+  nullithGoal: Decimal,
+  firstNullithUpgradeCost: Decimal,
+  secondNullithUpgradeCost: Decimal,
+  thirdNullithUpgradeCost: Decimal,
+  fourthNullithUpgradeCost: Decimal,
+  secondSoftcapperLevelAt: Decimal,
+  secondSoftcapperLevelPower: Decimal,
   endgameAt: Decimal
 }

@@ -13,7 +13,7 @@ function Ampliflux() {
 
   return (
     <div className="bg-ampliflux-bg">
-      <p className="text-ampliflux-counter">Ampliflux: {format(player.ampliflux)} {player.boughtFourthTierUpgrade ? <>(+{format(player.amplifluxGain)}/s)</> : ''} - <span className="text-ampliflux-effect">Effect: {format(player.amplifluxEffect)}x</span></p>
+      <p className="text-ampliflux-counter">Ampliflux: {format(player.ampliflux)} {player.amplifluxGain.gt(0) ? <>(+{format(player.amplifluxGain)}/s)</> : ''} - <span className="text-ampliflux-effect">Effect: {format(player.amplifluxEffect)}x</span></p>
     </div>
   );
 }

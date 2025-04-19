@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { playerContext } from "../playerUtils";
-import { triggerVermyrosReset } from "../../Resets";
+import { triggerVermyrosReset } from "../Resets";
 import { format, formatLeftTime } from "../format";
 
 function Amplivault() {
@@ -11,14 +11,17 @@ function Amplivault() {
     )
   }
 
-  const { player, setPlayer } = context;
+  const { player, setPlayer, playerRef } = context;
 
   function enterAmplivault() {
-    setPlayer(prev => ({
-      ...prev,
-      ...triggerVermyrosReset(prev),
-      enteredAmplivault: !prev.enteredAmplivault
-    }))
+    if (!playerRef.current.boughtFifthVermyrosUpgrade) return;
+    setPlayer(prev => {
+      return {
+        ...prev,
+        ...triggerVermyrosReset(prev),
+        enteredAmplivault: !prev.enteredAmplivault
+      }
+    })
   }
 
   const animationPaused = !player.enteredAmplivault;

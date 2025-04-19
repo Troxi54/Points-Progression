@@ -11,7 +11,7 @@
   --color-layer-div-bg: #202020;
   --color-point-upgrade-bg: #2e2e16;
   --color-point-upgrade-hover-border: #ffff00; 
-  --color-point-upgrade-cost: yellow;
+  --color-point-upgrade-cost: #ffff00;
   --color-point-upgrade-hover-cost: #fff598;
   --color-point-upgrade-effect: #8c9462;
   --color-time: #979797;
@@ -65,17 +65,27 @@
   --color-softcapper-bg-2: #003300;
   --color-softcapper-h-1: #0000ff;
   --color-softcapper-h-2: #00ff00;
-  --color-softcapper-level-1-c1: hsl(240, 100%, 40%);
-  --color-softcapper-level-1-c2: hsl(120, 100%, 40%);
+  --color-softcapper-level-1-c1: #0000cc;
+  --color-softcapper-level-1-c2: #00cc00;
   --color-energy-reactor-bg: #3a2508;
   --color-energy-reactor-counter: #ff9500;
-  --color-energy-bg: hsl(60, 76%, 13%);
+  --color-energy-bg: #3a3a08;
   --color-energy-counter: #ffff00;
   --color-energy-effect: #9e9e00;
   --color-core-bg: #111111;
   --color-core-description: #afafaf;
   --color-core-effect: #9e9e9e;
   --color-core-upgrade-effect: #949494;
+  --color-dark-energy-bg: #aaaaaa;
+  --color-dark-energy-counter: #000;
+  --color-dark-energy-effect: #111;
+  --color-nullith-first: #000000;
+  --color-nullith-second: #ffffff;
+  --color-nullith-bar-first: #2c2c2c;
+  --color-nullith-bar-second: #000000;
+  --color-nullith-effect: rgb(148, 148, 148);
+  --color-softcapper-level-2-c1: #00cc00;
+  --color-softcapper-level-2-c2: #cccc00;
 
   @keyframes vermyros-bar {
     0% {
@@ -109,7 +119,15 @@
       width: 0%;
     }
   }
+
+  @keyframes nullith-bar {
+    0% {
+      background-position: calc(var(--d) / sin(var(--angle))) 0;
+    }
+  }
 }
+
+
 
 @utility transition-ease {
   @apply ease-[cubix-bezier(0.25,_0.1,_0.25,_1.0)];
@@ -157,7 +175,7 @@
   h2 {
     @apply text-[1.5em] my-[.83em];
   }
-  sup {
+  sup, sub {
     @apply text-inherit;
   }
   
@@ -203,7 +221,7 @@
     @apply w-2/5;
   }
 
-  #tier-upgrades > button, #vermyros-upgrades > button, #more-vermyros-upgrades > button {
+  #tier-upgrades > button, #vermyros-upgrades > button, #more-vermyros-upgrades > button, #nullith-upgrades > button {
     @apply w-1/5;
   }
 
@@ -282,8 +300,6 @@
   .vermyros-bar-container {
     --d: 200px;
     --angle: 90deg;
-    --first-color: rgb(156, 0, 0);
-    --second-color: rgb(255, 0, 0);
     @apply size-full absolute bg-gradient-to-r from-vermyros-bar-first via-vermyros-bar-second to-vermyros-bar-first
             bg-size-[calc(var(--d)/sin(var(--angle)))_100%] animate-[vermyros-bar_2s_linear_infinite];
   }
@@ -328,6 +344,10 @@
     @apply text-gradient bg-linear-to-r from-softcapper-level-1-c1 to-softcapper-level-1-c2;
   }
 
+  .softcap-2 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-2-c1 to-softcapper-level-2-c2;
+  }
+
   .more-menu-row {
     @apply gap-[1em];
   }
@@ -354,5 +374,32 @@
 
   .spoiler:hover {
     @apply text-white bg-transparent;
+  }
+
+  .dark-energy {
+    @apply text-dark-energy-counter text-shadow-[0_0_.1em,0_0_.1em] text-shadow-dark-energy-counter;
+  }
+
+  .nullith-bar-container {
+    --d: 200px;
+    --angle: 5deg;
+    @apply absolute size-full bg-gradient-to-r from-nullith-bar-first via-nullith-bar-second to-nullith-bar-first
+            bg-size-[calc(var(--d)/sin(var(--angle)))_100%] animate-[nullith-bar_2s_linear_infinite];
+  }
+
+  .nullith {
+    @apply text-gradient bg-linear-45 from-nullith-first to-nullith-second;
+  }
+
+  .softcap-container > p {
+    @apply my-0;
+  }
+
+  .softcap-container > p:first-of-type {
+    @apply mt-4;
+  }
+
+  .softcap-container > p:last-of-type {
+    @apply mb-4;
   }
 }

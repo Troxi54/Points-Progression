@@ -10,3 +10,14 @@ export function calculateOfflineTierResets(setPlayer: React.Dispatch<React.SetSt
     };
   })
 }
+
+export function calculateOfflineNullithResets(setPlayer: React.Dispatch<React.SetStateAction<Player>>) {
+  setPlayer(prev => {
+    if (!prev.boughtFourthNullithUpgrade || !prev.autoNullithEnabled) return prev;
+    const deltaTime = Math.max((Date.now() - prev.lastTick) / 1000, 0);
+    return {
+      ...prev,
+      madeNullithResets: prev.madeNullithResets.plus(prev.approximateNullithResetsPerSecond.times(deltaTime).floor())
+    };
+  })
+}

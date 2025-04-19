@@ -19,7 +19,7 @@ function CoreButton() {
       ...prev,
       everMadeCoreReset: true,
       cores: prev.cores.plus(prev.coreGain),
-      energyReactors: new Decimal(0),
+      energyReactors: prev.boughtSecondNullithUpgrade ? prev.energyReactors : new Decimal(0),
       energy: new Decimal(0),
     }));
   }

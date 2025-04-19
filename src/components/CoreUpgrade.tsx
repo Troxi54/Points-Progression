@@ -20,7 +20,7 @@ function CoreUpgrade() {
       if (prev.cores.lessThan(prev.coreUpgradeCost) || !prev.everMadeCoreReset) return prev;
       return {
         ...prev,
-        cores: prev.cores.minus(prev.coreUpgradeCost),
+        cores: prev.boughtFirstNullithUpgrade ? prev.cores : prev.cores.minus(prev.coreUpgradeCost),
         coreUpgradeLvl: prev.coreUpgradeLvl.plus(1)
       };
     });

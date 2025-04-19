@@ -6,7 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.3.1',
+    gameVersion: '0.4',
     lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
@@ -93,7 +93,25 @@ export function getDefaultPlayer(): Player {
     coreUpgradeBulk: new Decimal(0),
     boughtNinthVermyrosUpgrade: false,
     boughtTenthVermyrosUpgrade: false,
-    exponentialNotation: false
+    everBoughtTenthVermyrosUpgrade: false,
+    exponentialNotation: false,
+    darkEnergy: new Decimal(0),
+    darkEnergyGain: new Decimal(0),
+    darkEnergyEffect: new Decimal(1),
+    everMadeNullith: false,
+    nullithStartedDate: null,
+    autoNullithEnabled: true,
+    madeNullithResets: new Decimal(0),
+    approximateNullithResetsPerSecond: new Decimal(0),
+    nullithResetsEffect: new Decimal(1),
+    nullithResetsVermyteEffect: new Decimal(1),
+    nullithResetsEnergyEffect: new Decimal(1),
+    boughtFirstNullithUpgrade: false,
+    boughtSecondNullithUpgrade: false,
+    boughtThirdNullithUpgrade: false,
+    boughtFourthNullithUpgrade: false,
+    coresPerSecond: new Decimal(0),
+    hideBoughtUpgrades: false
   }
   return defaultPlayer;
 }
@@ -128,7 +146,7 @@ export function loadPlayer(savedData: string): Player {
       }
     }
     if (merged.bestRun !== null && merged.bestRun < 10) merged.bestRun = 10;
-    if (merged.bestVermytes.lessThanOrEqualTo(0) && merged.everMadeVermyros) {
+    if (merged.bestVermytes.lessThanOrEqualTo(0) && merged.everMadeVermyros && !merged.everMadeNullith) {
       merged.everMadeVermyros = false;
       merged.vermyrosStartedDate = null;
     }
@@ -199,7 +217,14 @@ export const settings: Settings = {
   coreUpgradeEffectScaling: new Decimal(1.1),
   ninthVermyrosUpgradeCost: new Decimal(1e230),
   tenthVermyrosUpgradeCost: new Decimal(1e250),
-  endgameAt: new Decimal(1e250)
+  nullithGoal: new Decimal(2).pow(1024),
+  firstNullithUpgradeCost: new Decimal(49674),
+  secondNullithUpgradeCost: new Decimal('7.438e323'),
+  thirdNullithUpgradeCost: new Decimal('1.905e375'),
+  fourthNullithUpgradeCost: new Decimal('9.064e435'),
+  secondSoftcapperLevelAt: new Decimal('1e368'),
+  secondSoftcapperLevelPower: new Decimal(0.85),
+  endgameAt: new Decimal('9.064e435')
 } as const;
 
 export const GlobalSettings: globalSettings = {

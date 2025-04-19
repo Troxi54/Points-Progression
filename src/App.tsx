@@ -29,6 +29,10 @@ import CoreButton from './components/CoreButton';
 import Cores from './components/Cores';
 import CoreUpgrade from './components/CoreUpgrade';
 import MoreVermyrosUpgrades2 from './components/MoreVermyrosUpgrades2';
+import DarkEnergy from './components/DarkEnergy';
+import NullithBar from './components/NullithBar';
+import AutoNullithButton from './components/AutoNullithButton';
+import NullithUpgrades from './components/NullithUpgrades';
 
 function App() {
   const context = useContext(playerContext);
@@ -42,7 +46,7 @@ function App() {
     <>
       <Menu/>
       <div className="size-full flex-col gap-20 overflow-y-auto pt-6 pb-12">
-        <div className="layer first-layer">
+        <div className="layer">
           <GameLoop/>
           <TimeSpent/>
           <PlayerInfo/>
@@ -58,7 +62,7 @@ function App() {
           )}
         </div>
         {player.everMadeRun && (
-          <div className="layer second-layer">
+          <div className="layer">
             <TierBar/>
             {player.everMadeTier && (
               <>
@@ -76,7 +80,7 @@ function App() {
           </div>
         )}
         {(player.boughtFourthTierUpgrade || player.everMadeVermyros) && (
-          <div className="layer third-layer">
+          <div className="layer">
             <VermyrosBar/>
             {player.everMadeVermyros && (
               <>
@@ -84,19 +88,19 @@ function App() {
                 <Vermora/>
                 <Vermytes/>
                 <VermyrosUpgrades/>
-                {player.boughtFirstVermyrosUpgrade && (
+                {(player.boughtFirstVermyrosUpgrade || player.everMadeNullith) && (
                   <VermyteUpgrade/>
                 )}
-                {player.boughtFourthVermyrosUpgrade && (
+                {(player.boughtFourthVermyrosUpgrade || player.everMadeNullith) && (
                   <MoreVermyrosUpgrades/>
                 )}
-                {player.boughtFifthVermyrosUpgrade && (
+                {(player.boughtFifthVermyrosUpgrade || player.everMadeNullith) && (
                   <Amplivault/>
                 )}
               </>
             )}
             {player.bestSoftcapperLevel.greaterThanOrEqualTo(1) && (<Softcapper/>)}
-            {player.boughtEighthVermyrosUpgrade && (
+            {(player.boughtEighthVermyrosUpgrade || player.everMadeNullith) && (
               <>
                 <EnergyReactors/>
                 <Energy/>
@@ -108,6 +112,22 @@ function App() {
                   </>
                 )}
                 <MoreVermyrosUpgrades2/>
+              </>
+            )}
+            {(player.everBoughtTenthVermyrosUpgrade || player.everMadeNullith) && (
+              <>
+                <DarkEnergy/>
+              </>
+            )}
+          </div>
+        )}
+        {(player.everBoughtTenthVermyrosUpgrade || player.everMadeNullith) && (
+          <div className="layer">
+            <NullithBar/>
+            {player.everMadeNullith && (
+              <>
+                <AutoNullithButton/>
+                <NullithUpgrades/>
               </>
             )}
           </div>

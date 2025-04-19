@@ -4,6 +4,7 @@ import { CSSProperties } from "react";
 import { format } from "../format";
 import { calculateOfflineTierResets } from "../offline";
 import CloseIcon from "./CloseIcon";
+import discordIcon from "../assets/discord.png"
 
 function Menu() {
   const context = useContext(playerContext);
@@ -261,6 +262,14 @@ function Menu() {
           </button>
           <div className="gap-[2em] flex-col w-9/10 h-9/10 overflow-y-auto">
             <div className="more-menu-row">
+              <button className="more-menu-button" onClick={() => {
+                setPlayer(prev => ({
+                  ...prev,
+                  hideBoughtUpgrades: !prev.hideBoughtUpgrades
+                }));
+              }}>
+                <p className="menu-button-info">Hide bought upgrades: {player.hideBoughtUpgrades ? 'ON' : 'OFF'}</p>
+              </button>
               <button id="exponential-notation-button" className="more-menu-button" onClick={() => {
                 setPlayer(prev => ({
                   ...prev,
@@ -281,7 +290,7 @@ function Menu() {
               </button>
               <a id="discord-button" className="more-menu-button px-[1.2em] py-[0.5em] flex flex-col justify-center items-center gap-[0.25em] box-border" href="https://discord.gg/YT8R2szHXX" type="button" target="_blank">
                 <p className="menu-button-info">Discord</p>
-                <img src="./discord.png" className="h-[1em] w-[initial]" alt="Discord"></img>
+                <img src={discordIcon} className="h-[1em] w-[initial]" alt="Discord"></img>
               </a>
             </div>
             <p>Points Progression by Troxi<br/>Version: {player.gameVersion}</p>
@@ -332,7 +341,7 @@ function Menu() {
           <div className="w-full h-9/10 overflow-y-auto flex-col justify-start px-24">
             <h1>About this game</h1>
             <p>The game has a lot of timewalls, and even begins with one - so be prepared for that. At first, the game may feel slow and uninteresting, but once you reach 1M points, the experience becomes much more engaging. Additionally, all upgrades without level limits can be purchased multiple levels at once, but you only pay for the last level. For example, if the cost for levels 1, 2, and 3 is 10, 20, and 30 points respectively, you only pay 30 points for upgrading to level 3 directly. With this knowledge, you can drastically speed up your progress.</p>
-            <p className="info-important mb-12">Frequently exporting your save file is highly recommended because the game is still in beta, and potential bugs may reset your progress</p>
+            <p className="info-important mb-12">Frequently exporting your save is highly recommended because the game is still in beta, and potential bugs may reset your progress</p>
             <h2>Number notation</h2>
             <p className="mb-0">The game also has a unique number notation system, here it is:</p>
             <p className="mb-12">1k = 1000<br/>1M = 10<sup>6</sup><br/>1B = 10<sup>9</sup><br/>1T = 10<sup>12</sup><br/>1U = 10<sup>18</sup><br/>1U+ = 10<sup>24</sup><br/>1U++ = 10<sup>30</sup><br/>1A = 10<sup>36</sup><br/>1A+ = 10<sup>42</sup><br/>1A++ = 10<sup>48</sup><br/>1C = 10<sup>54</sup><br/>1C+ = 10<sup>60</sup><br/>1C++ = 10<sup>66</sup><br/>1S = 10<sup>72</sup><br/>1S+ = 10<sup>78</sup><br/>1S++ = 10<sup>84</sup><br/>1O = 10<sup>90</sup><br/>1O+ = 10<sup>96</sup><br/>1O++ = 10<sup>102</sup><br/>1N = 10<sup>108</sup><br/>1N+ = 10<sup>114</sup><br/>1N++ = 10<sup>120</sup><br/>1D = 10<sup>126</sup><br/>1D+ = 10<sup>132</sup><br/>1D++ = 10<sup>138</sup><br/>1L = 10<sup>144</sup><br/>1L+ = 10<sup>150</sup><br/>1L++ = 10<sup>156</sup><br/>1OP = 10<sup>162</sup><br/>1OP+ = 10<sup>168</sup><br/>1OP++ = 10<sup>174</sup><br/>1OP* = 10<sup>180</sup><br/>1OP** = 10<sup>186</sup><br/>1OP^ = 10<sup>192</sup><br/>1OP^^ = 10<sup>198</sup><br/>1i = 10<sup>204</sup><br/>Exponential at 10<sup>213</sup></p>
@@ -366,10 +375,17 @@ function Menu() {
               {player.boughtFifthVermyrosUpgrade && <><br/>Amplivault level requirement:<span className="info-effect"> {format(settings.amplivaultRequirementStartsAt)} × 1,000<sup>x</sup>, where x is amplivault level</span></>}
               {player.amplivaultLevel.greaterThan(0) && <><br/>Amplivault effect:<span className="info-effect"> 2<sup>x</sup>, where x is amplivault level</span></>}
               {player.boughtEighthVermyrosUpgrade && <><br/>Energy effect:<span className="info-effect"> 1.75<sup>log(x + 1)</sup>, where x is energy</span></>}
-              {player.everReachedCores && <><br/>Cores:<span className="info-effect"> x / 1,000,000</span>, where x is energy</>}
+              {player.everReachedCores && <><br/>Cores:<span className="info-effect"> x / 1,000,000, where x is energy</span></>}
               {player.everMadeCoreReset && <><br/>Core effect:<span className="info-effect"> 4<sup>log(x + 1)</sup></span>
                 <br/>Core upgrade cost:<span className="info-effect"> {format(settings.coreUpgradeStartingCost)} × {format(settings.coreUpgradeCostScaling)}<sup>x</sup>, where x is the core upgrade level</span>
                 <br/>Core upgrade effect:<span className="info-effect"> {format(settings.coreUpgradeEffectScaling)}<sup>x</sup>, where x is the core upgrade level</span></>}
+              {player.everBoughtTenthVermyrosUpgrade && <>
+                <br/>Dark energy gain:<span className="info-effect"> 2<sup>log<sub>1e10</sub>(x / {format(settings.tenthVermyrosUpgradeCost)})</sup>, where x is points</span>
+                <br/>Dark energy effect:<span className="info-effect"> 1.75<sup>log(x + 1)</sup>, where x is dark energy</span></>}
+              {player.everMadeCoreReset && <>
+              <br/>Nullith resets made first effect:<span className="info-effect"> 125 × x<sup>3</sup>, where x is nullith resets</span>
+              <br/>Nullith resets made second effect:<span className="info-effect"> (x + 1)<sup>1.2</sup>, where x is nullith resets</span>
+              <br/>Nullith resets made third effect:<span className="info-effect"> (x + 1)<sup>0.75</sup>, where x is nullith resets</span></>}
             </p>
             <p>Current endgame: <span className="spoiler">{format(settings.endgameAt)}</span> <span className="info-effect">(hover to see)</span></p>
             <p>If you find a bug, please report it to Troxi, the developer of the game.</p>

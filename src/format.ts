@@ -30,7 +30,9 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
   if (precision === "auto") {
     precisionWasAuto = true;
     precision = +abs.dividedBy(Decimal.pow(1000, abs.log10().dividedBy(3).floor()));
-    precision = 3 - Math.floor(Math.log10(precision));
+    if (precision === 1) {
+      precision = 3;
+    } else precision = 3 - Math.floor(Math.log10(precision));
   }
   
   let index = abs.log10().dividedBy(3).floor();
@@ -93,6 +95,6 @@ export function formatTime(milliseconds: DecimalSource): string {
 export function formatLeftTime(milliseconds: DecimalSource) {
   milliseconds = new Decimal(milliseconds);
   if (milliseconds.lessThanOrEqualTo(0)) return 'Ready';
-  if (milliseconds.greaterThanOrEqualTo('e25')) return 'Never';
+  if (milliseconds.greaterThanOrEqualTo('e25') || milliseconds.isNan()) return 'Never';
   return formatTime(milliseconds);
 }

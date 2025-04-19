@@ -14,7 +14,7 @@ function Vermora() {
 
   return (
     <div id="vermora-container">
-      <p id="vermora-counter">Vermora: {format(player.vermora)} (+{format(player.vermoraGain)}/s) - <span className="vermyros-effect">Effect: {format(player.vermoraEffect)}x ampliflux</span></p>
+      <p id="vermora-counter">Vermora: {format(player.vermora)}{player.vermoraGain.gt(0) && <> (+{format(player.vermoraGain)}/s)</>} - <span className="text-vermyros-effect">Effect: {format(player.vermoraEffect)}x ampliflux</span></p>
     </div>
   );
 }

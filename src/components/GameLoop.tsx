@@ -3,8 +3,8 @@ import { Player } from "./PlayerContext";
 import { GlobalSettings, loadPlayerFromLocalStorage, playerContext, savePlayerToLocalStorage, settings } from "../playerUtils";
 import Decimal from "break_eternity.js";
 import { buyMax, buyMaxAmpliflux, buyMaxCore, buyMaxVermyte } from "../Upgrades";
-import { triggerReset, triggerTierReset, triggerVermyrosReset } from "../../Resets";
-import { calculateOfflineTierResets } from "../offline";
+import { triggerNullithReset, triggerReset, triggerTierReset, triggerVermyrosReset } from "../Resets";
+import { calculateOfflineNullithResets, calculateOfflineTierResets } from "../offline";
 
 function GameLoop() {
   const context = useRef(useContext(playerContext));
@@ -18,6 +18,9 @@ function GameLoop() {
   const vermyrosTimes = useRef([0]);
   const VERMYROS_TIMES_MAX_LENGTH = 10;
   const lastVermyrosTime = useRef(0);
+  const nullithTimes = useRef([0]);
+  const NULLITH_TIMES_MAX_LENGTH = 10;
+  const lastNullithTime = useRef(0);
 
   useEffect(() => {
     if (!context.current) {
@@ -31,11 +34,14 @@ function GameLoop() {
 
     const { setPlayer, playerRef } = context.current;
 
+    
+
     let frameId: number;
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
       setPlayer(savedPlayer);
       calculateOfflineTierResets(setPlayer);
+      calculateOfflineNullithResets(setPlayer);
     }
 
     function savePlayer() {
@@ -48,13 +54,40 @@ function GameLoop() {
     function onVisibilityChange() {
       if (!document.hidden) {
         calculateOfflineTierResets(setPlayer);
+        calculateOfflineNullithResets(setPlayer);
       }
     }
     
-    function getVermyrosUpdates(updates: Player) {
+    function getNullithUpdates(updates: Player): Partial<Player> {
+      const now = performance.now() / 1000;
+      if (updates.points.lessThan(settings.nullithGoal) || !updates.autoNullithEnabled) return {};
+      
+      const time = updates.nullithStartedDate === null ? Infinity : Date.now() - updates.nullithStartedDate;
+      nullithTimes.current.push(time);
+      setTimeout(() => {
+        const index = nullithTimes.current.indexOf(time);
+        if (index !== -1) nullithTimes.current.splice(index, 1);
+      }, 1000);
+      if (nullithTimes.current.length > NULLITH_TIMES_MAX_LENGTH) nullithTimes.current.shift();
+
+      const nullithUpdate: Partial<Player> = {
+        ...triggerNullithReset(updates),
+        everMadeNullith: true,
+        everMadeVermyros: true,
+        everMadeTier: true,
+        everMadeRun: true,
+        madeNullithResets: updates.madeNullithResets.plus(1)
+      };
+
+      lastNullithTime.current = now;
+
+      return nullithUpdate;
+    }
+
+    function getVermyrosUpdates(updates: Player): Partial<Player> {
       const now = performance.now() / 1000;
       //if (now - lastVermyrosTime.current < VERMYROS_INTERVAL) return;
-      if (updates.points.lessThan(settings.vermyrosGoal) || !updates.autoVermyrosEnabled) return;
+      if (updates.points.lessThan(settings.vermyrosGoal) || !updates.autoVermyrosEnabled) return {};
       
       const time = updates.vermyrosStartedDate === null ? Infinity : Date.now() - updates.vermyrosStartedDate;
       vermyrosTimes.current.push(time);
@@ -78,7 +111,7 @@ function GameLoop() {
       return vermyrosUpdate;
     }
     
-    function getTierUpdates(updates: Player) {
+    function getTierUpdates(updates: Player): Partial<Player> {
       const now = performance.now() / 1000;
       //if (now - lastTierTime.current < TIER_INTERVAL) return {};
       let bulk = updates.points.dividedBy(updates.tierRequirement).log(settings.tierScaling).floor();
@@ -114,7 +147,7 @@ function GameLoop() {
         madeTierTimes: updates.madeTierTimes.plus(1)
       };
     }
-    function getGoalUpdates(updates: Player) {
+    function getGoalUpdates(updates: Player): Partial<Player> {
       const DAY_IN_MS = 8.64e7;
       let autoSet = {};
       if (updates.boughtThirdTierUpgrade) {
@@ -143,20 +176,23 @@ function GameLoop() {
             timeSpent < updates.bestRun ? timeSpent : updates.bestRun
       };
     }
-    function generateTierResets(updates: Player, deltaTime: number) {
+    function generateTierResets(updates: Player, deltaTime: number): Partial<Player> {
       if (!updates.boughtSecondVermyrosUpgrade) return {};
       return {
         madeTierTimes: updates.madeTierTimes.plus(Decimal.multiply(MAX_TIER_PER_SECOND, deltaTime))
       };
     }
-    function automateUpgrade(updates: Player) {
+    function automateUpgrade(updates: Player): Partial<Player> {
       return buyMax(updates, !updates.boughtSecondResetUpgrade);
     }
-    function automateAmplifluxUpgrade(updates: Player) {
+    function automateAmplifluxUpgrade(updates: Player): Partial<Player> {
       return buyMaxAmpliflux(updates, !updates.boughtSixthTierUpgrade);
     }
-    function automateVermyteUpgrade(updates: Player) {
+    function automateVermyteUpgrade(updates: Player): Partial<Player> {
       return buyMaxVermyte(updates, !updates.boughtTenthVermyrosUpgrade);
+    }
+    function automateCoreUpgrade(updates: Player): Partial<Player> {
+      return buyMaxCore(updates, !updates.boughtFourthNullithUpgrade);
     }
     function generateVermytes(updates: Player, deltaTime: number) {
       let percentage = 0;
@@ -173,6 +209,19 @@ function GameLoop() {
         vermytes: updates.vermytes.plus(generation.multiply(deltaTime))
       }
     }
+    function generateCores(updates: Player, deltaTime: number): Partial<Player> {
+      let percentage = 0;
+      if (updates.boughtThirdNullithUpgrade) percentage = 0.1;
+      if (updates.boughtFourthNullithUpgrade) percentage = 1;
+      if (!percentage || updates.coreGain.lessThanOrEqualTo(0)) return {
+        coresPerSecond: new Decimal(0)
+      };
+      const generation = updates.coreGain.multiply(percentage / 100);
+      return {
+        coresPerSecond: generation,
+        cores: updates.cores.plus(generation.multiply(deltaTime))
+      }
+    }
   
 
     function updatePlayer() {
@@ -181,20 +230,48 @@ function GameLoop() {
 
         const deltaTime = Math.max((Date.now() - updates.lastTick) / 1000, 0);
 
+        updates = {...updates, ...getNullithUpdates(updates)};
+        const nullithTimesSum = nullithTimes.current.reduce((num, num2) => num + num2, 0);
+        if (nullithTimes.current.length >= 1 && nullithTimesSum > 0 && nullithTimesSum !== Infinity && updates.autoNullithEnabled) {
+          updates.approximateNullithResetsPerSecond = new Decimal(1000 / (nullithTimesSum / nullithTimes.current.length));
+        } else {
+          updates.approximateNullithResetsPerSecond = new Decimal(0);
+        }
+        updates.nullithResetsEffect = updates.madeNullithResets.gt(0) ? Decimal.multiply(125, updates.madeNullithResets.pow(3)).round()
+              : new Decimal(1);
+        updates.nullithResetsVermyteEffect = updates.madeNullithResets.gt(0) ? updates.madeNullithResets.plus(1).pow(1.2)
+              : new Decimal(1);
+        updates.nullithResetsEnergyEffect = updates.madeNullithResets.gt(0) ? updates.madeNullithResets.plus(1).pow(0.75)
+              : new Decimal(1);
+
+        updates.everBoughtTenthVermyrosUpgrade = updates.boughtTenthVermyrosUpgrade || updates.everBoughtTenthVermyrosUpgrade;
+
+        let darkEnergyGain = Decimal.pow(2, updates.points.dividedBy(settings.tenthVermyrosUpgradeCost).max(0).plus(1).log(1e10));
+        if (!updates.everBoughtTenthVermyrosUpgrade) darkEnergyGain = new Decimal(0);
+        const newDarkEnergy = updates.darkEnergy.plus(darkEnergyGain.multiply(deltaTime));
+        
+        updates = {
+          ...updates,
+          darkEnergy: newDarkEnergy,
+          darkEnergyGain: darkEnergyGain,
+          darkEnergyEffect: Decimal.pow(1.75, newDarkEnergy.max(0).plus(1).log10())
+        }
+
+
         updates.coreEffect = Decimal.pow(4, updates.cores.max(0).plus(1).log10());
 
-        const energyReactorGain = new Decimal(0.1).multiply(updates.coreEffect);
-        let newEnergyReactors = updates.energyReactors.plus(energyReactorGain.multiply(deltaTime));
-        if (!updates.boughtEighthVermyrosUpgrade) newEnergyReactors = updates.energyReactors;
+        let energyReactorGain = new Decimal(0.1).multiply(updates.coreEffect).multiply(updates.darkEnergyEffect);
+        if (!updates.boughtEighthVermyrosUpgrade) energyReactorGain = new Decimal(0);
+        const newEnergyReactors = updates.energyReactors.plus(energyReactorGain.multiply(deltaTime));
         updates = {
           ...updates,
           energyReactors: newEnergyReactors,
           energyReactorGain: energyReactorGain
         }
 
-        const energyGain = updates.energyReactors;
-        let newEnergy = updates.energy.plus(energyGain.multiply(deltaTime));
-        if (!updates.boughtEighthVermyrosUpgrade) newEnergy = updates.energy;
+        let energyGain = updates.energyReactors.multiply(updates.nullithResetsEnergyEffect);
+        if (!updates.boughtEighthVermyrosUpgrade) energyGain = new Decimal(0);
+        const newEnergy = updates.energy.plus(energyGain.multiply(deltaTime));
         updates = {
           ...updates,
           energy: newEnergy,
@@ -209,9 +286,13 @@ function GameLoop() {
                 ? newEnergy.dividedBy(settings.coresAt)
                 : new Decimal(0);
 
+        updates = { ...updates, ...generateCores(updates, deltaTime) };
+
         updates.softcapperLevel = new Decimal(0);
         if (updates.pointGain.greaterThanOrEqualTo(settings.firstSoftcapperLevelAt))
           updates.softcapperLevel = new Decimal(1);
+        if (updates.points.greaterThanOrEqualTo(settings.secondSoftcapperLevelAt))
+          updates.softcapperLevel = new Decimal(2);
         updates.bestSoftcapperLevel = updates.softcapperLevel.greaterThan(updates.bestSoftcapperLevel) ? updates.softcapperLevel : updates.bestSoftcapperLevel;
 
         if (updates.boughtEighthVermyrosUpgrade) updates.autoVermyrosEnabled = false;
@@ -224,6 +305,7 @@ function GameLoop() {
 
         updates.vermytesGain = updates.points.greaterThanOrEqualTo(settings.vermyrosGoal)
             ? Decimal.pow(2, updates.points.div(settings.vermyrosGoal).log('e6').max(0))
+              .multiply(updates.nullithResetsVermyteEffect)
             : new Decimal(0);
 
         if (updates.boughtEighthVermyrosUpgrade)
@@ -276,7 +358,7 @@ function GameLoop() {
         updates.vermytesUpgradeCost = settings.vermytesUpgradeStartingCost.multiply(Decimal.pow(settings.vermytesUpgradeCostScaling, updates.vermytesUpgradeLvl));
         updates.vermytesUpgradeEffect = settings.vermytesUpgradeEffectScaling.pow(updates.vermytesUpgradeLvl);
 
-        updates = {...updates, ...buyMaxCore(updates, true)};
+        updates = {...updates, ...automateCoreUpgrade(updates)};
         updates.coreUpgradeCost = settings.coreUpgradeStartingCost.multiply(Decimal.pow(settings.coreUpgradeCostScaling, updates.coreUpgradeLvl));
         updates.coreUpgradeEffect = settings.coreUpgradeEffectScaling.pow(updates.coreUpgradeLvl);
 
@@ -296,9 +378,10 @@ function GameLoop() {
             bestPointsOfRunEffect: Decimal.plus(1, Decimal.max(updates.bestPointsOfRun, 1e6).dividedBy(1e6).log10()).pow(1.3).pow(updates.coreUpgradeEffect)
         };
         
-        const amplifluxGain = updates.amplifluxUpgradeEffect.multiply(updates.vermoraEffect).multiply(updates.amplivaultEffect);
-        let newAmpliflux = updates.ampliflux.plus(amplifluxGain.multiply(deltaTime));
-        if (!updates.boughtFourthTierUpgrade) newAmpliflux = updates.ampliflux;
+        let amplifluxGain = updates.amplifluxUpgradeEffect.multiply(updates.vermoraEffect).multiply(updates.amplivaultEffect);
+        if (!updates.boughtFourthTierUpgrade) amplifluxGain = new Decimal(0);
+        const newAmpliflux = updates.ampliflux.plus(amplifluxGain.multiply(deltaTime));
+        
         updates = {
           ...updates,
           ampliflux: newAmpliflux,
@@ -316,9 +399,10 @@ function GameLoop() {
             .multiply(updates.tierTimesEffect)
             .multiply(updates.amplifluxEffect)
             .multiply(updates.vermytesUpgradeEffect)
-            .multiply(updates.energyEffect);
-        const pointGain = preSoftcap1.softcap(settings.firstSoftcapperLevelAt, settings.firstSoftcapperLevelPower, 
-          'pow');
+            .multiply(updates.energyEffect)
+            .multiply(updates.nullithResetsEffect);
+        const pointGain = preSoftcap1.softcap(settings.firstSoftcapperLevelAt, settings.firstSoftcapperLevelPower, 'pow')
+            .softcap(settings.secondSoftcapperLevelAt, settings.secondSoftcapperLevelPower, 'pow');
 
         updates.points = updates.points.plus(pointGain.multiply(deltaTime));
 
@@ -330,7 +414,7 @@ function GameLoop() {
         updates.lastTick = Date.now();
 
         GlobalSettings.exponentialNotation = updates.exponentialNotation;
-        
+
         return updates;
       });
       savePlayer();
