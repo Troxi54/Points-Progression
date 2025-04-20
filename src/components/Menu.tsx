@@ -379,7 +379,7 @@ function Menu() {
               {player.everMadeCoreReset && <><br/>Core effect:<span className="info-effect"> 4<sup>log(x + 1)</sup></span>
                 <br/>Core upgrade cost:<span className="info-effect"> {format(settings.coreUpgradeStartingCost)} × {format(settings.coreUpgradeCostScaling)}<sup>x</sup>, where x is the core upgrade level</span>
                 <br/>Core upgrade effect:<span className="info-effect"> {format(settings.coreUpgradeEffectScaling)}<sup>x</sup>, where x is the core upgrade level</span></>}
-              {player.everBoughtTenthVermyrosUpgrade && <>
+              {(player.everBoughtTenthVermyrosUpgrade || player.everMadeNullith) && <>
                 <br/>Dark energy gain:<span className="info-effect"> 2<sup>log<sub>1e10</sub>(x / {format(settings.tenthVermyrosUpgradeCost)})</sup>, where x is points</span>
                 <br/>Dark energy effect:<span className="info-effect"> 1.75<sup>log(x + 1)</sup>, where x is dark energy</span></>}
               {player.everMadeCoreReset && <>

@@ -246,8 +246,8 @@ function GameLoop() {
 
         updates.everBoughtTenthVermyrosUpgrade = updates.boughtTenthVermyrosUpgrade || updates.everBoughtTenthVermyrosUpgrade;
 
-        let darkEnergyGain = Decimal.pow(2, updates.points.dividedBy(settings.tenthVermyrosUpgradeCost).max(0).plus(1).log(1e10));
-        if (!updates.everBoughtTenthVermyrosUpgrade) darkEnergyGain = new Decimal(0);
+        let darkEnergyGain = Decimal.pow(2, updates.points.dividedBy(settings.tenthVermyrosUpgradeCost).max(0).plus(1).log(1e10)).max(1);
+        if (!updates.everBoughtTenthVermyrosUpgrade && !updates.everMadeNullith) darkEnergyGain = new Decimal(0);
         const newDarkEnergy = updates.darkEnergy.plus(darkEnergyGain.multiply(deltaTime));
         
         updates = {
