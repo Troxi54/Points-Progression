@@ -149,7 +149,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: 'sixthTierUpgradeCost',
       currency: 'points',
       takesCurrency: (player) => !(player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade),
-      description: "Ampliflux upgrade no longer takes ampliflux",
+      description: "Automate ampliflux upgrade",
       isBoughtName: 'boughtSixthTierUpgrade',
       show: (player) => player.boughtFifthTierUpgrade || player.everMadeVermyros
     }
