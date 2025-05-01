@@ -62,7 +62,8 @@ export interface Upgrade {
   takesCurrency: (player: Player) => boolean,
   description: string,
   isBoughtName: BooleanKeys<Player>,
-  show: (player: Player) => boolean
+  show: (player: Player) => boolean,
+  previousUpgradeFromAnotherContainerBoughtName?: BooleanKeys<Player>
 };
 
 type UpgradeContainer = Upgrade[];
@@ -141,7 +142,8 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: (player) => !(player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade),
       description: "Ampliflux upgrade no longer takes ampliflux",
       isBoughtName: 'boughtFifthTierUpgrade',
-      show: () => true
+      show: () => true,
+      previousUpgradeFromAnotherContainerBoughtName: "boughtFourthTierUpgrade"
     },
     {
       id: 8,
@@ -205,7 +207,8 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description: "Unlock the Amplivault and generate 1% of your best vermytes per second",
       isBoughtName: 'boughtFifthVermyrosUpgrade',
-      show: () => true
+      show: () => true,
+      previousUpgradeFromAnotherContainerBoughtName: "boughtFourthVermyrosUpgrade"
     },
     {
       id: 14,
@@ -247,7 +250,8 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description: "Vermyte upgrade no longer takes vermytes",
       isBoughtName: 'boughtNinthVermyrosUpgrade',
-      show: () => true
+      show: () => true,
+      previousUpgradeFromAnotherContainerBoughtName: "boughtEighthVermyrosUpgrade"
     },
     {
       id: 18,

@@ -264,7 +264,7 @@
   }
   
   .layer {
-    @apply relative flex-col w-full gap-4 bg-layer-bg py-4
+    @apply relative flex-col w-full gap-4 bg-layer-bg py-4 overflow-visible
             before:-top-6 before:bg-gradient-to-b before:from-transparent before:to-layer-bg
             after:-bottom-6 after:bg-gradient-to-t after:from-transparent after:to-layer-bg;
   }

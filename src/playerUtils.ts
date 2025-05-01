@@ -111,7 +111,10 @@ export function getDefaultPlayer(): Player {
     boughtThirdNullithUpgrade: false,
     boughtFourthNullithUpgrade: false,
     coresPerSecond: new Decimal(0),
-    hideBoughtUpgrades: false
+    hideBoughtUpgrades: false,
+    firstLayerHidden: false,
+    secondLayerHidden: false,
+    thirdLayerHidden: false
   }
   return defaultPlayer;
 }

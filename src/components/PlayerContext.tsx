@@ -114,7 +114,10 @@ export interface Player {
   boughtThirdNullithUpgrade: boolean
   boughtFourthNullithUpgrade: boolean,
   coresPerSecond: Decimal,
-  hideBoughtUpgrades: boolean
+  hideBoughtUpgrades: boolean,
+  firstLayerHidden: boolean,
+  secondLayerHidden: boolean,
+  thirdLayerHidden: boolean
 }
 
 export interface globalSettings {

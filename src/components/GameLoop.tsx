@@ -34,8 +34,6 @@ function GameLoop() {
 
     const { setPlayer, playerRef } = context.current;
 
-    
-
     let frameId: number;
     const savedPlayer = loadPlayerFromLocalStorage();
     if (savedPlayer) {
@@ -257,7 +255,6 @@ function GameLoop() {
           darkEnergyEffect: Decimal.pow(1.75, newDarkEnergy.max(0).plus(1).log10())
         }
 
-
         updates.coreEffect = Decimal.pow(4, updates.cores.max(0).plus(1).log10());
 
         let energyReactorGain = new Decimal(0.1).multiply(updates.coreEffect).multiply(updates.darkEnergyEffect);
@@ -361,6 +358,9 @@ function GameLoop() {
         updates = {...updates, ...automateCoreUpgrade(updates)};
         updates.coreUpgradeCost = settings.coreUpgradeStartingCost.multiply(Decimal.pow(settings.coreUpgradeCostScaling, updates.coreUpgradeLvl));
         updates.coreUpgradeEffect = settings.coreUpgradeEffectScaling.pow(updates.coreUpgradeLvl);
+
+        if (updates.boughtFourthTierUpgrade)
+          updates.autoresettingEnabled = false;
 
         const goalUpdates = getGoalUpdates(updates)
         updates = {...updates, ...goalUpdates};

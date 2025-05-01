@@ -9,8 +9,12 @@ export function format(num: DecimalSource, precision: number | "auto" = "auto"):
   function getExponential(num: Decimal, wasPrecisionAuto: boolean): string {
     if (wasPrecisionAuto || precision === 'auto')
       precision = 2;
-    const mantissa = num.mantissa;
-    const exponent = num.exponent;
+    let mantissa = num.mantissa;
+    let exponent = Math.round(num.exponent);
+    if (mantissa >= 9.999999999) {
+      mantissa = 1;
+      exponent++;
+    }
     return `${prefix}${mantissa.toFixed(precision)}e${exponent}`;
   }
   if (num.equals(0)) return '0';

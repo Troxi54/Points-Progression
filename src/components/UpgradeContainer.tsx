@@ -20,9 +20,15 @@ function UpgradeContainer({id, upgrades, classNames}: props) {
   
   const { player, setPlayer } = context;
 
-  function buy(upgrade: Upgrade) {
+  function buy(upgrade: Upgrade, previousUpgrade: Upgrade | null = null) {
     setPlayer(prev => {
-      if (prev[upgrade.isBoughtName] || prev[upgrade.currency].lessThan(settings[upgrade.cost])) return prev;
+      let boughtPreviousUpgrade = false;
+      if (upgrade.previousUpgradeFromAnotherContainerBoughtName) {
+        boughtPreviousUpgrade = prev[upgrade.previousUpgradeFromAnotherContainerBoughtName];
+      } else {
+        boughtPreviousUpgrade = !previousUpgrade || prev[previousUpgrade.isBoughtName];
+      }
+      if (prev[upgrade.isBoughtName] || prev[upgrade.currency].lessThan(settings[upgrade.cost]) || !boughtPreviousUpgrade) return prev;
       return {
         ...prev,
         [upgrade.isBoughtName]: true,
@@ -31,17 +37,22 @@ function UpgradeContainer({id, upgrades, classNames}: props) {
     });
   }
 
-  function contextMenu(e: React.MouseEvent, upgrade: Upgrade) {
+  function contextMenu(e: React.MouseEvent, upgrade: Upgrade, previousUpgrade: Upgrade | null = null) {
     e.preventDefault();
-    buy(upgrade);
+    buy(upgrade, previousUpgrade);
+  }
+
+  function getPreviousUpgrade(currentIndex: number) {
+    if (currentIndex === 0) return null;
+    return upgrades[currentIndex - 1];
   }
 
   const visibleUpgrades = upgrades.filter(upgrade => upgrade.show(player) && (!player[upgrade.isBoughtName] || !player.hideBoughtUpgrades));
   return visibleUpgrades.length > 0 && (
       <div id={id} className={'upgrade-container ' + classNames}>
-        {upgrades.map(upgrade => (
+        {upgrades.map((upgrade, index) => (
           upgrade.show(player) && (!player[upgrade.isBoughtName] || !player.hideBoughtUpgrades) ?
-          <button className={player[upgrade.isBoughtName] ? 'bought-upgrade' : ''} onClick={() => buy(upgrade)} onContextMenu={(e) => contextMenu(e, upgrade)} key={upgrade.id}>
+          <button className={player[upgrade.isBoughtName] ? 'bought-upgrade' : ''} onClick={() => buy(upgrade, getPreviousUpgrade(index))} onContextMenu={(e) => contextMenu(e, upgrade, getPreviousUpgrade(index))} key={upgrade.id}>
             <p>{upgrade.name}: {format(settings[upgrade.cost])} - <span className="text-buyable-once-upgrade-effect">{upgrade.description}</span></p>
           </button> : null
         ))}
