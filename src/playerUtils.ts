@@ -6,7 +6,7 @@ export const playerContext = createContext<PlayerContextType | undefined>(undefi
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: '0.4.1',
+    gameVersion: '0.4.2',
     lastTick: Date.now(),
     points: new Decimal(0),
     pointGain: new Decimal(1),
@@ -112,9 +112,7 @@ export function getDefaultPlayer(): Player {
     boughtFourthNullithUpgrade: false,
     coresPerSecond: new Decimal(0),
     hideBoughtUpgrades: false,
-    firstLayerHidden: false,
-    secondLayerHidden: false,
-    thirdLayerHidden: false
+    isCoreUpgradeMaxed: false,
   }
   return defaultPlayer;
 }
@@ -227,7 +225,10 @@ export const settings: Settings = {
   fourthNullithUpgradeCost: new Decimal('9.064e435'),
   secondSoftcapperLevelAt: new Decimal('1e368'),
   secondSoftcapperLevelPower: new Decimal(0.85),
-  endgameAt: new Decimal('9.064e435')
+  thirdSoftcapperLevelAt: new Decimal('1e1000'),
+  thirdSoftcapperLevelPower: new Decimal(0.5),
+  maxCoreUpgradeLevel: new Decimal(40),
+  endgameAt: new Decimal('1e1000')
 } as const;
 
 export const GlobalSettings: globalSettings = {

@@ -30,7 +30,6 @@ function GameLoop() {
 
     const TIER_INTERVAL = 1 / 60;
     const MAX_TIER_PER_SECOND = 1 / TIER_INTERVAL;
-    //const VERMYROS_INTERVAL = 1 / 60;
 
     const { setPlayer, playerRef } = context.current;
 
@@ -84,7 +83,6 @@ function GameLoop() {
 
     function getVermyrosUpdates(updates: Player): Partial<Player> {
       const now = performance.now() / 1000;
-      //if (now - lastVermyrosTime.current < VERMYROS_INTERVAL) return;
       if (updates.points.lessThan(settings.vermyrosGoal) || !updates.autoVermyrosEnabled) return {};
       
       const time = updates.vermyrosStartedDate === null ? Infinity : Date.now() - updates.vermyrosStartedDate;
@@ -111,7 +109,6 @@ function GameLoop() {
     
     function getTierUpdates(updates: Player): Partial<Player> {
       const now = performance.now() / 1000;
-      //if (now - lastTierTime.current < TIER_INTERVAL) return {};
       let bulk = updates.points.dividedBy(updates.tierRequirement).log(settings.tierScaling).floor();
   
       if (!updates.boughtSecondVermyrosUpgrade) {
@@ -283,6 +280,13 @@ function GameLoop() {
                 ? newEnergy.dividedBy(settings.coresAt)
                 : new Decimal(0);
 
+        updates.isCoreUpgradeMaxed = false;
+        if (updates.coreUpgradeLvl.greaterThanOrEqualTo(settings.maxCoreUpgradeLevel)) {
+          updates.isCoreUpgradeMaxed = true;
+          updates.coreUpgradeLvl = settings.maxCoreUpgradeLevel;
+        }
+          
+
         updates = { ...updates, ...generateCores(updates, deltaTime) };
 
         updates.softcapperLevel = new Decimal(0);
@@ -290,6 +294,8 @@ function GameLoop() {
           updates.softcapperLevel = new Decimal(1);
         if (updates.points.greaterThanOrEqualTo(settings.secondSoftcapperLevelAt))
           updates.softcapperLevel = new Decimal(2);
+        if (updates.points.greaterThanOrEqualTo(settings.thirdSoftcapperLevelAt))
+          updates.softcapperLevel = new Decimal(3);
         updates.bestSoftcapperLevel = updates.softcapperLevel.greaterThan(updates.bestSoftcapperLevel) ? updates.softcapperLevel : updates.bestSoftcapperLevel;
 
         if (updates.boughtEighthVermyrosUpgrade) updates.autoVermyrosEnabled = false;
@@ -402,7 +408,8 @@ function GameLoop() {
             .multiply(updates.energyEffect)
             .multiply(updates.nullithResetsEffect);
         const pointGain = preSoftcap1.softcap(settings.firstSoftcapperLevelAt, settings.firstSoftcapperLevelPower, 'pow')
-            .softcap(settings.secondSoftcapperLevelAt, settings.secondSoftcapperLevelPower, 'pow');
+            .softcap(settings.secondSoftcapperLevelAt, settings.secondSoftcapperLevelPower, 'pow')
+            .softcap(settings.thirdSoftcapperLevelAt, settings.thirdSoftcapperLevelPower, 'pow');
 
         updates.points = updates.points.plus(pointGain.multiply(deltaTime));
 
@@ -418,8 +425,6 @@ function GameLoop() {
         return updates;
       });
       savePlayer();
-
-      
 
       frameId = requestAnimationFrame(updatePlayer);
     }

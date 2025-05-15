@@ -115,9 +115,7 @@ export interface Player {
   boughtFourthNullithUpgrade: boolean,
   coresPerSecond: Decimal,
   hideBoughtUpgrades: boolean,
-  firstLayerHidden: boolean,
-  secondLayerHidden: boolean,
-  thirdLayerHidden: boolean
+  isCoreUpgradeMaxed: boolean
 }
 
 export interface globalSettings {
@@ -191,5 +189,8 @@ export interface Settings {
   fourthNullithUpgradeCost: Decimal,
   secondSoftcapperLevelAt: Decimal,
   secondSoftcapperLevelPower: Decimal,
+  thirdSoftcapperLevelAt: Decimal,
+  thirdSoftcapperLevelPower: Decimal,
+  maxCoreUpgradeLevel: Decimal,
   endgameAt: Decimal
 }

@@ -17,7 +17,7 @@ function CoreUpgrade() {
   function buy(event: React.MouseEvent) {
     setPlayer(prev => {
       event.preventDefault();
-      if (prev.cores.lessThan(prev.coreUpgradeCost) || !prev.everMadeCoreReset) return prev;
+      if (prev.cores.lessThan(prev.coreUpgradeCost) || !prev.everMadeCoreReset || prev.isCoreUpgradeMaxed) return prev;
       return {
         ...prev,
         cores: prev.boughtFirstNullithUpgrade ? prev.cores : prev.cores.minus(prev.coreUpgradeCost),
@@ -36,7 +36,7 @@ function CoreUpgrade() {
   return (
     <div className="bg-core-bg">
       <button id="core-upgrade-button" onClick={buyMAX} onContextMenu={buy}>
-        <p id="core-upgrade-cost">Upgrade: {format(player.coreUpgradeCost)} Cores {player.coreUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.coreUpgradeLvl, 0)}{player.coreUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.coreUpgradeBulk, 0)}` : ''})</span>)}</p>
+        <p id="core-upgrade-cost">Upgrade: {player.isCoreUpgradeMaxed ? 'Maxed' : <>{format(player.coreUpgradeCost)} Cores</>} {player.coreUpgradeLvl.greaterThanOrEqualTo(1) && (<span>({format(player.coreUpgradeLvl, 0)}{player.coreUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.coreUpgradeBulk, 0)}` : ''})</span>)}</p>
         <p className="text-core-upgrade-effect">Effect: x<sup>{format(player.coreUpgradeEffect)}</sup> best points effect</p>
       </button>
     </div>

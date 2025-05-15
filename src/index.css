@@ -86,6 +86,8 @@
   --color-nullith-effect: rgb(148, 148, 148);
   --color-softcapper-level-2-c1: #00cc00;
   --color-softcapper-level-2-c2: #cccc00;
+  --color-softcapper-level-3-c1: #cccc00;
+  --color-softcapper-level-3-c2: #cc6600;
 
   @keyframes vermyros-bar {
     0% {
@@ -346,6 +348,10 @@
 
   .softcap-2 {
     @apply text-gradient bg-linear-to-r from-softcapper-level-2-c1 to-softcapper-level-2-c2;
+  }
+
+  .softcap-3 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-3-c1 to-softcapper-level-3-c2;
   }
 
   .more-menu-row {

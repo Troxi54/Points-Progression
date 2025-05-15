@@ -22,6 +22,9 @@ function Softcapper() {
         {player.bestSoftcapperLevel.greaterThanOrEqualTo(2) && (
           <p className="softcap-2">Level 2: at {format(settings.secondSoftcapperLevelAt)} - ^{format(settings.secondSoftcapperLevelPower)} point gain{player.softcapperLevel.greaterThanOrEqualTo(2) ? ' (Active)' : ''}</p>
         )}
+        {player.bestSoftcapperLevel.greaterThanOrEqualTo(3) && (
+          <p className="softcap-3">Level 3: at {format(settings.thirdSoftcapperLevelAt)} - ^{format(settings.thirdSoftcapperLevelPower)} point gain{player.softcapperLevel.greaterThanOrEqualTo(3) ? ' (Active)' : ''}</p>
+        )}
       </div>
       
     </div>

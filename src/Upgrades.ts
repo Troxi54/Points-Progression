@@ -36,8 +36,13 @@ export function buyMaxVermyte(updates: Player, justUpdateBulk: boolean = false) 
 }
 
 export function buyMaxCore(updates: Player, justUpdateBulk: boolean = false) {
-  const array = { coreUpgradeBulk: updates.cores.dividedBy(updates.coreUpgradeCost).log(settings.coreUpgradeCostScaling).floor().plus(updates.cores.greaterThanOrEqualTo(updates.coreUpgradeCost) ? 1 : 0)};
-  if (updates.cores.lessThan(updates.coreUpgradeCost) || !updates.everMadeCoreReset || justUpdateBulk) return array;
+  let bulk: Decimal;
+  if (updates.isCoreUpgradeMaxed)
+    bulk = new Decimal(0);
+  else 
+    bulk = updates.cores.dividedBy(updates.coreUpgradeCost).log(settings.coreUpgradeCostScaling).floor().plus(updates.cores.greaterThanOrEqualTo(updates.coreUpgradeCost) ? 1 : 0)
+  const array = { coreUpgradeBulk: bulk };
+  if (updates.cores.lessThan(updates.coreUpgradeCost) || !updates.everMadeCoreReset || justUpdateBulk || updates.isCoreUpgradeMaxed) return array;
   const finalCost = updates.coreUpgradeCost.multiply(settings.coreUpgradeCostScaling.pow(array.coreUpgradeBulk.minus(1)));
   return {
     coreUpgradeBulk: new Decimal(0),
