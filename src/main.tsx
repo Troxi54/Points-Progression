@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import { PlayerProvider } from './components/PlayerContext.tsx'
-import "./decimalExtensions.ts"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import "./decimalExtensions.ts";
+import { startGame } from "./startGame.ts";
 
-createRoot(document.getElementById('root')!).render(
+startGame();
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <PlayerProvider>
-      <App/>
-    </PlayerProvider>
-  </StrictMode>,
-)
+    <App />
+  </StrictMode>
+);

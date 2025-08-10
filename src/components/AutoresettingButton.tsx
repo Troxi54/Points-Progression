@@ -1,29 +1,26 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
+import { usePlayer, usePlayerStore } from "../player/playerStore";
 
 function AutoresettingButton() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player, setPlayer } = context;
+  const autoresettingEnabled = usePlayer(
+    (state) => state.player.autoresettingEnabled
+  );
 
   function toggleAutoresetting() {
-    setPlayer(prev => {
-      if (!prev.everMadeRun) return prev;
-      return {
-        ...prev,
-        autoresettingEnabled: !prev.autoresettingEnabled
-      }
+    const { player, setPlayer } = usePlayerStore.getState();
+    if (!player.everMadeRun) return;
+    setPlayer({
+      autoresettingEnabled: !player.autoresettingEnabled
     });
   }
 
   return (
     <div className="auto-toggle">
       <button onClick={toggleAutoresetting}>
-        <p>{player.autoresettingEnabled ? 'Auto Reset: enabled' : 'Auto Reset: disabled'}</p>
+        <p>
+          {autoresettingEnabled
+            ? "Auto Reset: enabled"
+            : "Auto Reset: disabled"}
+        </p>
       </button>
     </div>
   );

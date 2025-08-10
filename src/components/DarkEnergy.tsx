@@ -1,22 +1,28 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
-import { format } from "../format";
+import { format, formatWithPlural } from "../format";
+import { usePlayer } from "../player/playerStore";
 
 function DarkEnergy() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player } = context;
+  const { darkEnergy, darkEnergyGain, darkEnergyEffect } = usePlayer(
+    (state) => ({
+      darkEnergy: state.player.darkEnergy,
+      darkEnergyGain: state.cachedPlayer.darkEnergyGain,
+      darkEnergyEffect: state.cachedPlayer.darkEnergyEffect
+    })
+  );
 
   return (
     <div className="bg-dark-energy-bg">
-      <p className="dark-energy">Dark energy: {format(player.darkEnergy)} {player.darkEnergyGain.gt(0) && <>(+{format(player.darkEnergyGain)}/s)</>}<span className="text-dark-energy-effect text-shadow-none"> - Effect: {format(player.darkEnergyEffect)}x energy reactors</span></p>
+      <p className="dark-energy">
+        Dark energy: {format(darkEnergy)}{" "}
+        {darkEnergyGain.gt(0) && <>(+{format(darkEnergyGain)}/s)</>}
+        <span className="text-dark-energy-effect text-shadow-none">
+          {" "}
+          - Effect:{" "}
+          {formatWithPlural(darkEnergyEffect, "Energy Reactors", "x ")}
+        </span>
+      </p>
     </div>
   );
-  
 }
 
 export default DarkEnergy;

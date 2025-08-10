@@ -1,9 +1,13 @@
 import UpgradeContainer from "./UpgradeContainer";
-import { upgrades } from "../Upgrades";
+import { upgrades } from "../upgrades";
 
 function NullithUpgrades() {
   return (
-    <UpgradeContainer id="nullith-upgrades" upgrades={upgrades.nullithUpgrades} classNames="gap-[5%]"/>
+    <UpgradeContainer
+      id="nullith-upgrades"
+      upgrades={upgrades.nullithUpgrades}
+      classNames="gap-[5%]"
+    />
   );
 }
 

@@ -1,10 +1,13 @@
-
-import { upgrades } from "../Upgrades";
+import { upgrades } from "../upgrades";
 import UpgradeContainer from "./UpgradeContainer";
 
 function VermyrosUpgrades() {
   return (
-    <UpgradeContainer id="vermyros-upgrades" upgrades={upgrades.vermyrosUpgrades} classNames="gap-[5%]"/>
+    <UpgradeContainer
+      id="vermyros-upgrades"
+      upgrades={upgrades.vermyrosUpgrades}
+      classNames="gap-[5%]"
+    />
   );
 }
 

@@ -1,32 +1,36 @@
-import { useContext } from "react";
-import { playerContext, settings } from "../playerUtils";
 import { format } from "../format";
+import { usePlayer } from "../player/playerStore";
+import { settings } from "../player/settings";
 
 function Softcapper() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
+  const { softcapperLevel, bestSoftcapperLevel } = usePlayer((state) => ({
+    softcapperLevel: state.cachedPlayer.softcapperLevel,
+    bestSoftcapperLevel: state.player.bestSoftcapperLevel
+  }));
 
-  const { player } = context;
+  const softcappers = [];
+  for (const [index, softcapper] of settings.softcappers.entries()) {
+    if (bestSoftcapperLevel.lessThan(index + 1)) break;
+    softcappers.push(softcapper);
+  }
 
   return (
     <div className="flex-col bg-linear-to-r from-softcapper-bg-1 to-softcapper-bg-2">
-      <h2 className="text-gradient bg-linear-to-l from-softcapper-h-1 to-softcapper-h-2 text-[2em] mb-[.4em]">Softcapper</h2>
+      <h2 className="text-gradient bg-linear-to-l from-softcapper-h-1 to-softcapper-h-2 text-[2em] mb-[.4em]">
+        Softcapper
+      </h2>
       <div className="softcap-container flex-col gap-y-2">
-        {player.bestSoftcapperLevel.greaterThanOrEqualTo(1) && (
-          <p className="softcap-1">Level 1: at {format(settings.firstSoftcapperLevelAt)} - ^{format(settings.firstSoftcapperLevelPower)} point gain{player.softcapperLevel.greaterThanOrEqualTo(1) ? ' (Active)' : ''}</p>
-        )}
-        {player.bestSoftcapperLevel.greaterThanOrEqualTo(2) && (
-          <p className="softcap-2">Level 2: at {format(settings.secondSoftcapperLevelAt)} - ^{format(settings.secondSoftcapperLevelPower)} point gain{player.softcapperLevel.greaterThanOrEqualTo(2) ? ' (Active)' : ''}</p>
-        )}
-        {player.bestSoftcapperLevel.greaterThanOrEqualTo(3) && (
-          <p className="softcap-3">Level 3: at {format(settings.thirdSoftcapperLevelAt)} - ^{format(settings.thirdSoftcapperLevelPower)} point gain{player.softcapperLevel.greaterThanOrEqualTo(3) ? ' (Active)' : ''}</p>
-        )}
+        {softcappers.map((softcapper, i) => {
+          const index = i + 1;
+          return (
+            <p className={"softcap-" + index} key={index}>
+              Level {index}: at {format(softcapper[0])} - ^
+              {format(softcapper[1])} point gain
+              {softcapperLevel.greaterThanOrEqualTo(index) && " (Active)"}
+            </p>
+          );
+        })}
       </div>
-      
     </div>
   );
 }

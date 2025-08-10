@@ -1,20 +1,30 @@
-import { useContext } from "react";
 import { format } from "../format";
-import { playerContext } from "../playerUtils";
+import { usePlayer } from "../player/playerStore";
 
 function Vermytes() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-
-  const { player } = context;
+  const {
+    vermytes,
+    boughtEighthVermyrosUpgrade,
+    vermytesGain,
+    vermytesPerSecond
+  } = usePlayer((state) => ({
+    vermytes: state.player.vermytes,
+    boughtEighthVermyrosUpgrade: state.player.boughtEighthVermyrosUpgrade,
+    vermytesGain: state.cachedPlayer.vermytesGain,
+    vermytesPerSecond: state.cachedPlayer.vermytesPerSecond
+  }));
 
   return (
     <div id="vermytes-container">
-      <p id="vermytes-counter">Vermytes: {format(player.vermytes)}{(player.vermytesGain.greaterThan(0) && !player.boughtEighthVermyrosUpgrade) && (<span> (+{format(player.vermytesGain)})</span>)}{player.vermytesPerSecond.greaterThan(0) && (<span> (+{format(player.vermytesPerSecond)}/s)</span>)}</p>
+      <p id="vermytes-counter">
+        Vermytes: {format(vermytes)}
+        {vermytesGain.greaterThan(0) && !boughtEighthVermyrosUpgrade && (
+          <span> (+{format(vermytesGain)})</span>
+        )}
+        {vermytesPerSecond.greaterThan(0) && (
+          <span> (+{format(vermytesPerSecond)}/s)</span>
+        )}
+      </p>
     </div>
   );
 }

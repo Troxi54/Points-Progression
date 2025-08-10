@@ -1,29 +1,22 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
+import { usePlayer, usePlayerStore } from "../player/playerStore";
 
 function AutoVermyrosButton() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player, setPlayer } = context;
+  const autoVermyrosEnabled = usePlayer(
+    (state) => state.player.autoVermyrosEnabled
+  );
 
   function toggleAutoresetting() {
-    setPlayer(prev => {
-      if (!prev.everMadeVermyros) return prev;
-      return {
-        ...prev,
-        autoVermyrosEnabled: !prev.autoVermyrosEnabled
-      }
+    const { player, setPlayer } = usePlayerStore.getState();
+    if (!player.everMadeVermyros) return;
+    setPlayer({
+      autoVermyrosEnabled: !player.autoVermyrosEnabled
     });
   }
 
   return (
     <div className="auto-toggle">
       <button onClick={toggleAutoresetting}>
-        <p>{player.autoVermyrosEnabled ? 'Auto Vermyros: enabled' : 'Auto Vermyros: disabled'}</p>
+        <p>Auto Vermyros: {autoVermyrosEnabled ? "enabled" : "disabled"}</p>
       </button>
     </div>
   );

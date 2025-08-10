@@ -1,28 +1,99 @@
-import { useContext } from "react";
-import { playerContext, settings } from "../playerUtils";
-import Decimal from "break_eternity.js";
-import { format, formatLeftTime } from "../format";
+import { format, formatLeftTime, integerFormat } from "../format";
+import { settings } from "../player/settings";
+import { usePlayer } from "../player/playerStore";
+import {
+  calculateProgressInPercentage,
+  calculateTimeForRequirement
+} from "../utils";
 
 function TierBar() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
+  const {
+    points,
+    pointGain,
+    autoTierEnabled,
+    boughtSecondVermyrosUpgrade,
+    tierRequirement,
+    everMadeTier,
+    tier,
+    tierEffect,
+    madeTierTimes,
+    tierTimesEffect,
+    stableProgressBars,
+    approximateTiersPerSecond
+  } = usePlayer((state) => ({
+    points: state.player.points,
+    pointGain: state.cachedPlayer.pointGain,
+    autoTierEnabled: state.player.autoTierEnabled,
+    boughtSecondVermyrosUpgrade: state.player.boughtSecondVermyrosUpgrade,
+    tierRequirement: state.cachedPlayer.tierRequirement,
+    everMadeTier: state.player.everMadeTier,
+    tier: state.player.tier,
+    tierEffect: state.cachedPlayer.tierEffect,
+    madeTierTimes: state.player.madeTierTimes,
+    tierTimesEffect: state.cachedPlayer.tierTimesEffect,
+    stableProgressBars: state.player.stableProgressBars,
+    approximateTiersPerSecond: state.player.approximateTiersPerSecond
+  }));
 
-  const { player } = context;
-  let progress = +Decimal.min(player.points.dividedBy((player.points.lessThan(settings.firstTierAt) || player.autoTierEnabled) && !player.boughtSecondVermyrosUpgrade ? settings.firstTierAt : player.tierRequirement), 1).multiply(100);
-  const stable = player.stableProgressBars && player.approximateTiersPerSecond.greaterThan(5);
-  if (stable) progress = 100;
-  const timeLeft = Decimal.max(settings.firstTierAt.minus(player.points).div(player.pointGain).multiply(1000), 0);
-  const timeLeftForNextTier = Decimal.max(player.tierRequirement.minus(player.points).div(player.pointGain).multiply(1000), 0);
+  const useFirstTierRequirement =
+    (points.lessThan(settings.firstTierAt) || autoTierEnabled) &&
+    !boughtSecondVermyrosUpgrade;
+
+  const currentRequirement = useFirstTierRequirement
+    ? settings.firstTierAt
+    : tierRequirement;
+
+  let progress = calculateProgressInPercentage(points, currentRequirement);
+  const stable =
+    stableProgressBars &&
+    approximateTiersPerSecond.greaterThan(
+      settings.stableProgressBarsStartWorkingAt
+    );
+
+  const isStable = stable && !boughtSecondVermyrosUpgrade;
+  if (isStable) progress = 100;
+
+  const timeLeft = calculateTimeForRequirement(
+    points,
+    pointGain,
+    settings.firstTierAt
+  );
+  const timeLeftForNextTier = calculateTimeForRequirement(
+    points,
+    pointGain,
+    tierRequirement
+  );
+
   return (
     <div className="relative">
-      <p className="z-1">Goal: {format(settings.firstTierAt)} - <span className="text-time">{stable ? 'Ready' :formatLeftTime(timeLeft)}</span>{player.everMadeTier && (<span>, For next Tier: {format(player.tierRequirement)} - <span className="text-time">{formatLeftTime(timeLeftForNextTier)}</span>&emsp;|&emsp;Tier: {format(player.tier, 0)} - <span className="text-tier-effect">Effect: {format(player.tierEffect)}x</span>&emsp;|&emsp;Resets made: {(+player.madeTierTimes.floor()).toLocaleString('en-US')} - <span className="text-tier-effect">Effect: {format(player.tierTimesEffect)}x</span></span>)}</p>
-      <div className="progress-bar bg-tier" style={{width: `${progress}%`}}></div>
+      <p className="z-1">
+        Goal: {format(settings.firstTierAt)} -{" "}
+        <span className="text-time">
+          {isStable ? "Ready" : formatLeftTime(timeLeft)}
+        </span>
+        {everMadeTier && (
+          <span>
+            , For next Tier: {format(tierRequirement)} -{" "}
+            <span className="text-time">
+              {isStable ? "Never" : formatLeftTime(timeLeftForNextTier)}
+            </span>
+            &emsp;|&emsp;Tier: {format(tier, 0)} -{" "}
+            <span className="text-tier-effect">
+              Effect: {format(tierEffect)}x
+            </span>
+            &emsp;|&emsp;Resets made: {integerFormat(madeTierTimes)} -{" "}
+            <span className="text-tier-effect">
+              Effect: {format(tierTimesEffect)}x
+            </span>
+          </span>
+        )}
+      </p>
+      <div
+        className="progress-bar bg-tier"
+        style={{ width: `${progress}%` }}
+      ></div>
     </div>
-  )
+  );
 }
 
 export default TierBar;

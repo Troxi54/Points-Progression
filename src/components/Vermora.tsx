@@ -1,20 +1,22 @@
-import { useContext } from "react";
-import { format } from "../format";
-import { playerContext } from "../playerUtils";
+import { format, formatWithPlural } from "../format";
+import { usePlayer } from "../player/playerStore";
 
 function Vermora() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-
-  const { player } = context;
+  const { vermora, vermoraGain, vermoraEffect } = usePlayer((state) => ({
+    vermora: state.player.vermora,
+    vermoraGain: state.cachedPlayer.vermoraGain,
+    vermoraEffect: state.cachedPlayer.vermoraEffect
+  }));
 
   return (
     <div id="vermora-container">
-      <p id="vermora-counter">Vermora: {format(player.vermora)}{player.vermoraGain.gt(0) && <> (+{format(player.vermoraGain)}/s)</>} - <span className="text-vermyros-effect">Effect: {format(player.vermoraEffect)}x ampliflux</span></p>
+      <p id="vermora-counter">
+        Vermora: {format(vermora)}
+        {vermoraGain.gt(0) && <> (+{format(vermoraGain)}/s)</>} -{" "}
+        <span className="text-vermyros-effect">
+          Effect: {formatWithPlural(vermoraEffect, "Ampliflux", "x ")}
+        </span>
+      </p>
     </div>
   );
 }

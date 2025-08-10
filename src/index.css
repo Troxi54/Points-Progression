@@ -9,8 +9,10 @@
   --color-button-border: white;
   --color-layer-bg: #363636;
   --color-layer-div-bg: #202020;
+
+  --color-effect: hsl(0, 0%, 59%);
   --color-point-upgrade-bg: #2e2e16;
-  --color-point-upgrade-hover-border: #ffff00; 
+  --color-point-upgrade-hover-border: #ffff00;
   --color-point-upgrade-cost: #ffff00;
   --color-point-upgrade-hover-cost: #fff598;
   --color-point-upgrade-effect: #8c9462;
@@ -20,7 +22,7 @@
   --color-bought-upgrade-bg: #424242;
   --color-buyable-once-upgrade-effect: #949494;
   --color-tier: #008cff;
-  --color-tier-effect: #608197;
+  --color-tier-effect: hsl(204, 22%, 48%);
   --color-ampliflux-upgrade-bg: #16192d;
   --color-ampliflux-upgrade-hover-border: #002aff;
   --color-ampliflux-upgrade-cost: #002aff;
@@ -39,15 +41,14 @@
   --color-vermyte-upgrade-hover-cost: #ff9999;
   --color-vermyte-upgrade-effect: #936262;
   --color-menu-button: #2c2c2c;
-  --color-data-button: #363636;
   --color-info-important: #ffbfbf;
   --color-info-effect: #ffffffbf;
-  --color-amplivault-bg: #141020;
+  --color-amplivault-bg: hsl(255, 33%, 9%);
   --color-amplivault-hover-border: #4400ff;
-  --color-amplivault-info: #4400ff;
-  --color-amplivault-description: #3100b8;
-  
-  --color-amplivault-div-bg: #1a0b44;
+  --color-amplivault-info: hsl(256, 100%, 50%);
+  --color-amplivault-description: hsl(256, 100%, 36%);
+
+  --color-amplivault-div-bg: #190b42;
   --color-amplivault-div-border: #4400ff;
   --color-amplivault-div-2-bg: #251155;
   --color-amplivault-div-2-border: #002aff;
@@ -56,10 +57,28 @@
   --color-amplivault-div-4-bg: #294cff;
   --color-amplivault-div-5-bg: #150030;
 
-  --color-data-action-button-bg: #222222;
+  --color-overlay-div: rgb(54, 54, 54, 0.9);
+  --color-main-button-container: rgba(20, 20, 20, 0.75);
+  --color-main-button: rgba(48, 48, 48, 0.5);
+  --color-main-button-hover: rgba(66, 66, 66, 0.5);
+  --color-data-button-container: rgba(29, 29, 29, 0.75);
+  --color-data-button: rgba(59, 59, 59, 0.75);
+  --color-data-button-hovered: rgba(73, 73, 73, 0.75);
+
+  --color-data-action-button-bg: #212121;
+  --color-discord-button: #5865f2;
+  --color-discord-button-hovered: #7884f8;
   --color-tooltip-trigger-bg: #181818;
   --color-tooltip-bg: #111111;
   --color-spoiler-bg: #202020;
+  --color-enabled: #8dee9d;
+  --color-disabled: #ee8d8d;
+  --color-input-bg: rgba(255, 255, 255, 0.25);
+  --color-input-text: rgb(219, 219, 219);
+  --color-input-text-focused: rgb(255, 255, 255);
+  --color-reset-data-button: #200e0e;
+  --color-reset-data-button-hovered: #301818;
+  --color-reset-data-text: #ff8585;
 
   --color-softcapper-bg-1: #000033;
   --color-softcapper-bg-2: #003300;
@@ -88,6 +107,92 @@
   --color-softcapper-level-2-c2: #cccc00;
   --color-softcapper-level-3-c1: #cccc00;
   --color-softcapper-level-3-c2: #cc6600;
+  --color-break-amplivault-1: #ff0095;
+  --color-break-amplivault-2: #8400ff;
+  --color-break-amplivault-bg-1: hsl(325, 100%, 9%);
+  --color-break-amplivault-bg-2: hsl(271, 100%, 9%);
+  --color-break-amplivault-info-1: hsl(325, 100%, 35%);
+  --color-break-amplivault-info-2: hsl(271, 100%, 35%);
+
+  --color-broken-amplivault-1: hsl(326, 100%, 10%);
+  --color-broken-amplivault-2: hsl(326, 100%, 50%);
+  --color-broken-amplivault-3: hsl(255, 100%, 50%);
+  --broken-amplivault-gradient: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-1),
+    var(--color-broken-amplivault-2),
+    var(--color-broken-amplivault-3),
+    var(--color-broken-amplivault-2),
+    var(--color-broken-amplivault-1)
+  );
+
+  --color-broken-amplivault-bg-1: hsl(0, 0%, 0%);
+  --color-broken-amplivault-bg-2: hsl(327, 100%, 4.5%);
+  --color-broken-amplivault-bg-3: hsl(255, 33%, 9%);
+  --broken-amplivault-gradient-bg: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-bg-1),
+    var(--color-broken-amplivault-bg-2),
+    var(--color-broken-amplivault-bg-3),
+    var(--color-broken-amplivault-bg-2),
+    var(--color-broken-amplivault-bg-1)
+  );
+
+  --color-broken-amplivault-border-1: hsl(0, 0%, 0%);
+  --color-broken-amplivault-border-2: hsl(326, 100%, 50%);
+  --color-broken-amplivault-border-3: hsl(255, 100%, 50%);
+  --broken-amplivault-gradient-border: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-border-1),
+    var(--color-broken-amplivault-border-2),
+    var(--color-broken-amplivault-border-3),
+    var(--color-broken-amplivault-border-2),
+    var(--color-broken-amplivault-border-1)
+  );
+
+  --color-nullifice-1: #e99fff;
+  --color-nullifice-2: #ffcb9b;
+  --nullifice-gradient: linear-gradient(
+    to right,
+    var(--color-nullifice-1),
+    var(--color-nullifice-2)
+  );
+
+  --color-nullifice-description-1: #a872b8;
+  --color-nullifice-description-2: #b89270;
+
+  --color-nullifice-bg-1: hsl(288, 22%, 23%);
+  --color-nullifice-bg-2: hsl(29, 21%, 23%);
+  --nullifice-gradient-bg: linear-gradient(
+    to right,
+    var(--color-nullifice-bg-1),
+    var(--color-nullifice-bg-2)
+  );
+
+  --color-sliph-1: rgb(137, 255, 255);
+  --color-sliph-2: rgb(67, 155, 190);
+  --sliph-gradient: linear-gradient(
+    to right,
+    var(--color-sliph-1),
+    var(--color-sliph-2)
+  );
+
+  --color-sliph-description-1: rgb(99, 184, 184);
+  --color-sliph-description-2: rgb(48, 112, 137);
+
+  --color-sliph-bg-1: rgb(25, 46, 46);
+  --color-sliph-bg-2: rgb(12, 28, 34);
+  --sliph-gradient-bg: linear-gradient(
+    to right,
+    var(--color-sliph-bg-1),
+    var(--color-sliph-bg-2)
+  );
+
+  --color-dertoint-upgrade-effect-1: rgb(111, 150, 150);
+  --color-dertoint-upgrade-effect-2: rgb(57, 78, 85);
+
+  --color-mallirt-bar: #c451bb;
+  --color-mallirt-effect: #92618c;
 
   @keyframes vermyros-bar {
     0% {
@@ -129,8 +234,6 @@
   }
 }
 
-
-
 @utility transition-ease {
   @apply ease-[cubix-bezier(0.25,_0.1,_0.25,_1.0)];
 }
@@ -148,59 +251,77 @@
   -webkit-text-fill-color: transparent;
 }
 
+@utility border-image-gradient {
+  border-image-slice: 1;
+  @apply transition-[border-image];
+}
+
+@utility before-full {
+  @apply before:w-full before:h-full before:absolute before:left-0 before:top-0 before:m-0 before:p-0 before:border-none;
+}
+
 @layer base {
   :root {
-    @apply font-[system-ui,_Avenir,_Helvetica,_Arial,_sans-serif] scheme-light-dark
-             antialiased ;
+    @apply font-[system-ui,_Avenir,_Helvetica,_Arial,_sans-serif] scheme-light-dark antialiased;
     text-rendering: optimizeLegibility;
   }
-  
+
   * {
     @apply font-bold text-main-text text-center;
   }
-  
+
   body {
-    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg;
+    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg font-[inherit];
   }
-  
+
   p {
-    @apply my-4;
+    @apply my-[1em];
   }
-  
+
   a {
     @apply font-medium text-a hover:text-a-hover;
   }
-  
+
   h1 {
     @apply text-[3.2em] my-[.5em];
   }
   h2 {
     @apply text-[1.5em] my-[.83em];
   }
-  sup, sub {
+  sup,
+  sub {
     @apply text-inherit;
   }
-  
+
   button {
     @apply px-[1.2em] py-[0.6em] text-[1em] bg-button-bg
             transition-colors-250
             border-[3px] border-transparent not-[.bought-upgrade]:cursor-pointer hover:not-[.bought-upgrade]:border-button-border;
   }
 
-  button * {
+  button *,
+  a * {
     @apply font-medium;
   }
-  
-  div {
+
+  div,
+  button {
     @apply flex items-center justify-center;
   }
 
-  .layer > div {
-    @apply w-full bg-layer-div-bg;
+  button {
+    @apply flex-col;
   }
-  
-  .layer > div > button {
-    @apply w-full bg-transparent;
+
+  input[type="text"] {
+    @apply h-[1em] text-[1.25em] font-mono py-[0.75em] px-[0.1em] bg-input-bg rounded-xl 
+      outline-none transition-colors duration-150 text-input-text focus:text-input-text-focused;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  .layer > div,
+  .layer > button {
+    @apply w-full bg-layer-div-bg;
   }
 
   .auto-toggle > button {
@@ -219,30 +340,38 @@
     @apply my-2;
   }
 
-  #reset-upgrades > button, #more-tier-upgrades > button, #more-vermyros-upgrades-2 > button {
+  #reset-upgrades > button,
+  #more-tier-upgrades > button,
+  #more-vermyros-upgrades-2 > button,
+  #more-nullith-upgrades > button {
     @apply w-2/5;
   }
 
-  #tier-upgrades > button, #vermyros-upgrades > button, #more-vermyros-upgrades > button, #nullith-upgrades > button {
+  #tier-upgrades > button,
+  #vermyros-upgrades > button,
+  #more-vermyros-upgrades > button,
+  #nullith-upgrades > button,
+  #dertoint-upgrades > button,
+  #mallirt-upgrades > button {
     @apply w-1/5;
   }
 
   #main-buttons > button {
-    @apply p-0 w-16 h-16 border-none transition-colors duration-100 ease-linear rounded-2xl;
+    @apply p-0 h-full aspect-square border-none transition-colors duration-100 ease-linear rounded-[0.5em] bg-main-button hover:bg-main-button-hover;
   }
 
   #menu-toggle > div {
-    @apply w-[65%] h-1 rounded-lg bg-white m-[0_auto];
+    @apply w-[65%] h-[0.25em] rounded-[0.5em] bg-white m-[0_auto];
   }
 
   #data-buttons > button {
-    @apply relative h-full bg-data-button items-center justify-center content-center;
+    @apply relative h-[50%] bg-data-button hover:bg-data-button-hovered border-none transition-colors duration-100 rounded-[1em];
   }
 
   #amplivault-line-container > div {
     @apply absolute w-full h-[2px] bg-amplivault-div-4-bg;
   }
-  
+
   #amplivault-line-container > div::after {
     @apply content-[''] w-0 h-[3px] bg-amplivault-div-5-bg animate-[amplivault-animation-2_1.5s_linear_infinite];
   }
@@ -256,25 +385,26 @@
   }
 
   .more-menu-button > p {
-    @apply py-[.5em];
+    @apply py-[.25em];
   }
 }
 
 @layer components {
   #root {
-    @apply size-full flex-col pt-12 gap-2 overflow-x-hidden;
+    @apply size-full flex-col gap-2 overflow-x-hidden;
   }
-  
+
   .layer {
     @apply relative flex-col w-full gap-4 bg-layer-bg py-4 overflow-visible
             before:-top-6 before:bg-gradient-to-b before:from-transparent before:to-layer-bg
             after:-bottom-6 after:bg-gradient-to-t after:from-transparent after:to-layer-bg;
   }
-  
-  .layer::before, .layer::after {
+
+  .layer::before,
+  .layer::after {
     @apply content-[''] w-full absolute h-6;
   }
-  
+
   .auto-toggle {
     @apply w-fit;
   }
@@ -282,7 +412,7 @@
   .upgrade-container {
     @apply bg-transparent;
   }
-  
+
   .upgrade-container > button {
     @apply bg-button-bg;
   }
@@ -291,8 +421,12 @@
     @apply bg-bought-upgrade-bg;
   }
 
+  .buyable > p:nth-of-type(2) {
+    @apply mt-0;
+  }
+
   .menu-button-info {
-    @apply m-0 text-center items-center justify-center leading-[0.5em];
+    @apply m-0;
   }
 
   .progress-bar-inner {
@@ -311,11 +445,11 @@
   }
 
   .overlay {
-    @apply fixed w-screen h-screen bg-[#00000080] left-0 top-0 z-2 transition-ease transition-opacity duration-200;
+    @apply fixed w-screen h-screen bg-[#00000080] left-0 top-0 z-2 transition-ease transition-opacity duration-150 text-[1.5vmin];
   }
 
   .overlay-div {
-    @apply relative size-2/3 bg-data-button rounded-[1em];
+    @apply relative size-2/3 bg-overlay-div rounded-[2em] shadow-[0_0_0.5em_0.3em_rgba(0,0,0,0.2)];
   }
 
   .info-important {
@@ -323,23 +457,28 @@
   }
 
   .info-effect {
-    @apply font-sans text-xs text-info-effect;
+    @apply font-sans text-[0.75em] text-info-effect;
   }
 
-  #main-buttons > button:hover, .overlay-close-button:hover, .data-action-container > button:hover, .more-menu-button:hover {
+  .data-action-container > button:hover,
+  .more-menu-button:hover {
     @apply bg-menu-button;
   }
 
   .data-div {
-    @apply flex-col w-20/100 h-1/4 gap-y-[5%] text-[1.5vmin];
+    @apply flex-col w-fit h-fit p-[2em] gap-y-[5%];
+  }
+
+  .data-div > h1 {
+    @apply mt-0;
+  }
+
+  .data-action-container {
+    @apply gap-[1em];
   }
 
   .data-action-container > button {
-    @apply relative bg-data-action-button-bg border-none items-center justify-center content-center transition-colors duration-100 ease-linear;
-  }
-
-  .data-action-container > button * {
-    @apply my-2;
+    @apply relative bg-data-action-button-bg border-none items-center justify-center content-center transition-colors duration-100 ease-linear rounded-[0.375em];
   }
 
   .softcap-1 {
@@ -359,19 +498,23 @@
   }
 
   .more-menu-button {
-    @apply relative bg-data-action-button-bg border-none transition-colors duration-100 ease-linear p-[1em];
+    @apply relative bg-data-action-button-bg border-none transition-colors duration-100 ease-linear rounded-[0.375em];
   }
 
   .tooltip-trigger {
-    @apply absolute right-0 top-0 bg-tooltip-trigger-bg w-[1em] h-[1em];
+    @apply absolute right-0 top-0 bg-tooltip-trigger-bg w-[1em] h-[1em] rounded-tr-[0.375em] rounded-bl-[0.375em];
   }
 
   .tooltip-trigger:hover ~ .tooltip {
-    @apply opacity-100 translate-y-1/2;
+    @apply opacity-100 translate-y-1/6;
   }
 
   .tooltip {
-    @apply absolute top-1/2 left-1/2 text-[0.7em] bg-tooltip-bg pointer-events-none w-85/100 -translate-x-1/2 opacity-0 transition-[transform_opacity] duration-200 transition-ease;
+    @apply absolute top-4/5 left-1/2 text-[0.7em] p-[0.4em] bg-tooltip-bg pointer-events-none w-85/100 -translate-x-1/2 opacity-0 transition-[transform_opacity] duration-200 transition-ease;
+  }
+
+  .tooltip > * {
+    @apply m-0;
   }
 
   .spoiler {
@@ -407,5 +550,32 @@
 
   .softcap-container > p:last-of-type {
     @apply mb-4;
+  }
+
+  .break-amplivault {
+    @apply text-gradient bg-linear-to-r from-break-amplivault-1 to-break-amplivault-2;
+  }
+
+  .broken-amplivault {
+    @apply text-gradient;
+    background-image: var(--broken-amplivault-gradient);
+  }
+
+  .nullifice {
+    @apply text-gradient;
+    background-image: var(--nullifice-gradient);
+  }
+
+  .nullifice-description {
+    @apply text-gradient bg-linear-to-r from-nullifice-description-1 to-nullifice-description-2;
+  }
+
+  .sliph {
+    @apply text-gradient;
+    background-image: var(--sliph-gradient);
+  }
+
+  .sliph-description {
+    @apply text-gradient bg-linear-to-r from-sliph-description-1 to-sliph-description-2;
   }
 }

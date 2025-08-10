@@ -1,29 +1,26 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
+import { usePlayer, usePlayerStore } from "../player/playerStore";
 
 function AutoNullithButton() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player, setPlayer } = context;
+  const autoNullithEnabled = usePlayer(
+    (state) => state.player.autoNullithEnabled
+  );
 
   function toggleAutoresetting() {
-    setPlayer(prev => {
-      if (!prev.everMadeNullith) return prev;
-      return {
-        ...prev,
-        autoNullithEnabled: !prev.autoNullithEnabled
-      }
+    const { player, setPlayer } = usePlayerStore.getState();
+    if (!player.everMadeNullith) return;
+    setPlayer({
+      autoNullithEnabled: !player.autoNullithEnabled
     });
   }
 
   return (
     <div className="auto-toggle">
       <button onClick={toggleAutoresetting}>
-        <p>{player.autoNullithEnabled ? 'Auto Nullith: enabled' : 'Auto Nullith: disabled'}</p>
+        <p>
+          {autoNullithEnabled
+            ? "Auto Nullith: enabled"
+            : "Auto Nullith: disabled"}
+        </p>
       </button>
     </div>
   );

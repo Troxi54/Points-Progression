@@ -1,19 +1,18 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
 import { format } from "../format";
+import { usePlayer } from "../player/playerStore";
 
 function EnergyReactors() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
+  const { energyReactors, energyReactorGain } = usePlayer((state) => ({
+    energyReactors: state.player.energyReactors,
+    energyReactorGain: state.cachedPlayer.energyReactorGain
+  }));
 
-  const { player } = context;
   return (
     <div className="bg-energy-reactor-bg">
-      <p className="text-energy-reactor-counter">Energy Reactors: {format(player.energyReactors)}{player.energyReactorGain.gt(0) ? ` (+${format(player.energyReactorGain)}/s)` : ''}</p>
+      <p className="text-energy-reactor-counter">
+        Energy Reactors: {format(energyReactors)}
+        {energyReactorGain.gt(0) ? ` (+${format(energyReactorGain)}/s)` : ""}
+      </p>
     </div>
   );
 }

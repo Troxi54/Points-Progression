@@ -1,96 +1,146 @@
 import Decimal from "break_eternity.js";
-import { Player } from "../src/components/PlayerContext";
+import { Player } from "./player/playerTypes";
 
-export function triggerReset() {
+export function triggerReset(): Partial<Player> {
   return {
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
-    startedRun: Date.now(),
+    startedRun: Date.now()
   };
 }
 
-export function triggerTierReset(updates: Player): Partial<Player> {
+export function triggerTierReset(player: Player): Partial<Player> {
   return {
     tierStartedDate: Date.now(),
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
     startedRun: Date.now(),
-    bestRun: null,
+    bestRun: player.boughtThirdTierUpgrade ? player.bestRun : null,
     bestPointsOfRun: new Decimal(0),
-    autoresettingEnabled: !updates.boughtThirdTierUpgrade,
-    boughtFirstResetUpgrade: updates.boughtFirstTierUpgrade && updates.boughtFirstResetUpgrade,
-    boughtSecondResetUpgrade: updates.boughtSecondTierUpgrade && updates.boughtSecondResetUpgrade,
+    autoresettingEnabled: !player.boughtThirdTierUpgrade,
+    boughtFirstResetUpgrade:
+      player.boughtFirstTierUpgrade && player.boughtFirstResetUpgrade,
+    boughtSecondResetUpgrade:
+      player.boughtSecondTierUpgrade && player.boughtSecondResetUpgrade
   };
 }
 
-export function triggerVermyrosReset(updates: Player): Partial<Player> {
+export function triggerVermyrosReset(player: Player): Partial<Player> {
   return {
     vermyrosStartedDate: Date.now(),
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
     startedRun: Date.now(),
     bestRun: null,
-    boughtFirstResetUpgrade: updates.boughtSecondVermyrosUpgrade && updates.boughtFirstResetUpgrade,
-    boughtSecondResetUpgrade: updates.boughtSecondVermyrosUpgrade && updates.boughtSecondResetUpgrade,
+    boughtFirstResetUpgrade:
+      player.boughtSecondVermyrosUpgrade && player.boughtFirstResetUpgrade,
+    boughtSecondResetUpgrade:
+      player.boughtSecondVermyrosUpgrade && player.boughtSecondResetUpgrade,
     tier: new Decimal(0),
-    autoresettingEnabled: !updates.boughtThirdVermyrosUpgrade,
+    autoresettingEnabled: !player.boughtThirdVermyrosUpgrade,
     bestPointsOfRun: new Decimal(0),
     tierStartedDate: null,
     ampliflux: new Decimal(0),
     amplifluxUpgradeLvl: new Decimal(0),
-    boughtFirstTierUpgrade: updates.boughtSecondVermyrosUpgrade && updates.boughtFirstTierUpgrade,
-    boughtSecondTierUpgrade: updates.boughtSecondVermyrosUpgrade && updates.boughtSecondTierUpgrade,
-    boughtThirdTierUpgrade: updates.boughtThirdVermyrosUpgrade && updates.boughtThirdTierUpgrade,
-    boughtFourthTierUpgrade: updates.boughtThirdVermyrosUpgrade && updates.boughtFourthTierUpgrade,
-    boughtFifthTierUpgrade: updates.boughtThirdVermyrosUpgrade && updates.boughtFifthTierUpgrade,
-    boughtSixthTierUpgrade: updates.boughtThirdVermyrosUpgrade && updates.boughtSixthTierUpgrade,
-    autoTierEnabled: updates.boughtSecondVermyrosUpgrade && updates.autoTierEnabled,
+    boughtFirstTierUpgrade:
+      player.boughtSecondVermyrosUpgrade && player.boughtFirstTierUpgrade,
+    boughtSecondTierUpgrade:
+      player.boughtSecondVermyrosUpgrade && player.boughtSecondTierUpgrade,
+    boughtThirdTierUpgrade:
+      player.boughtThirdVermyrosUpgrade && player.boughtThirdTierUpgrade,
+    boughtFourthTierUpgrade:
+      player.boughtThirdVermyrosUpgrade && player.boughtFourthTierUpgrade,
+    boughtFifthTierUpgrade:
+      player.boughtThirdVermyrosUpgrade && player.boughtFifthTierUpgrade,
+    boughtSixthTierUpgrade:
+      player.boughtThirdVermyrosUpgrade && player.boughtSixthTierUpgrade,
+    autoTierEnabled:
+      player.boughtSecondVermyrosUpgrade && player.autoTierEnabled
   };
 }
 
-export function triggerNullithReset(updates: Player): Partial<Player> {
+export function triggerNullithReset(player: Player): Partial<Player> {
+  const result = { nullithStartedDate: Date.now() };
+
+  if (player.boughtFifthNullithUpgrade) return result;
+
   return {
-    nullithStartedDate: Date.now(),
+    ...result,
     vermyrosStartedDate: Date.now(),
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
     startedRun: Date.now(),
     bestRun: null,
-    boughtFirstResetUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFirstResetUpgrade,
-    boughtSecondResetUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtSecondResetUpgrade,
+    boughtFirstResetUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFirstResetUpgrade,
+    boughtSecondResetUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtSecondResetUpgrade,
     tier: new Decimal(0),
-    autoresettingEnabled: !updates.boughtThirdVermyrosUpgrade,
+    autoresettingEnabled: !player.boughtThirdVermyrosUpgrade,
     bestPointsOfRun: new Decimal(0),
     tierStartedDate: null,
     ampliflux: new Decimal(0),
     amplifluxUpgradeLvl: new Decimal(0),
-    boughtFirstTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFirstTierUpgrade,
-    boughtSecondTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtSecondTierUpgrade,
-    boughtThirdTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtThirdTierUpgrade,
-    boughtFourthTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFourthTierUpgrade,
-    boughtFifthTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFifthTierUpgrade,
-    boughtSixthTierUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtSixthTierUpgrade,
-    autoTierEnabled: updates.boughtSecondVermyrosUpgrade && updates.autoTierEnabled,
+    boughtFirstTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFirstTierUpgrade,
+    boughtSecondTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtSecondTierUpgrade,
+    boughtThirdTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtThirdTierUpgrade,
+    boughtFourthTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFourthTierUpgrade,
+    boughtFifthTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFifthTierUpgrade,
+    boughtSixthTierUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtSixthTierUpgrade,
+    autoTierEnabled:
+      player.boughtSecondVermyrosUpgrade && player.autoTierEnabled,
     autoVermyrosEnabled: true,
     vermytes: new Decimal(0),
     bestVermytes: new Decimal(0),
     vermora: new Decimal(0),
     vermytesUpgradeLvl: new Decimal(0),
     enteredAmplivault: false,
-    amplivaultLevel: updates.boughtThirdNullithUpgrade ? updates.amplivaultLevel : new Decimal(0),
+    amplivaultLevel: player.boughtThirdNullithUpgrade
+      ? player.amplivaultLevel
+      : new Decimal(0),
     energyReactors: new Decimal(0),
     energy: new Decimal(0),
     cores: new Decimal(0),
     coreUpgradeLvl: new Decimal(0),
-    boughtFirstVermyrosUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFirstVermyrosUpgrade,
-    boughtSecondVermyrosUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtSecondVermyrosUpgrade,
-    boughtThirdVermyrosUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtThirdVermyrosUpgrade,
-    boughtFourthVermyrosUpgrade: updates.boughtSecondNullithUpgrade && updates.boughtFourthVermyrosUpgrade,
-    boughtFifthVermyrosUpgrade: updates.boughtThirdNullithUpgrade && updates.boughtFifthVermyrosUpgrade,
-    boughtSixthVermyrosUpgrade: updates.boughtThirdNullithUpgrade && updates.boughtSixthVermyrosUpgrade,
-    boughtSeventhVermyrosUpgrade: updates.boughtThirdNullithUpgrade && updates.boughtSeventhVermyrosUpgrade,
-    boughtEighthVermyrosUpgrade: updates.boughtThirdNullithUpgrade && updates.boughtEighthVermyrosUpgrade,
-    boughtNinthVermyrosUpgrade: updates.boughtFourthNullithUpgrade && updates.boughtNinthVermyrosUpgrade,
-    boughtTenthVermyrosUpgrade: updates.boughtFourthNullithUpgrade && updates.boughtTenthVermyrosUpgrade
+    boughtFirstVermyrosUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFirstVermyrosUpgrade,
+    boughtSecondVermyrosUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtSecondVermyrosUpgrade,
+    boughtThirdVermyrosUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtThirdVermyrosUpgrade,
+    boughtFourthVermyrosUpgrade:
+      player.boughtSecondNullithUpgrade && player.boughtFourthVermyrosUpgrade,
+    boughtFifthVermyrosUpgrade:
+      player.boughtThirdNullithUpgrade && player.boughtFifthVermyrosUpgrade,
+    boughtSixthVermyrosUpgrade:
+      player.boughtThirdNullithUpgrade && player.boughtSixthVermyrosUpgrade,
+    boughtSeventhVermyrosUpgrade:
+      player.boughtThirdNullithUpgrade && player.boughtSeventhVermyrosUpgrade,
+    boughtEighthVermyrosUpgrade:
+      player.boughtThirdNullithUpgrade && player.boughtEighthVermyrosUpgrade,
+    boughtNinthVermyrosUpgrade:
+      player.boughtFourthNullithUpgrade && player.boughtNinthVermyrosUpgrade,
+    boughtTenthVermyrosUpgrade:
+      player.boughtFourthNullithUpgrade && player.boughtTenthVermyrosUpgrade,
+    reachedBreakAmplivault:
+      player.reachedBreakAmplivault || player.enteredAmplivault
+  };
+}
+
+export function triggerMallirtReset(player: Player): Partial<Player> {
+  return {
+    dertointUpgradeLvl: new Decimal(0),
+    dertoints: new Decimal(0),
+    mallirtStartedDate: Date.now(),
+    boughtFirstDertointUpgrade: player.boughtFirstMallirtUpgrade,
+    boughtSecondDertointUpgrade: player.boughtFirstMallirtUpgrade,
+    boughtThirdDertointUpgrade: player.boughtSecondMallirtUpgrade,
+    boughtFourthDertointUpgrade: player.boughtSecondMallirtUpgrade
   };
 }

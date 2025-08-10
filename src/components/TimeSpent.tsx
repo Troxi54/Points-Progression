@@ -1,21 +1,48 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
 import { formatTime } from "../format";
+import { usePlayer } from "../player/playerStore";
 
 function TimeSpent() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  
-  const { player } = context;
+  const {
+    tierStartedDate,
+    vermyrosStartedDate,
+    nullithStartedDate,
+    timeSinceHighestReset
+  } = usePlayer((state) => ({
+    tierStartedDate: state.player.tierStartedDate,
+    vermyrosStartedDate: state.player.vermyrosStartedDate,
+    nullithStartedDate: state.player.nullithStartedDate,
+    timeSinceHighestReset: state.cachedPlayer.timeSinceHighestReset
+  }));
+
   return (
     <div>
-      <p>Time spent this run: {player.nullithStartedDate === null ? player.vermyrosStartedDate === null ? player.tierStartedDate === null ? formatTime(Date.now() - player.startedRun) : <><span>{formatTime(Date.now() - player.tierStartedDate)}</span> <span className="text-tier">(T)</span></> : <><span>{formatTime(Date.now() - player.vermyrosStartedDate)}</span> <span className="text-vermyros">(V)</span></> : <>{formatTime(Date.now() - player.nullithStartedDate)} <span className="nullith">(N)</span></>}</p>
+      <p>
+        Time spent this run:{" "}
+        {nullithStartedDate === null ? (
+          vermyrosStartedDate === null ? (
+            tierStartedDate === null ? (
+              formatTime(timeSinceHighestReset)
+            ) : (
+              <>
+                <span>{formatTime(timeSinceHighestReset)}</span>{" "}
+                <span className="text-tier">(T)</span>
+              </>
+            )
+          ) : (
+            <>
+              <span>{formatTime(timeSinceHighestReset)}</span>{" "}
+              <span className="text-vermyros">(V)</span>
+            </>
+          )
+        ) : (
+          <>
+            {formatTime(timeSinceHighestReset)}{" "}
+            <span className="nullith">(N)</span>
+          </>
+        )}
+      </p>
     </div>
-  )
+  );
 }
 
 export default TimeSpent;

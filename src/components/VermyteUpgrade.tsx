@@ -1,44 +1,59 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
-import { format } from "../format";
-import { buyMaxVermyte } from "../Upgrades";
+import { format, formatWithPlural } from "../format";
+import { buyBuyable, buyMaxBuyable } from "../upgrades";
+import { usePlayer } from "../player/playerStore";
 
 function VermyteUpgrade() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player, setPlayer } = context;
-  
+  const {
+    setPlayer,
+    setCachedPlayer,
+    vermytesUpgradeLvl,
+    vermytesUpgradeCost,
+    vermytesUpgradeBulk,
+    vermytesUpgradeEffect
+  } = usePlayer((state) => ({
+    setPlayer: state.setPlayer,
+    setCachedPlayer: state.setCachedPlayer,
+    vermytesUpgradeLvl: state.player.vermytesUpgradeLvl,
+    vermytesUpgradeCost: state.cachedPlayer.vermytesUpgradeCost,
+    vermytesUpgradeBulk: state.cachedPlayer.vermytesUpgradeBulk,
+    vermytesUpgradeEffect: state.cachedPlayer.vermytesUpgradeEffect
+  }));
+
   function buy(event: React.MouseEvent) {
-    setPlayer(prev => {
-      event.preventDefault();
-      if (prev.vermytes.lessThan(prev.vermytesUpgradeCost) || !prev.everMadeVermyros) return prev;
-      return {
-        ...prev,
-        vermytes: prev.boughtNinthVermyrosUpgrade ? prev.vermytes : prev.vermytes.minus(prev.vermytesUpgradeCost),
-        vermytesUpgradeLvl: prev.vermytesUpgradeLvl.plus(1)
-      };
-    });
+    event.preventDefault();
+    const bought = buyBuyable("vermyte");
+    setPlayer(bought.player);
+    setCachedPlayer(bought.cachedPlayer);
   }
 
-  function buyMAX() {
-    setPlayer(prev => ({
-      ...prev,
-      ...buyMaxVermyte(prev)
-    }));
+  function buyMax() {
+    const bought = buyMaxBuyable("vermyte");
+    setPlayer(bought.player);
+    setCachedPlayer(bought.cachedPlayer);
   }
+
+  const thereIsABulk = vermytesUpgradeBulk.greaterThanOrEqualTo(1);
 
   return (
-    <div className="bg-vermyte-upgrade-bg">
-      <button className="group hover:border-vermyte-upgrade-hover-border transition-colors-250" onClick={buyMAX} onContextMenu={buy}>
-        <p className="transition-colors-250 text-vermyte-upgrade-cost group-hover:text-vermyte-upgrade-hover-cost">Upgrade: {format(player.vermytesUpgradeCost)} Vermytes {player.vermytesUpgradeLvl.greaterThanOrEqualTo(1) && (<>({format(player.vermytesUpgradeLvl, 0)}{player.vermytesUpgradeBulk.greaterThanOrEqualTo(1) ? ` + ${format(player.vermytesUpgradeBulk, 0)}` : ''})</>)}</p>
-        <p className="text-vermyte-upgrade-effect">Effect: {format(player.vermytesUpgradeEffect)}x</p>
-      </button>
-    </div>
-  )
+    <button
+      className="buyable group bg-vermyte-upgrade-bg hover:border-vermyte-upgrade-hover-border transition-colors-250"
+      onClick={buyMax}
+      onContextMenu={buy}
+    >
+      <p className="transition-colors-250 text-vermyte-upgrade-cost group-hover:text-vermyte-upgrade-hover-cost">
+        Upgrade: {formatWithPlural(vermytesUpgradeCost, "Vermyte")}{" "}
+        {(vermytesUpgradeLvl.greaterThanOrEqualTo(1) || thereIsABulk) && (
+          <>
+            ({format(vermytesUpgradeLvl, 0)}
+            {thereIsABulk ? ` + ${format(vermytesUpgradeBulk, 0)}` : ""})
+          </>
+        )}
+      </p>
+      <p className="text-vermyte-upgrade-effect">
+        Effect: {format(vermytesUpgradeEffect)}x
+      </p>
+    </button>
+  );
 }
 
 export default VermyteUpgrade;

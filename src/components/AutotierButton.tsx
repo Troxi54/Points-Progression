@@ -1,30 +1,33 @@
-import { useContext } from "react";
-import { playerContext } from "../playerUtils";
+import { usePlayer, usePlayerStore } from "../player/playerStore";
 
 function AutotierButton() {
-  const context = useContext(playerContext);
-  if (!context) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-  const { player, setPlayer } = context;
+  const { autoTierEnabled, boughtSecondVermyrosUpgrade } = usePlayer(
+    (state) => ({
+      autoTierEnabled: state.player.autoTierEnabled,
+      boughtSecondVermyrosUpgrade: state.player.boughtSecondVermyrosUpgrade
+    })
+  );
 
   function toggleAutoresetting() {
-    setPlayer(prev => {
-      if (!prev.everMadeTier) return prev;
-      return {
-        ...prev,
-        autoTierEnabled: !prev.autoTierEnabled
-      }
+    const { player, setPlayer } = usePlayerStore.getState();
+    if (!player.everMadeTier) return;
+    setPlayer({
+      autoTierEnabled: !player.autoTierEnabled
     });
   }
 
   return (
     <div className="auto-toggle">
       <button onClick={toggleAutoresetting}>
-        <p>{player.autoTierEnabled ? player.boughtSecondVermyrosUpgrade ? 'Auto Tier Up: enabled' : 'Auto Tier: enabled'
-                                                           : player.boughtSecondVermyrosUpgrade ? 'Auto Tier Up: disabled' : 'Auto Tier: disabled'}</p>
+        <p>
+          {autoTierEnabled
+            ? boughtSecondVermyrosUpgrade
+              ? "Auto Tier Up: enabled"
+              : "Auto Tier: enabled"
+            : boughtSecondVermyrosUpgrade
+            ? "Auto Tier Up: disabled"
+            : "Auto Tier: disabled"}
+        </p>
       </button>
     </div>
   );
