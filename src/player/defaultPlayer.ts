@@ -3,7 +3,7 @@ import { CachedPlayer, Player } from "./playerTypes";
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: "0.5",
+    gameVersion: "0.5.1",
     lastTick: Date.now(),
     points: new Decimal(0),
     upgradeLvl: new Decimal(0),
