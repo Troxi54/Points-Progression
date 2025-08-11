@@ -33,8 +33,8 @@ function BreakAmplivault() {
       </h2>
       {!noInfo && (
         <p className="text-gradient bg-linear-to-r from-break-amplivault-info-1 to-break-amplivault-info-2 text-balance">
-          Breaking Amplivault allows the level of Amplivault to increase when
-          you're not inside it. You can no longer enter Amplivault, and its
+          Breaking the Amplivault allows the level of Amplivault to increase
+          when you're not inside it. You can no longer enter Amplivault, and its
           effect becomes softcapped. This action is permanent.
         </p>
       )}

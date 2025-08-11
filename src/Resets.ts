@@ -60,12 +60,15 @@ export function triggerVermyrosReset(player: Player): Partial<Player> {
 }
 
 export function triggerNullithReset(player: Player): Partial<Player> {
-  const result = { nullithStartedDate: Date.now() };
+  const result = {
+    nullithStartedDate: Date.now(),
+    reachedBreakAmplivault:
+      player.reachedBreakAmplivault || player.enteredAmplivault
+  };
 
   if (player.boughtFifthNullithUpgrade) return result;
 
   return {
-    ...result,
     vermyrosStartedDate: Date.now(),
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
@@ -128,8 +131,7 @@ export function triggerNullithReset(player: Player): Partial<Player> {
       player.boughtFourthNullithUpgrade && player.boughtNinthVermyrosUpgrade,
     boughtTenthVermyrosUpgrade:
       player.boughtFourthNullithUpgrade && player.boughtTenthVermyrosUpgrade,
-    reachedBreakAmplivault:
-      player.reachedBreakAmplivault || player.enteredAmplivault
+    ...result
   };
 }
 

@@ -259,16 +259,18 @@ export function startGameLoop() {
       newCachedPlayer.pointGain.multiply(deltaTime)
     );
 
+    let softcapperLevel = new Decimal(0);
     for (const [index, softcapper] of settings.softcappers.entries()) {
       if (newCachedPlayer.pointGain.lessThan(softcapper[0])) break;
 
       const dIndex = new Decimal(index + 1);
 
-      newCachedPlayer.softcapperLevel = dIndex;
+      softcapperLevel = dIndex;
       if (dIndex.greaterThan(newPlayer.bestSoftcapperLevel)) {
         newPlayer.bestSoftcapperLevel = dIndex;
       }
     }
+    newCachedPlayer.softcapperLevel = softcapperLevel;
 
     const sliphDate = newPlayer.mallirtStartedDate;
 
