@@ -364,7 +364,7 @@ function MenuInfo() {
             Nullion effect:
             <span className="info-effect">
               {" "}
-              (1.1 + log((x + 100,000) / 100,000) / 10)
+              min(1.1 + log(max(x / 100,000, 0) + 1), 3)
               <sup>log(max(x, 0) + 1)</sup>, where x is nullions
             </span>
           </>
@@ -410,8 +410,7 @@ function MenuInfo() {
             Mallirt effect:
             <span className="info-effect">
               {" "}
-              2.75
-              <sup>log(max(x / (1,000,000 / (1,000,000 / 133456)), 0) + 1)</sup>
+              3<sup>log(max(x / 133456, 0) + 1)</sup>
             </span>
           </>
         )}

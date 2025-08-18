@@ -240,10 +240,10 @@ export const formulas = {
 
     return Decimal.plus(
       1.1,
-      n.plus(GROWTH_POINT).dividedBy(GROWTH_POINT).log10().dividedBy(10)
+      n.dividedBy(GROWTH_POINT).max(0).plus(1).log10().dividedBy(8)
     )
-      .pow(n.max(0).plus(1).log10())
-      .softcap(1e6, 0.5, "pow");
+      .min(3)
+      .pow(n.max(0).plus(1).log10());
   },
   getDertointGain(player: Player, cachedPlayer: CachedPlayer) {
     return new Decimal(0.01)
@@ -273,14 +273,8 @@ export const formulas = {
   },
   getMallirtEffect(player: Player) {
     return Decimal.pow(
-      2.75,
-      player.mallirtTotalDertoints
-        .dividedBy(
-          settings.mallirtGoal.dividedBy(settings.mallirtGoal.dividedBy(133456))
-        )
-        .max(0)
-        .plus(1)
-        .log10()
+      3,
+      player.mallirtTotalDertoints.dividedBy(133456).max(0).plus(1).log10()
     );
   }
 };

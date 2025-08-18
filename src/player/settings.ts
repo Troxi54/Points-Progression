@@ -57,7 +57,7 @@ export const settings: Settings = {
   sixthNullithUpgradeCost: new Decimal("1e1150"),
   dertointUpgradeStartingCost: new Decimal(0.1),
   dertointUpgradeCostScaling: new Decimal(10),
-  dertointUpgradeEffectScaling: new Decimal(2),
+  dertointUpgradeEffectScaling: new Decimal(2.4),
   firstDertointUpgradeCost: new Decimal(100),
   secondDertointUpgradeCost: new Decimal(7.5e3),
   thirdDertointUpgradeCost: new Decimal(8.25e4),
@@ -65,7 +65,7 @@ export const settings: Settings = {
   firstMallirtUpgradeCost: new Decimal(5.5e6),
   secondMallirtUpgradeCost: new Decimal(2.7e7),
   thirdMallirtUpgradeCost: new Decimal(7.435e11),
-  fourthMallirtUpgradeCost: new Decimal(7.95e13),
+  fourthMallirtUpgradeCost: new Decimal(3.21e13),
   mallirtGoal: new Decimal(1e6),
   endgameAt: new Decimal("1e1150")
 } as const;

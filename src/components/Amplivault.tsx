@@ -86,7 +86,7 @@ function Amplivault() {
             <span className={"text-amplivault-description"}>
               Entering the Amplivault triggers a Vermyros reset. While inside,
               you can't buy the Upgrade, and you need to reach the requirement
-              to increase your Amplivault level. Amplivault level boosts
+              to increase your Amplivault Level. Amplivault Level boosts
               Ampliflux.
             </span>
           </>

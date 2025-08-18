@@ -50,7 +50,7 @@ function VermyrosBar() {
         </span>
         {everMadeVermyros && (
           <span>
-            &emsp;|&emsp;Best vermytes: {format(bestVermytes)} -{" "}
+            &emsp;|&emsp;Best Vermytes on reset : {format(bestVermytes)} -{" "}
             <span className="text-vermyros-effect">
               Effect: {formatWithPlural(vermytesBestEffect, "Vermora", "x ")}
             </span>

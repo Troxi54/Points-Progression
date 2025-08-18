@@ -31,8 +31,33 @@ export function isPlayerDataValid(data: string): boolean {
   return false;
 }
 
+export function compressPlayerData(player: Player): Partial<Player> {
+  const defaultPlayer = getDefaultPlayer();
+
+  const compressedPlayer: Partial<Player> = {};
+
+  for (const [key, value] of Object.entries(player)) {
+    const keyPlayer = key as keyof Player;
+
+    const defaultPlayerValue = defaultPlayer[keyPlayer];
+
+    if (value === defaultPlayer[keyPlayer]) continue;
+    if (
+      value instanceof Decimal &&
+      defaultPlayerValue instanceof Decimal &&
+      value.equals(defaultPlayerValue)
+    )
+      continue;
+
+    compressedPlayer[keyPlayer] = value;
+  }
+
+  return compressedPlayer;
+}
+
 export function getConvertedPlayerData(player: Player): string {
-  return btoa(JSON.stringify(player));
+  const compressed = compressPlayerData(player);
+  return btoa(JSON.stringify(compressed));
 }
 
 export function savePlayerToLocalStorage(
@@ -86,7 +111,8 @@ function fixPlayerData(player: Player): Player {
       (result[key] as unknown as Decimal) = decimalValue;
     }
   }
-  if (result.bestRun !== null && result.bestRun < 10) result.bestRun = 10;
+  if (result.bestRun !== null && result.bestRun < settings.bestRunTimeLimit)
+    result.bestRun = settings.bestRunTimeLimit;
   if (
     result.bestVermytes.lessThanOrEqualTo(0) &&
     result.everMadeVermyros &&

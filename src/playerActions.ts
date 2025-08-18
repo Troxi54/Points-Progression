@@ -4,17 +4,21 @@ import { settings } from "./player/settings";
 import { triggerVermyrosReset } from "./resets";
 
 export function toggleAmplivault() {
-  const { player, setPlayer } = usePlayerStore.getState();
+  const { player, setPlayer, setCachedPlayer } = usePlayerStore.getState();
   if (
     !player.enteredAmplivault &&
     (!player.boughtFifthVermyrosUpgrade || player.amplivaultBroken)
   )
     return;
 
+  const vermyrosReset = triggerVermyrosReset(player);
+
   setPlayer({
-    ...triggerVermyrosReset(player),
+    ...vermyrosReset.player,
     enteredAmplivault: !player.enteredAmplivault
   });
+
+  setCachedPlayer(vermyrosReset.cachedPlayer);
 }
 
 export function convertEnergyIntoCores() {

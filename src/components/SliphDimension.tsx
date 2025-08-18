@@ -1,4 +1,4 @@
-import { usePlayer } from "../player/playerStore";
+import { usePlayer } from "@player/playerStore";
 import AutoMallirtButton from "./AutoMallirtButton";
 import Dertoints from "./Dertoints";
 import DertointUpgrade from "./DertointUpgrade";

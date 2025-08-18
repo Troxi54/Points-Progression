@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --color-loading-menu-bg: #0e0e0e;
+
   --color-main-text: #ffffffde;
   --color-bg: #0e0e0e;
   --color-a: #646cff;
@@ -330,6 +332,10 @@
 
   .auto-toggle > button > p {
     @apply my-2;
+  }
+
+  .upgrade-container > button.bought-upgrade {
+    @apply pointer-events-none;
   }
 
   .upgrade-container > button.bought-upgrade > * {

@@ -78,9 +78,11 @@ export function getNullithUpdates({
       ? Infinity
       : Date.now() - player.nullithStartedDate;
 
+  const nullithReset = triggerNullithReset(player);
+
   return {
     player: {
-      ...triggerNullithReset(player),
+      ...nullithReset.player,
       everMadeNullith: true,
       everMadeVermyros: true,
       everMadeTier: true,
@@ -90,6 +92,7 @@ export function getNullithUpdates({
       )
     },
     cachedPlayer: {
+      ...nullithReset.cachedPlayer,
       lastNullithTime: lastNullithTime
     }
   };
@@ -110,9 +113,11 @@ export function getVermyrosUpdates({
       ? Infinity
       : Date.now() - player.vermyrosStartedDate;
 
+  const vermyrosReset = triggerVermyrosReset(player);
+
   return {
     player: {
-      ...triggerVermyrosReset(player),
+      ...vermyrosReset.player,
       everMadeVermyros: true,
       everMadeTier: true,
       everMadeRun: true,
@@ -122,6 +127,7 @@ export function getVermyrosUpdates({
         : player.bestVermytes
     },
     cachedPlayer: {
+      ...vermyrosReset.cachedPlayer,
       lastVermyrosTime: lastVermyrosTime
     }
   };
@@ -162,15 +168,18 @@ export function getTierUpdates({
       ? Infinity
       : Date.now() - player.tierStartedDate;
 
+  const tierReset = triggerTierReset(player);
+
   return {
     player: {
-      ...triggerTierReset(player),
+      ...tierReset.player,
       everMadeTier: true,
       everMadeRun: true,
       tier: player.tier.plus(bulk.plus(1)),
       madeTierTimes: player.madeTierTimes.plus(cachedPlayer.tierResetGain)
     },
     cachedPlayer: {
+      ...tierReset.cachedPlayer,
       lastTierTime: lastTierTime
     }
   };

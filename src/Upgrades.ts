@@ -256,7 +256,6 @@ export interface Upgrade {
   isBoughtName: BooleanKeys<Player>;
   show: (player: Player) => boolean;
   previousUpgradeFromAnotherContainerBoughtName?: BooleanKeys<Player>;
-  visual?: "dertoint";
 }
 
 type UpgradeContainer = Readonly<Upgrade>[];
@@ -274,7 +273,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
           player.boughtFirstVermyrosUpgrade ||
           player.boughtFirstNullithUpgrade
         ),
-      description: "Upgrade no longer takes Points",
+      description: "Point Upgrade no longer takes Points",
       isBoughtName: "boughtFirstResetUpgrade",
       show: () => true
     },
@@ -289,7 +288,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
           player.boughtFirstVermyrosUpgrade ||
           player.boughtFirstNullithUpgrade
         ),
-      description: "Automate upgrade",
+      description: "Automate Point Upgrade",
       isBoughtName: "boughtSecondResetUpgrade",
       show: (player) => player.boughtFirstResetUpgrade || player.everMadeTier
     }
@@ -318,7 +317,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
         !(
           player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade
         ),
-      description: "Keep the second reset upgrade",
+      description: "Keep the second Reset upgrade",
       isBoughtName: "boughtSecondTierUpgrade",
       show: (player) => player.boughtFirstTierUpgrade || player.everMadeVermyros
     },
@@ -332,7 +331,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
           player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade
         ),
       description:
-        "Always have 10ms best reset run, disable auto reset and unlock offline tier resets",
+        "Always have 10ms best reset run, disable auto reset and unlock offline Tier Resets",
       isBoughtName: "boughtThirdTierUpgrade",
       show: (player) =>
         player.boughtSecondTierUpgrade || player.everMadeVermyros
@@ -347,7 +346,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
           player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade
         ),
       description:
-        "Automatically update Reset Best Points, remove the 'Auto Reset' toggle and unlock ampliflux",
+        "Automatically update Reset Best Points, remove the 'Auto Reset' toggle and unlock Ampliflux",
       isBoughtName: "boughtFourthTierUpgrade",
       show: (player) => player.boughtThirdTierUpgrade || player.everMadeVermyros
     }
@@ -362,7 +361,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
         !(
           player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade
         ),
-      description: "Ampliflux upgrade no longer takes ampliflux",
+      description: "Ampliflux upgrade no longer takes Ampliflux",
       isBoughtName: "boughtFifthTierUpgrade",
       show: () => true,
       previousUpgradeFromAnotherContainerBoughtName: "boughtFourthTierUpgrade"
@@ -376,7 +375,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
         !(
           player.boughtFirstVermyrosUpgrade || player.boughtFirstNullithUpgrade
         ),
-      description: "Automate ampliflux upgrade",
+      description: "Automate Ampliflux Upgrade",
       isBoughtName: "boughtSixthTierUpgrade",
       show: (player) => player.boughtFifthTierUpgrade || player.everMadeVermyros
     }
@@ -400,7 +399,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description:
-        "Keep 1st and 2nd Reset and Tier upgrades, generate 60 tier resets per second and replace the 'Auto Tier' toggle with the 'Auto Tier Up' toggle",
+        "Keep 1st and 2nd Reset and Tier upgrades, generate 60 Tier Resets per second and replace the 'Auto Tier' toggle with the 'Auto Tier Up' toggle",
       isBoughtName: "boughtSecondVermyrosUpgrade",
       show: (player) =>
         player.boughtFirstVermyrosUpgrade || player.everMadeNullith
@@ -411,7 +410,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: "thirdVermyrosUpgradeCost",
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
-      description: "Keep 3-6 tier upgrades",
+      description: "Keep 3-6 Tier upgrades",
       isBoughtName: "boughtThirdVermyrosUpgrade",
       show: (player) =>
         player.boughtSecondVermyrosUpgrade || player.everMadeNullith
@@ -423,7 +422,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description:
-        "Tier no longer resets anything and generate 0.1% of your best vermytes per second",
+        "Tier no longer resets anything and generate 0.1% of your Best Vermytes per second",
       isBoughtName: "boughtFourthVermyrosUpgrade",
       show: (player) =>
         player.boughtThirdVermyrosUpgrade || player.everMadeNullith
@@ -437,7 +436,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description:
-        "Unlock the Amplivault and generate 1% of your best vermytes per second",
+        "Unlock Amplivault and generate 1% of your Best Vermytes per second",
       isBoughtName: "boughtFifthVermyrosUpgrade",
       show: () => true,
       previousUpgradeFromAnotherContainerBoughtName:
@@ -449,7 +448,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: "sixthVermyrosUpgradeCost",
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
-      description: "Generate 10% of your best vermytes per second",
+      description: "Generate 10% of your Best Vermytes per second",
       isBoughtName: "boughtSixthVermyrosUpgrade",
       show: (player) =>
         player.boughtFifthVermyrosUpgrade || player.everMadeNullith
@@ -460,7 +459,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: "seventhVermyrosUpgradeCost",
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
-      description: "Generate 100% of your best vermytes per second",
+      description: "Generate 100% of your Best Vermytes per second",
       isBoughtName: "boughtSeventhVermyrosUpgrade",
       show: (player) =>
         player.boughtSixthVermyrosUpgrade || player.everMadeNullith
@@ -472,7 +471,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description:
-        "Automatically update best vermytes, remove the 'Auto Vermyros' toggle and unlock energy",
+        "Automatically update Best Vermytes, remove the 'Auto Vermyros' toggle and unlock Energy",
       isBoughtName: "boughtEighthVermyrosUpgrade",
       show: (player) =>
         player.boughtSeventhVermyrosUpgrade || player.everMadeNullith
@@ -485,7 +484,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: "ninthVermyrosUpgradeCost",
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
-      description: "Vermyte upgrade no longer takes vermytes",
+      description: "Vermyte Upgrade no longer takes Vermytes",
       isBoughtName: "boughtNinthVermyrosUpgrade",
       show: () => true,
       previousUpgradeFromAnotherContainerBoughtName:
@@ -498,7 +497,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: (player) => !player.boughtFirstNullithUpgrade,
       description:
-        "Automate vermyte upgrade and permanently unlock dark energy",
+        "Automate Vermyte Upgrade and permanently unlock Dark Energy",
       isBoughtName: "boughtTenthVermyrosUpgrade",
       show: (player) =>
         player.boughtNinthVermyrosUpgrade || player.everMadeNullith
@@ -512,7 +511,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: () => true,
       description:
-        "Reset, Tier, Vermyros upgrades no longer take anything, and Core upgrade also no longer takes cores",
+        "Reset, Tier, Vermyros upgrades no longer take anything, and Core upgrade also no longer takes Cores",
       isBoughtName: "boughtFirstNullithUpgrade",
       show: () => true
     },
@@ -523,7 +522,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: () => true,
       description:
-        "Keep all Reset and Tier upgrades, keep 1-4 Vermyros upgrades and converting energy into cores no longer resets energy reactors",
+        "Keep all Reset and Tier upgrades, keep 1-4 Vermyros upgrades and converting Energy into Cores no longer resets Energy Reactors",
       isBoughtName: "boughtSecondNullithUpgrade",
       show: (player) => player.boughtFirstNullithUpgrade
     },
@@ -534,7 +533,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: () => true,
       description:
-        "Keep 5-8 Vermyros upgrades, keep amplivault level and generate 0.1% of cores you could gain",
+        "Keep 5-8 Vermyros upgrades, keep Amplivault Level and generate 0.1% of Cores you could gain",
       isBoughtName: "boughtThirdNullithUpgrade",
       show: (player) => player.boughtSecondNullithUpgrade
     },
@@ -545,7 +544,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: () => true,
       description:
-        "Keep 9-10 Vermyros upgrades, automatically buy Core upgrade, generate 1% of cores you could gain, unlock offline nullith resets and Nullifice",
+        "Keep 9-10 Vermyros upgrades, automatically buy Core upgrade, generate 1% of Cores you could gain, unlock offline Nullith Resets and Nullifice",
       isBoughtName: "boughtFourthNullithUpgrade",
       show: (player) => player.boughtThirdNullithUpgrade
     }
@@ -558,7 +557,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       currency: "points",
       takesCurrency: () => true,
       description:
-        "Unlock Sliph, Nullith no longer reset anything and generate 10% of cores you could gain",
+        "Unlock Sliph, Nullith no longer reset anything and generate 10% of Cores you could gain",
       isBoughtName: "boughtFifthNullithUpgrade",
       show: () => true,
       previousUpgradeFromAnotherContainerBoughtName:
@@ -570,7 +569,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       cost: "sixthNullithUpgradeCost",
       currency: "points",
       takesCurrency: () => true,
-      description: "Generate 100% of cores you could gain",
+      description: "Generate 100% of Cores you could gain",
       isBoughtName: "boughtSixthNullithUpgrade",
       show: (player) => player.boughtFifthNullithUpgrade
     }
@@ -587,8 +586,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
           mergedPlayer.cachedPlayer.firstDertointUpgradeEffect
         )}x)`}`,
       isBoughtName: "boughtFirstDertointUpgrade",
-      show: () => true,
-      visual: "dertoint"
+      show: () => true
     },
     {
       id: 26,
@@ -598,8 +596,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "The Nullion effect also applies to Tier Resets",
       isBoughtName: "boughtSecondDertointUpgrade",
-      show: (player) => player.boughtFirstDertointUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtFirstDertointUpgrade
     },
     {
       id: 27,
@@ -609,8 +606,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "The Nullion effect also applies to Dertoints",
       isBoughtName: "boughtThirdDertointUpgrade",
-      show: (player) => player.boughtSecondDertointUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtSecondDertointUpgrade
     },
     {
       id: 28,
@@ -620,8 +616,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "Dertoint Upgrade no longer takes Dertoints",
       isBoughtName: "boughtFourthDertointUpgrade",
-      show: (player) => player.boughtThirdDertointUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtThirdDertointUpgrade
     }
   ],
   mallirtUpgrades: [
@@ -633,8 +628,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "Keep 1-2 Dertoint upgrades",
       isBoughtName: "boughtFirstMallirtUpgrade",
-      show: () => true,
-      visual: "dertoint"
+      show: () => true
     },
     {
       id: 30,
@@ -644,8 +638,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "Keep 3-4 Dertoint upgrades",
       isBoughtName: "boughtSecondMallirtUpgrade",
-      show: (player) => player.boughtFirstMallirtUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtFirstMallirtUpgrade
     },
     {
       id: 31,
@@ -655,8 +648,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       takesCurrency: () => true,
       description: "Square Dark Energy effect",
       isBoughtName: "boughtThirdMallirtUpgrade",
-      show: (player) => player.boughtSecondMallirtUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtSecondMallirtUpgrade
     },
     {
       id: 32,
@@ -667,8 +659,7 @@ export const upgrades: Record<string, UpgradeContainer> = {
       description:
         "Automate Dertoint Upgrade and square Dark Energy effect again",
       isBoughtName: "boughtFourthMallirtUpgrade",
-      show: (player) => player.boughtThirdMallirtUpgrade,
-      visual: "dertoint"
+      show: (player) => player.boughtThirdMallirtUpgrade
     }
   ]
 } as const;

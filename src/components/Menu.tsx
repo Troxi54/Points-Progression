@@ -177,7 +177,7 @@ const Menu: React.FC = () => {
   };
 
   useEffect(() => {
-    const timeouts: number[] = [];
+    const timeouts: NodeJS.Timeout[] = [];
 
     Object.keys(menuStates).forEach((menu) => {
       const key = menu as MenuType;

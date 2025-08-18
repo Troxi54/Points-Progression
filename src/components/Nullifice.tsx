@@ -82,7 +82,8 @@ function Nullifice() {
       <p>
         <span className="nullifice">Nullifice - </span>
         <span className="nullifice-description">
-          sacrifice nullith resets to get nullions that boost nullith resets.
+          sacrifice Nullith Resets to get Nullions that boost Nullith Resets.
+          Enter the number or percentage of Nullith Resets you want to sacrifice
         </span>
         <br />
 
