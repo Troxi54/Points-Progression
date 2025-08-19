@@ -364,7 +364,7 @@ function MenuInfo() {
             Nullion effect:
             <span className="info-effect">
               {" "}
-              min(1.1 + log(max(x / 100,000, 0) + 1), 3)
+              min(1.1 + log(max(x / 100,000, 0) / 8 + 1), 3)
               <sup>log(max(x, 0) + 1)</sup>, where x is nullions
             </span>
           </>
