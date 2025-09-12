@@ -1,5 +1,5 @@
-import { format } from "../format";
-import { usePlayer } from "../player/playerStore";
+import { format } from "@/format";
+import { usePlayer } from "@player/playerStore";
 
 function Points() {
   const { points, pointGain } = usePlayer((state) => ({

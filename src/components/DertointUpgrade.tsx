@@ -1,6 +1,6 @@
-import { format } from "../format";
-import { buyBuyable, buyMaxBuyable } from "../upgrades";
-import { usePlayer } from "../player/playerStore";
+import { format } from "@/format";
+import { buyBuyable, buyMaxBuyable } from "@/upgrades";
+import { usePlayer } from "@player/playerStore";
 
 function DertointUpgrade() {
   const {
@@ -38,6 +38,7 @@ function DertointUpgrade() {
       className="buyable group bg-linear-to-r from-sliph-bg-1 to-sliph-bg-2 border-image-gradient [border-image-source:var(--sliph-gradient-bg)] hover:[border-image-source:var(--sliph-gradient)] transition-colors-250"
       onClick={buyMax}
       onContextMenu={buy}
+      aria-label="Buy Dertoint upgrade"
     >
       <p className="w-fit sliph">
         Upgrade: {format(dertointUpgradeCost)} Dertoints{" "}

@@ -1,7 +1,8 @@
 import Decimal from "break_eternity.js";
-import { usePlayerStore } from "./player/playerStore";
-import { settings } from "./player/settings";
+import { usePlayerStore } from "@player/playerStore";
+import { settings } from "@player/settings";
 import { triggerVermyrosReset } from "./resets";
+import { getCurrentTime } from "@utils/timeUtils";
 
 export function toggleAmplivault() {
   const { player, setPlayer, setCachedPlayer } = usePlayerStore.getState();
@@ -72,7 +73,7 @@ export function toggleSliph() {
     enteredSliph: enter,
     ...(enter && !player.everEnteredSliph ? { everEnteredSliph: true } : {}),
     ...(enter && player.mallirtStartedDate === null
-      ? { mallirtStartedDate: Date.now() }
+      ? { mallirtStartedDate: getCurrentTime() }
       : {})
   });
 }

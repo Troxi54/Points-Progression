@@ -1,7 +1,7 @@
-import { format, formatWithPlural } from "../format";
-import { usePlayer } from "../player/playerStore";
-import { settings } from "../player/settings";
-import { convertEnergyIntoCores } from "../playerActions";
+import { format, formatWithPlural } from "@/format";
+import { usePlayer } from "@player/playerStore";
+import { settings } from "@player/settings";
+import { convertEnergyIntoCores } from "@/playerActions";
 
 function CoreButton() {
   const { everReachedCores, coreGain } = usePlayer((state) => ({
@@ -14,6 +14,7 @@ function CoreButton() {
       id="cores-button"
       className="bg-core-bg"
       onClick={convertEnergyIntoCores}
+      aria-label="Convert energy into cores"
     >
       <p id="cores-info">
         {everReachedCores ? (

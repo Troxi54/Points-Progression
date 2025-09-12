@@ -1,10 +1,8 @@
-import { format, formatLeftTime, formatWithPlural } from "../format";
-import { usePlayer } from "../player/playerStore";
-import {
-  calculateProgressInPercentage,
-  calculateTimeForRequirement
-} from "../utils";
-import { settings } from "../player/settings";
+import { format, formatLeftTime, formatWithPlural } from "@/format";
+import { calculateProgressInPercentage } from "@utils/progressUtils";
+import { calculateTimeForRequirement } from "@utils/timeUtils";
+import { usePlayer } from "@player/playerStore";
+import { settings } from "@player/settings";
 
 function VermyrosBar() {
   const {

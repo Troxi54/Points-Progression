@@ -1,5 +1,5 @@
-import { format, splittedFormatWithPlural } from "../format";
-import { usePlayer } from "../player/playerStore";
+import { format, splittedFormatWithPlural } from "@/format";
+import { usePlayer } from "@player/playerStore";
 
 function Dertoints() {
   const { dertoints, dertointGain, dertointEffect } = usePlayer((state) => ({

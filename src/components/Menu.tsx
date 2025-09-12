@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState, CSSProperties } from "react";
-import discordIcon from "../assets/discord.png";
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import discordIcon from "@assets/discord.svg";
+import githubIcon from "@assets/github.svg";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 import {
   getConvertedPlayerData,
   isPlayerDataValid,
   loadAndSetPlayer,
   resetPlayerDataAndGame,
   savePlayerToLocalStorage
-} from "../player/playerUtils";
+} from "@player/playerUtils";
 import MenuInfo from "./MenuInfo";
-import { Player } from "../player/playerTypes";
+import { Player } from "@player/playerTypes";
 import StatusText from "./StatusText";
-import { settings } from "../player/settings";
-import { toPastSense } from "../utils";
+import { settings } from "@player/settings";
+import { toPastSense } from "@utils/stringUtils";
 
 const TRANSITION_TIME = 150;
 const TRANSITION = `transform ${TRANSITION_TIME}ms ease-out`;
@@ -235,9 +236,10 @@ const Menu: React.FC = () => {
   const renderMenuButton = (
     label: string,
     action: keyof typeof actionStates,
-    onClick: () => void
+    onClick: () => void,
+    ariaLabel: string
   ) => (
-    <button onClick={onClick}>
+    <button onClick={onClick} aria-label={ariaLabel}>
       <p className="menu-button-info" style={getButtonTextStyle(action)}>
         {toPastSense(action.charAt(0).toUpperCase() + action.slice(1))}
       </p>
@@ -257,6 +259,7 @@ const Menu: React.FC = () => {
         id="menu-toggle"
         className="flex flex-col gap-[.6em] items-center justify-center py-[0.5em]"
         onClick={() => toggleMenu("main")}
+        aria-label="Toggle menu"
       >
         <div />
         <div />
@@ -272,12 +275,22 @@ const Menu: React.FC = () => {
           transformOrigin: "right"
         }}
       >
-        <button onClick={() => toggleMenu("more")}>
+        <button onClick={() => toggleMenu("more")} aria-label="Open more menu">
           <p className="menu-button-info">More</p>
         </button>
-        {renderMenuButton("Save", "save", handleSave)}
-        {renderMenuButton("Import", "import", () => toggleMenu("import"))}
-        {renderMenuButton("Export", "export", () => toggleMenu("export"))}
+        {renderMenuButton("Save", "save", handleSave, "Save your data")}
+        {renderMenuButton(
+          "Import",
+          "import",
+          () => toggleMenu("import"),
+          "Open import menu"
+        )}
+        {renderMenuButton(
+          "Export",
+          "export",
+          () => toggleMenu("export"),
+          "Open export menu"
+        )}
       </div>
       <div className="overlay text-[1.6vmin]" style={getOverlayStyle("more")}>
         <div
@@ -290,6 +303,7 @@ const Menu: React.FC = () => {
               <button
                 className="more-menu-button"
                 onClick={() => togglePlayerSetting("hideBoughtUpgrades")}
+                aria-label="Toggle bought upgrades"
               >
                 <p className="menu-button-info">
                   Hide bought upgrades:{" "}
@@ -299,6 +313,7 @@ const Menu: React.FC = () => {
               <button
                 className="more-menu-button"
                 onClick={() => togglePlayerSetting("exponentialNotation")}
+                aria-label="Toggle exponential notation"
               >
                 <p className="menu-button-info">
                   Exponential notation:{" "}
@@ -308,6 +323,7 @@ const Menu: React.FC = () => {
               <button
                 className="more-menu-button"
                 onClick={() => togglePlayerSetting("stableProgressBars")}
+                aria-label="Toggle stable progress bars"
               >
                 <p className="menu-button-info">
                   Stable progress bars:{" "}
@@ -330,17 +346,22 @@ const Menu: React.FC = () => {
             </p>
             <div className="more-menu-row">
               <a
-                className="more-menu-button px-[1.2em] py-[0.5em] flex flex-row justify-center items-center gap-[0.5em] box-border bg-discord-button hover:bg-discord-button-hovered"
+                className="more-menu-button more-menu-link-button bg-discord-button hover:bg-discord-button-hovered"
                 href="https://discord.gg/YT8R2szHXX"
                 target="_blank"
+                title="Our Discord server"
               >
                 <p className="menu-button-info">Discord</p>
-                <img
-                  src={discordIcon}
-                  className="h-[1em] w-[initial]"
-                  alt="Discord"
-                  draggable="false"
-                />
+                <img src={discordIcon} alt="Discord" draggable="false" />
+              </a>
+              <a
+                className="more-menu-button more-menu-link-button bg-github-button hover:bg-github-button-hovered"
+                href="https://discord.gg/YT8R2szHXX"
+                target="_blank"
+                title="GitHub repository"
+              >
+                <p className="menu-button-info">GitHub</p>
+                <img src={githubIcon} alt="GitHub" draggable="false" />
               </a>
             </div>
           </div>
@@ -361,6 +382,7 @@ const Menu: React.FC = () => {
                 );
                 if (userText) handleImport(userText);
               }}
+              aria-label="Import from text"
             >
               <p className="menu-button-info">From text</p>
             </button>
@@ -368,6 +390,7 @@ const Menu: React.FC = () => {
               onClick={() =>
                 document.getElementById("import-from-file")?.click()
               }
+              aria-label="Import from file"
             >
               <p className="menu-button-info">From file</p>
               <input
@@ -389,6 +412,7 @@ const Menu: React.FC = () => {
                   handleAction("import", () => toggleMenu("import"));
                 }
               }}
+              aria-label="Import default data"
             >
               <p className="menu-button-info text-reset-data-text">
                 Default player data
@@ -405,16 +429,22 @@ const Menu: React.FC = () => {
         >
           <h1>Export</h1>
           <div className="data-action-container">
-            <button onClick={() => handleExport(true)}>
+            <button
+              onClick={() => handleExport(true)}
+              aria-label="Export to clipboard"
+            >
               <p className="menu-button-info">To clipboard</p>
             </button>
-            <button onClick={() => handleExport(false)}>
+            <button
+              onClick={() => handleExport(false)}
+              aria-label="Export to file"
+            >
               <p className="menu-button-info">File</p>
             </button>
           </div>
         </div>
       </div>
-      <button onClick={() => toggleMenu("info")}>
+      <button onClick={() => toggleMenu("info")} aria-label="Open info menu">
         <p className="menu-button-info text-[2.5em]">?</p>
       </button>
       <div className="overlay" style={getOverlayStyle("info")}>

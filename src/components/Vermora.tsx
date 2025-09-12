@@ -1,5 +1,5 @@
-import { format, formatWithPlural } from "../format";
-import { usePlayer } from "../player/playerStore";
+import { format, formatWithPlural } from "@/format";
+import { usePlayer } from "@player/playerStore";
 
 function Vermora() {
   const { vermora, vermoraGain, vermoraEffect } = usePlayer((state) => ({

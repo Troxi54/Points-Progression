@@ -1,5 +1,5 @@
-import { format, formatWithPlural } from "../format";
-import { usePlayer } from "../player/playerStore";
+import { format, formatWithPlural } from "@/format";
+import { usePlayer } from "@player/playerStore";
 
 function Cores() {
   const { cores, coresPerSecond, coreEffect } = usePlayer((state) => ({

@@ -1,4 +1,4 @@
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 
 function AutoresettingButton() {
   const autoresettingEnabled = usePlayer(
@@ -14,7 +14,7 @@ function AutoresettingButton() {
   }
 
   return (
-    <div className="auto-toggle">
+    <div className="auto-toggle" aria-label="Toggle Auto resetting">
       <button onClick={toggleAutoresetting}>
         <p>
           {autoresettingEnabled

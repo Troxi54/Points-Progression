@@ -1,40 +1,5 @@
+import { isNumberStringDecimal } from "@/utils/stringUtils";
 import Decimal, { DecimalSource } from "break_eternity.js";
-
-export function calculateTimeForRequirement(
-  currency: Decimal,
-  currencyGain: Decimal,
-  requirement: Decimal
-) {
-  return requirement
-    .minus(currency)
-    .dividedBy(currencyGain)
-    .multiply(1000)
-    .max(0);
-}
-
-export function calculateProgress(currency: Decimal, goal: Decimal) {
-  return currency.dividedBy(goal).max(0).min(1);
-}
-
-export function calculateProgressInPercentage(
-  currency: Decimal,
-  goal: Decimal
-) {
-  return +calculateProgress(currency, goal).multiply(100);
-}
-
-export function getTimeSince(date: number) {
-  return Date.now() - date;
-}
-
-export function checkElapsedTime(time: number | null): time is number {
-  return time !== null && isFinite(time) && time > 0;
-}
-
-export function toPastSense(str: string) {
-  if (str.endsWith("e")) return str + "d";
-  return str + "ed";
-}
 
 export function handleDecimalInputOnBlur(
   target: HTMLInputElement,
@@ -47,17 +12,13 @@ export function handleDecimalInputOnBlur(
     return !isNaN(num) && num >= 0;
   }
 
-  function isExponential(numStr: string) {
-    return numStr.toLowerCase().includes("e");
-  }
-
   const value = target.value.replace(/\s/g, "");
   let processedValue: string;
 
   if (value.endsWith("%")) {
     const numStr = value.slice(0, -1);
 
-    if (isExponential(numStr)) {
+    if (isNumberStringDecimal(numStr)) {
       processedValue = DEFAULT_VALUE;
     } else {
       const num = Number(numStr);
@@ -80,14 +41,14 @@ export function handleDecimalInputOnBlur(
     if (!isValid(num)) {
       processedValue = DEFAULT_VALUE;
     } else if (
-      !isExponential(value) &&
+      !isNumberStringDecimal(value) &&
       num < CONVERT_NUMBER_TO_EXPONENTIAL_AT
     ) {
       processedValue = String(Math.floor(num));
     } else {
       const decimal = new Decimal(value).floor();
       if (decimal.greaterThan(maxValue)) {
-        processedValue = "1e1000000";
+        processedValue = String(maxValue);
       } else if (decimal.equals(0) || decimal.isNan()) {
         processedValue = DEFAULT_VALUE;
       } else {

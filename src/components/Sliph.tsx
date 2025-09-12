@@ -1,5 +1,5 @@
-import { usePlayer } from "../player/playerStore";
-import { toggleSliph } from "../playerActions";
+import { usePlayer } from "@player/playerStore";
+import { toggleSliph } from "@/playerActions";
 
 function Sliph() {
   const { enteredSliph } = usePlayer((state) => ({
@@ -9,6 +9,7 @@ function Sliph() {
     <button
       className="bg-linear-to-r from-sliph-bg-1 to-sliph-bg-2 border-image-gradient [border-image-source:var(--sliph-gradient-bg)] hover:[border-image-source:var(--sliph-gradient)]"
       onClick={toggleSliph}
+      aria-label="Toggle Sliph"
     >
       <p>
         <span className="sliph">Sliph - </span>

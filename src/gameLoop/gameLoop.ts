@@ -1,6 +1,6 @@
 import Decimal from "break_eternity.js";
-import { formulas } from "../formulas";
-import { usePlayerStore } from "../player/playerStore";
+import { formulas } from "@/formulas";
+import { usePlayerStore } from "@player/playerStore";
 import {
   generateCores,
   generateTierResets,
@@ -11,24 +11,28 @@ import {
   getTierUpdates,
   getVermyrosUpdates
 } from "./gameLoopParts";
-import { settings } from "../player/settings";
-import { mergePlayer, savePlayerToLocalStorage } from "../player/playerUtils";
-import { checkElapsedTime, getTimeSince } from "../utils";
+import { settings } from "@player/settings";
+import { mergePlayer, savePlayerToLocalStorage } from "@player/playerUtils";
 import { cacheUpdates } from "./cacheUpdates";
-import { calculateOfflineProgress } from "../offline";
+import { calculateOfflineProgress } from "@/offline";
 import {
   automateAmplifluxUpgrade,
   automateCoreUpgrade,
   automateDertointpgrade,
   automateUpgrade,
   automateVermyteUpgrade
-} from "../upgrades";
-import { CachedPlayer, Player } from "../player/playerTypes";
+} from "@/upgrades";
+import { CachedPlayer, Player } from "@player/playerTypes";
+import {
+  checkElapsedTime,
+  getCurrentTime,
+  getTimeSince
+} from "@utils/timeUtils";
 
 export function startGameLoop() {
   let lastSave = 0;
   function loop() {
-    const now = Date.now();
+    const now = getCurrentTime();
 
     const { getState } = usePlayerStore;
     const state = getState();
@@ -288,7 +292,7 @@ export function startGameLoop() {
 
     if (lastSave + settings.saveInterval <= now) {
       savePlayerToLocalStorage(newPlayer);
-      lastSave = Date.now();
+      lastSave = getCurrentTime();
     }
 
     requestAnimationFrame(loop);

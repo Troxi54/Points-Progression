@@ -1,5 +1,5 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
-import { usePlayerStore } from "./player/playerStore";
+import { usePlayerStore } from "@player/playerStore";
 import pluralize from "pluralize";
 
 export function format(

@@ -1,6 +1,6 @@
-import { format } from "../format";
-import { buyBuyable, buyMaxBuyable } from "../upgrades";
-import { usePlayer } from "../player/playerStore";
+import { format } from "@/format";
+import { buyBuyable, buyMaxBuyable } from "@/upgrades";
+import { usePlayer } from "@player/playerStore";
 
 function PointUpgrade() {
   const {
@@ -38,6 +38,7 @@ function PointUpgrade() {
       className="buyable group bg-point-upgrade-bg hover:border-point-upgrade-hover-border transition-colors-250"
       onClick={buyMax}
       onContextMenu={buy}
+      aria-label="Buy Point upgrade"
     >
       <p className="transition-colors-250 text-point-upgrade-cost group-hover:text-point-upgrade-hover-cost">
         Upgrade: {format(upgradeCost)}{" "}

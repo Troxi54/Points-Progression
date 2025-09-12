@@ -1,6 +1,6 @@
-import { format } from "../format";
-import { usePlayer } from "../player/playerStore";
-import { settings } from "../player/settings";
+import { format } from "@/format";
+import { usePlayer } from "@player/playerStore";
+import { settings } from "@player/settings";
 
 function Softcapper() {
   const { softcapperLevel, bestSoftcapperLevel } = usePlayer((state) => ({

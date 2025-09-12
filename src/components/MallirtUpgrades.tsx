@@ -1,4 +1,4 @@
-import { upgrades } from "../upgrades";
+import { upgrades } from "@/upgrades";
 import UpgradeContainer from "./UpgradeContainer";
 
 function MallirtUpgrades() {

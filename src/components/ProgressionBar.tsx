@@ -1,10 +1,8 @@
-import { format, formatLeftTime, formatTime } from "../format";
-import { settings } from "../player/settings";
-import { usePlayer } from "../player/playerStore";
-import {
-  calculateProgressInPercentage,
-  calculateTimeForRequirement
-} from "../utils";
+import { format, formatLeftTime, formatTime } from "@/format";
+import { settings } from "@player/settings";
+import { usePlayer } from "@player/playerStore";
+import { calculateProgressInPercentage } from "@utils/progressUtils";
+import { calculateTimeForRequirement } from "@utils/timeUtils";
 
 function ProgressionBar() {
   const {

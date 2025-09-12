@@ -3,11 +3,14 @@ import {
   formatWithPlural,
   integerFormat,
   integerFormatWithPlural
-} from "../format";
-import { usePlayer, usePlayerStore } from "../player/playerStore";
-import { handleDecimalInputOnBlur, handleDecimalInputOnChange } from "../utils";
-import { convertNullithResetsIntoNullions } from "../playerActions";
+} from "@/format";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
+import { convertNullithResetsIntoNullions } from "@/playerActions";
 import pluralize from "pluralize";
+import {
+  handleDecimalInputOnBlur,
+  handleDecimalInputOnChange
+} from "@utils/inputUtils";
 
 function onBlur(input: React.FocusEvent<HTMLInputElement> | HTMLInputElement) {
   let processedInput;
@@ -78,6 +81,7 @@ function Nullifice() {
     <button
       className="bg-linear-to-r from-nullifice-bg-1 to-nullifice-bg-2 border-image-gradient [border-image-source:var(--nullifice-gradient-bg)] hover:[border-image-source:var(--nullifice-gradient)]"
       onClick={convertNullithResetsIntoNullions}
+      aria-label="Convert Nullith Resets into Nullions"
     >
       <p>
         <span className="nullifice">Nullifice - </span>
@@ -109,6 +113,7 @@ function Nullifice() {
           onClick={(e) => e.stopPropagation()}
           onBlur={onBlur}
           onChange={onChange}
+          aria-label="Enter Nullith Resets to sacrifice"
         />{" "}
         {isPercentage
           ? `= ${integerFormatWithPlural(

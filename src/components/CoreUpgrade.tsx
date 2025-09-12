@@ -1,6 +1,6 @@
-import { format, formatWithPlural } from "../format";
-import { buyBuyable, buyMaxBuyable } from "../upgrades";
-import { usePlayer } from "../player/playerStore";
+import { format, formatWithPlural } from "@/format";
+import { buyBuyable, buyMaxBuyable } from "@/upgrades";
+import { usePlayer } from "@player/playerStore";
 
 function CoreUpgrade() {
   const {
@@ -37,7 +37,12 @@ function CoreUpgrade() {
   const thereIsABulk = coreUpgradeBulk.greaterThanOrEqualTo(1);
 
   return (
-    <button className="buyable bg-core-bg" onClick={buyMax} onContextMenu={buy}>
+    <button
+      className="buyable bg-core-bg"
+      onClick={buyMax}
+      onContextMenu={buy}
+      aria-label="Buy Core upgrade"
+    >
       <p>
         Upgrade:{" "}
         {isCoreUpgradeMaxed ? (

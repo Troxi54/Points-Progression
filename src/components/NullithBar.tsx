@@ -3,13 +3,11 @@ import {
   formatLeftTime,
   formatWithPlural,
   integerFormat
-} from "../format";
-import { usePlayer } from "../player/playerStore";
-import {
-  calculateProgressInPercentage,
-  calculateTimeForRequirement
-} from "../utils";
-import { settings } from "../player/settings";
+} from "@/format";
+import { calculateProgressInPercentage } from "@utils/progressUtils";
+import { usePlayer } from "@player/playerStore";
+import { settings } from "@player/settings";
+import { calculateTimeForRequirement } from "@utils/timeUtils";
 
 function NullithBar() {
   const {

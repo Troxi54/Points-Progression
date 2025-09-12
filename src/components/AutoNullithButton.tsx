@@ -1,4 +1,4 @@
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 
 function AutoNullithButton() {
   const autoNullithEnabled = usePlayer(
@@ -15,7 +15,7 @@ function AutoNullithButton() {
 
   return (
     <div className="auto-toggle">
-      <button onClick={toggleAutoresetting}>
+      <button onClick={toggleAutoresetting} aria-label="Toggle Auto Nullith">
         <p>
           {autoNullithEnabled
             ? "Auto Nullith: enabled"

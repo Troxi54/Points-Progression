@@ -1,21 +1,22 @@
 import Decimal from "break_eternity.js";
-import { PartialMergedPlayer, Player } from "./player/playerTypes";
+import { PartialMergedPlayer, Player } from "@player/playerTypes";
+import { getCurrentTime } from "@utils/timeUtils";
 
 export function triggerReset(): Partial<Player> {
   return {
     upgradeLvl: new Decimal(0),
     points: new Decimal(0),
-    startedRun: Date.now()
+    startedRun: getCurrentTime()
   };
 }
 
 export function triggerTierReset(player: Player): PartialMergedPlayer {
   return {
     player: {
-      tierStartedDate: Date.now(),
+      tierStartedDate: getCurrentTime(),
       upgradeLvl: new Decimal(0),
       points: new Decimal(0),
-      startedRun: Date.now(),
+      startedRun: getCurrentTime(),
       bestRun: player.boughtThirdTierUpgrade ? player.bestRun : null,
       bestPointsOfRun: new Decimal(0),
       autoresettingEnabled: !player.boughtThirdTierUpgrade,
@@ -33,10 +34,10 @@ export function triggerTierReset(player: Player): PartialMergedPlayer {
 export function triggerVermyrosReset(player: Player): PartialMergedPlayer {
   return {
     player: {
-      vermyrosStartedDate: Date.now(),
+      vermyrosStartedDate: getCurrentTime(),
       upgradeLvl: new Decimal(0),
       points: new Decimal(0),
-      startedRun: Date.now(),
+      startedRun: getCurrentTime(),
       bestRun: null,
       boughtFirstResetUpgrade:
         player.boughtSecondVermyrosUpgrade && player.boughtFirstResetUpgrade,
@@ -72,7 +73,7 @@ export function triggerVermyrosReset(player: Player): PartialMergedPlayer {
 
 export function triggerNullithReset(player: Player): PartialMergedPlayer {
   const result = {
-    nullithStartedDate: Date.now(),
+    nullithStartedDate: getCurrentTime(),
     reachedBreakAmplivault:
       player.reachedBreakAmplivault || player.enteredAmplivault
   };
@@ -81,10 +82,10 @@ export function triggerNullithReset(player: Player): PartialMergedPlayer {
 
   return {
     player: {
-      vermyrosStartedDate: Date.now(),
+      vermyrosStartedDate: getCurrentTime(),
       upgradeLvl: new Decimal(0),
       points: new Decimal(0),
-      startedRun: Date.now(),
+      startedRun: getCurrentTime(),
       bestRun: null,
       boughtFirstResetUpgrade:
         player.boughtSecondNullithUpgrade && player.boughtFirstResetUpgrade,
@@ -157,7 +158,7 @@ export function triggerMallirtReset(player: Player): Partial<Player> {
   return {
     dertointUpgradeLvl: new Decimal(0),
     dertoints: new Decimal(0),
-    mallirtStartedDate: Date.now(),
+    mallirtStartedDate: getCurrentTime(),
     boughtFirstDertointUpgrade: player.boughtFirstMallirtUpgrade,
     boughtSecondDertointUpgrade: player.boughtFirstMallirtUpgrade,
     boughtThirdDertointUpgrade: player.boughtSecondMallirtUpgrade,

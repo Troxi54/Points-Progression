@@ -2,22 +2,19 @@ import Decimal from "break_eternity.js";
 import {
   calculateOfflineNullithResets,
   calculateOfflineTierResets
-} from "../offline";
-import {
-  MergedPlayer,
-  PartialMergedPlayer,
-  Player
-} from "../player/playerTypes";
-import { savePlayerToLocalStorage } from "../player/playerUtils";
-import { settings } from "../player/settings";
-import { usePlayerStore } from "../player/playerStore";
+} from "@/offline";
+import { MergedPlayer, PartialMergedPlayer, Player } from "@player/playerTypes";
+import { savePlayerToLocalStorage } from "@player/playerUtils";
+import { settings } from "@player/settings";
+import { usePlayerStore } from "@player/playerStore";
 import {
   triggerMallirtReset,
   triggerNullithReset,
   triggerReset,
   triggerTierReset,
   triggerVermyrosReset
-} from "../resets";
+} from "@/resets";
+import { getCurrentTime } from "@utils/timeUtils";
 
 let lastTimeSave = performance.now();
 export function savePlayer() {
@@ -47,7 +44,7 @@ export function getMallirtUpdates(
   const lastMallirtTime =
     player.mallirtStartedDate === null
       ? Infinity
-      : Date.now() - player.mallirtStartedDate;
+      : getCurrentTime() - player.mallirtStartedDate;
 
   return {
     player: {
@@ -76,7 +73,7 @@ export function getNullithUpdates({
   const lastNullithTime =
     player.nullithStartedDate === null
       ? Infinity
-      : Date.now() - player.nullithStartedDate;
+      : getCurrentTime() - player.nullithStartedDate;
 
   const nullithReset = triggerNullithReset(player);
 
@@ -111,7 +108,7 @@ export function getVermyrosUpdates({
   const lastVermyrosTime =
     player.vermyrosStartedDate === null
       ? Infinity
-      : Date.now() - player.vermyrosStartedDate;
+      : getCurrentTime() - player.vermyrosStartedDate;
 
   const vermyrosReset = triggerVermyrosReset(player);
 
@@ -166,7 +163,7 @@ export function getTierUpdates({
   const lastTierTime =
     player.tierStartedDate === null
       ? Infinity
-      : Date.now() - player.tierStartedDate;
+      : getCurrentTime() - player.tierStartedDate;
 
   const tierReset = triggerTierReset(player);
 
@@ -206,11 +203,11 @@ export function getGoalUpdates(player: Player): PartialMergedPlayer {
   )
     return autoSet;
   const timeSpent = Math.max(
-    Math.min(Date.now() - player.startedRun, DAY_IN_MS),
+    Math.min(getCurrentTime() - player.startedRun, DAY_IN_MS),
     settings.bestRunTimeLimit
   );
 
-  const lastResetTime = Date.now() - player.startedRun;
+  const lastResetTime = getCurrentTime() - player.startedRun;
 
   return {
     player: {

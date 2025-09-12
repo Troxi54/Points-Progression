@@ -70,6 +70,8 @@
   --color-data-action-button-bg: #212121;
   --color-discord-button: #5865f2;
   --color-discord-button-hovered: #7884f8;
+  --color-github-button: #24292f;
+  --color-github-button-hovered: #2e3640;
   --color-tooltip-trigger-bg: #181818;
   --color-tooltip-bg: #111111;
   --color-spoiler-bg: #202020;
@@ -505,6 +507,14 @@
 
   .more-menu-button {
     @apply relative bg-data-action-button-bg border-none transition-colors duration-100 ease-linear rounded-[0.375em];
+  }
+
+  .more-menu-link-button {
+    @apply px-[1.2em] py-[0.5em] flex flex-row justify-center items-center gap-[0.5em] box-border;
+  }
+
+  .more-menu-link-button > img {
+    @apply h-[1em] w-[initial];
   }
 
   .tooltip-trigger {

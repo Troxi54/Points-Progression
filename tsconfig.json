@@ -26,7 +26,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
-      "@player/*": ["src/player/*"]
+      "@player/*": ["src/player/*"],
+      "@gameLoop/*": ["src/gameLoop/*"],
+      "@utils/*": ["src/utils/*"],
+      "@assets/*": ["src/assets/*"]
     },
 
     "typeRoots": ["./node_modules/@types", "./src/types"]

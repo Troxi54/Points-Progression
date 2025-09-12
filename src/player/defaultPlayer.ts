@@ -1,13 +1,14 @@
 import Decimal from "break_eternity.js";
 import { CachedPlayer, Player } from "./playerTypes";
+import { getCurrentTime } from "@utils/timeUtils";
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: "0.5.2",
-    lastTick: Date.now(),
+    gameVersion: "0.5.3",
+    lastTick: getCurrentTime(),
     points: new Decimal(0),
     upgradeLvl: new Decimal(0),
-    startedRun: Date.now(),
+    startedRun: getCurrentTime(),
     approximateResetsPerSecond: new Decimal(0),
     bestRun: null,
     everMadeRun: false,

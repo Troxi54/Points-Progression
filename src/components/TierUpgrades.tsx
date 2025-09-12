@@ -1,5 +1,5 @@
 import UpgradeContainer from "./UpgradeContainer";
-import { upgrades } from "../upgrades";
+import { upgrades } from "@/upgrades";
 
 function TierUpgrades() {
   return (

@@ -1,4 +1,4 @@
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 
 function AutotierButton() {
   const { autoTierEnabled, boughtSecondVermyrosUpgrade } = usePlayer(
@@ -17,7 +17,7 @@ function AutotierButton() {
   }
 
   return (
-    <div className="auto-toggle">
+    <div className="auto-toggle" aria-label="Toggle Auto Tier">
       <button onClick={toggleAutoresetting}>
         <p>
           {autoTierEnabled

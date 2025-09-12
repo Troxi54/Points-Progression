@@ -1,6 +1,6 @@
-import { format, formatWithPlural } from "../format";
-import { buyBuyable, buyMaxBuyable } from "../upgrades";
-import { usePlayer } from "../player/playerStore";
+import { format, formatWithPlural } from "@/format";
+import { buyBuyable, buyMaxBuyable } from "@/upgrades";
+import { usePlayer } from "@player/playerStore";
 
 function VermyteUpgrade() {
   const {
@@ -39,6 +39,7 @@ function VermyteUpgrade() {
       className="buyable group bg-vermyte-upgrade-bg hover:border-vermyte-upgrade-hover-border transition-colors-250"
       onClick={buyMax}
       onContextMenu={buy}
+      aria-label="Buy Vermyte upgrade"
     >
       <p className="transition-colors-250 text-vermyte-upgrade-cost group-hover:text-vermyte-upgrade-hover-cost">
         Upgrade: {formatWithPlural(vermytesUpgradeCost, "Vermyte")}{" "}

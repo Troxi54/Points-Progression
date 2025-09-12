@@ -1,7 +1,7 @@
-import { format, formatLeftTime, formatWithPlural } from "../format";
-import { calculateTimeForRequirement } from "../utils";
-import { usePlayer } from "../player/playerStore";
-import { toggleAmplivault } from "../playerActions";
+import { calculateTimeForRequirement } from "@utils/timeUtils";
+import { format, formatLeftTime, formatWithPlural } from "@/format";
+import { usePlayer } from "@player/playerStore";
+import { toggleAmplivault } from "@/playerActions";
 
 function Amplivault() {
   const {
@@ -43,6 +43,7 @@ function Amplivault() {
           : "bg-amplivault-bg hover:border-amplivault-hover-border")
       }
       onClick={toggleAmplivault}
+      aria-label="Enter Amplivault"
     >
       <div
         className={

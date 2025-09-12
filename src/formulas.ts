@@ -1,6 +1,6 @@
 import Decimal from "break_eternity.js";
-import { CachedPlayer, Player } from "./player/playerTypes";
-import { settings } from "./player/settings";
+import { CachedPlayer, Player } from "@player/playerTypes";
+import { settings } from "@player/settings";
 
 const TWO_HOURS_IN_MS = 7.2e6;
 

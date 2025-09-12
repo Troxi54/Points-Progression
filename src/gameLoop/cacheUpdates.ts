@@ -1,8 +1,8 @@
 import Decimal from "break_eternity.js";
-import { formulas } from "../formulas";
-import { usePlayerStore } from "../player/playerStore";
-import { MergedPlayer } from "../player/playerTypes";
-import { settings } from "../player/settings";
+import { formulas } from "@/formulas";
+import { usePlayerStore } from "@player/playerStore";
+import { MergedPlayer } from "@player/playerTypes";
+import { settings } from "@player/settings";
 
 export const cacheUpdates = {
   mallirtEffect({ player, cachedPlayer }: MergedPlayer) {

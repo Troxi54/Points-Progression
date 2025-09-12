@@ -1,6 +1,6 @@
-import { format, formatWithPlural } from "../format";
-import { buyBuyable, buyMaxBuyable } from "../upgrades";
-import { usePlayer } from "../player/playerStore";
+import { format, formatWithPlural } from "@/format";
+import { buyBuyable, buyMaxBuyable } from "@/upgrades";
+import { usePlayer } from "@player/playerStore";
 
 function AmplifluxUpgrade() {
   const {
@@ -41,6 +41,7 @@ function AmplifluxUpgrade() {
       className="buyable group bg-ampliflux-upgrade-bg hover:border-ampliflux-upgrade-hover-border transition-colors-250"
       onClick={buyMax}
       onContextMenu={buy}
+      aria-label="Buy Ampliflux upgrade"
     >
       <p className="transition-colors-250 text-ampliflux-upgrade-cost group-hover:text-ampliflux-upgrade-hover-cost">
         Upgrade: {formatWithPlural(amplifluxUpgradeCost, "Ampliflux")}{" "}

@@ -7,11 +7,11 @@ import {
   PartialMergedPlayer,
   Player,
   Settings
-} from "./player/playerTypes";
-import { settings } from "./player/settings";
-import { usePlayerStore } from "./player/playerStore";
-import { cacheUpdates } from "./gameLoop/cacheUpdates";
-import { mergePlayer } from "./player/playerUtils";
+} from "@player/playerTypes";
+import { settings } from "@player/settings";
+import { usePlayerStore } from "@player/playerStore";
+import { cacheUpdates } from "@gameLoop/cacheUpdates";
+import { mergePlayer } from "@player/playerUtils";
 import { format } from "./format";
 
 export interface Buyable {

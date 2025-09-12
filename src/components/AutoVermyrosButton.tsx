@@ -1,4 +1,4 @@
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 
 function AutoVermyrosButton() {
   const autoVermyrosEnabled = usePlayer(
@@ -14,7 +14,7 @@ function AutoVermyrosButton() {
   }
 
   return (
-    <div className="auto-toggle">
+    <div className="auto-toggle" aria-label="Toggle Auto Vermyros">
       <button onClick={toggleAutoresetting}>
         <p>Auto Vermyros: {autoVermyrosEnabled ? "enabled" : "disabled"}</p>
       </button>

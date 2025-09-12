@@ -1,4 +1,4 @@
-import { usePlayer, usePlayerStore } from "../player/playerStore";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
 
 function AutoMallirtButton() {
   const autoMallirtEnabled = usePlayer(
@@ -15,7 +15,7 @@ function AutoMallirtButton() {
 
   return (
     <div className="auto-toggle">
-      <button onClick={toggleAutoresetting}>
+      <button onClick={toggleAutoresetting} aria-label="Toggle Auto Mallirt">
         <p>
           {autoMallirtEnabled
             ? "Auto Mallirt: enabled"

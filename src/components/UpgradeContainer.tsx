@@ -1,9 +1,9 @@
-import { Upgrade } from "../upgrades";
-import { format, formatWithPlural } from "../format";
-import { usePlayer, usePlayerStore } from "../player/playerStore";
-import { settings } from "../player/settings";
+import { Upgrade } from "@/upgrades";
+import { format, formatWithPlural } from "@/format";
+import { usePlayer, usePlayerStore } from "@player/playerStore";
+import { settings } from "@player/settings";
 import { useRef } from "react";
-import { mergePlayer } from "../player/playerUtils";
+import { mergePlayer } from "@player/playerUtils";
 
 interface props {
   id: string;
@@ -104,6 +104,7 @@ function UpgradeContainer({ id, upgrades, classNames }: props) {
                 contextMenu(e, upgrade, getPreviousUpgrade(index), isBought)
               }
               key={id}
+              aria-label={`Buy ${name}`}
             >
               <p>
                 {name}:{" "}

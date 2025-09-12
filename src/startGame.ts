@@ -1,11 +1,11 @@
-import { updateAllCache } from "./gameLoop/cacheUpdates";
-import { startGameLoop } from "./gameLoop/gameLoop";
+import { updateAllCache } from "@gameLoop/cacheUpdates";
+import { startGameLoop } from "@gameLoop/gameLoop";
 import { calculateOfflineProgress } from "./offline";
-import { usePlayerStore } from "./player/playerStore";
+import { usePlayerStore } from "@player/playerStore";
 import {
   loadPlayerFromLocalStorage,
   savePlayerToLocalStorage
-} from "./player/playerUtils";
+} from "@player/playerUtils";
 import { addUncountableWords } from "./pluralizeRules";
 
 function loadPlayerData() {

@@ -8,7 +8,8 @@ import {
 } from "./playerTypes";
 import { settings } from "./settings";
 import { usePlayerStore } from "./playerStore";
-import { resetGame } from "../startGame";
+import { resetGame } from "@/startGame";
+import { getCurrentTime } from "@utils/timeUtils";
 
 export function resetPlayerData() {
   const { setPlayer, setCachedPlayer } = usePlayerStore.getState();
@@ -111,6 +112,9 @@ function fixPlayerData(player: Player): Player {
       (result[key] as unknown as Decimal) = decimalValue;
     }
   }
+
+  const currentTime = getCurrentTime();
+
   if (result.bestRun !== null && result.bestRun < settings.bestRunTimeLimit)
     result.bestRun = settings.bestRunTimeLimit;
   if (
@@ -133,17 +137,17 @@ function fixPlayerData(player: Player): Player {
     result.autoTierEnabled = true;
   if (!result.everMadeVermyros && !result.autoVermyrosEnabled)
     result.autoVermyrosEnabled = true;
-  if (Date.now() - result.startedRun < 0) result.startedRun = Date.now();
+  if (currentTime - result.startedRun < 0) result.startedRun = currentTime;
   if (
     result.tierStartedDate !== null &&
-    Date.now() - result.tierStartedDate < 0
+    currentTime - result.tierStartedDate < 0
   )
-    result.tierStartedDate = Date.now();
+    result.tierStartedDate = currentTime;
   if (
     result.vermyrosStartedDate !== null &&
-    Date.now() - result.vermyrosStartedDate < 0
+    currentTime - result.vermyrosStartedDate < 0
   )
-    result.vermyrosStartedDate = Date.now();
+    result.vermyrosStartedDate = currentTime;
   result.gameVersion = defaultPlayer.gameVersion;
   return result;
 }

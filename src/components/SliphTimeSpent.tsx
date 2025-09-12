@@ -1,5 +1,5 @@
-import { formatTime } from "../format";
-import { usePlayer } from "../player/playerStore";
+import { formatTime } from "@/format";
+import { usePlayer } from "@player/playerStore";
 
 function SliphTimeSpent() {
   const { timeSinceHighestReset } = usePlayer((state) => ({
