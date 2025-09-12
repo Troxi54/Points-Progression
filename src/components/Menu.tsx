@@ -356,7 +356,7 @@ const Menu: React.FC = () => {
               </a>
               <a
                 className="more-menu-button more-menu-link-button bg-github-button hover:bg-github-button-hovered"
-                href="https://discord.gg/YT8R2szHXX"
+                href="https://github.com/Troxi54/Points-Progression"
                 target="_blank"
                 title="GitHub repository"
               >
