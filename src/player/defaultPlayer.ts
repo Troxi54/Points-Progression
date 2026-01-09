@@ -4,7 +4,7 @@ import { getCurrentTime } from "@utils/timeUtils";
 
 export function getDefaultPlayer(): Player {
   const defaultPlayer: Player = {
-    gameVersion: "0.5.3",
+    gameVersion: "0.5.4",
     lastTick: getCurrentTime(),
     points: new Decimal(0),
     upgradeLvl: new Decimal(0),

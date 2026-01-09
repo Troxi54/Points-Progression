@@ -38,7 +38,8 @@ export const settings: Settings = {
   softcappers: [
     [new Decimal(1e204), new Decimal(0.94)],
     [new Decimal("1e368"), new Decimal(0.85)],
-    [new Decimal("1e1000"), new Decimal(0.5)]
+    [new Decimal("1e1000"), new Decimal(0.5)],
+    [new Decimal("1e1500"), new Decimal(0.4)]
   ],
   coresAt: new Decimal(1e6),
   coreUpgradeStartingCost: new Decimal(10),
@@ -57,7 +58,7 @@ export const settings: Settings = {
   sixthNullithUpgradeCost: new Decimal("1e1150"),
   dertointUpgradeStartingCost: new Decimal(0.1),
   dertointUpgradeCostScaling: new Decimal(10),
-  dertointUpgradeEffectScaling: new Decimal(2.4),
+  dertointUpgradeEffectScaling: new Decimal(2.3),
   firstDertointUpgradeCost: new Decimal(100),
   secondDertointUpgradeCost: new Decimal(7.5e3),
   thirdDertointUpgradeCost: new Decimal(8.25e4),

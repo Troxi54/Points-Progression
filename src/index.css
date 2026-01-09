@@ -111,6 +111,8 @@
   --color-softcapper-level-2-c2: #cccc00;
   --color-softcapper-level-3-c1: #cccc00;
   --color-softcapper-level-3-c2: #cc6600;
+  --color-softcapper-level-4-c1: #cc6600;
+  --color-softcapper-level-4-c2: #cc0000;
   --color-break-amplivault-1: #ff0095;
   --color-break-amplivault-2: #8400ff;
   --color-break-amplivault-bg-1: hsl(325, 100%, 9%);
@@ -499,6 +501,10 @@
 
   .softcap-3 {
     @apply text-gradient bg-linear-to-r from-softcapper-level-3-c1 to-softcapper-level-3-c2;
+  }
+
+  .softcap-4 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-4-c1 to-softcapper-level-4-c2;
   }
 
   .more-menu-row {
