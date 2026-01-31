@@ -1,0 +1,37 @@
+@theme {
+  @keyframes animated-gradient {
+    0% {
+      background-position: calc(
+          var(--gradient-step) / sin(var(--gradient-angle))
+        )
+        0;
+    }
+  }
+
+  @keyframes amplivault-animation {
+    0% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(135deg);
+    }
+    100% {
+      transform: rotate(135deg);
+    }
+  }
+
+  @keyframes amplivault-animation-2 {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 0%;
+    }
+    75% {
+      width: 50%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
+}

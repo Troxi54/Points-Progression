@@ -24,15 +24,17 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@player/*": ["src/player/*"],
-      "@gameLoop/*": ["src/gameLoop/*"],
-      "@utils/*": ["src/utils/*"],
-      "@assets/*": ["src/assets/*"]
+      "@app/*": ["src/app/*"],
+      "@core/*": ["src/core/*"],
+      "@game/*": ["src/game/*"],
+      "@ui/*": ["src/ui/*"],
+      "@/*": ["src/*"]
     },
 
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": [
+      "./node_modules/@extensions/augmentations",
+      "./src/extensions/augmentations"
+    ]
   },
   "include": ["src"]
 }

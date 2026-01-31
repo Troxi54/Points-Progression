@@ -1,0 +1,227 @@
+@layer components {
+  #root {
+    @apply size-full flex-col gap-2;
+  }
+
+  #open-menu-buttons > button {
+    @apply p-0 h-full aspect-square border-none rounded-[0.5em]
+           transition-colors duration-100 ease-linear
+           bg-open-menu-button-bg hover:bg-open-menu-button-bg-hover;
+  }
+
+  #amplivault-line-container > div {
+    @apply absolute w-full h-[0.1em] bg-amplivault-div-4-bg;
+  }
+  #amplivault-line-container > div::after {
+    @apply content-[''] w-0 h-[0.2em] bg-amplivault-div-5-bg animate-[amplivault-animation-2_1.5s_linear_infinite];
+  }
+
+  .auto-input {
+    @apply min-w-[1ch] w-[calc(var(--chars,1)*1ch)];
+  }
+
+  .circle-list {
+    @apply list-disc list-inside;
+  }
+
+  .layer {
+    @apply relative flex-col w-full gap-4 bg-layer-bg py-4 overflow-visible
+            before:-top-6 before:bg-linear-to-b
+            after:-bottom-6 after:bg-linear-to-t;
+  }
+  .layer::before,
+  .layer::after {
+    @apply content-[''] w-full absolute h-6 from-transparent to-layer-bg;
+  }
+  .layer > div,
+  .layer > button {
+    @apply w-full bg-layer-inner-bg;
+  }
+
+  .upgrade {
+    @apply bg-button-bg min-w-[15em] max-w-[50em] flex-1 rounded-[0.25em];
+  }
+  .upgrade.bought {
+    @apply bg-button-bought pointer-events-none select-text;
+  }
+
+  .small-text {
+    @apply font-sans text-[0.75em] text-menu-small-text;
+  }
+
+  .menu-button {
+    @apply relative bg-menu-button-bg hover:bg-menu-button-bg-hover
+           border-none rounded-[0.375em]
+           items-center justify-center content-center flex-row
+           transition-colors duration-100 ease-linear;
+  }
+  .menu-button > p {
+    @apply m-0;
+  }
+
+  .image-button {
+    @apply p-0;
+  }
+
+  .big {
+    @apply text-[1.25em];
+  }
+
+  .small {
+    @apply text-[0.75em] leading-[0.75em];
+  }
+
+  .muted {
+    @apply text-[0.75em] text-text-muted;
+  }
+
+  .horizontal-container {
+    @apply flex-row gap-[1em];
+  }
+
+  .vertical-container {
+    @apply flex-col gap-[1em];
+  }
+
+  .link-button {
+    @apply px-[1.2em] py-[0.5em] flex flex-row justify-center items-center gap-[0.5em] box-border
+          text-[1.2em];
+  }
+  .link-button > img {
+    @apply h-[1em] w-[initial];
+  }
+
+  .tooltip {
+    @apply z-1;
+  }
+  .tooltip-trigger {
+    @apply absolute right-0 top-0 bg-transparent size-full rounded-tr-[0.375em] rounded-[inherit];
+  }
+  .tooltip-trigger:hover ~ .tooltip {
+    @apply opacity-100 translate-y-[1em];
+  }
+
+  .tooltip {
+    @apply absolute top-4/5 left-1/2 text-[0.7em] p-[0.4em] bg-tooltip-bg pointer-events-none w-85/100 -translate-x-1/2 opacity-0 transition-[transform_opacity] duration-200 transition-ease;
+  }
+  .tooltip > * {
+    @apply m-0;
+  }
+
+  .spoiler {
+    @apply text-transparent bg-spoiler-bg transition-colors-250;
+  }
+  .spoiler:hover {
+    @apply text-white bg-transparent;
+  }
+
+  .save-button {
+    @apply transition-[scale,background];
+  }
+  .save-button > p {
+    @apply transition-[color,opacity];
+  }
+  .save-button,
+  .save-button > p {
+    @apply duration-(--duration);
+  }
+  .saved {
+    @apply scale-110 bg-positive-menu-button-bg hover:bg-positive-menu-button-bg-hover;
+  }
+  .saved > p {
+    @apply text-positive-menu-button-text;
+  }
+
+  .underline-effect-button {
+    overflow: hidden;
+  }
+  .underline-effect-button::after {
+    @apply content-[''] transition-[scale] duration-300 absolute w-full h-[0.25em] bottom-0 scale-y-0 opacity-0 origin-bottom;
+  }
+  .underline-effect-button.active::after {
+    @apply bg-white scale-y-100 opacity-100;
+  }
+
+  .softcap-1 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-1-from to-softcapper-level-1-to;
+  }
+  .softcap-2 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-2-from to-softcapper-level-2-to;
+  }
+  .softcap-3 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-3-from to-softcapper-level-3-to;
+  }
+  .softcap-4 {
+    @apply text-gradient bg-linear-to-r from-softcapper-level-4-from to-softcapper-level-4-to;
+  }
+
+  .dark-energy {
+    @apply text-dark-energy text-shadow-[0_0_.1em,0_0_.1em] text-shadow-dark-energy;
+  }
+
+  .nullith {
+    @apply text-gradient bg-linear-45 [background-image:var(--nullith-gradient)];
+  }
+
+  .softcap-container > p {
+    @apply my-0;
+  }
+  .softcap-container > p:first-of-type {
+    @apply mt-4;
+  }
+  .softcap-container > p:last-of-type {
+    @apply mb-4;
+  }
+
+  .break-amplivault {
+    @apply text-gradient bg-linear-to-r from-break-amplivault-1 to-break-amplivault-2;
+  }
+
+  .broken-amplivault {
+    @apply text-gradient;
+    background-image: var(--broken-amplivault-gradient-text);
+  }
+
+  .nullifice {
+    @apply text-gradient;
+    background-image: var(--nullifice-gradient);
+  }
+  .nullifice-description {
+    @apply text-gradient bg-linear-to-r from-nullifice-description-1 to-nullifice-description-2;
+  }
+
+  .sliph {
+    @apply text-gradient;
+    background-image: var(--sliph-gradient);
+  }
+  .sliph-description {
+    @apply text-gradient bg-linear-to-r from-sliph-description-1 to-sliph-description-2;
+  }
+
+  .cappergy {
+    @apply text-gradient;
+    background-image: var(--cappergy-gradient);
+  }
+  .cappergy-effect {
+    @apply text-gradient;
+    background-image: var(--cappergy-effect-gradient);
+  }
+
+  .nuxar {
+    @apply text-gradient;
+    background-image: var(--nuxar-gradient);
+  }
+  .nuxar-description {
+    @apply text-gradient;
+    background-image: var(--nuxar-gradient-description);
+  }
+
+  .nexus {
+    @apply text-gradient;
+    background-image: var(--nexus-gradient);
+  }
+  .nexus-description {
+    @apply text-gradient;
+    background-image: var(--nexus-gradient-description);
+  }
+}

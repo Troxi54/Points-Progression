@@ -1,0 +1,360 @@
+@theme {
+  --color-bg: #0e0e0e;
+  --color-loading-bg: #0e0e0e;
+  --color-text-primary: #ffffffde;
+  --color-text-muted: oklch(67.64% 0.00008 271.152);
+  --color-time: var(--color-text-muted);
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+
+  --color-effect: var(--color-text-muted);
+  --effect-source: oklch(47.347% 0.1943 29.223);
+
+  --color-success: #51c451;
+  --color-success-muted: #629261;
+  --color-enabled: #8dee9d;
+  --color-disabled: #ee8d8d;
+  --color-important: #ff9494;
+
+  --color-button-bg: #202020;
+  --color-button-border-hover: white;
+  --color-button-bought: #424242;
+
+  --color-menu-small-text: #ffffffbf;
+
+  --color-menu-button-bg: oklch(24.776% 0 0);
+  --color-menu-button-bg-hover: oklch(28.908% 0 0);
+  --color-open-menu-container-bg: rgba(20, 20, 20, 0.75);
+  --color-open-menu-button-bg: rgb(48, 48, 48, 0.5);
+  --color-open-menu-button-bg-hover: rgb(66, 66, 66, 0.5);
+
+  --color-positive-menu-button-bg: oklch(24.776% 0.04662 141.103);
+  --color-positive-menu-button-bg-hover: oklch(28.908% 0.03593 141.103);
+  --color-positive-menu-button-text: oklch(75.285% 0.14857 141.103);
+
+  --color-negative-menu-button-bg: oklch(24.776% 0.04662 20.884);
+  --color-negative-menu-button-bg-hover: oklch(28.908% 0.03593 20.884);
+  --color-negative-menu-button-text: oklch(75.285% 0.14857 20.884);
+
+  --color-page-container-bg: rgba(54, 54, 54, 0.75);
+  --color-page-button-bg: rgba(98, 98, 98, 0.5);
+  --color-page-button-bg-hover: rgba(130, 130, 130, 0.5);
+
+  --color-input-bg: rgba(255, 255, 255, 0.25);
+  --color-input-text: rgb(219, 219, 219);
+  --color-input-text-focus: rgb(255, 255, 255);
+
+  --color-tooltip-bg: #111111;
+  --color-tooltip-trigger: #181818;
+  --color-spoiler-bg: #202020;
+
+  --color-overlay-1: rgba(0, 0, 0, 1);
+  --color-overlay-2: rgba(0, 0, 0, 0.5);
+  --color-overlay-menu: rgb(54, 54, 54, 0.85);
+
+  --color-discord: #5865f2;
+  --color-discord-hover: #7884f8;
+  --color-github: #24292f;
+  --color-github-hover: #2e3640;
+
+  --color-formula-body-bg: #272727;
+  --color-formula-stat-bg: #181818;
+
+  --color-layer-bg: #363636;
+  --color-layer-inner-bg: #202020;
+
+  --color-upgrade-description: #949494;
+
+  --color-offline-bar: oklch(72.935% 0.18687 194.807);
+  --color-offline-time: oklch(58.265% 0.04953 194.807);
+
+  --color-description-gradient-fill: rgba(0, 0, 0, 0.3);
+
+  --color-point-upgrade-bg: #2e2e16;
+  --color-point-upgrade-accent: #ffff00;
+  --color-point-upgrade-accent-hover: #fff598;
+  --color-point-upgrade-effect: #8c9462;
+
+  --color-reset: oklch(72.935% 0.18687 143.382);
+  --color-reset-effect: oklch(61.23% 0.08937 143.958);
+
+  --color-tier: #008cff;
+  --color-tier-effect: oklch(58.265% 0.04953 236.702);
+
+  --color-ampliflux: #002aff;
+  --color-ampliflux-effect: #001a9e;
+  --color-ampliflux-bg: #08113a;
+  --color-ampliflux-upgrade-bg: #16192d;
+  --color-ampliflux-upgrade-hover: #99aaff;
+  --color-ampliflux-upgrade-effect: #626a93;
+
+  --color-vermyros: #ff0000;
+  --color-vermyte: var(--color-vermyros);
+  --color-vermyros-effect: #955f5f;
+  --color-vermyros-1: #e41212;
+  --color-vermyros-2: #850909;
+  --color-vermyte-upgrade-bg: #2d1616;
+  --color-vermyte-upgrade-effect: var(--color-vermyros-effect);
+  --color-vermyte-hover: #ff9999;
+
+  --color-amplivault: #4400ff;
+  --color-amplivault-bg: hsl(255, 33%, 9%);
+  --color-amplivault-info: hsl(256, 100%, 50%);
+  --color-amplivault-description: hsl(256, 100%, 36%);
+
+  --color-amplivault-div-bg: #190b42;
+  --color-amplivault-div-border: #4400ff;
+  --color-amplivault-div-2-bg: #251155;
+  --color-amplivault-div-2-border: #002aff;
+  --color-amplivault-div-3-bg: #240053;
+  --color-amplivault-div-3-border: #002aff;
+  --color-amplivault-div-4-bg: #294cff;
+  --color-amplivault-div-5-bg: #150030;
+
+  --color-broken-amplivault-1: hsl(0, 0%, 0%);
+  --color-broken-amplivault-2: hsl(326, 100%, 50%);
+  --color-broken-amplivault-3: hsl(255, 100%, 50%);
+  --broken-amplivault-gradient: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-1),
+    var(--color-broken-amplivault-2),
+    var(--color-broken-amplivault-3),
+    var(--color-broken-amplivault-2),
+    var(--color-broken-amplivault-1)
+  );
+  --color-broken-amplivault-text-1: hsl(326, 100%, 10%);
+  --color-broken-amplivault-text-2: hsl(326, 100%, 50%);
+  --color-broken-amplivault-text-3: hsl(255, 100%, 50%);
+  --broken-amplivault-gradient-text: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-text-1),
+    var(--color-broken-amplivault-text-2),
+    var(--color-broken-amplivault-text-3),
+    var(--color-broken-amplivault-text-2),
+    var(--color-broken-amplivault-text-1)
+  );
+  --color-broken-amplivault-bg-1: hsl(0, 0%, 0%);
+  --color-broken-amplivault-bg-2: hsl(327, 100%, 4.5%);
+  --color-broken-amplivault-bg-3: hsl(255, 33%, 9%);
+  --broken-amplivault-gradient-bg: linear-gradient(
+    to right,
+    var(--color-broken-amplivault-bg-1),
+    var(--color-broken-amplivault-bg-2),
+    var(--color-broken-amplivault-bg-3),
+    var(--color-broken-amplivault-bg-2),
+    var(--color-broken-amplivault-bg-1)
+  );
+
+  --color-softcapper-bg-1: #000033;
+  --color-softcapper-bg-2: #003300;
+  --color-softcapper-header-1: #0000ff;
+  --color-softcapper-header-2: #00ff00;
+
+  --color-softcapper-level-1-from: #0000cc;
+  --color-softcapper-level-1-to: #00cc00;
+  --color-softcapper-level-2-from: #00cc00;
+  --color-softcapper-level-2-to: #cccc00;
+  --color-softcapper-level-3-from: #cccc00;
+  --color-softcapper-level-3-to: #cc6600;
+  --color-softcapper-level-4-from: #cc6600;
+  --color-softcapper-level-4-to: #cc0000;
+
+  --color-energy: oklch(96.798% 0.21094 109.783);
+  --color-energy-effect: oklch(67.687% 0.1475 109.783);
+  --color-energy-bg: #3a3a08;
+
+  --color-energy-reactor: oklch(76.523% 0.17515 62.566);
+  --color-energy-reactor-effect: oklch(0.5441 0.1233 62.57);
+  --color-energy-reactor-bg: #3a2508;
+
+  --color-core: #fff;
+  --color-core-effect: #9e9e9e;
+  --color-core-bg: #111111;
+  --color-core-description: #afafaf;
+  --color-core-upgrade-effect: #949494;
+
+  --color-dark-energy: #000;
+  --color-dark-energy-effect: #111;
+  --color-dark-energy-bg: #aaaaaa;
+
+  --color-nullith-1: #2c2c2c;
+  --color-nullith-2: #000;
+  --color-nullith-effect: rgb(148, 148, 148);
+  --nullith-gradient: linear-gradient(45deg in oklab, #000000, #ffffff);
+
+  --color-nullifice-1: oklch(80.762% 0.15208 318.231);
+  --color-nullifice-2: oklch(87.674% 0.08581 64.019);
+  --nullifice-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-nullifice-1),
+    var(--color-nullifice-2)
+  );
+  --color-nullifice-description-1: oklch(63.339% 0.11793 318.259);
+  --color-nullifice-description-2: oklch(68.702% 0.06569 63.184);
+  --nullifice-gradient-bg: linear-gradient(
+    to right in oklab,
+    oklch(33.54% 0.05174 318.22),
+    oklch(35.87% 0.027 64.476)
+  );
+
+  --color-break-amplivault-1: #ff0095;
+  --color-break-amplivault-2: #8400ff;
+  --color-break-amplivault-bg-1: hsl(325, 100%, 9%);
+  --color-break-amplivault-bg-2: hsl(271, 100%, 9%);
+  --color-break-amplivault-info-1: hsl(325, 100%, 35%);
+  --color-break-amplivault-info-2: hsl(271, 100%, 35%);
+
+  --color-sliph-1: rgb(137, 255, 255);
+  --color-sliph-2: rgb(67, 155, 190);
+  --sliph-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-sliph-1),
+    var(--color-sliph-2)
+  );
+  --color-sliph-description-1: rgb(99, 184, 184);
+  --color-sliph-description-2: rgb(48, 112, 137);
+  --sliph-gradient-bg: linear-gradient(
+    to right in oklab,
+    rgb(25, 46, 46),
+    rgb(12, 28, 34)
+  );
+
+  --color-point-upgrade-bg: hsl(60, 35%, 13%);
+  --color-point-upgrade-accent: hsl(60, 100%, 50%);
+  --color-point-upgrade-accent-hover: hsl(54, 100%, 80%);
+  --color-point-upgrade-effect: hsl(70, 20%, 48%);
+
+  --color-dertoint-upgrade-bg: hsl(29, 35%, 13%);
+  --color-dertoint-upgrade-accent: hsl(29, 100%, 50%);
+  --color-dertoint-upgrade-accent-hover: hsl(29, 100%, 80%);
+  --color-dertoint-upgrade-effect: hsl(29, 20%, 48%);
+
+  --color-mallirt-bar: #c451bb;
+  --color-mallirt-effect: #92618c;
+
+  --color-cappergy-1: oklch(77.751% 0.15953 166.602);
+  --color-cappergy-2: oklch(64.755% 0.20418 11.05);
+  --cappergy-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-cappergy-1),
+    var(--color-cappergy-2)
+  );
+  --color-cappergy-effect-1: oklch(60.088% 0.12176 167.099);
+  --color-cappergy-effect-2: oklch(50.981% 0.1591 11.017);
+  --cappergy-effect-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-cappergy-effect-1),
+    var(--color-cappergy-effect-2)
+  );
+  --color-cappergy-bg-1: oklch(35.071% 0.06953 168.561);
+  --color-cappergy-bg-2: oklch(31.605% 0.08823 8.165);
+  --cappergy-bg-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-cappergy-bg-1),
+    var(--color-cappergy-bg-2)
+  );
+
+  --color-level: oklch(96.798% 0.21094 109.783);
+  --color-level-bar: oklch(77.963% 0.13478 109.174);
+  --color-level-effect: oklch(63.238% 0.06034 108.034);
+  --color-xp-bar: oklch(77.963% 0.13478 109.174 / 0.1);
+
+  --color-nuxar-1: #ffffff;
+  --color-nuxar-2: #ef8354;
+  --color-nuxar-3: #4f5d75;
+  --nuxar-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-nuxar-1),
+    var(--color-nuxar-2),
+    var(--color-nuxar-3)
+  );
+  --nuxar-gradient-border: linear-gradient(
+    to left in oklab,
+    var(--color-nuxar-1),
+    var(--color-nuxar-2),
+    var(--color-nuxar-3)
+  );
+  --color-nuxar-description-1: #a8a8a8;
+  --color-nuxar-description-2: #c34812;
+  --color-nuxar-description-3: #343d4d;
+  --nuxar-gradient-description: linear-gradient(
+    to right in oklab,
+    var(--color-nuxar-description-1),
+    var(--color-nuxar-description-2),
+    var(--color-nuxar-description-3)
+  );
+  --color-nuxar-bg-1: #333333;
+  --color-nuxar-bg-2: #3b1606;
+  --color-nuxar-bg-3: #101317;
+  --nuxar-gradient-bg: linear-gradient(
+    to left in oklab,
+    var(--color-nuxar-bg-1),
+    var(--color-nuxar-bg-2),
+    var(--color-nuxar-bg-3)
+  );
+
+  --color-nexus-1: #cbc5ea;
+  --color-nexus-2: #73628a;
+  --color-nexus-3: #313d5a;
+  --nexus-gradient: linear-gradient(
+    to right in oklab,
+    var(--color-nexus-1),
+    var(--color-nexus-2),
+    var(--color-nexus-3)
+  );
+  --color-nexus-description-1: #847f99;
+  --color-nexus-description-2: #473c55;
+  --color-nexus-description-3: #1d2435;
+  --nexus-gradient-description: linear-gradient(
+    to right in oklab,
+    var(--color-nexus-description-1),
+    var(--color-nexus-description-2),
+    var(--color-nexus-description-3)
+  );
+  --color-nexus-bg-1: #32303a;
+  --color-nexus-bg-2: #17131b;
+  --color-nexus-bg-3: #0a0d13;
+  --nexus-gradient-bg: linear-gradient(
+    to right in oklab,
+    var(--color-nexus-bg-1),
+    var(--color-nexus-bg-2),
+    var(--color-nexus-bg-3)
+  );
+  --color-nexus-milestone-bg: #ffffff0c;
+
+  --color-amplivoid: #415a77;
+  --color-amplivoid-effect: #243242;
+  --color-amplivoid-bg: #151d27;
+  --color-amplivoid-upgrade-bg: #151b22;
+  --color-amplivoid-upgrade-hover: #8e9eaf;
+  --color-amplivoid-upgrade-effect: #3e4853;
+}
+
+:root {
+  --nexus-milestone-1: #fff;
+  --nexus-milestone-1-bg: rgba(255, 255, 255, 0.075);
+
+  --nexus-milestone-2: rgb(255, 255, 160);
+  --nexus-milestone-2-bg: rgba(255, 255, 160, 0.075);
+
+  --nexus-milestone-3: rgb(255, 200, 100);
+  --nexus-milestone-3-bg: rgba(255, 200, 100, 0.075);
+
+  --nexus-milestone-4: rgb(255, 125, 25);
+  --nexus-milestone-4-bg: rgba(255, 125, 25, 0.075);
+
+  --nexus-milestone-5: rgb(255, 60, 0);
+  --nexus-milestone-5-bg: rgba(255, 60, 0, 0.075);
+
+  --nexus-milestone-6: rgb(255, 0, 0);
+  --nexus-milestone-6-bg: rgba(255, 0, 0, 0.075);
+
+  --nexus-milestone-7: rgb(255, 0, 100);
+  --nexus-milestone-7-bg: rgba(255, 0, 100, 0.075);
+
+  --nexus-milestone-8: rgb(255, 0, 160);
+  --nexus-milestone-8-bg: rgba(255, 0, 175, 0.075);
+
+  --nexus-milestone-9: rgb(225, 0, 255);
+  --nexus-milestone-9-bg: rgba(225, 0, 255, 0.075);
+}

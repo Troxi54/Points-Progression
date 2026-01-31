@@ -1,0 +1,75 @@
+@layer base {
+  :root {
+    @apply font-[system-ui,Avenir,Helvetica,Arial,sans-serif] scheme-light-dark antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    @apply font-bold text-text-primary text-center;
+  }
+
+  body {
+    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg font-[inherit];
+  }
+
+  p {
+    @apply my-[1em];
+  }
+
+  a {
+    @apply font-medium text-link hover:text-link-hover;
+  }
+
+  h1 {
+    @apply text-[3.2em] my-[.5em];
+  }
+  h2 {
+    @apply text-[1.5em] my-[.83em];
+  }
+  sup,
+  sub {
+    @apply text-inherit;
+  }
+
+  span {
+    @apply text-inherit;
+  }
+
+  button {
+    @apply px-[1.2em] py-[0.6em] text-[1em] bg-button-bg
+           transition-colors-250
+           border-[0.2em] border-transparent cursor-pointer hover:border-button-border-hover;
+  }
+
+  button *,
+  a * {
+    @apply font-medium;
+  }
+
+  div,
+  button {
+    @apply flex items-center justify-center;
+  }
+
+  button {
+    @apply flex-col min-h-[1em];
+  }
+
+  input[type="text"] {
+    @apply h-[1em] text-[1.25em] font-mono py-[0.75em] px-[0.1em] bg-input-bg rounded-xl
+      outline-none transition-colors duration-150 text-input-text focus:text-input-text-focus;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  img {
+    @apply h-1/1;
+  }
+
+  ul {
+    @apply flex flex-col justify-center;
+  }
+
+  li {
+    @apply w-fit text-start;
+  }
+}

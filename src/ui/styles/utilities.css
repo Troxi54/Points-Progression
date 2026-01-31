@@ -1,0 +1,68 @@
+@utility transition-ease {
+  transition-timing-function: cubix-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@utility transition-colors-250 {
+  @apply transition-colors duration-250 transition-ease;
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  & sub,
+  & sup {
+    background-clip: inherit;
+    -webkit-text-fill-color: inherit;
+    -webkit-background-clip: inherit;
+    position: inherit;
+  }
+  & sub {
+    vertical-align: sub;
+  }
+  & sup {
+    vertical-align: super;
+  }
+}
+
+@utility border-image-gradient {
+  border-image-slice: 1;
+  @apply transition-[border-image];
+}
+
+@utility full {
+  @apply absolute inset-0;
+}
+
+@utility before-full {
+  &::before {
+    @apply full;
+  }
+}
+
+@utility after-full {
+  &::after {
+    @apply full;
+  }
+}
+
+@utility animated-gradient {
+  --gradient-angle: 90deg;
+  --gradient-step: 200px;
+  @apply bg-linear-to-r
+         bg-size-[calc(var(--gradient-step)/sin(var(--gradient-angle)))_100%]
+         animate-[animated-gradient_linear_infinite];
+}
+
+@utility absolute-full {
+  @apply absolute size-full;
+}
+
+@utility paused {
+  animation-play-state: paused;
+
+  &::after,
+  &::before {
+    animation-play-state: paused;
+  }
+}
