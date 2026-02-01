@@ -1,0 +1,34 @@
+name: Upload gh-pages to itch.io
+
+on:
+  push:
+    branches:
+      - gh-pages
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: game
+
+      - name: Zip gh-pages
+        run: |
+          cd game
+          zip -r ../game.zip ./*
+
+      - name: Install Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default.zip
+          unzip butler.zip -d butler
+          sudo mv butler/butler /usr/local/bin/
+
+      - name: Upload to itch.io
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          butler push game.zip Troxi/points-progression:html
