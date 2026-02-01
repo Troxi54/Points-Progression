@@ -1,1 +1,0 @@
-import{j as r,C as t,f as o}from"./index-CYklPhvG.js";function c(){return r.jsx(t,{currencyId:"cores",containerClassName:"bg-core-bg",textClassName:"core",effectClassName:"text-core-effect",effectNodes:[{node:({cachedPlayer:e})=>o(e,"cores","energyReactors")}]})}export{c as default};
