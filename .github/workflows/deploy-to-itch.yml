@@ -29,6 +29,6 @@ jobs:
 
       - name: Upload to itch.io
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          butler push game.zip Troxi/points-progression:html
+          echo "$BUTLER_API_KEY" | butler push game.zip Troxi/points-progression:html --uservar api_key
