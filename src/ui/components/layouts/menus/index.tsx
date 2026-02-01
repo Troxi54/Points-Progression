@@ -6,6 +6,7 @@ import SettingsMenu from "./settings/menu";
 import ImportMenu from "./settings/import";
 import ExportMenu from "./settings/export";
 import OfflineMenu from "./offline";
+import PromptRoot from "./prompt";
 
 function Menu() {
   return (
@@ -18,6 +19,7 @@ function Menu() {
         <InfoButton />
 
         <OfflineMenu />
+        <PromptRoot />
 
         <SettingsMenu />
         <InfoMenu />

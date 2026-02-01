@@ -7,9 +7,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), tailwindcss()],
-  base: "/Points-Progression/",
+  base: "./",
   server: {
-    port: 5173
+    port: 5173,
   },
   build: {
     rollupOptions: {
@@ -17,9 +17,9 @@ export default defineConfig({
         visualizer({
           filename: "stats.html",
           gzipSize: true,
-          brotliSize: true
-        })
-      ]
-    }
-  }
+          brotliSize: true,
+        }),
+      ],
+    },
+  },
 });

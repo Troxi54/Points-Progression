@@ -2,7 +2,7 @@
   "homepage": "https://troxi54.github.io/Points-Progression/",
   "name": "points-progression",
   "private": true,
-  "version": "1.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -68,12 +68,25 @@ const Overlay: React.FC<OverlayProps> = ({
     };
   }, [visible, menuId]);
 
+  const position = stack.findIndex((menu) => menu === menuId);
+  const zIndexRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (position !== -1 && zIndexRef.current === null) {
+      zIndexRef.current = 100 + position * 10;
+    }
+
+    if (!shouldRender) {
+      zIndexRef.current = null;
+    }
+  }, [position, shouldRender]);
+
   if (!shouldRender) return null;
 
   const overlayStyle: CSSProperties = {
     opacity: visible ? 1 : 0,
     transition: `opacity ${TRANSITION_TIME}ms ease-out`,
-    zIndex: 100 + stack.length * 10,
+    zIndex: zIndexRef.current ?? 0,
   };
 
   const innerStyle: CSSProperties = {

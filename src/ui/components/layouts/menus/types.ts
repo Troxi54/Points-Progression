@@ -1,5 +1,6 @@
 export type MenuId =
   | "offline"
+  | "prompt"
   | "info"
   | "settings"
   | "settings/import"

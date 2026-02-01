@@ -5,15 +5,18 @@ import { ChangeEvent, useRef } from "react";
 import { resetPlayerDataAndGame } from "@/game/player/utils";
 import Tooltip from "@/ui/components/base/Tooltip";
 import { useMenu } from "../provider";
+import { showPrompt } from "../prompt/service";
 
 function ImportMenu() {
   const { closeAll } = useMenu();
   const closeMenu = () => closeAll();
 
-  function fromText() {
-    const userText = prompt(
-      "Enter your save data here. The current data will be lost."
-    );
+  async function fromText() {
+    const userText = await showPrompt({
+      title: "Import from text",
+      message: "Enter your save data here. The current data will be lost.",
+    });
+
     if (userText) {
       closeMenu();
       importPlayer(userText);
@@ -37,10 +40,13 @@ function ImportMenu() {
     reader.readAsText(file);
   }
 
-  function importDefaultData() {
-    const userText = prompt(
-      "Warning: This will permanently clear your progress. Type 'confirm' (any case) to proceed."
-    );
+  async function importDefaultData() {
+    const userText = await showPrompt({
+      title: "Reset data",
+      message:
+        "Warning: this will permanently clear your progress. Type 'confirm' (any case) to proceed.",
+    });
+
     if (userText?.toLowerCase() === "confirm") {
       closeMenu();
       resetPlayerDataAndGame();
