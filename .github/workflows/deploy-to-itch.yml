@@ -21,7 +21,7 @@ jobs:
           cd game
           zip -r ../game.zip ./*
 
-      - name: Install Butler
+      - name: Install Butler CLI
         run: |
           curl -L --retry 5 -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip -d butler
@@ -31,4 +31,4 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          echo "$BUTLER_API_KEY" | butler push game.zip Troxi/points-progression:html --uservar api_key
+          butler push game.zip Troxi/points-progression:html
