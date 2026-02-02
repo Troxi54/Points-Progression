@@ -14,21 +14,18 @@ jobs:
           ref: gh-pages
           path: game
 
-      - name: Zip gh-pages
+      - name: Check gh-pages folder
         run: |
-          cd game
-          if [ -z "$(ls -A .)" ]; then
+          if [ -z "$(ls -A game)" ]; then
             echo "Error: gh-pages folder is empty"
             exit 1
           fi
-          zip -r ../game.zip ./*
-
-      - name: Install Butler CLI
-        uses: itchio/butler-action@v1
 
       - name: Upload to itch.io
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        run: |
-          butler push game.zip Troxi/points-progression:html
+        uses: Ayowel/butler-to-itch@v1
+        with:
+          butler_key: ${{ secrets.BUTLER_API_KEY }}
+          itch_user: Troxi
+          itch_game: points-progression
+          files: game
           
