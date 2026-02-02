@@ -1,14 +1,14 @@
 import {
   mergeObjects,
   objectEntries,
-  objectFromEntries
+  objectFromEntries,
 } from "@/core/utils/object";
 import getDefaultResetLayerData from "../default";
 import {
   FullResetLayerData,
   PartialResetLayerData,
   PartialResetLayerDataContainer,
-  ResetLayerDataContainer
+  ResetLayerDataContainer,
 } from "../types";
 import { DimensionId } from "@/game/dimensions/types";
 import { hasUpgrade } from "@/game/upgrades/utils/has";
@@ -16,12 +16,12 @@ import { applyResetLayerPlayerData } from "./apply";
 
 export function createResetLayerData(
   resetLayerData: PartialResetLayerData,
-  dimensionId: DimensionId
+  dimensionId: DimensionId,
 ): FullResetLayerData {
   const defaultResetLayer = getDefaultResetLayerData();
   const newResetLayer = mergeObjects(
     defaultResetLayer,
-    resetLayerData
+    resetLayerData,
   ) as FullResetLayerData;
 
   newResetLayer.dimensionId = dimensionId;
@@ -32,26 +32,27 @@ export function createResetLayerData(
   newResetLayer.reset = function (
     mergedPlayer,
     defaultMergedPlayer,
-    currentTime
+    currentTime,
   ) {
     const existingResetValue = oldResetFn(
       mergedPlayer,
       defaultMergedPlayer,
-      currentTime
+      currentTime,
     );
 
     const { player } = existingResetValue;
     let newPlayer = mergeObjects(mergedPlayer.player, player);
 
     const appliedData = applyResetLayerPlayerData(newPlayer, resetLayerId, {
-      everPerformed: true
+      everPerformed: true,
+      startedDate: currentTime,
     });
 
     newPlayer = mergeObjects(newPlayer, appliedData);
 
     const result = {
       ...existingResetValue,
-      player: newPlayer
+      player: newPlayer,
     };
 
     const upgrades = newPlayer.upgrades;
@@ -72,7 +73,7 @@ export function createResetLayerData(
     newPlayer.upgrades = newUpgrades;
     newPlayer.repeatableUpgrades = mergeObjects(
       mergedPlayer.player.repeatableUpgrades,
-      newPlayer.repeatableUpgrades
+      newPlayer.repeatableUpgrades,
     );
 
     return result;
@@ -82,14 +83,14 @@ export function createResetLayerData(
 }
 
 export function createResetLayerDataContainer(
-  container: PartialResetLayerDataContainer
+  container: PartialResetLayerDataContainer,
 ): ResetLayerDataContainer {
   return objectFromEntries(
     objectEntries(container).map(([dimensionId, dimensionLayers]) => {
       const newDimensionLayers = dimensionLayers.map((layer) =>
-        createResetLayerData(layer, dimensionId)
+        createResetLayerData(layer, dimensionId),
       );
       return [dimensionId, newDimensionLayers];
-    })
+    }),
   ) as ResetLayerDataContainer;
 }

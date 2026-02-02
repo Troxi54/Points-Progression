@@ -7,11 +7,11 @@ import { usePlayer } from "@/ui/hooks/usePlayer";
 import { getPlayerState } from "@/game/player/store/store";
 import { ValueGetter } from "@/game/player/types";
 import { parseValueGetter } from "@/game/player/utils";
-import resetLayerConfig from "@/game/resetLayers/config";
 import { ResetLayerId } from "@/game/resetLayers/types";
 import {
   getResetLayerData,
-  getResetLayerPlayerDataProps
+  getResetLayerPlayerDataProps,
+  shouldResetLayerProgressBarLock,
 } from "@/game/resetLayers/utils/get";
 import { mergeObjects } from "@/core/utils/object";
 import { calculateProgress } from "@/core/utils/progress";
@@ -34,7 +34,7 @@ function ResetLayerProgressBar({
   progressFillClassName,
   animatedBarOptions,
   labelParts,
-  customProgress
+  customProgress,
 }: Props) {
   const resetLayerData = getResetLayerData(resetLayerId);
   const { currency, goal } = resetLayerData;
@@ -46,7 +46,7 @@ function ResetLayerProgressBar({
       const { everPerformed, resetsPerSecond } = getResetLayerPlayerDataProps(
         state,
         resetLayerId,
-        ["everPerformed", "resetsPerSecond"]
+        ["everPerformed", "resetsPerSecond"],
       );
 
       const basicSelection = {
@@ -55,10 +55,10 @@ function ResetLayerProgressBar({
         currencyPassiveGain: getCachedCurrencyProp(
           state,
           currency,
-          "passiveGain"
+          "passiveGain",
         ),
         resetsPerSecond,
-        everPerformed
+        everPerformed,
       };
 
       const additionalSelection = resetLayerData.usePlayer?.(state);
@@ -67,16 +67,13 @@ function ResetLayerProgressBar({
 
       return fullSelection;
     },
-    { useFormat: true }
+    { useFormat: true },
   );
 
   const { mergedPlayer } = getPlayerState();
-  const { currencyValue, stableProgressBars, resetsPerSecond, everPerformed } =
-    state;
+  const { currencyValue, everPerformed } = state;
 
-  const { progressBarsStartLockingAt } = resetLayerConfig;
-  const isLocked =
-    stableProgressBars && resetsPerSecond >= progressBarsStartLockingAt;
+  const isLocked = shouldResetLayerProgressBarLock(mergedPlayer, resetLayerId);
 
   const calculatedProgress =
     parseValueGetter(customProgress, mergedPlayer, currencyValue) ??
@@ -86,7 +83,7 @@ function ResetLayerProgressBar({
   const timeLeft = calculateTimeForRequirement(
     currencyValue,
     state.currencyPassiveGain,
-    goal
+    goal,
   );
 
   const currencyName = formatCurrencyName(currency);

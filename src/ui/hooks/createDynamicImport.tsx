@@ -4,7 +4,7 @@ import { ComponentType, useEffect, useState } from "react";
 
 export type DynamicImportFeature<S, P> = [
   () => Promise<{ default: ComponentType<P> }>,
-  (state: S) => boolean
+  (state: S) => boolean,
 ];
 
 export type DynamicImportFeatureContainer<S> = {
@@ -16,7 +16,7 @@ type ComponentOf<F> =
 
 export function createDynamicImport<
   S,
-  F extends DynamicImportFeatureContainer<S>
+  F extends DynamicImportFeatureContainer<S>,
 >(features: F) {
   return (state: S) => {
     const [cache, setCache] = useState<{
@@ -27,7 +27,7 @@ export function createDynamicImport<
 
     useEffect(() => {
       const entries = objectEntries(features).filter(([, [, condition]]) =>
-        condition(state)
+        condition(state),
       );
       Promise.all(
         entries.map(async ([name, [importFn]]) => {
@@ -36,7 +36,7 @@ export function createDynamicImport<
             const mod = await importFn();
             setCache((prev) => ({ ...prev, [key]: mod.default }));
           }
-        })
+        }),
       )
         .then(() => {
           if (!firstComponentsLoaded) setFirstComponentsLoaded(true);

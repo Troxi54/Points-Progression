@@ -1,7 +1,7 @@
 import {
   PartialPlayer,
   PlayerLike,
-  ResetLayerPlayerData
+  ResetLayerPlayerData,
 } from "@/game/player/types";
 import { CachedPlayerLike } from "@/game/player/cached/types";
 import { PartialMergedPlayer } from "@/game/player/merged/types";
@@ -13,26 +13,25 @@ import {
   getResetLayerData,
   getResetLayerDimensionContainer,
   getResetLayerPlayerData,
-  getResetLayerPlayerDataProp
+  getResetLayerPlayerDataProp,
 } from "./get";
 import { shouldDimensionWork } from "@/game/dimensions/utils/check";
 import getDefaultMergedPlayer from "@/game/player/merged/default";
 import {
   parseCachedPlayerLike,
   parsePlayerLike,
-  parseValueGetter
+  parseValueGetter,
 } from "@/game/player/utils";
 import {
   assignCachedPlayerForMergedPlayer,
   assignMergedPlayer,
-  assignPlayerForMergedPlayer,
-  mergePartialPlayer
+  mergePartialPlayer,
 } from "@/game/player/merged/utils";
 import {
   copyObject,
   deepCopy,
   mergeObjects,
-  objectEntries
+  objectEntries,
 } from "@/core/utils/object";
 import { getDefaultResetLayerPlayerData } from "@/game/player/default";
 import { getDefaultCachedResetLayer } from "@/game/player/cached/default";
@@ -45,7 +44,7 @@ import { arrayLastIndex } from "@/core/utils/array";
 export function applyResetLayerPlayerData(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
-  data: Partial<ResetLayerPlayerData>
+  data: Partial<ResetLayerPlayerData>,
 ): PartialPlayer {
   const player = parsePlayerLike(playerLike);
 
@@ -64,13 +63,13 @@ export function applyResetLayerPlayerData(
   newContainer[resetLayerId] = newData;
 
   return {
-    resetLayers: newContainer
+    resetLayers: newContainer,
   };
 }
 
 export function applyToggledResetLayerAuto(
   playerLike: PlayerLike,
-  resetLayerId: ResetLayerId
+  resetLayerId: ResetLayerId,
 ) {
   const player = parsePlayerLike(playerLike);
 
@@ -78,15 +77,15 @@ export function applyToggledResetLayerAuto(
     autoEnabled: !getResetLayerPlayerDataProp(
       player,
       resetLayerId,
-      "autoEnabled"
-    )
+      "autoEnabled",
+    ),
   });
 }
 
 export function applyResetLayerAuto(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
-  value: ResetLayerPlayerData["autoEnabled"]
+  value: ResetLayerPlayerData["autoEnabled"],
 ): PartialPlayer | undefined {
   const player = parsePlayerLike(playerLike);
 
@@ -96,14 +95,14 @@ export function applyResetLayerAuto(
     return;
 
   return applyResetLayerPlayerData(player, resetLayerId, {
-    autoEnabled: value
+    autoEnabled: value,
   });
 }
 
 export function applyResetLayerCachedPlayerData(
   cachedPlayerLike: CachedPlayerLike,
   resetLayerId: ResetLayerId,
-  data: Partial<CachedResetLayer>
+  data: Partial<CachedResetLayer>,
 ): Partial<CachedPlayer> {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
 
@@ -121,13 +120,13 @@ export function applyResetLayerCachedPlayerData(
   newContainer[resetLayerId] = newData;
 
   return {
-    resetLayers: newContainer
+    resetLayers: newContainer,
   };
 }
 
 export function triggerResetLayer(
   mergedPlayer: MergedPlayer,
-  resetLayerId: ResetLayerId
+  resetLayerId: ResetLayerId,
 ): MergedPlayer | undefined {
   const data = getResetLayerData(resetLayerId);
   const { dimensionId } = data;
@@ -137,7 +136,7 @@ export function triggerResetLayer(
   const currentTime = getCurrentGameTime(mergedPlayer);
 
   const resetLayerDimension = getResetLayerDimensionContainer(
-    dimensionId
+    dimensionId,
   ) as FullResetLayerData[];
   const index = resetLayerDimension.indexOf(data);
 
@@ -150,7 +149,7 @@ export function triggerResetLayer(
   const startedDate = getResetLayerPlayerDataProp(
     mergedPlayer,
     resetLayerId,
-    "startedDate"
+    "startedDate",
   );
 
   const resetDuration = startedDate === null ? null : currentTime - startedDate;
@@ -163,7 +162,7 @@ export function triggerResetLayer(
       const resetLayer = layerData.reset(
         result,
         defaultMergedPlayer,
-        currentTime
+        currentTime,
       );
 
       assignMergedPlayer(result, {
@@ -172,9 +171,9 @@ export function triggerResetLayer(
           ...resetLayer.player,
           resetLayers: {
             ...result.player.resetLayers,
-            ...resetLayer.player?.resetLayers
-          }
-        }
+            ...resetLayer.player?.resetLayers,
+          },
+        },
       });
     }
   }
@@ -184,22 +183,13 @@ export function triggerResetLayer(
 
   assignMergedPlayer(result, rewarded);
 
-  const appliedPlayerProperties = applyResetLayerPlayerData(
-    result,
-    resetLayerId,
-    {
-      startedDate: currentTime
-    }
-  );
-
-  assignPlayerForMergedPlayer(result, appliedPlayerProperties);
-
   const appliedCachedProperties = applyResetLayerCachedPlayerData(
     result,
     resetLayerId,
     {
-      lastResetDuration: startedDate === null ? null : currentTime - startedDate
-    }
+      lastResetDuration:
+        startedDate === null ? null : currentTime - startedDate,
+    },
   );
 
   assignCachedPlayerForMergedPlayer(result, appliedCachedProperties);
@@ -209,12 +199,12 @@ export function triggerResetLayer(
 
 function getUpdatedResetLayer(
   mergedPlayer: MergedPlayer,
-  resetLayerId: ResetLayerId
+  resetLayerId: ResetLayerId,
 ): PartialMergedPlayer {
   const currentData = getResetLayerPlayerData(mergedPlayer, resetLayerId);
   const currentCachedData = getResetLayerCachedPlayerData(
     mergedPlayer,
-    resetLayerId
+    resetLayerId,
   );
 
   const { startedDate } = currentData;
@@ -237,32 +227,32 @@ function getUpdatedResetLayer(
   }
 
   const additionalPlayerData: Partial<ResetLayerPlayerData> = {
-    resetsPerSecond
+    resetsPerSecond,
   };
 
   const newPlayerData: ResetLayerPlayerData = mergeObjects(
     currentData,
-    additionalPlayerData
+    additionalPlayerData,
   );
 
   const additionalCachedData: Partial<CachedResetLayer> = {
-    duration: currentDuration
+    duration: currentDuration,
   };
 
   const newCachedData: CachedResetLayer = mergeObjects(
     currentCachedData,
-    additionalCachedData
+    additionalCachedData,
   );
 
   const applied = applyResetLayerPlayerData(
     mergedPlayer,
     resetLayerId,
-    newPlayerData
+    newPlayerData,
   );
   const appliedCached = applyResetLayerCachedPlayerData(
     mergedPlayer,
     resetLayerId,
-    newCachedData
+    newCachedData,
   );
 
   return mergePartialPlayer(applied, appliedCached);
@@ -270,7 +260,7 @@ function getUpdatedResetLayer(
 
 function triggerResetLayers(mergedPlayer: MergedPlayer, result: MergedPlayer) {
   for (const [dimensionId, dimensionResetLayers] of objectEntries(
-    resetLayers
+    resetLayers,
   )) {
     const dimensionWorks = shouldDimensionWork(result, dimensionId);
     if (!dimensionWorks) continue;
@@ -282,7 +272,7 @@ function triggerResetLayers(mergedPlayer: MergedPlayer, result: MergedPlayer) {
       const autoEnabled = getResetLayerPlayerDataProp(
         mergedPlayer.player,
         resetLayerId,
-        "autoEnabled"
+        "autoEnabled",
       );
 
       if (!autoEnabled) continue;
@@ -299,7 +289,7 @@ function triggerResetLayers(mergedPlayer: MergedPlayer, result: MergedPlayer) {
 
 export function tickAllResetLayers(
   mergedPlayer: MergedPlayer,
-  deltaTime: number
+  deltaTime: number,
 ): MergedPlayer {
   const result = deepCopy(mergedPlayer, 2) as MergedPlayer;
 
