@@ -1,9 +1,7 @@
 name: Upload gh-pages to itch.io
 
 on:
-  push:
-    branches:
-      - gh-pages
+  page_build:
   workflow_dispatch:
 
 jobs:
@@ -19,16 +17,18 @@ jobs:
       - name: Zip gh-pages
         run: |
           cd game
+          if [ -z "$(ls -A .)" ]; then
+            echo "Error: gh-pages folder is empty"
+            exit 1
+          fi
           zip -r ../game.zip ./*
 
       - name: Install Butler CLI
-        run: |
-          curl -L --retry 5 -o butler.zip https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default
-          unzip butler.zip -d butler
-          sudo mv butler/butler /usr/local/bin/
+        uses: itchio/butler-action@v1
 
       - name: Upload to itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
           butler push game.zip Troxi/points-progression:html
+          
