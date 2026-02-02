@@ -9,15 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
         with:
           ref: gh-pages
           path: game
 
-      - name: Check gh-pages folder
+      - name: Check gh-pages folder not empty
         run: |
           if [ -z "$(ls -A game)" ]; then
-            echo "Error: gh-pages folder is empty"
+            echo "Error: gh-pages folder is empty!"
             exit 1
           fi
 
@@ -27,5 +28,7 @@ jobs:
           butler_key: ${{ secrets.BUTLER_API_KEY }}
           itch_user: Troxi
           itch_game: points-progression
-          files: game
+          version: ${{ github.sha }}
+          files: |
+            html5 game
           
