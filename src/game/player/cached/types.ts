@@ -24,7 +24,7 @@ export interface CachedPlayer {
   offlineProgressFullTime: number;
   offlineProgressTicksCompleted: number;
   offlineProgressSpeed: number;
-  offlineProgressStartedDate: number;
+  offlineProgressStartedDate: number | null;
   offlineProgressLastTick: number;
 
   runEffect: Decimal;

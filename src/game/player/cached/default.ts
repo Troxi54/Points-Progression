@@ -3,7 +3,7 @@ import {
   CachedCurrency,
   CachedPlayer,
   CachedRepeatableUpgrade,
-  CachedResetLayer
+  CachedResetLayer,
 } from "./types";
 import { getCurrentTime } from "@/core/utils/time";
 
@@ -27,7 +27,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     offlineProgressFullTime: 0,
     offlineProgressTicksCompleted: 0,
     offlineProgressSpeed: 1,
-    offlineProgressStartedDate: currentTime,
+    offlineProgressStartedDate: null,
     offlineProgressLastTick: currentTime,
 
     runEffect: createDecimal(1),
@@ -50,7 +50,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     XPForNextLevel: createDecimal(Infinity),
     levelDertointEffect: createDecimal(1),
 
-    nexusCost: createDecimal(Infinity)
+    nexusCost: createDecimal(Infinity),
   };
 }
 
@@ -59,14 +59,14 @@ export function getDefaultCachedRepeatableUpgrade(): CachedRepeatableUpgrade {
     cost: createDecimal(Infinity),
     effect: createDecimal(1),
     bulk: createDecimal(0),
-    maxed: false
+    maxed: false,
   };
 }
 
 export function getDefaultCachedResetLayer(): CachedResetLayer {
   return {
     duration: null,
-    lastResetDuration: null
+    lastResetDuration: null,
   };
 }
 
@@ -78,6 +78,6 @@ export function getDefaultCachedCurrency(): CachedCurrency {
   return {
     gain: createDecimal(0),
     passiveGain: createDecimal(0),
-    effect: getDefaultCachedCurrencyEffect()
+    effect: getDefaultCachedCurrencyEffect(),
   };
 }

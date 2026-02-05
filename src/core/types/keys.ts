@@ -1,8 +1,8 @@
 import Decimal from "break_eternity.js";
 
-export type DecimalKeys<T> = {
-  [K in keyof T]: T[K] extends Decimal ? K : never;
-}[keyof T];
-export type BooleanKeys<T> = {
-  [K in keyof T]: T[K] extends boolean ? K : never;
-}[keyof T];
+export type Keys<K, T> = {
+  [P in keyof K]: K[P] extends T ? P : never;
+}[keyof K];
+
+export type DecimalKeys<T> = Keys<T, Decimal>;
+export type BooleanKeys<T> = Keys<T, boolean>;
