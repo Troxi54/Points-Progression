@@ -1,1 +1,0 @@
-import{j as r,C as a,f as n}from"./index-D_Chwx-o.js";function s(){return r.jsx(a,{currencyId:"darkEnergy",containerClassName:"bg-dark-energy-bg",textClassName:"dark-energy",effectClassName:"text-dark-energy-effect text-shadow-none",effectNodes:[{node:({cachedPlayer:e})=>n(e,"darkEnergy","energyReactors")}]})}export{s as default};

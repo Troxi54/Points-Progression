@@ -1,1 +1,0 @@
-import{j as t,C as a,f as i}from"./index-D_Chwx-o.js";function m(){return t.jsx(a,{currencyId:"amplivoid",containerClassName:"bg-amplivoid-bg",textClassName:"text-amplivoid",effectClassName:"text-amplivoid-effect",effectNodes:[{node:({cachedPlayer:e})=>i(e,"amplivoid","ampliflux")}]})}export{m as default};

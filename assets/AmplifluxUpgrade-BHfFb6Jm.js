@@ -1,0 +1,1 @@
+import{j as e,R as a}from"./index-DyB5lfAn.js";function p(){return e.jsx(a,{repeatableUpgradeId:"ampliflux",className:"group bg-ampliflux-upgrade-bg hover:border-ampliflux",textClassName:"text-ampliflux group-hover:text-ampliflux-upgrade-hover",effectClassName:"text-ampliflux-upgrade-effect"})}export{p as default};
