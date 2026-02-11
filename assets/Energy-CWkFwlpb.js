@@ -1,1 +1,0 @@
-import{j as t,C as r,f as n}from"./index-DyB5lfAn.js";function a(){return t.jsx(r,{currencyId:"energy",containerClassName:"bg-energy-bg",textClassName:"text-energy",effectClassName:"text-energy-effect",effectNodes:[{node:({cachedPlayer:e})=>n(e,"energy","points")}]})}export{a as default};
