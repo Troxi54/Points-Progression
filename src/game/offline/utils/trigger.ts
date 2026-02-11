@@ -14,7 +14,7 @@ export function triggerOfflineProgress(
   if (!player.offlineProgressWorks) {
     return setPlayer({
       lastTick: currentTime,
-      offlineOffset: (player.offlineOffset += deltaTime),
+      offlineOffset: player.offlineOffset + deltaTime,
     });
   }
 

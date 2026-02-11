@@ -39,13 +39,20 @@ export default function gameLoopPostTick(state: GameLoopPartState) {
     player.unspentOfflineTime = 0;
   }
 
-  const instantTPS = 1000 / state.deltaTimeSession;
-  if (cachedPlayer.ticksPerSecond === 0) {
-    cachedPlayer.ticksPerSecond = instantTPS;
+  let instantTPS =
+    state.deltaTimeSession > 0 ? 1000 / state.deltaTimeSession : 0;
+  if (!Number.isFinite(instantTPS)) {
+    instantTPS = 0;
   }
 
-  cachedPlayer.ticksPerSecond +=
-    (instantTPS - cachedPlayer.ticksPerSecond) * cachedPlayerConfig.TPSSmooth;
+  if (instantTPS > 0) {
+    if (cachedPlayer.ticksPerSecond === 0) {
+      cachedPlayer.ticksPerSecond = instantTPS;
+    }
+
+    cachedPlayer.ticksPerSecond +=
+      (instantTPS - cachedPlayer.ticksPerSecond) * cachedPlayerConfig.TPSSmooth;
+  }
 
   player.lastTick = currentTime;
   cachedPlayer.lastTickSession = currentTime;

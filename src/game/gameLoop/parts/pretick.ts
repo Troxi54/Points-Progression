@@ -18,7 +18,12 @@ export default function gameLoopPreTick(currentTime: number) {
     const tickTime =
       (newCachedPlayer.offlineProgressSpeed / offlineConfig.ticksOnTrigger) *
       newCachedPlayer.offlineProgressFullTime;
-    timeSpeed = tickTime / partState.deltaTimeTPS;
+    if (partState.deltaTimeTPS > 0) {
+      timeSpeed = tickTime / partState.deltaTimeTPS;
+    }
+    if (!Number.isFinite(timeSpeed) || timeSpeed < 0) {
+      timeSpeed = 1;
+    }
   }
 
   newCachedPlayer.timeSpeed = timeSpeed;
