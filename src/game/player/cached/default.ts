@@ -20,6 +20,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     resetsAccumulator: 0,
     repeatableUpgrades: {},
     highestResetDuration: 0,
+    gameProgress: createDecimal(0),
 
     ticksPerSecond: 0,
 

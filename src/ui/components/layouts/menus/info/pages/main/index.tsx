@@ -1,12 +1,13 @@
 import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
 import Image from "@/ui/components/base/Image";
 import gameConfig from "@/core/config/data";
-import { formatNumber } from "@/core/format/number";
 import discordIcon from "@ui/assets/discord.svg";
 import githubIcon from "@ui/assets/github.svg";
+import patreonIcon from "@ui/assets/patreon.svg";
 import LinkButton from "@/ui/components/base/LinkButton";
 import { gameVersionToString } from "@/core/config/utils";
 import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import MenuInfoMainPageGameProgress from "./endgame";
 
 function MenuInfoMainPage() {
   return (
@@ -34,9 +35,7 @@ function MenuInfoMainPage() {
           <span className="small-text">Version: </span>
           {gameVersionToString(gameConfig.gameVersion)}
           <br />
-          <span className="small-text">Endgame: </span>
-          <span className="spoiler">{formatNumber(gameConfig.endgameAt)}</span>
-          <span className="small-text"> (hover to reveal)</span>
+          <MenuInfoMainPageGameProgress />
         </p>
         <p className="m-0">
           <span className="small-text">Made by </span>Troxi
@@ -52,6 +51,7 @@ function MenuInfoMainPage() {
           <p>Discord</p>
           <Image name="Discord" src={discordIcon} />
         </LinkButton>
+
         <LinkButton
           name="GitHub repository"
           link="https://github.com/Troxi54/Points-Progression"
@@ -59,6 +59,14 @@ function MenuInfoMainPage() {
         >
           <p>GitHub</p>
           <Image name="GitHub" src={githubIcon} />
+        </LinkButton>
+        <LinkButton
+          name="Patreon"
+          link="https://patreon.com/Troxi"
+          className="menu-button bg-patreon hover:bg-patreon-hover"
+        >
+          <p>Patreon</p>
+          <Image name="Patreon" src={patreonIcon} />
         </LinkButton>
       </HorizontalContainer>
     </>

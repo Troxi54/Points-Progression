@@ -30,6 +30,7 @@ export interface Player {
   dimensionId: DimensionId;
 
   points: Decimal;
+  bestPoints: Decimal;
   bestRun: Decimal | null;
   bestPointsOfRun: Decimal;
 
@@ -81,7 +82,7 @@ export type PartialPlayer = Partial<Player>;
 export type UsePlayerFieldsReturn<
   KP extends readonly (keyof Player)[] | undefined,
   KC extends readonly (keyof CachedPlayer)[] | undefined,
-  S extends readonly PlayerSetterName[] | undefined
+  S extends readonly PlayerSetterName[] | undefined,
 > = PickByKeys<Player, KP> & PickByKeys<CachedPlayer, KC> & PickSetters<S>;
 
 export type PlayerLike =

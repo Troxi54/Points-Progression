@@ -13,6 +13,7 @@ function LinkButton({ children, className, name, link }: Props) {
       href={link}
       target="_blank"
       title={name}
+      rel="noopener noreferrer"
     >
       {children}
     </a>

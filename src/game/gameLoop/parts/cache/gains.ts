@@ -8,7 +8,7 @@ export default function gameLoopUpdateGains(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
   state.assignCachedPlayerForMergedPlayer(
-    applyUpdatedCurrencyGains(mergedPlayer)
+    applyUpdatedCurrencyGains(mergedPlayer),
   );
 
   updateRelated(state);
@@ -24,4 +24,6 @@ function updateRelated(state: GameLoopPartState) {
   cachedPlayer.nullionInputConverted = parseNullionInput(player);
 
   cachedPlayer.level = formulas.level(mergedPlayer);
+
+  cachedPlayer.gameProgress = formulas.gameProgress(mergedPlayer);
 }

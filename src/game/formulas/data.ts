@@ -7,15 +7,22 @@ import amplivaultConfig from "@/game/features/amplivault/config";
 import { calculateBulk } from "@/core/utils/level";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
 import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
+import gameConfig from "@core/config/data";
 
 const formulas = {
+  bestPoints({ player }) {
+    return player.bestPoints.max(player.points);
+  },
+  gameProgress({ player }) {
+    return player.bestPoints.log(gameConfig.endgameAt).max(0);
+  },
   firstResetLayerRunLimit() {
     return createDecimal(resetLayerConfig.firstResetLayerBestRunLimit);
   },
   firstResetLayerRun(
     { player },
     run: DecimalSource | null,
-    override: boolean = false
+    override: boolean = false,
   ): Decimal | null {
     const lowestLimit = formulas.firstResetLayerRunLimit();
 
@@ -30,7 +37,7 @@ const formulas = {
 
     return newBestRun.clamp(
       lowestLimit,
-      resetLayerConfig.firstResetLayerWorstRunLimit
+      resetLayerConfig.firstResetLayerWorstRunLimit,
     );
   },
   bestPointsOfRun({ player }) {
@@ -43,19 +50,19 @@ const formulas = {
   tierRequirement({ player }) {
     const firstTierAt = getResetLayerData("tier").goal;
     return firstTierAt.multiply(
-      Decimal.pow(resetLayerConfig.tierRequirementScaling, player.tier)
+      Decimal.pow(resetLayerConfig.tierRequirementScaling, player.tier),
     );
   },
   tierBulk(mergedPlayer) {
     const {
-      player: { points }
+      player: { points },
     } = mergedPlayer;
     const requirement = formulas.tierRequirement(mergedPlayer);
 
     return calculateBulk(
       points,
       requirement,
-      resetLayerConfig.tierRequirementScaling
+      resetLayerConfig.tierRequirementScaling,
     );
   },
   bestVermytes(mergedPlayer) {
@@ -67,19 +74,19 @@ const formulas = {
   },
   amplivaultRequirement({ player }) {
     return amplivaultConfig.requirementStartsAt.multiply(
-      Decimal.pow(amplivaultConfig.requirementScaling, player.amplivaultLevel)
+      Decimal.pow(amplivaultConfig.requirementScaling, player.amplivaultLevel),
     );
   },
   amplivaultBulk(mergedPlayer) {
     const {
-      player: { points }
+      player: { points },
     } = mergedPlayer;
     const requirement = formulas.amplivaultRequirement(mergedPlayer);
 
     return calculateBulk(
       points,
       requirement,
-      amplivaultConfig.requirementScaling
+      amplivaultConfig.requirementScaling,
     );
   },
   level({ player: { XP } }) {
@@ -92,7 +99,7 @@ const formulas = {
   XPForThisLevel(mergedPlayer) {
     const level = formulas.level(mergedPlayer);
     return Decimal.pow(2, level.minus(1).max(0));
-  }
+  },
 } as const satisfies FormulaContainer;
 
 export default formulas;

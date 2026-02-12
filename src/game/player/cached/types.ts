@@ -17,6 +17,7 @@ export interface CachedPlayer {
   resetsAccumulator: number;
   currencies: Partial<Record<CurrencyId, CachedCurrency>>;
   highestResetDuration: number;
+  gameProgress: Decimal;
 
   ticksPerSecond: number;
 

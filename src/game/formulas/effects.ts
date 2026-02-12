@@ -17,22 +17,22 @@ const effectFormulas = {
       .times(
         bestRun.lessThanOrEqualTo(GROWTH_POINT)
           ? Decimal.pow(5, GROWTH_POINT.log10().minus(bestRun.log10()))
-          : 1
+          : 1,
       );
   },
   bestPointsOfRun(mergedPlayer) {
     const {
-      player: { bestPointsOfRun }
+      player: { bestPointsOfRun },
     } = mergedPlayer;
 
     const coreUpgradeEffect = calculateRepeatableUpgradeEffect(
       mergedPlayer,
-      "core"
+      "core",
     );
 
     return Decimal.plus(
       1,
-      Decimal.max(bestPointsOfRun, 1e6).dividedBy(1e6).log10()
+      Decimal.max(bestPointsOfRun, 1e6).dividedBy(1e6).log10(),
     )
       .pow(1.3)
       .pow(coreUpgradeEffect);
@@ -46,17 +46,17 @@ const effectFormulas = {
   amplivault({ player }) {
     return Decimal.pow(
       player.amplivaultBroken ? 1.5 : 2,
-      player.amplivaultLevel
+      player.amplivaultLevel,
     );
   },
   firstDertointUpgrade({ player }) {
     return decimalSoftcap(
       Decimal.pow(
         1.15,
-        player.points.dividedBy("e1000").max(0).plus(1).log("e5")
+        player.points.dividedBy("e1000").max(0).plus(1).log("e5"),
       ),
       1e12,
-      0.7
+      0.7,
     );
   },
   levelDertoint(mergedPlayer) {
@@ -88,8 +88,8 @@ const effectFormulas = {
 
     const { player } = mergedPlayer;
 
-    return player.bestVermytes.pow(3.75);
-  }
+    return player.bestVermytes.pow(3.75).max(1);
+  },
 } as const satisfies FormulaContainer;
 
 export default effectFormulas;

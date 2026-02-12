@@ -52,10 +52,12 @@
   --color-overlay-2: rgba(0, 0, 0, 0.5);
   --color-overlay-menu: rgb(54, 54, 54, 0.85);
 
-  --color-discord: #5865f2;
-  --color-discord-hover: #7884f8;
+  --color-discord: hsl(235, 86%, 65%);
+  --color-discord-hover: hsl(234, 90%, 72%);
   --color-github: #24292f;
   --color-github-hover: #2e3640;
+  --color-patreon: #000000;
+  --color-patreon-hover: #1a1a1a;
 
   --color-formula-body-bg: #272727;
   --color-formula-stat-bg: #181818;
@@ -156,8 +158,10 @@
   --color-softcapper-level-2-to: #cccc00;
   --color-softcapper-level-3-from: #cccc00;
   --color-softcapper-level-3-to: #cc6600;
-  --color-softcapper-level-4-from: #cc6600;
+  --color-softcapper-level-4-from: rgb(204, 102, 0);
   --color-softcapper-level-4-to: #cc0000;
+  --color-softcapper-level-5-from: #cc0000;
+  --color-softcapper-level-5-to: rgb(204, 0, 102);
 
   --color-energy: oklch(96.798% 0.21094 109.783);
   --color-energy-effect: oklch(67.687% 0.1475 109.783);

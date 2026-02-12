@@ -5,35 +5,38 @@ import { GameLoopPartState } from "@/game/gameLoop/types";
 import { ResetLayerId } from "@/game/resetLayers/types";
 import { getResetLayerPlayerData } from "@/game/resetLayers/utils/get";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import formulas from "@game/formulas/data";
 
 export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {
   const { mergedPlayer } = state;
   const { player } = mergedPlayer;
 
   state.assignPlayerForMergedPlayer(
-    applyGeneratedCurrencies(mergedPlayer, state.deltaTime)
+    applyGeneratedCurrencies(mergedPlayer, state.deltaTime),
   );
 
   gameLoopGenerateOfflineResets(
     state,
     "tier",
     "madeTierTimes",
-    hasUpgradeById(player, "tier_3")
+    hasUpgradeById(player, "tier_3"),
   );
 
   gameLoopGenerateOfflineResets(
     state,
     "nullith",
     "madeNullithResets",
-    hasUpgradeById(player, "nullith_4")
+    hasUpgradeById(player, "nullith_4"),
   );
+
+  player.bestPoints = formulas.bestPoints(mergedPlayer);
 }
 
 export function gameLoopGenerateOfflineResets(
   state: GameLoopPartState,
   resetLayerId: ResetLayerId,
   currencyId: CurrencyId,
-  condition: boolean = true
+  condition: boolean = true,
 ): void {
   const { mergedPlayer } = state;
   const { player, cachedPlayer } = mergedPlayer;
@@ -42,7 +45,7 @@ export function gameLoopGenerateOfflineResets(
 
   const { autoEnabled, resetsPerSecond } = getResetLayerPlayerData(
     player,
-    resetLayerId
+    resetLayerId,
   );
   if (!autoEnabled) return;
 

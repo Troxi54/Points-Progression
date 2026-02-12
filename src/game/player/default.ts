@@ -25,12 +25,13 @@ export function getDefaultPlayer(): Player {
     upgrades: {},
     repeatableUpgrades: {},
     resetLayers: {
-      reset: firstResetLayerData
+      reset: firstResetLayerData,
     },
 
     dimensionId: "normal",
 
     points: createDecimal(0),
+    bestPoints: createDecimal(0),
     bestRun: null,
     bestPointsOfRun: createDecimal(0),
     tier: createDecimal(0),
@@ -67,7 +68,7 @@ export function getDefaultPlayer(): Player {
     everTriggeredNuxar: false,
     nexusLevel: createDecimal(0),
     bestNexusLevel: createDecimal(0),
-    amplivoid: createDecimal(0)
+    amplivoid: createDecimal(0),
   };
 }
 
@@ -80,7 +81,7 @@ export function getDefaultResetLayerPlayerData(): ResetLayerPlayerData {
     everPerformed: false,
     startedDate: null,
     autoEnabled: true,
-    resetsPerSecond: 0
+    resetsPerSecond: 0,
   };
 }
 
