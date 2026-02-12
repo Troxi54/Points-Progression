@@ -1,1 +1,0 @@
-import{D as s,E as u,F as C,G as i}from"./index-Qj3D4Zb9.js";function h(r,e,c,y){const a=s(r);return u(C(c.map(t=>{const n=`cachedCurrency_${e}_${t}`,o=i(a,e,t);return[n,o]})),{})}function f(r,e,c){return h(r,e,[c])}export{f as g};
