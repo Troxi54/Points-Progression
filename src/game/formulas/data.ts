@@ -31,9 +31,17 @@ const formulas = {
 
     if (run === null) return null;
 
+    const runDecimal = createDecimal(run);
+    if (
+      runDecimal.isNan() ||
+      !runDecimal.isFinite()
+    ) {
+      return null;
+    }
+
     const { bestRun } = player;
     const newBestRun =
-      bestRun && !override ? bestRun.min(run) : createDecimal(run);
+      bestRun && !override ? bestRun.min(runDecimal) : runDecimal;
 
     return newBestRun.clamp(
       lowestLimit,

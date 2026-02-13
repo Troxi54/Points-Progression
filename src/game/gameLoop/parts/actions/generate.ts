@@ -48,6 +48,7 @@ export function gameLoopGenerateOfflineResets(
     resetLayerId,
   );
   if (!autoEnabled) return;
+  if (!Number.isFinite(resetsPerSecond) || resetsPerSecond <= 0) return;
 
   const gain = getCachedCurrencyProp(cachedPlayer, currencyId, "gain");
   const gainPerSecond = gain

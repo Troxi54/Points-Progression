@@ -10,9 +10,14 @@ export function calculateTimeForRequirement(
   currencyGain: DecimalSource,
   requirement: DecimalSource,
 ): Decimal {
+  const gain = createDecimal(currencyGain);
+  if (gain.isNan() || !gain.isFinite() || gain.lessThanOrEqualTo(0)) {
+    return createDecimal(Infinity);
+  }
+
   return createDecimal(requirement)
     .minus(currencyValue)
-    .dividedBy(currencyGain)
+    .dividedBy(gain)
     .multiply(1000)
     .max(0);
 }
@@ -32,13 +37,25 @@ export function getCurrentGameTime(
   )
     return currentTime - player.offlineOffset;
 
+  if (!Number.isFinite(cachedPlayer.offlineProgressStartedDate)) {
+    return currentTime - player.offlineOffset;
+  }
+
+  const ticksOnTrigger = offlineConfig.ticksOnTrigger;
+  if (!Number.isFinite(ticksOnTrigger) || ticksOnTrigger <= 0) {
+    return currentTime - player.offlineOffset;
+  }
+
   const offlineProgress =
-    (cachedPlayer.offlineProgressTicksCompleted ?? 0) /
-    offlineConfig.ticksOnTrigger;
+    (cachedPlayer.offlineProgressTicksCompleted ?? 0) / ticksOnTrigger;
+
+  const fullTime = Number.isFinite(cachedPlayer.offlineProgressFullTime)
+    ? cachedPlayer.offlineProgressFullTime
+    : 0;
 
   return (
     cachedPlayer.offlineProgressStartedDate +
-    (cachedPlayer.offlineProgressFullTime ?? 0) * offlineProgress
+    fullTime * offlineProgress
   );
 }
 

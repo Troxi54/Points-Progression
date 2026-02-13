@@ -13,7 +13,6 @@ function loadPlayerDataFromLocalStorage(): string | null {
 
 export function loadPlayerFromString(str: string): Player | undefined {
   const decompressed = decompressPlayerString(str);
-
   if (!decompressed) return;
 
   let unminified: PartialPlayer;

@@ -12,7 +12,7 @@ export function parseNullionInput(player: Player) {
     let percent = Number(input.slice(0, -1));
     if (!isNaN(percent)) {
       percent = clamp(percent, 0, 100);
-      result = player.madeNullithResets.multiply(percent / 100).floor();
+      result = player.madeNullithResets.multiply(percent / 100);
     }
   } else {
     const decimal = createDecimal(input);
@@ -42,7 +42,7 @@ export function triggerNullifice() {
   setPlayer({
     nullions: player.nullions.plus(gain),
     madeNullithResets: player.madeNullithResets.minus(
-      cachedPlayer.nullionInputConverted
-    )
+      cachedPlayer.nullionInputConverted,
+    ),
   });
 }

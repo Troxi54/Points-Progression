@@ -9,9 +9,15 @@ export default function gameLoopPostTick(state: GameLoopPartState) {
   const { player, cachedPlayer } = mergedPlayer;
 
   if (cachedPlayer.offlineProgress) {
+    let offlineProgressSpeed = cachedPlayer.offlineProgressSpeed;
+    if (!Number.isFinite(offlineProgressSpeed) || offlineProgressSpeed <= 0) {
+      offlineProgressSpeed = 1;
+    }
+    offlineProgressSpeed = Math.min(offlineProgressSpeed, offlineConfig.maxSpeed);
+    cachedPlayer.offlineProgressSpeed = offlineProgressSpeed;
+
     cachedPlayer.offlineProgressTicksCompleted = Math.min(
-      cachedPlayer.offlineProgressTicksCompleted +
-        cachedPlayer.offlineProgressSpeed,
+      cachedPlayer.offlineProgressTicksCompleted + offlineProgressSpeed,
       offlineConfig.ticksOnTrigger
     );
 

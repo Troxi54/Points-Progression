@@ -9,6 +9,13 @@ const effectFormulas = {
   firstResetLayerRun({ player }) {
     const { bestRun } = player;
     if (bestRun === null) return createDecimal(1);
+    if (
+      bestRun.isNan() ||
+      !bestRun.isFinite() ||
+      bestRun.lessThanOrEqualTo(0)
+    ) {
+      return createDecimal(1);
+    }
 
     const GROWTH_POINT = createDecimal(7.2e6);
 

@@ -226,14 +226,27 @@ function getUpdatedResetLayer(
     startedDate === null ? null : currentTime - startedDate;
 
   let resetsPerSecond: number;
+  const hasValidDuration =
+    typeof lastResetDuration === "number" &&
+    Number.isFinite(lastResetDuration) &&
+    lastResetDuration > 0 &&
+    typeof currentDuration === "number" &&
+    Number.isFinite(currentDuration);
+
+  const hasValidTimeSpeed =
+    Number.isFinite(cachedPlayer.timeSpeed) && cachedPlayer.timeSpeed > 0;
+
   if (
-    lastResetDuration === null ||
-    currentDuration === null ||
+    !hasValidDuration ||
+    !hasValidTimeSpeed ||
     currentDuration > lastResetDuration
   ) {
     resetsPerSecond = 0;
   } else {
     resetsPerSecond = (cachedPlayer.timeSpeed * 1000) / lastResetDuration;
+    if (!Number.isFinite(resetsPerSecond) || resetsPerSecond < 0) {
+      resetsPerSecond = 0;
+    }
   }
 
   const additionalPlayerData: Partial<ResetLayerPlayerData> = {

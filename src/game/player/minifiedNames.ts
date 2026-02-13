@@ -1,7 +1,7 @@
 import {
   createUniqueObject,
   objectEntries,
-  objectFromEntries
+  objectFromEntries,
 } from "@/core/utils/object";
 import { Player } from "./types";
 
@@ -53,7 +53,8 @@ export const minifiedPlayerMap = createUniqueObject({
   everTriggeredNuxar: 44,
   nexusLevel: 45,
   bestNexusLevel: 46,
-  amplivoid: 47
+  amplivoid: 47,
+  bestPoints: 48,
 } as const satisfies Record<keyof Player, number>);
 
 export type MinifiedPlayerMap = typeof minifiedPlayerMap;
@@ -61,5 +62,5 @@ export type MinifiedPlayerMap = typeof minifiedPlayerMap;
 export const unminifiedPlayerMap = objectFromEntries(
   objectEntries(minifiedPlayerMap).map(([key, value]) => {
     return [value, key];
-  })
+  }),
 ) as { [K in keyof MinifiedPlayerMap as MinifiedPlayerMap[K]]: K };

@@ -72,9 +72,17 @@ function OfflineMenu() {
           className="menu-button"
           onClick={() => {
             const { cachedPlayer, setCachedPlayer } = getPlayerState();
+            const currentSpeed = cachedPlayer.offlineProgressSpeed;
+            const finiteSpeed =
+              Number.isFinite(currentSpeed) && currentSpeed > 0
+                ? currentSpeed
+                : 1;
 
             setCachedPlayer({
-              offlineProgressSpeed: cachedPlayer.offlineProgressSpeed * 2
+              offlineProgressSpeed: Math.min(
+                finiteSpeed * 2,
+                offlineConfig.maxSpeed
+              )
             });
           }}
         >

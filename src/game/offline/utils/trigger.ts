@@ -44,11 +44,20 @@ export function triggerOfflineProgress(
 export function skipOfflineProgress(): void {
   const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
 
+  const ticksOnTrigger = offlineConfig.ticksOnTrigger;
+  if (!Number.isFinite(ticksOnTrigger) || ticksOnTrigger <= 0) return;
+
+  const completedTicks = Number.isFinite(cachedPlayer.offlineProgressTicksCompleted)
+    ? cachedPlayer.offlineProgressTicksCompleted
+    : 0;
+  const fullTime = Number.isFinite(cachedPlayer.offlineProgressFullTime)
+    ? cachedPlayer.offlineProgressFullTime
+    : 0;
+
   const remainingProgress =
     1 -
-    cachedPlayer.offlineProgressTicksCompleted / offlineConfig.ticksOnTrigger;
-  const remainingTime =
-    remainingProgress * cachedPlayer.offlineProgressFullTime;
+    completedTicks / ticksOnTrigger;
+  const remainingTime = Math.max(remainingProgress, 0) * fullTime;
 
   setMergedPlayer({
     player: {

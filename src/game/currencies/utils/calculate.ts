@@ -13,7 +13,7 @@ import { getDefaultCachedCurrencyEffect } from "@/game/player/cached/default";
 export function calculateCurrencyGain(
   mergedPlayer: MergedPlayer,
   currencyId: CurrencyId,
-  isPassive: boolean = false
+  isPassive: boolean = false,
 ) {
   const gainProperty = currencyGainFormulas[currencyId];
   if (!gainProperty) return createDecimal(0);
@@ -31,12 +31,12 @@ export function calculateCurrencyGain(
     currencyId,
     baseGain,
     data.dimensionId,
-    data.layer
+    data.layer,
   );
   const softcappedGain = mainFormulas.getCurrencySoftcapped(
     mergedPlayer,
     currencyId,
-    beforeSoftcaps
+    beforeSoftcaps,
   );
 
   let afterSoftcaps = softcappedGain;
@@ -56,15 +56,15 @@ export function calculateCurrencyGain(
 
 export function calculateCurrencyPassiveGain(
   mergedPlayer: MergedPlayer,
-  currencyId: CurrencyId
+  currencyId: CurrencyId,
 ) {
-  calculateCurrencyGain(mergedPlayer, currencyId, true);
+  return calculateCurrencyGain(mergedPlayer, currencyId, true);
 }
 
 export function calculateCurrencyPassiveGainFromGain(
   mergedPlayer: MergedPlayer,
   currencyId: CurrencyId,
-  gain: Decimal
+  gain: Decimal,
 ) {
   const gainProperty = currencyGainFormulas[currencyId];
   if (!gainProperty) return getDefaultCachedCurrency().passiveGain;
@@ -77,7 +77,7 @@ export function calculateCurrencyPassiveGainFromGain(
 export function calculateEffectForCurrency(
   mergedPlayer: MergedPlayer,
   currencyId: CurrencyId,
-  currencyFor: CurrencyId
+  currencyFor: CurrencyId,
 ) {
   const effectProperty = currencyEffectFormulas[currencyId];
   if (!effectProperty) return getDefaultCachedCurrencyEffect();

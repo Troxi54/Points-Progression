@@ -17,11 +17,37 @@ type Data = Record<
 >;
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
+function parseFiniteTimestamp(value: unknown): number | null {
+  const parsed =
+    typeof value === "number"
+      ? value
+      : typeof value === "string"
+        ? Number(value)
+        : NaN;
+
+  if (!Number.isFinite(parsed) || parsed <= 0) return null;
+  return parsed;
+}
+
+function parseFiniteNonNegativeNumber(value: unknown): number {
+  const parsed =
+    typeof value === "number"
+      ? value
+      : typeof value === "string"
+        ? Number(value)
+        : NaN;
+
+  if (!Number.isFinite(parsed) || parsed < 0) return 0;
+  return parsed;
+}
+
 const conversionData: Data = {
   upgradeLvl: ({ player }, value) =>
     applyRepeatableUpgradeLevel(player, "point", createDecimal(value)),
   startedRun: ({ player }, value) =>
-    applyResetLayerPlayerData(player, "reset", { startedDate: value }),
+    applyResetLayerPlayerData(player, "reset", {
+      startedDate: parseFiniteTimestamp(value)
+    }),
   bestRun: (mergedPlayer, value) => ({
     bestRun: formulas.firstResetLayerRun(mergedPlayer, value)
   }),
@@ -31,7 +57,7 @@ const conversionData: Data = {
     applyResetLayerPlayerData(player, "reset", { autoEnabled: value }),
   approximateResetsPerSecond: ({ player }, value) =>
     applyResetLayerPlayerData(player, "reset", {
-      resetsPerSecond: createDecimal(value).toNumber()
+      resetsPerSecond: parseFiniteNonNegativeNumber(value)
     }),
   boughtFirstResetUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "reset_1", value),
@@ -40,12 +66,14 @@ const conversionData: Data = {
   everMadeTier: ({ player }, value) =>
     applyResetLayerPlayerData(player, "tier", { everPerformed: value }),
   tierStartedDate: ({ player }, value) =>
-    applyResetLayerPlayerData(player, "tier", { startedDate: value }),
+    applyResetLayerPlayerData(player, "tier", {
+      startedDate: parseFiniteTimestamp(value)
+    }),
   autoTierEnabled: ({ player }, value) =>
     applyResetLayerPlayerData(player, "tier", { autoEnabled: value }),
   approximateTiersPerSecond: ({ player }, value) =>
     applyResetLayerPlayerData(player, "tier", {
-      resetsPerSecond: createDecimal(value).toNumber()
+      resetsPerSecond: parseFiniteNonNegativeNumber(value)
     }),
   boughtFirstTierUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "tier_1", value),
@@ -64,12 +92,14 @@ const conversionData: Data = {
   everMadeVermyros: ({ player }, value) =>
     applyResetLayerPlayerData(player, "vermyros", { everPerformed: value }),
   vermyrosStartedDate: ({ player }, value) =>
-    applyResetLayerPlayerData(player, "vermyros", { startedDate: value }),
+    applyResetLayerPlayerData(player, "vermyros", {
+      startedDate: parseFiniteTimestamp(value)
+    }),
   autoVermyrosEnabled: ({ player }, value) =>
     applyResetLayerPlayerData(player, "vermyros", { autoEnabled: value }),
   approximateVermyrosResetsPerSecond: ({ player }, value) =>
     applyResetLayerPlayerData(player, "vermyros", {
-      resetsPerSecond: createDecimal(value).toNumber()
+      resetsPerSecond: parseFiniteNonNegativeNumber(value)
     }),
   vermytesUpgradeLvl: ({ player }, value) =>
     applyRepeatableUpgradeLevel(player, "vermyte", createDecimal(value)),
@@ -98,12 +128,14 @@ const conversionData: Data = {
   everMadeNullith: ({ player }, value) =>
     applyResetLayerPlayerData(player, "nullith", { everPerformed: value }),
   nullithStartedDate: ({ player }, value) =>
-    applyResetLayerPlayerData(player, "nullith", { startedDate: value }),
+    applyResetLayerPlayerData(player, "nullith", {
+      startedDate: parseFiniteTimestamp(value)
+    }),
   autoNullithEnabled: ({ player }, value) =>
     applyResetLayerPlayerData(player, "nullith", { autoEnabled: value }),
   approximateNullithResetsPerSecond: ({ player }, value) =>
     applyResetLayerPlayerData(player, "nullith", {
-      resetsPerSecond: createDecimal(value).toNumber()
+      resetsPerSecond: parseFiniteNonNegativeNumber(value)
     }),
   boughtFirstNullithUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "nullith_1", value),
@@ -139,12 +171,14 @@ const conversionData: Data = {
   everMadeMallirt: ({ player }, value) =>
     applyResetLayerPlayerData(player, "mallirt", { everPerformed: value }),
   mallirtStartedDate: ({ player }, value) =>
-    applyResetLayerPlayerData(player, "mallirt", { startedDate: value }),
+    applyResetLayerPlayerData(player, "mallirt", {
+      startedDate: parseFiniteTimestamp(value)
+    }),
   autoMallirtEnabled: ({ player }, value) =>
     applyResetLayerPlayerData(player, "mallirt", { autoEnabled: value }),
   approximateMallirtResetsPerSecond: ({ player }, value) =>
     applyResetLayerPlayerData(player, "mallirt", {
-      resetsPerSecond: createDecimal(value).toNumber()
+      resetsPerSecond: parseFiniteNonNegativeNumber(value)
     })
 };
 
