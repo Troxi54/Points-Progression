@@ -1,0 +1,1 @@
+import{j as r,R as t,H as f}from"./index-COOaxVxa.js";function s(){return r.jsx(t,{repeatableUpgradeId:"core",className:"bg-core-bg",effectClassName:"text-core-upgrade-effect",effectChildren:(e,a)=>f(e,a,"pow")})}export{s as default};
