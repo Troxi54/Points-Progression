@@ -1,0 +1,1 @@
+import{j as e,A as o,h as a,S as n,a as u}from"./index-h32nEdgb.js";function c(){return e.jsx(o,{resetLayerId:"tier",usePlayerSelector:({mergedPlayer:r})=>u(r,"vermyros_2"),customChildren:({player:r},t)=>{const s=a(r,"vermyros_2")?"Tier Up":"Tier";return e.jsxs(e.Fragment,{children:["Auto ",s,": ",e.jsx(n,{active:t})]})}})}export{c as default};

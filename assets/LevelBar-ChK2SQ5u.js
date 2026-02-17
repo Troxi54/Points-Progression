@@ -1,0 +1,1 @@
+import{j as e,k as s,v as t,m as a}from"./index-h32nEdgb.js";function n(){return e.jsx(s,{resetLayerId:"level",progressFillClassName:"bg-level-bar",labelParts:({cachedPlayer:r})=>[e.jsxs(e.Fragment,{children:["Level: ",t(r.level)," -"," ",e.jsxs("span",{className:"text-level-effect",children:["Effect:"," ",a(r.levelDertointEffect,"dertoints")]})]})]})}export{n as default};

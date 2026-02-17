@@ -1,1 +1,0 @@
-import{j as e,A as o,h as a,a as n,S as u}from"./index-COOaxVxa.js";function c(){return e.jsx(o,{resetLayerId:"tier",usePlayerSelector:({mergedPlayer:r})=>a(r,"vermyros_2"),customChildren:({player:r},t)=>{const s=n(r,"vermyros_2")?"Tier Up":"Tier";return e.jsxs(e.Fragment,{children:["Auto ",s,": ",e.jsx(u,{active:t})]})}})}export{c as default};
