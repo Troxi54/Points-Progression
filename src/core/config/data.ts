@@ -6,7 +6,7 @@ const gameConfig = {
   gameVersion: {
     major: 1,
     minor: 0,
-    patch: 6,
+    patch: 7,
   } as GameVersion,
   endgameAt: createDecimal("1e4025"),
 } as const;

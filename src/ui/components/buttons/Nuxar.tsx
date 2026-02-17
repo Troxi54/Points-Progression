@@ -9,7 +9,7 @@ import cn from "@/core/utils/tailwind";
 
 function Nuxar() {
   usePlayer(() => null, {
-    useFormat: true
+    useFormat: true,
   });
 
   return (
@@ -17,7 +17,7 @@ function Nuxar() {
       className={cn(
         "[background-image:var(--nuxar-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nuxar-gradient-bg)]",
-        "hover:[border-image-source:var(--nuxar-gradient-border)]"
+        "hover:[border-image-source:var(--nuxar-gradient-border)]",
       )}
       onClick={triggerNuxar}
       aria-label="Trigger Nuxar"
@@ -35,11 +35,12 @@ function Nuxar() {
           currencyId="nux"
           mainTextClassName="nuxar"
           effectClassName="nuxar-description"
+          passiveGainPriority={false}
           effectNodes={[
             {
               node: ({ cachedPlayer }) =>
-                formatCurrencyEffect(cachedPlayer, "nux", "madeNullithResets")
-            }
+                formatCurrencyEffect(cachedPlayer, "nux", "madeNullithResets"),
+            },
           ]}
         />
       </p>

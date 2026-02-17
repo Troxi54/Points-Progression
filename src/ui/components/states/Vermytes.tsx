@@ -20,8 +20,8 @@ function Vermytes() {
               {formatCurrencyEffect(cachedPlayer, "vermytes", "XP")}{" "}
               <span className="text-(--nexus-milestone-9)">(N9)</span>
             </>
-          )
-        }
+          ),
+        },
       ]}
       passiveGainPriority={({ player }) => hasUpgradeById(player, "vermyros_8")}
     />

@@ -14,12 +14,12 @@ function Points() {
               {formatCurrencyEffect(
                 cachedPlayer,
                 "points",
-                "madeNullithResets"
+                "madeNullithResets",
               )}{" "}
               <span className="text-(--nexus-milestone-1)">(N1)</span>
             </>
-          )
-        }
+          ),
+        },
       ]}
     />
   );

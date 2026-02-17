@@ -45,7 +45,7 @@ function CurrencyContent({
   textClassName,
   mainTextClassName,
   children,
-  formatType
+  formatType,
 }: CurrencyComponentProps) {
   const currencyData = getCurrencyData(currencyId);
   if (!currencyData) return null;
@@ -61,7 +61,7 @@ function CurrencyContent({
         currencyValue: state.mergedPlayer.player[currencyId],
         currencyGain: cachedCurrencyData?.gain,
         currencyPassiveGain: cachedCurrencyData?.passiveGain,
-        currencyEffect: effect
+        currencyEffect: effect,
       };
 
       if (effect && !isDecimal(effect)) {
@@ -77,12 +77,12 @@ function CurrencyContent({
 
       const finalSelection = mergeObjects(
         currencySelection,
-        usePlayerSelector?.(state)
+        usePlayerSelector?.(state),
       );
 
       return finalSelection;
     },
-    { useFormat: true }
+    { useFormat: true },
   );
 
   const { currencyValue, currencyGain, currencyPassiveGain } = state;
@@ -91,7 +91,7 @@ function CurrencyContent({
 
   const passiveGainWorks = parseValueGetter(
     currencyData.passiveGainWorks,
-    mergedPlayer
+    mergedPlayer,
   );
 
   const currencyName = formatCurrencyNameEmptyless(currencyId);
@@ -107,7 +107,7 @@ function CurrencyContent({
 
   const onlyPassiveGain =
     passiveGainPriority === undefined
-      ? passiveGainNodeCondition
+      ? true
       : parseValueGetter(passiveGainPriority, mergedPlayer);
 
   const gainNodeCondition =

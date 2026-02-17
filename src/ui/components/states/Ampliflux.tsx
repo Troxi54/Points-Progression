@@ -12,7 +12,7 @@ function Ampliflux() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "ampliflux", "points")
+            formatCurrencyEffect(cachedPlayer, "ampliflux", "points"),
         },
         {
           works: ({ player }) => hasNexusLevel(player, 6),
@@ -21,8 +21,8 @@ function Ampliflux() {
               {formatCurrencyEffect(cachedPlayer, "ampliflux", "madeTierTimes")}{" "}
               <span className="text-(--nexus-milestone-6)">(N6)</span>
             </>
-          )
-        }
+          ),
+        },
       ]}
     />
   );

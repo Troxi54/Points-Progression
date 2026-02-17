@@ -5,7 +5,7 @@ import { calculateTimeForRequirement } from "@/core/utils/time";
 import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
 import {
   getResetLayerData,
-  getResetLayerPlayerDataProp
+  getResetLayerPlayerDataProp,
 } from "@/game/resetLayers/utils/get";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
 import { formatEffectForCurrency } from "@/core/format/effect";
@@ -26,7 +26,7 @@ function TierBar() {
         const autoEnabled = getResetLayerPlayerDataProp(
           player,
           "tier",
-          "autoEnabled"
+          "autoEnabled",
         );
 
         const useFirstTierRequirement =
@@ -45,7 +45,7 @@ function TierBar() {
         const timeLeftForNextTier = calculateTimeForRequirement(
           player[currency],
           pointGain,
-          cachedPlayer.tierRequirement
+          cachedPlayer.tierRequirement,
         );
 
         const hasVermyros_2 = hasUpgradeById(player, "vermyros_2");
@@ -71,7 +71,7 @@ function TierBar() {
                   ,{" "}
                   {formatEffectForCurrency(
                     cachedPlayer.tierVermyteEffect,
-                    "vermytes"
+                    "vermytes",
                   )}{" "}
                   <span className="text-(--nexus-milestone-4)">(N4)</span>
                 </>
@@ -83,15 +83,14 @@ function TierBar() {
               currencyId="madeTierTimes"
               effectClassName="text-tier-effect"
               formatType="integerComma"
-              passiveGainPriority
               effectNodes={[
                 {
                   node: ({ cachedPlayer }) =>
                     formatCurrencyEffect(
                       cachedPlayer,
                       "madeTierTimes",
-                      "points"
-                    )
+                      "points",
+                    ),
                 },
                 {
                   works: ({ player }) => hasNexusLevel(player, 5),
@@ -100,15 +99,15 @@ function TierBar() {
                       {formatCurrencyEffect(
                         cachedPlayer,
                         "madeTierTimes",
-                        "dertoints"
+                        "dertoints",
                       )}{" "}
                       <span className="text-(--nexus-milestone-5)">(N5)</span>
                     </>
-                  )
-                }
+                  ),
+                },
               ]}
             />
-          </>
+          </>,
         ];
       }}
     />

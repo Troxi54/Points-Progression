@@ -17,8 +17,8 @@ function Cappergy() {
               {formatCurrencyEffect(cachedPlayer, "cappergy", "dertoints")}{" "}
               after {formatNumber(cappergyConfig.startsWorkingFrom)}
             </>
-          )
-        }
+          ),
+        },
       ]}
     ></CurrencyComponent>
   );

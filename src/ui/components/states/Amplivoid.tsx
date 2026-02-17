@@ -11,8 +11,8 @@ function Amplivoid() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "amplivoid", "ampliflux")
-        }
+            formatCurrencyEffect(cachedPlayer, "amplivoid", "ampliflux"),
+        },
       ]}
     />
   );

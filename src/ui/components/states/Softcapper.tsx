@@ -1,5 +1,5 @@
 import Pow from "@/ui/components/base/Pow";
-import { formatNumber } from "@/core/format/number";
+import { formatNumber, integerCommaFormat } from "@/core/format/number";
 import { usePlayerFields } from "@/ui/hooks/usePlayer";
 import { getPlayerState } from "@/game/player/store/store";
 import { parseValueGetter } from "@/game/player/utils";
@@ -9,11 +9,11 @@ function Softcapper() {
   const state = usePlayerFields(
     {
       player: ["bestSoftcapperLevel"],
-      cachedPlayer: ["softcapperLevel"]
+      cachedPlayer: ["softcapperLevel"],
     },
     {
-      useFormat: true
-    }
+      useFormat: true,
+    },
   );
 
   const pointSoftcappers = softcapperData.points;
@@ -27,10 +27,24 @@ function Softcapper() {
 
   const { mergedPlayer } = getPlayerState();
 
+  const bestLvl = state.bestSoftcapperLevel.floor();
+  const bestLvlNumber = bestLvl.toNumber();
+
   return (
-    <div className="flex-col bg-linear-to-r from-softcapper-bg-1 to-softcapper-bg-2">
-      <h2 className="text-gradient bg-linear-to-l from-softcapper-header-1 to-softcapper-header-2 text-[2em] mb-[.4em]">
+    <div
+      className="flex-col"
+      style={{
+        backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber}-bg)`,
+      }}
+    >
+      <h2
+        className="text-gradient text-[2em] mb-[.4em]"
+        style={{
+          backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber})`,
+        }}
+      >
         Softcapper
+        {bestLvl.greaterThan(1) && <> ({integerCommaFormat(bestLvl)})</>}
       </h2>
       <div className="softcap-container flex-col gap-y-2">
         {softcappers.map((softcapper, i) => {
@@ -44,7 +58,13 @@ function Softcapper() {
           const formattedPower = formatNumber(power);
 
           return (
-            <p className={"softcap-" + index} key={index}>
+            <p
+              className="text-gradient"
+              key={index}
+              style={{
+                backgroundImage: `var(--gradient-softcapper-level-${index})`,
+              }}
+            >
               Level {index}: at {formatNumber(startsAt)} -{" "}
               {mode === "pow" ? (
                 <>

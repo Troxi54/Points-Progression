@@ -8,7 +8,7 @@ function NullithBar() {
       resetLayerId="nullith"
       mode="animated"
       animatedBarOptions={{
-        gradientAngle: "5deg"
+        gradientAngle: "5deg",
       }}
       progressFillClassName="from-nullith-1 via-nullith-2 to-nullith-1"
       labelParts={() => {
@@ -17,15 +17,14 @@ function NullithBar() {
             currencyId="madeNullithResets"
             formatType="integerComma"
             effectClassName="text-nullith-effect"
-            passiveGainPriority
             effectNodes={[
               {
                 node: ({ cachedPlayer }) =>
                   formatCurrencyEffect(
                     cachedPlayer,
                     "madeNullithResets",
-                    "points"
-                  )
+                    "points",
+                  ),
               },
               {
                 className: "text-vermyros-effect",
@@ -33,8 +32,8 @@ function NullithBar() {
                   formatCurrencyEffect(
                     cachedPlayer,
                     "madeNullithResets",
-                    "vermytes"
-                  )
+                    "vermytes",
+                  ),
               },
               {
                 className: "text-energy-effect",
@@ -42,11 +41,11 @@ function NullithBar() {
                   formatCurrencyEffect(
                     cachedPlayer,
                     "madeNullithResets",
-                    "energy"
-                  )
-              }
+                    "energy",
+                  ),
+              },
             ]}
-          />
+          />,
         ];
       }}
     />

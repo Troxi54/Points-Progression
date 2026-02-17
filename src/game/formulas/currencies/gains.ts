@@ -128,10 +128,10 @@ const currencyGainFormulas: GainFormulaContainer = {
       );
 
       const multiplier = calculateGeneration([
-        [hasUpgradeById(player, "nullith_10"), 1],
-        [hasUpgradeById(player, "nullith_9"), 0.1],
-        [hasUpgradeById(player, "nullith_8"), 0.01],
-        [hasUpgradeById(player, "nullith_7"), 0.001],
+        [hasUpgradeById(player, "nullith_10"), 100],
+        [hasUpgradeById(player, "nullith_9"), 10],
+        [hasUpgradeById(player, "nullith_8"), 1],
+        [hasUpgradeById(player, "nullith_7"), 0.1],
       ]);
 
       return nullithGain.multiply(multiplier);

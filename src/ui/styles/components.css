@@ -142,22 +142,6 @@
     @apply bg-white scale-y-100 opacity-100;
   }
 
-  .softcap-1 {
-    @apply text-gradient bg-linear-to-r from-softcapper-level-1-from to-softcapper-level-1-to;
-  }
-  .softcap-2 {
-    @apply text-gradient bg-linear-to-r from-softcapper-level-2-from to-softcapper-level-2-to;
-  }
-  .softcap-3 {
-    @apply text-gradient bg-linear-to-r from-softcapper-level-3-from to-softcapper-level-3-to;
-  }
-  .softcap-4 {
-    @apply text-gradient bg-linear-to-r from-softcapper-level-4-from to-softcapper-level-4-to;
-  }
-  .softcap-5 {
-    @apply text-gradient bg-linear-to-r from-softcapper-level-5-from to-softcapper-level-5-to;
-  }
-
   .dark-energy {
     @apply text-dark-energy text-shadow-[0_0_.1em,0_0_.1em] text-shadow-dark-energy;
   }

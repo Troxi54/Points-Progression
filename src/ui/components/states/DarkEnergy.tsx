@@ -11,8 +11,8 @@ function DarkEnergy() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "darkEnergy", "energyReactors")
-        }
+            formatCurrencyEffect(cachedPlayer, "darkEnergy", "energyReactors"),
+        },
       ]}
     />
   );

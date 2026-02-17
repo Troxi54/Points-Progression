@@ -10,7 +10,7 @@ function Vermora() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "vermora", "ampliflux")
+            formatCurrencyEffect(cachedPlayer, "vermora", "ampliflux"),
         },
         {
           works: ({ player }) => hasNexusLevel(player, 8),
@@ -19,8 +19,8 @@ function Vermora() {
               {formatCurrencyEffect(cachedPlayer, "vermora", "amplivoid")}{" "}
               <span className="text-(--nexus-milestone-8)">(N8)</span>
             </>
-          )
-        }
+          ),
+        },
       ]}
     />
   );

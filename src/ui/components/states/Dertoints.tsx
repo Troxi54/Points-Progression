@@ -8,8 +8,8 @@ function Dertoints() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "dertoints", "darkEnergy")
-        }
+            formatCurrencyEffect(cachedPlayer, "dertoints", "darkEnergy"),
+        },
       ]}
     />
   );

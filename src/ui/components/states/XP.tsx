@@ -7,18 +7,19 @@ import { calculateProgress } from "@/core/utils/progress";
 function XPState() {
   const { XP, XPForThisLevel, XPForNextLevel } = usePlayerFields({
     player: ["XP"],
-    cachedPlayer: ["XPForThisLevel", "XPForNextLevel"]
+    cachedPlayer: ["XPForThisLevel", "XPForNextLevel"],
   });
 
   const progress = calculateProgress(
     XP.minus(XPForThisLevel),
-    XPForNextLevel.minus(XPForThisLevel)
+    XPForNextLevel.minus(XPForThisLevel),
   );
 
   return (
     <ProgressBar progress={progress} progressFillClassName="bg-xp-bar">
       <CurrencyComponent
         currencyId="XP"
+        passiveGainPriority={false}
         preEffectChildren={() => (
           <>
             {" - "}

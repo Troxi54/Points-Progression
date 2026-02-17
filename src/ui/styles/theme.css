@@ -147,22 +147,6 @@
     var(--color-broken-amplivault-bg-1)
   );
 
-  --color-softcapper-bg-1: #000033;
-  --color-softcapper-bg-2: #003300;
-  --color-softcapper-header-1: #0000ff;
-  --color-softcapper-header-2: #00ff00;
-
-  --color-softcapper-level-1-from: #0000cc;
-  --color-softcapper-level-1-to: #00cc00;
-  --color-softcapper-level-2-from: #00cc00;
-  --color-softcapper-level-2-to: #cccc00;
-  --color-softcapper-level-3-from: #cccc00;
-  --color-softcapper-level-3-to: #cc6600;
-  --color-softcapper-level-4-from: rgb(204, 102, 0);
-  --color-softcapper-level-4-to: #cc0000;
-  --color-softcapper-level-5-from: #cc0000;
-  --color-softcapper-level-5-to: rgb(204, 0, 102);
-
   --color-energy: oklch(96.798% 0.21094 109.783);
   --color-energy-effect: oklch(67.687% 0.1475 109.783);
   --color-energy-bg: #3a3a08;
@@ -222,11 +206,6 @@
     rgb(25, 46, 46),
     rgb(12, 28, 34)
   );
-
-  --color-point-upgrade-bg: hsl(60, 35%, 13%);
-  --color-point-upgrade-accent: hsl(60, 100%, 50%);
-  --color-point-upgrade-accent-hover: hsl(54, 100%, 80%);
-  --color-point-upgrade-effect: hsl(70, 20%, 48%);
 
   --color-dertoint-upgrade-bg: hsl(29, 35%, 13%);
   --color-dertoint-upgrade-accent: hsl(29, 100%, 50%);
@@ -335,6 +314,61 @@
 }
 
 :root {
+  --gradient-softcapper-level-1: linear-gradient(
+    to right in oklab,
+    #0000cc,
+    #00cc00
+  );
+  --gradient-softcapper-level-1-bg: linear-gradient(
+    to right in oklab,
+    rgb(0, 0, 51),
+    rgb(0, 51, 0)
+  );
+
+  --gradient-softcapper-level-2: linear-gradient(
+    to right in oklab,
+    #00cc00,
+    #cccc00
+  );
+  --gradient-softcapper-level-2-bg: linear-gradient(
+    to right in oklab,
+    rgb(0, 51, 0),
+    rgb(51, 51, 0)
+  );
+
+  --gradient-softcapper-level-3: linear-gradient(
+    to right in oklab,
+    #cccc00,
+    #cc6600
+  );
+  --gradient-softcapper-level-3-bg: linear-gradient(
+    to right in oklab,
+    rgb(51, 51, 0),
+    rgb(51, 26, 0)
+  );
+
+  --gradient-softcapper-level-4: linear-gradient(
+    to right in oklab,
+    #cc6600,
+    #cc0000
+  );
+  --gradient-softcapper-level-4-bg: linear-gradient(
+    to right in oklab,
+    rgb(51, 26, 0),
+    rgb(51, 0, 0)
+  );
+
+  --gradient-softcapper-level-5: linear-gradient(
+    to right in oklab,
+    #cc0000,
+    #cc0066
+  );
+  --gradient-softcapper-level-5-bg: linear-gradient(
+    to right in oklab,
+    rgb(51, 0, 0),
+    rgb(51, 0, 26)
+  );
+
   --nexus-milestone-1: #fff;
   --nexus-milestone-1-bg: rgba(255, 255, 255, 0.075);
 

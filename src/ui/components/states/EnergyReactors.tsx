@@ -11,8 +11,8 @@ function EnergyReactors() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "energyReactors", "energy")
-        }
+            formatCurrencyEffect(cachedPlayer, "energyReactors", "energy"),
+        },
       ]}
     />
   );
