@@ -1,15 +1,18 @@
 import Menu from "@/ui/components/layouts/menus";
-import { appStateSelector } from "./selector";
 import NormalDimension from "./dimensions/normal";
 import useGlobalEvents from "@/ui/hooks/useGlobalEvents";
 import useDimensionScroll from "@/ui/hooks/useDimensionScroll";
 import SliphDimension from "./dimensions/sliph";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 function App() {
   useGlobalEvents();
 
-  const appState = appStateSelector();
-  useDimensionScroll({ dimensionId: appState.dimensionId });
+  const state = usePlayerFields({
+    player: ["dimensionId"],
+  });
+
+  useDimensionScroll({ dimensionId: state.dimensionId });
 
   return (
     <>
