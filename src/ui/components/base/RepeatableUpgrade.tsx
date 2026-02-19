@@ -2,16 +2,16 @@ import { hasCurrencyName } from "@/game/currencies/utils/has";
 import { formatCurrencyName } from "@/game/currencies/utils/format";
 import { integerFormat } from "@/core/format/number";
 import { formatWithPlural } from "@/core/format/plural";
-import { usePlayer } from "@/ui/hooks/usePlayer";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { CachedRepeatableUpgrade } from "@/game/player/cached/types";
 import {
   CachedRepeatableUpgradeSelector,
-  RepeatableUpgradeId
+  RepeatableUpgradeId,
 } from "@/game/repeatableUpgrades/types";
 import {
   applyRepeatableUpgradeMax,
-  applyRepeatableUpgradeSingle
+  applyRepeatableUpgradeSingle,
 } from "@/game/repeatableUpgrades/utils/apply";
 import { getCachedRepeatableUpgradePropsSelection } from "@/game/repeatableUpgrades/utils/selector";
 import { getRepeatableUpgradeLevelSelection } from "@/game/repeatableUpgrades/utils/selector";
@@ -36,13 +36,13 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
   className,
   textClassName,
   effectClassName,
-  effectChildren
+  effectChildren,
 }: Props<T>) {
   const cachedProperties: (keyof CachedRepeatableUpgrade)[] = [
     "bulk",
     "cost",
     "effect",
-    "maxed"
+    "maxed",
   ] as const;
 
   const state = usePlayer(
@@ -50,20 +50,20 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
       const cachedSelector = getCachedRepeatableUpgradePropsSelection(
         state,
         repeatableUpgradeId,
-        cachedProperties
+        cachedProperties,
       );
 
       const playerSelector = getRepeatableUpgradeLevelSelection(state, [
-        repeatableUpgradeId
+        repeatableUpgradeId,
       ]);
 
       return mergeObjects(cachedSelector, playerSelector);
     },
-    { useFormat: true }
+    { useFormat: true },
   );
 
   function useCachedProperty<N extends (typeof cachedProperties)[number]>(
-    propertyName: N
+    propertyName: N,
   ) {
     const key: CachedRepeatableUpgradeSelector<T, N> =
       `cachedRepeatableUpgrade_${repeatableUpgradeId}_${propertyName}`;
@@ -76,7 +76,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
     const { mergedPlayer, setMergedPlayer } = getPlayerState();
     const purchased = applyRepeatableUpgradeSingle(
       mergedPlayer,
-      repeatableUpgradeId
+      repeatableUpgradeId,
     );
     setMergedPlayer(purchased);
   }
@@ -85,7 +85,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
     const { mergedPlayer, setMergedPlayer } = getPlayerState();
     const purchased = applyRepeatableUpgradeMax(
       mergedPlayer,
-      repeatableUpgradeId
+      repeatableUpgradeId,
     );
     setMergedPlayer(purchased);
   }

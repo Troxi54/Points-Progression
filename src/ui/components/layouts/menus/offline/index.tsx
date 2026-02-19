@@ -1,4 +1,4 @@
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Overlay from "../overlay";
 import { formatLeftTime, formatTime } from "@/core/format/time";
 import { useMenu } from "../provider";
@@ -18,15 +18,15 @@ function OfflineMenu() {
     offlineProgressFullTime,
     offlineProgressTicksCompleted,
     offlineProgressSpeed,
-    ticksPerSecond
+    ticksPerSecond,
   } = usePlayerFields({
     cachedPlayer: [
       "offlineProgress",
       "offlineProgressFullTime",
       "offlineProgressTicksCompleted",
       "offlineProgressSpeed",
-      "ticksPerSecond"
-    ]
+      "ticksPerSecond",
+    ],
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function OfflineMenu() {
   let leftTime = calculateTimeForRequirement(
     offlineProgressTicksCompleted,
     offlineProgressSpeed * ticksPerSecond,
-    ticksOnTrigger
+    ticksOnTrigger,
   );
 
   return (
@@ -81,8 +81,8 @@ function OfflineMenu() {
             setCachedPlayer({
               offlineProgressSpeed: Math.min(
                 finiteSpeed * 2,
-                offlineConfig.maxSpeed
-              )
+                offlineConfig.maxSpeed,
+              ),
             });
           }}
         >

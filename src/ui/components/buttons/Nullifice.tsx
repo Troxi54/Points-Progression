@@ -3,9 +3,9 @@ import { integerFormatWithPlural } from "@/core/format/plural";
 import pluralize from "pluralize";
 import {
   handleDecimalInputOnBlur,
-  handleDecimalInputOnChange
+  handleDecimalInputOnChange,
 } from "@/core/utils/input";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
 import { getCurrencyEffectFor } from "@/game/currencies/utils/get";
@@ -19,9 +19,9 @@ function Nullifice() {
   const state = usePlayerFields(
     {
       player: ["nullions", "nullionInput"],
-      cachedPlayer: ["nullionInputConverted"]
+      cachedPlayer: ["nullionInputConverted"],
     },
-    { useFormat: true }
+    { useFormat: true },
   );
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,7 +66,7 @@ function Nullifice() {
       className={cn(
         "[background-image:var(--nullifice-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nullifice-gradient-bg)]",
-        "hover:[border-image-source:var(--nullifice-gradient)]"
+        "hover:[border-image-source:var(--nullifice-gradient)]",
       )}
       onClick={triggerNullifice}
     >
@@ -90,7 +90,7 @@ function Nullifice() {
                 const effect = getCurrencyEffectFor(
                   cachedPlayer,
                   "nullions",
-                  "madeNullithResets"
+                  "madeNullithResets",
                 );
 
                 return (
@@ -104,8 +104,8 @@ function Nullifice() {
                     )}
                   </>
                 );
-              }
-            }
+              },
+            },
           ]}
         />
       </p>
@@ -124,7 +124,7 @@ function Nullifice() {
         {isPercentage
           ? `= ${integerFormatWithPlural(
               state.nullionInputConverted,
-              "Nullith Reset"
+              "Nullith Reset",
             )}`
           : pluralize("Nullith Reset", +state.nullionInputConverted)}
       </span>

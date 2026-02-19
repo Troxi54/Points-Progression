@@ -1,14 +1,14 @@
 import { ResetLayerId } from "@/game/resetLayers/types";
 import StatusText from "./StatusText";
 import { applyToggledResetLayerAuto } from "@/game/resetLayers/utils/apply";
-import { usePlayer } from "@/ui/hooks/usePlayer";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
-import { UsePlayerFn } from "@/ui/hooks/usePlayerTypes";
+import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 import { getResetLayerPlayerSelection } from "@/game/resetLayers/utils/selector";
 import { mergeObjects } from "@/core/utils/object";
 import {
   everPerformed,
-  getResetLayerPlayerDataProp
+  getResetLayerPlayerDataProp,
 } from "@/game/resetLayers/utils/get";
 import { BooleanGetter, ValueGetter } from "@/game/player/types";
 import { parseValueGetter } from "@/game/player/utils";
@@ -28,11 +28,11 @@ function AutoResetToggle<T extends ResetLayerId>({
   usePlayerSelector,
   condition,
   name,
-  customChildren
+  customChildren,
 }: Props<T>) {
   usePlayer((state) => {
     const mainSelection = getResetLayerPlayerSelection(state, resetLayerId, [
-      "autoEnabled"
+      "autoEnabled",
     ]);
 
     const additionalSelection = usePlayerSelector?.(state);
@@ -44,7 +44,7 @@ function AutoResetToggle<T extends ResetLayerId>({
   const enabled = getResetLayerPlayerDataProp(
     player,
     resetLayerId,
-    "autoEnabled"
+    "autoEnabled",
   );
 
   const processedName =

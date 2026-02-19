@@ -1,25 +1,42 @@
-import { AppLayoutProps } from "@/ui/app/types";
 import DimensionLayerLayout from "@/ui/components/base/DimensionLayerLayout";
+import { mergeObjects } from "@core/utils/object";
+import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
+import { hasUpgrades } from "@game/upgrades/utils/has";
+import LevelBar from "@ui/components/progressBars/LevelBar";
+import AmplivoidUpgrade from "@ui/components/repeatableUpgrades/AmplivoidUpgrade";
+import Amplivoid from "@ui/components/states/Amplivoid";
+import XPState from "@ui/components/states/XP";
+import AutoLevelButton from "@ui/components/toggles/AutoLevelButton";
+import LevelUpgrades from "@ui/components/upgrades/LevelUpgrades";
+import LevelUpgrades2 from "@ui/components/upgrades/LevelUpgrades2";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 
-function SliphDimensionLayer2({ appLayoutState }: AppLayoutProps) {
-  const { appState, getComponent } = appLayoutState;
+function SliphDimensionLayer2() {
+  const state = usePlayer((state) => {
+    const resetLayers = everPerformedResetLayers(state, ["level"]);
+    const upgrades = hasUpgrades(state, {
+      mallirt: [4],
+      level: [4],
+    } as const);
 
-  if (!(appState.mallirt_4 || appState.resetLayer_level_everPerformed))
-    return null;
+    return mergeObjects(resetLayers, upgrades);
+  });
+
+  if (!(state.mallirt_4 || state.resetLayer_level_everPerformed)) return null;
 
   return (
     <DimensionLayerLayout>
-      {getComponent("LevelBar")}
-      {appState.resetLayer_level_everPerformed && (
+      <LevelBar />
+      {state.resetLayer_level_everPerformed && (
         <>
-          {getComponent("AutoLevelButton")}
-          {getComponent("XPState")}
-          {getComponent("LevelUpgrades")}
-          {appState.level_4 && (
+          <AutoLevelButton />
+          <XPState />
+          <LevelUpgrades />
+          {state.level_4 && (
             <>
-              {getComponent("Amplivoid")}
-              {getComponent("AmplivoidUpgrade")}
-              {getComponent("LevelUpgrades2")}
+              <Amplivoid />
+              <AmplivoidUpgrade />
+              <LevelUpgrades2 />
             </>
           )}
         </>

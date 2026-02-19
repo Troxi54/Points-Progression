@@ -1,4 +1,4 @@
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { everPerformedResetLayers } from "@/game/resetLayers/utils/selector";
 import { hasUpgrades } from "@/game/upgrades/utils/has";
 import { mergeObjects } from "@/core/utils/object";
@@ -13,8 +13,8 @@ const menuInfoFormulaSelector = () => {
         "amplivaultBroken",
         "everEnteredSliph",
         "everReachedCappergy",
-        "bestNexusLevel"
-      ]
+        "bestNexusLevel",
+      ],
     },
     {
       additionalSelectors: ({ mergedPlayer }) => {
@@ -22,7 +22,7 @@ const menuInfoFormulaSelector = () => {
           tier: [4],
           vermyros: [1, 5, 8, 10],
           nullith: [4, 6],
-          level: [4]
+          level: [4],
         } as const);
 
         const performs = everPerformedResetLayers(mergedPlayer, [
@@ -31,13 +31,13 @@ const menuInfoFormulaSelector = () => {
           "vermyros",
           "nullith",
           "mallirt",
-          "level"
+          "level",
         ]);
 
         return mergeObjects(upgrades, performs);
       },
-      useFormat: true
-    }
+      useFormat: true,
+    },
   );
 };
 

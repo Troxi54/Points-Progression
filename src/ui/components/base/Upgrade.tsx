@@ -1,7 +1,7 @@
 import { formatCurrencyName } from "@/game/currencies/utils/format";
 import { formatNumber } from "@/core/format/number";
 import { formatWithPlural } from "@/core/format/plural";
-import { usePlayer } from "@/ui/hooks/usePlayer";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { parseValueGetter } from "@/game/player/utils";
 import { UpgradeData, UpgradeDataContainer } from "@/game/upgrades/types";
@@ -29,11 +29,11 @@ function Upgrade({
   upgradeContainerData,
   upgradeData,
   upgradeNumber,
-  style
+  style,
 }: Props) {
   const [containerUsePlayer, upgradeUsePlayer] = [
     upgradeContainerData.usePlayer,
-    upgradeData.usePlayer
+    upgradeData.usePlayer,
   ];
 
   const containerId = upgradeContainerData.id;
@@ -53,7 +53,7 @@ function Upgrade({
       const upgradesSelector = mergeObjects(containerSelector, upgradeSelector);
       const mergedWithPurchase = mergeObjects(
         upgradesSelector,
-        hasUpgradeSelection(state, containerId, upgradeNumber)
+        hasUpgradeSelection(state, containerId, upgradeNumber),
       );
 
       const currency = getUpgradeCurrency(upgradeData, upgradeContainerData);
@@ -67,8 +67,8 @@ function Upgrade({
             mergedPlayer,
             containerId,
             upgradeNumber,
-            upgradeData
-          )
+            upgradeData,
+          ),
       });
 
       let fullSelector = mergedWithOptions;
@@ -78,13 +78,13 @@ function Upgrade({
           previousUpgradeId ?? createUpgradeId(containerId, upgradeNumber - 1);
         fullSelector = mergeObjects(
           fullSelector,
-          hasUpgradeSelectionById(state, id)
+          hasUpgradeSelectionById(state, id),
         );
       }
 
       return fullSelector;
     },
-    { useFormat: true }
+    { useFormat: true },
   );
 
   const { player, mergedPlayer } = getPlayerState();
@@ -97,7 +97,7 @@ function Upgrade({
       containerId,
       upgradeNumber,
       upgradeData,
-      upgradeContainerData
+      upgradeContainerData,
     );
     if (!bought) return;
 

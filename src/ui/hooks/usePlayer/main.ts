@@ -1,7 +1,7 @@
 import { usePlayerStore } from "@/game/player/store/store";
 import {
   PlayerSetterName,
-  PlayerStoreSelectorGeneric
+  PlayerStoreSelectorGeneric,
 } from "@/game/player/store/types";
 import { PlayerState } from "@/game/player/store/types";
 import { Player, UsePlayerFieldsReturn } from "@/game/player/types";
@@ -10,18 +10,18 @@ import {
   assignKey,
   isObject,
   mergeObjects,
-  objectKeys
+  objectKeys,
 } from "@/core/utils/object";
 import {
   UsePlayerAdditionalSelector,
   UsePlayerFieldsOptions,
-  UsePlayerOptions
-} from "./usePlayerTypes";
+  UsePlayerOptions,
+} from "./types";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 import { isDecimal } from "@/core/utils/decimal";
 
 const usePlayerDefaultOptions: UsePlayerOptions = {
-  useFormat: false
+  useFormat: false,
 };
 
 function storeComparer<T, O>(a: T, b: O): boolean {
@@ -69,14 +69,14 @@ function storeComparer<T, O>(a: T, b: O): boolean {
 
 export function usePlayer<T>(
   selector: PlayerStoreSelectorGeneric<T>,
-  options?: Partial<UsePlayerOptions>
+  options?: Partial<UsePlayerOptions>,
 ): T {
   const fullOptions = mergeObjects(usePlayerDefaultOptions, options);
 
   const fullSelector: PlayerStoreSelectorGeneric<T> = (state) => {
     const baseSelector = selector(state);
     const additionalSelector: UsePlayerAdditionalSelector = {
-      exponentialNotation: state.mergedPlayer.player.exponentialNotation
+      exponentialNotation: state.mergedPlayer.player.exponentialNotation,
     };
 
     return fullOptions.useFormat
@@ -91,14 +91,14 @@ export function usePlayerFields<
   KP extends readonly (keyof Player)[] | undefined,
   KC extends readonly (keyof CachedPlayer)[] | undefined,
   S extends PlayerSetterName[] | undefined = undefined,
-  O extends object = object
+  O extends object = object,
 >(
   fields: {
     player?: KP;
     cachedPlayer?: KC;
     setters?: S;
   },
-  options?: UsePlayerFieldsOptions<O>
+  options?: UsePlayerFieldsOptions<O>,
 ): UsePlayerFieldsReturn<KP, KC, S> & O {
   const state = usePlayer((state) => {
     const playerState = {} as KP extends readonly (keyof Player)[]
@@ -117,7 +117,7 @@ export function usePlayerFields<
       assignKey(
         cachedPlayerState,
         field,
-        state.mergedPlayer.cachedPlayer[field]
+        state.mergedPlayer.cachedPlayer[field],
       );
     });
 
@@ -127,13 +127,13 @@ export function usePlayerFields<
       ? { [K in S[number]]: PlayerState[K] }
       : object;
     fields.setters?.forEach((setter) =>
-      assignKey(setterState, setter, state[setter])
+      assignKey(setterState, setter, state[setter]),
     );
 
     const baseState = mergeObjects(mergedPlayer, setterState);
     const fullState = mergeObjects(
       baseState,
-      options?.additionalSelectors?.(state)
+      options?.additionalSelectors?.(state),
     );
 
     return fullState;

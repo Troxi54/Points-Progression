@@ -2,7 +2,7 @@ import { savePlayer } from "@/game/player/persistence/save";
 import Overlay from "../overlay";
 import { useMenu } from "../provider";
 import { togglePlayerField } from "@/game/player/utils";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import StatusText from "@/ui/components/base/StatusText";
 import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
 import Tooltip from "@/ui/components/base/Tooltip";
@@ -22,8 +22,8 @@ const SettingsMenu = () => {
       "exponentialNotation",
       "saveBeforeUnload",
       "stableProgressBars",
-      "offlineProgressWorks"
-    ]
+      "offlineProgressWorks",
+    ],
   });
 
   const SAVE_BUTTON_TRANSITION_DURATION = 300;
@@ -44,7 +44,7 @@ const SettingsMenu = () => {
         className={cn("menu-button big save-button", isSaving && "saved")}
         style={
           {
-            "--duration": `${SAVE_BUTTON_TRANSITION_DURATION}ms`
+            "--duration": `${SAVE_BUTTON_TRANSITION_DURATION}ms`,
           } as CSSProperties
         }
         onClick={() => {

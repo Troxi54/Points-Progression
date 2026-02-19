@@ -16,7 +16,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "reset_1"),
       effectFormula: (lvl) => Decimal.pow(1.125, lvl),
       affects: "points",
-      autobuy: ({ player }) => hasUpgradeById(player, "reset_2")
+      autobuy: ({ player }) => hasUpgradeById(player, "reset_2"),
     },
     ampliflux: {
       condition: ({ player }) => hasUpgradeById(player, "tier_4"),
@@ -26,7 +26,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "tier_5"),
       effectFormula: (lvl) => Decimal.pow(1.1, lvl),
       affects: "ampliflux",
-      autobuy: ({ player }) => hasUpgradeById(player, "tier_6")
+      autobuy: ({ player }) => hasUpgradeById(player, "tier_6"),
     },
     vermyte: {
       condition: ({ player }) => everPerformed(player, "vermyros"),
@@ -36,7 +36,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "vermyros_9"),
       effectFormula: (lvl) => Decimal.pow(3, lvl),
       affects: "points",
-      autobuy: ({ player }) => hasUpgradeById(player, "vermyros_10")
+      autobuy: ({ player }) => hasUpgradeById(player, "vermyros_10"),
     },
     core: {
       condition: ({ player }) => player.everMadeCoreReset,
@@ -46,9 +46,9 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "nullith_1"),
       effectFormula: (lvl) => Decimal.pow(1.1, lvl),
       maxLevel: createDecimal(40),
-      affects: "best points effect",
-      autobuy: ({ player }) => hasUpgradeById(player, "nullith_4")
-    }
+      affects: "Best Points effect",
+      autobuy: ({ player }) => hasUpgradeById(player, "nullith_4"),
+    },
   },
   sliph: {
     dertoint: {
@@ -58,7 +58,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "dertoint_4"),
       effectFormula: (lvl) => Decimal.pow(2.35, lvl),
       affects: "dertoints",
-      autobuy: ({ player }) => hasUpgradeById(player, "mallirt_4")
+      autobuy: ({ player }) => hasUpgradeById(player, "mallirt_4"),
     },
     amplivoid: {
       startCost: createDecimal(10),
@@ -67,9 +67,9 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       spendCurrency: ({ player }) => !hasUpgradeById(player, "level_5"),
       effectFormula: (lvl) => Decimal.pow(2, lvl),
       affects: "dertoints",
-      autobuy: ({ player }) => hasUpgradeById(player, "level_6")
-    }
-  }
+      autobuy: ({ player }) => hasUpgradeById(player, "level_6"),
+    },
+  },
 });
 
 export default repeatableUpgrades;

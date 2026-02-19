@@ -3,7 +3,7 @@ import { Nil } from "@/core/types/primitives";
 import { getCachedCurrencyProp } from "@/game/currencies/utils/get";
 import { formatWithPlural } from "@/core/format/plural";
 import { formatLeftTime } from "@/core/format/time";
-import { usePlayer } from "@/ui/hooks/usePlayer";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { ValueGetter } from "@/game/player/types";
 import { parseValueGetter } from "@/game/player/utils";

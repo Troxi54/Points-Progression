@@ -3,7 +3,7 @@ import { formatCurrencyEffect } from "@/game/currencies/utils/format";
 import nuxarConfig from "@/game/features/nuxar/config";
 import { triggerNuxar } from "@/game/features/nuxar/utils";
 import { formatNumber } from "@/core/format/number";
-import { usePlayer } from "@/ui/hooks/usePlayer";
+import { usePlayer } from "@ui/hooks/usePlayer/main";
 import { toPercentage } from "@/core/utils/decimal";
 import cn from "@/core/utils/tailwind";
 

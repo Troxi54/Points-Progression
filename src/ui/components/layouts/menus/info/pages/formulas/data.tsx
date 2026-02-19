@@ -75,7 +75,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "reset"),
-    name: "Best point effect",
+    name: "Best Point effect",
     node: () => {
       const formattedMillion = integerCommaFormat(1_000_000);
       return (
@@ -120,7 +120,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "tier"),
-    name: "Tier reset effect",
+    name: "Tier Reset effect",
     node: () => (
       <>
         (<Stat>tier resets</Stat> {UISymbols.plus} 1)
@@ -151,7 +151,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "tier_4") || everPerformed(player, "vermyros"),
-    name: "Ampliflux upgrade cost",
+    name: "Ampliflux Upgrade cost",
     node: () => {
       const upgradeData = getRepeatableUpgradeData("ampliflux");
       return (
@@ -168,7 +168,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "tier_4") || everPerformed(player, "vermyros"),
-    name: "Ampliflux upgrade effect",
+    name: "Ampliflux Upgrade effect",
     node: () => (
       <>
         1.1
@@ -201,7 +201,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "vermyros"),
-    name: "Best vermytes effect",
+    name: "Best Vermytes effect",
     node: () => (
       <>
         <Stat>best vermytes</Stat>
@@ -226,7 +226,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "vermyros_1") || everPerformed(player, "nullith"),
-    name: "Vermyte upgrade cost",
+    name: "Vermyte Upgrade cost",
     node: () => {
       const upgradeData = getRepeatableUpgradeData("vermyte");
       return (
@@ -243,7 +243,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "vermyros_1") || everPerformed(player, "nullith"),
-    name: "Vermyte upgrade effect",
+    name: "Vermyte Upgrade effect",
     node: () => (
       <>
         3
@@ -331,7 +331,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.everMadeCoreReset,
-    name: "Core upgrade cost",
+    name: "Core Upgrade cost",
     node: () => {
       const upgradeData = getRepeatableUpgradeData("core");
       return (
@@ -347,7 +347,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.everMadeCoreReset,
-    name: "Core upgrade effect",
+    name: "Core Upgrade effect",
     node: () => (
       <>
         1.1
@@ -360,7 +360,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "vermyros_10") || everPerformed(player, "nullith"),
-    name: "Dark energy gain",
+    name: "Dark Energy gain",
     node: () => (
       <>
         2
@@ -375,7 +375,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) =>
       hasUpgradeById(player, "vermyros_10") || everPerformed(player, "nullith"),
-    name: "Dark energy effect",
+    name: "Dark Energy effect",
     node: () => (
       <>
         1.75
@@ -389,7 +389,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "nullith"),
-    name: "Nullith reset point effect",
+    name: "Nullith Reset's Point effect",
     node: () => (
       <>
         125 {UISymbols.multiply} <Stat>nullith resets</Stat>
@@ -399,7 +399,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "nullith"),
-    name: "Nullith reset vermyte effect",
+    name: "Nullith Reset's Vermyte effect",
     node: () => (
       <>
         (<Stat>nullith resets</Stat> {UISymbols.plus} 1)<Pow>1.2</Pow>
@@ -408,7 +408,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "nullith"),
-    name: "Nullith reset energy effect",
+    name: "Nullith Reset's Energy effect",
     node: () => (
       <>
         (<Stat>nullith resets</Stat> {UISymbols.plus} 1)<Pow>0.75</Pow>
@@ -450,7 +450,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.everEnteredSliph,
-    name: "Dertoint upgrade cost",
+    name: "Dertoint Upgrade cost",
     node: () => {
       const upgradeData = getRepeatableUpgradeData("dertoint");
       return (
@@ -466,7 +466,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.everEnteredSliph,
-    name: "Dertoint upgrade effect",
+    name: "Dertoint Upgrade effect",
     node: () => (
       <>
         2.35
@@ -493,7 +493,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "mallirt"),
-    name: "Total dertoint effect",
+    name: "Total Dertoint effect",
     node: () => (
       <>
         3
@@ -630,7 +630,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(3),
-    name: "Best point Vermora effect",
+    name: "Best Point Vermora effect",
     node: () => (
       <>
         <Stat>best point effect</Stat>
@@ -652,7 +652,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(5),
-    name: "Tier reset Dertoint effect",
+    name: "Tier Reset's Dertoint effect",
     node: () => (
       <>
         (<Stat>tier resets</Stat> {UISymbols.plus} 1)
@@ -690,7 +690,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => hasUpgradeById(player, "level_4"),
-    name: "Amplivoid upgrade cost",
+    name: "Amplivoid Upgrade cost",
     node: () => {
       const upgradeData = getRepeatableUpgradeData("amplivoid");
       return (
@@ -706,7 +706,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => hasUpgradeById(player, "level_4"),
-    name: "Amplivoid upgrade effect",
+    name: "Amplivoid Upgrade effect",
     node: () => (
       <>
         2

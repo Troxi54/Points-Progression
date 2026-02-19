@@ -1,21 +1,22 @@
 import { formatTime } from "@/core/format/time";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { TimeSpentResetLayerData } from "@/game/resetLayers/types";
 import { everPerformedResetLayers } from "@/game/resetLayers/utils/selector";
 
 function SliphTimeSpent() {
   const state = usePlayerFields(
     {
-      cachedPlayer: ["highestResetDuration"]
+      cachedPlayer: ["highestResetDuration"],
     },
     {
-      additionalSelectors: (state) => everPerformedResetLayers(state, ["level"])
-    }
+      additionalSelectors: (state) =>
+        everPerformedResetLayers(state, ["level"]),
+    },
   );
 
   const activeReset = (
     [
-      [state.resetLayer_level_everPerformed, "L", "text-level"]
+      [state.resetLayer_level_everPerformed, "L", "text-level"],
     ] as TimeSpentResetLayerData
   ).find(([date]) => date);
 

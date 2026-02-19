@@ -1,6 +1,6 @@
 import gameConfig from "@core/config/data";
 import { formatNumber } from "@core/format/number";
-import { usePlayerFields } from "@ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 function MenuInfoMainPageEndgame() {
   const { gameProgress } = usePlayerFields({

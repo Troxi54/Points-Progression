@@ -18,23 +18,23 @@ const nexusMilestones = createNexusMilestoneContainer([
     description: "Tier effect for Vermytes",
   },
   {
-    cost: 16_495_000,
+    cost: 13_495_000,
     description: "Tier Reset effect for Dertoints",
   },
   {
-    cost: 3.745e11,
+    cost: 2.745e11,
     description: "Ampliflux effect for Tier Resets",
   },
   {
-    cost: 7.365e12,
+    cost: 5.365e12,
     description: "Best Vermyte effect for Points",
   },
   {
-    cost: 6.1e15,
+    cost: 4.1e15,
     description: "Vermora effect for Amplivoid",
   },
   {
-    cost: 2.75e17,
+    cost: 1.95e17,
     description: "Vermyte effect for XP",
   },
 ]);

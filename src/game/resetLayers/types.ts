@@ -6,7 +6,7 @@ import { BooleanGetter, ResetLayerPlayerData } from "@/game/player/types";
 import { PartialMergedPlayer } from "@/game/player/merged/types";
 import { MergedPlayer } from "@/game/player/merged/types";
 import Decimal from "break_eternity.js";
-import { UsePlayerFn } from "@/ui/hooks/usePlayerTypes";
+import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 
 export interface ResetLayerIds {
   normal: "reset" | "tier" | "vermyros" | "nullith";
@@ -23,13 +23,13 @@ export interface ResetLayerData<T extends DimensionId = DimensionId> {
   reset: (
     mergedPlayer: MergedPlayer,
     defaultMergedPlayer: MergedPlayer,
-    currentTime: number
+    currentTime: number,
   ) => PartialMergedPlayer;
   preventReset: BooleanGetter;
   canPerform: BooleanGetter;
   reward: (
     mergedPlayer: MergedPlayer,
-    spentTime: number | null
+    spentTime: number | null,
   ) => PartialMergedPlayer;
 }
 
@@ -37,7 +37,7 @@ export type PartialResetLayerData<T extends DimensionId = DimensionId> =
   PartialBut<ResetLayerData<T>, "id">;
 
 export interface FullResetLayerData<
-  T extends DimensionId = DimensionId
+  T extends DimensionId = DimensionId,
 > extends ResetLayerData<T> {
   dimensionId: T;
 }
@@ -56,11 +56,11 @@ export type FlatResetLayerContainer = Record<ResetLayerId, FullResetLayerData>;
 
 export type ResetLayerPlayerSelector<
   T extends ResetLayerId = ResetLayerId,
-  P extends keyof ResetLayerPlayerData = keyof ResetLayerPlayerData
+  P extends keyof ResetLayerPlayerData = keyof ResetLayerPlayerData,
 > = `resetLayer_${T}_${P}`;
 export type ResetLayerCachedPlayerSelector<
   T extends ResetLayerId = ResetLayerId,
-  P extends keyof CachedResetLayer = keyof CachedResetLayer
+  P extends keyof CachedResetLayer = keyof CachedResetLayer,
 > = `cachedResetLayer_${T}_${P}`;
 
 export type LayerNumber = number | null;

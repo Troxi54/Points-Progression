@@ -1,24 +1,24 @@
 import { formatTime } from "@/core/format/time";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { TimeSpentResetLayerData } from "@/game/resetLayers/types";
 import { everPerformedResetLayers } from "@/game/resetLayers/utils/selector";
 
 function TimeSpent() {
   const state = usePlayerFields(
     {
-      cachedPlayer: ["highestResetDuration"]
+      cachedPlayer: ["highestResetDuration"],
     },
     {
       additionalSelectors: (state) =>
-        everPerformedResetLayers(state, ["tier", "vermyros", "nullith"])
-    }
+        everPerformedResetLayers(state, ["tier", "vermyros", "nullith"]),
+    },
   );
 
   const activeReset = (
     [
       [state.resetLayer_nullith_everPerformed, "N", "nullith"],
       [state.resetLayer_vermyros_everPerformed, "V", "text-vermyros"],
-      [state.resetLayer_tier_everPerformed, "T", "text-tier"]
+      [state.resetLayer_tier_everPerformed, "T", "text-tier"],
     ] as TimeSpentResetLayerData
   ).find(([works]) => works);
 

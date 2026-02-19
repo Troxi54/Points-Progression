@@ -1,4 +1,4 @@
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { everPerformedResetLayers } from "@/game/resetLayers/utils/selector";
 import { hasUpgrades } from "@/game/upgrades/utils/has";
 import { mergeObjects } from "@/core/utils/object";
@@ -10,8 +10,8 @@ export const appStateSelector = () =>
         "dimensionId",
         "bestSoftcapperLevel",
         "everMadeCoreReset",
-        "everReachedCappergy"
-      ]
+        "everReachedCappergy",
+      ],
     },
     {
       additionalSelectors: (state) => {
@@ -20,7 +20,7 @@ export const appStateSelector = () =>
           vermyros: [1, 3, 4, 5, 7, 8, 9, 10],
           nullith: [3, 4, 5, 6, 7, 8],
           mallirt: [4],
-          level: [3, 4]
+          level: [3, 4],
         } as const);
 
         const performs = everPerformedResetLayers(state, [
@@ -29,10 +29,10 @@ export const appStateSelector = () =>
           "vermyros",
           "nullith",
           "mallirt",
-          "level"
+          "level",
         ]);
 
         return mergeObjects(upgrades, performs);
-      }
-    }
+      },
+    },
   );

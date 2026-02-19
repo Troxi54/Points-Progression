@@ -1,6 +1,6 @@
 import Pow from "@/ui/components/base/Pow";
 import { formatNumber, integerCommaFormat } from "@/core/format/number";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { parseValueGetter } from "@/game/player/utils";
 import softcapperData from "@/game/softcappers/data";

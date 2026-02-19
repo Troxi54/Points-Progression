@@ -1,7 +1,7 @@
 import CurrencyComponent from "@/ui/components/base/Currency";
 import ProgressBar from "@/ui/components/base/ProgressBar";
 import { formatCurrency } from "@/game/currencies/utils/format";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { calculateProgress } from "@/core/utils/progress";
 
 function XPState() {

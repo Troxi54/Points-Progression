@@ -1,6 +1,6 @@
 import { isDimension } from "@/game/dimensions/utils/compare";
 import { toggleSliph } from "@/game/features/sliph/utils";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import cn from "@/core/utils/tailwind";
 
 function Sliph() {

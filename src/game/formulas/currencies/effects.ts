@@ -63,16 +63,25 @@ const currencyEffectFormulas: EffectFormulaContainer = {
     return preSquared2.pow(2);
   },
   madeNullithResets: {
-    points({ player: { madeNullithResets } }) {
+    points({ player }) {
+      const { madeNullithResets } = player;
+
       return Decimal.multiply(125, madeNullithResets.max(0).pow(3))
+        .pow(hasUpgradeById(player, "level_5") ? 1.15 : 1)
         .round()
         .max(1);
     },
     vermytes({ player: { madeNullithResets } }) {
       return madeNullithResets.max(0).plus(1).pow(1.2);
     },
-    energy({ player: { madeNullithResets } }) {
-      return madeNullithResets.max(0).plus(1).pow(0.75);
+    energy({ player }) {
+      const { madeNullithResets } = player;
+
+      return madeNullithResets
+        .max(0)
+        .plus(1)
+        .pow(0.75)
+        .pow(hasUpgradeById(player, "level_6") ? 10 : 1);
     },
   },
   nullions({ player: { nullions } }) {

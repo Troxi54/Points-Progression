@@ -1,29 +1,22 @@
-import { AppLayoutProps, AppLayoutState } from "@/ui/app/types";
 import { ChildrenProps } from "@/core/types/react";
 import { DimensionId } from "@/game/dimensions/types";
 import { isDimension } from "@/game/dimensions/utils/compare";
+import { getPlayerState } from "@game/player/store/store";
 import { ComponentType } from "react";
 
 interface Props extends ChildrenProps {
   dimensionId: DimensionId;
-  appLayoutState: AppLayoutState;
-  layers?: ComponentType<AppLayoutProps>[];
+  layers?: ComponentType[];
 }
 
-function DimensionLayout({
-  dimensionId,
-  appLayoutState,
-  children,
-  layers
-}: Props) {
-  const { appState } = appLayoutState;
-
-  if (!isDimension(dimensionId, appState.dimensionId)) return null;
+function DimensionLayout({ dimensionId, children, layers }: Props) {
+  const { mergedPlayer } = getPlayerState();
+  if (!isDimension(dimensionId, mergedPlayer.player.dimensionId)) return null;
 
   return (
     <>
       {layers?.map((Layer, index) => (
-        <Layer appLayoutState={appLayoutState} key={index} />
+        <Layer key={index} />
       ))}
       {children}
     </>

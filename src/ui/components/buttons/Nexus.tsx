@@ -4,7 +4,7 @@ import { formatCurrency } from "@/game/currencies/utils/format";
 import nexusMilestones from "@/game/features/nexus/data";
 import { buyNexus } from "@/game/features/nexus/utils/buy";
 import { integerCommaFormat } from "@/core/format/number";
-import { usePlayerFields } from "@/ui/hooks/usePlayer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { parseValueGetter } from "@/game/player/utils";
 import cn from "@/core/utils/tailwind";
@@ -13,7 +13,7 @@ function Nexus() {
   const { nexusLevel, bestNexusLevel, nexusCost, enough } = usePlayerFields(
     {
       player: ["nexusLevel", "bestNexusLevel"],
-      cachedPlayer: ["nexusCost"]
+      cachedPlayer: ["nexusCost"],
     },
     {
       useFormat: true,
@@ -24,10 +24,10 @@ function Nexus() {
           enough:
             nexusCost === null
               ? false
-              : player.nux.greaterThanOrEqualTo(nexusCost)
+              : player.nux.greaterThanOrEqualTo(nexusCost),
         };
-      }
-    }
+      },
+    },
   );
 
   const { mergedPlayer } = getPlayerState();
@@ -44,7 +44,7 @@ function Nexus() {
       className={cn(
         "[background-image:var(--nexus-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nexus-gradient-bg)]",
-        "hover:[border-image-source:var(--nexus-gradient)]"
+        "hover:[border-image-source:var(--nexus-gradient)]",
       )}
       onClick={buyNexus}
     >
@@ -83,13 +83,13 @@ function Nexus() {
                 key={index}
                 className="w-full"
                 style={{
-                  backgroundColor: `var(--nexus-milestone-${milestoneNumber}-bg)`
+                  backgroundColor: `var(--nexus-milestone-${milestoneNumber}-bg)`,
                 }}
               >
                 <p
                   className="text-white"
                   style={{
-                    color: `var(--nexus-milestone-${milestoneNumber})`
+                    color: `var(--nexus-milestone-${milestoneNumber})`,
                   }}
                 >
                   {milestoneNumber}. {parsed}

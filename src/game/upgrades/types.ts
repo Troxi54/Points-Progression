@@ -3,7 +3,7 @@ import { MergedPlayer } from "@/game/player/merged/types";
 import { CurrencyId } from "@/game/currencies/types";
 import Decimal, { DecimalSource } from "break_eternity.js";
 import { DimensionId } from "@/game/dimensions/types";
-import { UsePlayerFn } from "@/ui/hooks/usePlayerTypes";
+import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 
 export type UpgradeContainerId =
   | "reset"
@@ -16,7 +16,7 @@ export type UpgradeContainerId =
 
 export type UpgradeId<
   C extends UpgradeContainerId = UpgradeContainerId,
-  N extends number = number
+  N extends number = number,
 > = `${C}_${N}`;
 
 /**
