@@ -1,1 +1,0 @@
-import{E as s,F as u,G as C,H as i}from"./index-h32nEdgb.js";function h(r,e,c,y){const a=s(r);return u(C(c.map(t=>{const n=`cachedCurrency_${e}_${t}`,o=i(a,e,t);return[n,o]})),{})}function f(r,e,c){return h(r,e,[c])}export{f as g};
