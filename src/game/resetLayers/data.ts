@@ -7,8 +7,8 @@ import { hasUpgradeById } from "@/game/upgrades/utils/has";
 import { applyResetLayerPlayerData } from "./utils/apply";
 import { applyUpgradesById } from "@/game/upgrades/utils/apply";
 import formulas from "@game/formulas/data";
-import { getCurrencyEffectFor } from "@/game/currencies/utils/get";
-import { getResetLayerPlayerDataProp } from "./utils/get";
+import { getCurrencyEffectOn } from "@/game/currencies/utils/get";
+import { everPerformed, getResetLayerPlayerDataProp } from "./utils/get";
 import Decimal from "break_eternity.js";
 import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
 
@@ -21,26 +21,26 @@ const resetLayers = createResetLayerDataContainer({
         bestRun: player.bestRun,
         bestPointsOfRun: player.bestPointsOfRun,
         runEffect: cachedPlayer.runEffect,
-        bestPointsOfRunEffect: cachedPlayer.bestPointsOfRunEffect
+        bestPointsOfRunEffect: cachedPlayer.bestPointsOfRunEffect,
       }),
       reset: (_, defaultMergedPlayer) => {
         return {
           player: {
             points: defaultMergedPlayer.player.points,
             repeatableUpgrades: {
-              point: getRepeatableUpgradeLevel(defaultMergedPlayer, "point")
-            }
-          }
+              point: getRepeatableUpgradeLevel(defaultMergedPlayer, "point"),
+            },
+          },
         };
       },
       reward: (mergedPlayer, spentTime) => {
         return {
           player: {
             bestRun: formulas.firstResetLayerRun(mergedPlayer, spentTime),
-            bestPointsOfRun: formulas.bestPointsOfRun(mergedPlayer)
-          }
+            bestPointsOfRun: formulas.bestPointsOfRun(mergedPlayer),
+          },
         };
-      }
+      },
     },
     {
       id: "tier",
@@ -49,12 +49,12 @@ const resetLayers = createResetLayerDataContainer({
         madeTierTimes: player.madeTierTimes,
         tierRequirement: cachedPlayer.tierRequirement,
         tierEffect: cachedPlayer.tierEffect,
-        tierTimesEffect: getCurrencyEffectFor(
+        tierTimesEffect: getCurrencyEffectOn(
           cachedPlayer,
           "madeTierTimes",
-          "points"
+          "points",
         ),
-        ...hasUpgradeSelectionById(player, "vermyros_2")
+        ...hasUpgradeSelectionById(player, "vermyros_2"),
       }),
       goal: createDecimal(1e25),
       canPerform: (mergedPlayer) => {
@@ -79,13 +79,13 @@ const resetLayers = createResetLayerDataContainer({
             bestRun: defaultPlayer.bestRun,
             bestPointsOfRun: defaultPlayer.bestPointsOfRun,
             ...applyResetLayerPlayerData(player, "reset", {
-              autoEnabled: !hasTier_3
+              autoEnabled: !hasTier_3,
             }),
             ...applyUpgradesById(player, {
               reset_1: hasUpgradeById(player, "tier_1"),
-              reset_2: hasUpgradeById(player, "tier_2")
-            })
-          }
+              reset_2: hasUpgradeById(player, "tier_2"),
+            }),
+          },
         };
       },
       preventReset: ({ player }) => hasUpgradeById(player, "vermyros_4"),
@@ -95,7 +95,7 @@ const resetLayers = createResetLayerDataContainer({
         const bulk = formulas.tierBulk(mergedPlayer);
         const tierResetGain = calculateCurrencyGain(
           mergedPlayer,
-          "madeTierTimes"
+          "madeTierTimes",
         );
 
         const vermyros_4 = hasUpgradeById(mergedPlayer, "vermyros_4");
@@ -105,16 +105,16 @@ const resetLayers = createResetLayerDataContainer({
             tier: player.tier.plus(bulk),
             ...(vermyros_4
               ? {}
-              : { madeTierTimes: player.madeTierTimes.plus(tierResetGain) })
-          }
+              : { madeTierTimes: player.madeTierTimes.plus(tierResetGain) }),
+          },
         };
-      }
+      },
     },
     {
       id: "vermyros",
       usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) => ({
         bestVermytes: player.bestVermytes,
-        bestVermytesEffect: cachedPlayer.bestVermytesEffect
+        bestVermytesEffect: cachedPlayer.bestVermytesEffect,
       }),
       goal: createDecimal(1e84),
       reset: ({ player }, defaultMergedPlayer) => {
@@ -130,8 +130,8 @@ const resetLayers = createResetLayerDataContainer({
             repeatableUpgrades: {
               ampliflux: getRepeatableUpgradeLevel(
                 defaultMergedPlayer,
-                "ampliflux"
-              )
+                "ampliflux",
+              ),
             },
             ...applyUpgradesById(player, {
               reset_1: hasVermyros_2,
@@ -141,17 +141,17 @@ const resetLayers = createResetLayerDataContainer({
               tier_3: hasVermyros_3,
               tier_4: hasVermyros_3,
               tier_5: hasVermyros_3,
-              tier_6: hasVermyros_3
+              tier_6: hasVermyros_3,
             }),
             ...applyResetLayerPlayerData(player, "reset", {
-              autoEnabled: !hasVermyros_3
+              autoEnabled: !hasVermyros_3,
             }),
             ...applyResetLayerPlayerData(player, "tier", {
               autoEnabled:
                 getResetLayerPlayerDataProp(player, "tier", "autoEnabled") &&
-                hasVermyros_2
-            })
-          }
+                hasVermyros_2,
+            }),
+          },
         };
       },
       reward: (mergedPlayer) => {
@@ -162,31 +162,31 @@ const resetLayers = createResetLayerDataContainer({
         return {
           player: {
             vermytes: player.vermytes.plus(vermyteGain),
-            bestVermytes: formulas.bestVermytes(mergedPlayer)
-          }
+            bestVermytes: formulas.bestVermytes(mergedPlayer),
+          },
         };
-      }
+      },
     },
     {
       id: "nullith",
       goal: Decimal.pow(2, 1024),
       usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) => ({
         madeNullithResets: player.madeNullithResets,
-        nullithResetsPointEffect: getCurrencyEffectFor(
+        nullithResetsPointEffect: getCurrencyEffectOn(
           cachedPlayer,
           "madeNullithResets",
-          "points"
+          "points",
         ),
-        nullithResetsVermyteEffect: getCurrencyEffectFor(
+        nullithResetsVermyteEffect: getCurrencyEffectOn(
           cachedPlayer,
           "madeNullithResets",
-          "vermytes"
+          "vermytes",
         ),
-        nullithResetsEnergyEffect: getCurrencyEffectFor(
+        nullithResetsEnergyEffect: getCurrencyEffectOn(
           cachedPlayer,
           "madeNullithResets",
-          "energy"
-        )
+          "energy",
+        ),
       }),
       reset: ({ player }, defaultMergedPlayer) => {
         const defaultPlayer = defaultMergedPlayer.player;
@@ -198,7 +198,7 @@ const resetLayers = createResetLayerDataContainer({
         return {
           player: {
             ...applyResetLayerPlayerData(player, "vermyros", {
-              autoEnabled: true
+              autoEnabled: true,
             }),
             vermytes: defaultPlayer.vermytes,
             bestVermytes: defaultPlayer.bestVermytes,
@@ -206,9 +206,9 @@ const resetLayers = createResetLayerDataContainer({
             repeatableUpgrades: {
               vermyte: getRepeatableUpgradeLevel(
                 defaultMergedPlayer,
-                "vermyte"
+                "vermyte",
               ),
-              core: getRepeatableUpgradeLevel(defaultMergedPlayer, "core")
+              core: getRepeatableUpgradeLevel(defaultMergedPlayer, "core"),
             },
             enteredAmplivault: false,
             amplivaultLevel: hasNullith_3
@@ -235,9 +235,9 @@ const resetLayers = createResetLayerDataContainer({
               vermyros_7: hasNullith_3,
               vermyros_8: hasNullith_3,
               vermyros_9: hasNullith_4,
-              vermyros_10: hasNullith_4
-            })
-          }
+              vermyros_10: hasNullith_4,
+            }),
+          },
         };
       },
       reward: (mergedPlayer) => {
@@ -245,18 +245,18 @@ const resetLayers = createResetLayerDataContainer({
 
         const nullithResetGain = calculateCurrencyGain(
           mergedPlayer,
-          "madeNullithResets"
+          "madeNullithResets",
         );
 
         return {
           player: {
             madeNullithResets: player.madeNullithResets.plus(nullithResetGain),
             reachedBreakAmplivault:
-              player.reachedBreakAmplivault || player.enteredAmplivault
-          }
+              player.reachedBreakAmplivault || player.enteredAmplivault,
+          },
         };
-      }
-    }
+      },
+    },
   ],
   sliph: [
     {
@@ -265,11 +265,11 @@ const resetLayers = createResetLayerDataContainer({
       currency: "dertoints",
       usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) => ({
         mallirtTotalDertoints: player.mallirtTotalDertoints,
-        mallirtTotalDertointsEffect: getCurrencyEffectFor(
+        mallirtTotalDertointsEffect: getCurrencyEffectOn(
           cachedPlayer,
           "mallirtTotalDertoints",
-          "dertoints"
-        )
+          "dertoints",
+        ),
       }),
       reset: ({ player }, defaultMergedPlayer) => {
         const defaultPlayer = defaultMergedPlayer.player;
@@ -283,17 +283,17 @@ const resetLayers = createResetLayerDataContainer({
             repeatableUpgrades: {
               dertoint: getRepeatableUpgradeLevel(
                 defaultMergedPlayer,
-                "dertoint"
-              )
+                "dertoint",
+              ),
             },
             ...applyUpgradesById(player, {
               dertoint_1: hasMallirt_1,
               dertoint_2: hasMallirt_1,
               dertoint_3: hasMallirt_2,
-              dertoint_4: hasMallirt_2
+              dertoint_4: hasMallirt_2,
             }),
-            cappergy: defaultPlayer.cappergy
-          }
+            cappergy: defaultPlayer.cappergy,
+          },
         };
       },
       reward: (mergedPlayer) => {
@@ -301,16 +301,16 @@ const resetLayers = createResetLayerDataContainer({
 
         const totalDertointsGain = calculateCurrencyGain(
           mergedPlayer,
-          "mallirtTotalDertoints"
+          "mallirtTotalDertoints",
         );
 
         return {
           player: {
             mallirtTotalDertoints:
-              player.mallirtTotalDertoints.plus(totalDertointsGain)
-          }
+              player.mallirtTotalDertoints.plus(totalDertointsGain),
+          },
         };
-      }
+      },
     },
     {
       id: "level",
@@ -326,24 +326,27 @@ const resetLayers = createResetLayerDataContainer({
               mallirt_1: hasUpgradeById(player, "level_1"),
               mallirt_2: hasUpgradeById(player, "level_2"),
               mallirt_3: hasUpgradeById(player, "level_3"),
-              mallirt_4: hasUpgradeById(player, "level_4")
-            })
-          }
+              mallirt_4: hasUpgradeById(player, "level_4"),
+            }),
+          },
         };
       },
       reward: (mergedPlayer) => {
         const { player } = mergedPlayer;
 
-        const XPGain = calculateCurrencyGain(mergedPlayer, "XP");
+        const scoreGain = calculateCurrencyGain(mergedPlayer, "score");
 
         return {
           player: {
-            XP: player.XP.plus(XPGain)
-          }
+            score: formulas.score(mergedPlayer, scoreGain),
+            XP: everPerformed(mergedPlayer, "level")
+              ? player.XP
+              : player.XP.plus(scoreGain),
+          },
         };
-      }
-    }
-  ]
+      },
+    },
+  ],
 } as const);
 
 export default resetLayers;

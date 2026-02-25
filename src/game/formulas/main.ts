@@ -13,7 +13,7 @@ import currencyData from "@/game/currencies/data";
 import { LayerNumber } from "@/game/resetLayers/types";
 import {
   getCurrencyData,
-  getCurrencyEffectFor
+  getCurrencyEffectOn,
 } from "@/game/currencies/utils/get";
 import { parseValueGetter } from "@/game/player/utils";
 
@@ -27,7 +27,7 @@ const mainFormulas = {
   getLayerMultiplier(
     mergedPlayer: MergedPlayer,
     dimensionId: DimensionId,
-    layer: LayerNumber
+    layer: LayerNumber,
   ) {
     if (layer === null) return createDecimal(1);
 
@@ -40,12 +40,12 @@ const mainFormulas = {
   },
   getCurrencyRepeatableUpgradeMultiplier(
     mergedPlayer: MergedPlayer,
-    currencyId: CurrencyId
+    currencyId: CurrencyId,
   ) {
     let result = createDecimal(1);
 
     for (const [repeatableUpgradeId, repeatableUpgrade] of objectEntries(
-      flatRepeatableUpgrades
+      flatRepeatableUpgrades,
     )) {
       const { affects } = repeatableUpgrade;
       if (affects !== currencyId) continue;
@@ -53,7 +53,7 @@ const mainFormulas = {
       const multiplier = getCachedRepeatableUpgradeProp(
         mergedPlayer,
         repeatableUpgradeId,
-        "effect"
+        "effect",
       );
       result = result.multiply(multiplier);
     }
@@ -63,7 +63,7 @@ const mainFormulas = {
   getCurrencyMultiplier(
     mergedPlayer: MergedPlayer,
     currencyFrom: CurrencyId,
-    currencyFor?: CurrencyId
+    currencyFor?: CurrencyId,
   ) {
     if (!currencyFor) return createDecimal(1);
 
@@ -82,16 +82,16 @@ const mainFormulas = {
       }
     }
 
-    const hasEffectForIt =
+    const hasEffectOnIt =
       affects === currencyFor || hasKey(currencyFor, affects);
-    if (!hasEffectForIt) return createDecimal(1);
+    if (!hasEffectOnIt) return createDecimal(1);
 
-    return getCurrencyEffectFor(mergedPlayer, currencyFrom, currencyFor);
+    return getCurrencyEffectOn(mergedPlayer, currencyFrom, currencyFor);
   },
   boostCurrencyByOthers(
     mergedPlayer: MergedPlayer,
     currencyId: CurrencyId,
-    currencyValue: Decimal
+    currencyValue: Decimal,
   ) {
     let cumulativeMul = createDecimal(1);
     let cumulativePow = createDecimal(1);
@@ -135,7 +135,7 @@ const mainFormulas = {
   getCurrencySoftcapped(
     mergedPlayer: MergedPlayer,
     currencyId: CurrencyId,
-    currencyValue: Decimal
+    currencyValue: Decimal,
   ) {
     return calculateSoftcappedGain(mergedPlayer, currencyId, currencyValue);
   },
@@ -144,20 +144,20 @@ const mainFormulas = {
     currencyId: CurrencyId,
     currencyValue: Decimal,
     dimensionId: DimensionId,
-    layer: LayerNumber
+    layer: LayerNumber,
   ) {
     const mainMultipliers = this.getGlobalMultiplier()
       .multiply(this.getDimensionMultiplier(mergedPlayer, dimensionId))
       .multiply(this.getLayerMultiplier(mergedPlayer, dimensionId, layer))
       .multiply(
-        this.getCurrencyRepeatableUpgradeMultiplier(mergedPlayer, currencyId)
+        this.getCurrencyRepeatableUpgradeMultiplier(mergedPlayer, currencyId),
       );
 
     const boostedByMainMultipliers = currencyValue.multiply(mainMultipliers);
     const boostedByOtherCurrencies = this.boostCurrencyByOthers(
       mergedPlayer,
       currencyId,
-      boostedByMainMultipliers
+      boostedByMainMultipliers,
     );
 
     return boostedByOtherCurrencies;
@@ -167,18 +167,18 @@ const mainFormulas = {
     currencyId: CurrencyId,
     currencyValue: Decimal,
     dimensionId: DimensionId,
-    layer: LayerNumber
+    layer: LayerNumber,
   ) {
     const boostedValue = this.boostBeforeSoftcaps(
       mergedPlayer,
       currencyId,
       currencyValue,
       dimensionId,
-      layer
+      layer,
     );
 
     return this.getCurrencySoftcapped(mergedPlayer, currencyId, boostedValue);
-  }
+  },
 } as const;
 
 export default mainFormulas;

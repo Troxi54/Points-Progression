@@ -8,7 +8,7 @@ import {
   getResetLayerPlayerDataProp,
 } from "@/game/resetLayers/utils/get";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 import { getCachedCurrencyProp } from "@/game/currencies/utils/get";
 import { formatCurrencyEffect } from "@/game/currencies/utils/format";
 import CurrencyContent from "@/ui/components/base/CurrencyContent";
@@ -65,11 +65,11 @@ function TierBar() {
             Tier: {integerCommaFormat(player.tier)} -{" "}
             <span className="text-tier-effect">
               Effect:{" "}
-              {formatEffectForCurrency(cachedPlayer.tierEffect, "points")}
+              {formatEffectOnCurrency(cachedPlayer.tierEffect, "points")}
               {hasNexusLevel(player, 4) && (
                 <>
                   ,{" "}
-                  {formatEffectForCurrency(
+                  {formatEffectOnCurrency(
                     cachedPlayer.tierVermyteEffect,
                     "vermytes",
                   )}{" "}

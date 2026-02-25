@@ -1,5 +1,5 @@
 import { DefaultResetLayerData } from "./types";
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 
 export default function getDefaultResetLayerData(): DefaultResetLayerData {
   return {
@@ -9,6 +9,6 @@ export default function getDefaultResetLayerData(): DefaultResetLayerData {
     reset: () => ({}),
     preventReset: false,
     canPerform: true,
-    reward: () => ({})
+    reward: () => ({}),
   };
 }

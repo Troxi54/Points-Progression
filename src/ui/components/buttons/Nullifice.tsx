@@ -8,12 +8,12 @@ import {
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { getPlayerState } from "@/game/player/store/store";
 import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { getCurrencyEffectFor } from "@/game/currencies/utils/get";
+import { getCurrencyEffectOn } from "@/game/currencies/utils/get";
 import { triggerNullifice } from "@/game/features/nullifice/utils";
 import cn from "@/core/utils/tailwind";
 import CurrencyContent from "@/ui/components/base/CurrencyContent";
 import { pluralizeCurrency } from "@/game/currencies/utils/format";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 
 function Nullifice() {
   const state = usePlayerFields(
@@ -87,7 +87,7 @@ function Nullifice() {
           effectNodes={[
             {
               node: ({ player, cachedPlayer }) => {
-                const effect = getCurrencyEffectFor(
+                const effect = getCurrencyEffectOn(
                   cachedPlayer,
                   "nullions",
                   "madeNullithResets",
@@ -95,7 +95,7 @@ function Nullifice() {
 
                 return (
                   <>
-                    {formatEffectForCurrency(effect, "madeNullithResets")}
+                    {formatEffectOnCurrency(effect, "madeNullithResets")}
                     {hasUpgradeById(player, "dertoint_2") && (
                       <>, {pluralizeCurrency("madeTierTimes", effect)}</>
                     )}

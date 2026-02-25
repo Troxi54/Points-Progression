@@ -55,6 +55,8 @@ export const minifiedPlayerMap = createUniqueObject({
   bestNexusLevel: 46,
   amplivoid: 47,
   bestPoints: 48,
+  score: 49,
+  menuBackgroundBlur: 50,
 } as const satisfies Record<keyof Player, number>);
 
 export type MinifiedPlayerMap = typeof minifiedPlayerMap;

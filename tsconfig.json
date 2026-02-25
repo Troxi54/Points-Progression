@@ -29,12 +29,7 @@
       "@game/*": ["src/game/*"],
       "@ui/*": ["src/ui/*"],
       "@/*": ["src/*"]
-    },
-
-    "typeRoots": [
-      "./node_modules/@extensions/augmentations",
-      "./src/extensions/augmentations"
-    ]
+    }
   },
   "include": ["src"]
 }

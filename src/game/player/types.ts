@@ -22,6 +22,7 @@ export interface Player {
   autosave: boolean;
   saveBeforeUnload: boolean;
   offlineProgressWorks: boolean;
+  menuBackgroundBlur: boolean;
 
   upgrades: Partial<Record<UpgradeContainerId, boolean[]>>;
   repeatableUpgrades: Partial<Record<RepeatableUpgradeId, Decimal>>;
@@ -62,6 +63,7 @@ export interface Player {
   mallirtTotalDertoints: Decimal;
   everReachedCappergy: boolean;
   cappergy: Decimal;
+  score: Decimal;
   XP: Decimal;
   nux: Decimal;
   everTriggeredNuxar: boolean;

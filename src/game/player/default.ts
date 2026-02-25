@@ -21,6 +21,7 @@ export function getDefaultPlayer(): Player {
     autosave: true,
     saveBeforeUnload: true,
     offlineProgressWorks: true,
+    menuBackgroundBlur: true,
 
     upgrades: {},
     repeatableUpgrades: {},
@@ -63,6 +64,7 @@ export function getDefaultPlayer(): Player {
     everReachedCappergy: false,
     cappergy: createDecimal(0),
 
+    score: createDecimal(0),
     XP: createDecimal(0),
     nux: createDecimal(0),
     everTriggeredNuxar: false,

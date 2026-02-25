@@ -4,20 +4,20 @@ import {
   isObject,
   mergeObjects,
   objectEntries,
-  objectKeys
+  objectKeys,
 } from "@/core/utils/object";
 import currencyData from "../data";
 import {
   CachedCurrency,
   CachedPlayerLike,
-  PartialCachedPlayer
+  PartialCachedPlayer,
 } from "@/game/player/cached/types";
 import createDecimal from "@/core/utils/decimal";
 import { parseCachedPlayerLike, parseValueGetter } from "@/game/player/utils";
 import {
-  calculateEffectForCurrency,
+  calculateEffectOnCurrency,
   calculateCurrencyGain,
-  calculateCurrencyPassiveGainFromGain
+  calculateCurrencyPassiveGainFromGain,
 } from "./calculate";
 import { CurrencyId } from "../types";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
@@ -29,7 +29,7 @@ import Decimal from "break_eternity.js";
 function setCachedCurrency(
   cachedPlayerLike: CachedPlayerLike,
   currencyId: CurrencyId,
-  cachedCurrency: Partial<CachedCurrency>
+  cachedCurrency: Partial<CachedCurrency>,
 ) {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
 
@@ -45,10 +45,10 @@ function setCachedCurrency(
 }
 
 export function applyUpdatedCurrencyEffects(
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): PartialCachedPlayer {
   const result: PartialCachedPlayer = {
-    currencies: copyObject(mergedPlayer.cachedPlayer.currencies)
+    currencies: copyObject(mergedPlayer.cachedPlayer.currencies),
   };
 
   for (const [currencyId, data] of objectEntries(currencyData)) {
@@ -65,16 +65,16 @@ export function applyUpdatedCurrencyEffects(
       const newEffects = {} as Partial<Record<CurrencyId, Decimal>>;
 
       for (const effectCurrency of objectKeys(affects)) {
-        const newEffect = calculateEffectForCurrency(
+        const newEffect = calculateEffectOnCurrency(
           mergedPlayer,
           currencyId,
-          effectCurrency
+          effectCurrency,
         );
         if (newEffect) newEffects[effectCurrency] = newEffect;
       }
 
       setCachedCurrency(result, currencyId, {
-        effect: newEffects
+        effect: newEffects,
       });
 
       continue;
@@ -88,7 +88,7 @@ export function applyUpdatedCurrencyEffects(
     const newEffect = effectFormula(mergedPlayer);
 
     setCachedCurrency(result, currencyId, {
-      effect: newEffect
+      effect: newEffect,
     });
   }
 
@@ -96,10 +96,10 @@ export function applyUpdatedCurrencyEffects(
 }
 
 export function applyUpdatedCurrencyGains(
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): PartialCachedPlayer {
   const result: PartialCachedPlayer = {
-    currencies: copyObject(mergedPlayer.cachedPlayer.currencies)
+    currencies: copyObject(mergedPlayer.cachedPlayer.currencies),
   };
 
   for (const [currencyId, data] of objectEntries(currencyData)) {
@@ -107,7 +107,7 @@ export function applyUpdatedCurrencyGains(
 
     const passiveGainWorks = parseValueGetter(
       data.passiveGainWorks,
-      mergedPlayer
+      mergedPlayer,
     );
     const passiveGain = passiveGainWorks
       ? calculateCurrencyPassiveGainFromGain(mergedPlayer, currencyId, gain)
@@ -115,7 +115,7 @@ export function applyUpdatedCurrencyGains(
 
     setCachedCurrency(result, currencyId, {
       gain,
-      passiveGain
+      passiveGain,
     });
   }
 
@@ -124,7 +124,7 @@ export function applyUpdatedCurrencyGains(
 
 export function applyGeneratedCurrencies(
   mergedPlayer: MergedPlayer,
-  deltaTime: number
+  deltaTime: number,
 ): PartialPlayer {
   const result: PartialPlayer = {};
 
@@ -134,13 +134,13 @@ export function applyGeneratedCurrencies(
     const passiveGain = getCachedCurrencyProp(
       cachedPlayer,
       currencyId,
-      "passiveGain"
+      "passiveGain",
     );
     if (passiveGain.equals(0)) continue;
 
     const passiveGainWorks = parseValueGetter(
       data.passiveGainWorks,
-      mergedPlayer
+      mergedPlayer,
     );
 
     if (!passiveGainWorks) continue;

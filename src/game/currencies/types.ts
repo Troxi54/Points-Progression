@@ -21,6 +21,7 @@ export type CurrencyId = DecimalKeys<
     | "dertoints"
     | "mallirtTotalDertoints"
     | "cappergy"
+    | "score"
     | "XP"
     | "nux"
     | "amplivoid"
@@ -60,10 +61,10 @@ export type PartialCurrencyDataContainer = Record<
 
 export type CachedCurrencyPropSelection<
   C extends CurrencyId,
-  P extends keyof CachedCurrency
+  P extends keyof CachedCurrency,
 > = `cachedCurrency_${C}_${P}`;
 
 export type CachedCurrencyEffectSelection<
   C extends CurrencyId,
-  EC extends CurrencyId
+  EC extends CurrencyId,
 > = `cachedCurrency_${C}_effect_${EC}`;

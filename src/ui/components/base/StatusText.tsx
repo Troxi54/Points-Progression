@@ -1,10 +1,12 @@
 import { ClassName } from "@/core/types/react";
 import { isFunction } from "@/core/utils/function";
+import cn from "@core/utils/tailwind";
 import { ReactNode } from "react";
 
 interface Props {
   active: boolean;
   customNode?: ReactNode | ((active: boolean) => ReactNode);
+  className?: ClassName;
   customEnabledClassName?: ClassName;
   customDisabledClassName?: ClassName;
 }
@@ -12,8 +14,9 @@ interface Props {
 function StatusText({
   active,
   customNode,
+  className,
   customEnabledClassName,
-  customDisabledClassName
+  customDisabledClassName,
 }: Props) {
   const custom = isFunction(customNode) ? customNode(active) : customNode;
   const node = custom === undefined ? (active ? "ON" : "OFF") : custom;
@@ -23,9 +26,11 @@ function StatusText({
 
   return (
     <span
-      className={`font-semibold transition-colors ${
-        active ? enabledClassName : disabledClassName
-      }`}
+      className={cn(
+        `font-semibold transition-colors`,
+        className,
+        active ? enabledClassName : disabledClassName,
+      )}
     >
       {node}
     </span>

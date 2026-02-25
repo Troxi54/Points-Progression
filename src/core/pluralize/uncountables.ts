@@ -4,9 +4,10 @@ const uncountableWords = [
   "dark energy",
   "vermora",
   "cappergy",
-  "XP",
   "nux",
-  "amplivoid"
+  "score",
+  "XP",
+  "amplivoid",
 ] as const;
 
 export default uncountableWords;

@@ -15,7 +15,7 @@ export function getCurrencyData(currencyId: CurrencyId) {
 export function getCachedCurrencyProp<P extends keyof CachedCurrency>(
   cachedPlayerLike: CachedPlayerLike,
   currencyId: CurrencyId,
-  prop: P
+  prop: P,
 ): CachedCurrency[P] {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
   return (
@@ -27,7 +27,7 @@ export function getCachedCurrencyProp<P extends keyof CachedCurrency>(
 export function getCachedCurrencyProps<P extends (keyof CachedCurrency)[]>(
   cachedPlayerLike: CachedPlayerLike,
   currencyId: CurrencyId,
-  props: P
+  props: P,
 ): { [K in P[number]]: CachedCurrency[K] } {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
   const defaultCurrency = getDefaultCachedCurrency();
@@ -37,31 +37,31 @@ export function getCachedCurrencyProps<P extends (keyof CachedCurrency)[]>(
       const value =
         cachedPlayer.currencies?.[currencyId]?.[prop] ?? defaultCurrency[prop];
       return [prop, value];
-    })
+    }),
   ) as { [K in P[number]]: CachedCurrency[K] };
 }
 
 export function getCurrencyEffect(
   cachedPlayerLike: CachedPlayerLike,
-  currencyId: CurrencyId
+  currencyId: CurrencyId,
 ) {
   return getCachedCurrencyProp(cachedPlayerLike, currencyId, "effect");
 }
 
 export function parseCurrencyEffect(
   effect: CachedCurrency["effect"],
-  affects: CurrencyId
+  affects: CurrencyId,
 ): Decimal {
   if (isDecimal(effect)) return effect;
 
   return effect[affects] ?? getDefaultCachedCurrencyEffect();
 }
 
-export function getCurrencyEffectFor(
+export function getCurrencyEffectOn(
   cachedPlayerLike: CachedPlayerLike,
   currencyFrom: CurrencyId,
-  currencyFor: CurrencyId
+  currencyTo: CurrencyId,
 ): Decimal {
   const effectProp = getCurrencyEffect(cachedPlayerLike, currencyFrom);
-  return parseCurrencyEffect(effectProp, currencyFor);
+  return parseCurrencyEffect(effectProp, currencyTo);
 }

@@ -19,7 +19,6 @@ function XPState() {
     <ProgressBar progress={progress} progressFillClassName="bg-xp-bar">
       <CurrencyComponent
         currencyId="XP"
-        passiveGainPriority={false}
         preEffectChildren={() => (
           <>
             {" - "}

@@ -74,10 +74,10 @@ export function calculateCurrencyPassiveGainFromGain(
   return gainProperty.passiveGain(mergedPlayer, gain);
 }
 
-export function calculateEffectForCurrency(
+export function calculateEffectOnCurrency(
   mergedPlayer: MergedPlayer,
   currencyId: CurrencyId,
-  currencyFor: CurrencyId,
+  currencyTo: CurrencyId,
 ) {
   const effectProperty = currencyEffectFormulas[currencyId];
   if (!effectProperty) return getDefaultCachedCurrencyEffect();
@@ -85,7 +85,7 @@ export function calculateEffectForCurrency(
   if (isFunction(effectProperty)) return effectProperty(mergedPlayer);
 
   return (
-    effectProperty[currencyFor]?.(mergedPlayer) ??
+    effectProperty[currencyTo]?.(mergedPlayer) ??
     getDefaultCachedCurrencyEffect()
   );
 }

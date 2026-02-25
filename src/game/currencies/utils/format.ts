@@ -1,9 +1,9 @@
 import { isNil } from "@/core/utils/nil";
 import { CurrencyId } from "../types";
-import { getCurrencyData, getCurrencyEffectFor } from "./get";
+import { getCurrencyData, getCurrencyEffectOn } from "./get";
 import { CachedPlayerLike } from "@/game/player/cached/types";
 import { ReactNode } from "react";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 import { DecimalSource } from "break_eternity.js";
 import { formatWithPlural } from "@/core/format/plural";
 import pluralize from "pluralize";
@@ -38,23 +38,23 @@ export function formatCurrencyNameEmptyless(currencyId: CurrencyId): string {
 export function formatCurrencyEffect(
   cachedPlayerLike: CachedPlayerLike,
   currencyFrom: CurrencyId,
-  currencyFor: CurrencyId
+  currencyFor: CurrencyId,
 ): ReactNode {
   const data = getCurrencyData(currencyFrom);
   const { effectMode } = data;
 
-  const effect = getCurrencyEffectFor(
+  const effect = getCurrencyEffectOn(
     cachedPlayerLike,
     currencyFrom,
-    currencyFor
+    currencyFor,
   );
 
-  return formatEffectForCurrency(effect, currencyFor, effectMode);
+  return formatEffectOnCurrency(effect, currencyFor, effectMode);
 }
 
 export function formatCurrency(
   currencyValue: DecimalSource,
-  currencyId: CurrencyId
+  currencyId: CurrencyId,
 ) {
   const formattedCurrency = formatCurrencyName(currencyId);
   return formatWithPlural(currencyValue, formattedCurrency);
@@ -62,7 +62,7 @@ export function formatCurrency(
 
 export function pluralizeCurrency(
   currencyId: CurrencyId,
-  value: DecimalSource
+  value: DecimalSource,
 ) {
   const formattedCurrency = formatCurrencyName(currencyId);
   return pluralize(formattedCurrency, +value);

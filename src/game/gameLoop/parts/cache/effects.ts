@@ -6,7 +6,7 @@ export default function gameLoopUpdateEffects(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
   state.assignCachedPlayerForMergedPlayer(
-    applyUpdatedCurrencyEffects(mergedPlayer)
+    applyUpdatedCurrencyEffects(mergedPlayer),
   );
 
   updateOtherEffects(state);

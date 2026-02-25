@@ -2,7 +2,7 @@ import { formatNumber } from "@/core/format/number";
 import { formatBestRunTime } from "@/core/format/time";
 import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
 import resetLayerConfig from "@/game/resetLayers/config";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 import { hasNexusLevel } from "@/game/features/nexus/utils/has";
 
 function ResetBar() {
@@ -20,19 +20,18 @@ function ResetBar() {
             Best run: {formatBestRunTime(bestRun)}{" "}
             {bestRun &&
               bestRun.lessThanOrEqualTo(
-                resetLayerConfig.firstResetLayerBestRunLimit
+                resetLayerConfig.firstResetLayerBestRunLimit,
               ) &&
               "(limit)"}
             {" - "}
             <span className="text-reset-effect">
-              Effect:{" "}
-              {formatEffectForCurrency(cachedPlayer.runEffect, "points")}
+              Effect: {formatEffectOnCurrency(cachedPlayer.runEffect, "points")}
               {hasNexusLevel(player, 2) && (
                 <>
                   ,{" "}
-                  {formatEffectForCurrency(
+                  {formatEffectOnCurrency(
                     cachedPlayer.runDertointEffect,
-                    "dertoints"
+                    "dertoints",
                   )}{" "}
                   <span className="text-(--nexus-milestone-2)">(N2)</span>
                 </>
@@ -43,22 +42,22 @@ function ResetBar() {
             Best Points: {formatNumber(player.bestPointsOfRun)} -{" "}
             <span className="text-reset-effect">
               Effect:{" "}
-              {formatEffectForCurrency(
+              {formatEffectOnCurrency(
                 cachedPlayer.bestPointsOfRunEffect,
-                "points"
+                "points",
               )}
               {hasNexusLevel(player, 3) && (
                 <>
                   ,{" "}
-                  {formatEffectForCurrency(
+                  {formatEffectOnCurrency(
                     cachedPlayer.bestPointsOfRunVermoraEffect,
-                    "vermora"
+                    "vermora",
                   )}{" "}
                   <span className="text-(--nexus-milestone-3)">(N3)</span>
                 </>
               )}
             </span>
-          </>
+          </>,
         ];
       }}
     />

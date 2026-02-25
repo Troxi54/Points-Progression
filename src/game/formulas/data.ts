@@ -32,10 +32,7 @@ const formulas = {
     if (run === null) return null;
 
     const runDecimal = createDecimal(run);
-    if (
-      runDecimal.isNan() ||
-      !runDecimal.isFinite()
-    ) {
+    if (runDecimal.isNan() || !runDecimal.isFinite()) {
       return null;
     }
 
@@ -96,6 +93,9 @@ const formulas = {
       requirement,
       amplivaultConfig.requirementScaling,
     );
+  },
+  score({ player: { score } }, gain: Decimal) {
+    return score.max(gain);
   },
   level({ player: { XP } }) {
     return calculateBulk(XP, 1, 2);

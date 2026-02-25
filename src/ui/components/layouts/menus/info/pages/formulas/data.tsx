@@ -564,7 +564,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "level"),
-    name: "XP gain",
+    name: "Score gain",
     node: () => {
       const formattedGoal = formatNumber(getResetLayerData("level").goal);
 
@@ -579,6 +579,28 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         </>
       );
     },
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "level"),
+    name: "Score effect",
+    node: () => (
+      <>
+        <Min
+          values={[
+            <>
+              (1 {UISymbols.minus} 1 {UISymbols.divide} 2
+              <Pow>
+                <Log base={formatNumber("1e100")}>
+                  <Stat>score {UISymbols.plus} 1</Stat>
+                </Log>
+              </Pow>
+              ) {UISymbols.multiply} 100
+            </>,
+            0.1,
+          ]}
+        />
+      </>
+    ),
   },
   {
     condition: ({ player }) => everPerformed(player, "level"),
@@ -756,7 +778,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(9),
-    name: "Vermyte XP effect",
+    name: "Vermyte Score effect",
     node: () => (
       <>
         1.075

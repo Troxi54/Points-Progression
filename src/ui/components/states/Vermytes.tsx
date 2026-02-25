@@ -17,7 +17,7 @@ function Vermytes() {
           works: ({ player }) => hasNexusLevel(player, 9),
           node: ({ cachedPlayer }) => (
             <>
-              {formatCurrencyEffect(cachedPlayer, "vermytes", "XP")}{" "}
+              {formatCurrencyEffect(cachedPlayer, "vermytes", "score")}{" "}
               <span className="text-(--nexus-milestone-9)">(N9)</span>
             </>
           ),

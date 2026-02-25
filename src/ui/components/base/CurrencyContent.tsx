@@ -26,6 +26,7 @@ export interface CurrencyComponentProps {
   children?: ValueGetter<ReactNode>;
   currencyId: CurrencyId;
   usePlayerSelector?: UsePlayerFn;
+  customGainNode?: ValueGetter<ReactNode, [Decimal]>;
   passiveGainPriority?: BooleanGetter;
   effectClassName?: ClassName;
   effectNodes?: EffectNode[];
@@ -33,12 +34,14 @@ export interface CurrencyComponentProps {
   textClassName?: ClassName;
   mainTextClassName?: ClassName;
   formatType?: FormatNumberType;
+  setMode?: boolean;
 }
 
 function CurrencyContent({
   currencyId,
   usePlayerSelector,
   passiveGainPriority,
+  customGainNode,
   effectClassName,
   effectNodes,
   preEffectChildren,
@@ -46,6 +49,7 @@ function CurrencyContent({
   mainTextClassName,
   children,
   formatType,
+  setMode,
 }: CurrencyComponentProps) {
   const currencyData = getCurrencyData(currencyId);
   if (!currencyData) return null;
@@ -113,7 +117,10 @@ function CurrencyContent({
   const gainNodeCondition =
     !onlyPassiveGain && currencyGain && currencyGain.notEquals(0);
   const gainNode =
-    gainNodeCondition && ` (+${parseNumberFormat(currencyGain, formatType)})`;
+    gainNodeCondition &&
+    (customGainNode !== undefined
+      ? parseValueGetter(customGainNode, mergedPlayer, currencyGain)
+      : ` (${setMode ? "" : "+"}${parseNumberFormat(currencyGain, formatType)})`);
 
   const filteredEffectNodes: EffectNode[] = [];
   if (effectNodes) {

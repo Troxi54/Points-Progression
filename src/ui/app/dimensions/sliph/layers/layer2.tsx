@@ -5,6 +5,7 @@ import { hasUpgrades } from "@game/upgrades/utils/has";
 import LevelBar from "@ui/components/progressBars/LevelBar";
 import AmplivoidUpgrade from "@ui/components/repeatableUpgrades/AmplivoidUpgrade";
 import Amplivoid from "@ui/components/states/Amplivoid";
+import Score from "@ui/components/states/Score";
 import XPState from "@ui/components/states/XP";
 import AutoLevelButton from "@ui/components/toggles/AutoLevelButton";
 import LevelUpgrades from "@ui/components/upgrades/LevelUpgrades";
@@ -30,6 +31,7 @@ function SliphDimensionLayer2() {
       {state.resetLayer_level_everPerformed && (
         <>
           <AutoLevelButton />
+          <Score />
           <XPState />
           <LevelUpgrades />
           {state.level_4 && (

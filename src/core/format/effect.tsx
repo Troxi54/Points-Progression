@@ -13,7 +13,7 @@ import pluralize from "pluralize";
 export function formatEffectSingular(
   effect: DecimalSource,
   affects: string,
-  mode: EffectMode = "multiply"
+  mode: EffectMode = "multiply",
 ) {
   const decimalEffect = createDecimal(effect);
 
@@ -32,15 +32,15 @@ export function formatEffectSingular(
 export function formatEffect(
   effect: DecimalSource,
   affects: string,
-  mode: EffectMode = "multiply"
+  mode: EffectMode = "multiply",
 ): ReactNode {
   return formatEffectSingular(effect, pluralize(affects), mode);
 }
 
-export function formatEffectForCurrency(
+export function formatEffectOnCurrency(
   effect: DecimalSource,
   affects: CurrencyId,
-  mode: EffectMode = "multiply"
+  mode: EffectMode = "multiply",
 ) {
   const currencyName = formatCurrencyName(affects);
   return formatEffect(effect, currencyName, mode);

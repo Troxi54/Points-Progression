@@ -67,7 +67,7 @@ const currencyEffectFormulas: EffectFormulaContainer = {
       const { madeNullithResets } = player;
 
       return Decimal.multiply(125, madeNullithResets.max(0).pow(3))
-        .pow(hasUpgradeById(player, "level_5") ? 1.15 : 1)
+        .pow(hasUpgradeById(player, "level_5") ? 1.1 : 1)
         .round()
         .max(1);
     },
@@ -128,6 +128,17 @@ const currencyEffectFormulas: EffectFormulaContainer = {
     if (nux.lessThan(1)) return createDecimal(1);
 
     return Decimal.pow(2.65, nux.log10().plus(1));
+  },
+  score({ player: { score } }) {
+    if (score.lessThanOrEqualTo(0)) return createDecimal(0);
+
+    return Decimal.minus(
+      1,
+      Decimal.divide(
+        1,
+        Decimal.pow(2, score.max(0).plus(1).log10().dividedBy(100)),
+      ),
+    ).clamp(0.001, 1);
   },
   amplivoid({ player: { amplivoid } }) {
     return amplivoid.max(0).plus(1).pow(1.75);

@@ -2,14 +2,15 @@
   "homepage": "https://troxi54.github.io/Points-Progression/",
   "name": "points-progression",
   "private": true,
-  "version": "1.0.8",
+  "version": "1.0.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc -b",
+    "build": "npm run typecheck && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "test": "vitest"
   },
   "dependencies": {

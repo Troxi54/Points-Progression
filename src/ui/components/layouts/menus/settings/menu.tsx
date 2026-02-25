@@ -23,6 +23,7 @@ const SettingsMenu = () => {
       "saveBeforeUnload",
       "stableProgressBars",
       "offlineProgressWorks",
+      "menuBackgroundBlur",
     ],
   });
 
@@ -144,6 +145,16 @@ const SettingsMenu = () => {
         >
           <p>
             Offline progress: <StatusText active={state.offlineProgressWorks} />
+          </p>
+        </button>
+        <button
+          className="menu-button"
+          aria-label="Toggle menu blur"
+          onClick={() => togglePlayerField("menuBackgroundBlur")}
+        >
+          <p>
+            Menu background blur:{" "}
+            <StatusText active={state.menuBackgroundBlur} />
           </p>
         </button>
       </HorizontalContainer>

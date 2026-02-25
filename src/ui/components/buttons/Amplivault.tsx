@@ -5,7 +5,7 @@ import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { getCachedCurrencyPropSelection } from "@/game/currencies/utils/selector";
 import { toggleAmplivault } from "@/game/features/amplivault/utils";
 import cn from "@/core/utils/tailwind";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 
 function Amplivault() {
   const state = usePlayerFields(
@@ -121,7 +121,7 @@ function Amplivault() {
             <br />
             <span className="text-amplivault-description">
               Effect:{" "}
-              {formatEffectForCurrency(state.amplivaultEffect, "ampliflux")}
+              {formatEffectOnCurrency(state.amplivaultEffect, "ampliflux")}
             </span>
           </>
         )}

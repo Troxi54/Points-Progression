@@ -4,6 +4,7 @@ import { MenuId } from "./types";
 import { ClassName } from "@/core/types/react";
 import cn from "@/core/utils/tailwind";
 import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 const TRANSITION_TIME = 150;
 
@@ -26,6 +27,10 @@ const Overlay: React.FC<OverlayProps> = ({
   containerClassName,
   blockClosing,
 }) => {
+  const { menuBackgroundBlur } = usePlayerFields({
+    player: ["menuBackgroundBlur"],
+  });
+
   const { close, stack, isOpen, isTop } = useMenu();
   const [shouldRender, setShouldRender] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -97,13 +102,17 @@ const Overlay: React.FC<OverlayProps> = ({
   return (
     <div
       ref={ref}
-      className="fixed bg-overlay-2 transition-ease transition-opacity duration-150 text-[1.5vmin] inset-0 backdrop-blur-[0.25em]"
+      className={cn(
+        "fixed bg-overlay-2 transition-ease transition-opacity duration-150 text-[1.5vmin] inset-0",
+        menuBackgroundBlur && "backdrop-blur-[0.25em]",
+      )}
       style={overlayStyle}
     >
       {overlayChildren}
       <div
         className={cn(
-          "relative size-fit p-[3em] text-[1.1em] bg-overlay-menu rounded-[2em] shadow-[0_0_1.5em_1em_rgba(0,0,0,0.25)] backdrop-blur-[0.1em]",
+          "relative size-fit p-[3em] text-[1.1em] bg-overlay-menu rounded-[2em] shadow-[0_0_1.5em_1em_rgba(0,0,0,0.25)]",
+          menuBackgroundBlur && "backdrop-blur-[0.1em]",
           menuClassName,
         )}
         style={innerStyle}

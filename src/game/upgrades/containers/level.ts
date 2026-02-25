@@ -32,7 +32,7 @@ const levelUpgrades = createUpgradeDataContainer({
     {
       id: "level_5",
       description:
-        "Raises Nullith Reset's Point effect to the power of 1.15, generates Total Dertoints equal to 10% of Total Dertoints you could gain per second, and prevents Amplivoid Upgrade from spending Amplivoid",
+        "Raises Nullith Reset's Point effect to the power of 1.1, generates Total Dertoints equal to 10% of Total Dertoints you could gain per second, and prevents Amplivoid Upgrade from spending Amplivoid",
       cost: 4.45e131,
     },
     {

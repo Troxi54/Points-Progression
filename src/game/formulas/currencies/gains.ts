@@ -12,7 +12,7 @@ import { hasUpgradeById } from "@/game/upgrades/utils/has";
 import currencyConfig from "@/game/currencies/config";
 import {
   getCachedCurrencyProp,
-  getCurrencyEffectFor,
+  getCurrencyEffectOn,
 } from "@/game/currencies/utils/get";
 import cappergyConfig from "@/game/features/cappergy/config";
 import nuxarConfig from "@/game/features/nuxar/config";
@@ -30,7 +30,7 @@ const currencyGainFormulas: GainFormulaContainer = {
   madeTierTimes: {
     gain: ({ player, cachedPlayer }) => {
       const nullionEffect = hasUpgradeById(player, "dertoint_2")
-        ? getCurrencyEffectFor(cachedPlayer, "nullions", "madeNullithResets")
+        ? getCurrencyEffectOn(cachedPlayer, "nullions", "madeNullithResets")
         : 1;
       return createDecimal(1).multiply(nullionEffect);
     },
@@ -139,7 +139,7 @@ const currencyGainFormulas: GainFormulaContainer = {
   },
   dertoints: {
     gain({ player, cachedPlayer }) {
-      const nullionEffect = getCurrencyEffectFor(
+      const nullionEffect = getCurrencyEffectOn(
         cachedPlayer,
         "nullions",
         "madeNullithResets",
@@ -192,25 +192,26 @@ const currencyGainFormulas: GainFormulaContainer = {
       value.dividedBy(cappergyConfig.startEarningAt).max(1).log10(),
     );
   },
-  XP: {
-    gain(mergedPlayer) {
-      if (!canPerform(mergedPlayer, "level")) return createDecimal(0);
-
-      const { player } = mergedPlayer;
-      if (!everPerformed(player, "level")) return createDecimal(1);
-
-      const { dertoints } = player;
-      const { goal } = getResetLayerData("level");
-
-      return Decimal.pow(2, dertoints.dividedBy(goal).log(100).max(0));
-    },
-  },
   nux({ player: { nullions } }) {
     const { requirement } = nuxarConfig;
 
     if (nullions.lessThan(requirement)) return createDecimal(0);
 
     return nullions.dividedBy(requirement).pow(0.9);
+  },
+  score(mergedPlayer) {
+    if (!canPerform(mergedPlayer, "level")) return createDecimal(0);
+
+    const { player } = mergedPlayer;
+    if (!everPerformed(player, "level")) return createDecimal(1);
+
+    const { dertoints } = player;
+    const { goal } = getResetLayerData("level");
+
+    return Decimal.pow(2, dertoints.dividedBy(goal).log(100).max(0));
+  },
+  XP({ player }) {
+    return player.score;
   },
   amplivoid: {
     gain({ player: { ampliflux } }) {

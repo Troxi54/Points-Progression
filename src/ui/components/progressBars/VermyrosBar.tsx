@@ -1,6 +1,6 @@
 import { formatNumber } from "@/core/format/number";
 import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
-import { formatEffectForCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@/core/format/effect";
 import { hasNexusLevel } from "@/game/features/nexus/utils/has";
 
 function VermyrosBar() {
@@ -15,22 +15,22 @@ function VermyrosBar() {
             Best Vermytes on reset: {formatNumber(player.bestVermytes)}{" "}
             <span className="text-vermyros-effect">
               - Effect:{" "}
-              {formatEffectForCurrency(
+              {formatEffectOnCurrency(
                 cachedPlayer.bestVermytesEffect,
-                "vermora"
+                "vermora",
               )}
               {hasNexusLevel(player, 7) && (
                 <>
                   ,{" "}
-                  {formatEffectForCurrency(
+                  {formatEffectOnCurrency(
                     cachedPlayer.bestVermytesPointsEffect,
-                    "points"
+                    "points",
                   )}{" "}
                   <span className="text-(--nexus-milestone-7)">(N7)</span>
                 </>
               )}
             </span>
-          </>
+          </>,
         ];
       }}
     />
