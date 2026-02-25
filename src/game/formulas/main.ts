@@ -63,9 +63,9 @@ const mainFormulas = {
   getCurrencyMultiplier(
     mergedPlayer: MergedPlayer,
     currencyFrom: CurrencyId,
-    currencyFor?: CurrencyId,
+    effectOn?: CurrencyId,
   ) {
-    if (!currencyFor) return createDecimal(1);
+    if (!effectOn) return createDecimal(1);
 
     const data = getCurrencyData(currencyFrom);
     const { affects } = data;
@@ -73,20 +73,19 @@ const mainFormulas = {
     const effectWorks = parseValueGetter(data.effectWorks, mergedPlayer);
     if (!effectWorks) return createDecimal(1);
 
-    const effectDataHasCurrency = hasKey(currencyFor, affects);
+    const effectDataHasCurrency = hasKey(effectOn, affects);
     if (effectDataHasCurrency) {
-      const effectData = affects[currencyFor];
+      const effectData = affects[effectOn];
       if (effectData) {
         const works = parseValueGetter(effectData.works, mergedPlayer);
         if (!works) return createDecimal(1);
       }
     }
 
-    const hasEffectOnIt =
-      affects === currencyFor || hasKey(currencyFor, affects);
+    const hasEffectOnIt = affects === effectOn || hasKey(effectOn, affects);
     if (!hasEffectOnIt) return createDecimal(1);
 
-    return getCurrencyEffectOn(mergedPlayer, currencyFrom, currencyFor);
+    return getCurrencyEffectOn(mergedPlayer, currencyFrom, effectOn);
   },
   boostCurrencyByOthers(
     mergedPlayer: MergedPlayer,

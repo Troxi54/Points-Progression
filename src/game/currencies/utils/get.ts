@@ -60,8 +60,8 @@ export function parseCurrencyEffect(
 export function getCurrencyEffectOn(
   cachedPlayerLike: CachedPlayerLike,
   currencyFrom: CurrencyId,
-  currencyTo: CurrencyId,
+  effectOn: CurrencyId,
 ): Decimal {
   const effectProp = getCurrencyEffect(cachedPlayerLike, currencyFrom);
-  return parseCurrencyEffect(effectProp, currencyTo);
+  return parseCurrencyEffect(effectProp, effectOn);
 }

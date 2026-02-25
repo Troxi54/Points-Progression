@@ -38,18 +38,14 @@ export function formatCurrencyNameEmptyless(currencyId: CurrencyId): string {
 export function formatCurrencyEffect(
   cachedPlayerLike: CachedPlayerLike,
   currencyFrom: CurrencyId,
-  currencyFor: CurrencyId,
+  effectOn: CurrencyId,
 ): ReactNode {
   const data = getCurrencyData(currencyFrom);
   const { effectMode } = data;
 
-  const effect = getCurrencyEffectOn(
-    cachedPlayerLike,
-    currencyFrom,
-    currencyFor,
-  );
+  const effect = getCurrencyEffectOn(cachedPlayerLike, currencyFrom, effectOn);
 
-  return formatEffectOnCurrency(effect, currencyFor, effectMode);
+  return formatEffectOnCurrency(effect, effectOn, effectMode);
 }
 
 export function formatCurrency(
