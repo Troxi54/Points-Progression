@@ -1,0 +1,34 @@
+name: Upload gh-pages to itch.io
+
+on:
+  page_build:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          path: game
+
+      - name: Check gh-pages folder not empty
+        run: |
+          if [ -z "$(ls -A game)" ]; then
+            echo "Error: gh-pages folder is empty!"
+            exit 1
+          fi
+
+      - name: Upload to itch.io
+        uses: Ayowel/butler-to-itch@v1
+        with:
+          butler_key: ${{ secrets.BUTLER_API_KEY }}
+          itch_user: Troxi
+          itch_game: points-progression
+          version: ${{ github.sha }}
+          files: |
+            html5 game
+          
