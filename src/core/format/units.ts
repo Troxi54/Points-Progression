@@ -1,7 +1,7 @@
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 import { FormatNumberGroupContainer, Unit } from "./types";
 import Decimal from "break_eternity.js";
-import { arrayLastItem } from "@/core/utils/array";
+import { arrayLastItem } from "@core/utils/array";
 
 const formatUnits: FormatNumberGroupContainer = [
   {

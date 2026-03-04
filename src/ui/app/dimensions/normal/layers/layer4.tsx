@@ -1,4 +1,4 @@
-import DimensionLayerLayout from "@/ui/components/base/DimensionLayerLayout";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";

@@ -1,6 +1,6 @@
 import Decimal from "break_eternity.js";
 import { RepeatableUpgrade } from "./types";
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 
 export default function getDefaultRepeatableUpgrade(): RepeatableUpgrade {
   return {
@@ -12,6 +12,6 @@ export default function getDefaultRepeatableUpgrade(): RepeatableUpgrade {
     effectFormula: (lvl) => Decimal.pow(1.5, lvl),
     affects: "points",
     maxLevel: Decimal.dInf,
-    autobuy: false
+    autobuy: false,
   };
 }

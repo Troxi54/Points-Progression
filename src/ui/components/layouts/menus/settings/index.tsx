@@ -1,4 +1,4 @@
-import Image from "@/ui/components/base/Image";
+import Image from "@ui/components/base/Image";
 import { useMenu } from "../provider";
 import settingsIcon from "@ui/assets/settings.svg";
 

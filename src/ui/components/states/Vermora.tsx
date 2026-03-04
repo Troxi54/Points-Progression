@@ -1,6 +1,6 @@
-import CurrencyComponent from "@/ui/components/base/Currency";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+import CurrencyComponent from "@ui/components/base/Currency";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 function Vermora() {
   return (

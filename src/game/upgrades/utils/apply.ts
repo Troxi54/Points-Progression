@@ -1,17 +1,17 @@
-import { PlayerLike, PartialPlayer } from "@/game/player/types";
-import { MergedPlayer } from "@/game/player/merged/types";
-import { parsePlayerLike } from "@/game/player/utils";
+import { PlayerLike, PartialPlayer } from "@game/player/types";
+import { MergedPlayer } from "@game/player/merged/types";
+import { parsePlayerLike } from "@game/player/utils";
 import {
   UpgradeContainerId,
   UpgradeData,
   UpgradeDataContainer,
   UpgradeId,
-} from "@/game/upgrades/types";
-import { deepCopy, objectEntries } from "@/core/utils/object";
+} from "@game/upgrades/types";
+import { copyObject, deepCopy, objectEntries } from "@core/utils/object";
 import { splitUpgradeId } from "./id";
 import { hasPreviousUpgrade, hasUpgrade } from "./has";
 import { getUpgradeContainerDimensionId, getUpgradeCurrency } from "./get";
-import { shouldDimensionWork } from "@/game/dimensions/utils/check";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
 
 export function applyUpgrade(
   playerLike: PlayerLike,
@@ -68,7 +68,8 @@ export function applyUpgradesById(
 
   if (!currentUpgrades) return player;
 
-  const newUpgrades = deepCopy(currentUpgrades, 2);
+  const newUpgrades = copyObject(currentUpgrades);
+  const touchedContainers = new Set<UpgradeContainerId>();
 
   for (const [upgradeId, value] of objectEntries(upgrades)) {
     const [containerName, upgradeNumber] = splitUpgradeId(upgradeId);
@@ -78,6 +79,12 @@ export function applyUpgradesById(
 
     let container = newUpgrades[containerName];
     if (container === undefined) continue;
+
+    if (!touchedContainers.has(containerName)) {
+      container = container ? [...container] : [];
+      newUpgrades[containerName] = container;
+      touchedContainers.add(containerName);
+    }
 
     if (!container) {
       container = newUpgrades[containerName] = [];

@@ -1,8 +1,8 @@
 import formulas from "@game/formulas/data";
-import { getPlayerState } from "@/game/player/store/store";
-import { MergedPlayer } from "@/game/player/merged/types";
-import { triggerResetLayer } from "@/game/resetLayers/utils/apply";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { getPlayerState } from "@game/player/store/store";
+import { MergedPlayer } from "@game/player/merged/types";
+import { triggerResetLayer } from "@game/resetLayers/utils/apply";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 function shouldAmplivaultIncreaseLevel({ player, cachedPlayer }: MergedPlayer) {
   return (
@@ -35,8 +35,8 @@ export function toggleAmplivault() {
     ...triggeredReset,
     player: {
       ...triggeredReset?.player,
-      enteredAmplivault: !player.enteredAmplivault
-    }
+      enteredAmplivault: !player.enteredAmplivault,
+    },
   });
 }
 
@@ -47,6 +47,6 @@ export function breakAmplivault() {
 
   setPlayer({
     amplivaultBroken: true,
-    enteredAmplivault: false
+    enteredAmplivault: false,
   });
 }

@@ -1,6 +1,6 @@
 const offlineConfig = {
-  ticksOnTrigger: 1000,
-  minimumTime: 30000,
+  maxTicksOnTrigger: 1000,
+  minimumTime: 10000,
   maxSpeed: 4096,
 } as const;
 

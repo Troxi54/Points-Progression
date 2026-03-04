@@ -1,9 +1,9 @@
-import { PartialPlayer, Player } from "@/game/player/types";
+import { PartialPlayer, Player } from "@game/player/types";
 import playerPersistenceConfig from "./config";
 import { decompressPlayerString } from "./decompress";
 import { migratePlayer } from "./migrate";
 import { normalizePlayer, sanitizePlayer } from "./normalize";
-import gameConfig from "@/core/config/data";
+import gameConfig from "@core/config/data";
 import { unminifyPlayer } from "./minify";
 
 function loadPlayerDataFromLocalStorage(): string | null {

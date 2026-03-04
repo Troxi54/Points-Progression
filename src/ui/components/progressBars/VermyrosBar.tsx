@@ -1,7 +1,7 @@
-import { formatNumber } from "@/core/format/number";
-import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
-import { formatEffectOnCurrency } from "@/core/format/effect";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+import { formatNumber } from "@core/format/number";
+import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 function VermyrosBar() {
   return (
@@ -12,9 +12,9 @@ function VermyrosBar() {
       labelParts={({ player, cachedPlayer }) => {
         return [
           <>
-            Best Vermytes on reset: {formatNumber(player.bestVermytes)}{" "}
+            Best Vermytes on reset: {formatNumber(player.bestVermytes)} -{" "}
             <span className="text-vermyros-effect">
-              - Effect:{" "}
+              Effect:{" "}
               {formatEffectOnCurrency(
                 cachedPlayer.bestVermytesEffect,
                 "vermora",

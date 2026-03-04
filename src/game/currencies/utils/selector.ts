@@ -1,25 +1,25 @@
-import { CachedCurrency, CachedPlayerLike } from "@/game/player/cached/types";
+import { CachedCurrency, CachedPlayerLike } from "@game/player/cached/types";
 import {
   CachedCurrencyEffectSelection,
   CachedCurrencyPropSelection,
-  CurrencyId
+  CurrencyId,
 } from "../types";
-import { parseCachedPlayerLike } from "@/game/player/utils";
-import { mergeObjects, objectFromEntries } from "@/core/utils/object";
+import { parseCachedPlayerLike } from "@game/player/utils";
+import { mergeObjects, objectFromEntries } from "@core/utils/object";
 import { getCachedCurrencyProp } from "./get";
 import Decimal from "break_eternity.js";
-import { isDecimal } from "@/core/utils/decimal";
-import { getDefaultCachedCurrencyEffect } from "@/game/player/cached/default";
+import { isDecimal } from "@core/utils/decimal";
+import { getDefaultCachedCurrencyEffect } from "@game/player/cached/default";
 
 export function getCachedCurrencySelection<
   C extends CurrencyId,
   P extends (keyof CachedCurrency)[],
-  EI extends CurrencyId[] | undefined = undefined
+  EI extends CurrencyId[] | undefined = undefined,
 >(
   cachedPlayerLike: CachedPlayerLike,
   currencyId: C,
   props: P,
-  effects?: EI
+  effects?: EI,
 ): {
   [K in P[number] as CachedCurrencyPropSelection<C, K>]: CachedCurrency[K];
 } & (EI extends undefined
@@ -38,7 +38,7 @@ export function getCachedCurrencySelection<
           `cachedCurrency_${currencyId}_${prop}`;
         const value = getCachedCurrencyProp(cachedPlayer, currencyId, prop);
         return [key, value];
-      })
+      }),
     ),
     effects
       ? objectFromEntries(
@@ -47,21 +47,21 @@ export function getCachedCurrencySelection<
             const effectProp = getCachedCurrencyProp(
               cachedPlayer,
               currencyId,
-              "effect"
+              "effect",
             );
             const value = isDecimal(effectProp)
               ? effectProp
               : (effectProp[effect] ?? getDefaultCachedCurrencyEffect());
             return [key, value];
-          })
+          }),
         )
-      : {}
+      : {},
   ) as ReturnType<typeof getCachedCurrencySelection>;
 }
 
 export function getCachedCurrencyPropSelection<
   T extends CurrencyId,
-  P extends keyof CachedCurrency
+  P extends keyof CachedCurrency,
 >(cachedPlayerLike: CachedPlayerLike, currencyId: T, prop: P) {
   return getCachedCurrencySelection(cachedPlayerLike, currencyId, [prop]);
 }

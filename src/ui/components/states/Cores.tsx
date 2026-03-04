@@ -1,5 +1,5 @@
-import CurrencyComponent from "@/ui/components/base/Currency";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
+import CurrencyComponent from "@ui/components/base/Currency";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
 
 function Cores() {
   return (
@@ -11,8 +11,8 @@ function Cores() {
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
-            formatCurrencyEffect(cachedPlayer, "cores", "energyReactors")
-        }
+            formatCurrencyEffect(cachedPlayer, "cores", "energyReactors"),
+        },
       ]}
     />
   );

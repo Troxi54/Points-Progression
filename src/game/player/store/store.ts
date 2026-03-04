@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { getDefaultPlayer } from "../default";
 import { getDefaultCachedPlayer } from "../cached/default";
-import { mergePlayer } from "@/game/player/merged/utils";
-import { updateObject } from "@/core/utils/object";
+import { mergePlayer } from "@game/player/merged/utils";
+import { updateObject } from "@core/utils/object";
 import { PlayerState, PlayerStateFacade } from "./types";
 
 export const usePlayerStore = create<PlayerState>((set) => {
@@ -24,8 +24,8 @@ export const usePlayerStore = create<PlayerState>((set) => {
         return {
           mergedPlayer: {
             ...state.mergedPlayer,
-            player: updatedPlayer
-          }
+            player: updatedPlayer,
+          },
         };
       }),
 
@@ -41,8 +41,8 @@ export const usePlayerStore = create<PlayerState>((set) => {
         return {
           mergedPlayer: {
             ...state.mergedPlayer,
-            cachedPlayer: updatedCachedPlayer
-          }
+            cachedPlayer: updatedCachedPlayer,
+          },
         };
       }),
 
@@ -54,7 +54,7 @@ export const usePlayerStore = create<PlayerState>((set) => {
         const updatedPlayer = updateObject(oldPlayer, newMergedPlayer?.player);
         const updatedCached = updateObject(
           oldCached,
-          newMergedPlayer?.cachedPlayer
+          newMergedPlayer?.cachedPlayer,
         );
 
         const hasPlayerChanged = updatedPlayer !== oldPlayer;
@@ -66,11 +66,11 @@ export const usePlayerStore = create<PlayerState>((set) => {
 
         const merged = {
           player: updatedPlayer,
-          cachedPlayer: updatedCached
+          cachedPlayer: updatedCached,
         };
 
         return { mergedPlayer: merged };
-      })
+      }),
   };
 });
 
@@ -84,6 +84,6 @@ export function getPlayerState(): PlayerStateFacade {
     cachedPlayer: mergedPlayer.cachedPlayer,
     setPlayer,
     setCachedPlayer,
-    setMergedPlayer
+    setMergedPlayer,
   };
 }

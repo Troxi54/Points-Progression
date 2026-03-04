@@ -1,42 +1,42 @@
-import { PartialPlayer, PlayerLike } from "@/game/player/types";
-import { PartialCachedPlayer } from "@/game/player/cached/types";
-import { CachedPlayerLike } from "@/game/player/cached/types";
-import { PartialMergedPlayer } from "@/game/player/merged/types";
-import { MergedPlayer } from "@/game/player/merged/types";
-import { CachedRepeatableUpgrade } from "@/game/player/cached/types";
+import { PartialPlayer, PlayerLike } from "@game/player/types";
+import { PartialCachedPlayer } from "@game/player/cached/types";
+import { CachedPlayerLike } from "@game/player/cached/types";
+import { PartialMergedPlayer } from "@game/player/merged/types";
+import { MergedPlayer } from "@game/player/merged/types";
+import { CachedRepeatableUpgrade } from "@game/player/cached/types";
 import { flatRepeatableUpgrades } from "../data";
 import { RepeatableUpgrade, RepeatableUpgradeId } from "../types";
 import Decimal from "break_eternity.js";
 import {
   parseCachedPlayerLike,
   parsePlayerLike,
-  parseValueGetter
-} from "@/game/player/utils";
+  parseValueGetter,
+} from "@game/player/utils";
 import {
   assignCachedPlayerForMergedPlayer,
-  assignMergedPlayer
-} from "@/game/player/merged/utils";
+  assignMergedPlayer,
+} from "@game/player/merged/utils";
 import {
   copyObject,
   deepCopy,
   mergeObjects,
   objectEntries,
-  objectKeys
-} from "@/core/utils/object";
+  objectKeys,
+} from "@core/utils/object";
 import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
 import {
   getRepeatableUpgradeBulkCostAndLevel,
   calculateRepeatableUpgradeCost,
   calculateRepeatableUpgradeBulkWithMax,
-  getRepeatableUpgradeMaxLevel
+  getRepeatableUpgradeMaxLevel,
 } from "./calculate";
-import { shouldDimensionWork } from "@/game/dimensions/utils/check";
-import createDecimal from "@/core/utils/decimal";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import createDecimal from "@core/utils/decimal";
 
 export function applyRepeatableUpgradeLevel(
   playerLike: PlayerLike,
   repeatableUpgradeId: RepeatableUpgradeId,
-  level: Decimal
+  level: Decimal,
 ): PartialPlayer | undefined {
   const player = parsePlayerLike(playerLike);
   if (!player) return;
@@ -53,7 +53,7 @@ export function applyRepeatableUpgradeLevel(
 function applyRepeatableUpgradeWithBulk(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal
+  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal,
 ): PartialPlayer | undefined {
   const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
 
@@ -61,13 +61,13 @@ function applyRepeatableUpgradeWithBulk(
 
   const dimensionWorks = shouldDimensionWork(
     mergedPlayer,
-    upgradeData.dimensionId
+    upgradeData.dimensionId,
   );
   if (!dimensionWorks) return;
 
   const upgradeCondition = parseValueGetter(
     upgradeData.condition,
-    mergedPlayer
+    mergedPlayer,
   );
   if (!upgradeCondition) return;
 
@@ -85,7 +85,7 @@ function applyRepeatableUpgradeWithBulk(
     mergedPlayer,
     upgradeData,
     currentLevel,
-    bulkFromFormula
+    bulkFromFormula,
   );
 
   if (bulk.lessThanOrEqualTo(0)) return;
@@ -93,7 +93,7 @@ function applyRepeatableUpgradeWithBulk(
   const newLevel = currentLevel.plus(bulk);
   const costWithBulk = calculateRepeatableUpgradeCost(
     upgradeData,
-    newLevel.minus(1)
+    newLevel.minus(1),
   );
   const hasEnoughCurrencyWithBulk =
     currencyValue.greaterThanOrEqualTo(costWithBulk);
@@ -102,19 +102,19 @@ function applyRepeatableUpgradeWithBulk(
 
   const spendCurrency = parseValueGetter(
     upgradeData.spendCurrency,
-    mergedPlayer
+    mergedPlayer,
   );
 
   return {
     ...applyRepeatableUpgradeLevel(player, repeatableUpgradeId, newLevel),
-    ...(spendCurrency ? { [currency]: currencyValue.minus(costWithBulk) } : {})
+    ...(spendCurrency ? { [currency]: currencyValue.minus(costWithBulk) } : {}),
   };
 }
 
 function applyCachedRepeatableUpgrade(
   cachedPlayerLike: CachedPlayerLike,
   repeatableUpgradeId: RepeatableUpgradeId,
-  cachedRepeatableUpgrade: Partial<CachedRepeatableUpgrade>
+  cachedRepeatableUpgrade: Partial<CachedRepeatableUpgrade>,
 ): PartialCachedPlayer | undefined {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
 
@@ -128,13 +128,13 @@ function applyCachedRepeatableUpgrade(
   newContainer[repeatableUpgradeId] = newUpgrade;
 
   return {
-    repeatableUpgrades: newContainer
+    repeatableUpgrades: newContainer,
   };
 }
 
 function createUpdatedCachedRepeatableUpgrade(
   mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ): PartialCachedPlayer | undefined {
   const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
 
@@ -143,7 +143,7 @@ function createUpdatedCachedRepeatableUpgrade(
   const { effectFormula } = upgradeData;
   const [bulk, cost, level] = getRepeatableUpgradeBulkCostAndLevel(
     repeatableUpgradeId,
-    mergedPlayer
+    mergedPlayer,
   );
 
   const maxLevel = getRepeatableUpgradeMaxLevel(mergedPlayer, upgradeData);
@@ -154,54 +154,54 @@ function createUpdatedCachedRepeatableUpgrade(
       mergedPlayer,
       upgradeData,
       level,
-      bulk
+      bulk,
     ),
     effect: effectFormula(level, mergedPlayer),
-    maxed: level.greaterThanOrEqualTo(maxLevel)
+    maxed: level.greaterThanOrEqualTo(maxLevel),
   };
 
   return applyCachedRepeatableUpgrade(
     cachedPlayer,
     repeatableUpgradeId,
-    newRepeatableUpgrade
+    newRepeatableUpgrade,
   );
 }
 
 function applyRepeatableUpgradeWithBulkAndUpdates(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal
+  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal,
 ): PartialMergedPlayer {
   const purchased = applyRepeatableUpgradeWithBulk(
     mergedPlayer,
     repeatableUpgradeId,
-    bulkFormula
+    bulkFormula,
   );
   const updated = createUpdatedCachedRepeatableUpgrade(
     mergedPlayer,
-    repeatableUpgradeId
+    repeatableUpgradeId,
   );
 
   return {
     player: purchased,
-    cachedPlayer: updated
+    cachedPlayer: updated,
   };
 }
 
 export function applyRepeatableUpgradeSingle(
   mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ): PartialMergedPlayer {
   return applyRepeatableUpgradeWithBulkAndUpdates(
     mergedPlayer,
     repeatableUpgradeId,
-    () => createDecimal(1)
+    () => createDecimal(1),
   );
 }
 
 export function applyRepeatableUpgradeMax(
   mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ): PartialMergedPlayer {
   return applyRepeatableUpgradeWithBulkAndUpdates(
     mergedPlayer,
@@ -209,16 +209,16 @@ export function applyRepeatableUpgradeMax(
     () => {
       const [bulk] = getRepeatableUpgradeBulkCostAndLevel(
         repeatableUpgradeId,
-        mergedPlayer
+        mergedPlayer,
       );
 
       return bulk;
-    }
+    },
   );
 }
 
 export function tickAllRepeatableUpgrades(
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): PartialMergedPlayer {
   const result = copyObject(mergedPlayer);
 
@@ -238,7 +238,7 @@ export function tickAllRepeatableUpgrades(
 }
 
 export function applyUpdatedRepeatableUpgrades(
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): PartialMergedPlayer {
   const result = deepCopy(mergedPlayer, 2);
 

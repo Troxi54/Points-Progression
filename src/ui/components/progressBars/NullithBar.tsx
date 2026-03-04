@@ -1,6 +1,6 @@
-import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
-import CurrencyContent from "@/ui/components/base/CurrencyContent";
+import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import CurrencyContent from "@ui/components/base/CurrencyContent";
 
 function NullithBar() {
   return (

@@ -1,9 +1,9 @@
-import { formatWithPlural } from "@/core/format/plural";
+import { formatWithPlural } from "@core/format/plural";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import coreConfig from "@/game/features/cores/config";
-import { getCachedCurrencyPropSelection } from "@/game/currencies/utils/selector";
-import { convertEnergyIntoCores } from "@/game/features/cores/utils";
-import { formatCurrency } from "@/game/currencies/utils/format";
+import coreConfig from "@game/features/cores/config";
+import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
+import { convertEnergyIntoCores } from "@game/features/cores/utils";
+import { formatCurrency } from "@game/currencies/utils/format";
 
 function CoreButton() {
   const state = usePlayerFields(

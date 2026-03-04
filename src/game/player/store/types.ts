@@ -1,6 +1,6 @@
 import { PartialPlayer } from "../types";
-import { PartialMergedPlayer } from "@/game/player/merged/types";
-import { MergedPlayer } from "@/game/player/merged/types";
+import { PartialMergedPlayer } from "@game/player/merged/types";
+import { MergedPlayer } from "@game/player/merged/types";
 import { CachedPlayer } from "../cached/types";
 
 export interface PlayerState {

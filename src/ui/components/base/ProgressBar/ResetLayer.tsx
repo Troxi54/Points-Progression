@@ -1,31 +1,32 @@
-import { formatCurrencyName } from "@/game/currencies/utils/format";
-import { Nil } from "@/core/types/primitives";
-import { getCachedCurrencyProp } from "@/game/currencies/utils/get";
-import { formatWithPlural } from "@/core/format/plural";
-import { formatLeftTime } from "@/core/format/time";
+import { formatCurrencyName } from "@game/currencies/utils/format";
+import { getCachedCurrencyProp } from "@game/currencies/utils/get";
+import { formatWithPlural } from "@core/format/plural";
+import { formatLeftTime } from "@core/format/time";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
-import { ValueGetter } from "@/game/player/types";
-import { parseValueGetter } from "@/game/player/utils";
-import { ResetLayerId } from "@/game/resetLayers/types";
+import { getPlayerState } from "@game/player/store/store";
+import { ValueGetter } from "@game/player/types";
+import { parseValueGetter } from "@game/player/utils";
+import { ResetLayerId } from "@game/resetLayers/types";
 import {
   getResetLayerData,
   getResetLayerPlayerDataProps,
   shouldResetLayerProgressBarLock,
-} from "@/game/resetLayers/utils/get";
-import { mergeObjects } from "@/core/utils/object";
-import { calculateProgress } from "@/core/utils/progress";
-import { calculateTimeForRequirement } from "@/core/utils/time";
+} from "@game/resetLayers/utils/get";
+import { mergeObjects } from "@core/utils/object";
+import { calculateProgress } from "@core/utils/progress";
+import { calculateTimeForRequirement } from "@core/utils/time";
 import Decimal from "break_eternity.js";
-import { Fragment, ReactNode } from "react";
-import ProgressBar, { ProgressBarProps } from "./ProgressBar";
+import { ProgressBarProps } from "./types";
+import { ReactNode } from "react";
+import { Nil } from "@core/types/primitives";
+import ProgressBar from ".";
+import { isNil } from "@core/utils/nil";
+import progressBarConfig from "./config";
 
-const LABEL_SEPARATOR = <>&emsp;|&emsp;</>;
-
-interface Props extends ProgressBarProps {
+interface Props extends Omit<ProgressBarProps, "labelParts"> {
   resetLayerId: ResetLayerId;
-  labelParts?: ValueGetter<ReactNode[] | Nil, [boolean]>;
   customProgress?: ValueGetter<number, [Decimal]>;
+  labelParts?: ValueGetter<ReactNode[] | Nil, [boolean]>;
 }
 
 function ResetLayerProgressBar({
@@ -89,6 +90,8 @@ function ResetLayerProgressBar({
   const currencyName = formatCurrencyName(currency);
 
   const parsedLabelParts = parseValueGetter(labelParts, mergedPlayer, isLocked);
+  const labelPartCondition =
+    everPerformed && !isNil(parsedLabelParts) && parsedLabelParts.length > 0;
 
   return (
     <ProgressBar
@@ -97,20 +100,15 @@ function ResetLayerProgressBar({
       animatedBarOptions={animatedBarOptions}
       progressFillClassName={progressFillClassName}
       children={
-        <p className="z-1">
+        <>
           Goal: {formatWithPlural(goal, currencyName)} -{" "}
           <span className="text-time">
             {isLocked ? "Ready" : formatLeftTime(timeLeft)}
           </span>
-          {everPerformed &&
-            parsedLabelParts?.map((part, index) => (
-              <Fragment key={index}>
-                {LABEL_SEPARATOR}
-                {part}
-              </Fragment>
-            ))}
-        </p>
+          {labelPartCondition && progressBarConfig.labelSeparator}
+        </>
       }
+      {...(labelPartCondition && { labelParts: parsedLabelParts })}
     />
   );
 }

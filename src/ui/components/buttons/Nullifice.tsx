@@ -1,19 +1,19 @@
 import { useLayoutEffect, useRef } from "react";
-import { integerFormatWithPlural } from "@/core/format/plural";
+import { integerFormatWithPlural } from "@core/format/plural";
 import pluralize from "pluralize";
 import {
   handleDecimalInputOnBlur,
   handleDecimalInputOnChange,
-} from "@/core/utils/input";
+} from "@core/utils/input";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { getCurrencyEffectOn } from "@/game/currencies/utils/get";
-import { triggerNullifice } from "@/game/features/nullifice/utils";
-import cn from "@/core/utils/tailwind";
-import CurrencyContent from "@/ui/components/base/CurrencyContent";
-import { pluralizeCurrency } from "@/game/currencies/utils/format";
-import { formatEffectOnCurrency } from "@/core/format/effect";
+import { getPlayerState } from "@game/player/store/store";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { getCurrencyEffectOn } from "@game/currencies/utils/get";
+import { triggerNullifice } from "@game/features/nullifice/utils";
+import cn from "@core/utils/tailwind";
+import CurrencyContent from "@ui/components/base/CurrencyContent";
+import { pluralizeCurrency } from "@game/currencies/utils/format";
+import { formatEffectOnCurrency } from "@core/format/effect";
 
 function Nullifice() {
   const state = usePlayerFields(

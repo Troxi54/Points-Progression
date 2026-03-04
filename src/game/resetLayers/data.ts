@@ -1,16 +1,16 @@
 import { FlatResetLayerContainer } from "./types";
 import { createResetLayerDataContainer } from "./utils/create";
-import { getRepeatableUpgradeLevel } from "@/game/repeatableUpgrades/utils/get";
-import createDecimal from "@/core/utils/decimal";
-import { hasUpgradeSelectionById } from "@/game/upgrades/utils/selector";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
+import createDecimal from "@core/utils/decimal";
+import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { applyResetLayerPlayerData } from "./utils/apply";
-import { applyUpgradesById } from "@/game/upgrades/utils/apply";
+import { applyUpgradesById } from "@game/upgrades/utils/apply";
 import formulas from "@game/formulas/data";
-import { getCurrencyEffectOn } from "@/game/currencies/utils/get";
+import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { everPerformed, getResetLayerPlayerDataProp } from "./utils/get";
 import Decimal from "break_eternity.js";
-import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 
 const resetLayers = createResetLayerDataContainer({
   normal: [
@@ -319,12 +319,19 @@ const resetLayers = createResetLayerDataContainer({
       reset: ({ player }, defaultMergedPlayer) => {
         const defaultPlayer = defaultMergedPlayer.player;
 
+        const hasLevel_1 = hasUpgradeById(player, "level_1");
+        const hasLevel_2 = hasUpgradeById(player, "level_2");
+
         return {
           player: {
             mallirtTotalDertoints: defaultPlayer.mallirtTotalDertoints,
             ...applyUpgradesById(player, {
-              mallirt_1: hasUpgradeById(player, "level_1"),
-              mallirt_2: hasUpgradeById(player, "level_2"),
+              dertoint_1: hasLevel_1,
+              dertoint_2: hasLevel_1,
+              dertoint_3: hasLevel_2,
+              dertoint_4: hasLevel_2,
+              mallirt_1: hasLevel_1,
+              mallirt_2: hasLevel_2,
               mallirt_3: hasUpgradeById(player, "level_3"),
               mallirt_4: hasUpgradeById(player, "level_4"),
             }),

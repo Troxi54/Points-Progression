@@ -1,25 +1,25 @@
-import { CachedPlayer, PartialCachedPlayer } from "@/game/player/cached/types";
-import { PartialPlayer, Player } from "@/game/player/types";
+import { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
+import { PartialPlayer, Player } from "@game/player/types";
 import { MergedPlayer, MergedPlayerState, PartialMergedPlayer } from "./types";
-import { objectAssign } from "@/core/utils/object";
+import { objectAssign } from "@core/utils/object";
 
 export function mergePlayer(
   player: Player,
-  cachedPlayer: CachedPlayer
+  cachedPlayer: CachedPlayer,
 ): MergedPlayer {
   return { player, cachedPlayer };
 }
 
 export function mergePartialPlayer(
   player?: PartialPlayer,
-  cachedPlayer?: PartialCachedPlayer
+  cachedPlayer?: PartialCachedPlayer,
 ): PartialMergedPlayer {
   return { player, cachedPlayer };
 }
 
 export function assignPlayerForMergedPlayer(
   mergedPlayer: MergedPlayer | PartialMergedPlayer,
-  player: PartialPlayer | undefined
+  player: PartialPlayer | undefined,
 ) {
   if (!player) return;
 
@@ -32,7 +32,7 @@ export function assignPlayerForMergedPlayer(
 
 export function assignCachedPlayerForMergedPlayer(
   mergedPlayer: MergedPlayer | PartialMergedPlayer,
-  cachedPlayer: PartialCachedPlayer | undefined
+  cachedPlayer: PartialCachedPlayer | undefined,
 ) {
   if (!cachedPlayer) return;
 
@@ -45,7 +45,7 @@ export function assignCachedPlayerForMergedPlayer(
 
 export function assignMergedPlayer(
   mergedPlayer: MergedPlayer | PartialMergedPlayer,
-  newMergedPlayer?: PartialMergedPlayer
+  newMergedPlayer?: PartialMergedPlayer,
 ) {
   if (!newMergedPlayer) return;
 
@@ -54,7 +54,7 @@ export function assignMergedPlayer(
 }
 
 export function createMergedPlayerState(
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): MergedPlayerState {
   return {
     mergedPlayer,
@@ -63,6 +63,6 @@ export function createMergedPlayerState(
     assignPlayerForMergedPlayer: (newPlayer) =>
       assignPlayerForMergedPlayer(mergedPlayer, newPlayer),
     assignCachedPlayerForMergedPlayer: (newCachedPlayer) =>
-      assignCachedPlayerForMergedPlayer(mergedPlayer, newCachedPlayer)
+      assignCachedPlayerForMergedPlayer(mergedPlayer, newCachedPlayer),
   };
 }

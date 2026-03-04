@@ -1,9 +1,9 @@
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import Overlay from "../overlay";
 import menuInfoPages from "./pages/data";
 import { useState } from "react";
-import cn from "@/core/utils/tailwind";
-import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import cn from "@core/utils/tailwind";
+import VerticalContainer from "@ui/components/base/VerticalContainer";
 
 const InfoMenu = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -22,7 +22,7 @@ const InfoMenu = () => {
               className={cn(
                 "menu-button underline-effect-button rounded-[0.75em] bg-page-button-bg hover:bg-page-button-bg-hover",
                 currentPage === index && "active",
-                page.buttonClassName
+                page.buttonClassName,
               )}
               onClick={() => setCurrentPage(index)}
               key={index}

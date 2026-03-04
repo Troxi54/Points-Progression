@@ -1,7 +1,7 @@
-import { UpgradeDataContainer } from "@/game/upgrades/types";
+import { UpgradeDataContainer } from "@game/upgrades/types";
 import Upgrade from "./Upgrade";
-import cn from "@/core/utils/tailwind";
-import { ClassName } from "@/core/types/react";
+import cn from "@core/utils/tailwind";
+import { ClassName } from "@core/types/react";
 
 interface props {
   id?: string;
@@ -16,7 +16,7 @@ function UpgradeContainer({
   upgradeContainer,
   className,
   start,
-  end
+  end,
 }: props) {
   const startsAt = start ? start - 1 : 0;
   return (
@@ -24,7 +24,7 @@ function UpgradeContainer({
       id={id}
       className={cn(
         "bg-transparent justify-evenly px-[2em] overflow-x-auto gap-[5%]",
-        className
+        className,
       )}
     >
       {upgradeContainer.upgrades.slice(startsAt, end).map((upgrade, index) => {

@@ -1,9 +1,9 @@
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import Overlay from "../overlay";
-import { importPlayer } from "@/game/player/persistence/import";
+import { importPlayer } from "@game/player/persistence/import";
 import { ChangeEvent, useRef } from "react";
-import { resetPlayerDataAndGame } from "@/game/player/utils";
-import Tooltip from "@/ui/components/base/Tooltip";
+import { resetPlayerDataAndGame } from "@game/player/utils";
+import Tooltip from "@ui/components/base/Tooltip";
 import { useMenu } from "../provider";
 import { showPrompt } from "../prompt/service";
 

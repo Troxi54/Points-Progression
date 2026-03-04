@@ -1,4 +1,4 @@
-import { Player } from "@/game/player/types";
+import { Player } from "@game/player/types";
 import { minifyPlayer } from "./minify";
 import { compressToEncodedURIComponent } from "lz-string";
 

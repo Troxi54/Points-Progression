@@ -1,5 +1,5 @@
-import CurrencyComponent from "@/ui/components/base/Currency";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
+import CurrencyComponent from "@ui/components/base/Currency";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
 
 function DarkEnergy() {
   return (

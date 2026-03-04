@@ -13,7 +13,7 @@ function FormatArgs({
   joiner = ", ",
   prefix = "",
   open = "(",
-  close = ")"
+  close = ")",
 }: FormatArgsProps) {
   return (
     <>

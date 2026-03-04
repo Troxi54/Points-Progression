@@ -1,9 +1,9 @@
-import createDecimal, { decimalSoftcap } from "@/core/utils/decimal";
+import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
 import { FormulaContainer } from "./types";
 import Decimal from "break_eternity.js";
-import { calculateRepeatableUpgradeEffect } from "@/game/repeatableUpgrades/utils/calculate";
+import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import formulas from "./data";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 const effectFormulas = {
   firstResetLayerRun({ player }) {

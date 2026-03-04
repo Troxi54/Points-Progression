@@ -1,22 +1,22 @@
-import { CachedRepeatableUpgrade } from "@/game/player/cached/types";
-import { PlayerLike } from "@/game/player/types";
-import { CachedPlayerLike } from "@/game/player/cached/types";
-import { parseCachedPlayerLike, parsePlayerLike } from "@/game/player/utils";
-import { flatRepeatableUpgrades } from "@/game/repeatableUpgrades/data";
-import { getDefaultRepeatableUpgradeLevel } from "@/game/player/default";
-import { getDefaultCachedRepeatableUpgrade } from "@/game/player/cached/default";
-import { RepeatableUpgradeId } from "@/game/repeatableUpgrades/types";
+import { CachedRepeatableUpgrade } from "@game/player/cached/types";
+import { PlayerLike } from "@game/player/types";
+import { CachedPlayerLike } from "@game/player/cached/types";
+import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
+import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
+import { getDefaultRepeatableUpgradeLevel } from "@game/player/default";
+import { getDefaultCachedRepeatableUpgrade } from "@game/player/cached/default";
+import { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
 import Decimal from "break_eternity.js";
 
 export function getRepeatableUpgradeData(
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ) {
   return flatRepeatableUpgrades[repeatableUpgradeId];
 }
 
 export function getRepeatableUpgradeLevel(
   playerLike: PlayerLike,
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ): Decimal {
   const player = parsePlayerLike(playerLike);
   return (
@@ -26,11 +26,11 @@ export function getRepeatableUpgradeLevel(
 }
 
 export function getCachedRepeatableUpgradeProp<
-  T extends keyof CachedRepeatableUpgrade
+  T extends keyof CachedRepeatableUpgrade,
 >(
   cachedPlayerLike: CachedPlayerLike,
   repeatableUpgradeId: RepeatableUpgradeId,
-  propertyName: T
+  propertyName: T,
 ): CachedRepeatableUpgrade[T] {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
   const container = cachedPlayer?.repeatableUpgrades?.[repeatableUpgradeId];
@@ -41,11 +41,11 @@ export function getCachedRepeatableUpgradeProp<
 }
 
 export function getCachedRepeatableUpgradeProps<
-  T extends readonly (keyof CachedRepeatableUpgrade)[]
+  T extends readonly (keyof CachedRepeatableUpgrade)[],
 >(
   cachedPlayerLike: CachedPlayerLike,
   repeatableUpgradeId: RepeatableUpgradeId,
-  propertyNames: T
+  propertyNames: T,
 ): {
   [K in T[number]]: CachedRepeatableUpgrade[K];
 } {
@@ -56,7 +56,7 @@ export function getCachedRepeatableUpgradeProps<
   const source = container ?? defaultUpgrade;
 
   return Object.fromEntries(
-    propertyNames.map((name) => [name, source[name]])
+    propertyNames.map((name) => [name, source[name]]),
   ) as {
     [K in T[number]]: CachedRepeatableUpgrade[K];
   };

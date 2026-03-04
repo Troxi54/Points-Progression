@@ -8,13 +8,13 @@ export default function getDefaultCurrencyData(): CurrencyData {
     affects: null,
     effectMode: "multiply",
     passiveGainWorks: false,
-    effectWorks: true
+    effectWorks: true,
   };
 }
 
 export function getDefaultCurrencyEffectData(): CurrencyEffectData {
   return {
     mode: "multiply",
-    works: true
+    works: true,
   };
 }

@@ -1,8 +1,8 @@
-import { applyUpdatedCurrencyGains } from "@/game/currencies/utils/apply";
-import { parseNullionInput } from "@/game/features/nullifice/utils";
+import { applyUpdatedCurrencyGains } from "@game/currencies/utils/apply";
+import { parseNullionInput } from "@game/features/nullifice/utils";
 import formulas from "@game/formulas/data";
-import { GameLoopPartState } from "@/game/gameLoop/types";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { GameLoopPartState } from "@game/gameLoop/types";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export default function gameLoopUpdateGains(state: GameLoopPartState) {
   const { mergedPlayer } = state;

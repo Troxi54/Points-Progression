@@ -1,10 +1,10 @@
-import { DimensionId } from "@/game/dimensions/types";
-import { isDimension } from "@/game/dimensions/utils/compare";
-import { getPlayerState } from "@/game/player/store/store";
-import { applyResetLayerPlayerData } from "@/game/resetLayers/utils/apply";
-import { getResetLayerPlayerDataProp } from "@/game/resetLayers/utils/get";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { getCurrentGameTime } from "@/core/utils/time";
+import { DimensionId } from "@game/dimensions/types";
+import { isDimension } from "@game/dimensions/utils/compare";
+import { getPlayerState } from "@game/player/store/store";
+import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
+import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { getCurrentGameTime } from "@core/utils/time";
 
 export function toggleSliph() {
   const { player, setPlayer } = getPlayerState();
@@ -21,7 +21,7 @@ export function toggleSliph() {
   const mallirtStartedDate = getResetLayerPlayerDataProp(
     player,
     "mallirt",
-    "startedDate"
+    "startedDate",
   );
 
   setPlayer({
@@ -29,8 +29,8 @@ export function toggleSliph() {
     ...(isSliph && !player.everEnteredSliph ? { everEnteredSliph: true } : {}),
     ...(isSliph && mallirtStartedDate === null
       ? applyResetLayerPlayerData(player, "mallirt", {
-          startedDate: getCurrentGameTime()
+          startedDate: getCurrentGameTime(),
         })
-      : {})
+      : {}),
   });
 }

@@ -1,5 +1,5 @@
-import { CachedPlayer, PartialCachedPlayer } from "@/game/player/cached/types";
-import { PartialPlayer, Player } from "@/game/player/types";
+import { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
+import { PartialPlayer, Player } from "@game/player/types";
 
 export interface MergedPlayer {
   player: Player;
@@ -16,6 +16,6 @@ export interface MergedPlayerState {
   assignMergedPlayer: (newMergedPlayer?: PartialMergedPlayer) => void;
   assignPlayerForMergedPlayer: (newPlayer?: PartialPlayer) => void;
   assignCachedPlayerForMergedPlayer: (
-    newCachedPlayer?: PartialCachedPlayer
+    newCachedPlayer?: PartialCachedPlayer,
   ) => void;
 }

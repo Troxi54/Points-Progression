@@ -1,19 +1,19 @@
-import { ResetLayerId } from "@/game/resetLayers/types";
+import { ResetLayerId } from "@game/resetLayers/types";
 import StatusText from "./StatusText";
-import { applyToggledResetLayerAuto } from "@/game/resetLayers/utils/apply";
+import { applyToggledResetLayerAuto } from "@game/resetLayers/utils/apply";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
-import { getResetLayerPlayerSelection } from "@/game/resetLayers/utils/selector";
-import { mergeObjects } from "@/core/utils/object";
+import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
+import { mergeObjects } from "@core/utils/object";
 import {
   everPerformed,
   getResetLayerPlayerDataProp,
-} from "@/game/resetLayers/utils/get";
-import { BooleanGetter, ValueGetter } from "@/game/player/types";
-import { parseValueGetter } from "@/game/player/utils";
+} from "@game/resetLayers/utils/get";
+import { BooleanGetter, ValueGetter } from "@game/player/types";
+import { parseValueGetter } from "@game/player/utils";
 import { ReactNode } from "react";
-import { capitalizeString } from "@/core/utils/string";
+import { capitalizeString } from "@core/utils/string";
 
 type Props<T extends ResetLayerId = ResetLayerId> = {
   resetLayerId: T;

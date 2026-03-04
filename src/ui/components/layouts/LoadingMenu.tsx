@@ -22,7 +22,7 @@ function LoadingMenu({ conditionForMainContent, mainContent }: Props) {
 
   const menuStyle: CSSProperties = {
     opacity: !conditionForMainContent ? 1 : 0,
-    transitionDuration: `${LOADING_MENU_FADE_OUT_DURATION}ms`
+    transitionDuration: `${LOADING_MENU_FADE_OUT_DURATION}ms`,
   };
 
   return (

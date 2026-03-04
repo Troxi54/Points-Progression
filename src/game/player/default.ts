@@ -1,7 +1,7 @@
 import { Player, ResetLayerPlayerData } from "./types";
-import { getCurrentTime } from "@/core/utils/time";
-import createDecimal from "@/core/utils/decimal";
-import gameConfig from "@/core/config/data";
+import { getCurrentTime } from "@core/utils/time";
+import createDecimal from "@core/utils/decimal";
+import gameConfig from "@core/config/data";
 
 export function getDefaultPlayer(): Player {
   const currentTime = getCurrentTime();

@@ -1,4 +1,4 @@
-import { ClassNameProps } from "@/core/types/react";
+import { ClassNameProps } from "@core/types/react";
 
 type Props = {
   name: string;

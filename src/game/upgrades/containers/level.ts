@@ -1,4 +1,4 @@
-import { createUpgradeDataContainer } from "@/game/upgrades/utils/create";
+import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
 
 const levelUpgrades = createUpgradeDataContainer({
   id: "level",
@@ -8,13 +8,13 @@ const levelUpgrades = createUpgradeDataContainer({
     {
       id: "level_1",
       description:
-        "Prevents Dertoint and Mallirt upgrades from spending Dertoints and keeps Mallirt Upgrade 1",
+        "Prevents Dertoint and Mallirt upgrades from spending Dertoints and keeps 1-2 Dertoint Upgrades and Mallirt Upgrade 1",
       cost: 5e25,
     },
     {
       id: "level_2",
       description:
-        "Generates Total Dertoints equal to 0.01% of Total Dertoints you could gain per second and keeps Mallirt Upgrade 2",
+        "Generates Total Dertoints equal to 0.01% of Total Dertoints you could gain per second, and keeps 3-4 Dertoint Upgrades and Mallirt Upgrade 2",
       cost: 1e28,
     },
     {

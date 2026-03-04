@@ -8,8 +8,8 @@ import { CachedPlayer } from "./cached/types";
 import resetGame from "@app/resetGame";
 import { getPlayerState } from "./store/store";
 import { PlayerState } from "./store/types";
-import { NotFunction } from "@/core/types/function";
-import { BooleanKeys } from "@/core/types/keys";
+import { NotFunction } from "@core/types/function";
+import { BooleanKeys } from "@core/types/keys";
 
 export function resetPlayerData() {
   const { setPlayer, setCachedPlayer } = getPlayerState();

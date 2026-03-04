@@ -1,4 +1,4 @@
-import { BooleanGetter, ValueGetter } from "@/game/player/types";
+import { BooleanGetter, ValueGetter } from "@game/player/types";
 import { ReactNode } from "react";
 
 export interface MenuInfoFormula {

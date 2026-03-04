@@ -2,15 +2,15 @@ import {
   isObject,
   mergeObjects,
   objectEntries,
-  objectFromEntries
-} from "@/core/utils/object";
+  objectFromEntries,
+} from "@core/utils/object";
 import getDefaultCurrencyData, {
-  getDefaultCurrencyEffectData
+  getDefaultCurrencyEffectData,
 } from "../default";
 import {
   CurrencyDataContainer,
   PartialCurrencyData,
-  PartialCurrencyDataContainer
+  PartialCurrencyDataContainer,
 } from "../types";
 
 function createCurrencyData(currencyData?: PartialCurrencyData) {
@@ -30,11 +30,11 @@ function createCurrencyData(currencyData?: PartialCurrencyData) {
 }
 
 export function createCurrencyDataContainer(
-  container: PartialCurrencyDataContainer
+  container: PartialCurrencyDataContainer,
 ): CurrencyDataContainer {
   return objectFromEntries(
     objectEntries(container).map(([id, data]) => {
       return [id, createCurrencyData(data)];
-    })
+    }),
   );
 }

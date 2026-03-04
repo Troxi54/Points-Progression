@@ -1,4 +1,4 @@
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 import { DecimalSource } from "break_eternity.js";
 
 export function calculateGeneration(values: [boolean, DecimalSource][]) {

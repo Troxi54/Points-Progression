@@ -1,5 +1,5 @@
-import { PlayerState } from "@/game/player/store/types";
-import { Player } from "@/game/player/types";
+import { PlayerState } from "@game/player/store/types";
+import { Player } from "@game/player/types";
 
 export interface UsePlayerOptions {
   useFormat: boolean;

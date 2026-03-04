@@ -1,10 +1,10 @@
-import { PlayerLike } from "@/game/player/types";
-import { parsePlayerLike } from "@/game/player/utils";
+import { PlayerLike } from "@game/player/types";
+import { parsePlayerLike } from "@game/player/utils";
 import { DecimalSource } from "break_eternity.js";
 
 export function hasNexusLevel(
   playerLike: PlayerLike,
-  level: DecimalSource
+  level: DecimalSource,
 ): boolean {
   const player = parsePlayerLike(playerLike);
 

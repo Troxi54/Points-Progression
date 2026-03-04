@@ -1,5 +1,5 @@
-import { ScrollPosition } from "@/core/types/vector";
-import { DimensionId } from "@/game/dimensions/types";
+import { ScrollPosition } from "@core/types/vector";
+import { DimensionId } from "@game/dimensions/types";
 import { useLayoutEffect, useRef } from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 
 function useDimensionScroll({ dimensionId }: Props) {
   const scrollPositions = useRef<Partial<Record<DimensionId, ScrollPosition>>>(
-    {}
+    {},
   );
 
   const prevDimensionId = useRef<DimensionId>(dimensionId);
@@ -17,7 +17,7 @@ function useDimensionScroll({ dimensionId }: Props) {
   if (dimensionId !== prevDimensionId.current) {
     scrollPositions.current[prevDimensionId.current] = {
       scrollTop: root.scrollTop,
-      scrollLeft: root.scrollLeft
+      scrollLeft: root.scrollLeft,
     };
 
     prevDimensionId.current = dimensionId;
@@ -28,14 +28,14 @@ function useDimensionScroll({ dimensionId }: Props) {
     if (!position) {
       position = {
         scrollLeft: 0,
-        scrollTop: 0
+        scrollTop: 0,
       };
     }
 
     root.scrollTo({
       top: position.scrollTop,
       left: position.scrollLeft,
-      behavior: "instant"
+      behavior: "instant",
     });
   }, [dimensionId]);
 }

@@ -1,4 +1,4 @@
-import AutoResetToggle from "@/ui/components/base/AutoResetToggle";
+import AutoResetToggle from "@ui/components/base/AutoResetToggle";
 
 function AutoNullithButton() {
   return <AutoResetToggle resetLayerId="nullith" />;

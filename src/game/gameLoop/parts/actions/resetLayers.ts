@@ -1,5 +1,5 @@
-import { GameLoopPartState } from "@/game/gameLoop/types";
-import { tickAllResetLayers } from "@/game/resetLayers/utils/apply";
+import { GameLoopPartState } from "@game/gameLoop/types";
+import { tickAllResetLayers } from "@game/resetLayers/utils/apply";
 import { setFixedResetLayerDates } from "@game/resetLayers/utils/set";
 
 export default function gameLoopResetLayers(state: GameLoopPartState) {

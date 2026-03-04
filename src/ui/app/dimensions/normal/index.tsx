@@ -1,4 +1,4 @@
-import DimensionLayout from "@/ui/components/base/DimensionLayout";
+import DimensionLayout from "@ui/components/base/DimensionLayout";
 import NormalDimensionLayer1 from "./layers/layer1";
 import NormalDimensionLayer2 from "./layers/layer2";
 import NormalDimensionLayer3 from "./layers/layer3";

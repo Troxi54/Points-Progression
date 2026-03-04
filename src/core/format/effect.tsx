@@ -1,13 +1,13 @@
-import { EffectMode } from "@/core/types/effect";
-import createDecimal from "@/core/utils/decimal";
+import { EffectMode } from "@core/types/effect";
+import createDecimal from "@core/utils/decimal";
 import { DecimalSource } from "break_eternity.js";
 import { ReactNode } from "react";
 import { formatWithPlural } from "./plural";
-import { CurrencyId } from "@/game/currencies/types";
-import { formatCurrencyName } from "@/game/currencies/utils/format";
-import UISymbols from "@/app/UISymbols";
+import { CurrencyId } from "@game/currencies/types";
+import { formatCurrencyName } from "@game/currencies/utils/format";
+import UISymbols from "@app/UISymbols";
 import { formatNumber } from "./number";
-import Pow from "@/ui/components/base/Pow";
+import Pow from "@ui/components/base/Pow";
 import pluralize from "pluralize";
 
 export function formatEffectSingular(

@@ -1,4 +1,4 @@
-import { BooleanGetter } from "@/game/player/types";
+import { BooleanGetter } from "@game/player/types";
 
 export type DimensionId = "normal" | "sliph";
 

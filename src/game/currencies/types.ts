@@ -1,8 +1,8 @@
-import { EffectMode } from "@/core/types/effect";
-import { DecimalKeys } from "@/core/types/keys";
-import { DimensionId } from "@/game/dimensions/types";
-import { CachedCurrency } from "@/game/player/cached/types";
-import { BooleanGetter, Player } from "@/game/player/types";
+import { EffectMode } from "@core/types/effect";
+import { DecimalKeys } from "@core/types/keys";
+import { DimensionId } from "@game/dimensions/types";
+import { CachedCurrency } from "@game/player/cached/types";
+import { BooleanGetter, Player } from "@game/player/types";
 
 export type CurrencyId = DecimalKeys<
   Pick<

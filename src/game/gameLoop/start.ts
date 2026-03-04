@@ -1,4 +1,4 @@
-import { getCurrentTime } from "@/core/utils/time";
+import { getCurrentTime } from "@core/utils/time";
 import gameLoopTick from "./tick";
 
 const requestTick = () => requestAnimationFrame(tick);

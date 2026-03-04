@@ -1,5 +1,5 @@
-import { ClassName } from "@/core/types/react";
-import { isFunction } from "@/core/utils/function";
+import { ClassName } from "@core/types/react";
+import { isFunction } from "@core/utils/function";
 import cn from "@core/utils/tailwind";
 import { ReactNode } from "react";
 

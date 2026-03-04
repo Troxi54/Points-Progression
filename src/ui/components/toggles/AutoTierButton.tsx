@@ -1,7 +1,7 @@
-import AutoResetToggle from "@/ui/components/base/AutoResetToggle";
-import StatusText from "@/ui/components/base/StatusText";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { hasUpgradeSelectionById } from "@/game/upgrades/utils/selector";
+import AutoResetToggle from "@ui/components/base/AutoResetToggle";
+import StatusText from "@ui/components/base/StatusText";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 
 function AutoTierButton() {
   return (

@@ -1,7 +1,7 @@
 import { NexusMilestoneContainer } from "../types";
 
 export function createNexusMilestoneContainer(
-  container: NexusMilestoneContainer
+  container: NexusMilestoneContainer,
 ): NexusMilestoneContainer {
   return container;
 }

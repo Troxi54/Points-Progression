@@ -1,4 +1,4 @@
-import { GameLoopPartState } from "@/game/gameLoop/types";
+import { GameLoopPartState } from "@game/gameLoop/types";
 import gameLoopUpdateEffects from "./cache/effects";
 import gameLoopUpdateGains from "./cache/gains";
 import gameLoopUpdateRepeatableUpgradeCache from "./cache/repeatableUpgrades";

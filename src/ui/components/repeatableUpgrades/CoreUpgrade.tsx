@@ -1,5 +1,5 @@
-import RepeatableUpgrade from "@/ui/components/base/RepeatableUpgrade";
-import { formatEffectSingular } from "@/core/format/effect";
+import RepeatableUpgrade from "@ui/components/base/RepeatableUpgrade";
+import { formatEffectSingular } from "@core/format/effect";
 
 function CoreUpgrade() {
   return (

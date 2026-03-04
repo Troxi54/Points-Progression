@@ -1,13 +1,13 @@
-import { isNil } from "@/core/utils/nil";
+import { isNil } from "@core/utils/nil";
 import { CurrencyId } from "../types";
 import { getCurrencyData, getCurrencyEffectOn } from "./get";
-import { CachedPlayerLike } from "@/game/player/cached/types";
+import { CachedPlayerLike } from "@game/player/cached/types";
 import { ReactNode } from "react";
-import { formatEffectOnCurrency } from "@/core/format/effect";
+import { formatEffectOnCurrency } from "@core/format/effect";
 import { DecimalSource } from "break_eternity.js";
-import { formatWithPlural } from "@/core/format/plural";
+import { formatWithPlural } from "@core/format/plural";
 import pluralize from "pluralize";
-import { capitalizeString } from "@/core/utils/string";
+import { capitalizeString } from "@core/utils/string";
 
 export function formatCurrencyName(currencyId: CurrencyId): string {
   const data = getCurrencyData(currencyId);

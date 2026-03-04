@@ -1,22 +1,22 @@
-import resetLayerConfig from "@/game/resetLayers/config";
+import resetLayerConfig from "@game/resetLayers/config";
 import { GainFormulaContainer } from "../types";
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 import {
   canPerform,
   everPerformed,
   getResetLayerData,
-} from "@/game/resetLayers/utils/get";
+} from "@game/resetLayers/utils/get";
 import Decimal from "break_eternity.js";
 import { calculateGeneration } from "../utils/calculate";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import currencyConfig from "@/game/currencies/config";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import currencyConfig from "@game/currencies/config";
 import {
   getCachedCurrencyProp,
   getCurrencyEffectOn,
-} from "@/game/currencies/utils/get";
-import cappergyConfig from "@/game/features/cappergy/config";
-import nuxarConfig from "@/game/features/nuxar/config";
-import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
+} from "@game/currencies/utils/get";
+import cappergyConfig from "@game/features/cappergy/config";
+import nuxarConfig from "@game/features/nuxar/config";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 
 const currencyGainFormulas: GainFormulaContainer = {
   points: {

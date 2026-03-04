@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { getPlayerState } from "@/game/player/store/store";
-import { savePlayer } from "@/game/player/persistence/save";
-import { triggerOfflineProgress } from "@/game/offline/utils/trigger";
+import { getPlayerState } from "@game/player/store/store";
+import { savePlayer } from "@game/player/persistence/save";
+import { triggerOfflineProgress } from "@game/offline/utils/trigger";
 
 function useGlobalEvents(): void {
   useEffect(() => {

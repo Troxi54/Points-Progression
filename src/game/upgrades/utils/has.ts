@@ -1,14 +1,14 @@
-import { PlayerLike } from "@/game/player/types";
-import { parsePlayerLike } from "@/game/player/utils";
+import { PlayerLike } from "@game/player/types";
+import { parsePlayerLike } from "@game/player/utils";
 import {
   UpgradeCollection,
   UpgradeContainerId,
   UpgradeData,
   UpgradeId,
   UpgradesFlags,
-} from "@/game/upgrades/types";
+} from "@game/upgrades/types";
 import { splitUpgradeId } from "./id";
-import { objectEntries, mergeObjects } from "@/core/utils/object";
+import { objectEntries, mergeObjects } from "@core/utils/object";
 import { hasUpgradeSelection } from "./selector";
 
 export function hasUpgrade(

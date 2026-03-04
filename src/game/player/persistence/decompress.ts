@@ -1,5 +1,5 @@
-import { MinifiedPlayer, PartialPlayer } from "@/game/player/types";
-import { isObject } from "@/core/utils/object";
+import { MinifiedPlayer, PartialPlayer } from "@game/player/types";
+import { isObject } from "@core/utils/object";
 import { decompressFromEncodedURIComponent } from "lz-string";
 
 function convertToPlayer(str: string) {

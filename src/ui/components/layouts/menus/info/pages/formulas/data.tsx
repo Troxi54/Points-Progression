@@ -1,14 +1,14 @@
-import { getRepeatableUpgradeData } from "@/game/repeatableUpgrades/utils/get";
+import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import { MenuInfoFormulaContainer } from "./types";
-import { formatNumber, integerCommaFormat } from "@/core/format/number";
-import UISymbols from "@/app/UISymbols";
-import Stat from "@/ui/components/base/Stat";
-import { everPerformed, getResetLayerData } from "@/game/resetLayers/utils/get";
-import Log from "@/ui/components/base/Log";
-import Pow from "@/ui/components/base/Pow";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import Min from "@/ui/components/base/Min";
-import amplivaultConfig from "@/game/features/amplivault/config";
+import { formatNumber, integerCommaFormat } from "@core/format/number";
+import UISymbols from "@app/UISymbols";
+import Stat from "@ui/components/base/Stat";
+import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
+import Log from "@ui/components/base/Log";
+import Pow from "@ui/components/base/Pow";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import Min from "@ui/components/base/Min";
+import amplivaultConfig from "@game/features/amplivault/config";
 import nuxarConfig from "@game/features/nuxar/config";
 import cappergyConfig from "@game/features/cappergy/config";
 
@@ -590,7 +590,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
             <>
               (1 {UISymbols.minus} 1 {UISymbols.divide} 2
               <Pow>
-                <Log base={formatNumber("1e100")}>
+                <Log base={formatNumber("1e200")}>
                   <Stat>score {UISymbols.plus} 1</Stat>
                 </Log>
               </Pow>

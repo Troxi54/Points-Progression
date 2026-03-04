@@ -4,7 +4,7 @@ import createDecimal from "./decimal";
 export function calculateBulk(
   value: DecimalSource,
   requirement: DecimalSource,
-  requirementScaling: DecimalSource
+  requirementScaling: DecimalSource,
 ): Decimal {
   value = createDecimal(value);
 

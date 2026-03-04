@@ -1,4 +1,4 @@
-import { getCurrentTime } from "@/core/utils/time";
+import { getCurrentTime } from "@core/utils/time";
 import gameLoopUpdateCache from "./parts/cacheUpdates";
 import gameLoopActions from "./parts/actions";
 import gameLoopPreTick from "./parts/pretick";

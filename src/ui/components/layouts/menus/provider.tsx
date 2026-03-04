@@ -4,15 +4,15 @@ import React, {
   useContext,
   useEffect,
   useRef,
-  useState
+  useState,
 } from "react";
 import { MenuContextValue, MenuId } from "./types";
-import { arrayLastItem } from "@/core/utils/array";
+import { arrayLastItem } from "@core/utils/array";
 
 const MenuContext = createContext<MenuContextValue | null>(null);
 
 export const MenuProvider: React.FC<{ children: ReactNode }> = ({
-  children
+  children,
 }) => {
   const [stack, setStack] = useState<MenuId[]>([]);
   const stackRef = useRef(stack);

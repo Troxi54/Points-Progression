@@ -1,4 +1,4 @@
-import { ValueGetter } from "@/game/player/types";
+import { ValueGetter } from "@game/player/types";
 import { DecimalSource } from "break_eternity.js";
 import { ReactNode } from "react";
 

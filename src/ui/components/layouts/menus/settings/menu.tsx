@@ -1,16 +1,16 @@
-import { savePlayer } from "@/game/player/persistence/save";
+import { savePlayer } from "@game/player/persistence/save";
 import Overlay from "../overlay";
 import { useMenu } from "../provider";
-import { togglePlayerField } from "@/game/player/utils";
+import { togglePlayerField } from "@game/player/utils";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import StatusText from "@/ui/components/base/StatusText";
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
-import Tooltip from "@/ui/components/base/Tooltip";
-import resetLayerConfig from "@/game/resetLayers/config";
-import { exponentialNotationSettingStartsWorkingAt } from "@/core/format/units";
-import { formatNumber } from "@/core/format/number";
+import StatusText from "@ui/components/base/StatusText";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
+import Tooltip from "@ui/components/base/Tooltip";
+import resetLayerConfig from "@game/resetLayers/config";
+import { exponentialNotationSettingStartsWorkingAt } from "@core/format/units";
+import { formatNumber } from "@core/format/number";
 import { CSSProperties, useEffect, useState } from "react";
-import cn from "@/core/utils/tailwind";
+import cn from "@core/utils/tailwind";
 
 const SettingsMenu = () => {
   const { open } = useMenu();

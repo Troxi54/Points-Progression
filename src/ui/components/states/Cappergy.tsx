@@ -1,7 +1,7 @@
-import CurrencyComponent from "@/ui/components/base/Currency";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
-import cappergyConfig from "@/game/features/cappergy/config";
-import { formatNumber } from "@/core/format/number";
+import CurrencyComponent from "@ui/components/base/Currency";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import cappergyConfig from "@game/features/cappergy/config";
+import { formatNumber } from "@core/format/number";
 
 function Cappergy() {
   return (

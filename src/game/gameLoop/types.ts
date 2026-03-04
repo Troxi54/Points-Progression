@@ -1,4 +1,4 @@
-import { MergedPlayerState } from "@/game/player/merged/types";
+import { MergedPlayerState } from "@game/player/merged/types";
 
 export interface GameLoopPartState extends MergedPlayerState {
   currentTime: number;

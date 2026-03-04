@@ -1,13 +1,13 @@
-import StatusText from "@/ui/components/base/StatusText";
-import VerticalContainer from "@/ui/components/base/VerticalContainer";
-import { formatCurrency } from "@/game/currencies/utils/format";
-import nexusMilestones from "@/game/features/nexus/data";
-import { buyNexus } from "@/game/features/nexus/utils/buy";
-import { integerCommaFormat } from "@/core/format/number";
+import StatusText from "@ui/components/base/StatusText";
+import VerticalContainer from "@ui/components/base/VerticalContainer";
+import { formatCurrency } from "@game/currencies/utils/format";
+import nexusMilestones from "@game/features/nexus/data";
+import { buyNexus } from "@game/features/nexus/utils/buy";
+import { integerCommaFormat } from "@core/format/number";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
-import { parseValueGetter } from "@/game/player/utils";
-import cn from "@/core/utils/tailwind";
+import { getPlayerState } from "@game/player/store/store";
+import { parseValueGetter } from "@game/player/utils";
+import cn from "@core/utils/tailwind";
 
 function Nexus() {
   const { nexusLevel, bestNexusLevel, nexusCost, enough } = usePlayerFields(

@@ -1,8 +1,8 @@
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import coreConfig from "./config";
-import createDecimal from "@/core/utils/decimal";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
+import createDecimal from "@core/utils/decimal";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 
 export function convertEnergyIntoCores() {
   const { player, mergedPlayer, setPlayer } = getPlayerState();
@@ -17,6 +17,6 @@ export function convertEnergyIntoCores() {
     energyReactors: hasUpgradeById(player, "nullith_2")
       ? player.energyReactors
       : createDecimal(0),
-    energy: createDecimal(0)
+    energy: createDecimal(0),
   });
 }

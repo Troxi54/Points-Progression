@@ -1,10 +1,10 @@
-import { CurrencyId } from "@/game/currencies/types";
-import { DimensionId } from "@/game/dimensions/types";
-import { PartialBut } from "@/core/types/partial";
-import { CachedResetLayer } from "@/game/player/cached/types";
-import { BooleanGetter, ResetLayerPlayerData } from "@/game/player/types";
-import { PartialMergedPlayer } from "@/game/player/merged/types";
-import { MergedPlayer } from "@/game/player/merged/types";
+import { CurrencyId } from "@game/currencies/types";
+import { DimensionId } from "@game/dimensions/types";
+import { PartialBut } from "@core/types/partial";
+import { CachedResetLayer } from "@game/player/cached/types";
+import { BooleanGetter, ResetLayerPlayerData } from "@game/player/types";
+import { PartialMergedPlayer } from "@game/player/merged/types";
+import { MergedPlayer } from "@game/player/merged/types";
 import Decimal from "break_eternity.js";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 

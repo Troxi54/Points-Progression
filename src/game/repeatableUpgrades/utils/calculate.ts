@@ -1,26 +1,26 @@
-import { MergedPlayer } from "@/game/player/merged/types";
-import { parseValueGetter } from "@/game/player/utils";
+import { MergedPlayer } from "@game/player/merged/types";
+import { parseValueGetter } from "@game/player/utils";
 import {
   RepeatableUpgrade,
-  RepeatableUpgradeId
-} from "@/game/repeatableUpgrades/types";
+  RepeatableUpgradeId,
+} from "@game/repeatableUpgrades/types";
 import Decimal, { DecimalSource } from "break_eternity.js";
 import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
-import { calculateBulk } from "@/core/utils/level";
+import { calculateBulk } from "@core/utils/level";
 import createDecimal from "@core/utils/decimal";
 
 export function calculateRepeatableUpgradeCost(
   repeatableUpgrade: RepeatableUpgrade,
-  level: DecimalSource
+  level: DecimalSource,
 ): Decimal {
   return repeatableUpgrade.startCost.multiply(
-    Decimal.pow(repeatableUpgrade.costScaling, level)
+    Decimal.pow(repeatableUpgrade.costScaling, level),
   );
 }
 
 export function getRepeatableUpgradeMaxLevel(
   mergedPlayer: MergedPlayer,
-  repeatableUpgrade: RepeatableUpgrade
+  repeatableUpgrade: RepeatableUpgrade,
 ): Decimal {
   return parseValueGetter(repeatableUpgrade.maxLevel, mergedPlayer);
 }
@@ -29,11 +29,11 @@ export function calculateRepeatableUpgradeBulkWithMax(
   mergedPlayer: MergedPlayer,
   repeatableUpgrade: RepeatableUpgrade,
   level: Decimal,
-  bulk: Decimal
+  bulk: Decimal,
 ): Decimal {
   const maxLevel = getRepeatableUpgradeMaxLevel(
     mergedPlayer,
-    repeatableUpgrade
+    repeatableUpgrade,
   );
 
   const newLevel = level.plus(bulk);
@@ -50,7 +50,7 @@ export function calculateRepeatableUpgradeBulk(
   mergedPlayer: MergedPlayer,
   repeatableUpgrade: RepeatableUpgrade,
   currencyValue: Decimal,
-  cost: Decimal
+  cost: Decimal,
 ): Decimal {
   const condition = parseValueGetter(repeatableUpgrade.condition, mergedPlayer);
   if (!condition) return createDecimal(0);
@@ -60,7 +60,7 @@ export function calculateRepeatableUpgradeBulk(
 
 export function getRepeatableUpgradeBulkCostAndLevel(
   repeatableUpgradeId: RepeatableUpgradeId,
-  mergedPlayer: MergedPlayer
+  mergedPlayer: MergedPlayer,
 ): [Decimal, Decimal, Decimal] {
   const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
 
@@ -75,7 +75,7 @@ export function getRepeatableUpgradeBulkCostAndLevel(
     mergedPlayer,
     upgradeData,
     currencyValue,
-    cost
+    cost,
   );
 
   return [bulk, cost, level];
@@ -84,23 +84,23 @@ export function getRepeatableUpgradeBulkCostAndLevel(
 export function calculateRepeatableUpgradeEffectByData(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  data: RepeatableUpgrade
+  data: RepeatableUpgrade,
 ): Decimal {
   const level = getRepeatableUpgradeLevel(
     mergedPlayer.player,
-    repeatableUpgradeId
+    repeatableUpgradeId,
   );
   return data.effectFormula(level, mergedPlayer);
 }
 
 export function calculateRepeatableUpgradeEffect(
   mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId
+  repeatableUpgradeId: RepeatableUpgradeId,
 ) {
   const data = getRepeatableUpgradeData(repeatableUpgradeId);
   return calculateRepeatableUpgradeEffectByData(
     mergedPlayer,
     repeatableUpgradeId,
-    data
+    data,
   );
 }

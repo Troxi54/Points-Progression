@@ -1,22 +1,22 @@
-import { formatCurrencyName } from "@/game/currencies/utils/format";
-import { formatNumber } from "@/core/format/number";
-import { formatWithPlural } from "@/core/format/plural";
+import { formatCurrencyName } from "@game/currencies/utils/format";
+import { formatNumber } from "@core/format/number";
+import { formatWithPlural } from "@core/format/plural";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
-import { parseValueGetter } from "@/game/player/utils";
-import { UpgradeData, UpgradeDataContainer } from "@/game/upgrades/types";
-import { applyBoughtUpgrade } from "@/game/upgrades/utils/apply";
-import { hasUpgradeSelectionById } from "@/game/upgrades/utils/selector";
-import { hasUpgradeSelection } from "@/game/upgrades/utils/selector";
-import { hasPreviousUpgrade } from "@/game/upgrades/utils/has";
-import { hasUpgrade } from "@/game/upgrades/utils/has";
-import { createUpgradeId } from "@/game/upgrades/utils/id";
-import { mergeObjects } from "@/core/utils/object";
-import { getUpgradeCurrency } from "@/game/upgrades/utils/get";
-import cn from "@/core/utils/tailwind";
+import { getPlayerState } from "@game/player/store/store";
+import { parseValueGetter } from "@game/player/utils";
+import { UpgradeData, UpgradeDataContainer } from "@game/upgrades/types";
+import { applyBoughtUpgrade } from "@game/upgrades/utils/apply";
+import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
+import { hasUpgradeSelection } from "@game/upgrades/utils/selector";
+import { hasPreviousUpgrade } from "@game/upgrades/utils/has";
+import { hasUpgrade } from "@game/upgrades/utils/has";
+import { createUpgradeId } from "@game/upgrades/utils/id";
+import { mergeObjects } from "@core/utils/object";
+import { getUpgradeCurrency } from "@game/upgrades/utils/get";
+import cn from "@core/utils/tailwind";
 import StatusText from "./StatusText";
 import { CSSProperties } from "react";
-import { capitalizeString } from "@/core/utils/string";
+import { capitalizeString } from "@core/utils/string";
 
 type Props = {
   upgradeContainerData: UpgradeDataContainer;

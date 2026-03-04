@@ -1,9 +1,9 @@
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import menuInfoFormulaSelector from "./selector";
 import { Fragment, ReactNode } from "react";
 import menuInfoFormulaContainer from "./data";
-import { parseValueGetter } from "@/game/player/utils";
-import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import { parseValueGetter } from "@game/player/utils";
+import VerticalContainer from "@ui/components/base/VerticalContainer";
 
 function MenuInfoFormulaPage() {
   menuInfoFormulaSelector();
@@ -30,7 +30,7 @@ function MenuInfoFormulaPage() {
           </VerticalContainer>
         </Fragment>
       );
-    }
+    },
   );
 
   return (

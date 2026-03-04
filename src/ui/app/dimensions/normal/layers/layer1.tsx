@@ -1,10 +1,10 @@
-import DimensionLayerLayout from "@/ui/components/base/DimensionLayerLayout";
-import ResetBar from "@/ui/components/progressBars/ResetBar";
-import PointUpgrade from "@/ui/components/repeatableUpgrades/PointUpgrade";
-import Points from "@/ui/components/states/Points";
-import TimeSpent from "@/ui/components/states/TimeSpent";
-import AutoResetButton from "@/ui/components/toggles/AutoResetButton";
-import ResetUpgrades from "@/ui/components/upgrades/ResetUpgrades";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import ResetBar from "@ui/components/progressBars/ResetBar";
+import PointUpgrade from "@ui/components/repeatableUpgrades/PointUpgrade";
+import Points from "@ui/components/states/Points";
+import TimeSpent from "@ui/components/states/TimeSpent";
+import AutoResetButton from "@ui/components/toggles/AutoResetButton";
+import ResetUpgrades from "@ui/components/upgrades/ResetUpgrades";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";

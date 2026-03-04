@@ -1,6 +1,6 @@
-import { applyUpdatedCurrencyEffects } from "@/game/currencies/utils/apply";
+import { applyUpdatedCurrencyEffects } from "@game/currencies/utils/apply";
 import effectFormulas from "@game/formulas/effects";
-import { GameLoopPartState } from "@/game/gameLoop/types";
+import { GameLoopPartState } from "@game/gameLoop/types";
 
 export default function gameLoopUpdateEffects(state: GameLoopPartState) {
   const { mergedPlayer } = state;

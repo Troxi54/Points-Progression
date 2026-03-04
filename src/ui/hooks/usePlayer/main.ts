@@ -1,24 +1,24 @@
-import { usePlayerStore } from "@/game/player/store/store";
+import { usePlayerStore } from "@game/player/store/store";
 import {
   PlayerSetterName,
   PlayerStoreSelectorGeneric,
-} from "@/game/player/store/types";
-import { PlayerState } from "@/game/player/store/types";
-import { Player, UsePlayerFieldsReturn } from "@/game/player/types";
-import { CachedPlayer } from "@/game/player/cached/types";
+} from "@game/player/store/types";
+import { PlayerState } from "@game/player/store/types";
+import { Player, UsePlayerFieldsReturn } from "@game/player/types";
+import { CachedPlayer } from "@game/player/cached/types";
 import {
   assignKey,
   isObject,
   mergeObjects,
   objectKeys,
-} from "@/core/utils/object";
+} from "@core/utils/object";
 import {
   UsePlayerAdditionalSelector,
   UsePlayerFieldsOptions,
   UsePlayerOptions,
 } from "./types";
 import { useStoreWithEqualityFn } from "zustand/traditional";
-import { isDecimal } from "@/core/utils/decimal";
+import { isDecimal } from "@core/utils/decimal";
 
 const usePlayerDefaultOptions: UsePlayerOptions = {
   useFormat: false,

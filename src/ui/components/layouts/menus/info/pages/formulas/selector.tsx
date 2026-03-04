@@ -1,7 +1,7 @@
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { everPerformedResetLayers } from "@/game/resetLayers/utils/selector";
-import { hasUpgrades } from "@/game/upgrades/utils/has";
-import { mergeObjects } from "@/core/utils/object";
+import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
+import { hasUpgrades } from "@game/upgrades/utils/has";
+import { mergeObjects } from "@core/utils/object";
 
 const menuInfoFormulaSelector = () => {
   return usePlayerFields(

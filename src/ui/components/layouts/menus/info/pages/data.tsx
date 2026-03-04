@@ -1,4 +1,4 @@
-import Image from "@/ui/components/base/Image";
+import Image from "@ui/components/base/Image";
 import { MenuInfoPages } from "./types";
 import starIcon from "@ui/assets/star.svg";
 import MenuInfoNotationPage from "./notation";

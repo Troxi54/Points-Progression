@@ -1,8 +1,8 @@
-import { hasOneOfUpgrades, hasUpgradeById } from "@/game/upgrades/utils/has";
+import { hasOneOfUpgrades, hasUpgradeById } from "@game/upgrades/utils/has";
 import { createCurrencyDataContainer } from "./utils/create";
-import { everPerformed } from "@/game/resetLayers/utils/get";
+import { everPerformed } from "@game/resetLayers/utils/get";
 import { getCachedCurrencyProp } from "./utils/get";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 const currencyData = createCurrencyDataContainer({
   points: {

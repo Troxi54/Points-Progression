@@ -1,28 +1,10 @@
-import { ChildrenProps, ClassName } from "@/core/types/react";
-import { mergeObjects } from "@/core/utils/object";
-import cn from "@/core/utils/tailwind";
+import { ChildrenProps } from "@core/types/react";
+import { mergeObjects } from "@core/utils/object";
+import cn from "@core/utils/tailwind";
 import { clamp } from "@core/utils/number";
-import { CSSProperties } from "react";
-
-export interface AnimatedBarOptions {
-  gradientStep: string;
-  gradientAngle: string;
-  animationDuration: string;
-}
-
-const defaultAnimatedBarOptions: AnimatedBarOptions = {
-  gradientStep: "200px",
-  gradientAngle: "90deg",
-  animationDuration: "2s",
-};
-
-export type ProgressBarProps = {
-  mode?: "static" | "animated";
-  progressBarClassName?: ClassName;
-  progressFillClassName?: ClassName;
-  backgroundClassName?: ClassName;
-  animatedBarOptions?: Partial<AnimatedBarOptions>;
-};
+import { CSSProperties, Fragment } from "react";
+import { ProgressBarProps } from "./types";
+import progressBarConfig from "./config";
 
 interface Props extends ProgressBarProps, ChildrenProps {
   progress: number;
@@ -36,10 +18,11 @@ function ProgressBar({
   progressFillClassName,
   backgroundClassName,
   animatedBarOptions,
+  labelParts,
 }: Props) {
   const barMode = mode ?? "static";
   const fullBarOptions = mergeObjects(
-    defaultAnimatedBarOptions,
+    progressBarConfig.defaultAnimatedBarOptions,
     animatedBarOptions,
   );
   const bgClassName = backgroundClassName ?? "bg-layer-inner-bg";
@@ -54,7 +37,16 @@ function ProgressBar({
       aria-valuemax={100}
       className={cn("relative", progressBarClassName, bgClassName)}
     >
-      {children}
+      <p className="z-1">
+        {children}
+        {labelParts?.map((part, index) => (
+          <Fragment key={index}>
+            {index > 0 && progressBarConfig.labelSeparator}
+            {part}
+          </Fragment>
+        ))}
+      </p>
+
       {barMode === "static" ? (
         <div
           className={cn("absolute-full origin-left", progressFillClassName)}

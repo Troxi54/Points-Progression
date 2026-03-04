@@ -1,18 +1,18 @@
 import {
   mergeObjects,
   objectEntries,
-  objectFromEntries
-} from "@/core/utils/object";
+  objectFromEntries,
+} from "@core/utils/object";
 import getDefaultDimensionData from "../default";
 import {
   DimensionContainer,
   DimensionData,
   PartialDimensionContainer,
-  PartialDimensionData
+  PartialDimensionData,
 } from "../types";
 
 function createDimensionData(
-  dimensionData?: PartialDimensionData
+  dimensionData?: PartialDimensionData,
 ): DimensionData | undefined {
   if (!dimensionData) return;
 
@@ -23,12 +23,12 @@ function createDimensionData(
 }
 
 export function createDimensionContainer(
-  container: PartialDimensionContainer
+  container: PartialDimensionContainer,
 ): DimensionContainer {
   return objectFromEntries(
     objectEntries(container).map(([key, data]) => [
       key,
-      createDimensionData(data)
-    ])
+      createDimensionData(data),
+    ]),
   );
 }

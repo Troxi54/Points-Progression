@@ -1,9 +1,9 @@
 import { CSSProperties, ReactNode, useEffect, useRef, useState } from "react";
 import { useMenu } from "./provider";
 import { MenuId } from "./types";
-import { ClassName } from "@/core/types/react";
-import cn from "@/core/utils/tailwind";
-import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import { ClassName } from "@core/types/react";
+import cn from "@core/utils/tailwind";
+import VerticalContainer from "@ui/components/base/VerticalContainer";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 const TRANSITION_TIME = 150;

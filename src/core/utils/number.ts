@@ -15,3 +15,7 @@ export function clamp(value: number, min?: number, max?: number): number {
 
   return value;
 }
+
+export function safeNumber(num: number, fallback: number = 0): number {
+  return Number.isFinite(num) ? num : fallback;
+}

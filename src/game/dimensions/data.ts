@@ -1,7 +1,7 @@
 import { createDimensionContainer } from "./utils/create";
 
 const dimensionContainer = createDimensionContainer({
-  normal: { pauseOtherDimensions: true }
+  normal: { pauseOtherDimensions: true },
 });
 
 export default dimensionContainer;

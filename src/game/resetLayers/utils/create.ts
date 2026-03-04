@@ -2,7 +2,7 @@ import {
   mergeObjects,
   objectEntries,
   objectFromEntries,
-} from "@/core/utils/object";
+} from "@core/utils/object";
 import getDefaultResetLayerData from "../default";
 import {
   FullResetLayerData,
@@ -10,8 +10,8 @@ import {
   PartialResetLayerDataContainer,
   ResetLayerDataContainer,
 } from "../types";
-import { DimensionId } from "@/game/dimensions/types";
-import { hasUpgrade } from "@/game/upgrades/utils/has";
+import { DimensionId } from "@game/dimensions/types";
+import { hasUpgrade } from "@game/upgrades/utils/has";
 import { applyResetLayerPlayerData } from "./apply";
 
 export function createResetLayerData(

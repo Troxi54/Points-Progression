@@ -1,4 +1,4 @@
-import DimensionLayout from "@/ui/components/base/DimensionLayout";
+import DimensionLayout from "@ui/components/base/DimensionLayout";
 import SliphDimensionLayer1 from "./layers/layer1";
 import SliphDimensionLayer2 from "./layers/layer2";
 

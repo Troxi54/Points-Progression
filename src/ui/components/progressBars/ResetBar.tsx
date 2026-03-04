@@ -1,9 +1,9 @@
-import { formatNumber } from "@/core/format/number";
-import { formatBestRunTime } from "@/core/format/time";
-import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
-import resetLayerConfig from "@/game/resetLayers/config";
-import { formatEffectOnCurrency } from "@/core/format/effect";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+import { formatNumber } from "@core/format/number";
+import { formatBestRunTime } from "@core/format/time";
+import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
+import resetLayerConfig from "@game/resetLayers/config";
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 function ResetBar() {
   return (

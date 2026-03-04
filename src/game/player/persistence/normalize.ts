@@ -1,16 +1,16 @@
-import { getDefaultPlayer } from "@/game/player/default";
-import { PartialPlayer, Player } from "@/game/player/types";
+import { getDefaultPlayer } from "@game/player/default";
+import { PartialPlayer, Player } from "@game/player/types";
 import {
   getDefaultRepeatableUpgradeLevel,
   getDefaultResetLayerPlayerData,
-} from "@/game/player/default";
-import createDecimal, { isDecimal } from "@/core/utils/decimal";
-import { objectEntries } from "@/core/utils/object";
+} from "@game/player/default";
+import createDecimal, { isDecimal } from "@core/utils/decimal";
+import { objectEntries } from "@core/utils/object";
 import Decimal from "break_eternity.js";
 
 function parseDecimalValue<T, O>(
   defaultValue: T,
-  value: O
+  value: O,
 ): Decimal | undefined {
   if (!isDecimal(defaultValue)) return;
   if (
@@ -21,8 +21,7 @@ function parseDecimalValue<T, O>(
     return;
 
   const decimalValue = createDecimal(value);
-  if (decimalValue.isNan() || !decimalValue.isFinite())
-    return createDecimal(0);
+  if (decimalValue.isNan() || !decimalValue.isFinite()) return createDecimal(0);
 
   return decimalValue;
 }
@@ -51,7 +50,7 @@ function parseOptionalDecimalValue(value: unknown): Decimal | null | undefined {
 
 function parseFiniteNumberValue<T, O>(
   defaultValue: T,
-  value: O
+  value: O,
 ): number | undefined {
   if (typeof defaultValue !== "number") return;
 
@@ -69,7 +68,7 @@ function parseFiniteNumberValue<T, O>(
 }
 
 function parseResetLayersValue(
-  value: unknown
+  value: unknown,
 ): Player["resetLayers"] | undefined {
   if (typeof value !== "object" || value === null) return;
 
@@ -125,7 +124,7 @@ export function normalize(player: PartialPlayer): Player {
 
   for (const [key, defaultValue] of Object.entries(defaultPlayer) as [
     keyof Player,
-    any
+    any,
   ][]) {
     const value = player[key];
     if (value === undefined) continue;

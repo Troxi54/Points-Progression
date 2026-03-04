@@ -1,6 +1,8 @@
-import { getCurrentTime } from "@/core/utils/time";
+import { getCurrentTime } from "@core/utils/time";
 import offlineConfig from "../config";
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
+import { calculateTicksForOfflineTime } from "./calculate";
+import { safeNumber } from "@core/utils/number";
 
 export function triggerOfflineProgress(
   currentTime: number = getCurrentTime(),
@@ -10,6 +12,7 @@ export function triggerOfflineProgress(
   const { lastTick, unspentOfflineTime } = player;
 
   let deltaTime = Math.max(currentTime - lastTick, 0);
+  if (!isFinite(deltaTime) || deltaTime <= 0) return;
 
   if (!player.offlineProgressWorks) {
     return setPlayer({
@@ -34,6 +37,7 @@ export function triggerOfflineProgress(
   setCachedPlayer({
     offlineProgress: true,
     offlineProgressFullTime: deltaTime,
+    offlineProgressTicksOnTrigger: calculateTicksForOfflineTime(deltaTime),
     offlineProgressTicksCompleted: 0,
     offlineProgressSpeed: 1,
     offlineProgressStartedDate: startedDate,
@@ -44,19 +48,15 @@ export function triggerOfflineProgress(
 export function skipOfflineProgress(): void {
   const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
 
-  const ticksOnTrigger = offlineConfig.ticksOnTrigger;
+  const { offlineProgressFullTime, offlineProgressTicksCompleted } =
+    cachedPlayer;
+  const fullTime = safeNumber(offlineProgressFullTime);
+
+  const ticksOnTrigger = calculateTicksForOfflineTime(fullTime);
   if (!Number.isFinite(ticksOnTrigger) || ticksOnTrigger <= 0) return;
 
-  const completedTicks = Number.isFinite(cachedPlayer.offlineProgressTicksCompleted)
-    ? cachedPlayer.offlineProgressTicksCompleted
-    : 0;
-  const fullTime = Number.isFinite(cachedPlayer.offlineProgressFullTime)
-    ? cachedPlayer.offlineProgressFullTime
-    : 0;
-
-  const remainingProgress =
-    1 -
-    completedTicks / ticksOnTrigger;
+  const completedTicks = safeNumber(offlineProgressTicksCompleted);
+  const remainingProgress = 1 - completedTicks / ticksOnTrigger;
   const remainingTime = Math.max(remainingProgress, 0) * fullTime;
 
   setMergedPlayer({

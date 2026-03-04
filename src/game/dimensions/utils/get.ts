@@ -3,7 +3,7 @@ import getDefaultDimensionData from "../default";
 import { DimensionData, DimensionId } from "../types";
 
 export function getDimensionData<T extends DimensionId>(
-  dimensionId: T
+  dimensionId: T,
 ): DimensionData<T> {
   return dimensionContainer[dimensionId] ?? getDefaultDimensionData();
 }

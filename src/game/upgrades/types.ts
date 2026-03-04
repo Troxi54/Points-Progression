@@ -1,8 +1,8 @@
-import { BooleanGetter } from "@/game/player/types";
-import { MergedPlayer } from "@/game/player/merged/types";
-import { CurrencyId } from "@/game/currencies/types";
+import { BooleanGetter } from "@game/player/types";
+import { MergedPlayer } from "@game/player/merged/types";
+import { CurrencyId } from "@game/currencies/types";
 import Decimal, { DecimalSource } from "break_eternity.js";
-import { DimensionId } from "@/game/dimensions/types";
+import { DimensionId } from "@game/dimensions/types";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 
 export type UpgradeContainerId =

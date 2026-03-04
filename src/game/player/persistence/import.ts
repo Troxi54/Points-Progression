@@ -1,4 +1,4 @@
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import { loadPlayer } from "./load";
 import resetGame from "@app/resetGame";
 

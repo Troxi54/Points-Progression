@@ -1,4 +1,4 @@
-import RepeatableUpgrade from "@/ui/components/base/RepeatableUpgrade";
+import RepeatableUpgrade from "@ui/components/base/RepeatableUpgrade";
 
 function AmplivoidUpgrade() {
   return (

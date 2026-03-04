@@ -1,8 +1,8 @@
-import CurrencyComponent from "@/ui/components/base/Currency";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { hasUpgradeSelectionById } from "@/game/upgrades/utils/selector";
+import CurrencyComponent from "@ui/components/base/Currency";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 
 function Vermytes() {
   return (

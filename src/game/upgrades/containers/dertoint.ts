@@ -1,7 +1,7 @@
-import { formatEffectOnCurrency } from "@/core/format/effect";
-import { everPerformed } from "@/game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@/game/upgrades/utils/create";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { everPerformed } from "@game/resetLayers/utils/get";
+import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const dertointUpgrades = createUpgradeDataContainer({
   id: "dertoint",

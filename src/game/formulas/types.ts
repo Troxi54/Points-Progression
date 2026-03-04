@@ -1,6 +1,6 @@
-import { CurrencyId } from "@/game/currencies/types";
-import { DimensionId } from "@/game/dimensions/types";
-import { MergedPlayer } from "@/game/player/merged/types";
+import { CurrencyId } from "@game/currencies/types";
+import { DimensionId } from "@game/dimensions/types";
+import { MergedPlayer } from "@game/player/merged/types";
 import Decimal from "break_eternity.js";
 
 export type Formula<T extends unknown[] = [], R = Decimal> = (

@@ -1,14 +1,14 @@
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Overlay from "../overlay";
-import { formatLeftTime, formatTime } from "@/core/format/time";
+import { formatLeftTime, formatTime } from "@core/format/time";
 import { useMenu } from "../provider";
 import { useEffect } from "react";
-import ProgressBar from "@/ui/components/base/ProgressBar";
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
-import { getPlayerState } from "@/game/player/store/store";
-import offlineConfig from "@/game/offline/config";
-import { calculateTimeForRequirement } from "@/core/utils/time";
-import { skipOfflineProgress } from "@/game/offline/utils/trigger";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
+import { getPlayerState } from "@game/player/store/store";
+import offlineConfig from "@game/offline/config";
+import { calculateTimeForRequirement } from "@core/utils/time";
+import { skipOfflineProgress } from "@game/offline/utils/trigger";
+import ProgressBar from "@ui/components/base/ProgressBar";
 
 function OfflineMenu() {
   const { open, close, closeAllExcept } = useMenu();
@@ -18,12 +18,14 @@ function OfflineMenu() {
     offlineProgressFullTime,
     offlineProgressTicksCompleted,
     offlineProgressSpeed,
+    offlineProgressTicksOnTrigger,
     ticksPerSecond,
   } = usePlayerFields({
     cachedPlayer: [
       "offlineProgress",
       "offlineProgressFullTime",
       "offlineProgressTicksCompleted",
+      "offlineProgressTicksOnTrigger",
       "offlineProgressSpeed",
       "ticksPerSecond",
     ],
@@ -38,13 +40,12 @@ function OfflineMenu() {
     }
   }, [offlineProgress]);
 
-  const { ticksOnTrigger } = offlineConfig;
-
-  const progress = offlineProgressTicksCompleted / ticksOnTrigger;
+  const progress =
+    offlineProgressTicksCompleted / offlineProgressTicksOnTrigger;
   let leftTime = calculateTimeForRequirement(
     offlineProgressTicksCompleted,
     offlineProgressSpeed * ticksPerSecond,
-    ticksOnTrigger,
+    offlineProgressTicksOnTrigger,
   );
 
   return (
@@ -60,12 +61,8 @@ function OfflineMenu() {
         progressBarClassName="w-9/10 rounded-[0.5em] overflow-hidden"
         progressFillClassName="bg-offline-bar"
       >
-        <p className="z-1">
-          Ticks: {offlineProgressTicksCompleted} / {ticksOnTrigger}{" "}
-          <span className="text-offline-time">
-            ({formatLeftTime(leftTime)})
-          </span>
-        </p>
+        Ticks: {offlineProgressTicksCompleted} / {offlineProgressTicksOnTrigger}{" "}
+        <span className="text-offline-time">({formatLeftTime(leftTime)})</span>
       </ProgressBar>
       <HorizontalContainer>
         <button

@@ -1,8 +1,8 @@
-import { CurrencyId } from "@/game/currencies/types";
-import { ResetLayerId } from "@/game/resetLayers/types";
-import { PartialMergedPlayer } from "@/game/player/merged/types";
-import { PlayerState } from "@/game/player/store/types";
-import { RepeatableUpgradeId } from "@/game/repeatableUpgrades/types";
+import { CurrencyId } from "@game/currencies/types";
+import { ResetLayerId } from "@game/resetLayers/types";
+import { PartialMergedPlayer } from "@game/player/merged/types";
+import { PlayerState } from "@game/player/store/types";
+import { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
 import Decimal from "break_eternity.js";
 
 export interface CachedPlayer {
@@ -23,6 +23,7 @@ export interface CachedPlayer {
 
   offlineProgress: boolean;
   offlineProgressFullTime: number;
+  offlineProgressTicksOnTrigger: number;
   offlineProgressTicksCompleted: number;
   offlineProgressSpeed: number;
   offlineProgressStartedDate: number | null;

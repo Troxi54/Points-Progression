@@ -1,6 +1,6 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
 import { formatNumber } from "./number";
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 
 const pad = (value: Decimal | number): string => {
   const num = value instanceof Decimal ? value.toNumber() : value;
@@ -22,7 +22,7 @@ export function formatTime(milliseconds: DecimalSource): string {
     { name: "d", value: ms.dividedBy(1000 * 60 * 60 * 24).mod(365) },
     { name: "h", value: ms.dividedBy(1000 * 60 * 60).mod(24) },
     { name: "m", value: ms.dividedBy(1000 * 60).mod(60) },
-    { name: "s", value: ms.dividedBy(1000).mod(60) }
+    { name: "s", value: ms.dividedBy(1000).mod(60) },
   ];
 
   if (units[0].value.greaterThanOrEqualTo(1000)) {
@@ -35,7 +35,7 @@ export function formatTime(milliseconds: DecimalSource): string {
 
   if (units[0].value.greaterThanOrEqualTo(1)) {
     return `${formatUnit(units[0])}y. ${formatUnit(units[1])}d. ${formatUnit(
-      units[2]
+      units[2],
     )}h`;
   }
 

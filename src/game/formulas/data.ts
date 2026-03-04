@@ -1,12 +1,12 @@
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 import { FormulaContainer } from "./types";
-import resetLayerConfig from "@/game/resetLayers/config";
-import { everPerformed, getResetLayerData } from "@/game/resetLayers/utils/get";
+import resetLayerConfig from "@game/resetLayers/config";
+import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import Decimal, { DecimalSource } from "break_eternity.js";
-import amplivaultConfig from "@/game/features/amplivault/config";
-import { calculateBulk } from "@/core/utils/level";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
+import amplivaultConfig from "@game/features/amplivault/config";
+import { calculateBulk } from "@core/utils/level";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import gameConfig from "@core/config/data";
 
 const formulas = {

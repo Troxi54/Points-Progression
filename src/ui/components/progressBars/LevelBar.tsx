@@ -1,6 +1,6 @@
-import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
-import { formatEffectOnCurrency } from "@/core/format/effect";
-import { integerCommaFormat } from "@/core/format/number";
+import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { integerCommaFormat } from "@core/format/number";
 
 function LevelBar() {
   return (

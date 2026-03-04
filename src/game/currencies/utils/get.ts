@@ -1,11 +1,11 @@
-import { CachedCurrency, CachedPlayerLike } from "@/game/player/cached/types";
+import { CachedCurrency, CachedPlayerLike } from "@game/player/cached/types";
 import currencyData from "../data";
 import { CurrencyId } from "../types";
-import { getDefaultCachedCurrency } from "@/game/player/cached/default";
-import { getDefaultCachedCurrencyEffect } from "@/game/player/cached/default";
-import { objectFromEntries } from "@/core/utils/object";
-import { parseCachedPlayerLike } from "@/game/player/utils";
-import { isDecimal } from "@/core/utils/decimal";
+import { getDefaultCachedCurrency } from "@game/player/cached/default";
+import { getDefaultCachedCurrencyEffect } from "@game/player/cached/default";
+import { objectFromEntries } from "@core/utils/object";
+import { parseCachedPlayerLike } from "@game/player/utils";
+import { isDecimal } from "@core/utils/decimal";
 import Decimal from "break_eternity.js";
 
 export function getCurrencyData(currencyId: CurrencyId) {

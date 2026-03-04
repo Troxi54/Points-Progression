@@ -1,9 +1,9 @@
-import Pow from "@/ui/components/base/Pow";
-import { integerCommaFormat } from "@/core/format/number";
+import Pow from "@ui/components/base/Pow";
+import { integerCommaFormat } from "@core/format/number";
 import {
   allFormatUnitsLog,
-  formatExponentialNotationStartsAtLog
-} from "@/core/format/units";
+  formatExponentialNotationStartsAtLog,
+} from "@core/format/units";
 import Decimal from "break_eternity.js";
 
 function MenuInfoNotationPage() {

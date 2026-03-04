@@ -1,4 +1,4 @@
-import { ClassName } from "@/core/types/react";
+import { ClassName } from "@core/types/react";
 import CurrencyContent, { CurrencyComponentProps } from "./CurrencyContent";
 import { Ref } from "react";
 

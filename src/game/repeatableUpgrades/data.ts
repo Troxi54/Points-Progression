@@ -1,10 +1,10 @@
 import Decimal from "break_eternity.js";
 import { createRepeatableUpgradeContainer } from "./utils/create";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { FlatRepeatableUpgradeContainer } from "./types";
-import { objectEntries } from "@/core/utils/object";
-import createDecimal from "@/core/utils/decimal";
-import { everPerformed } from "@/game/resetLayers/utils/get";
+import { objectEntries } from "@core/utils/object";
+import createDecimal from "@core/utils/decimal";
+import { everPerformed } from "@game/resetLayers/utils/get";
 
 const repeatableUpgrades = createRepeatableUpgradeContainer({
   normal: {

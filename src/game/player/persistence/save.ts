@@ -1,8 +1,8 @@
-import { Player } from "@/game/player/types";
+import { Player } from "@game/player/types";
 import playerPersistenceConfig from "./config";
-import { getPlayerState } from "@/game/player/store/store";
-import { MergedPlayer } from "@/game/player/merged/types";
-import { getCurrentTime } from "@/core/utils/time";
+import { getPlayerState } from "@game/player/store/store";
+import { MergedPlayer } from "@game/player/merged/types";
+import { getCurrentTime } from "@core/utils/time";
 import { serializePlayer } from "./compress";
 
 function savePlayerStringToLocalStorage(str: string) {
@@ -20,7 +20,7 @@ export function savePlayer(player: Player = getPlayerState().player) {
 
 export function canAutoSave(
   mergedPlayer: MergedPlayer,
-  currentTime: number = getCurrentTime()
+  currentTime: number = getCurrentTime(),
 ) {
   const { player, cachedPlayer } = mergedPlayer;
   if (!player.autosave) return false;

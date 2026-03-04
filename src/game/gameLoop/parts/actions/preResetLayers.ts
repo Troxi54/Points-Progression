@@ -1,10 +1,10 @@
-import { getNewAmplivaultLevel } from "@/game/features/amplivault/utils";
-import coreConfig from "@/game/features/cores/config";
+import { getNewAmplivaultLevel } from "@game/features/amplivault/utils";
+import coreConfig from "@game/features/cores/config";
 import formulas from "@game/formulas/data";
-import { GameLoopPartState } from "@/game/gameLoop/types";
-import { applyResetLayerAuto } from "@/game/resetLayers/utils/apply";
-import { calculateSoftcapperLevel } from "@/game/softcappers/utils/calculate";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { GameLoopPartState } from "@game/gameLoop/types";
+import { applyResetLayerAuto } from "@game/resetLayers/utils/apply";
+import { calculateSoftcapperLevel } from "@game/softcappers/utils/calculate";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export default function gameLoopPreResetLayers(state: GameLoopPartState) {
   const { mergedPlayer } = state;
@@ -14,7 +14,7 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
     player.bestPointsOfRun = formulas.bestPointsOfRun(mergedPlayer);
 
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "reset", false)
+      applyResetLayerAuto(player, "reset", false),
     );
   }
 
@@ -29,13 +29,13 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
 
   if (hasUpgradeById(player, "vermyros_4")) {
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "tier", true)
+      applyResetLayerAuto(player, "tier", true),
     );
   }
 
   if (hasUpgradeById(player, "vermyros_8")) {
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "vermyros", false)
+      applyResetLayerAuto(player, "vermyros", false),
     );
   }
 
@@ -50,8 +50,8 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
       applyResetLayerAuto(
         player,
         "nullith",
-        player.enteredAmplivault && !player.reachedBreakAmplivault
-      )
+        player.enteredAmplivault && !player.reachedBreakAmplivault,
+      ),
     );
   }
 

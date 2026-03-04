@@ -1,12 +1,12 @@
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
-import Image from "@/ui/components/base/Image";
-import gameConfig from "@/core/config/data";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
+import Image from "@ui/components/base/Image";
+import gameConfig from "@core/config/data";
 import discordIcon from "@ui/assets/discord.svg";
 import githubIcon from "@ui/assets/github.svg";
 import patreonIcon from "@ui/assets/patreon.svg";
-import LinkButton from "@/ui/components/base/LinkButton";
-import { gameVersionToString } from "@/core/config/utils";
-import VerticalContainer from "@/ui/components/base/VerticalContainer";
+import LinkButton from "@ui/components/base/LinkButton";
+import { gameVersionToString } from "@core/config/utils";
+import VerticalContainer from "@ui/components/base/VerticalContainer";
 import MenuInfoMainPageGameProgress from "./endgame";
 
 function MenuInfoMainPage() {

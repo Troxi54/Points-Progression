@@ -1,19 +1,19 @@
-import { MergedPlayer } from "@/game/player/merged/types";
+import { MergedPlayer } from "@game/player/merged/types";
 import {
   copyObject,
   isObject,
   mergeObjects,
   objectEntries,
   objectKeys,
-} from "@/core/utils/object";
+} from "@core/utils/object";
 import currencyData from "../data";
 import {
   CachedCurrency,
   CachedPlayerLike,
   PartialCachedPlayer,
-} from "@/game/player/cached/types";
-import createDecimal from "@/core/utils/decimal";
-import { parseCachedPlayerLike, parseValueGetter } from "@/game/player/utils";
+} from "@game/player/cached/types";
+import createDecimal from "@core/utils/decimal";
+import { parseCachedPlayerLike, parseValueGetter } from "@game/player/utils";
 import {
   calculateEffectOnCurrency,
   calculateCurrencyGain,
@@ -21,8 +21,8 @@ import {
 } from "./calculate";
 import { CurrencyId } from "../types";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
-import { isFunction } from "@/core/utils/function";
-import { PartialPlayer } from "@/game/player/types";
+import { isFunction } from "@core/utils/function";
+import { PartialPlayer } from "@game/player/types";
 import { getCachedCurrencyProp } from "./get";
 import Decimal from "break_eternity.js";
 

@@ -4,7 +4,7 @@ import { stringIsExponentialDecimal } from "./string";
 
 export function handleDecimalInputOnBlur(
   target: HTMLInputElement,
-  maxValue: DecimalSource = "1ee6"
+  maxValue: DecimalSource = "1ee6",
 ): string {
   const DEFAULT_VALUE = "0";
   const CONVERT_NUMBER_TO_EXPONENTIAL_AT = 1e16;

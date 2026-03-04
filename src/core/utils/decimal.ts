@@ -1,4 +1,4 @@
-import { DecimalSoftcapMode } from "@/core/types/decimal";
+import { DecimalSoftcapMode } from "@core/types/decimal";
 import Decimal, { DecimalSource } from "break_eternity.js";
 
 const usuallyUsedDecimals: Record<number, Decimal> = {

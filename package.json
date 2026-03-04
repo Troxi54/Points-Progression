@@ -2,11 +2,12 @@
   "homepage": "https://troxi54.github.io/Points-Progression/",
   "name": "points-progression",
   "private": true,
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc -b",
+    "format": "npx prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "build": "npm run typecheck && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

@@ -1,4 +1,4 @@
-import { ClassName } from "@/core/types/react";
+import { ClassName } from "@core/types/react";
 import { ComponentType, ReactNode } from "react";
 
 interface MenuInfoPage {

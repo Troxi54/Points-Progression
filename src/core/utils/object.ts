@@ -6,7 +6,7 @@ export function isObject(value: unknown): value is object {
 
 export function hasKey<K extends PropertyKey, T>(
   key: K,
-  obj: unknown
+  obj: unknown,
 ): obj is Partial<Record<K, T>> {
   return isObject(obj) && key in obj;
 }
@@ -18,7 +18,7 @@ export function mergeObjects<T, U>(base: T, override: U): T & U {
 export function assignKey<T, K extends keyof T>(
   obj: Partial<T>,
   key: K,
-  value: T[K]
+  value: T[K],
 ) {
   obj[key] = value;
 }
@@ -74,7 +74,7 @@ export function objectKeys<T extends Readonly<object>>(obj: T) {
 
 export function objectAssign<T extends object>(
   base: T,
-  override: Partial<T> | undefined
+  override: Partial<T> | undefined,
 ): T {
   return Object.assign(base, override);
 }
@@ -119,7 +119,7 @@ export function deepCopy<T>(obj: T, depth: number = Infinity): T {
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function createUniqueObject<
-  T extends Readonly<Record<string, unknown>>
+  T extends Readonly<Record<string, unknown>>,
 >(obj: {
   [K in keyof T]: T[K] extends T[Exclude<keyof T, K>] ? never : T[K];
 }) {
@@ -128,7 +128,7 @@ export function createUniqueObject<
 
 export function shallowEqual<T extends Readonly<object>>(
   obj1: T,
-  obj2: T
+  obj2: T,
 ): boolean {
   const keys1 = Object.keys(obj1) as (keyof T)[];
   const keys2 = Object.keys(obj2) as (keyof T)[];

@@ -1,10 +1,10 @@
-import { applyGeneratedCurrencies } from "@/game/currencies/utils/apply";
-import { CurrencyId } from "@/game/currencies/types";
-import { getCachedCurrencyProp } from "@/game/currencies/utils/get";
-import { GameLoopPartState } from "@/game/gameLoop/types";
-import { ResetLayerId } from "@/game/resetLayers/types";
-import { getResetLayerPlayerData } from "@/game/resetLayers/utils/get";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
+import { applyGeneratedCurrencies } from "@game/currencies/utils/apply";
+import { CurrencyId } from "@game/currencies/types";
+import { getCachedCurrencyProp } from "@game/currencies/utils/get";
+import { GameLoopPartState } from "@game/gameLoop/types";
+import { ResetLayerId } from "@game/resetLayers/types";
+import { getResetLayerPlayerData } from "@game/resetLayers/utils/get";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 import formulas from "@game/formulas/data";
 
 export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {

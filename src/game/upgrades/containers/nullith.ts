@@ -1,4 +1,4 @@
-import { createUpgradeDataContainer } from "@/game/upgrades/utils/create";
+import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
 
 const nullithUpgrades = createUpgradeDataContainer({
   id: "nullith",

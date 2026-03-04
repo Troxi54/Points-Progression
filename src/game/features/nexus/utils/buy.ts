@@ -1,11 +1,11 @@
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import { getNexusCost } from "./get";
 
 export function buyNexus() {
   const {
     player: { nux, nexusLevel, bestNexusLevel },
     mergedPlayer,
-    setPlayer
+    setPlayer,
   } = getPlayerState();
 
   const cost = getNexusCost(mergedPlayer);
@@ -16,6 +16,6 @@ export function buyNexus() {
   setPlayer({
     nexusLevel: newNexusLevel,
     bestNexusLevel: bestNexusLevel.max(newNexusLevel),
-    nux: nux.minus(cost)
+    nux: nux.minus(cost),
   });
 }

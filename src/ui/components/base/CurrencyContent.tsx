@@ -1,20 +1,20 @@
-import { ClassName } from "@/core/types/react";
-import { CurrencyId } from "@/game/currencies/types";
-import { formatCurrencyNameEmptyless } from "@/game/currencies/utils/format";
-import { getCurrencyData } from "@/game/currencies/utils/get";
-import { parseNumberFormat } from "@/core/format/number";
+import { ClassName } from "@core/types/react";
+import { CurrencyId } from "@game/currencies/types";
+import { formatCurrencyNameEmptyless } from "@game/currencies/utils/format";
+import { getCurrencyData } from "@game/currencies/utils/get";
+import { parseNumberFormat } from "@core/format/number";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
-import { BooleanGetter, ValueGetter } from "@/game/player/types";
-import { parseValueGetter } from "@/game/player/utils";
-import { mergeObjects, objectEntries } from "@/core/utils/object";
+import { BooleanGetter, ValueGetter } from "@game/player/types";
+import { parseValueGetter } from "@game/player/utils";
+import { mergeObjects, objectEntries } from "@core/utils/object";
 import { plural } from "pluralize";
 import { ReactNode } from "react";
-import { FormatNumberType } from "@/core/format/types";
-import { isDecimal } from "@/core/utils/decimal";
+import { FormatNumberType } from "@core/format/types";
+import { isDecimal } from "@core/utils/decimal";
 import Decimal from "break_eternity.js";
-import { arrayLastIndex, isEmpty } from "@/core/utils/array";
+import { arrayLastIndex, isEmpty } from "@core/utils/array";
 
 interface EffectNode {
   className?: string;

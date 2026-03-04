@@ -1,12 +1,12 @@
-import { MergedPlayer } from "@/game/player/merged/types";
+import { MergedPlayer } from "@game/player/merged/types";
 import { DimensionId } from "../types";
 import { getDimensionData } from "./get";
-import { parseValueGetter } from "@/game/player/utils";
+import { parseValueGetter } from "@game/player/utils";
 import { isDimension } from "./compare";
 
 export function shouldDimensionWork(
   mergedPlayer: MergedPlayer,
-  dimensionId: DimensionId
+  dimensionId: DimensionId,
 ): boolean {
   const currentId = mergedPlayer.player.dimensionId;
   if (isDimension(currentId, dimensionId)) return true;

@@ -1,11 +1,11 @@
-import { calculateTimeForRequirement } from "@/core/utils/time";
-import { formatNumber, integerFormat } from "@/core/format/number";
-import { formatLeftTime } from "@/core/format/time";
+import { calculateTimeForRequirement } from "@core/utils/time";
+import { formatNumber, integerFormat } from "@core/format/number";
+import { formatLeftTime } from "@core/format/time";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { getCachedCurrencyPropSelection } from "@/game/currencies/utils/selector";
-import { toggleAmplivault } from "@/game/features/amplivault/utils";
-import cn from "@/core/utils/tailwind";
-import { formatEffectOnCurrency } from "@/core/format/effect";
+import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
+import { toggleAmplivault } from "@game/features/amplivault/utils";
+import cn from "@core/utils/tailwind";
+import { formatEffectOnCurrency } from "@core/format/effect";
 
 function Amplivault() {
   const state = usePlayerFields(

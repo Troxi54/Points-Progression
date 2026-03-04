@@ -1,6 +1,6 @@
-import HorizontalContainer from "@/ui/components/base/HorizontalContainer";
+import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import Overlay from "../overlay";
-import { exportPlayer } from "@/game/player/persistence/export";
+import { exportPlayer } from "@game/player/persistence/export";
 import { useMenu } from "../provider";
 
 const ExportMenu = () => {

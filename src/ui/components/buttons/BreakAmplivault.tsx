@@ -1,4 +1,4 @@
-import { breakAmplivault } from "@/game/features/amplivault/utils";
+import { breakAmplivault } from "@game/features/amplivault/utils";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 function BreakAmplivault() {

@@ -1,18 +1,18 @@
-import { formatNumber, integerCommaFormat } from "@/core/format/number";
-import { formatLeftTime } from "@/core/format/time";
-import { calculateProgress } from "@/core/utils/progress";
-import { calculateTimeForRequirement } from "@/core/utils/time";
-import ResetLayerProgressBar from "@/ui/components/base/ResetLayerProgressBar";
+import { formatNumber, integerCommaFormat } from "@core/format/number";
+import { formatLeftTime } from "@core/format/time";
+import { calculateProgress } from "@core/utils/progress";
+import { calculateTimeForRequirement } from "@core/utils/time";
+import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
 import {
   getResetLayerData,
   getResetLayerPlayerDataProp,
-} from "@/game/resetLayers/utils/get";
-import { hasUpgradeById } from "@/game/upgrades/utils/has";
-import { formatEffectOnCurrency } from "@/core/format/effect";
-import { getCachedCurrencyProp } from "@/game/currencies/utils/get";
-import { formatCurrencyEffect } from "@/game/currencies/utils/format";
-import CurrencyContent from "@/ui/components/base/CurrencyContent";
-import { hasNexusLevel } from "@/game/features/nexus/utils/has";
+} from "@game/resetLayers/utils/get";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { getCachedCurrencyProp } from "@game/currencies/utils/get";
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import CurrencyContent from "@ui/components/base/CurrencyContent";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 function TierBar() {
   const data = getResetLayerData("tier");

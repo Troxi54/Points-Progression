@@ -1,16 +1,16 @@
-import { ResetLayerPlayerData, PlayerLike } from "@/game/player/types";
-import { parsePlayerLike } from "@/game/player/utils";
-import { objectFromEntries } from "@/core/utils/object";
+import { ResetLayerPlayerData, PlayerLike } from "@game/player/types";
+import { parsePlayerLike } from "@game/player/utils";
+import { objectFromEntries } from "@core/utils/object";
 import { ResetLayerId, ResetLayerPlayerSelector } from "../types";
 import { everPerformed, getResetLayerPlayerDataProps } from "./get";
 
 export function getResetLayerPlayerSelection<
   T extends ResetLayerId,
-  P extends (keyof ResetLayerPlayerData)[]
+  P extends (keyof ResetLayerPlayerData)[],
 >(
   playerLike: PlayerLike,
   resetLayerId: T,
-  properties: P
+  properties: P,
 ): {
   [K in P[number] as ResetLayerPlayerSelector<T, K>]: ResetLayerPlayerData[K];
 } {
@@ -27,13 +27,13 @@ export function getResetLayerPlayerSelection<
       const value = data[propertyName];
 
       return [key, value];
-    })
+    }),
   ) as ReturnType<typeof getResetLayerPlayerSelection>;
 }
 
 export function everPerformedResetLayers<T extends ResetLayerId[]>(
   playerLike: PlayerLike,
-  resetLayerIds: T
+  resetLayerIds: T,
 ): {
   [K in T[number] as ResetLayerPlayerSelector<
     K,
@@ -49,6 +49,6 @@ export function everPerformedResetLayers<T extends ResetLayerId[]>(
       const value = everPerformed(player, id);
 
       return [key, value];
-    })
+    }),
   ) as ReturnType<typeof everPerformedResetLayers>;
 }

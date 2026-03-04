@@ -1,5 +1,5 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
-import { getPlayerState } from "@/game/player/store/store";
+import { getPlayerState } from "@game/player/store/store";
 import {
   FormatNumberType,
   FormatNumberOptions,
@@ -12,10 +12,10 @@ import formatUnits, {
 import createDecimal, {
   decimalIsGreaterByOoM,
   isDecimal,
-} from "@/core/utils/decimal";
-import UISymbols from "@/app/UISymbols";
-import { isNil } from "@/core/utils/nil";
-import { arrayLastItem } from "@/core/utils/array";
+} from "@core/utils/decimal";
+import UISymbols from "@app/UISymbols";
+import { isNil } from "@core/utils/nil";
+import { arrayLastItem } from "@core/utils/array";
 import { mergeObjects } from "@core/utils/object";
 
 const ADD_COMMAS_AT = 1000;

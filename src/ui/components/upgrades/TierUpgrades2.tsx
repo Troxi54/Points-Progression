@@ -1,4 +1,4 @@
-import tierUpgrades from "@/game/upgrades/containers/tier";
+import tierUpgrades from "@game/upgrades/containers/tier";
 import UpgradeContainer from "../base/UpgradeContainer";
 
 function TierUpgrades2() {

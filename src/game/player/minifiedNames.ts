@@ -2,7 +2,7 @@ import {
   createUniqueObject,
   objectEntries,
   objectFromEntries,
-} from "@/core/utils/object";
+} from "@core/utils/object";
 import { Player } from "./types";
 
 export const minifiedPlayerMap = createUniqueObject({

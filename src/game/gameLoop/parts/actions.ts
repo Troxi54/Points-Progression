@@ -1,4 +1,4 @@
-import { GameLoopPartState } from "@/game/gameLoop/types";
+import { GameLoopPartState } from "@game/gameLoop/types";
 import gameLoopRepeatableUpgrades from "./actions/repeatableUpgrades";
 import gameLoopResetLayers from "./actions/resetLayers";
 import gameLoopGenerateCurrencies from "./actions/generate";

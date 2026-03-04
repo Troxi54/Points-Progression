@@ -1,11 +1,11 @@
-import createDecimal from "@/core/utils/decimal";
+import createDecimal from "@core/utils/decimal";
 import {
   CachedCurrency,
   CachedPlayer,
   CachedRepeatableUpgrade,
   CachedResetLayer,
 } from "./types";
-import { getCurrentTime } from "@/core/utils/time";
+import { getCurrentTime } from "@core/utils/time";
 
 export function getDefaultCachedPlayer(): CachedPlayer {
   const currentTime = getCurrentTime();
@@ -26,6 +26,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
 
     offlineProgress: false,
     offlineProgressFullTime: 0,
+    offlineProgressTicksOnTrigger: 0,
     offlineProgressTicksCompleted: 0,
     offlineProgressSpeed: 1,
     offlineProgressStartedDate: null,

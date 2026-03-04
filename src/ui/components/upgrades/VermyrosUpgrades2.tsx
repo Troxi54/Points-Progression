@@ -1,4 +1,4 @@
-import vermyrosUpgrades from "@/game/upgrades/containers/vermyros";
+import vermyrosUpgrades from "@game/upgrades/containers/vermyros";
 import UpgradeContainer from "../base/UpgradeContainer";
 
 function VermyrosUpgrades2() {

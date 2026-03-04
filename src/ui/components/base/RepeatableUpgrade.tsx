@@ -1,27 +1,27 @@
-import { hasCurrencyName } from "@/game/currencies/utils/has";
-import { formatCurrencyName } from "@/game/currencies/utils/format";
-import { integerFormat } from "@/core/format/number";
-import { formatWithPlural } from "@/core/format/plural";
+import { hasCurrencyName } from "@game/currencies/utils/has";
+import { formatCurrencyName } from "@game/currencies/utils/format";
+import { integerFormat } from "@core/format/number";
+import { formatWithPlural } from "@core/format/plural";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@/game/player/store/store";
-import { CachedRepeatableUpgrade } from "@/game/player/cached/types";
+import { getPlayerState } from "@game/player/store/store";
+import { CachedRepeatableUpgrade } from "@game/player/cached/types";
 import {
   CachedRepeatableUpgradeSelector,
   RepeatableUpgradeId,
-} from "@/game/repeatableUpgrades/types";
+} from "@game/repeatableUpgrades/types";
 import {
   applyRepeatableUpgradeMax,
   applyRepeatableUpgradeSingle,
-} from "@/game/repeatableUpgrades/utils/apply";
-import { getCachedRepeatableUpgradePropsSelection } from "@/game/repeatableUpgrades/utils/selector";
-import { getRepeatableUpgradeLevelSelection } from "@/game/repeatableUpgrades/utils/selector";
-import { getRepeatableUpgradeData } from "@/game/repeatableUpgrades/utils/get";
-import { mergeObjects } from "@/core/utils/object";
+} from "@game/repeatableUpgrades/utils/apply";
+import { getCachedRepeatableUpgradePropsSelection } from "@game/repeatableUpgrades/utils/selector";
+import { getRepeatableUpgradeLevelSelection } from "@game/repeatableUpgrades/utils/selector";
+import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
+import { mergeObjects } from "@core/utils/object";
 import Decimal from "break_eternity.js";
-import { formatEffect } from "@/core/format/effect";
-import cn from "@/core/utils/tailwind";
-import { ClassName } from "@/core/types/react";
-import { capitalizeString } from "@/core/utils/string";
+import { formatEffect } from "@core/format/effect";
+import cn from "@core/utils/tailwind";
+import { ClassName } from "@core/types/react";
+import { capitalizeString } from "@core/utils/string";
 
 type Props<T extends RepeatableUpgradeId> = {
   repeatableUpgradeId: T;

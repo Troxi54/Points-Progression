@@ -3,6 +3,8 @@ import { copyObject } from "@core/utils/object";
 import { mergePlayer } from "@game/player/merged/utils";
 import { createGameLoopPartState } from "../utils/create";
 import offlineConfig from "@game/offline/config";
+import { clamp, safeNumber } from "@core/utils/number";
+import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
 
 export default function gameLoopPreTick(currentTime: number) {
   const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
@@ -13,21 +15,22 @@ export default function gameLoopPreTick(currentTime: number) {
   const mergedPlayer = mergePlayer(newPlayer, newCachedPlayer);
   const partState = createGameLoopPartState(mergedPlayer, currentTime);
 
-  let timeSpeed = 1;
-  if (newCachedPlayer.offlineProgress) {
-    const offlineProgressSpeed = Number.isFinite(newCachedPlayer.offlineProgressSpeed)
-      ? Math.min(Math.max(newCachedPlayer.offlineProgressSpeed, 1), offlineConfig.maxSpeed)
-      : 1;
-    const offlineProgressFullTime = Number.isFinite(newCachedPlayer.offlineProgressFullTime)
-      ? Math.max(newCachedPlayer.offlineProgressFullTime, 0)
-      : 0;
+  const { offlineProgress, offlineProgressFullTime } = newCachedPlayer;
 
+  let timeSpeed = 1;
+  if (offlineProgress) {
+    const offlineProgressSpeed = safeNumber(
+      clamp(newCachedPlayer.offlineProgressSpeed, 1, offlineConfig.maxSpeed),
+      1,
+    );
     newCachedPlayer.offlineProgressSpeed = offlineProgressSpeed;
-    newCachedPlayer.offlineProgressFullTime = offlineProgressFullTime;
+
+    const ticksOnTrigger = calculateTicksForOfflineTime(
+      offlineProgressFullTime,
+    );
 
     const tickTime =
-      (offlineProgressSpeed / offlineConfig.ticksOnTrigger) *
-      offlineProgressFullTime;
+      (offlineProgressSpeed / ticksOnTrigger) * offlineProgressFullTime;
     if (partState.deltaTimeTPS > 0) {
       timeSpeed = tickTime / partState.deltaTimeTPS;
     }

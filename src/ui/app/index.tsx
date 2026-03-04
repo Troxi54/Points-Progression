@@ -1,7 +1,7 @@
-import Menu from "@/ui/components/layouts/menus";
+import Menu from "@ui/components/layouts/menus";
 import NormalDimension from "./dimensions/normal";
-import useGlobalEvents from "@/ui/hooks/useGlobalEvents";
-import useDimensionScroll from "@/ui/hooks/useDimensionScroll";
+import useGlobalEvents from "@ui/hooks/useGlobalEvents";
+import useDimensionScroll from "@ui/hooks/useDimensionScroll";
 import SliphDimension from "./dimensions/sliph";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 

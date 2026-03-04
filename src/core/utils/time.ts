@@ -1,9 +1,9 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
 import createDecimal from "./decimal";
-import { getPlayerState } from "@/game/player/store/store";
-import offlineConfig from "@/game/offline/config";
-import { MergedPlayer } from "@/game/player/merged/types";
+import { getPlayerState } from "@game/player/store/store";
+import { MergedPlayer } from "@game/player/merged/types";
 import { isNil } from "./nil";
+import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
 
 export function calculateTimeForRequirement(
   currencyValue: DecimalSource,
@@ -31,32 +31,32 @@ export function getCurrentGameTime(
   currentTime: number = getCurrentTime(),
 ): number {
   const { player, cachedPlayer } = mergedPlayer;
-  if (
-    !cachedPlayer.offlineProgress ||
-    isNil(cachedPlayer.offlineProgressStartedDate)
-  )
-    return currentTime - player.offlineOffset;
+  const {
+    offlineProgressStartedDate,
+    offlineProgressTicksCompleted,
+    offlineProgressFullTime,
+  } = cachedPlayer;
+  const { offlineOffset } = player;
 
-  if (!Number.isFinite(cachedPlayer.offlineProgressStartedDate)) {
-    return currentTime - player.offlineOffset;
+  if (!cachedPlayer.offlineProgress || isNil(offlineProgressStartedDate))
+    return currentTime - offlineOffset;
+
+  if (!Number.isFinite(offlineProgressStartedDate)) {
+    return currentTime - offlineOffset;
   }
 
-  const ticksOnTrigger = offlineConfig.ticksOnTrigger;
+  const ticksOnTrigger = calculateTicksForOfflineTime(offlineProgressFullTime);
   if (!Number.isFinite(ticksOnTrigger) || ticksOnTrigger <= 0) {
-    return currentTime - player.offlineOffset;
+    return currentTime - offlineOffset;
   }
 
-  const offlineProgress =
-    (cachedPlayer.offlineProgressTicksCompleted ?? 0) / ticksOnTrigger;
+  const offlineProgress = (offlineProgressTicksCompleted ?? 0) / ticksOnTrigger;
 
-  const fullTime = Number.isFinite(cachedPlayer.offlineProgressFullTime)
-    ? cachedPlayer.offlineProgressFullTime
+  const fullTime = Number.isFinite(offlineProgressFullTime)
+    ? offlineProgressFullTime
     : 0;
 
-  return (
-    cachedPlayer.offlineProgressStartedDate +
-    fullTime * offlineProgress
-  );
+  return offlineProgressStartedDate + fullTime * offlineProgress;
 }
 
 export function getTimeSince(date: number): number {

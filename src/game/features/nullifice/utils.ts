@@ -1,8 +1,8 @@
-import { calculateCurrencyGain } from "@/game/currencies/utils/calculate";
-import { getPlayerState } from "@/game/player/store/store";
-import { Player } from "@/game/player/types";
-import createDecimal from "@/core/utils/decimal";
-import { clamp } from "@/core/utils/number";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import { getPlayerState } from "@game/player/store/store";
+import { Player } from "@game/player/types";
+import createDecimal from "@core/utils/decimal";
+import { clamp } from "@core/utils/number";
 
 export function parseNullionInput(player: Player) {
   let result = createDecimal(0);
