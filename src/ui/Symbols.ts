@@ -1,4 +1,4 @@
-const UISymbols = {
+const symbols = {
   multiply: "×",
   divide: "÷",
   plus: "+",
@@ -13,4 +13,4 @@ const UISymbols = {
   infinity: "∞",
 } as const;
 
-export default UISymbols;
+export default symbols;

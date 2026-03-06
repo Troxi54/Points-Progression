@@ -1,6 +1,6 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
 import createDecimal from "./decimal";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { MergedPlayer } from "@game/player/merged/types";
 import { isNil } from "./nil";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";

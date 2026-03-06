@@ -1,7 +1,7 @@
 import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import { MenuInfoFormulaContainer } from "./types";
 import { formatNumber, integerCommaFormat } from "@core/format/number";
-import UISymbols from "@app/UISymbols";
+import symbols from "@ui/symbols";
 import Stat from "@ui/components/base/Stat";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import Log from "@ui/components/base/Log";
@@ -20,7 +20,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("point");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -50,7 +50,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         <Min
           values={[
             <>
-              1 {UISymbols.plus} <Log base={"2 hours"}>{bestRun}</Log>
+              1 {symbols.plus} <Log base={"2 hours"}>{bestRun}</Log>
             </>,
             2,
           ]}
@@ -59,11 +59,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
 
       return (
         <>
-          If best run {UISymbols.lessThanOrEqualTo} 2 hours:
+          If best run {symbols.lessThanOrEqualTo} 2 hours:
           <br />
-          {firstPart} {UISymbols.multiply} 5
+          {firstPart} {symbols.multiply} 5
           <Pow>
-            (<Log>2 hours</Log> {UISymbols.minus} <Log>{bestRun}</Log>)
+            (<Log>2 hours</Log> {symbols.minus} <Log>{bestRun}</Log>)
           </Pow>
           <br />
           Otherwise:
@@ -80,10 +80,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const formattedMillion = integerCommaFormat(1_000_000);
       return (
         <>
-          (1 {UISymbols.plus}{" "}
+          (1 {symbols.plus}{" "}
           <Log>
             <Stat>best points</Stat>
-            {UISymbols.divide} {formattedMillion}
+            {symbols.divide} {formattedMillion}
           </Log>
           )<Pow>1.3</Pow>
         </>
@@ -97,7 +97,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const tierData = getResetLayerData("tier");
       return (
         <>
-          {formatNumber(tierData.goal)} {UISymbols.multiply}{" "}
+          {formatNumber(tierData.goal)} {symbols.multiply}{" "}
           {integerCommaFormat(1_000)}
           <Pow>
             <Stat>tier</Stat>
@@ -123,7 +123,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Tier Reset effect",
     node: () => (
       <>
-        (<Stat>tier resets</Stat> {UISymbols.plus} 1)
+        (<Stat>tier resets</Stat> {symbols.plus} 1)
         <Pow>1.2</Pow>
         <br />
         <span className="muted">
@@ -142,7 +142,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         2
         <Pow>
           <Log>
-            <Stat>ampliflux</Stat> {UISymbols.plus} 1
+            <Stat>ampliflux</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -156,7 +156,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("ampliflux");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -192,7 +192,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
           2
           <Pow>
             <Log base={formattedMillion}>
-              {points} {UISymbols.divide} {formattedGoal}
+              {points} {symbols.divide} {formattedGoal}
             </Log>
           </Pow>
         </>
@@ -217,7 +217,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         2
         <Pow>
           <Log>
-            <Stat>vermora</Stat> {UISymbols.plus} 1
+            <Stat>vermora</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -231,7 +231,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("vermyte");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -259,8 +259,8 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Amplivault level requirement",
     node: () => (
       <>
-        {formatNumber(amplivaultConfig.requirementStartsAt)}{" "}
-        {UISymbols.multiply} {integerCommaFormat(1_000)}
+        {formatNumber(amplivaultConfig.requirementStartsAt)} {symbols.multiply}{" "}
+        {integerCommaFormat(1_000)}
         <Pow>
           <Stat>lvl</Stat>
         </Pow>
@@ -300,7 +300,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.75
         <Pow>
           <Log>
-            <Stat>energy</Stat> {UISymbols.plus} 1
+            <Stat>energy</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -311,7 +311,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Core gain",
     node: () => (
       <>
-        <Stat>energy</Stat> {UISymbols.divide} {integerCommaFormat(1_000_000)}
+        <Stat>energy</Stat> {symbols.divide} {integerCommaFormat(1_000_000)}
       </>
     ),
   },
@@ -323,7 +323,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         4
         <Pow>
           <Log>
-            <Stat>cores</Stat> {UISymbols.plus} 1
+            <Stat>cores</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -336,7 +336,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("core");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -366,7 +366,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         2
         <Pow>
           <Log base={formatNumber(1e10)}>
-            <Stat>points</Stat> {UISymbols.divide} {formatNumber(1e250)}
+            <Stat>points</Stat> {symbols.divide} {formatNumber(1e250)}
           </Log>
         </Pow>
       </>
@@ -381,7 +381,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.75
         <Pow>
           <Log>
-            <Stat>dark energy</Stat> {UISymbols.plus} 1
+            <Stat>dark energy</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -392,7 +392,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Nullith Reset's Point effect",
     node: () => (
       <>
-        125 {UISymbols.multiply} <Stat>nullith resets</Stat>
+        125 {symbols.multiply} <Stat>nullith resets</Stat>
         <Pow>3</Pow>
       </>
     ),
@@ -402,7 +402,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Nullith Reset's Vermyte effect",
     node: () => (
       <>
-        (<Stat>nullith resets</Stat> {UISymbols.plus} 1)<Pow>1.2</Pow>
+        (<Stat>nullith resets</Stat> {symbols.plus} 1)<Pow>1.2</Pow>
       </>
     ),
   },
@@ -411,7 +411,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Nullith Reset's Energy effect",
     node: () => (
       <>
-        (<Stat>nullith resets</Stat> {UISymbols.plus} 1)<Pow>0.75</Pow>
+        (<Stat>nullith resets</Stat> {symbols.plus} 1)<Pow>0.75</Pow>
       </>
     ),
   },
@@ -423,8 +423,8 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         3
         <Pow>
           <Log>
-            <Stat>nullions</Stat> {UISymbols.divide} {integerCommaFormat(5e4)}{" "}
-            {UISymbols.plus} 1
+            <Stat>nullions</Stat> {symbols.divide} {integerCommaFormat(5e4)}{" "}
+            {symbols.plus} 1
           </Log>
         </Pow>
         <br />
@@ -440,11 +440,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Dertoint effect",
     node: () => (
       <>
-        1 {UISymbols.plus}{" "}
+        1 {symbols.plus}{" "}
         <Log>
-          <Stat>dertoints</Stat> {UISymbols.multiply} 100 {UISymbols.plus} 1
+          <Stat>dertoints</Stat> {symbols.multiply} 100 {symbols.plus} 1
         </Log>{" "}
-        {UISymbols.divide} 2.5
+        {symbols.divide} 2.5
       </>
     ),
   },
@@ -455,7 +455,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("dertoint");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -484,8 +484,8 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.15
         <Pow>
           <Log base={integerCommaFormat(100_000)}>
-            <Stat>points</Stat> {UISymbols.divide} {formatNumber("1e1000")}{" "}
-            {UISymbols.plus} 1
+            <Stat>points</Stat> {symbols.divide} {formatNumber("1e1000")}{" "}
+            {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -499,8 +499,8 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         3
         <Pow>
           <Log>
-            <Stat>total dertoints</Stat> {UISymbols.divide}{" "}
-            {integerCommaFormat(133456)} {UISymbols.plus} 1
+            <Stat>total dertoints</Stat> {symbols.divide}{" "}
+            {integerCommaFormat(133456)} {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -511,7 +511,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Nux gain",
     node: () => (
       <>
-        (<Stat>nullions</Stat> {UISymbols.divide}{" "}
+        (<Stat>nullions</Stat> {symbols.divide}{" "}
         {formatNumber(nuxarConfig.requirement)})<Pow>0.9</Pow>
       </>
     ),
@@ -527,7 +527,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
           <Log>
             <Stat>nux</Stat>
           </Log>{" "}
-          {UISymbols.plus} 1)
+          {symbols.plus} 1)
         </Pow>
       </>
     ),
@@ -540,8 +540,8 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         3.5
         <Pow>
           <Log>
-            (<Stat>points</Stat> {UISymbols.plus} <Stat>point gain</Stat>){" "}
-            {UISymbols.divide} {formatNumber(cappergyConfig.startEarningAt)}
+            (<Stat>points</Stat> {symbols.plus} <Stat>point gain</Stat>){" "}
+            {symbols.divide} {formatNumber(cappergyConfig.startEarningAt)}
           </Log>
         </Pow>
       </>
@@ -555,9 +555,9 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
 
       return (
         <>
-          1 {UISymbols.divide} ((1 {UISymbols.plus} <Log>{n}</Log>)
-          <Pow>0.055</Pow> {UISymbols.multiply} (1 {UISymbols.plus}{" "}
-          <Log base={formatNumber(1e10)}>{n}</Log> {UISymbols.divide} 35))
+          1 {symbols.divide} ((1 {symbols.plus} <Log>{n}</Log>)<Pow>0.055</Pow>{" "}
+          {symbols.multiply} (1 {symbols.plus}{" "}
+          <Log base={formatNumber(1e10)}>{n}</Log> {symbols.divide} 35))
         </>
       );
     },
@@ -573,7 +573,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
           2
           <Pow>
             <Log base={100}>
-              <Stat>dertoints</Stat> {UISymbols.divide} {formattedGoal}
+              <Stat>dertoints</Stat> {symbols.divide} {formattedGoal}
             </Log>
           </Pow>
         </>
@@ -588,13 +588,13 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         <Min
           values={[
             <>
-              (1 {UISymbols.minus} 1 {UISymbols.divide} 2
+              (1 {symbols.minus} 1 {symbols.divide} 2
               <Pow>
                 <Log base={formatNumber("1e200")}>
-                  <Stat>score {UISymbols.plus} 1</Stat>
+                  <Stat>score {symbols.plus} 1</Stat>
                 </Log>
               </Pow>
-              ) {UISymbols.multiply} 100
+              ) {symbols.multiply} 100
             </>,
             0.1,
           ]}
@@ -634,7 +634,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         2
         <Pow>
           <Log base={formatNumber("1e100")}>
-            <Stat>points</Stat> {UISymbols.divide} {formatNumber("1e1200")}
+            <Stat>points</Stat> {symbols.divide} {formatNumber("1e1200")}
           </Log>
         </Pow>
       </>
@@ -645,8 +645,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Best run Dertoint effect",
     node: () => (
       <>
-        <Stat>best run effect</Stat> {UISymbols.divide}{" "}
-        {integerCommaFormat(1000)}
+        <Stat>best run effect</Stat> {symbols.divide} {integerCommaFormat(1000)}
       </>
     ),
   },
@@ -667,7 +666,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       <>
         1.7
         <Pow>
-          (<Stat>tier</Stat> {UISymbols.minus} 350)
+          (<Stat>tier</Stat> {symbols.minus} 350)
         </Pow>
       </>
     ),
@@ -677,7 +676,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Tier Reset's Dertoint effect",
     node: () => (
       <>
-        (<Stat>tier resets</Stat> {UISymbols.plus} 1)
+        (<Stat>tier resets</Stat> {symbols.plus} 1)
         <Pow>1.05</Pow>
         <br />
         <span className="muted">
@@ -695,7 +694,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.6
         <Pow>
           <Log base={formatNumber("1e10")}>
-            <Stat>ampliflux</Stat> {UISymbols.divide} {formatNumber("1e1075")}
+            <Stat>ampliflux</Stat> {symbols.divide} {formatNumber("1e1075")}
           </Log>
         </Pow>
       </>
@@ -706,7 +705,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Amplivoid effect",
     node: () => (
       <>
-        (<Stat>amplivoid</Stat> {UISymbols.plus} 1)<Pow>1.75</Pow>
+        (<Stat>amplivoid</Stat> {symbols.plus} 1)<Pow>1.75</Pow>
       </>
     ),
   },
@@ -717,7 +716,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("amplivoid");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {UISymbols.multiply}{" "}
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -746,7 +745,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.125
         <Pow>
           <Log>
-            <Stat>ampliflux</Stat> {UISymbols.plus} 1
+            <Stat>ampliflux</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -770,7 +769,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.075
         <Pow>
           <Log>
-            <Stat>vermora</Stat> {UISymbols.plus} 1
+            <Stat>vermora</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>
@@ -784,7 +783,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         1.075
         <Pow>
           <Log>
-            <Stat>vermytes</Stat> {UISymbols.plus} 1
+            <Stat>vermytes</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>

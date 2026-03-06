@@ -1,4 +1,4 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { copyObject } from "@core/utils/object";
 import { mergePlayer } from "@game/player/merged/utils";
 import { createGameLoopPartState } from "../utils/create";

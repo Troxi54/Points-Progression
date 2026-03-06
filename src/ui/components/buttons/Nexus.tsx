@@ -5,7 +5,7 @@ import nexusMilestones from "@game/features/nexus/data";
 import { buyNexus } from "@game/features/nexus/utils/buy";
 import { integerCommaFormat } from "@core/format/number";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import cn from "@core/utils/tailwind";
 

@@ -1,4 +1,4 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import menuInfoFormulaSelector from "./selector";
 import { Fragment, ReactNode } from "react";
 import menuInfoFormulaContainer from "./data";

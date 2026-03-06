@@ -5,7 +5,7 @@ import discordIcon from "@ui/assets/discord.svg";
 import githubIcon from "@ui/assets/github.svg";
 import patreonIcon from "@ui/assets/patreon.svg";
 import LinkButton from "@ui/components/base/LinkButton";
-import { gameVersionToString } from "@core/config/utils";
+import { gameVersionToString } from "@core/utils/version";
 import VerticalContainer from "@ui/components/base/VerticalContainer";
 import MenuInfoMainPageGameProgress from "./endgame";
 

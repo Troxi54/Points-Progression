@@ -1,5 +1,5 @@
 import Decimal, { DecimalSource } from "break_eternity.js";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import {
   FormatNumberType,
   FormatNumberOptions,
@@ -13,7 +13,7 @@ import createDecimal, {
   decimalIsGreaterByOoM,
   isDecimal,
 } from "@core/utils/decimal";
-import UISymbols from "@app/UISymbols";
+import symbols from "@ui/symbols";
 import { isNil } from "@core/utils/nil";
 import { arrayLastItem } from "@core/utils/array";
 import { mergeObjects } from "@core/utils/object";
@@ -98,7 +98,7 @@ function handleSpecialNumbers(value: Decimal): string | null {
     return "0";
   }
   if (!value.isFinite()) {
-    return UISymbols.infinity;
+    return symbols.infinity;
   }
   return null;
 }
@@ -142,7 +142,7 @@ export function formatNumber(
 
   const isNegative = value.lessThan(0);
   const abs = value.abs();
-  const prefix = isNegative ? UISymbols.minus : "";
+  const prefix = isNegative ? symbols.minus : "";
 
   if (
     (player.exponentialNotation &&
@@ -227,7 +227,7 @@ export function integerCommaFormat(num: DecimalSource): string {
   const NORMAL_FORMAT_AT = 1e12;
 
   const isNegative = num.lessThan(0);
-  let result = isNegative ? UISymbols.minus : "";
+  let result = isNegative ? symbols.minus : "";
 
   const absolute = num.abs();
   if (absolute.lessThan(NORMAL_FORMAT_AT)) result += addCommas(absolute);

@@ -1,7 +1,7 @@
 import { ChildrenProps } from "@core/types/react";
 import { DimensionId } from "@game/dimensions/types";
 import { isDimension } from "@game/dimensions/utils/compare";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { ComponentType } from "react";
 
 interface Props extends ChildrenProps {

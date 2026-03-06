@@ -1,4 +1,4 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { getNexusCost } from "./get";
 
 export function buyNexus() {

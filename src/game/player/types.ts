@@ -6,7 +6,7 @@ import { UpgradeContainerId } from "@game/upgrades/types";
 import { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
 import { CachedPlayer } from "./cached/types";
 import { ResetLayerId } from "@game/resetLayers/types";
-import { GameVersion } from "@core/config/types";
+import { GameVersion } from "@core/types/version";
 import { DimensionId } from "@game/dimensions/types";
 import { MergedPlayer, PartialMergedPlayer } from "./merged/types";
 

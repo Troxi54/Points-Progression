@@ -35,7 +35,7 @@ const nullithUpgrades = createUpgradeDataContainer({
     {
       id: "nullith_6",
       description:
-        "Unlocks Nuxar and generates Cores equal to 100% of the Cores you could gain",
+        "Unlocks Nuxar, generates Cores equal to 100% of the Cores you could gain, and removes Core button",
       cost: "1e1150",
     },
     {

@@ -1,5 +1,5 @@
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import nuxarConfig from "./config";
 import Decimal from "break_eternity.js";
 

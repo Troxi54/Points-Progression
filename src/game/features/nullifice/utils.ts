@@ -1,5 +1,5 @@
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { Player } from "@game/player/types";
 import createDecimal from "@core/utils/decimal";
 import { clamp } from "@core/utils/number";

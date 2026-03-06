@@ -4,7 +4,7 @@ import { formatLeftTime, formatTime } from "@core/format/time";
 import { useMenu } from "../provider";
 import { useEffect } from "react";
 import HorizontalContainer from "@ui/components/base/HorizontalContainer";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import offlineConfig from "@game/offline/config";
 import { calculateTimeForRequirement } from "@core/utils/time";
 import { skipOfflineProgress } from "@game/offline/utils/trigger";

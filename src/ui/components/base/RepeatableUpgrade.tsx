@@ -3,7 +3,7 @@ import { formatCurrencyName } from "@game/currencies/utils/format";
 import { integerFormat } from "@core/format/number";
 import { formatWithPlural } from "@core/format/plural";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { CachedRepeatableUpgrade } from "@game/player/cached/types";
 import {
   CachedRepeatableUpgradeSelector,

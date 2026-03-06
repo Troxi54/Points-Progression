@@ -9,6 +9,7 @@ import Decimal from "break_eternity.js";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
 import { getDefaultCachedCurrency } from "@game/player/cached/default";
 import { getDefaultCachedCurrencyEffect } from "@game/player/cached/default";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
 
 export function calculateCurrencyGain(
   mergedPlayer: MergedPlayer,
@@ -19,6 +20,7 @@ export function calculateCurrencyGain(
   if (!gainProperty) return createDecimal(0);
 
   const data = getCurrencyData(currencyId);
+  const { dimensionId } = data;
 
   const isPropertyFunction = isFunction(gainProperty);
   const isPropertyObject = !isPropertyFunction;
@@ -26,17 +28,12 @@ export function calculateCurrencyGain(
   const gainFormula = isPropertyFunction ? gainProperty : gainProperty.gain;
   const baseGain = gainFormula(mergedPlayer);
 
-  const beforeSoftcaps = mainFormulas.boostBeforeSoftcaps(
+  const softcappedGain = mainFormulas.getMultiplier(
     mergedPlayer,
     currencyId,
     baseGain,
-    data.dimensionId,
+    dimensionId,
     data.layer,
-  );
-  const softcappedGain = mainFormulas.getCurrencySoftcapped(
-    mergedPlayer,
-    currencyId,
-    beforeSoftcaps,
   );
 
   let afterSoftcaps = softcappedGain;
@@ -45,10 +42,11 @@ export function calculateCurrencyGain(
   }
 
   if (!isPassive) return afterSoftcaps;
+  if (!shouldDimensionWork(mergedPlayer, dimensionId)) return createDecimal(0);
 
   let passiveGain = afterSoftcaps;
   if (isPropertyObject && gainProperty.passiveGain) {
-    passiveGain = gainProperty.passiveGain(mergedPlayer, softcappedGain);
+    passiveGain = gainProperty.passiveGain(mergedPlayer, afterSoftcaps);
   }
 
   return passiveGain;
@@ -68,6 +66,10 @@ export function calculateCurrencyPassiveGainFromGain(
 ) {
   const gainProperty = currencyGainFormulas[currencyId];
   if (!gainProperty) return getDefaultCachedCurrency().passiveGain;
+
+  const data = getCurrencyData(currencyId);
+  if (!shouldDimensionWork(mergedPlayer, data.dimensionId))
+    return createDecimal(0);
 
   if (isFunction(gainProperty) || !gainProperty.passiveGain) return gain;
 

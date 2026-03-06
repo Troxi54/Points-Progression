@@ -1,6 +1,6 @@
 import { Player } from "@game/player/types";
 import playerPersistenceConfig from "./config";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { MergedPlayer } from "@game/player/merged/types";
 import { getCurrentTime } from "@core/utils/time";
 import { serializePlayer } from "./compress";

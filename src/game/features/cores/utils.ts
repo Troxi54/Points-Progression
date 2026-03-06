@@ -1,4 +1,4 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import coreConfig from "./config";
 import createDecimal from "@core/utils/decimal";
 import { hasUpgradeById } from "@game/upgrades/utils/has";

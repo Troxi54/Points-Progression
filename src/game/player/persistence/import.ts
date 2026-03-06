@@ -1,6 +1,6 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { loadPlayer } from "./load";
-import resetGame from "@app/resetGame";
+import resetGame from "@main/resetGame";
 
 export function importPlayer(str?: string) {
   const loaded = loadPlayer(str);

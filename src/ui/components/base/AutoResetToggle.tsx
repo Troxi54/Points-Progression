@@ -2,7 +2,7 @@ import { ResetLayerId } from "@game/resetLayers/types";
 import StatusText from "./StatusText";
 import { applyToggledResetLayerAuto } from "@game/resetLayers/utils/apply";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
 import { mergeObjects } from "@core/utils/object";

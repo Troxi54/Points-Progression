@@ -1,5 +1,5 @@
 import formulas from "@game/formulas/data";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { getDefaultPlayer } from "@game/player/default";
 import { MergedPlayer } from "@game/player/merged/types";
 import { mergePlayer } from "@game/player/merged/utils";

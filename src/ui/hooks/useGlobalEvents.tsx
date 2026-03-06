@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { savePlayer } from "@game/player/persistence/save";
 import { triggerOfflineProgress } from "@game/offline/utils/trigger";
 

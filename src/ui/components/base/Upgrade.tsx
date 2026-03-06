@@ -2,7 +2,7 @@ import { formatCurrencyName } from "@game/currencies/utils/format";
 import { formatNumber } from "@core/format/number";
 import { formatWithPlural } from "@core/format/plural";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import { UpgradeData, UpgradeDataContainer } from "@game/upgrades/types";
 import { applyBoughtUpgrade } from "@game/upgrades/utils/apply";

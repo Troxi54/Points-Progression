@@ -1,5 +1,5 @@
 import formulas from "@game/formulas/data";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { MergedPlayer } from "@game/player/merged/types";
 import { triggerResetLayer } from "@game/resetLayers/utils/apply";
 import { hasUpgradeById } from "@game/upgrades/utils/has";

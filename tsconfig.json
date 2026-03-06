@@ -20,7 +20,7 @@
       "@game/*": ["src/game/*"],
       "@core/*": ["src/core/*"],
       "@ui/*": ["src/ui/*"],
-      "@app/*": ["src/app/*"],
+      "@main/*": ["src/main/*"],
       "@/*": ["src/*"]
     }
   },

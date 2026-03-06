@@ -1,6 +1,6 @@
 import { DimensionId } from "@game/dimensions/types";
 import { isDimension } from "@game/dimensions/utils/compare";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";

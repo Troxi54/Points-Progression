@@ -6,7 +6,7 @@ import {
   handleDecimalInputOnChange,
 } from "@core/utils/input";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { triggerNullifice } from "@game/features/nullifice/utils";

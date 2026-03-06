@@ -1,4 +1,4 @@
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { serializePlayer } from "./compress";
 
 export function exportPlayer(): string {

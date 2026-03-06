@@ -1,4 +1,4 @@
-import { usePlayerStore } from "@game/player/store/store";
+import { usePlayerStore } from "@game/player/store";
 import {
   PlayerSetterName,
   PlayerStoreSelectorGeneric,

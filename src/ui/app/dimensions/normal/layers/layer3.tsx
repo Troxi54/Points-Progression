@@ -32,6 +32,7 @@ function NormalDimensionLayer3() {
         const upgrades = hasUpgrades(state, {
           tier: [4],
           vermyros: [1, 4, 5, 8, 10],
+          nullith: [6],
         } as const);
 
         return mergeObjects(resetLayers, upgrades);
@@ -64,7 +65,7 @@ function NormalDimensionLayer3() {
         <>
           <EnergyReactors />
           <Energy />
-          <CoreButton />
+          {!state.nullith_6 && <CoreButton />}
           {state.everMadeCoreReset && (
             <>
               <Cores />

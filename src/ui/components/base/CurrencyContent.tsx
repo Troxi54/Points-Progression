@@ -4,7 +4,7 @@ import { formatCurrencyNameEmptyless } from "@game/currencies/utils/format";
 import { getCurrencyData } from "@game/currencies/utils/get";
 import { parseNumberFormat } from "@core/format/number";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 import { BooleanGetter, ValueGetter } from "@game/player/types";
 import { parseValueGetter } from "@game/player/utils";

@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { formatWithPlural } from "./plural";
 import { CurrencyId } from "@game/currencies/types";
 import { formatCurrencyName } from "@game/currencies/utils/format";
-import UISymbols from "@app/UISymbols";
+import symbols from "@ui/symbols";
 import { formatNumber } from "./number";
 import Pow from "@ui/components/base/Pow";
 import pluralize from "pluralize";
@@ -18,7 +18,7 @@ export function formatEffectSingular(
   const decimalEffect = createDecimal(effect);
 
   if (mode === "multiply") {
-    return UISymbols.multiply + formatWithPlural(decimalEffect, affects);
+    return symbols.multiply + formatWithPlural(decimalEffect, affects);
   }
 
   return (

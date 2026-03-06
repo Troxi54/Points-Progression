@@ -1,6 +1,6 @@
 import { getCurrentTime } from "@core/utils/time";
 import offlineConfig from "../config";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { calculateTicksForOfflineTime } from "./calculate";
 import { safeNumber } from "@core/utils/number";
 

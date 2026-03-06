@@ -3,7 +3,7 @@ import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { formatWithPlural } from "@core/format/plural";
 import { formatLeftTime } from "@core/format/time";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import { getPlayerState } from "@game/player/store/store";
+import { getPlayerState } from "@game/player/store";
 import { ValueGetter } from "@game/player/types";
 import { parseValueGetter } from "@game/player/utils";
 import { ResetLayerId } from "@game/resetLayers/types";
