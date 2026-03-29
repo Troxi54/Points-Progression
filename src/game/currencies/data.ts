@@ -60,18 +60,42 @@ const currencyData = createCurrencyDataContainer({
   energyReactors: {
     layer: 3,
     name: "Energy Reactor",
-    affects: "energy",
+    affects: {
+      energy: {},
+      cores: {
+        works: ({ player }) => hasNexusLevel(player, 11),
+      },
+    },
     passiveGainWorks: ({ player }) => hasUpgradeById(player, "vermyros_8"),
   },
   energy: {
     layer: 3,
-    affects: "points",
+    affects: {
+      points: {},
+      xagoraDertoints: {
+        works: ({ player }) => hasNexusLevel(player, 12),
+      },
+      xagoraPoints: {
+        works: ({ player }) => hasNexusLevel(player, 12),
+      },
+      xagoraNullithResets: {
+        works: ({ player }) => hasNexusLevel(player, 12),
+      },
+      xagoraNux: {
+        works: ({ player }) => hasNexusLevel(player, 12),
+      },
+    },
     passiveGainWorks: ({ player }) => hasUpgradeById(player, "vermyros_8"),
   },
   cores: {
     layer: 3,
     name: "Core",
-    affects: "energyReactors",
+    affects: {
+      energyReactors: {},
+      score: {
+        works: ({ player }) => hasNexusLevel(player, 13),
+      },
+    },
     passiveGainWorks: ({ player }) =>
       hasOneOfUpgrades(player, { nullith: [3, 4, 5, 6] }),
   },
@@ -100,8 +124,19 @@ const currencyData = createCurrencyDataContainer({
     dimensionId: "sliph",
     layer: 1,
     name: "Dertoint",
-    affects: "darkEnergy",
-    effectMode: "pow",
+    affects: {
+      darkEnergy: {
+        mode: "pow",
+      },
+      xagoraDertoints: {
+        works: ({ player }) => everPerformed(player, "xagyros"),
+      },
+      xagoraPoints: { works: ({ player }) => everPerformed(player, "xagyros") },
+      xagoraNullithResets: {
+        works: ({ player }) => everPerformed(player, "xagyros"),
+      },
+      xagoraNux: { works: ({ player }) => everPerformed(player, "xagyros") },
+    },
     passiveGainWorks: true,
   },
   mallirtTotalDertoints: {
@@ -140,6 +175,47 @@ const currencyData = createCurrencyDataContainer({
     layer: 2,
     affects: "ampliflux",
     passiveGainWorks: ({ player }) => hasUpgradeById(player, "level_4"),
+  },
+  xagytes: {
+    dimensionId: "sliph",
+    layer: 3,
+    name: "Xagyte",
+    affects: {
+      xagoraDertoints: {},
+      xagoraPoints: {},
+      xagoraNullithResets: {},
+      xagoraNux: {},
+    },
+  },
+  xagoraDertoints: {
+    dimensionId: "sliph",
+    layer: 3,
+    name: "Xagora",
+    affects: "dertoints",
+    passiveGainWorks: ({ player }) =>
+      player.xagyrosStates.includes("dertoints"),
+  },
+  xagoraPoints: {
+    dimensionId: "sliph",
+    layer: 3,
+    name: "Xagora",
+    affects: "points",
+    passiveGainWorks: ({ player }) => player.xagyrosStates.includes("points"),
+  },
+  xagoraNullithResets: {
+    dimensionId: "sliph",
+    layer: 3,
+    name: "Xagora",
+    affects: "madeNullithResets",
+    passiveGainWorks: ({ player }) =>
+      player.xagyrosStates.includes("nullithResets"),
+  },
+  xagoraNux: {
+    dimensionId: "sliph",
+    layer: 3,
+    name: "Xagora",
+    affects: "nux",
+    passiveGainWorks: ({ player }) => player.xagyrosStates.includes("nux"),
   },
 });
 

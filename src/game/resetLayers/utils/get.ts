@@ -1,4 +1,8 @@
-import { ResetLayerPlayerData, PlayerLike } from "@game/player/types";
+import {
+  ResetLayerPlayerData,
+  PlayerLike,
+  PartialResetLayerPlayerData,
+} from "@game/player/types";
 import { CachedPlayerLike } from "@game/player/cached/types";
 import {
   parseCachedPlayerLike,
@@ -29,7 +33,7 @@ export function getResetLayerDimensionContainer(dimensionId: DimensionId) {
 export function getResetLayerPlayerData(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
-): ResetLayerPlayerData {
+): PartialResetLayerPlayerData {
   const player = parsePlayerLike(playerLike);
   return player.resetLayers?.[resetLayerId] ?? getDefaultResetLayerPlayerData();
 }
@@ -44,6 +48,26 @@ export function getResetLayerCachedPlayerData(
   );
 }
 
+export function getResetLayerPropsFromPlayerData<
+  T extends (keyof ResetLayerPlayerData)[],
+>(
+  data: PartialResetLayerPlayerData | undefined,
+  props: T,
+): {
+  [K in T[number]]: ResetLayerPlayerData[K];
+} {
+  const defaultData = getDefaultResetLayerPlayerData();
+
+  return objectFromEntries(
+    props.map((property) => {
+      const propertyName = property;
+
+      const value = data?.[propertyName] ?? defaultData[propertyName];
+      return [propertyName, value];
+    }),
+  ) as ReturnType<typeof getResetLayerPropsFromPlayerData>;
+}
+
 export function getResetLayerPlayerDataProps<
   T extends (keyof ResetLayerPlayerData)[],
 >(
@@ -54,18 +78,19 @@ export function getResetLayerPlayerDataProps<
   [K in T[number]]: ResetLayerPlayerData[K];
 } {
   const player = parsePlayerLike(playerLike);
-  const defaultData = getDefaultResetLayerPlayerData();
+  return getResetLayerPropsFromPlayerData(
+    player.resetLayers?.[resetLayerId],
+    props,
+  );
+}
 
-  return objectFromEntries(
-    props.map((property) => {
-      const propertyName = property;
-
-      const value =
-        player.resetLayers?.[resetLayerId]?.[propertyName] ??
-        defaultData[propertyName];
-      return [propertyName, value];
-    }),
-  ) as { [K in T[number]]: ResetLayerPlayerData[K] };
+export function getResetLayerPropFromPlayerData<
+  T extends keyof ResetLayerPlayerData,
+>(
+  data: PartialResetLayerPlayerData | undefined,
+  prop: T,
+): ResetLayerPlayerData[T] {
+  return data?.[prop] ?? getDefaultResetLayerPlayerData()[prop];
 }
 
 export function getResetLayerPlayerDataProp<
@@ -76,19 +101,24 @@ export function getResetLayerPlayerDataProp<
   prop: T,
 ): ResetLayerPlayerData[T] {
   const player = parsePlayerLike(playerLike);
-  return (
-    player.resetLayers?.[resetLayerId]?.[prop] ??
-    getDefaultResetLayerPlayerData()[prop]
+  return getResetLayerPropFromPlayerData(
+    player.resetLayers?.[resetLayerId],
+    prop,
   );
 }
 
 export function everPerformed(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
-): boolean {
-  return getResetLayerPlayerDataProps(playerLike, resetLayerId, [
-    "everPerformed",
-  ]).everPerformed;
+): ResetLayerPlayerData["everPerformed"] {
+  return getResetLayerPlayerDataProp(playerLike, resetLayerId, "everPerformed");
+}
+
+export function isFirstReset(
+  playerLike: PlayerLike,
+  resetLayerId: ResetLayerId,
+): ResetLayerPlayerData["isFirstReset"] {
+  return getResetLayerPlayerDataProp(playerLike, resetLayerId, "isFirstReset");
 }
 
 export function getHighestResetDuration(mergedPlayer: MergedPlayer): number {
@@ -156,9 +186,12 @@ export function shouldResetLayerProgressBarLock(
     const playerData = player.resetLayers[id];
     if (!playerData) continue;
 
-    if (
-      playerData.resetsPerSecond >= resetLayerConfig.progressBarsStartLockingAt
-    ) {
+    const resetsPerSecond = getResetLayerPropFromPlayerData(
+      playerData,
+      "resetsPerSecond",
+    );
+
+    if (resetsPerSecond >= resetLayerConfig.progressBarsStartLockingAt) {
       return true;
     }
   }

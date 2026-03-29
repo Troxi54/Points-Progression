@@ -6,6 +6,9 @@ import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector"
 import { toggleAmplivault } from "@game/features/amplivault/utils";
 import cn from "@core/utils/tailwind";
 import { formatEffectOnCurrency } from "@core/format/effect";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
+import { mergeObjects } from "@core/utils/object";
+import NexusSign from "../base/NexusSign";
 
 function Amplivault() {
   const state = usePlayerFields(
@@ -16,11 +19,23 @@ function Amplivault() {
         "amplivaultBroken",
         "points",
       ],
-      cachedPlayer: ["amplivaultRequirement", "amplivaultEffect"],
+      cachedPlayer: [
+        "amplivaultRequirement",
+        "amplivaultEffect",
+        "amplivaultAmplivoidEffect",
+      ],
     },
     {
-      additionalSelectors: (state) =>
-        getCachedCurrencyPropSelection(state, "points", "gain"),
+      additionalSelectors: (state) => {
+        const pointGain = getCachedCurrencyPropSelection(
+          state,
+          "points",
+          "gain",
+        );
+        const enoughNexusLevel = hasNexusLevelSelection(state, 10, "10");
+
+        return mergeObjects(pointGain, enoughNexusLevel);
+      },
       useFormat: true,
     },
   );
@@ -33,6 +48,8 @@ function Amplivault() {
     state.cachedCurrency_points_gain,
     state.amplivaultRequirement,
   );
+
+  const levelGreaterZero = state.amplivaultLevel.greaterThan(0);
 
   return (
     <button
@@ -80,52 +97,89 @@ function Amplivault() {
           <div className={cn(animationStateClassname, "rotate-90")}></div>
         </div>
       </div>
-      <p
-        className={
-          state.amplivaultBroken ? "broken-amplivault" : "text-amplivault-info"
-        }
-      >
-        {state.amplivaultBroken ? (
-          <>
-            Broken Amplivault -{" "}
-            <span className="tracking-wider font-normal">
-              You need to reach the requirement to increase your Amplivault
-              level. Amplivault level boosts Ampliflux.
-            </span>
-          </>
-        ) : (
-          <>
-            Amplivault -{" "}
-            <span className={"text-amplivault-description"}>
-              Entering Amplivault triggers a Vermyros reset. While inside, you
-              can't buy Point Upgrade, and you need to reach the requirement to
-              increase your Amplivault Level. Amplivault Level boosts Ampliflux.
-            </span>
-          </>
-        )}
-        <br />
-        <br />
-        Amplivault level: {integerFormat(state.amplivaultLevel)}, for the next
-        one: {formatNumber(state.amplivaultRequirement)}
-        {(state.enteredAmplivault || state.amplivaultBroken) && (
-          <>
-            {" "}
-            -{" "}
-            <span className="text-amplivault-description">
-              {formatLeftTime(leftTime)}
-            </span>
-          </>
-        )}
-        {state.amplivaultLevel.greaterThan(0) && (
-          <>
-            <br />
-            <span className="text-amplivault-description">
+
+      {state.amplivaultBroken ? (
+        <p className="broken-amplivault">
+          Broken Amplivault -{" "}
+          <span className="tracking-wider font-normal">
+            You need to reach the requirement to increase your Amplivault level.
+            Amplivault level boosts Ampliflux.
+          </span>
+          <br />
+          <br />
+          Amplivault level: {integerFormat(state.amplivaultLevel)}, for the next
+          one: {formatNumber(state.amplivaultRequirement)}
+          {(state.enteredAmplivault || state.amplivaultBroken) && (
+            <> - {formatLeftTime(leftTime)}</>
+          )}
+          {levelGreaterZero && (
+            <>
+              <br />
               Effect:{" "}
               {formatEffectOnCurrency(state.amplivaultEffect, "ampliflux")}
-            </span>
-          </>
-        )}
-      </p>
+              {state.hasNexusLevel10 && (
+                <>
+                  ,{" "}
+                  {formatEffectOnCurrency(
+                    state.amplivaultAmplivoidEffect,
+                    "amplivoid",
+                  )}{" "}
+                  <NexusSign
+                    className="cancel-text-gradient font-bold"
+                    level={10}
+                  />
+                </>
+              )}
+            </>
+          )}
+        </p>
+      ) : (
+        <p className="text-amplivault-info">
+          Amplivault -{" "}
+          <span className={"text-amplivault-description"}>
+            Entering Amplivault triggers a Vermyros reset. While inside, you
+            can't buy Point Upgrade, and you need to reach the requirement to
+            increase your Amplivault Level. Amplivault Level boosts Ampliflux.
+          </span>
+          <br />
+          <br />
+          Amplivault level: {integerFormat(state.amplivaultLevel)}, for the next
+          one: {formatNumber(state.amplivaultRequirement)}
+          {(state.enteredAmplivault || state.amplivaultBroken) && (
+            <>
+              {" "}
+              -{" "}
+              <span className="text-amplivault-description">
+                {formatLeftTime(leftTime)}
+              </span>
+            </>
+          )}
+          {levelGreaterZero && (
+            <>
+              <br />
+              <span className="text-amplivault-description">
+                Effect:{" "}
+                {formatEffectOnCurrency(state.amplivaultEffect, "ampliflux")}
+                {state.hasNexusLevel10 && (
+                  <>
+                    ,{" "}
+                    {formatEffectOnCurrency(
+                      state.amplivaultAmplivoidEffect,
+                      "amplivoid",
+                    )}
+                  </>
+                )}
+              </span>
+              {state.hasNexusLevel10 && (
+                <>
+                  {" "}
+                  <NexusSign level={10} />
+                </>
+              )}
+            </>
+          )}
+        </p>
+      )}
     </button>
   );
 }

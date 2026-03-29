@@ -348,12 +348,20 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) => player.everMadeCoreReset,
     name: "Core Upgrade effect",
-    node: () => (
+    node: ({ player }) => (
       <>
         1.1
         <Pow>
           <Stat>lvl</Stat>
         </Pow>
+        {player.bestNexusLevel.greaterThanOrEqualTo(14) && (
+          <>
+            <br />
+            <span className="muted">
+              lvl softcapped after 40 (multiplier 0.0002)
+            </span>
+          </>
+        )}
       </>
     ),
   },
@@ -784,6 +792,176 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         <Pow>
           <Log>
             <Stat>vermytes</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Xagyte gain",
+    node: () => {
+      const { goal } = getResetLayerData("xagyros");
+
+      return (
+        <>
+          1.1
+          <Pow>
+            <Log>
+              <Stat>dertoints</Stat> {symbols.divide} {formatNumber(goal)}
+            </Log>
+          </Pow>
+        </>
+      );
+    },
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Xagyte effect",
+    node: () => (
+      <>
+        500
+        <Pow>
+          <Log base={2}>
+            <Stat>xagytes</Stat>
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Dertoint Xagora effect",
+    node: () => {
+      const { goal } = getResetLayerData("xagyros");
+
+      return (
+        <>
+          2
+          <Pow>
+            <Log>
+              <Stat>dertoints</Stat> {symbols.divide} {formatNumber(goal)}
+            </Log>
+          </Pow>
+        </>
+      );
+    },
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Not chosen Xagyros state effect",
+    node: () => (
+      <>
+        <Stat>effect</Stat>
+        <Pow>0.5</Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Dertoint Xagora's effect",
+    node: () => (
+      <>
+        4
+        <Pow>
+          <Log>
+            <Stat>xagora</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Point Xagora's effect",
+    node: () => (
+      <>
+        {formatNumber("1.71e9")}
+        <Pow>
+          <Log>
+            <Stat>xagora</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Nullith Reset Xagora's effect",
+    node: () => (
+      <>
+        1.05
+        <Pow>
+          <Log>
+            <Stat>xagora</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => everPerformed(player, "xagyros"),
+    name: "Nux Xagora's effect",
+    node: () => (
+      <>
+        1.03
+        <Pow>
+          <Log>
+            <Stat>xagora</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(10),
+    name: "Amplivault Amplivoid effect",
+    node: () => (
+      <>
+        1.075
+        <Pow>
+          <Stat>lvl</Stat>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(11),
+    name: "Energy Reactor's Core effect",
+    node: () => (
+      <>
+        1.3
+        <Pow>
+          <Log>
+            <Stat>energy reactors</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(12),
+    name: "Energy Xagora effect",
+    node: () => (
+      <>
+        {formatNumber(1e4)}
+        <Pow>
+          <Log base={formatNumber("1e10000")}>
+            <Stat>energy</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.bestNexusLevel.greaterThanOrEqualTo(13),
+    name: "Core Score effect",
+    node: () => (
+      <>
+        50
+        <Pow>
+          <Log base={formatNumber("1e10000")}>
+            <Stat>cores</Stat> {symbols.plus} 1
           </Log>
         </Pow>
       </>

@@ -32,6 +32,7 @@ const menuInfoFormulaSelector = () => {
           "nullith",
           "mallirt",
           "level",
+          "xagyros",
         ]);
 
         return mergeObjects(upgrades, performs);

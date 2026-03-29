@@ -1,6 +1,5 @@
 import createDecimal from "@core/utils/decimal";
 import { FormulaContainer } from "./types";
-import resetLayerConfig from "@game/resetLayers/config";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import Decimal, { DecimalSource } from "break_eternity.js";
 import amplivaultConfig from "@game/features/amplivault/config";
@@ -8,6 +7,8 @@ import { calculateBulk } from "@core/utils/level";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import gameConfig from "@core/config/data";
+import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
+import tierResetLayerConfig from "@game/resetLayers/data/layers/tier/config";
 
 const formulas = {
   bestPoints({ player }) {
@@ -17,7 +18,7 @@ const formulas = {
     return player.bestPoints.log(gameConfig.endgameAt).max(0);
   },
   firstResetLayerRunLimit() {
-    return createDecimal(resetLayerConfig.firstResetLayerBestRunLimit);
+    return createDecimal(resetResetLayerConfig.bestRunLimit);
   },
   firstResetLayerRun(
     { player },
@@ -40,10 +41,7 @@ const formulas = {
     const newBestRun =
       bestRun && !override ? bestRun.min(runDecimal) : runDecimal;
 
-    return newBestRun.clamp(
-      lowestLimit,
-      resetLayerConfig.firstResetLayerWorstRunLimit,
-    );
+    return newBestRun.clamp(lowestLimit, resetResetLayerConfig.worstRunLimit);
   },
   bestPointsOfRun({ player }) {
     const value = everPerformed(player, "reset")
@@ -55,7 +53,7 @@ const formulas = {
   tierRequirement({ player }) {
     const firstTierAt = getResetLayerData("tier").goal;
     return firstTierAt.multiply(
-      Decimal.pow(resetLayerConfig.tierRequirementScaling, player.tier),
+      Decimal.pow(tierResetLayerConfig.requirementScaling, player.tier),
     );
   },
   tierBulk(mergedPlayer) {
@@ -67,15 +65,14 @@ const formulas = {
     return calculateBulk(
       points,
       requirement,
-      resetLayerConfig.tierRequirementScaling,
+      tierResetLayerConfig.requirementScaling,
     );
   },
-  bestVermytes(mergedPlayer) {
-    const { player } = mergedPlayer;
-
-    const vermytesGain = calculateCurrencyGain(mergedPlayer, "vermytes");
-
-    return player.bestVermytes.max(vermytesGain);
+  bestVermytes(
+    mergedPlayer,
+    gain: Decimal = calculateCurrencyGain(mergedPlayer, "vermytes"),
+  ) {
+    return mergedPlayer.player.bestVermytes.max(gain);
   },
   amplivaultRequirement({ player }) {
     return amplivaultConfig.requirementStartsAt.multiply(
@@ -94,8 +91,11 @@ const formulas = {
       amplivaultConfig.requirementScaling,
     );
   },
-  score({ player: { score } }, gain: Decimal) {
-    return score.max(gain);
+  score(
+    mergedPlayer,
+    gain: Decimal = calculateCurrencyGain(mergedPlayer, "score"),
+  ) {
+    return mergedPlayer.player.score.max(gain);
   },
   level({ player: { XP } }) {
     return calculateBulk(XP, 1, 2);
@@ -106,7 +106,18 @@ const formulas = {
   },
   XPForThisLevel(mergedPlayer) {
     const level = formulas.level(mergedPlayer);
+    if (level.lessThanOrEqualTo(0)) return createDecimal(0);
+
     return Decimal.pow(2, level.minus(1).max(0));
+  },
+  xagytes({ player: { xagytes } }, gain: Decimal) {
+    return xagytes.max(gain);
+  },
+  xagora() {
+    return createDecimal(1);
+  },
+  maxXagyrosStates() {
+    return 1;
   },
 } as const satisfies FormulaContainer;
 

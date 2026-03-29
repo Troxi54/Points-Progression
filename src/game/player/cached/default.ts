@@ -43,6 +43,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     bestVermytesPointsEffect: createDecimal(1),
     amplivaultRequirement: createDecimal(Infinity),
     amplivaultEffect: createDecimal(1),
+    amplivaultAmplivoidEffect: createDecimal(1),
     softcapperLevel: createDecimal(0),
     nullionInputConverted: createDecimal(0),
     firstDertointUpgradeEffect: createDecimal(1),
@@ -53,6 +54,8 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     levelDertointEffect: createDecimal(1),
 
     nexusCost: createDecimal(Infinity),
+
+    maxXagyrosStates: 0,
   };
 }
 

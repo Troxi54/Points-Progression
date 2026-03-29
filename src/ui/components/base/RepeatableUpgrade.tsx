@@ -20,20 +20,27 @@ import { mergeObjects } from "@core/utils/object";
 import Decimal from "break_eternity.js";
 import { formatEffect } from "@core/format/effect";
 import cn from "@core/utils/tailwind";
-import { ClassName } from "@core/types/react";
+import { ClassName, ClassNameProps } from "@core/types/react";
 import { capitalizeString } from "@core/utils/string";
+import { ReactNode } from "react";
+import { ValueGetter } from "@game/player/types";
+import { parseValueGetter } from "@game/player/utils";
+import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 
-type Props<T extends RepeatableUpgradeId> = {
+interface Props<T extends RepeatableUpgradeId> extends ClassNameProps {
   repeatableUpgradeId: T;
-  className?: ClassName;
+  usePlayerSelector?: UsePlayerFn;
   textClassName?: ClassName;
+  textChildren?: ValueGetter<ReactNode>;
   effectClassName?: ClassName;
   effectChildren?: (effect: Decimal, affects: string) => React.ReactNode;
-};
+}
 
 function RepeatableUpgrade<T extends RepeatableUpgradeId>({
   repeatableUpgradeId,
+  usePlayerSelector,
   className,
+  textChildren,
   textClassName,
   effectClassName,
   effectChildren,
@@ -47,7 +54,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
 
   const state = usePlayer(
     (state) => {
-      const cachedSelector = getCachedRepeatableUpgradePropsSelection(
+      const cachedPlayerSelector = getCachedRepeatableUpgradePropsSelection(
         state,
         repeatableUpgradeId,
         cachedProperties,
@@ -57,7 +64,14 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
         repeatableUpgradeId,
       ]);
 
-      return mergeObjects(cachedSelector, playerSelector);
+      const mainSelection = mergeObjects(cachedPlayerSelector, playerSelector);
+
+      const finalSelection = mergeObjects(
+        mainSelection,
+        usePlayerSelector?.(state),
+      );
+
+      return finalSelection;
     },
     { useFormat: true },
   );
@@ -90,6 +104,8 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
     setMergedPlayer(purchased);
   }
 
+  const { mergedPlayer } = getPlayerState();
+
   const level = state[`repeatableUpgrade_${repeatableUpgradeId}`];
   const cost = useCachedProperty("cost");
   const isMaxed = useCachedProperty("maxed");
@@ -106,6 +122,8 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
 
   const isThereABulk = bulk?.greaterThanOrEqualTo(1);
   const shouldLevelRender = level?.greaterThanOrEqualTo(1) || isThereABulk;
+
+  const computedTextChildren = parseValueGetter(textChildren, mergedPlayer);
 
   const affectText = hasCurrencyName(affects)
     ? formatCurrencyName(affects)
@@ -132,6 +150,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
             {isThereABulk && ` + ${integerFormat(bulk)}`})
           </>
         )}
+        {computedTextChildren}
       </p>
       <p className={cn("mt-0", effectClassName)}>Effect: {effectNode}</p>
     </button>

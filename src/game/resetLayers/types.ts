@@ -10,7 +10,7 @@ import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
 
 export interface ResetLayerIds {
   normal: "reset" | "tier" | "vermyros" | "nullith";
-  sliph: "mallirt" | "level";
+  sliph: "mallirt" | "level" | "xagyros";
 }
 
 export type ResetLayerId = ResetLayerIds[keyof ResetLayerIds];
@@ -24,6 +24,7 @@ export interface ResetLayerData<T extends DimensionId = DimensionId> {
     mergedPlayer: MergedPlayer,
     defaultMergedPlayer: MergedPlayer,
     currentTime: number,
+    sourceMergedPlayer?: MergedPlayer,
   ) => PartialMergedPlayer;
   preventReset: BooleanGetter;
   canPerform: BooleanGetter;

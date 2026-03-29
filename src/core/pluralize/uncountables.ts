@@ -8,6 +8,7 @@ const uncountableWords = [
   "score",
   "XP",
   "amplivoid",
+  "xagora",
 ] as const;
 
 export default uncountableWords;

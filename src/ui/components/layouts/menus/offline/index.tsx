@@ -85,7 +85,7 @@ function OfflineMenu() {
         >
           <p>Speed up</p>
         </button>
-        <button className="menu-button" onClick={skipOfflineProgress}>
+        <button className="menu-button" onClick={() => skipOfflineProgress()}>
           <p>Skip</p>
         </button>
       </HorizontalContainer>

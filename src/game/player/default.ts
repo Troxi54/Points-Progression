@@ -71,6 +71,13 @@ export function getDefaultPlayer(): Player {
     nexusLevel: createDecimal(0),
     bestNexusLevel: createDecimal(0),
     amplivoid: createDecimal(0),
+
+    xagytes: createDecimal(0),
+    xagyrosStates: ["dertoints"],
+    xagoraDertoints: createDecimal(0),
+    xagoraPoints: createDecimal(0),
+    xagoraNullithResets: createDecimal(0),
+    xagoraNux: createDecimal(0),
   };
 }
 
@@ -81,6 +88,7 @@ export function getDefaultRepeatableUpgradeLevel() {
 export function getDefaultResetLayerPlayerData(): ResetLayerPlayerData {
   return {
     everPerformed: false,
+    isFirstReset: true,
     startedDate: null,
     autoEnabled: true,
     resetsPerSecond: 0,

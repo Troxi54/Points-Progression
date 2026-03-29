@@ -9,7 +9,7 @@
   }
 
   body {
-    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg font-[inherit];
+    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg font-[inherit] tabular-nums;
   }
 
   p {

@@ -2,7 +2,7 @@ import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import LevelBar from "@ui/components/progressBars/LevelBar";
+import LevelBar from "@ui/components/resetLayers/LevelBar";
 import AmplivoidUpgrade from "@ui/components/repeatableUpgrades/AmplivoidUpgrade";
 import Amplivoid from "@ui/components/states/Amplivoid";
 import Score from "@ui/components/states/Score";
@@ -14,7 +14,7 @@ import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function SliphDimensionLayer2() {
   const state = usePlayer((state) => {
-    const resetLayers = everPerformedResetLayers(state, ["level"]);
+    const resetLayers = everPerformedResetLayers(state, ["level", "xagyros"]);
     const upgrades = hasUpgrades(state, {
       mallirt: [4],
       level: [4],
@@ -34,7 +34,7 @@ function SliphDimensionLayer2() {
           <Score />
           <XPState />
           <LevelUpgrades />
-          {state.level_4 && (
+          {(state.level_4 || state.resetLayer_xagyros_everPerformed) && (
             <>
               <Amplivoid />
               <AmplivoidUpgrade />

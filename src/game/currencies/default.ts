@@ -14,7 +14,6 @@ export default function getDefaultCurrencyData(): CurrencyData {
 
 export function getDefaultCurrencyEffectData(): CurrencyEffectData {
   return {
-    mode: "multiply",
     works: true,
   };
 }

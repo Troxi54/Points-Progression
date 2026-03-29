@@ -25,5 +25,10 @@ function updateRelated(state: GameLoopPartState) {
 
   cachedPlayer.level = formulas.level(mergedPlayer);
 
+  cachedPlayer.maxXagyrosStates = formulas.maxXagyrosStates();
+
+  if (hasUpgradeById(player, "xagyros_4"))
+    player.score = formulas.score(mergedPlayer);
+
   cachedPlayer.gameProgress = formulas.gameProgress(mergedPlayer);
 }

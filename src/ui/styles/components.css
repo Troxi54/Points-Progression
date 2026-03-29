@@ -75,6 +75,18 @@
     @apply text-[0.75em] text-text-muted;
   }
 
+  .default-font-weight,
+  .default-font-weight * {
+    @apply font-medium;
+  }
+
+  .cancel-text-gradient {
+    @apply [-webkit-text-fill-color:currentColor];
+    background-clip: initial;
+    -webkit-background-clip: initial;
+    background: none;
+  }
+
   .horizontal-container {
     @apply flex-row gap-[1em];
   }
@@ -147,7 +159,7 @@
   }
 
   .nullith {
-    @apply text-gradient bg-linear-45 [background-image:var(--nullith-gradient)];
+    @apply text-gradient bg-linear-45 [background-image:var(--nullith-sign-gradient)];
   }
 
   .softcap-container > p {
@@ -210,5 +222,14 @@
   .nexus-description {
     @apply text-gradient;
     background-image: var(--nexus-gradient-description);
+  }
+
+  .xagyros-states {
+    @apply text-gradient;
+    background-image: var(--xagyros-states-gradient-text);
+  }
+  .xagyros-states-description {
+    @apply text-gradient;
+    background-image: var(--xagyros-states-gradient-description);
   }
 }

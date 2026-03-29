@@ -7,7 +7,7 @@ import { hasOneOfUpgrades } from "@game/upgrades/utils/has";
 const tierUpgrades = createUpgradeDataContainer({
   id: "tier",
   usePlayer: ({ mergedPlayer }) => ({
-    everMadeVermyros: everPerformed(mergedPlayer, "vermyros"),
+    everPerformedVermyros: everPerformed(mergedPlayer, "vermyros"),
   }),
   spendCurrency: ({ player }) =>
     !hasOneOfUpgrades(player, {

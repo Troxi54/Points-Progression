@@ -9,6 +9,7 @@ import { ResetLayerId } from "@game/resetLayers/types";
 import { GameVersion } from "@core/types/version";
 import { DimensionId } from "@game/dimensions/types";
 import { MergedPlayer, PartialMergedPlayer } from "./merged/types";
+import { XagyrosState } from "@game/features/xagyrosStates/types";
 
 export interface Player {
   gameVersion: GameVersion;
@@ -26,7 +27,7 @@ export interface Player {
 
   upgrades: Partial<Record<UpgradeContainerId, boolean[]>>;
   repeatableUpgrades: Partial<Record<RepeatableUpgradeId, Decimal>>;
-  resetLayers: Partial<Record<ResetLayerId, ResetLayerPlayerData>>;
+  resetLayers: Partial<Record<ResetLayerId, PartialResetLayerPlayerData>>;
 
   dimensionId: DimensionId;
 
@@ -70,14 +71,23 @@ export interface Player {
   nexusLevel: Decimal;
   bestNexusLevel: Decimal;
   amplivoid: Decimal;
+  xagytes: Decimal;
+  xagyrosStates: XagyrosState[];
+  xagoraDertoints: Decimal;
+  xagoraPoints: Decimal;
+  xagoraNullithResets: Decimal;
+  xagoraNux: Decimal;
 }
 
 export interface ResetLayerPlayerData {
   everPerformed: boolean;
+  isFirstReset: boolean;
   startedDate: number | null;
   autoEnabled: boolean;
   resetsPerSecond: number;
 }
+
+export type PartialResetLayerPlayerData = Partial<ResetLayerPlayerData>;
 
 export type PartialPlayer = Partial<Player>;
 

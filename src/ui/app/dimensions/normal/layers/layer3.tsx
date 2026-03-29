@@ -4,7 +4,7 @@ import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
 import Amplivault from "@ui/components/buttons/Amplivault";
 import CoreButton from "@ui/components/buttons/CoreButton";
-import VermyrosBar from "@ui/components/progressBars/VermyrosBar";
+import VermyrosBar from "@ui/components/resetLayers/VermyrosBar";
 import CoreUpgrade from "@ui/components/repeatableUpgrades/CoreUpgrade";
 import VermyteUpgrade from "@ui/components/repeatableUpgrades/VermyteUpgrade";
 import Cores from "@ui/components/states/Cores";

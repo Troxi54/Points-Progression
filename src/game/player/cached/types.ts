@@ -40,6 +40,7 @@ export interface CachedPlayer {
   bestVermytesPointsEffect: Decimal;
   amplivaultRequirement: Decimal;
   amplivaultEffect: Decimal;
+  amplivaultAmplivoidEffect: Decimal;
   softcapperLevel: Decimal;
   nullionInputConverted: Decimal;
   firstDertointUpgradeEffect: Decimal;
@@ -50,6 +51,8 @@ export interface CachedPlayer {
   levelDertointEffect: Decimal;
 
   nexusCost: Decimal | null;
+
+  maxXagyrosStates: number;
 }
 
 export interface CachedRepeatableUpgrade {

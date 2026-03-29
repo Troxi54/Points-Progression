@@ -1,5 +1,5 @@
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import ResetBar from "@ui/components/progressBars/ResetBar";
+import ResetBar from "@ui/components/resetLayers/ResetBar";
 import PointUpgrade from "@ui/components/repeatableUpgrades/PointUpgrade";
 import Points from "@ui/components/states/Points";
 import TimeSpent from "@ui/components/states/TimeSpent";

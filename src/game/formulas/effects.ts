@@ -4,6 +4,7 @@ import Decimal from "break_eternity.js";
 import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import formulas from "./data";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { getResetLayerData } from "@game/resetLayers/utils/get";
 
 const effectFormulas = {
   firstResetLayerRun({ player }) {
@@ -96,6 +97,31 @@ const effectFormulas = {
     const { player } = mergedPlayer;
 
     return player.bestVermytes.pow(3.75).max(1);
+  },
+  xagytesXagora({ player: { xagytes } }) {
+    if (xagytes.equals(0)) return createDecimal(0);
+    return Decimal.pow(500, xagytes.max(1).log(2));
+  },
+  dertointXagora({ player: { dertoints } }) {
+    const { goal } = getResetLayerData("xagyros");
+
+    return Decimal.pow(2, dertoints.dividedBy(goal).max(1).log10());
+  },
+  xagyrosStateNotChosen(_, effect: Decimal) {
+    return effect.pow(0.5);
+  },
+  amplivaultAmplivoid(mergedPlayer) {
+    if (!hasNexusLevel(mergedPlayer, 10)) return createDecimal(1);
+
+    const { player } = mergedPlayer;
+
+    return Decimal.pow(
+      player.amplivaultBroken ? 1.075 : 1.1,
+      player.amplivaultLevel,
+    );
+  },
+  energyXagora({ player: { energy } }) {
+    return Decimal.pow(1e4, energy.max(0).plus(1).log("1e10000"));
   },
 } as const satisfies FormulaContainer;
 

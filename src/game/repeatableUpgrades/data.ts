@@ -3,8 +3,8 @@ import { createRepeatableUpgradeContainer } from "./utils/create";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { FlatRepeatableUpgradeContainer } from "./types";
 import { objectEntries } from "@core/utils/object";
-import createDecimal from "@core/utils/decimal";
-import { everPerformed } from "@game/resetLayers/utils/get";
+import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 const repeatableUpgrades = createRepeatableUpgradeContainer({
   normal: {
@@ -29,7 +29,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       autobuy: ({ player }) => hasUpgradeById(player, "tier_6"),
     },
     vermyte: {
-      condition: ({ player }) => everPerformed(player, "vermyros"),
+      condition: ({ player }) => hasUpgradeById(player, "vermyros_1"),
       startCost: createDecimal(1),
       costScaling: createDecimal(2),
       currency: "vermytes",
@@ -44,8 +44,10 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       costScaling: createDecimal(10),
       currency: "cores",
       spendCurrency: ({ player }) => !hasUpgradeById(player, "nullith_1"),
-      effectFormula: (lvl) => Decimal.pow(1.1, lvl),
-      maxLevel: createDecimal(40),
+      effectFormula: (lvl) =>
+        Decimal.pow(1.1, decimalSoftcap(lvl, 40, 0.0002, "multiplier")),
+      maxLevel: ({ player }) =>
+        hasNexusLevel(player, 14) ? createDecimal(Infinity) : createDecimal(40),
       affects: "Best Points effect",
       autobuy: ({ player }) => hasUpgradeById(player, "nullith_4"),
     },

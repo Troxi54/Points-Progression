@@ -7,7 +7,7 @@ import Nexus from "@ui/components/buttons/Nexus";
 import Nullifice from "@ui/components/buttons/Nullifice";
 import Nuxar from "@ui/components/buttons/Nuxar";
 import Sliph from "@ui/components/buttons/Sliph";
-import NullithBar from "@ui/components/progressBars/NullithBar";
+import NullithBar from "@ui/components/resetLayers/NullithBar";
 import AutoNullithButton from "@ui/components/toggles/AutoNullithButton";
 import NullithUpgrades from "@ui/components/upgrades/NullithUpgrades";
 import NullithUpgrades2 from "@ui/components/upgrades/NullithUpgrades2";

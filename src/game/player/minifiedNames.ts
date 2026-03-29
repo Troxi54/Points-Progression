@@ -57,6 +57,12 @@ export const minifiedPlayerMap = createUniqueObject({
   bestPoints: 48,
   score: 49,
   menuBackgroundBlur: 50,
+  xagytes: 51,
+  xagyrosStates: 52,
+  xagoraDertoints: 53,
+  xagoraPoints: 54,
+  xagoraNullithResets: 55,
+  xagoraNux: 56,
 } as const satisfies Record<keyof Player, number>);
 
 export type MinifiedPlayerMap = typeof minifiedPlayerMap;

@@ -5,10 +5,9 @@ const gameConfig = {
   gameName: "Points Progression",
   gameVersion: {
     major: 1,
-    minor: 0,
-    patch: 11,
+    minor: 1,
   } as GameVersion,
-  endgameAt: createDecimal("1e4025"),
+  endgameAt: createDecimal("1e5650"),
 } as const;
 
 export default gameConfig;

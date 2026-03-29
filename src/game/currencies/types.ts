@@ -25,6 +25,11 @@ export type CurrencyId = DecimalKeys<
     | "XP"
     | "nux"
     | "amplivoid"
+    | "xagytes"
+    | "xagoraDertoints"
+    | "xagoraPoints"
+    | "xagoraNullithResets"
+    | "xagoraNux"
   >
 >;
 
@@ -47,7 +52,7 @@ export interface CurrencyData<PE extends boolean = false> {
 }
 
 export interface CurrencyEffectData {
-  mode: EffectMode;
+  mode?: EffectMode;
   works: BooleanGetter;
 }
 

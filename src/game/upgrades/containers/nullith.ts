@@ -62,6 +62,16 @@ const nullithUpgrades = createUpgradeDataContainer({
         "Generates Nullions equal to 100% of your Nullith Reset generation",
       cost: "1e4025",
     },
+    {
+      id: "nullith_11",
+      description: "Generates Nullions equal to 0.001% of your Nullith Resets",
+      cost: "1e4650",
+    },
+    {
+      id: "nullith_12",
+      description: "Generates Nullions equal to 0.01% of your Nullith Resets",
+      cost: "1e5650",
+    },
   ],
 });
 

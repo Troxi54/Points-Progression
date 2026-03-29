@@ -8,3 +8,5 @@ interface NexusMilestone {
 }
 
 export type NexusMilestoneContainer = NexusMilestone[];
+
+export type NexusLevelSelection<T extends string> = `hasNexusLevel${T}`;

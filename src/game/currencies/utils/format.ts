@@ -8,6 +8,9 @@ import { DecimalSource } from "break_eternity.js";
 import { formatWithPlural } from "@core/format/plural";
 import pluralize from "pluralize";
 import { capitalizeString } from "@core/utils/string";
+import { isObject } from "@core/utils/object";
+import { EffectMode } from "@core/types/effect";
+import { Nil } from "@core/types/primitives";
 
 export function formatCurrencyName(currencyId: CurrencyId): string {
   const data = getCurrencyData(currencyId);
@@ -41,7 +44,14 @@ export function formatCurrencyEffect(
   effectOn: CurrencyId,
 ): ReactNode {
   const data = getCurrencyData(currencyFrom);
-  const { effectMode } = data;
+  const { affects } = data;
+
+  let effectModeInCurrencyData: EffectMode | Nil = null;
+  if (isObject(affects)) {
+    effectModeInCurrencyData = affects[effectOn]?.mode;
+  }
+
+  const effectMode = effectModeInCurrencyData ?? data.effectMode;
 
   const effect = getCurrencyEffectOn(cachedPlayerLike, currencyFrom, effectOn);
 

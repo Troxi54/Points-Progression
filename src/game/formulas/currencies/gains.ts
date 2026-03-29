@@ -17,6 +17,7 @@ import {
 import cappergyConfig from "@game/features/cappergy/config";
 import nuxarConfig from "@game/features/nuxar/config";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import formulas from "../data";
 
 const currencyGainFormulas: GainFormulaContainer = {
   points: {
@@ -127,14 +128,21 @@ const currencyGainFormulas: GainFormulaContainer = {
         "passiveGain",
       );
 
-      const multiplier = calculateGeneration([
+      const ofNullithGeneration = calculateGeneration([
         [hasUpgradeById(player, "nullith_10"), 100],
         [hasUpgradeById(player, "nullith_9"), 10],
         [hasUpgradeById(player, "nullith_8"), 1],
         [hasUpgradeById(player, "nullith_7"), 0.1],
-      ]);
+      ]).multiply(nullithGain);
 
-      return nullithGain.multiply(multiplier);
+      const { madeNullithResets } = player;
+
+      const ofNulliths = calculateGeneration([
+        [hasUpgradeById(player, "nullith_12"), 0.01],
+        [hasUpgradeById(player, "nullith_11"), 0.001],
+      ]).multiply(madeNullithResets);
+
+      return ofNullithGeneration.plus(ofNulliths);
     },
   },
   dertoints: {
@@ -214,9 +222,35 @@ const currencyGainFormulas: GainFormulaContainer = {
     return player.score;
   },
   amplivoid: {
-    gain({ player: { ampliflux } }) {
-      return Decimal.pow(1.6, ampliflux.dividedBy("1e1075").max(1).log(1e10));
+    gain({ player: { ampliflux }, cachedPlayer }) {
+      return Decimal.pow(
+        1.6,
+        ampliflux.dividedBy("1e1075").max(1).log(1e10),
+      ).multiply(cachedPlayer.amplivaultAmplivoidEffect);
     },
+  },
+  xagytes(mergedPlayer) {
+    if (!canPerform(mergedPlayer, "xagyros")) return createDecimal(0);
+
+    const { player } = mergedPlayer;
+    if (!everPerformed(player, "xagyros")) return createDecimal(1);
+
+    const { dertoints } = player;
+    const { goal } = getResetLayerData("xagyros");
+
+    return Decimal.pow(1.1, dertoints.dividedBy(goal).log10().max(0));
+  },
+  xagoraDertoints() {
+    return formulas.xagora();
+  },
+  xagoraPoints() {
+    return formulas.xagora();
+  },
+  xagoraNullithResets() {
+    return formulas.xagora();
+  },
+  xagoraNux() {
+    return formulas.xagora();
   },
 } as const satisfies GainFormulaContainer;
 

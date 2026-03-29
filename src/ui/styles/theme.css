@@ -2,7 +2,7 @@
   --color-bg: #0e0e0e;
   --color-loading-bg: #0e0e0e;
   --color-text-primary: #ffffffde;
-  --color-text-muted: oklch(67.64% 0.00008 271.152);
+  --color-text-muted: rgb(151, 151, 151);
   --color-time: var(--color-text-muted);
   --color-link: #646cff;
   --color-link-hover: #535bf2;
@@ -15,6 +15,9 @@
   --color-enabled: #8dee9d;
   --color-disabled: #ee8d8d;
   --color-important: #ff9494;
+
+  --bg: black;
+  --bg-percentage: 82%;
 
   --color-button-bg: #202020;
   --color-button-border-hover: white;
@@ -72,10 +75,10 @@
 
   --color-description-gradient-fill: rgba(0, 0, 0, 0.3);
 
-  --color-point-upgrade-bg: #2e2e16;
-  --color-point-upgrade-accent: #ffff00;
+  --color-point-upgrade-accent: rgb(255, 255, 0);
+  --color-point-upgrade-bg: rgb(46, 46, 22);
   --color-point-upgrade-accent-hover: #fff598;
-  --color-point-upgrade-effect: #8c9462;
+  --color-point-upgrade-effect: rgb(148, 148, 98);
 
   --color-reset: oklch(72.935% 0.18687 143.382);
   --color-reset-effect: oklch(61.23% 0.08937 143.958);
@@ -88,11 +91,11 @@
   --color-ampliflux-bg: #08113a;
   --color-ampliflux-upgrade-bg: #16192d;
   --color-ampliflux-upgrade-hover: #99aaff;
-  --color-ampliflux-upgrade-effect: #626a93;
+  --color-ampliflux-upgrade-effect: rgb(98, 106, 147);
 
   --color-vermyros: #ff0000;
   --color-vermyte: var(--color-vermyros);
-  --color-vermyros-effect: #955f5f;
+  --color-vermyros-effect: rgb(149, 95, 95);
   --color-vermyros-1: #e41212;
   --color-vermyros-2: #850909;
   --color-vermyte-upgrade-bg: #2d1616;
@@ -135,7 +138,7 @@
     var(--color-broken-amplivault-text-2),
     var(--color-broken-amplivault-text-1)
   );
-  --color-broken-amplivault-bg-1: hsl(0, 0%, 0%);
+  --color-broken-amplivault-bg-1: var(--color-broken-amplivault-1);
   --color-broken-amplivault-bg-2: hsl(327, 100%, 4.5%);
   --color-broken-amplivault-bg-3: hsl(255, 33%, 9%);
   --broken-amplivault-gradient-bg: linear-gradient(
@@ -167,8 +170,24 @@
 
   --color-nullith-1: #2c2c2c;
   --color-nullith-2: #000;
+  --color-nullith-accent-1: #000;
+  --color-nullith-accent-2: #fff;
   --color-nullith-effect: rgb(148, 148, 148);
-  --nullith-gradient: linear-gradient(45deg in oklab, #000000, #ffffff);
+  --nullith-sign-gradient: linear-gradient(
+    45deg in oklab,
+    var(--color-nullith-accent-1),
+    var(--color-nullith-accent-2)
+  );
+  --nullith-gradient: linear-gradient(
+    to left in oklab,
+    var(--color-nullith-accent-1),
+    var(--color-nullith-accent-2)
+  );
+  --nullith-gradient-bg: linear-gradient(
+    to right in oklab,
+    var(--color-nullith-1),
+    var(--color-nullith-2)
+  );
 
   --color-nullifice-1: oklch(80.762% 0.15208 318.231);
   --color-nullifice-2: oklch(87.674% 0.08581 64.019);
@@ -257,7 +276,7 @@
     var(--color-nuxar-2),
     var(--color-nuxar-3)
   );
-  --color-nuxar-description-1: #a8a8a8;
+  --color-nuxar-description-1: rgb(168, 168, 168);
   --color-nuxar-description-2: #c34812;
   --color-nuxar-description-3: #343d4d;
   --nuxar-gradient-description: linear-gradient(
@@ -311,13 +330,39 @@
   --color-amplivoid-upgrade-bg: #151b22;
   --color-amplivoid-upgrade-hover: #8e9eaf;
   --color-amplivoid-upgrade-effect: #3e4853;
+
+  --color-xagyros: #8193ff;
+  --color-xagytes: var(--color-xagyros);
+  --color-xagyros-effect: #7a7e95;
+  --color-xagyros-1: #5439ee;
+  --color-xagyros-2: #83beba;
+
+  --color-xagyros-states-bg-1: #130c38;
+  --color-xagyros-states-bg-2: #151f1e;
+  --xagyros-states-gradient-bg: linear-gradient(
+    to right in oklab,
+    var(--color-xagyros-states-bg-1),
+    var(--color-xagyros-states-bg-2)
+  );
+  --xagyros-states-gradient-text: linear-gradient(
+    to right in oklab,
+    var(--color-xagyros-1),
+    var(--color-xagyros-2)
+  );
+  --color-xagyros-states-description-1: rgb(57, 40, 151);
+  --color-xagyros-states-description-2: #5a8380;
+  --xagyros-states-gradient-description: linear-gradient(
+    to right in oklab,
+    var(--color-xagyros-states-description-1),
+    var(--color-xagyros-states-description-2)
+  );
 }
 
 :root {
   --gradient-softcapper-level-1: linear-gradient(
     to right in oklab,
-    #0000cc,
-    #00cc00
+    rgb(0, 0, 204),
+    rgb(0, 204, 0)
   );
   --gradient-softcapper-level-1-bg: linear-gradient(
     to right in oklab,
@@ -369,6 +414,17 @@
     rgb(51, 0, 26)
   );
 
+  --gradient-softcapper-level-6: linear-gradient(
+    to right in oklab,
+    rgb(204, 0, 102),
+    rgb(102, 0, 204)
+  );
+  --gradient-softcapper-level-6-bg: linear-gradient(
+    to right in oklab,
+    rgb(51, 0, 26),
+    rgb(26, 0, 51)
+  );
+
   --nexus-milestone-1: #fff;
   --nexus-milestone-1-bg: rgba(255, 255, 255, 0.075);
 
@@ -395,4 +451,19 @@
 
   --nexus-milestone-9: rgb(225, 0, 255);
   --nexus-milestone-9-bg: rgba(225, 0, 255, 0.075);
+
+  --nexus-milestone-10: rgb(150, 0, 255);
+  --nexus-milestone-10-bg: rgba(150, 0, 255, 0.075);
+
+  --nexus-milestone-11: rgb(90, 0, 255);
+  --nexus-milestone-11-bg: rgba(90, 0, 255, 0.075);
+
+  --nexus-milestone-12: rgb(0, 0, 255);
+  --nexus-milestone-12-bg: rgba(0, 0, 255, 0.075);
+
+  --nexus-milestone-13: rgb(0, 90, 255);
+  --nexus-milestone-13-bg: rgba(0, 90, 255, 0.075);
+
+  --nexus-milestone-14: rgb(0, 150, 255);
+  --nexus-milestone-14-bg: rgba(0, 150, 255, 0.075);
 }

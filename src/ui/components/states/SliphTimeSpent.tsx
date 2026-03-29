@@ -10,12 +10,13 @@ function SliphTimeSpent() {
     },
     {
       additionalSelectors: (state) =>
-        everPerformedResetLayers(state, ["level"]),
+        everPerformedResetLayers(state, ["level", "xagyros"]),
     },
   );
 
   const activeReset = (
     [
+      [state.resetLayer_xagyros_everPerformed, "X", "text-xagyros"],
       [state.resetLayer_level_everPerformed, "L", "text-level"],
     ] as TimeSpentResetLayerData
   ).find(([date]) => date);

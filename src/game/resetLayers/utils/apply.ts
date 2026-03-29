@@ -1,5 +1,6 @@
 import {
   PartialPlayer,
+  PartialResetLayerPlayerData,
   PlayerLike,
   ResetLayerPlayerData,
 } from "@game/player/types";
@@ -14,6 +15,7 @@ import {
   getResetLayerDimensionContainer,
   getResetLayerPlayerData,
   getResetLayerPlayerDataProp,
+  getResetLayerPropsFromPlayerData,
 } from "./get";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import getDefaultMergedPlayer from "@game/player/merged/default";
@@ -25,6 +27,7 @@ import {
 import {
   assignCachedPlayerForMergedPlayer,
   assignMergedPlayer,
+  assignPlayerForMergedPlayer,
   mergePartialPlayer,
 } from "@game/player/merged/utils";
 import {
@@ -156,12 +159,24 @@ function applyResetLayer(
   if (forceReset || !preventReset) {
     for (let i = 0; i <= index; i++) {
       const layerData = resetLayerDimension[i];
+      const { id } = layerData;
 
       const resetLayer = layerData.reset(
         result,
         defaultMergedPlayer,
         currentTime,
+        mergedPlayer,
       );
+
+      const notLast = i < index;
+      if (notLast) {
+        assignPlayerForMergedPlayer(
+          resetLayer,
+          applyResetLayerPlayerData(resetLayer, id, {
+            isFirstReset: true,
+          }),
+        );
+      }
 
       assignMergedPlayer(result, {
         ...resetLayer,
@@ -182,6 +197,16 @@ function applyResetLayer(
 
     assignMergedPlayer(result, rewarded);
   }
+
+  const appliedPlayerProperties = applyResetLayerPlayerData(
+    result,
+    resetLayerId,
+    {
+      isFirstReset: false,
+    },
+  );
+
+  assignPlayerForMergedPlayer(result, appliedPlayerProperties);
 
   const appliedCachedProperties = applyResetLayerCachedPlayerData(
     result,
@@ -217,7 +242,9 @@ function getUpdatedResetLayer(
     resetLayerId,
   );
 
-  const { startedDate } = currentData;
+  const { startedDate } = getResetLayerPropsFromPlayerData(currentData, [
+    "startedDate",
+  ]);
   const { lastResetDuration } = currentCachedData;
   const { cachedPlayer } = mergedPlayer;
 
@@ -253,7 +280,7 @@ function getUpdatedResetLayer(
     resetsPerSecond,
   };
 
-  const newPlayerData: ResetLayerPlayerData = mergeObjects(
+  const newPlayerData: PartialResetLayerPlayerData = mergeObjects(
     currentData,
     additionalPlayerData,
   );

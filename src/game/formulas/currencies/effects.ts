@@ -3,6 +3,8 @@ import { EffectFormulaContainer } from "../types";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
 import { getCachedCurrencyProp } from "@game/currencies/utils/get";
+import effectFormulas from "../effects";
+import { isXagyrosStateActive } from "@game/features/xagyrosStates/utils/get";
 
 const currencyEffectFormulas: EffectFormulaContainer = {
   points({ player: { points } }) {
@@ -39,14 +41,38 @@ const currencyEffectFormulas: EffectFormulaContainer = {
       return Decimal.pow(1.075, vermora.max(0).plus(1).log10());
     },
   },
-  energyReactors({ player: { energyReactors } }) {
-    return energyReactors;
+  energyReactors: {
+    energy({ player: { energyReactors } }) {
+      return energyReactors;
+    },
+    cores({ player: { energyReactors } }) {
+      return Decimal.pow(1.3, energyReactors.max(0).plus(1).log10());
+    },
   },
-  energy({ player: { energy } }) {
-    return Decimal.pow(1.75, energy.max(0).plus(1).log10());
+  energy: {
+    points({ player: { energy } }) {
+      return Decimal.pow(1.75, energy.max(0).plus(1).log10());
+    },
+    xagoraDertoints(mergedPlayer) {
+      return effectFormulas.energyXagora(mergedPlayer);
+    },
+    xagoraPoints(mergedPlayer) {
+      return effectFormulas.energyXagora(mergedPlayer);
+    },
+    xagoraNullithResets(mergedPlayer) {
+      return effectFormulas.energyXagora(mergedPlayer);
+    },
+    xagoraNux(mergedPlayer) {
+      return effectFormulas.energyXagora(mergedPlayer);
+    },
   },
-  cores({ player: { cores } }) {
-    return Decimal.pow(4, cores.max(0).plus(1).log10());
+  cores: {
+    energyReactors({ player: { cores } }) {
+      return Decimal.pow(4, cores.max(0).plus(1).log10());
+    },
+    score({ player: { cores } }) {
+      return Decimal.pow(50, cores.max(0).plus(1).log("1e10000"));
+    },
   },
   darkEnergy({ player }) {
     const preSquared = Decimal.pow(
@@ -98,11 +124,19 @@ const currencyEffectFormulas: EffectFormulaContainer = {
       softcappedNullions.dividedBy(GROWTH_POINT).max(0).plus(1).log10(),
     );
   },
-  dertoints({ player: { dertoints } }) {
-    return Decimal.plus(
-      1,
-      dertoints.multiply(100).max(0).plus(1).log10().dividedBy(2.5),
-    );
+  dertoints: {
+    darkEnergy({ player: { dertoints } }) {
+      return Decimal.plus(
+        1,
+        dertoints.multiply(100).max(0).plus(1).log10().dividedBy(2.5),
+      );
+    },
+    xagoraDertoints: (mergedPlayer) =>
+      effectFormulas.dertointXagora(mergedPlayer),
+    xagoraPoints: (mergedPlayer) => effectFormulas.dertointXagora(mergedPlayer),
+    xagoraNullithResets: (mergedPlayer) =>
+      effectFormulas.dertointXagora(mergedPlayer),
+    xagoraNux: (mergedPlayer) => effectFormulas.dertointXagora(mergedPlayer),
   },
   mallirtTotalDertoints({ player: { mallirtTotalDertoints } }) {
     return Decimal.pow(
@@ -142,6 +176,58 @@ const currencyEffectFormulas: EffectFormulaContainer = {
   },
   amplivoid({ player: { amplivoid } }) {
     return amplivoid.max(0).plus(1).pow(1.75);
+  },
+  xagytes: {
+    xagoraDertoints: (mergedPlayer) =>
+      effectFormulas.xagytesXagora(mergedPlayer),
+    xagoraPoints: (mergedPlayer) => effectFormulas.xagytesXagora(mergedPlayer),
+    xagoraNullithResets: (mergedPlayer) =>
+      effectFormulas.xagytesXagora(mergedPlayer),
+    xagoraNux: (mergedPlayer) => effectFormulas.xagytesXagora(mergedPlayer),
+  },
+  xagoraDertoints(mergedPlayer) {
+    const {
+      player: { xagoraDertoints },
+    } = mergedPlayer;
+
+    const value = Decimal.pow(4, xagoraDertoints.max(0).plus(1).log10());
+    if (!isXagyrosStateActive(mergedPlayer, "dertoints"))
+      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+
+    return value;
+  },
+  xagoraPoints(mergedPlayer) {
+    const {
+      player: { xagoraPoints },
+    } = mergedPlayer;
+
+    const value = Decimal.pow("1.71e9", xagoraPoints.max(0).plus(1).log10());
+    if (!isXagyrosStateActive(mergedPlayer, "points"))
+      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+
+    return value;
+  },
+  xagoraNullithResets(mergedPlayer) {
+    const {
+      player: { xagoraNullithResets },
+    } = mergedPlayer;
+
+    const value = Decimal.pow(1.05, xagoraNullithResets.max(0).plus(1).log10());
+    if (!isXagyrosStateActive(mergedPlayer, "nullithResets"))
+      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+
+    return value;
+  },
+  xagoraNux(mergedPlayer) {
+    const {
+      player: { xagoraNux },
+    } = mergedPlayer;
+
+    const value = Decimal.pow(1.03, xagoraNux.max(0).plus(1).log10());
+    if (!isXagyrosStateActive(mergedPlayer, "nux"))
+      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+
+    return value;
   },
 } as const;
 

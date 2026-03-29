@@ -1,6 +1,8 @@
 import CurrencyComponent from "@ui/components/base/Currency";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
+import NexusSign from "../base/NexusSign";
 
 function Ampliflux() {
   return (
@@ -9,6 +11,7 @@ function Ampliflux() {
       containerClassName="bg-ampliflux-bg"
       textClassName="text-ampliflux"
       effectClassName="text-ampliflux-effect"
+      usePlayerSelector={(state) => hasNexusLevelSelection(state, 6, "6")}
       effectNodes={[
         {
           node: ({ cachedPlayer }) =>
@@ -19,7 +22,7 @@ function Ampliflux() {
           node: ({ cachedPlayer }) => (
             <>
               {formatCurrencyEffect(cachedPlayer, "ampliflux", "madeTierTimes")}{" "}
-              <span className="text-(--nexus-milestone-6)">(N6)</span>
+              <NexusSign level={6} />
             </>
           ),
         },

@@ -35,7 +35,27 @@ const nexusMilestones = createNexusMilestoneContainer([
   },
   {
     cost: 1.95e17,
-    description: "Unlocks Vermyte effect on XP",
+    description: "Unlocks Vermyte effect on Score",
+  },
+  {
+    cost: 2.99e21,
+    description: "Unlocks Amplivault effect on Amplivoid",
+  },
+  {
+    cost: 1.435e23,
+    description: "Unlocks Energy Reactor effect on Cores",
+  },
+  {
+    cost: 8.05e25,
+    description: "Unlocks Energy effect on Xagora",
+  },
+  {
+    cost: 1.39e29,
+    description: "Unlocks Core effect on Score",
+  },
+  {
+    cost: 1.975e31,
+    description: "Uncaps Core Upgrade",
   },
 ]);
 

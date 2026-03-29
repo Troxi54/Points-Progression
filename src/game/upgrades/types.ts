@@ -12,7 +12,8 @@ export type UpgradeContainerId =
   | "nullith"
   | "dertoint"
   | "mallirt"
-  | "level";
+  | "level"
+  | "xagyros";
 
 export type UpgradeId<
   C extends UpgradeContainerId = UpgradeContainerId,

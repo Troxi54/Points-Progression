@@ -2,6 +2,7 @@ import { formatNumber } from "@core/format/number";
 import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
 import { formatEffectOnCurrency } from "@core/format/effect";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import NexusSign from "../base/NexusSign";
 
 function VermyrosBar() {
   return (
@@ -26,7 +27,7 @@ function VermyrosBar() {
                     cachedPlayer.bestVermytesPointsEffect,
                     "points",
                   )}{" "}
-                  <span className="text-(--nexus-milestone-7)">(N7)</span>
+                  <NexusSign level={7} />
                 </>
               )}
             </span>

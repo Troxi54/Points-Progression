@@ -1,5 +1,5 @@
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import MallirtBar from "@ui/components/progressBars/MallirtBar";
+import MallirtBar from "@ui/components/resetLayers/MallirtBar";
 import DertointUpgrade from "@ui/components/repeatableUpgrades/DertointUpgrade";
 import Cappergy from "@ui/components/states/Cappergy";
 import Dertoints from "@ui/components/states/Dertoints";

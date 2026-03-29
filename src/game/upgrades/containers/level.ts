@@ -1,9 +1,14 @@
+import { everPerformed } from "@game/resetLayers/utils/get";
 import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
 
 const levelUpgrades = createUpgradeDataContainer({
   id: "level",
   dimensionId: "sliph",
   currency: "mallirtTotalDertoints",
+  usePlayer: ({ mergedPlayer }) => ({
+    everPerformedXagyros: everPerformed(mergedPlayer, "xagyros"),
+  }),
+  forceShow: ({ player }) => everPerformed(player, "xagyros"),
   upgrades: [
     {
       id: "level_1",

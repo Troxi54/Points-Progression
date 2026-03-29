@@ -4,6 +4,7 @@ import { getPlayerState } from "@game/player/store";
 import { MergedPlayer } from "@game/player/merged/types";
 import { isNil } from "./nil";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
+import { Nil } from "@core/types/primitives";
 
 export function calculateTimeForRequirement(
   currencyValue: DecimalSource,
@@ -68,17 +69,17 @@ export function checkElapsedTime(time: number | null): time is number {
 }
 
 export function fixTime(
-  time: number | null,
+  time: number | Nil,
   currentTime: number = getCurrentTime(),
 ): number | null {
-  if (time === null) return null;
+  if (isNil(time)) return null;
 
   return Math.min(currentTime, time);
 }
 
 export function fixGameTime(
   mergedPlayer: MergedPlayer,
-  time: number | null,
+  time: number | Nil,
   currentTime: number = getCurrentGameTime(mergedPlayer),
 ) {
   return fixTime(time, currentTime);

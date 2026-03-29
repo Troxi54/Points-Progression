@@ -1,11 +1,14 @@
 import CurrencyComponent from "@ui/components/base/Currency";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
+import NexusSign from "../base/NexusSign";
 
 function Points() {
   return (
     <CurrencyComponent
       currencyId="points"
+      usePlayerSelector={(state) => hasNexusLevelSelection(state, 1, "1")}
       effectNodes={[
         {
           works: ({ player }) => hasNexusLevel(player, 1),
@@ -16,7 +19,7 @@ function Points() {
                 "points",
                 "madeNullithResets",
               )}{" "}
-              <span className="text-(--nexus-milestone-1)">(N1)</span>
+              <NexusSign level={1} />
             </>
           ),
         },

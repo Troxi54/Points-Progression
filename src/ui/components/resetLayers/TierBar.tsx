@@ -13,6 +13,8 @@ import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import CurrencyContent from "@ui/components/base/CurrencyContent";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import NexusSign from "../base/NexusSign";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 
 function TierBar() {
   const data = getResetLayerData("tier");
@@ -73,7 +75,7 @@ function TierBar() {
                     cachedPlayer.tierVermyteEffect,
                     "vermytes",
                   )}{" "}
-                  <span className="text-(--nexus-milestone-4)">(N4)</span>
+                  <NexusSign level={4} />
                 </>
               )}
             </span>
@@ -83,6 +85,9 @@ function TierBar() {
               currencyId="madeTierTimes"
               effectClassName="text-tier-effect"
               formatType="integerComma"
+              usePlayerSelector={(state) =>
+                hasNexusLevelSelection(state, 5, "5")
+              }
               effectNodes={[
                 {
                   node: ({ cachedPlayer }) =>
@@ -101,7 +106,7 @@ function TierBar() {
                         "madeTierTimes",
                         "dertoints",
                       )}{" "}
-                      <span className="text-(--nexus-milestone-5)">(N5)</span>
+                      <NexusSign level={5} />
                     </>
                   ),
                 },

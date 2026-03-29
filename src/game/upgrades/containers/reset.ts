@@ -5,7 +5,7 @@ import { hasOneOfUpgrades } from "@game/upgrades/utils/has";
 const resetUpgrades = createUpgradeDataContainer({
   id: "reset",
   usePlayer: ({ mergedPlayer }) => ({
-    everMadeTier: everPerformed(mergedPlayer, "tier"),
+    everPerformedTier: everPerformed(mergedPlayer, "tier"),
   }),
   spendCurrency: ({ player }) =>
     !hasOneOfUpgrades(player, {

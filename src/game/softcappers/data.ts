@@ -23,7 +23,11 @@ const softcapperData = createSoftcapperDataContainer({
     },
     {
       startsAt: createDecimal("1e4025"),
-      power: createDecimal(0.4),
+      power: createDecimal(0.55),
+    },
+    {
+      startsAt: createDecimal("1e5650"),
+      power: createDecimal(0.65),
     },
   ],
   dertoints: [

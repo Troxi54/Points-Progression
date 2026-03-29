@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getPlayerState } from "@game/player/store";
 import { savePlayer } from "@game/player/persistence/save";
-import { triggerOfflineProgress } from "@game/offline/utils/trigger";
+import { handleVisibilityChangeOffline } from "@game/offline/utils/trigger";
 
 function useGlobalEvents(): void {
   useEffect(() => {
@@ -14,9 +14,7 @@ function useGlobalEvents(): void {
     }
 
     function handleVisibilityChange() {
-      if (!document.hidden) {
-        triggerOfflineProgress();
-      }
+      handleVisibilityChangeOffline();
     }
 
     window.addEventListener("beforeunload", handleBeforeUnload);

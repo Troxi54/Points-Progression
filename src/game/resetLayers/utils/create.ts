@@ -14,7 +14,13 @@ import { DimensionId } from "@game/dimensions/types";
 import { hasUpgrade } from "@game/upgrades/utils/has";
 import { applyResetLayerPlayerData } from "./apply";
 
-export function createResetLayerData(
+export function defineResetLayer<D extends DimensionId>(
+  resetLayer: PartialResetLayerData<D>,
+): PartialResetLayerData<D> {
+  return resetLayer;
+}
+
+export function createResetLayer(
   resetLayerData: PartialResetLayerData,
   dimensionId: DimensionId,
 ): FullResetLayerData {
@@ -33,11 +39,13 @@ export function createResetLayerData(
     mergedPlayer,
     defaultMergedPlayer,
     currentTime,
+    sourceMergedPlayer = mergedPlayer,
   ) {
     const existingResetValue = oldResetFn(
       mergedPlayer,
       defaultMergedPlayer,
       currentTime,
+      sourceMergedPlayer,
     );
 
     const { player } = existingResetValue;
@@ -63,8 +71,8 @@ export function createResetLayerData(
     for (const [containerId, upgradeContainer] of objectEntries(upgrades)) {
       if (!upgradeContainer) continue;
 
-      const newUpgradeContainer = upgradeContainer.map((upgrade, index) => {
-        return upgrade && hasUpgrade(mergedPlayer, containerId, index + 1);
+      const newUpgradeContainer = upgradeContainer.map((bought, index) => {
+        return bought && hasUpgrade(sourceMergedPlayer, containerId, index + 1);
       });
 
       newUpgrades[containerId] = newUpgradeContainer;
@@ -82,13 +90,13 @@ export function createResetLayerData(
   return newResetLayer;
 }
 
-export function createResetLayerDataContainer(
+export function createResetLayerContainer(
   container: PartialResetLayerDataContainer,
 ): ResetLayerDataContainer {
   return objectFromEntries(
     objectEntries(container).map(([dimensionId, dimensionLayers]) => {
       const newDimensionLayers = dimensionLayers.map((layer) =>
-        createResetLayerData(layer, dimensionId),
+        createResetLayer(layer, dimensionId),
       );
       return [dimensionId, newDimensionLayers];
     }),

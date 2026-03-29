@@ -103,6 +103,10 @@ function parseResetLayersValue(
           : defaultResetLayer.everPerformed,
       startedDate:
         Number.isFinite(startedDate) && startedDate > 0 ? startedDate : null,
+      isFirstReset:
+        typeof resetLayerData.isFirstReset === "boolean"
+          ? resetLayerData.isFirstReset
+          : defaultResetLayer.isFirstReset,
       autoEnabled:
         typeof resetLayerData.autoEnabled === "boolean"
           ? resetLayerData.autoEnabled

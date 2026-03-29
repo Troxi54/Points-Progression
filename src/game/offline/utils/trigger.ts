@@ -7,7 +7,7 @@ import { safeNumber } from "@core/utils/number";
 export function triggerOfflineProgress(
   currentTime: number = getCurrentTime(),
 ): void {
-  const { player, cachedPlayer, setCachedPlayer, setPlayer } = getPlayerState();
+  const { player, cachedPlayer, setCachedPlayer } = getPlayerState();
 
   const { lastTick, unspentOfflineTime } = player;
 
@@ -15,17 +15,14 @@ export function triggerOfflineProgress(
   if (!isFinite(deltaTime) || deltaTime <= 0) return;
 
   if (!player.offlineProgressWorks) {
-    return setPlayer({
-      lastTick: currentTime,
-      offlineOffset: player.offlineOffset + deltaTime,
-    });
+    return;
   }
-
-  let startedDate = lastTick - player.offlineOffset;
 
   if (cachedPlayer.offlineProgress) {
     if (deltaTime < offlineConfig.minimumTime) return;
   }
+
+  let startedDate = lastTick - player.offlineOffset;
 
   if (unspentOfflineTime > 0) {
     deltaTime += unspentOfflineTime;
@@ -62,9 +59,28 @@ export function skipOfflineProgress(): void {
   setMergedPlayer({
     player: {
       offlineOffset: player.offlineOffset + remainingTime,
+      unspentOfflineTime: 0,
     },
     cachedPlayer: {
       offlineProgress: false,
     },
+  });
+}
+
+export function handleVisibilityChangeOffline(
+  currentTime: number = getCurrentTime(),
+): void {
+  const { player, setPlayer } = getPlayerState();
+
+  const { lastTick, offlineOffset, offlineProgressWorks } = player;
+
+  let deltaTime = Math.max(currentTime - lastTick, 0);
+  if (!isFinite(deltaTime) || deltaTime <= 0) return;
+
+  if (offlineProgressWorks || document.hidden) return;
+
+  setPlayer({
+    lastTick: currentTime,
+    offlineOffset: offlineOffset + deltaTime,
   });
 }

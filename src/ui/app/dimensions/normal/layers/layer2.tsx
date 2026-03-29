@@ -1,5 +1,5 @@
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import TierBar from "@ui/components/progressBars/TierBar";
+import TierBar from "@ui/components/resetLayers/TierBar";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";

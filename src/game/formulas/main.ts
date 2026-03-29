@@ -112,7 +112,10 @@ const mainFormulas = {
           const works = parseValueGetter(effectData.works, mergedPlayer);
           if (!works) continue;
 
-          effectMode = effectData.mode;
+          const { mode } = effectData;
+          if (mode !== undefined) {
+            effectMode = mode;
+          }
         }
       }
 

@@ -1,9 +1,10 @@
 import { formatNumber } from "@core/format/number";
 import { formatBestRunTime } from "@core/format/time";
 import ResetLayerProgressBar from "@ui/components/base/ProgressBar/ResetLayer";
-import resetLayerConfig from "@game/resetLayers/config";
 import { formatEffectOnCurrency } from "@core/format/effect";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
+import NexusSign from "../base/NexusSign";
 
 function ResetBar() {
   return (
@@ -19,9 +20,7 @@ function ResetBar() {
           <>
             Best run: {formatBestRunTime(bestRun)}{" "}
             {bestRun &&
-              bestRun.lessThanOrEqualTo(
-                resetLayerConfig.firstResetLayerBestRunLimit,
-              ) &&
+              bestRun.lessThanOrEqualTo(resetResetLayerConfig.bestRunLimit) &&
               "(limit)"}
             {" - "}
             <span className="text-reset-effect">
@@ -33,7 +32,7 @@ function ResetBar() {
                     cachedPlayer.runDertointEffect,
                     "dertoints",
                   )}{" "}
-                  <span className="text-(--nexus-milestone-2)">(N2)</span>
+                  <NexusSign level={2} />
                 </>
               )}
             </span>
@@ -53,7 +52,7 @@ function ResetBar() {
                     cachedPlayer.bestPointsOfRunVermoraEffect,
                     "vermora",
                   )}{" "}
-                  <span className="text-(--nexus-milestone-3)">(N3)</span>
+                  <NexusSign level={3} />
                 </>
               )}
             </span>

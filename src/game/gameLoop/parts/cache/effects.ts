@@ -32,6 +32,8 @@ function updateOtherEffects(state: GameLoopPartState) {
     effectFormulas.bestVermytesPoints(mergedPlayer);
 
   cachedPlayer.amplivaultEffect = effectFormulas.amplivault(mergedPlayer);
+  cachedPlayer.amplivaultAmplivoidEffect =
+    effectFormulas.amplivaultAmplivoid(mergedPlayer);
 
   cachedPlayer.firstDertointUpgradeEffect =
     effectFormulas.firstDertointUpgrade(mergedPlayer);
