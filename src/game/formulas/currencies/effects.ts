@@ -192,7 +192,7 @@ const currencyEffectFormulas: EffectFormulaContainer = {
 
     const value = Decimal.pow(4, xagoraDertoints.max(0).plus(1).log10());
     if (!isXagyrosStateActive(mergedPlayer, "dertoints"))
-      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+      return effectFormulas.inactiveXagyrosState(mergedPlayer, value);
 
     return value;
   },
@@ -203,7 +203,7 @@ const currencyEffectFormulas: EffectFormulaContainer = {
 
     const value = Decimal.pow("1.71e9", xagoraPoints.max(0).plus(1).log10());
     if (!isXagyrosStateActive(mergedPlayer, "points"))
-      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+      return effectFormulas.inactiveXagyrosState(mergedPlayer, value);
 
     return value;
   },
@@ -214,7 +214,7 @@ const currencyEffectFormulas: EffectFormulaContainer = {
 
     const value = Decimal.pow(1.05, xagoraNullithResets.max(0).plus(1).log10());
     if (!isXagyrosStateActive(mergedPlayer, "nullithResets"))
-      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+      return effectFormulas.inactiveXagyrosState(mergedPlayer, value);
 
     return value;
   },
@@ -225,7 +225,7 @@ const currencyEffectFormulas: EffectFormulaContainer = {
 
     const value = Decimal.pow(1.03, xagoraNux.max(0).plus(1).log10());
     if (!isXagyrosStateActive(mergedPlayer, "nux"))
-      return effectFormulas.xagyrosStateNotChosen(mergedPlayer, value);
+      return effectFormulas.inactiveXagyrosState(mergedPlayer, value);
 
     return value;
   },

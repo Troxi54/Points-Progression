@@ -849,7 +849,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   },
   {
     condition: ({ player }) => everPerformed(player, "xagyros"),
-    name: "Not chosen Xagyros state effect",
+    name: "Inactive Xagyros state effect",
     node: () => (
       <>
         <Stat>effect</Stat>

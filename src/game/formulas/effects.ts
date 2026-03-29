@@ -107,7 +107,7 @@ const effectFormulas = {
 
     return Decimal.pow(2, dertoints.dividedBy(goal).max(1).log10());
   },
-  xagyrosStateNotChosen(_, effect: Decimal) {
+  inactiveXagyrosState(_, effect: Decimal) {
     return effect.pow(0.5);
   },
   amplivaultAmplivoid(mergedPlayer) {

@@ -1,12 +1,15 @@
-import { MergedPlayer } from "@game/player/merged/types";
 import { XagyrosState } from "../types";
 import xagyrosStateCurrencyMap from "../map";
+import { PlayerLike } from "@game/player/types";
+import { parsePlayerLike } from "@game/player/utils";
 
 export function isXagyrosStateActive(
-  mergedPlayer: MergedPlayer,
+  playerLike: PlayerLike,
   state: XagyrosState,
 ): boolean {
-  return mergedPlayer.player.xagyrosStates.includes(state);
+  const player = parsePlayerLike(playerLike);
+
+  return player.xagyrosStates?.includes(state) ?? false;
 }
 
 export function getXagyrosStateCurrencyId<T extends XagyrosState>(

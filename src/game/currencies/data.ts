@@ -3,6 +3,7 @@ import { createCurrencyDataContainer } from "./utils/create";
 import { everPerformed } from "@game/resetLayers/utils/get";
 import { getCachedCurrencyProp } from "./utils/get";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { isXagyrosStateActive } from "@game/features/xagyrosStates/utils/get";
 
 const currencyData = createCurrencyDataContainer({
   points: {
@@ -192,15 +193,14 @@ const currencyData = createCurrencyDataContainer({
     layer: 3,
     name: "Xagora",
     affects: "dertoints",
-    passiveGainWorks: ({ player }) =>
-      player.xagyrosStates.includes("dertoints"),
+    passiveGainWorks: ({ player }) => isXagyrosStateActive(player, "dertoints"),
   },
   xagoraPoints: {
     dimensionId: "sliph",
     layer: 3,
     name: "Xagora",
     affects: "points",
-    passiveGainWorks: ({ player }) => player.xagyrosStates.includes("points"),
+    passiveGainWorks: ({ player }) => isXagyrosStateActive(player, "points"),
   },
   xagoraNullithResets: {
     dimensionId: "sliph",
@@ -208,14 +208,14 @@ const currencyData = createCurrencyDataContainer({
     name: "Xagora",
     affects: "madeNullithResets",
     passiveGainWorks: ({ player }) =>
-      player.xagyrosStates.includes("nullithResets"),
+      isXagyrosStateActive(player, "nullithResets"),
   },
   xagoraNux: {
     dimensionId: "sliph",
     layer: 3,
     name: "Xagora",
     affects: "nux",
-    passiveGainWorks: ({ player }) => player.xagyrosStates.includes("nux"),
+    passiveGainWorks: ({ player }) => isXagyrosStateActive(player, "nux"),
   },
 });
 
