@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { formatWithPlural } from "./plural";
 import { CurrencyId } from "@game/currencies/types";
 import { formatCurrencyName } from "@game/currencies/utils/format";
-import symbols from "@ui/temp";
+import symbols from "@ui/symbols";
 import { formatNumber } from "./number";
 import Pow from "@ui/components/base/Pow";
 import pluralize from "pluralize";
