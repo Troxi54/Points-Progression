@@ -13,7 +13,7 @@ import createDecimal, {
   decimalIsGreaterByOoM,
   isDecimal,
 } from "@core/utils/decimal";
-import symbols from "@ui/symbols";
+import symbols from "@ui/temp";
 import { isNil } from "@core/utils/nil";
 import { arrayLastItem } from "@core/utils/array";
 import { mergeObjects } from "@core/utils/object";

@@ -1,7 +1,7 @@
 import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import { MenuInfoFormulaContainer } from "./types";
 import { formatNumber, integerCommaFormat } from "@core/format/number";
-import symbols from "@ui/symbols";
+import symbols from "@ui/temp";
 import Stat from "@ui/components/base/Stat";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import Log from "@ui/components/base/Log";
