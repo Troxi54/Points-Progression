@@ -1,7 +1,6 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
-import { visualizer } from "rollup-plugin-visualizer";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,14 +13,6 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   build: {
-    rollupOptions: {
-      plugins: [
-        visualizer({
-          filename: "stats.html",
-          gzipSize: true,
-          brotliSize: true,
-        }),
-      ],
-    },
+    target: "ES2022",
   },
 });
