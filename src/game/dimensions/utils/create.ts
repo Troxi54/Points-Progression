@@ -1,15 +1,15 @@
+import type {
+  DimensionContainer,
+  DimensionData,
+  PartialDimensionContainer,
+  PartialDimensionData,
+} from "../types";
 import {
   mergeObjects,
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
 import getDefaultDimensionData from "../default";
-import {
-  DimensionContainer,
-  DimensionData,
-  PartialDimensionContainer,
-  PartialDimensionData,
-} from "../types";
 
 function createDimensionData(
   dimensionData?: PartialDimensionData,

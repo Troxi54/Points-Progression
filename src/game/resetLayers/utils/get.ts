@@ -1,26 +1,25 @@
-import {
-  ResetLayerPlayerData,
-  PlayerLike,
+import type { DimensionId } from "@game/dimensions/types";
+import type { CachedPlayerLike, CachedResetLayer  } from "@game/player/cached/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type {
   PartialResetLayerPlayerData,
+  PlayerLike,
+  ResetLayerPlayerData,
 } from "@game/player/types";
-import { CachedPlayerLike } from "@game/player/cached/types";
+import type { ResetLayerId } from "../types";
+import { arrayLastIndex } from "@core/utils/array";
+import { objectFromEntries } from "@core/utils/object";
+import { getCurrentGameTime } from "@core/utils/time";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import { getDefaultCachedResetLayer } from "@game/player/cached/default";
+import { getDefaultResetLayerPlayerData } from "@game/player/default";
 import {
   parseCachedPlayerLike,
   parsePlayerLike,
   parseValueGetter,
 } from "@game/player/utils";
-import { objectFromEntries } from "@core/utils/object";
-import resetLayers, { flatResetLayers } from "../data";
-import { getDefaultResetLayerPlayerData } from "@game/player/default";
-import { getDefaultCachedResetLayer } from "@game/player/cached/default";
-import { ResetLayerId } from "../types";
-import { DimensionId } from "@game/dimensions/types";
-import { CachedResetLayer } from "@game/player/cached/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { getCurrentGameTime } from "@core/utils/time";
-import { shouldDimensionWork } from "@game/dimensions/utils/check";
-import { arrayLastIndex } from "@core/utils/array";
 import resetLayerConfig from "../config";
+import resetLayers, { flatResetLayers } from "../data";
 
 export function getResetLayerData(resetLayerId: ResetLayerId) {
   return flatResetLayers[resetLayerId];

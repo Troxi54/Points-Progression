@@ -1,4 +1,4 @@
-import { DecimalSource } from "break_eternity.js";
+import type { DecimalSource } from "break_eternity.js";
 import createDecimal from "./decimal";
 import { stringIsExponentialDecimal } from "./string";
 
@@ -10,7 +10,7 @@ export function handleDecimalInputOnBlur(
   const CONVERT_NUMBER_TO_EXPONENTIAL_AT = 1e16;
 
   function isValid(num: number) {
-    return !isNaN(num) && num >= 0;
+    return !Number.isNaN(num) && num >= 0;
   }
 
   const value = target.value.replace(/\s/g, "");
@@ -33,7 +33,7 @@ export function handleDecimalInputOnBlur(
         if (fixed === 0) {
           processedValue = "0";
         } else {
-          processedValue = fixed + "%";
+          processedValue = `${fixed}%`;
         }
       }
     }
@@ -55,7 +55,7 @@ export function handleDecimalInputOnBlur(
       } else {
         const mantissa = decimal.mantissa;
         const exponent = decimal.exponent;
-        processedValue = Number(mantissa.toFixed(8)) + "e" + exponent;
+        processedValue = `${Number(mantissa.toFixed(8))}e${exponent}`;
       }
     }
   }

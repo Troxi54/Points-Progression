@@ -1,10 +1,10 @@
+import type { FlatRepeatableUpgradeContainer } from "./types";
+import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
+import { objectEntries } from "@core/utils/object";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Decimal from "break_eternity.js";
 import { createRepeatableUpgradeContainer } from "./utils/create";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
-import { FlatRepeatableUpgradeContainer } from "./types";
-import { objectEntries } from "@core/utils/object";
-import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
-import { hasNexusLevel } from "@game/features/nexus/utils/has";
 
 const repeatableUpgrades = createRepeatableUpgradeContainer({
   normal: {

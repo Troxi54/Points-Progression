@@ -1,6 +1,5 @@
-import { DimensionId } from "@game/dimensions/types";
-import getDefaultRepeatableUpgrade from "@game/repeatableUpgrades/default";
-import {
+import type { DimensionId } from "@game/dimensions/types";
+import type {
   FullRepeatableUpgrade,
   PartialRepeatableUpgrade,
   PartialRepeatableUpgradeContainer,
@@ -12,6 +11,7 @@ import {
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
+import getDefaultRepeatableUpgrade from "@game/repeatableUpgrades/default";
 
 export function createRepeatableUpgrade(
   upgrade: PartialRepeatableUpgrade,

@@ -1,8 +1,8 @@
-import { ChildrenProps } from "@core/types/react";
-import { DimensionId } from "@game/dimensions/types";
+import type { ChildrenProps } from "@core/types/react";
+import type { DimensionId } from "@game/dimensions/types";
+import type { ComponentType } from "react";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";
-import { ComponentType } from "react";
 
 interface Props extends ChildrenProps {
   dimensionId: DimensionId;

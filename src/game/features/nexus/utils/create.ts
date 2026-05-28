@@ -1,4 +1,4 @@
-import { NexusMilestoneContainer } from "../types";
+import type { NexusMilestoneContainer } from "../types";
 
 export function createNexusMilestoneContainer(
   container: NexusMilestoneContainer,

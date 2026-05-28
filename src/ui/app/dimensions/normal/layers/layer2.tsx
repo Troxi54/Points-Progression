@@ -1,9 +1,9 @@
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import TierBar from "@ui/components/resetLayers/TierBar";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import AmplifluxUpgrade from "@ui/components/repeatableUpgrades/AmplifluxUpgrade";
+import TierBar from "@ui/components/resetLayers/TierBar";
 import Ampliflux from "@ui/components/states/Ampliflux";
 import AutoTierButton from "@ui/components/toggles/AutoTierButton";
 import TierUpgrades from "@ui/components/upgrades/TierUpgrades";

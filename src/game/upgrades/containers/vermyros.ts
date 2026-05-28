@@ -4,7 +4,7 @@ import { hasUpgrade } from "@game/upgrades/utils/has";
 
 const vermyrosUpgrades = createUpgradeDataContainer({
   id: "vermyros",
-  usePlayer: ({ mergedPlayer }) => ({
+  playerSelector: ({ mergedPlayer }) => ({
     everPerformedNullith: everPerformed(mergedPlayer, "nullith"),
   }),
   forceShow: ({ player }) => everPerformed(player, "nullith"),

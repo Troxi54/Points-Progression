@@ -1,6 +1,6 @@
-import { Player } from "@game/player/types";
-import { minifyPlayer } from "./minify";
+import type { Player } from "@game/player/types";
 import { compressToEncodedURIComponent } from "lz-string";
+import { minifyPlayer } from "./minify";
 
 function compressPlayerToString(player: Player): string {
   const minified = minifyPlayer(player);

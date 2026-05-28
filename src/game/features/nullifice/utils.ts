@@ -1,8 +1,8 @@
-import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
-import { getPlayerState } from "@game/player/store";
-import { Player } from "@game/player/types";
+import type { Player } from "@game/player/types";
 import createDecimal from "@core/utils/decimal";
 import { clamp } from "@core/utils/number";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import { getPlayerState } from "@game/player/store";
 
 export function parseNullionInput(player: Player) {
   let result = createDecimal(0);
@@ -10,7 +10,7 @@ export function parseNullionInput(player: Player) {
   const input = player.nullionInput;
   if (input.includes("%")) {
     let percent = Number(input.slice(0, -1));
-    if (!isNaN(percent)) {
+    if (!Number.isNaN(percent)) {
       percent = clamp(percent, 0, 100);
       result = player.madeNullithResets.multiply(percent / 100);
     }

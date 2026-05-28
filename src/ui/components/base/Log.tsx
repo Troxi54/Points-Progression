@@ -1,5 +1,5 @@
-import { ChildrenProps } from "@core/types/react";
-import { ReactNode } from "react";
+import type { ChildrenProps } from "@core/types/react";
+import type { ReactNode } from "react";
 
 interface Props extends ChildrenProps {
   base?: ReactNode;

@@ -10,7 +10,7 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
   id: "mallirt",
   goal: createDecimal(1e6),
   currency: "dertoints",
-  usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) => ({
+  playerSelector: ({ mergedPlayer: { player, cachedPlayer } }) => ({
     mallirtTotalDertoints: player.mallirtTotalDertoints,
     mallirtTotalDertointsEffect: getCurrencyEffectOn(
       cachedPlayer,

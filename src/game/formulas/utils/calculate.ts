@@ -1,5 +1,5 @@
+import type { DecimalSource } from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
-import { DecimalSource } from "break_eternity.js";
 
 export function calculateGeneration(values: [boolean, DecimalSource][]) {
   let multiplier = createDecimal(0);

@@ -1,10 +1,11 @@
-import Decimal, { DecimalSource } from "break_eternity.js";
-import createDecimal from "./decimal";
-import { getPlayerState } from "@game/player/store";
-import { MergedPlayer } from "@game/player/merged/types";
-import { isNil } from "./nil";
+import type { Nil } from "@core/types/primitives";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { DecimalSource } from "break_eternity.js";
+import type Decimal from "break_eternity.js";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
-import { Nil } from "@core/types/primitives";
+import { getPlayerState } from "@game/player/store";
+import createDecimal from "./decimal";
+import { isNil } from "./nil";
 
 export function calculateTimeForRequirement(
   currencyValue: DecimalSource,
@@ -65,7 +66,7 @@ export function getTimeSince(date: number): number {
 }
 
 export function checkElapsedTime(time: number | null): time is number {
-  return time !== null && isFinite(time) && time > 0;
+  return time !== null && Number.isFinite(time) && time > 0;
 }
 
 export function fixTime(

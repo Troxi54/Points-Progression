@@ -1,4 +1,4 @@
-import { ChildrenProps, ClassNameProps } from "@core/types/react";
+import type { ChildrenProps, ClassNameProps } from "@core/types/react";
 import cn from "@core/utils/tailwind";
 
 interface Props extends ChildrenProps, ClassNameProps {

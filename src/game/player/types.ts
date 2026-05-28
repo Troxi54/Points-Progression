@@ -1,15 +1,14 @@
-import { PickByKeys, PickSetters } from "@core/types/pick";
-import Decimal from "break_eternity.js";
-import { PlayerSetterName } from "./store/types";
-import { PlayerState } from "./store/types";
-import { UpgradeContainerId } from "@game/upgrades/types";
-import { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
-import { CachedPlayer } from "./cached/types";
-import { ResetLayerId } from "@game/resetLayers/types";
-import { GameVersion } from "@core/types/version";
-import { DimensionId } from "@game/dimensions/types";
-import { MergedPlayer, PartialMergedPlayer } from "./merged/types";
-import { XagyrosState } from "@game/features/xagyrosStates/types";
+import type { PickByKeys, PickSetters } from "@core/types/pick";
+import type { GameVersion } from "@core/types/version";
+import type { DimensionId } from "@game/dimensions/types";
+import type { XagyrosState } from "@game/features/xagyrosStates/types";
+import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
+import type { ResetLayerId } from "@game/resetLayers/types";
+import type { UpgradeContainerId } from "@game/upgrades/types";
+import type Decimal from "break_eternity.js";
+import type { CachedPlayer } from "./cached/types";
+import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
+import type { PlayerSetterName, PlayerState  } from "./store/types";
 
 export interface Player {
   gameVersion: GameVersion;

@@ -1,4 +1,4 @@
-import { DimensionData } from "./types";
+import type { DimensionData } from "./types";
 
 export default function getDefaultDimensionData(): DimensionData {
   return {

@@ -1,7 +1,7 @@
-import { ClassName } from "@core/types/react";
+import type { ClassName } from "@core/types/react";
+import type { ReactNode } from "react";
 import { isFunction } from "@core/utils/function";
 import cn from "@core/utils/tailwind";
-import { ReactNode } from "react";
 
 interface Props {
   active: boolean;

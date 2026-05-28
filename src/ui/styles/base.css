@@ -9,23 +9,9 @@
   }
 
   body {
-    @apply m-0 flex place-items-center min-w-[320px] min-h-screen bg-bg font-[inherit] tabular-nums;
+    @apply m-0 flex place-items-center min-w-80 min-h-screen bg-bg font-[inherit] tabular-nums;
   }
 
-  p {
-    @apply my-[1em];
-  }
-
-  a {
-    @apply font-medium text-link hover:text-link-hover;
-  }
-
-  h1 {
-    @apply text-[3.2em] my-[.5em];
-  }
-  h2 {
-    @apply text-[1.5em] my-[.83em];
-  }
   sup,
   sub {
     @apply text-inherit;
@@ -35,24 +21,9 @@
     @apply text-inherit;
   }
 
-  button {
-    @apply px-[1.2em] py-[0.6em] text-[1em] bg-button-bg
-           transition-colors-250
-           border-[0.2em] border-transparent cursor-pointer hover:border-button-border-hover;
-  }
-
   button *,
   a * {
     @apply font-medium;
-  }
-
-  div,
-  button {
-    @apply flex items-center justify-center;
-  }
-
-  button {
-    @apply flex-col min-h-[1em];
   }
 
   input[type="text"] {

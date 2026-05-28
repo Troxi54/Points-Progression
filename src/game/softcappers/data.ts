@@ -1,7 +1,7 @@
-import { getCurrencyEffectOn } from "@game/currencies/utils/get";
-import { createSoftcapperDataContainer } from "./utils/create";
 import createDecimal from "@core/utils/decimal";
+import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import cappergyConfig from "@game/features/cappergy/config";
+import { createSoftcapperDataContainer } from "./utils/create";
 
 const softcapperData = createSoftcapperDataContainer({
   points: [

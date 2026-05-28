@@ -27,7 +27,7 @@ function smartMergeDecimalObject<T>(oldObj: T, newObj: Partial<T>): T {
   const result = { ...oldObj };
 
   for (const key in newObj) {
-    if (!Object.prototype.hasOwnProperty.call(newObj, key)) continue;
+    if (!Object.hasOwn(newObj, key)) continue;
 
     const k = key as keyof T;
     const oldVal = oldObj[k];
@@ -79,7 +79,6 @@ export function objectAssign<T extends object>(
   return Object.assign(base, override);
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function deepCopy<T>(obj: T, depth: number = Infinity): T {
   if (depth < 1 || obj === null || typeof obj !== "object") {
     return obj;
@@ -103,7 +102,7 @@ export function deepCopy<T>(obj: T, depth: number = Infinity): T {
           : (parent[key] = {});
 
     for (const k in value) {
-      if (Object.prototype.hasOwnProperty.call(value, k)) {
+      if (Object.hasOwn(value, k)) {
         const v = value[k];
         if (v !== null && typeof v === "object" && d > 1) {
           stack.push({ parent: target, key: k, value: v, depth: d - 1 });
@@ -116,7 +115,6 @@ export function deepCopy<T>(obj: T, depth: number = Infinity): T {
 
   return root;
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function createUniqueObject<
   T extends Readonly<Record<string, unknown>>,

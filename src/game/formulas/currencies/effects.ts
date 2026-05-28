@@ -1,10 +1,10 @@
-import Decimal from "break_eternity.js";
-import { EffectFormulaContainer } from "../types";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
+import type { EffectFormulaContainer } from "../types";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
-import { getCachedCurrencyProp } from "@game/currencies/utils/get";
-import effectFormulas from "../effects";
+import { calculateCurrencyPassiveGain } from "@game/currencies/utils/calculate";
 import { isXagyrosStateActive } from "@game/features/xagyrosStates/utils/get";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import Decimal from "break_eternity.js";
+import effectFormulas from "../effects";
 
 const currencyEffectFormulas: EffectFormulaContainer = {
   points({ player: { points } }) {
@@ -144,8 +144,12 @@ const currencyEffectFormulas: EffectFormulaContainer = {
       mallirtTotalDertoints.dividedBy(133456).max(0).plus(1).log10(),
     );
   },
-  cappergy({ player: { cappergy }, cachedPlayer }) {
-    const gain = getCachedCurrencyProp(cachedPlayer, "cappergy", "passiveGain");
+  cappergy(mergedPlayer) {
+    const {
+      player: { cappergy },
+    } = mergedPlayer;
+
+    const gain = calculateCurrencyPassiveGain(mergedPlayer, "cappergy");
 
     const n = cappergy.plus(gain).max(0).plus(1);
 

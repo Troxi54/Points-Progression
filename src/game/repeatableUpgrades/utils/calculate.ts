@@ -1,13 +1,14 @@
-import { MergedPlayer } from "@game/player/merged/types";
-import { parseValueGetter } from "@game/player/utils";
-import {
+import type { MergedPlayer } from "@game/player/merged/types";
+import type {
   RepeatableUpgrade,
   RepeatableUpgradeId,
 } from "@game/repeatableUpgrades/types";
-import Decimal, { DecimalSource } from "break_eternity.js";
-import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
-import { calculateBulk } from "@core/utils/level";
+import type { DecimalSource } from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
+import { calculateBulk } from "@core/utils/level";
+import { parseValueGetter } from "@game/player/utils";
+import Decimal from "break_eternity.js";
+import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
 
 export function calculateRepeatableUpgradeCost(
   repeatableUpgrade: RepeatableUpgrade,

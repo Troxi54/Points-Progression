@@ -1,10 +1,10 @@
+import type { FormulaContainer } from "./types";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
-import { FormulaContainer } from "./types";
-import Decimal from "break_eternity.js";
-import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
-import formulas from "./data";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import { getResetLayerData } from "@game/resetLayers/utils/get";
+import Decimal from "break_eternity.js";
+import formulas from "./data";
 
 const effectFormulas = {
   firstResetLayerRun({ player }) {

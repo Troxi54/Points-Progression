@@ -1,7 +1,7 @@
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getPlayerState } from "@game/player/store";
-import nuxarConfig from "./config";
 import Decimal from "break_eternity.js";
+import nuxarConfig from "./config";
 
 export function triggerNuxar() {
   const { player, mergedPlayer, setPlayer } = getPlayerState();

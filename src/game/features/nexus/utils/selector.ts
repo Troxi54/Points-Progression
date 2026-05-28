@@ -1,9 +1,9 @@
-import { PlayerLike } from "@game/player/types";
-import { DecimalSource } from "break_eternity.js";
-import { hasNexusLevel } from "./has";
-import { NexusLevelSelection } from "../types";
-import { parsePlayerLike } from "@game/player/utils";
+import type { PlayerLike } from "@game/player/types";
+import type { DecimalSource } from "break_eternity.js";
+import type { NexusLevelSelection } from "../types";
 import { objectFromEntries } from "@core/utils/object";
+import { parsePlayerLike } from "@game/player/utils";
+import { hasNexusLevel } from "./has";
 
 export function hasNexusLevelSelection<T extends string>(
   playerLike: PlayerLike,

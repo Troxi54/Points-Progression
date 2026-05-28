@@ -1,6 +1,6 @@
-import { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
-import { PartialPlayer, Player } from "@game/player/types";
-import { MergedPlayer, MergedPlayerState, PartialMergedPlayer } from "./types";
+import type { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
+import type { PartialPlayer, Player } from "@game/player/types";
+import type { MergedPlayer, MergedPlayerState, PartialMergedPlayer } from "./types";
 import { objectAssign } from "@core/utils/object";
 
 export function mergePlayer(

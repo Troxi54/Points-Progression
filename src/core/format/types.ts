@@ -1,4 +1,4 @@
-import { DecimalSource } from "break_eternity.js";
+import type { DecimalSource } from "break_eternity.js";
 
 export type Unit = string;
 

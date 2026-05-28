@@ -1,5 +1,5 @@
-import { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
-import { PartialPlayer, Player } from "@game/player/types";
+import type { CachedPlayer, PartialCachedPlayer } from "@game/player/cached/types";
+import type { PartialPlayer, Player } from "@game/player/types";
 
 export interface MergedPlayer {
   player: Player;

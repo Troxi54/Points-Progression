@@ -1,12 +1,12 @@
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import Amplivault from "@ui/components/buttons/Amplivault";
-import CoreButton from "@ui/components/buttons/CoreButton";
-import VermyrosBar from "@ui/components/resetLayers/VermyrosBar";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Amplivault from "@ui/components/game/buttons/Amplivault";
+import CoreButton from "@ui/components/game/buttons/CoreButton";
 import CoreUpgrade from "@ui/components/repeatableUpgrades/CoreUpgrade";
 import VermyteUpgrade from "@ui/components/repeatableUpgrades/VermyteUpgrade";
+import VermyrosBar from "@ui/components/resetLayers/VermyrosBar";
 import Cores from "@ui/components/states/Cores";
 import DarkEnergy from "@ui/components/states/DarkEnergy";
 import Energy from "@ui/components/states/Energy";

@@ -1,10 +1,10 @@
-import createDecimal from "@core/utils/decimal";
-import {
+import type {
   CachedCurrency,
   CachedPlayer,
   CachedRepeatableUpgrade,
   CachedResetLayer,
 } from "./types";
+import createDecimal from "@core/utils/decimal";
 import { getCurrentTime } from "@core/utils/time";
 
 export function getDefaultCachedPlayer(): CachedPlayer {

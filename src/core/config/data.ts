@@ -1,4 +1,4 @@
-import { GameVersion } from "@core/types/version";
+import type { GameVersion } from "@core/types/version";
 import createDecimal from "@core/utils/decimal";
 
 const gameConfig = {

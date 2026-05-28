@@ -1,6 +1,6 @@
-import { Nil } from "@core/types/primitives";
-import { ClassName } from "@core/types/react";
-import { ReactNode } from "react";
+import type { Nil } from "@core/types/primitives";
+import type { ClassName } from "@core/types/react";
+import type { ReactNode } from "react";
 
 export interface AnimatedBarOptions {
   gradientStep: string;
@@ -8,11 +8,11 @@ export interface AnimatedBarOptions {
   animationDuration: string;
 }
 
-export type ProgressBarProps = {
+export interface ProgressBarProps {
   mode?: "static" | "animated";
   progressBarClassName?: ClassName;
   progressFillClassName?: ClassName;
   backgroundClassName?: ClassName;
   animatedBarOptions?: Partial<AnimatedBarOptions>;
   labelParts?: ReactNode[] | Nil;
-};
+}

@@ -1,9 +1,11 @@
-import Menu from "@ui/components/layouts/menus";
-import NormalDimension from "./dimensions/normal";
-import useGlobalEvents from "@ui/hooks/useGlobalEvents";
+import Menu from "@ui/components/game/menu";
 import useDimensionScroll from "@ui/hooks/useDimensionScroll";
-import SliphDimension from "./dimensions/sliph";
+import useGlobalEvents from "@ui/hooks/useGlobalEvents";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
+import NormalDimension from "./dimensions/normal";
+import SliphDimension from "./dimensions/sliph";
+import Heading from "@ui/components/base/Heading";
+import gameConfig from "@core/config/data";
 
 function App() {
   useGlobalEvents();
@@ -16,6 +18,9 @@ function App() {
 
   return (
     <>
+      <Heading level={1} className="sr-only">
+        {gameConfig.gameName}
+      </Heading>
       <Menu />
       <div className="size-full flex-col gap-20 pt-[calc(8vmin+1.5rem)] pb-12">
         <NormalDimension />

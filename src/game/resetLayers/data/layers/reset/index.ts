@@ -8,7 +8,7 @@ import { defineResetLayer } from "@game/resetLayers/utils/create";
 const resetResetLayer = defineResetLayer<"normal">({
   id: "reset",
   goal: createDecimal(1e6),
-  usePlayer: ({ mergedPlayer }) => {
+  playerSelector: ({ mergedPlayer }) => {
     const { player, cachedPlayer } = mergedPlayer;
 
     return mergeObjects(

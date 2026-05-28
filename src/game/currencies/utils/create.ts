@@ -1,3 +1,8 @@
+import type {
+  CurrencyDataContainer,
+  PartialCurrencyData,
+  PartialCurrencyDataContainer,
+} from "../types";
 import {
   isObject,
   mergeObjects,
@@ -7,11 +12,6 @@ import {
 import getDefaultCurrencyData, {
   getDefaultCurrencyEffectData,
 } from "../default";
-import {
-  CurrencyDataContainer,
-  PartialCurrencyData,
-  PartialCurrencyDataContainer,
-} from "../types";
 
 function createCurrencyData(currencyData?: PartialCurrencyData) {
   const defaultData = getDefaultCurrencyData();

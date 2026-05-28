@@ -1,21 +1,9 @@
-import { PartialPlayer, PlayerLike } from "@game/player/types";
-import { PartialCachedPlayer } from "@game/player/cached/types";
-import { CachedPlayerLike } from "@game/player/cached/types";
-import { PartialMergedPlayer } from "@game/player/merged/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { CachedRepeatableUpgrade } from "@game/player/cached/types";
-import { flatRepeatableUpgrades } from "../data";
-import { RepeatableUpgrade, RepeatableUpgradeId } from "../types";
-import Decimal from "break_eternity.js";
-import {
-  parseCachedPlayerLike,
-  parsePlayerLike,
-  parseValueGetter,
-} from "@game/player/utils";
-import {
-  assignCachedPlayerForMergedPlayer,
-  assignMergedPlayer,
-} from "@game/player/merged/utils";
+import type { CachedPlayerLike, CachedRepeatableUpgrade , PartialCachedPlayer  } from "@game/player/cached/types";
+import type { MergedPlayer, PartialMergedPlayer  } from "@game/player/merged/types";
+import type { PartialPlayer, PlayerLike } from "@game/player/types";
+import type Decimal from "break_eternity.js";
+import type { RepeatableUpgrade, RepeatableUpgradeId } from "../types";
+import createDecimal from "@core/utils/decimal";
 import {
   copyObject,
   deepCopy,
@@ -23,15 +11,24 @@ import {
   objectEntries,
   objectKeys,
 } from "@core/utils/object";
-import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import {
-  getRepeatableUpgradeBulkCostAndLevel,
-  calculateRepeatableUpgradeCost,
+  assignCachedPlayerForMergedPlayer,
+  assignMergedPlayer,
+} from "@game/player/merged/utils";
+import {
+  parseCachedPlayerLike,
+  parsePlayerLike,
+  parseValueGetter,
+} from "@game/player/utils";
+import { flatRepeatableUpgrades } from "../data";
+import {
   calculateRepeatableUpgradeBulkWithMax,
+  calculateRepeatableUpgradeCost,
+  getRepeatableUpgradeBulkCostAndLevel,
   getRepeatableUpgradeMaxLevel,
 } from "./calculate";
-import { shouldDimensionWork } from "@game/dimensions/utils/check";
-import createDecimal from "@core/utils/decimal";
+import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
 
 export function applyRepeatableUpgradeLevel(
   playerLike: PlayerLike,

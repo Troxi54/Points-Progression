@@ -1,12 +1,12 @@
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import BreakAmplivault from "@ui/components/buttons/BreakAmplivault";
-import Nexus from "@ui/components/buttons/Nexus";
-import Nullifice from "@ui/components/buttons/Nullifice";
-import Nuxar from "@ui/components/buttons/Nuxar";
-import Sliph from "@ui/components/buttons/Sliph";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import BreakAmplivault from "@ui/components/game/buttons/BreakAmplivault";
+import Nexus from "@ui/components/game/buttons/Nexus";
+import Nullifice from "@ui/components/game/buttons/Nullifice";
+import Nuxar from "@ui/components/game/buttons/Nuxar";
+import Sliph from "@ui/components/game/buttons/Sliph";
 import NullithBar from "@ui/components/resetLayers/NullithBar";
 import AutoNullithButton from "@ui/components/toggles/AutoNullithButton";
 import NullithUpgrades from "@ui/components/upgrades/NullithUpgrades";

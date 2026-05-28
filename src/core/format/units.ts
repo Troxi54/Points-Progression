@@ -1,7 +1,7 @@
-import createDecimal from "@core/utils/decimal";
-import { FormatNumberGroupContainer, Unit } from "./types";
-import Decimal from "break_eternity.js";
+import type { FormatNumberGroupContainer, Unit } from "./types";
 import { arrayLastItem } from "@core/utils/array";
+import createDecimal from "@core/utils/decimal";
+import Decimal from "break_eternity.js";
 
 const formatUnits: FormatNumberGroupContainer = [
   {
@@ -54,7 +54,8 @@ const formatUnits: FormatNumberGroupContainer = [
 export default formatUnits;
 
 export const allFormatUnitsLog: [Unit, Decimal][] = [];
-export let formatExponentialNotationStartsAtLog: Decimal = createDecimal(0);
+
+let exponentialNotationStartsAtLog = createDecimal(0);
 
 function buildAllFormatUnits() {
   let startsAt = createDecimal(1);
@@ -72,13 +73,15 @@ function buildAllFormatUnits() {
       const isLastUnit =
         group === arrayLastItem(formatUnits) && unit === arrayLastItem(units);
       if (isLastUnit) {
-        formatExponentialNotationStartsAtLog = startsAt.log10();
+        exponentialNotationStartsAtLog = startsAt.log10();
       }
     }
   }
 }
 
 buildAllFormatUnits();
+export const formatExponentialNotationStartsAtLog =
+  exponentialNotationStartsAtLog;
 
 const firstUnitGroup = formatUnits[0];
 const firstUnitGroupSize = Decimal.pow(

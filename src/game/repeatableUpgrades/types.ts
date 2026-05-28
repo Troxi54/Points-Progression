@@ -1,15 +1,14 @@
-import { DimensionId } from "@game/dimensions/types";
-import { BooleanGetter, ValueGetter } from "@game/player/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { CurrencyId } from "@game/currencies/types";
-import { CachedRepeatableUpgrade } from "@game/player/cached/types";
-import Decimal from "break_eternity.js";
-import RepeatableUpgrade from "@ui/components/base/RepeatableUpgrade";
+import type { CurrencyId } from "@game/currencies/types";
+import type { DimensionId } from "@game/dimensions/types";
+import type { CachedRepeatableUpgrade } from "@game/player/cached/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { BooleanGetter, ValueGetter } from "@game/player/types";
+import type Decimal from "break_eternity.js";
 
-export type RepeatableUpgradeIds = {
+export interface RepeatableUpgradeIds {
   normal: "point" | "ampliflux" | "vermyte" | "core";
   sliph: "dertoint" | "amplivoid";
-};
+}
 
 export type RepeatableUpgradeId =
   RepeatableUpgradeIds[keyof RepeatableUpgradeIds];

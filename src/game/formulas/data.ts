@@ -1,14 +1,15 @@
-import createDecimal from "@core/utils/decimal";
-import { FormulaContainer } from "./types";
-import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
-import Decimal, { DecimalSource } from "break_eternity.js";
-import amplivaultConfig from "@game/features/amplivault/config";
-import { calculateBulk } from "@core/utils/level";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
-import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import type { DecimalSource } from "break_eternity.js";
+import type { FormulaContainer } from "./types";
 import gameConfig from "@core/config/data";
+import createDecimal from "@core/utils/decimal";
+import { calculateBulk } from "@core/utils/level";
+import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import amplivaultConfig from "@game/features/amplivault/config";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import tierResetLayerConfig from "@game/resetLayers/data/layers/tier/config";
+import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import Decimal from "break_eternity.js";
 
 const formulas = {
   bestPoints({ player }) {

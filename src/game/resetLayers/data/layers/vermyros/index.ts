@@ -1,18 +1,18 @@
-import { defineResetLayer } from "@game/resetLayers/utils/create";
 import createDecimal from "@core/utils/decimal";
+import { mergeObjects } from "@core/utils/object";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
+import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
+import { defineResetLayer } from "@game/resetLayers/utils/create";
+import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
 import { applyUpgradesById } from "@game/upgrades/utils/apply";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
-import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
-import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
-import { mergeObjects } from "@core/utils/object";
-import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 
 const vermyrosResetLayer = defineResetLayer<"normal">({
   id: "vermyros",
-  usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) =>
+  playerSelector: ({ mergedPlayer: { player, cachedPlayer } }) =>
     mergeObjects(
       {
         bestVermytes: player.bestVermytes,

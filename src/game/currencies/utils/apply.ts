@@ -1,4 +1,14 @@
-import { MergedPlayer } from "@game/player/merged/types";
+import type {
+  CachedCurrency,
+  CachedPlayerLike,
+  PartialCachedPlayer,
+} from "@game/player/cached/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { PartialPlayer } from "@game/player/types";
+import type Decimal from "break_eternity.js";
+import type { CurrencyId } from "../types";
+import createDecimal from "@core/utils/decimal";
+import { isFunction } from "@core/utils/function";
 import {
   copyObject,
   isObject,
@@ -6,25 +16,15 @@ import {
   objectEntries,
   objectKeys,
 } from "@core/utils/object";
+import currencyEffectFormulas from "@game/formulas/currencies/effects";
+import { parseCachedPlayerLike, parseValueGetter } from "@game/player/utils";
 import currencyData from "../data";
 import {
-  CachedCurrency,
-  CachedPlayerLike,
-  PartialCachedPlayer,
-} from "@game/player/cached/types";
-import createDecimal from "@core/utils/decimal";
-import { parseCachedPlayerLike, parseValueGetter } from "@game/player/utils";
-import {
-  calculateEffectOnCurrency,
   calculateCurrencyGain,
   calculateCurrencyPassiveGainFromGain,
+  calculateEffectOnCurrency,
 } from "./calculate";
-import { CurrencyId } from "../types";
-import currencyEffectFormulas from "@game/formulas/currencies/effects";
-import { isFunction } from "@core/utils/function";
-import { PartialPlayer } from "@game/player/types";
 import { getCachedCurrencyProp } from "./get";
-import Decimal from "break_eternity.js";
 
 function setCachedCurrency(
   cachedPlayerLike: CachedPlayerLike,

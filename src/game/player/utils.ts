@@ -1,15 +1,13 @@
-import { getDefaultPlayer } from "./default";
-import { getDefaultCachedPlayer } from "./cached/default";
-import { PartialPlayer, Player, PlayerLike, ValueGetter } from "./types";
-import { CachedPlayerLike, PartialCachedPlayer } from "./cached/types";
-import { PartialMergedPlayer } from "./merged/types";
-import { MergedPlayer } from "./merged/types";
-import { CachedPlayer } from "./cached/types";
+import type { NotFunction } from "@core/types/function";
+import type { BooleanKeys } from "@core/types/keys";
+import type { CachedPlayer, CachedPlayerLike, PartialCachedPlayer  } from "./cached/types";
+import type { MergedPlayer, PartialMergedPlayer  } from "./merged/types";
+import type { PlayerState } from "./store/types";
+import type { PartialPlayer, Player, PlayerLike, ValueGetter } from "./types";
 import resetGame from "@main/resetGame";
+import { getDefaultCachedPlayer } from "./cached/default";
+import { getDefaultPlayer } from "./default";
 import { getPlayerState } from "./store";
-import { PlayerState } from "./store/types";
-import { NotFunction } from "@core/types/function";
-import { BooleanKeys } from "@core/types/keys";
 
 export function resetPlayerData() {
   const { setPlayer, setCachedPlayer } = getPlayerState();

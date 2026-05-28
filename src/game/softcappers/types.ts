@@ -1,8 +1,8 @@
-import { CurrencyId } from "@game/currencies/types";
-import { DecimalSoftcapMode } from "@core/types/decimal";
-import { Optional } from "@core/types/partial";
-import { ValueGetter } from "@game/player/types";
-import Decimal from "break_eternity.js";
+import type { DecimalSoftcapMode } from "@core/types/decimal";
+import type { Optional } from "@core/types/partial";
+import type { CurrencyId } from "@game/currencies/types";
+import type { ValueGetter } from "@game/player/types";
+import type Decimal from "break_eternity.js";
 
 export default interface SoftcapperData {
   startsAt: ValueGetter<Decimal>;

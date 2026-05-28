@@ -18,5 +18,5 @@ export function stringIsNumeric(str: string): boolean {
   str = str.trim();
   if (!str) return false;
 
-  return !isNaN(Number(str));
+  return !Number.isNaN(Number(str));
 }

@@ -1,9 +1,9 @@
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import LevelBar from "@ui/components/resetLayers/LevelBar";
+import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import AmplivoidUpgrade from "@ui/components/repeatableUpgrades/AmplivoidUpgrade";
+import LevelBar from "@ui/components/resetLayers/LevelBar";
 import Amplivoid from "@ui/components/states/Amplivoid";
 import Score from "@ui/components/states/Score";
 import XPState from "@ui/components/states/XP";

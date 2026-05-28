@@ -1,9 +1,9 @@
-import { CurrencyId } from "@game/currencies/types";
-import Decimal from "break_eternity.js";
-import softcapperData from "../data";
+import type { CurrencyId } from "@game/currencies/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type Decimal from "break_eternity.js";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
-import { MergedPlayer } from "@game/player/merged/types";
 import { parseValueGetter } from "@game/player/utils";
+import softcapperData from "../data";
 
 export function calculateSoftcappedGain(
   mergedPlayer: MergedPlayer,

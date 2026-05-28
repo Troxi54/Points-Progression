@@ -5,7 +5,7 @@ const levelUpgrades = createUpgradeDataContainer({
   id: "level",
   dimensionId: "sliph",
   currency: "mallirtTotalDertoints",
-  usePlayer: ({ mergedPlayer }) => ({
+  playerSelector: ({ mergedPlayer }) => ({
     everPerformedXagyros: everPerformed(mergedPlayer, "xagyros"),
   }),
   forceShow: ({ player }) => everPerformed(player, "xagyros"),

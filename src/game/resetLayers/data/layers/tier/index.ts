@@ -12,7 +12,7 @@ import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 
 const tierResetLayer = defineResetLayer<"normal">({
   id: "tier",
-  usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) =>
+  playerSelector: ({ mergedPlayer: { player, cachedPlayer } }) =>
     mergeObjects(
       {
         tier: player.tier,

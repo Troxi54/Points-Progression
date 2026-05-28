@@ -1,8 +1,8 @@
-import { MergedPlayer } from "@game/player/merged/types";
-import { DimensionId } from "../types";
-import { getDimensionData } from "./get";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { DimensionId } from "../types";
 import { parseValueGetter } from "@game/player/utils";
 import { isDimension } from "./compare";
+import { getDimensionData } from "./get";
 
 export function shouldDimensionWork(
   mergedPlayer: MergedPlayer,

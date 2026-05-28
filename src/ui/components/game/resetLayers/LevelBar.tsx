@@ -1,0 +1,28 @@
+import { formatEffectOnCurrency } from "@core/format/effect";
+import { integerCommaFormat } from "@core/format/number";
+import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
+
+function LevelBar() {
+  return (
+    <ResetLayerProgressBar
+      resetLayerId="level"
+      progressFillClassName="bg-level-bar"
+      labelParts={({ cachedPlayer }) => {
+        return [
+          <>
+            Level: {integerCommaFormat(cachedPlayer.level)} -{" "}
+            <span className="text-level-effect">
+              Effect:{" "}
+              {formatEffectOnCurrency(
+                cachedPlayer.levelDertointEffect,
+                "dertoints",
+              )}
+            </span>
+          </>,
+        ];
+      }}
+    />
+  );
+}
+
+export default LevelBar;

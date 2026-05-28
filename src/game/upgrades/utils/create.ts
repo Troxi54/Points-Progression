@@ -1,4 +1,4 @@
-import {
+import type {
   BuiltUpgradeDataContainer,
   UpgradeDataContainer,
 } from "@game/upgrades/types";

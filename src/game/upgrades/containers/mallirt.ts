@@ -7,7 +7,7 @@ const mallirtUpgrades = createUpgradeDataContainer({
   dimensionId: "sliph",
   currency: "mallirtTotalDertoints",
   spendCurrency: ({ player }) => !hasUpgradeById(player, "level_1"),
-  usePlayer: ({ mergedPlayer }) => ({
+  playerSelector: ({ mergedPlayer }) => ({
     everPerformedLevel: everPerformed(mergedPlayer, "level"),
   }),
   forceShow: ({ player }) => everPerformed(player, "level"),

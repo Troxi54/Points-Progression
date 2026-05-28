@@ -1,6 +1,6 @@
-import { CurrencyId } from "@game/currencies/types";
-import { DimensionId } from "@game/dimensions/types";
-import { UpgradeData, UpgradeDataContainer } from "@game/upgrades/types";
+import type { CurrencyId } from "@game/currencies/types";
+import type { DimensionId } from "@game/dimensions/types";
+import type { UpgradeData, UpgradeDataContainer } from "@game/upgrades/types";
 
 export function getUpgradeCurrency(
   upgradeData: UpgradeData,

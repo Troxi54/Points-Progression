@@ -1,10 +1,12 @@
-import { ChildrenProps } from "@core/types/react";
+import type { ChildrenProps } from "@core/types/react";
+import type { CSSProperties } from "react";
+import type { ProgressBarProps } from "./types";
+import { clamp } from "@core/utils/number";
 import { mergeObjects } from "@core/utils/object";
 import cn from "@core/utils/tailwind";
-import { clamp } from "@core/utils/number";
-import { CSSProperties, Fragment } from "react";
-import { ProgressBarProps } from "./types";
+import { Fragment } from "react";
 import progressBarConfig from "./config";
+import Paragraph from "../Paragraph";
 
 interface Props extends ProgressBarProps, ChildrenProps {
   progress: number;
@@ -37,7 +39,7 @@ function ProgressBar({
       aria-valuemax={100}
       className={cn("relative", progressBarClassName, bgClassName)}
     >
-      <p className="z-1">
+      <Paragraph className="z-1">
         {children}
         {labelParts?.map((part, index) => (
           <Fragment key={index}>
@@ -45,7 +47,7 @@ function ProgressBar({
             {part}
           </Fragment>
         ))}
-      </p>
+      </Paragraph>
 
       {barMode === "static" ? (
         <div

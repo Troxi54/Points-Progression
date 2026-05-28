@@ -1,10 +1,10 @@
-import { getPlayerState } from "@game/player/store";
-import { copyObject } from "@core/utils/object";
-import { mergePlayer } from "@game/player/merged/utils";
-import { createGameLoopPartState } from "../utils/create";
-import offlineConfig from "@game/offline/config";
 import { clamp, safeNumber } from "@core/utils/number";
+import { copyObject } from "@core/utils/object";
+import offlineConfig from "@game/offline/config";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
+import { mergePlayer } from "@game/player/merged/utils";
+import { getPlayerState } from "@game/player/store";
+import { createGameLoopPartState } from "../utils/create";
 
 export default function gameLoopPreTick(currentTime: number) {
   const { player, cachedPlayer, setMergedPlayer } = getPlayerState();

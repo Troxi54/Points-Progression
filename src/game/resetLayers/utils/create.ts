@@ -1,17 +1,17 @@
-import {
-  mergeObjects,
-  objectEntries,
-  objectFromEntries,
-} from "@core/utils/object";
-import getDefaultResetLayerData from "../default";
-import {
+import type { DimensionId } from "@game/dimensions/types";
+import type {
   FullResetLayerData,
   PartialResetLayerData,
   PartialResetLayerDataContainer,
   ResetLayerDataContainer,
 } from "../types";
-import { DimensionId } from "@game/dimensions/types";
+import {
+  mergeObjects,
+  objectEntries,
+  objectFromEntries,
+} from "@core/utils/object";
 import { hasUpgrade } from "@game/upgrades/utils/has";
+import getDefaultResetLayerData from "../default";
 import { applyResetLayerPlayerData } from "./apply";
 
 export function defineResetLayer<D extends DimensionId>(

@@ -1,0 +1,34 @@
+import { formatCurrencyEffect } from "@game/currencies/utils/format";
+import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
+import CurrencyComponent from "@ui/components/base/Currency";
+import NexusSign from "../features/NexusSign";
+
+function Energy() {
+  return (
+    <CurrencyComponent
+      currencyId="energy"
+      containerClassName="bg-energy-bg"
+      textClassName="text-energy"
+      effectClassName="text-energy-effect"
+      playerSelector={(state) => hasNexusLevelSelection(state, 12, "12")}
+      effectNodes={[
+        {
+          node: ({ cachedPlayer }) =>
+            formatCurrencyEffect(cachedPlayer, "energy", "points"),
+        },
+        {
+          works: ({ player }) => hasNexusLevel(player, 12),
+          node: ({ cachedPlayer }) => (
+            <>
+              {formatCurrencyEffect(cachedPlayer, "energy", "xagoraDertoints")}{" "}
+              <NexusSign level={12} />
+            </>
+          ),
+        },
+      ]}
+    />
+  );
+}
+
+export default Energy;

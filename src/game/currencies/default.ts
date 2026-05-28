@@ -1,4 +1,4 @@
-import { CurrencyData, CurrencyEffectData } from "./types";
+import type { CurrencyData, CurrencyEffectData } from "./types";
 
 export default function getDefaultCurrencyData(): CurrencyData {
   return {

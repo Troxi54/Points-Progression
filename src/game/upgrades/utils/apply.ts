@@ -1,17 +1,17 @@
-import { PlayerLike, PartialPlayer } from "@game/player/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { parsePlayerLike } from "@game/player/utils";
-import {
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { PartialPlayer, PlayerLike } from "@game/player/types";
+import type {
   UpgradeContainerId,
   UpgradeData,
   UpgradeDataContainer,
   UpgradeId,
 } from "@game/upgrades/types";
 import { copyObject, deepCopy, objectEntries } from "@core/utils/object";
-import { splitUpgradeId } from "./id";
-import { hasPreviousUpgrade, hasUpgrade } from "./has";
-import { getUpgradeContainerDimensionId, getUpgradeCurrency } from "./get";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import { parsePlayerLike } from "@game/player/utils";
+import { getUpgradeContainerDimensionId, getUpgradeCurrency } from "./get";
+import { hasPreviousUpgrade, hasUpgrade } from "./has";
+import { splitUpgradeId } from "./id";
 
 export function applyUpgrade(
   playerLike: PlayerLike,
@@ -39,7 +39,9 @@ export function applyUpgrade(
   const emptyUpgrades = upgradeNumber - length;
 
   if (emptyUpgrades > 0) {
-    const arrayToFill = Array<boolean>(emptyUpgrades).fill(false);
+    const arrayToFill = Array.from<boolean>({ length: emptyUpgrades }).fill(
+      false,
+    );
     container.push(...arrayToFill);
   }
 
@@ -94,7 +96,9 @@ export function applyUpgradesById(
     const emptyUpgrades = upgradeNumber - length;
 
     if (emptyUpgrades > 0) {
-      const arrayToFill = Array<boolean>(emptyUpgrades).fill(false);
+      const arrayToFill = Array.from<boolean>({ length: emptyUpgrades }).fill(
+        false,
+      );
       container.push(...arrayToFill);
     }
 

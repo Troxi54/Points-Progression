@@ -1,21 +1,21 @@
+import type { CurrencyId } from "@game/currencies/types";
+import type { DimensionId } from "@game/dimensions/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { LayerNumber } from "@game/resetLayers/types";
+import type Decimal from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
-import { DimensionId } from "@game/dimensions/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { shouldDimensionWork } from "@game/dimensions/utils/check";
-import layerFormulas from "./layers";
-import { CurrencyId } from "@game/currencies/types";
-import Decimal from "break_eternity.js";
-import { calculateSoftcappedGain } from "@game/softcappers/utils/calculate";
-import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
 import { hasKey, isObject, objectEntries } from "@core/utils/object";
-import { getCachedRepeatableUpgradeProp } from "@game/repeatableUpgrades/utils/get";
 import currencyData from "@game/currencies/data";
-import { LayerNumber } from "@game/resetLayers/types";
 import {
   getCurrencyData,
   getCurrencyEffectOn,
 } from "@game/currencies/utils/get";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import { parseValueGetter } from "@game/player/utils";
+import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
+import { getCachedRepeatableUpgradeProp } from "@game/repeatableUpgrades/utils/get";
+import { calculateSoftcappedGain } from "@game/softcappers/utils/calculate";
+import layerFormulas from "./layers";
 
 const mainFormulas = {
   getGlobalMultiplier() {

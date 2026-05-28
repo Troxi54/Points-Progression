@@ -1,9 +1,9 @@
+import type { Player } from "./types";
 import {
   createUniqueObject,
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
-import { Player } from "./types";
 
 export const minifiedPlayerMap = createUniqueObject({
   gameVersion: 0,

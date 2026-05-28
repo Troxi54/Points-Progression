@@ -1,8 +1,8 @@
-import { MergedPlayer } from "@game/player/merged/types";
-import nexusMilestones from "../data";
-import Decimal from "break_eternity.js";
-import createDecimal from "@core/utils/decimal";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type Decimal from "break_eternity.js";
 import { arrayLastIndex } from "@core/utils/array";
+import createDecimal from "@core/utils/decimal";
+import nexusMilestones from "../data";
 
 export function getNexusCost(mergedPlayer: MergedPlayer): Decimal | null {
   const levelDecimal = mergedPlayer.player.nexusLevel;

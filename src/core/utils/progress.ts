@@ -1,4 +1,4 @@
-import Decimal from "break_eternity.js";
+import type Decimal from "break_eternity.js";
 
 export function calculateProgress(
   currencyValue: Decimal,

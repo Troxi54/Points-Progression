@@ -1,7 +1,7 @@
-import { ResetLayerPlayerData, PlayerLike } from "@game/player/types";
-import { parsePlayerLike } from "@game/player/utils";
+import type { PlayerLike, ResetLayerPlayerData } from "@game/player/types";
+import type { ResetLayerId, ResetLayerPlayerSelector } from "../types";
 import { objectFromEntries } from "@core/utils/object";
-import { ResetLayerId, ResetLayerPlayerSelector } from "../types";
+import { parsePlayerLike } from "@game/player/utils";
 import { everPerformed, getResetLayerPlayerDataProps } from "./get";
 
 export function getResetLayerPlayerSelection<

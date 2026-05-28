@@ -1,7 +1,7 @@
-import { XagyrosState } from "../types";
-import xagyrosStateCurrencyMap from "../map";
-import { PlayerLike } from "@game/player/types";
+import type { PlayerLike } from "@game/player/types";
+import type { XagyrosState } from "../types";
 import { parsePlayerLike } from "@game/player/utils";
+import xagyrosStateCurrencyMap from "../map";
 
 export function isXagyrosStateActive(
   playerLike: PlayerLike,

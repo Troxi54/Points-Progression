@@ -1,4 +1,4 @@
-import { GameVersion } from "@core/types/version";
+import type { GameVersion } from "@core/types/version";
 
 export function gameVersionToString(version: GameVersion): string {
   const { major, minor, patch, subpatch } = version;

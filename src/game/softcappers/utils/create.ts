@@ -1,13 +1,14 @@
+import type {
+  PartialSoftcapperData,
+  PartialSoftcapperDataContainer,
+  SoftcapperDataContainer,
+} from "../types";
+import type SoftcapperData from "../types";
 import {
   mergeObjects,
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
-import SoftcapperData, {
-  PartialSoftcapperData,
-  PartialSoftcapperDataContainer,
-  SoftcapperDataContainer,
-} from "../types";
 import getDefaultMissingSoftcapperData from "../default";
 
 function createSoftcapperData(

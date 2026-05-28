@@ -1,9 +1,9 @@
-import { create } from "zustand";
-import { getDefaultPlayer } from "../default";
-import { getDefaultCachedPlayer } from "../cached/default";
-import { mergePlayer } from "@game/player/merged/utils";
+import type { PlayerState, PlayerStateFacade } from "./types";
 import { updateObject } from "@core/utils/object";
-import { PlayerState, PlayerStateFacade } from "./types";
+import { mergePlayer } from "@game/player/merged/utils";
+import { create } from "zustand";
+import { getDefaultCachedPlayer } from "../cached/default";
+import { getDefaultPlayer } from "../default";
 
 export const usePlayerStore = create<PlayerState>((set) => {
   const player = getDefaultPlayer();

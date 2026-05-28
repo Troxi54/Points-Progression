@@ -1,9 +1,9 @@
-import { canAutoSave, savePlayer } from "@game/player/persistence/save";
-import { GameLoopPartState } from "../types";
-import offlineConfig from "@game/offline/config";
+import type { GameLoopPartState } from "../types";
 import { clamp, safeNumber } from "@core/utils/number";
-import cachedPlayerConfig from "@game/player/cached/config";
+import offlineConfig from "@game/offline/config";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
+import cachedPlayerConfig from "@game/player/cached/config";
+import { canAutoSave, savePlayer } from "@game/player/persistence/save";
 
 export default function gameLoopPostTick(state: GameLoopPartState) {
   const { mergedPlayer, currentTime } = state;
@@ -51,7 +51,7 @@ export default function gameLoopPostTick(state: GameLoopPartState) {
     player.unspentOfflineTime = 0;
   }
 
-  let instantTPS = safeNumber(
+  const instantTPS = safeNumber(
     state.deltaTimeSession > 0 ? 1000 / state.deltaTimeSession : 0,
   );
 

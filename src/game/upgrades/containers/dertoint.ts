@@ -7,7 +7,7 @@ const dertointUpgrades = createUpgradeDataContainer({
   id: "dertoint",
   dimensionId: "sliph",
   currency: "dertoints",
-  usePlayer: ({ mergedPlayer }) => ({
+  playerSelector: ({ mergedPlayer }) => ({
     everPerformedMallirt: everPerformed(mergedPlayer, "mallirt"),
   }),
   forceShow: ({ player }) => everPerformed(player, "mallirt"),
@@ -15,7 +15,7 @@ const dertointUpgrades = createUpgradeDataContainer({
   upgrades: [
     {
       id: "dertoint_1",
-      usePlayer: ({ mergedPlayer }) => ({
+      playerSelector: ({ mergedPlayer }) => ({
         firstDertointUpgradeEffect:
           mergedPlayer.cachedPlayer.firstDertointUpgradeEffect,
       }),

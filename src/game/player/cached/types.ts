@@ -1,9 +1,9 @@
-import { CurrencyId } from "@game/currencies/types";
-import { ResetLayerId } from "@game/resetLayers/types";
-import { PartialMergedPlayer } from "@game/player/merged/types";
-import { PlayerState } from "@game/player/store/types";
-import { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
-import Decimal from "break_eternity.js";
+import type { CurrencyId } from "@game/currencies/types";
+import type { PartialMergedPlayer } from "@game/player/merged/types";
+import type { PlayerState } from "@game/player/store/types";
+import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
+import type { ResetLayerId } from "@game/resetLayers/types";
+import type Decimal from "break_eternity.js";
 
 export interface CachedPlayer {
   lastSave: number;

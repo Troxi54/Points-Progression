@@ -1,15 +1,14 @@
+import type { MergedPlayer } from "@game/player/merged/types";
+import type Decimal from "break_eternity.js";
+import type { CurrencyId } from "../types";
 import createDecimal from "@core/utils/decimal";
-import { getCurrencyData } from "./get";
 import { isFunction } from "@core/utils/function";
-import { MergedPlayer } from "@game/player/merged/types";
-import { CurrencyId } from "../types";
-import mainFormulas from "@game/formulas/main";
-import currencyGainFormulas from "@game/formulas/currencies/gains";
-import Decimal from "break_eternity.js";
-import currencyEffectFormulas from "@game/formulas/currencies/effects";
-import { getDefaultCachedCurrency } from "@game/player/cached/default";
-import { getDefaultCachedCurrencyEffect } from "@game/player/cached/default";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import currencyEffectFormulas from "@game/formulas/currencies/effects";
+import currencyGainFormulas from "@game/formulas/currencies/gains";
+import mainFormulas from "@game/formulas/main";
+import { getDefaultCachedCurrency, getDefaultCachedCurrencyEffect  } from "@game/player/cached/default";
+import { getCurrencyData } from "./get";
 
 export function calculateCurrencyGain(
   mergedPlayer: MergedPlayer,

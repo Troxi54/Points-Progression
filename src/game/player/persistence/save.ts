@@ -1,9 +1,9 @@
-import { Player } from "@game/player/types";
-import playerPersistenceConfig from "./config";
-import { getPlayerState } from "@game/player/store";
-import { MergedPlayer } from "@game/player/merged/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { Player } from "@game/player/types";
 import { getCurrentTime } from "@core/utils/time";
+import { getPlayerState } from "@game/player/store";
 import { serializePlayer } from "./compress";
+import playerPersistenceConfig from "./config";
 
 function savePlayerStringToLocalStorage(str: string) {
   localStorage.setItem(playerPersistenceConfig.localStorageName, str);

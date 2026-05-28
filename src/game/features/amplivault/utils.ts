@@ -1,6 +1,6 @@
+import type { MergedPlayer } from "@game/player/merged/types";
 import formulas from "@game/formulas/data";
 import { getPlayerState } from "@game/player/store";
-import { MergedPlayer } from "@game/player/merged/types";
 import { triggerResetLayer } from "@game/resetLayers/utils/apply";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 

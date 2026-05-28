@@ -1,21 +1,19 @@
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { PartialPlayer, Player } from "@game/player/types";
+import createDecimal from "@core/utils/decimal";
+import { mergeObjects, objectEntries } from "@core/utils/object";
 import formulas from "@game/formulas/data";
-import { getPlayerState } from "@game/player/store";
 import { getDefaultPlayer } from "@game/player/default";
-import { MergedPlayer } from "@game/player/merged/types";
 import { mergePlayer } from "@game/player/merged/utils";
-import { PartialPlayer, Player } from "@game/player/types";
+import { getPlayerState } from "@game/player/store";
 import { applyRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/apply";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
 import { applyUpgradeById } from "@game/upgrades/utils/apply";
-import createDecimal from "@core/utils/decimal";
-import { mergeObjects, objectEntries } from "@core/utils/object";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type Data = Record<
   string,
   (player: MergedPlayer, value: any) => PartialPlayer | undefined
 >;
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 function parseFiniteTimestamp(value: unknown): number | null {
   const parsed =
@@ -23,7 +21,7 @@ function parseFiniteTimestamp(value: unknown): number | null {
       ? value
       : typeof value === "string"
         ? Number(value)
-        : NaN;
+        : Number.NaN;
 
   if (!Number.isFinite(parsed) || parsed <= 0) return null;
   return parsed;
@@ -35,7 +33,7 @@ function parseFiniteNonNegativeNumber(value: unknown): number {
       ? value
       : typeof value === "string"
         ? Number(value)
-        : NaN;
+        : Number.NaN;
 
   if (!Number.isFinite(parsed) || parsed < 0) return 0;
   return parsed;

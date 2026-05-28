@@ -1,30 +1,30 @@
-import { ScrollPosition } from "@core/types/vector";
-import { DimensionId } from "@game/dimensions/types";
+import type { ScrollPosition } from "@core/types/vector";
+import type { DimensionId } from "@game/dimensions/types";
 import { useLayoutEffect, useRef } from "react";
 
-type Props = {
+interface Props {
   dimensionId: DimensionId;
-};
+}
 
 function useDimensionScroll({ dimensionId }: Props) {
-  const scrollPositions = useRef<Partial<Record<DimensionId, ScrollPosition>>>(
-    {},
-  );
+  const scrollPositionsRef = useRef<
+    Partial<Record<DimensionId, ScrollPosition>>
+  >({});
 
-  const prevDimensionId = useRef<DimensionId>(dimensionId);
+  const prevDimensionIdRef = useRef<DimensionId>(dimensionId);
   const root = document.documentElement;
 
-  if (dimensionId !== prevDimensionId.current) {
-    scrollPositions.current[prevDimensionId.current] = {
+  if (dimensionId !== prevDimensionIdRef.current) {
+    scrollPositionsRef.current[prevDimensionIdRef.current] = {
       scrollTop: root.scrollTop,
       scrollLeft: root.scrollLeft,
     };
 
-    prevDimensionId.current = dimensionId;
+    prevDimensionIdRef.current = dimensionId;
   }
 
   useLayoutEffect(() => {
-    let position = scrollPositions.current[dimensionId];
+    let position = scrollPositionsRef.current[dimensionId];
     if (!position) {
       position = {
         scrollLeft: 0,
@@ -37,7 +37,7 @@ function useDimensionScroll({ dimensionId }: Props) {
       left: position.scrollLeft,
       behavior: "instant",
     });
-  }, [dimensionId]);
+  }, [dimensionId, root]);
 }
 
 export default useDimensionScroll;

@@ -1,5 +1,5 @@
+import type { MergedPlayer } from "@game/player/merged/types";
 import { fixGameTime } from "@core/utils/time";
-import { MergedPlayer } from "@game/player/merged/types";
 
 export function setFixedResetLayerDates(
   mergedPlayer: MergedPlayer,

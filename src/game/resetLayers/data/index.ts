@@ -1,11 +1,11 @@
-import { FlatResetLayerContainer } from "../types";
+import type { FlatResetLayerContainer } from "../types";
 import { createResetLayerContainer } from "../utils/create";
+import levelResetLayer from "./layers/level";
+import mallirtResetLayer from "./layers/mallirt";
+import nullithResetLayer from "./layers/nullith";
 import resetResetLayer from "./layers/reset";
 import tierResetLayer from "./layers/tier";
 import vermyrosResetLayer from "./layers/vermyros";
-import nullithResetLayer from "./layers/nullith";
-import mallirtResetLayer from "./layers/mallirt";
-import levelResetLayer from "./layers/level";
 import xagyrosResetLayer from "./layers/xagyros";
 
 const resetLayers = createResetLayerContainer({

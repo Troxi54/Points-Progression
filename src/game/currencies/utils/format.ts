@@ -1,16 +1,16 @@
-import { isNil } from "@core/utils/nil";
-import { CurrencyId } from "../types";
-import { getCurrencyData, getCurrencyEffectOn } from "./get";
-import { CachedPlayerLike } from "@game/player/cached/types";
-import { ReactNode } from "react";
+import type { EffectMode } from "@core/types/effect";
+import type { Nil } from "@core/types/primitives";
+import type { CachedPlayerLike } from "@game/player/cached/types";
+import type { DecimalSource } from "break_eternity.js";
+import type { ReactNode } from "react";
+import type { CurrencyId } from "../types";
 import { formatEffectOnCurrency } from "@core/format/effect";
-import { DecimalSource } from "break_eternity.js";
 import { formatWithPlural } from "@core/format/plural";
-import pluralize from "pluralize";
-import { capitalizeString } from "@core/utils/string";
+import { isNil } from "@core/utils/nil";
 import { isObject } from "@core/utils/object";
-import { EffectMode } from "@core/types/effect";
-import { Nil } from "@core/types/primitives";
+import { capitalizeString } from "@core/utils/string";
+import pluralize from "pluralize";
+import { getCurrencyData, getCurrencyEffectOn } from "./get";
 
 export function formatCurrencyName(currencyId: CurrencyId): string {
   const data = getCurrencyData(currencyId);

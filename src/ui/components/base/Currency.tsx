@@ -1,6 +1,8 @@
-import { ClassName } from "@core/types/react";
-import CurrencyContent, { CurrencyComponentProps } from "./CurrencyContent";
-import { Ref } from "react";
+import type { ClassName } from "@core/types/react";
+import type { Ref } from "react";
+import type { CurrencyComponentProps } from "./CurrencyContent";
+import CurrencyContent from "./CurrencyContent";
+import Paragraph from "./Paragraph";
 
 interface Props extends CurrencyComponentProps {
   containerClassName?: ClassName;
@@ -10,9 +12,9 @@ interface Props extends CurrencyComponentProps {
 function CurrencyComponent(props: Props) {
   return (
     <div className={props.containerClassName} ref={props.ref}>
-      <p>
+      <Paragraph>
         <CurrencyContent {...props} />
-      </p>
+      </Paragraph>
     </div>
   );
 }

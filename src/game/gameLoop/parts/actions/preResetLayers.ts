@@ -1,7 +1,7 @@
+import type { GameLoopPartState } from "@game/gameLoop/types";
 import { getNewAmplivaultLevel } from "@game/features/amplivault/utils";
 import coreConfig from "@game/features/cores/config";
 import formulas from "@game/formulas/data";
-import { GameLoopPartState } from "@game/gameLoop/types";
 import { applyResetLayerAuto } from "@game/resetLayers/utils/apply";
 import { calculateSoftcapperLevel } from "@game/softcappers/utils/calculate";
 import { hasUpgradeById } from "@game/upgrades/utils/has";

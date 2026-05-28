@@ -1,13 +1,37 @@
-import {
+import type { CachedPlayer, CachedPlayerLike, CachedResetLayer  } from "@game/player/cached/types";
+import type { MergedPlayer, PartialMergedPlayer  } from "@game/player/merged/types";
+import type {
   PartialPlayer,
   PartialResetLayerPlayerData,
   PlayerLike,
   ResetLayerPlayerData,
 } from "@game/player/types";
-import { CachedPlayerLike } from "@game/player/cached/types";
-import { PartialMergedPlayer } from "@game/player/merged/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { FullResetLayerData, ResetLayerId } from "../types";
+import type { FullResetLayerData, ResetLayerId } from "../types";
+import { arrayLastIndex } from "@core/utils/array";
+import {
+  copyObject,
+  deepCopy,
+  mergeObjects,
+  objectEntries,
+} from "@core/utils/object";
+import { getCurrentGameTime } from "@core/utils/time";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import { getDefaultCachedResetLayer } from "@game/player/cached/default";
+import { getDefaultResetLayerPlayerData } from "@game/player/default";
+import getDefaultMergedPlayer from "@game/player/merged/default";
+import {
+  assignCachedPlayerForMergedPlayer,
+  assignMergedPlayer,
+  assignPlayerForMergedPlayer,
+  mergePartialPlayer,
+} from "@game/player/merged/utils";
+import {
+  parseCachedPlayerLike,
+  parsePlayerLike,
+  parseValueGetter,
+} from "@game/player/utils";
+import resetLayerConfig from "@game/resetLayers/config";
+import resetLayers from "../data";
 import {
   canPerform,
   getResetLayerCachedPlayerData,
@@ -17,32 +41,6 @@ import {
   getResetLayerPlayerDataProp,
   getResetLayerPropsFromPlayerData,
 } from "./get";
-import { shouldDimensionWork } from "@game/dimensions/utils/check";
-import getDefaultMergedPlayer from "@game/player/merged/default";
-import {
-  parseCachedPlayerLike,
-  parsePlayerLike,
-  parseValueGetter,
-} from "@game/player/utils";
-import {
-  assignCachedPlayerForMergedPlayer,
-  assignMergedPlayer,
-  assignPlayerForMergedPlayer,
-  mergePartialPlayer,
-} from "@game/player/merged/utils";
-import {
-  copyObject,
-  deepCopy,
-  mergeObjects,
-  objectEntries,
-} from "@core/utils/object";
-import { getDefaultResetLayerPlayerData } from "@game/player/default";
-import { getDefaultCachedResetLayer } from "@game/player/cached/default";
-import { getCurrentGameTime } from "@core/utils/time";
-import resetLayers from "../data";
-import { CachedPlayer, CachedResetLayer } from "@game/player/cached/types";
-import resetLayerConfig from "@game/resetLayers/config";
-import { arrayLastIndex } from "@core/utils/array";
 
 export function applyResetLayerPlayerData(
   playerLike: PlayerLike,

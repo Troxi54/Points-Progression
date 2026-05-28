@@ -1,8 +1,8 @@
-import { MergedPlayer, PartialMergedPlayer } from "@game/player/merged/types";
-import { XagyrosState } from "../types";
-import { isXagyrosStateActive } from "./get";
+import type { MergedPlayer, PartialMergedPlayer } from "@game/player/merged/types";
+import type { XagyrosState } from "../types";
 import { triggerResetLayer } from "@game/resetLayers/utils/apply";
 import { everPerformed } from "@game/resetLayers/utils/get";
+import { isXagyrosStateActive } from "./get";
 
 export function activateXagyrosState(
   mergedPlayer: MergedPlayer,

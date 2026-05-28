@@ -1,9 +1,10 @@
-import { BooleanGetter } from "@game/player/types";
-import { MergedPlayer } from "@game/player/merged/types";
-import { CurrencyId } from "@game/currencies/types";
-import Decimal, { DecimalSource } from "break_eternity.js";
-import { DimensionId } from "@game/dimensions/types";
-import { UsePlayerFn } from "@ui/hooks/usePlayer/types";
+import type { CurrencyId } from "@game/currencies/types";
+import type { DimensionId } from "@game/dimensions/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type { BooleanGetter } from "@game/player/types";
+import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
+import type { DecimalSource } from "break_eternity.js";
+import type Decimal from "break_eternity.js";
 
 export type UpgradeContainerId =
   | "reset"
@@ -34,7 +35,7 @@ export type UpgradeId<
 export interface UpgradeData {
   id: UpgradeId;
   previousUpgradeId?: UpgradeId;
-  usePlayer?: UsePlayerFn;
+  playerSelector?: PlayerSelectorFn;
   name?: string | "auto";
   description: string | ((state: MergedPlayer) => string);
   cost: DecimalSource;
@@ -51,7 +52,7 @@ export interface UpgradeDataContainer {
   id: UpgradeContainerId;
   dimensionId?: DimensionId;
   name?: string | "auto" | ((state: MergedPlayer) => string);
-  usePlayer?: UsePlayerFn;
+  playerSelector?: PlayerSelectorFn;
   spendCurrency?: BooleanGetter;
   currency?: CurrencyId;
   forceShow?: BooleanGetter;

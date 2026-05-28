@@ -1,5 +1,6 @@
-import { DecimalSoftcapMode } from "@core/types/decimal";
-import Decimal, { DecimalSource } from "break_eternity.js";
+import type { DecimalSoftcapMode } from "@core/types/decimal";
+import type { DecimalSource } from "break_eternity.js";
+import Decimal from "break_eternity.js";
 
 const usuallyUsedDecimals: Record<number, Decimal> = {
   0: new Decimal(0),
@@ -21,7 +22,7 @@ export function isDecimal(value: unknown): value is Decimal {
 }
 
 export function toPercentage(value: DecimalSource): string {
-  return createDecimal(value).multiply(100) + "%";
+  return `${createDecimal(value).multiply(100)  }%`;
 }
 
 export function decimalSoftcap(

@@ -1,6 +1,6 @@
-import formulas from "@game/formulas/data";
+import type { GameLoopPartState } from "@game/gameLoop/types";
 import { getNexusCost } from "@game/features/nexus/utils/get";
-import { GameLoopPartState } from "@game/gameLoop/types";
+import formulas from "@game/formulas/data";
 
 export default function gameLoopUpdateRequirements(state: GameLoopPartState) {
   const { mergedPlayer } = state;

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { getPlayerState } from "@game/player/store";
-import { savePlayer } from "@game/player/persistence/save";
 import { handleVisibilityChangeOffline } from "@game/offline/utils/trigger";
+import { savePlayer } from "@game/player/persistence/save";
+import { getPlayerState } from "@game/player/store";
+import { useEffect } from "react";
 
 function useGlobalEvents(): void {
   useEffect(() => {

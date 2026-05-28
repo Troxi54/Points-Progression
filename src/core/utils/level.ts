@@ -1,4 +1,5 @@
-import Decimal, { DecimalSource } from "break_eternity.js";
+import type { DecimalSource } from "break_eternity.js";
+import type Decimal from "break_eternity.js";
 import createDecimal from "./decimal";
 
 export function calculateBulk(

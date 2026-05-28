@@ -1,4 +1,4 @@
-import { DecimalSource } from "break_eternity.js";
+import type { DecimalSource } from "break_eternity.js";
 import pluralize from "pluralize";
 import { formatNumber, integerCommaFormat } from "./number";
 

@@ -1,6 +1,6 @@
-import Decimal from "break_eternity.js";
-import { RepeatableUpgrade } from "./types";
+import type { RepeatableUpgrade } from "./types";
 import createDecimal from "@core/utils/decimal";
+import Decimal from "break_eternity.js";
 
 export default function getDefaultRepeatableUpgrade(): RepeatableUpgrade {
   return {

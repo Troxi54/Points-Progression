@@ -1,4 +1,4 @@
-import { MinifiedPlayer, PartialPlayer } from "@game/player/types";
+import type { MinifiedPlayer, PartialPlayer } from "@game/player/types";
 import { isObject } from "@core/utils/object";
 import { decompressFromEncodedURIComponent } from "lz-string";
 
@@ -15,30 +15,22 @@ export function decompressPlayerString(
 ): MinifiedPlayer | PartialPlayer | undefined {
   if (!str) return;
 
-  try {
-    const decompressed = decompressFromEncodedURIComponent(str);
-    if (!decompressed) throw new Error();
+  const decompressed = decompressFromEncodedURIComponent(str);
 
-    const converted = convertToPlayer(decompressed);
-    if (isObject(converted)) throw new Error();
-
-    const addedBrackets = "[" + decompressed + "]";
+  if (decompressed) {
+    const addedBrackets = `[${decompressed}]`;
     const parsed = convertToPlayer(addedBrackets);
 
-    if (!Array.isArray(parsed)) throw new Error();
-
-    return parsed;
-  } catch {
-    try {
-      const converted = atob(str);
-      if (!converted) throw new Error();
-
-      const parsed = convertToPlayer(converted);
-      if (!isObject(parsed)) throw new Error();
-
-      return parsed;
-    } catch {
-      return undefined;
-    }
+    if (Array.isArray(parsed)) return parsed;
   }
+
+  try {
+    const converted = atob(str);
+
+    if (!converted) return;
+
+    const parsed = convertToPlayer(converted);
+
+    if (isObject(parsed)) return parsed;
+  } catch {}
 }

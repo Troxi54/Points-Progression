@@ -1,4 +1,4 @@
-import { MissingSoftcapperData } from "./types";
+import type { MissingSoftcapperData } from "./types";
 
 export default function getDefaultMissingSoftcapperData(): MissingSoftcapperData {
   return {

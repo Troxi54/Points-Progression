@@ -1,4 +1,4 @@
-import { UpgradeId, UpgradeContainerId } from "@game/upgrades/types";
+import type { UpgradeContainerId, UpgradeId } from "@game/upgrades/types";
 
 export function splitUpgradeId(
   upgradeId: UpgradeId,

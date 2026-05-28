@@ -10,7 +10,7 @@ import Decimal from "break_eternity.js";
 const nullithResetLayer = defineResetLayer<"normal">({
   id: "nullith",
   goal: Decimal.pow(2, 1024),
-  usePlayer: ({ mergedPlayer: { player, cachedPlayer } }) => ({
+  playerSelector: ({ mergedPlayer: { player, cachedPlayer } }) => ({
     madeNullithResets: player.madeNullithResets,
     nullithResetsPointEffect: getCurrencyEffectOn(
       cachedPlayer,

@@ -1,22 +1,23 @@
-import Decimal, { DecimalSource } from "break_eternity.js";
-import { getPlayerState } from "@game/player/store";
-import {
-  FormatNumberType,
-  FormatNumberOptions,
+import type { DecimalSource } from "break_eternity.js";
+import type {
   FormatNumberGroup,
+  FormatNumberOptions,
+  FormatNumberType,
   Unit,
 } from "./types";
-import formatUnits, {
-  exponentialNotationSettingStartsWorkingAt,
-} from "./units";
+import { arrayLastItem } from "@core/utils/array";
 import createDecimal, {
   decimalIsGreaterByOoM,
   isDecimal,
 } from "@core/utils/decimal";
-import symbols from "@ui/symbols";
 import { isNil } from "@core/utils/nil";
-import { arrayLastItem } from "@core/utils/array";
 import { mergeObjects } from "@core/utils/object";
+import { getPlayerState } from "@game/player/store";
+import symbols from "@ui/symbols";
+import Decimal from "break_eternity.js";
+import formatUnits, {
+  exponentialNotationSettingStartsWorkingAt,
+} from "./units";
 
 const ADD_COMMAS_AT = 1000;
 
@@ -73,7 +74,7 @@ function getExponential(
 
   let fixedMantissa = mantissa.toFixed(precision);
 
-  if (parseFloat(fixedMantissa) >= 10) {
+  if (Number.parseFloat(fixedMantissa) >= 10) {
     mantissa = 1;
     exponent += 1;
     fixedMantissa = mantissa.toFixed(precision);
@@ -88,7 +89,7 @@ function addCommas(num: Decimal) {
   return Number(num.floor()).toLocaleString("en-US");
 }
 
-const formatErrorResult = `${NaN}`;
+const formatErrorResult = `${Number.NaN}`;
 
 function handleSpecialNumbers(value: Decimal): string | null {
   if (value.isNan()) {
@@ -187,7 +188,7 @@ export function formatNumber(
 
   calculatedPrecision = calculatePrecision(divided, value, fullOptions);
   let middle = divided.toFixed(calculatedPrecision);
-  const floatMiddle = parseFloat(middle);
+  const floatMiddle = Number.parseFloat(middle);
   let decimalMiddle = createDecimal(floatMiddle);
 
   const scalingStep = createDecimal(currentUnitGroup.scaling).toNumber();

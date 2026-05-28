@@ -1,8 +1,8 @@
-import { getCurrentTime } from "@core/utils/time";
-import offlineConfig from "../config";
-import { getPlayerState } from "@game/player/store";
-import { calculateTicksForOfflineTime } from "./calculate";
 import { safeNumber } from "@core/utils/number";
+import { getCurrentTime } from "@core/utils/time";
+import { getPlayerState } from "@game/player/store";
+import offlineConfig from "../config";
+import { calculateTicksForOfflineTime } from "./calculate";
 
 export function triggerOfflineProgress(
   currentTime: number = getCurrentTime(),
@@ -12,7 +12,7 @@ export function triggerOfflineProgress(
   const { lastTick, unspentOfflineTime } = player;
 
   let deltaTime = Math.max(currentTime - lastTick, 0);
-  if (!isFinite(deltaTime) || deltaTime <= 0) return;
+  if (!Number.isFinite(deltaTime) || deltaTime <= 0) return;
 
   if (!player.offlineProgressWorks) {
     return;
@@ -74,8 +74,8 @@ export function handleVisibilityChangeOffline(
 
   const { lastTick, offlineOffset, offlineProgressWorks } = player;
 
-  let deltaTime = Math.max(currentTime - lastTick, 0);
-  if (!isFinite(deltaTime) || deltaTime <= 0) return;
+  const deltaTime = Math.max(currentTime - lastTick, 0);
+  if (!Number.isFinite(deltaTime) || deltaTime <= 0) return;
 
   if (offlineProgressWorks || document.hidden) return;
 

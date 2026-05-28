@@ -1,6 +1,6 @@
-import { ValueGetter } from "@game/player/types";
-import { DecimalSource } from "break_eternity.js";
-import { ReactNode } from "react";
+import type { ValueGetter } from "@game/player/types";
+import type { DecimalSource } from "break_eternity.js";
+import type { ReactNode } from "react";
 
 interface NexusMilestone {
   cost: DecimalSource;

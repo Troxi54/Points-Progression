@@ -1,8 +1,8 @@
-import { GameLoopPartState } from "@game/gameLoop/types";
-import { createMergedPlayerState } from "@game/player/merged/utils";
-import { MergedPlayer } from "@game/player/merged/types";
+import type { GameLoopPartState } from "@game/gameLoop/types";
+import type { MergedPlayer } from "@game/player/merged/types";
 import { mergeObjects } from "@core/utils/object";
 import { getCurrentGameTime, getCurrentTime } from "@core/utils/time";
+import { createMergedPlayerState } from "@game/player/merged/utils";
 
 export function createGameLoopPartState(
   mergedPlayer: MergedPlayer,

@@ -1,4 +1,4 @@
-import { AnimatedBarOptions } from "./types";
+import type { AnimatedBarOptions } from "./types";
 
 const progressBarConfig = {
   labelSeparator: <>&emsp;|&emsp;</>,

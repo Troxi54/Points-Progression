@@ -1,3 +1,12 @@
+import type { MinifiedPlayer, PartialPlayer, Player } from "@game/player/types";
+import { setWithFill } from "@core/utils/array";
+import { isDecimal } from "@core/utils/decimal";
+import { isNil } from "@core/utils/nil";
+import {
+  objectEntries,
+  objectFromEntries,
+  shallowEqual,
+} from "@core/utils/object";
 import {
   getDefaultPlayer,
   getDefaultResetLayerPlayerData,
@@ -7,20 +16,11 @@ import {
   minifiedPlayerMap,
   unminifiedPlayerMap,
 } from "@game/player/minifiedNames";
-import { MinifiedPlayer, PartialPlayer, Player } from "@game/player/types";
-import { isDecimal } from "@core/utils/decimal";
-import { isNil } from "@core/utils/nil";
-import {
-  objectEntries,
-  objectFromEntries,
-  shallowEqual,
-} from "@core/utils/object";
-import { setWithFill } from "@core/utils/array";
 
 export function minifyPlayer(player: Player): MinifiedPlayer {
   const defaultPlayer = getDefaultPlayer();
 
-  let result: MinifiedPlayer = [];
+  const result: MinifiedPlayer = [];
 
   for (const [key, value] of objectEntries(player)) {
     const index = minifiedPlayerMap[key];

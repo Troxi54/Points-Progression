@@ -1,9 +1,9 @@
 import { getCurrentTime } from "@core/utils/time";
-import gameLoopUpdateCache from "./parts/cacheUpdates";
-import gameLoopActions from "./parts/actions";
-import gameLoopPreTick from "./parts/pretick";
-import gameLoopPostTick from "./parts/posttick";
 import { triggerOfflineProgress } from "@game/offline/utils/trigger";
+import gameLoopActions from "./parts/actions";
+import gameLoopUpdateCache from "./parts/cacheUpdates";
+import gameLoopPostTick from "./parts/posttick";
+import gameLoopPreTick from "./parts/pretick";
 
 export default function gameLoopTick(currentTime: number = getCurrentTime()) {
   triggerOfflineProgress(currentTime);

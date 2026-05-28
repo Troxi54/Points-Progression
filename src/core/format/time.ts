@@ -1,6 +1,7 @@
-import Decimal, { DecimalSource } from "break_eternity.js";
-import { formatNumber } from "./number";
+import type { DecimalSource } from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
+import Decimal from "break_eternity.js";
+import { formatNumber } from "./number";
 
 const pad = (value: Decimal | number): string => {
   const num = value instanceof Decimal ? value.toNumber() : value;

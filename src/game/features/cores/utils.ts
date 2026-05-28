@@ -1,8 +1,8 @@
-import { getPlayerState } from "@game/player/store";
-import coreConfig from "./config";
 import createDecimal from "@core/utils/decimal";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
+import { getPlayerState } from "@game/player/store";
+import { hasUpgradeById } from "@game/upgrades/utils/has";
+import coreConfig from "./config";
 
 export function convertEnergyIntoCores() {
   const { player, mergedPlayer, setPlayer } = getPlayerState();

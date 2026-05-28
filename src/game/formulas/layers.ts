@@ -1,4 +1,4 @@
-import { LayerFormulaContainer } from "./types";
+import type { LayerFormulaContainer } from "./types";
 
 const layerFormulas: LayerFormulaContainer = {} as const;
 

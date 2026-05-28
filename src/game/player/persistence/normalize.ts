@@ -1,12 +1,12 @@
-import { getDefaultPlayer } from "@game/player/default";
-import { PartialPlayer, Player } from "@game/player/types";
+import type { PartialPlayer, Player } from "@game/player/types";
+import type Decimal from "break_eternity.js";
+import createDecimal, { isDecimal } from "@core/utils/decimal";
+import { objectEntries } from "@core/utils/object";
 import {
+  getDefaultPlayer,
   getDefaultRepeatableUpgradeLevel,
   getDefaultResetLayerPlayerData,
 } from "@game/player/default";
-import createDecimal, { isDecimal } from "@core/utils/decimal";
-import { objectEntries } from "@core/utils/object";
-import Decimal from "break_eternity.js";
 
 function parseDecimalValue<T, O>(
   defaultValue: T,
@@ -61,7 +61,7 @@ function parseFiniteNumberValue<T, O>(
         ? Number(value)
         : isDecimal(value)
           ? value.toNumber()
-          : NaN;
+          : Number.NaN;
 
   if (!Number.isFinite(parsed)) return 0;
   return parsed;
@@ -86,7 +86,7 @@ function parseResetLayersValue(
         ? startedDateRaw
         : typeof startedDateRaw === "string"
           ? Number(startedDateRaw)
-          : NaN;
+          : Number.NaN;
 
     const resetsPerSecondRaw = resetLayerData.resetsPerSecond;
     const resetsPerSecondNumber =
@@ -94,7 +94,7 @@ function parseResetLayersValue(
         ? resetsPerSecondRaw
         : typeof resetsPerSecondRaw === "string"
           ? Number(resetsPerSecondRaw)
-          : NaN;
+          : Number.NaN;
 
     parsed[id] = {
       everPerformed:
@@ -121,7 +121,6 @@ function parseResetLayersValue(
   return parsed as Player["resetLayers"];
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function normalize(player: PartialPlayer): Player {
   const defaultPlayer = getDefaultPlayer();
   const result: Player & Record<string, any> = { ...defaultPlayer };
@@ -184,7 +183,6 @@ export function normalize(player: PartialPlayer): Player {
 
   return result as Player;
 }
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export function normalizePlayer(player: PartialPlayer): Player {
   const normalized = normalize(player);

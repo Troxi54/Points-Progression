@@ -1,9 +1,9 @@
-import { DefaultResetLayerData } from "./types";
+import type { DefaultResetLayerData } from "./types";
 import createDecimal from "@core/utils/decimal";
 
 export default function getDefaultResetLayerData(): DefaultResetLayerData {
   return {
-    usePlayer: null,
+    playerSelector: null,
     goal: createDecimal(1e6),
     currency: "points",
     reset: () => ({}),

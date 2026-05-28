@@ -1,9 +1,9 @@
-import { PlayerLike } from "@game/player/types";
-import { UpgradeContainerId, UpgradeId } from "@game/upgrades/types";
-import { hasUpgrade, hasUpgradeById } from "./has";
-import { parsePlayerLike } from "@game/player/utils";
-import { createUpgradeId } from "./id";
+import type { PlayerLike } from "@game/player/types";
+import type { UpgradeContainerId, UpgradeId } from "@game/upgrades/types";
 import { objectFromEntries } from "@core/utils/object";
+import { parsePlayerLike } from "@game/player/utils";
+import { hasUpgrade, hasUpgradeById } from "./has";
+import { createUpgradeId } from "./id";
 
 export function hasUpgradeSelection<
   T extends UpgradeContainerId,
