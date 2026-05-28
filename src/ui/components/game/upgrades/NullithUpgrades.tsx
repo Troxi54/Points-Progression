@@ -1,5 +1,5 @@
 import nullithUpgrades from "@game/upgrades/containers/nullith";
-import UpgradeContainer from "../features/UpgradeContainer";
+import UpgradeContainer from "@ui/components/features/UpgradeContainer";
 
 function NullithUpgrades() {
   return <UpgradeContainer upgradeContainer={nullithUpgrades} end={4} />;

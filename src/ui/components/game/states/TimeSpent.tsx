@@ -2,7 +2,7 @@ import type { TimeSpentResetLayerData } from "@game/resetLayers/types";
 import { formatTime } from "@core/format/time";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import Paragraph from "../base/Paragraph";
+import Paragraph from "@ui/components/base/Paragraph";
 
 function TimeSpent() {
   const state = usePlayerFields(

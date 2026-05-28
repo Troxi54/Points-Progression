@@ -3,9 +3,9 @@ import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
 import XagyrosStatesComponent from "@ui/components/game/buttons/xagyros/XagyrosStates";
-import XagyrosBar from "@ui/components/resetLayers/XagyrosBar";
-import AutoXagyrosButton from "@ui/components/toggles/AutoXagyrosButton";
-import XagyrosUpgrades from "@ui/components/upgrades/XagyrosUpgrades";
+import XagyrosBar from "@ui/components/game/resetLayers/XagyrosBar";
+import AutoXagyrosButton from "@ui/components/game/toggles/AutoXagyrosButton";
+import XagyrosUpgrades from "@ui/components/game/upgrades/XagyrosUpgrades";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function SliphDimensionLayer3() {

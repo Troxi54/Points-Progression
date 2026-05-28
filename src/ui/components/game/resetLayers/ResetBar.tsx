@@ -4,7 +4,7 @@ import { formatBestRunTime } from "@core/format/time";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
-import NexusSign from "../features/NexusSign";
+import NexusSign from "@ui/components/features/NexusSign";
 
 function ResetBar() {
   return (

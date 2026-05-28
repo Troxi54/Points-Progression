@@ -139,3 +139,16 @@ export function shallowEqual<T extends Readonly<object>>(
 
   return true;
 }
+
+export function defineConfig<T extends object>(obj: T): Readonly<T> {
+  return obj;
+}
+
+const a = defineConfig({
+  lol: {
+    um: 1,
+  },
+  b: "c",
+});
+
+a.lol.um = 1;

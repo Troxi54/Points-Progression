@@ -17,8 +17,7 @@ import {
   hasUpgradeSelectionById,
 } from "@game/upgrades/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import StatusText from "./StatusText";
-import Paragraph from "./Paragraph";
+import StatusText from "../base/StatusText";
 
 interface Props {
   upgradeContainerData: UpgradeDataContainer;

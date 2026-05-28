@@ -2,7 +2,7 @@ import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import CurrencyComponent from "@ui/components/base/Currency";
-import NexusSign from "../features/NexusSign";
+import NexusSign from "@ui/components/features/NexusSign";
 
 function Ampliflux() {
   return (

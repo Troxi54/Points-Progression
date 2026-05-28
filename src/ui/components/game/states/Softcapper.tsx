@@ -2,10 +2,10 @@ import { formatNumber, integerCommaFormat } from "@core/format/number";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import softcapperData from "@game/softcappers/data";
+import Heading from "@ui/components/base/Heading";
+import Paragraph from "@ui/components/base/Paragraph";
 import Pow from "@ui/components/base/Pow";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import Heading from "../base/Heading";
-import Paragraph from "../base/Paragraph";
 
 function Softcapper() {
   const state = usePlayerFields(

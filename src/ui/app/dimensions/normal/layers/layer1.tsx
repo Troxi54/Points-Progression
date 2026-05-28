@@ -2,12 +2,13 @@ import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import PointUpgrade from "@ui/components/repeatableUpgrades/PointUpgrade";
-import ResetBar from "@ui/components/resetLayers/ResetBar";
-import Points from "@ui/components/states/Points";
-import TimeSpent from "@ui/components/states/TimeSpent";
-import AutoResetButton from "@ui/components/toggles/AutoResetButton";
-import ResetUpgrades from "@ui/components/upgrades/ResetUpgrades";
+import PointUpgrade from "@ui/components/game/repeatableUpgrades/PointUpgrade";
+import ResetBar from "@ui/components/game/resetLayers/ResetBar";
+import Points from "@ui/components/game/states/Points";
+import TimeSpent from "@ui/components/game/states/TimeSpent";
+import AutoResetButton from "@ui/components/game/toggles/AutoResetButton";
+import ResetUpgrades from "@ui/components/game/upgrades/ResetUpgrades";
+
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function NormalDimensionLayer1() {

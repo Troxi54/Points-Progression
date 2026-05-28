@@ -14,7 +14,7 @@ import {
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import CurrencyContent from "@ui/components/base/CurrencyContent";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
-import NexusSign from "../features/NexusSign";
+import NexusSign from "@ui/components/features/NexusSign";
 
 function TierBar() {
   const data = getResetLayerData("tier");

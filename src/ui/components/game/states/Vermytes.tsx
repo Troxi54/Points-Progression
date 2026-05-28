@@ -5,7 +5,7 @@ import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 import CurrencyComponent from "@ui/components/base/Currency";
-import NexusSign from "../features/NexusSign";
+import NexusSign from "@ui/components/features/NexusSign";
 
 function Vermytes() {
   return (

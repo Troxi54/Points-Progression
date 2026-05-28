@@ -2,12 +2,12 @@ import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import AmplifluxUpgrade from "@ui/components/repeatableUpgrades/AmplifluxUpgrade";
-import TierBar from "@ui/components/resetLayers/TierBar";
-import Ampliflux from "@ui/components/states/Ampliflux";
-import AutoTierButton from "@ui/components/toggles/AutoTierButton";
-import TierUpgrades from "@ui/components/upgrades/TierUpgrades";
-import TierUpgrades2 from "@ui/components/upgrades/TierUpgrades2";
+import AmplifluxUpgrade from "@ui/components/game/repeatableUpgrades/AmplifluxUpgrade";
+import TierBar from "@ui/components/game/resetLayers/TierBar";
+import Ampliflux from "@ui/components/game/states/Ampliflux";
+import AutoTierButton from "@ui/components/game/toggles/AutoTierButton";
+import TierUpgrades from "@ui/components/game/upgrades/TierUpgrades";
+import TierUpgrades2 from "@ui/components/game/upgrades/TierUpgrades2";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function NormalDimensionLayer2() {

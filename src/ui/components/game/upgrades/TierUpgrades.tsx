@@ -1,5 +1,5 @@
 import tierUpgrades from "@game/upgrades/containers/tier";
-import UpgradeContainer from "../features/UpgradeContainer";
+import UpgradeContainer from "@ui/components/features/UpgradeContainer";
 
 function TierUpgrades() {
   return <UpgradeContainer upgradeContainer={tierUpgrades} end={4} />;

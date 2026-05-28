@@ -1,4 +1,4 @@
-import AutoResetToggle from "../features/AutoResetToggle";
+import AutoResetToggle from "@ui/components/features/AutoResetToggle";
 
 function AutoXagyrosButton() {
   return <AutoResetToggle resetLayerId="xagyros" />;

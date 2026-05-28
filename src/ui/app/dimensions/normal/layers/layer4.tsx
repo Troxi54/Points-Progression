@@ -7,12 +7,12 @@ import Nexus from "@ui/components/game/buttons/Nexus";
 import Nullifice from "@ui/components/game/buttons/Nullifice";
 import Nuxar from "@ui/components/game/buttons/Nuxar";
 import Sliph from "@ui/components/game/buttons/Sliph";
-import NullithBar from "@ui/components/resetLayers/NullithBar";
-import AutoNullithButton from "@ui/components/toggles/AutoNullithButton";
-import NullithUpgrades from "@ui/components/upgrades/NullithUpgrades";
-import NullithUpgrades2 from "@ui/components/upgrades/NullithUpgrades2";
-import NullithUpgrades3 from "@ui/components/upgrades/NullithUpgrades3";
-import NullithUpgrades4 from "@ui/components/upgrades/NullithUpgrades4";
+import NullithBar from "@ui/components/game/resetLayers/NullithBar";
+import AutoNullithButton from "@ui/components/game/toggles/AutoNullithButton";
+import NullithUpgrades from "@ui/components/game/upgrades/NullithUpgrades";
+import NullithUpgrades2 from "@ui/components/game/upgrades/NullithUpgrades2";
+import NullithUpgrades3 from "@ui/components/game/upgrades/NullithUpgrades3";
+import NullithUpgrades4 from "@ui/components/game/upgrades/NullithUpgrades4";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function NormalDimensionLayer4() {

@@ -1,7 +1,7 @@
 import { formatNumber } from "@core/format/number";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
-import CurrencyComponent from "../base/Currency";
-import StatusText from "../base/StatusText";
+import CurrencyComponent from "@ui/components/base/Currency";
+import StatusText from "@ui/components/base/StatusText";
 
 function Score() {
   return (

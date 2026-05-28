@@ -2,14 +2,14 @@ import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
 import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import AmplivoidUpgrade from "@ui/components/repeatableUpgrades/AmplivoidUpgrade";
-import LevelBar from "@ui/components/resetLayers/LevelBar";
-import Amplivoid from "@ui/components/states/Amplivoid";
-import Score from "@ui/components/states/Score";
-import XPState from "@ui/components/states/XP";
-import AutoLevelButton from "@ui/components/toggles/AutoLevelButton";
-import LevelUpgrades from "@ui/components/upgrades/LevelUpgrades";
-import LevelUpgrades2 from "@ui/components/upgrades/LevelUpgrades2";
+import AmplivoidUpgrade from "@ui/components/game/repeatableUpgrades/AmplivoidUpgrade";
+import LevelBar from "@ui/components/game/resetLayers/LevelBar";
+import Amplivoid from "@ui/components/game/states/Amplivoid";
+import Score from "@ui/components/game/states/Score";
+import XPState from "@ui/components/game/states/XP";
+import AutoLevelButton from "@ui/components/game/toggles/AutoLevelButton";
+import LevelUpgrades from "@ui/components/game/upgrades/LevelUpgrades";
+import LevelUpgrades2 from "@ui/components/game/upgrades/LevelUpgrades2";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 
 function SliphDimensionLayer2() {
