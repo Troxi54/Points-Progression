@@ -1,7 +1,7 @@
 @theme {
   --color-bg: #0e0e0e;
   --color-loading-bg: #0e0e0e;
-  --color-text-primary: #ffffffde;
+  --color-foreground: #ffffffde;
   --color-text-muted: rgb(151, 151, 151);
   --color-time: var(--color-text-muted);
   --color-link: #646cff;
@@ -16,14 +16,11 @@
   --color-disabled: #ee8d8d;
   --color-important: #ff9494;
 
-  --bg: black;
-  --bg-percentage: 82%;
-
   --color-button-bg: #202020;
   --color-button-border-hover: white;
   --color-button-bought: #424242;
 
-  --color-menu-small-text: #ffffffbf;
+  --color-menu-caption: #ffffffbf;
 
   --color-menu-button-bg: oklch(24.776% 0 0);
   --color-menu-button-bg-hover: oklch(28.908% 0 0);
@@ -35,13 +32,13 @@
   --color-positive-menu-button-bg-hover: oklch(28.908% 0.03593 141.103);
   --color-positive-menu-button-text: oklch(75.285% 0.14857 141.103);
 
-  --color-negative-menu-button-bg: oklch(24.776% 0.04662 20.884);
-  --color-negative-menu-button-bg-hover: oklch(28.908% 0.03593 20.884);
-  --color-negative-menu-button-text: oklch(75.285% 0.14857 20.884);
+  --color-danger-menu-button-bg: oklch(24.776% 0.04662 20.884);
+  --color-danger-menu-button-bg-hover: oklch(28.908% 0.03593 20.884);
+  --color-danger-menu-button-text: oklch(75.285% 0.14857 20.884);
 
-  --color-page-container-bg: rgba(54, 54, 54, 0.75);
-  --color-page-button-bg: rgba(98, 98, 98, 0.5);
-  --color-page-button-bg-hover: rgba(130, 130, 130, 0.5);
+  --color-tab-container-bg: rgba(54, 54, 54, 0.75);
+  --color-tab-button-bg: rgba(98, 98, 98, 0.5);
+  --color-tab-button-bg-hover: rgba(130, 130, 130, 0.5);
 
   --color-input-bg: rgba(255, 255, 255, 0.25);
   --color-input-text: rgb(219, 219, 219);

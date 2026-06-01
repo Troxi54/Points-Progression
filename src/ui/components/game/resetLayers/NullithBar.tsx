@@ -1,5 +1,5 @@
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function NullithBar() {

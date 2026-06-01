@@ -1,10 +1,9 @@
 import cn from "@core/utils/tailwind";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
-import VerticalContainer from "@ui/components/base/VerticalContainer";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import XagyrosStateComponent from "./XagyrosState";
 import Heading from "@ui/components/base/Heading";
 import Paragraph from "@ui/components/base/Paragraph";
+import Container from "@ui/components/base/Container";
 
 function XagyrosStatesComponent() {
   const state = usePlayerFields({
@@ -13,7 +12,7 @@ function XagyrosStatesComponent() {
   });
 
   return (
-    <VerticalContainer className="gap-0 [background-image:var(--xagyros-states-gradient-bg)] default-font-weight">
+    <Container className="flex-col gap-0 [background-image:var(--xagyros-states-gradient-bg)] font-medium">
       <Paragraph className="mt-6">
         <span className="xagyros-states">Xagyros states - </span>
         <span className="xagyros-states-description">
@@ -26,7 +25,7 @@ function XagyrosStatesComponent() {
       <Heading level={3} className="xagyros-states font-bold">
         Active states: {state.xagyrosStates.length} / {state.maxXagyrosStates}
       </Heading>
-      <HorizontalContainer className="w-full gap-0 items-stretch overflow-x-auto justify-start">
+      <Container className="flex-wrap w-full gap-0 items-stretch overflow-x-auto justify-start">
         <XagyrosStateComponent
           state="dertoints"
           title="Dertoints"
@@ -60,8 +59,8 @@ function XagyrosStatesComponent() {
           textClassName="nuxar"
           effectClassName="nuxar-description"
         />
-      </HorizontalContainer>
-    </VerticalContainer>
+      </Container>
+    </Container>
   );
 }
 

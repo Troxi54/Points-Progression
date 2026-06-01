@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import VerticalContainer from "@ui/components/base/VerticalContainer";
 import { Fragment } from "react";
 import menuInfoFormulaContainer from "./data";
 import useMenuInfoFormulaSelector from "./selector";
+import Stack from "@ui/components/base/Stack";
+import Caption from "@ui/components/base/Caption";
 
 function MenuInfoFormulaPage() {
   useMenuInfoFormulaSelector();
@@ -23,12 +24,12 @@ function MenuInfoFormulaPage() {
       return (
         <Fragment key={index}>
           {!isFirst && <br />}
-          <VerticalContainer className="gap-[0.1em]">
+          <Stack col className="gap-[0.1em]">
             <span>{formula.name}:</span>
-            <span className="small-text bg-formula-body-bg p-[0.5em] rounded-[0.5em]">
+            <Caption className="bg-formula-body-bg p-[0.5em] rounded-[0.5em] text-center">
               {node}
-            </span>
-          </VerticalContainer>
+            </Caption>
+          </Stack>
         </Fragment>
       );
     },
@@ -36,9 +37,9 @@ function MenuInfoFormulaPage() {
 
   return (
     <>
-      <VerticalContainer className="text-[1.5em] gap-[0.5em] py-[1em]">
+      <Stack col className="text-[1.5em] gap-[0.5em] py-[1em]">
         {formulas}
-      </VerticalContainer>
+      </Stack>
     </>
   );
 }

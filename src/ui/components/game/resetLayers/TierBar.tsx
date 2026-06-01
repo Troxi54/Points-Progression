@@ -12,7 +12,7 @@ import {
   getResetLayerPlayerDataProp,
 } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 import NexusSign from "@ui/components/features/NexusSign";
 

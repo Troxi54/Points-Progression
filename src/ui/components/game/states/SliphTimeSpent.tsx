@@ -3,6 +3,7 @@ import { formatTime } from "@core/format/time";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "@ui/components/base/Paragraph";
+import Container from "@ui/components/base/Container";
 
 function SliphTimeSpent() {
   const state = usePlayerFields(
@@ -25,7 +26,7 @@ function SliphTimeSpent() {
   const time = formatTime(state.highestResetDuration);
 
   return (
-    <div>
+    <Container>
       <Paragraph>
         Time spent this run: {time}{" "}
         {activeReset && (
@@ -34,7 +35,7 @@ function SliphTimeSpent() {
           </>
         )}
       </Paragraph>
-    </div>
+    </Container>
   );
 }
 

@@ -4,9 +4,10 @@ import cn from "@core/utils/tailwind";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import nuxarConfig from "@game/features/nuxar/config";
 import { triggerNuxar } from "@game/features/nuxar/utils";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
 
 function Nuxar() {
   usePlayer(() => null, {
@@ -14,7 +15,7 @@ function Nuxar() {
   });
 
   return (
-    <button
+    <Button
       className={cn(
         "[background-image:var(--nuxar-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nuxar-gradient-bg)]",
@@ -45,7 +46,7 @@ function Nuxar() {
           ]}
         />
       </Paragraph>
-    </button>
+    </Button>
   );
 }
 

@@ -1,12 +1,9 @@
-import type { ClassNameProps } from "@core/types/react";
+import { ComponentProps } from "react";
 
-type Props = {
-  name: string;
-  src?: string;
-} & ClassNameProps;
+type Props = ComponentProps<"img">;
 
-function Image({ name, src, className }: Props) {
-  return <img src={src} className={className} alt={name} draggable={false} />;
+function Image({ ...props }: Props) {
+  return <img draggable={false} {...props} />;
 }
 
 export default Image;

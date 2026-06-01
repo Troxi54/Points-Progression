@@ -10,8 +10,9 @@ import {
   isXagyrosStateActive,
 } from "@game/features/xagyrosStates/utils/get";
 import { getPlayerState } from "@game/player/store";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import Heading from "@ui/components/base/Heading";
+import Button from "@ui/components/base/Button";
 
 interface Props extends ClassNameProps {
   state: XagyrosState;
@@ -44,7 +45,7 @@ function XagyrosStateComponent({
   }
 
   return (
-    <button
+    <Button
       className={cn("flex-1 min-w-[15em]", className)}
       onClick={() => activate(state)}
     >
@@ -68,7 +69,7 @@ function XagyrosStateComponent({
           },
         ]}
       />
-    </button>
+    </Button>
   );
 }
 

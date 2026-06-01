@@ -6,9 +6,10 @@ import { buyNexus } from "@game/features/nexus/utils/buy";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import StatusText from "@ui/components/base/StatusText";
-import VerticalContainer from "@ui/components/base/VerticalContainer";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
+import Container from "@ui/components/base/Container";
 
 function Nexus() {
   const { nexusLevel, bestNexusLevel, nexusCost, enough } = usePlayerFields(
@@ -41,11 +42,10 @@ function Nexus() {
   );
 
   return (
-    <button
+    <Button
       className={cn(
-        "[background-image:var(--nexus-gradient-bg)]",
-        "border-image-gradient [border-image-source:var(--nexus-gradient-bg)]",
-        "hover:[border-image-source:var(--nexus-gradient)]",
+        "[background-image:var(--nexus-gradient-bg)] items-center",
+        "border-image-gradient [border-image-source:var(--nexus-gradient-bg)] hover:[border-image-source:var(--nexus-gradient)]",
       )}
       onClick={buyNexus}
     >
@@ -72,7 +72,7 @@ function Nexus() {
           )
         )}
       </Paragraph>
-      <VerticalContainer className="w-[50em] max-w-9/10 max-h-[9em] justify-start overflow-y-auto rounded-[1em] gap-0">
+      <Container className="flex-col w-[50em] max-w-9/10 max-h-[9em] justify-start overflow-y-auto rounded-[1em] gap-0">
         {nexusMilestones
           .slice(0, bestNexusLevel.toNumber())
           .map(({ description }, index) => {
@@ -98,8 +98,8 @@ function Nexus() {
               </div>
             );
           })}
-      </VerticalContainer>
-    </button>
+      </Container>
+    </Button>
   );
 }
 

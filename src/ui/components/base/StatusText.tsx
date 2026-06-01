@@ -1,9 +1,9 @@
 import type { ClassName } from "@core/types/react";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { isFunction } from "@core/utils/function";
 import cn from "@core/utils/tailwind";
 
-interface Props {
+interface Props extends Omit<ComponentProps<"span">, "children"> {
   active: boolean;
   customNode?: ReactNode | ((active: boolean) => ReactNode);
   className?: ClassName;
@@ -17,6 +17,7 @@ function StatusText({
   className,
   customEnabledClassName,
   customDisabledClassName,
+  ...props
 }: Props) {
   const custom = isFunction(customNode) ? customNode(active) : customNode;
   const node = custom === undefined ? (active ? "ON" : "OFF") : custom;
@@ -31,6 +32,7 @@ function StatusText({
         className,
         active ? enabledClassName : disabledClassName,
       )}
+      {...props}
     >
       {node}
     </span>

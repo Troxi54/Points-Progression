@@ -1,7 +1,7 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import Amplivault from "@ui/components/game/buttons/Amplivault";
 import CoreButton from "@ui/components/game/buttons/CoreButton";
 import CoreUpgrade from "@ui/components/game/repeatableUpgrades/CoreUpgrade";
@@ -47,7 +47,7 @@ function NormalDimensionLayer3() {
   const everPerformedNullith = state.resetLayer_nullith_everPerformed;
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <VermyrosBar />
       {everPerformedVermyros && (
         <>
@@ -76,7 +76,7 @@ function NormalDimensionLayer3() {
         </>
       )}
       {(state.vermyros_10 || everPerformedNullith) && <DarkEnergy />}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

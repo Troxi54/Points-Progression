@@ -1,7 +1,7 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import XagyrosStatesComponent from "@ui/components/game/buttons/xagyros/XagyrosStates";
 import XagyrosBar from "@ui/components/game/resetLayers/XagyrosBar";
 import AutoXagyrosButton from "@ui/components/game/toggles/AutoXagyrosButton";
@@ -21,7 +21,7 @@ function SliphDimensionLayer3() {
   if (!(state.level_4 || state.resetLayer_xagyros_everPerformed)) return null;
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <XagyrosBar />
       {state.resetLayer_xagyros_everPerformed && (
         <>
@@ -30,7 +30,7 @@ function SliphDimensionLayer3() {
           <XagyrosUpgrades />
         </>
       )}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

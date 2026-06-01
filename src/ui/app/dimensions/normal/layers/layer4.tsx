@@ -1,12 +1,12 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import BreakAmplivault from "@ui/components/game/buttons/BreakAmplivault";
 import Nexus from "@ui/components/game/buttons/Nexus";
 import Nullifice from "@ui/components/game/buttons/Nullifice";
 import Nuxar from "@ui/components/game/buttons/Nuxar";
-import Sliph from "@ui/components/game/buttons/Sliph";
+import SliphToggle from "@ui/components/game/buttons/SliphToggle";
 import NullithBar from "@ui/components/game/resetLayers/NullithBar";
 import AutoNullithButton from "@ui/components/game/toggles/AutoNullithButton";
 import NullithUpgrades from "@ui/components/game/upgrades/NullithUpgrades";
@@ -33,7 +33,7 @@ function NormalDimensionLayer4() {
   const sliphCondition = everPerformedNullith && state.nullith_5;
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <NullithBar />
       {everPerformedNullith && (
         <>
@@ -48,7 +48,7 @@ function NormalDimensionLayer4() {
           )}
         </>
       )}
-      {sliphCondition && <Sliph />}
+      {sliphCondition && <SliphToggle />}
       {everPerformedNullith && (
         <>
           {state.nullith_6 && (
@@ -65,7 +65,7 @@ function NormalDimensionLayer4() {
           )}
         </>
       )}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

@@ -18,6 +18,8 @@ import {
 } from "@game/upgrades/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 import StatusText from "../base/StatusText";
+import Paragraph from "../base/Paragraph";
+import Button from "../base/Button";
 
 interface Props {
   upgradeContainerData: UpgradeDataContainer;
@@ -141,15 +143,22 @@ function Upgrade({
   const costInactive = isPurchased;
   const costSuccess = state.canBuy || costInactive;
 
+  if (!shouldRender) return null;
+
   return (
-    shouldRender && (
-      <button
-        className={cn("upgrade", isPurchased && "bought")}
-        onClick={buy}
-        onContextMenu={contextMenu}
-        aria-label={`Buy ${name}`}
-        style={style}
-      >
+    <Button
+      className={cn(
+        "bg-button-bg min-w-[15em] max-w-[50em] flex-1 rounded-[0.25em]",
+        isPurchased &&
+          "bg-button-bought select-text hover:border-transparent cursor-auto",
+      )}
+      disabled={isPurchased}
+      onClick={buy}
+      onContextMenu={contextMenu}
+      aria-label={`Buy ${name}`}
+      style={style}
+    >
+      <Paragraph className="my-2">
         {name}:{" "}
         <StatusText
           active={costSuccess}
@@ -157,8 +166,8 @@ function Upgrade({
           customNode={fullCost}
         />{" "}
         - <span className="text-upgrade-description">{description}</span>
-      </button>
-    )
+      </Paragraph>
+    </Button>
   );
 }
 

@@ -9,7 +9,7 @@ import { formatWithPlural } from "@core/format/plural";
 import { isNil } from "@core/utils/nil";
 import { isObject } from "@core/utils/object";
 import { capitalizeString } from "@core/utils/string";
-import pluralize from "pluralize";
+import pluralize, { plural } from "pluralize";
 import { getCurrencyData, getCurrencyEffectOn } from "./get";
 
 export function formatCurrencyName(currencyId: CurrencyId): string {
@@ -36,6 +36,16 @@ export function formatCurrencyNameEmptyless(currencyId: CurrencyId): string {
   }
 
   return name;
+}
+
+export function formatCurrencyNameEmptylessPlural(
+  currencyId: CurrencyId,
+  value?: DecimalSource,
+): string {
+  const name = formatCurrencyNameEmptyless(currencyId);
+  if (value === undefined) return plural(name);
+
+  return pluralize(name, +value);
 }
 
 export function formatCurrencyEffect(

@@ -9,7 +9,7 @@ interface Props extends ChildrenProps {
   layers?: ComponentType[];
 }
 
-function DimensionLayout({ dimensionId, children, layers }: Props) {
+function Dimension({ dimensionId, children, layers }: Props) {
   const { mergedPlayer } = getPlayerState();
   if (!isDimension(dimensionId, mergedPlayer.player.dimensionId)) return null;
 
@@ -23,4 +23,4 @@ function DimensionLayout({ dimensionId, children, layers }: Props) {
   );
 }
 
-export default DimensionLayout;
+export default Dimension;

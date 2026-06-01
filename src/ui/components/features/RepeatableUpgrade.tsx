@@ -29,6 +29,7 @@ import {
 } from "@game/repeatableUpgrades/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 import Text from "../base/Text";
+import Button from "../base/Button";
 
 interface Props<T extends RepeatableUpgradeId> extends ClassNameProps {
   repeatableUpgradeId: T;
@@ -141,13 +142,18 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
       : effectChildren(effect, affectText);
 
   return (
-    <button
-      className={cn("transition-colors-250", className)}
+    <Button
+      className={cn("transition-colors duration-250 ease-[ease]", className)}
       onClick={buyMax}
       onContextMenu={buyOnce}
       aria-label={`Buy ${name} Upgrade`}
     >
-      <Text className={cn("transition-colors-250", textClassName)}>
+      <Text
+        className={cn(
+          "transition-colors duration-250 ease-[ease]",
+          textClassName,
+        )}
+      >
         Upgrade: {isMaxed ? "Maxed" : fullCost}
         {shouldLevelRender && (
           <>
@@ -159,7 +165,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
         {computedTextChildren}
       </Text>
       <Text className={cn("mt-0", effectClassName)}>Effect: {effectNode}</Text>
-    </button>
+    </Button>
   );
 }
 

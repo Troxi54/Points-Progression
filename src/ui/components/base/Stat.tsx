@@ -1,7 +1,15 @@
-import type { ChildrenProps } from "@core/types/react";
+import cn from "@core/utils/tailwind";
+import { ComponentProps } from "react";
 
-function Stat({ children }: ChildrenProps) {
-  return <span className="bg-formula-stat-bg p-[0.1em]">{children}</span>;
+type Props = ComponentProps<"span">;
+
+function Stat({ className, ...props }: Props) {
+  return (
+    <span
+      className={cn("bg-formula-stat-bg p-[0.1em]", className)}
+      {...props}
+    />
+  );
 }
 
 export default Stat;

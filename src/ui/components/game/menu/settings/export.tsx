@@ -1,9 +1,9 @@
 import { exportPlayer } from "@game/player/persistence/export";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import { useMenu } from "@ui/hooks/useMenu";
 import Overlay from "../overlay";
-import Paragraph from "@ui/components/base/Paragraph";
 import Heading from "@ui/components/base/Heading";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
 
 const ExportMenu = () => {
   const { close } = useMenu();
@@ -46,22 +46,18 @@ const ExportMenu = () => {
       <Heading level={2} className="m-0">
         Export
       </Heading>
-      <HorizontalContainer>
-        <button
-          className="menu-button"
+      <Stack>
+        <Button
+          variant="menu"
           aria-label="Export to clipboard"
           onClick={exportText}
         >
-          <Paragraph>To clipboard</Paragraph>
-        </button>
-        <button
-          className="menu-button"
-          aria-label="Export file"
-          onClick={exportFile}
-        >
-          <Paragraph>File</Paragraph>
-        </button>
-      </HorizontalContainer>
+          To clipboard
+        </Button>
+        <Button variant="menu" aria-label="Export file" onClick={exportFile}>
+          File
+        </Button>
+      </Stack>
     </Overlay>
   );
 };

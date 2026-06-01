@@ -1,9 +1,9 @@
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
-import CurrencyComponent from "@ui/components/base/Currency";
+import Currency from "@ui/components/features/Currency";
 
 function DarkEnergy() {
   return (
-    <CurrencyComponent
+    <Currency
       currencyId="darkEnergy"
       containerClassName="bg-dark-energy-bg"
       textClassName="dark-energy"

@@ -1,7 +1,7 @@
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function MallirtBar() {

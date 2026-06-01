@@ -1,46 +1,9 @@
 @layer base {
   :root {
-    @apply font-[system-ui,Avenir,Helvetica,Arial,sans-serif] scheme-light-dark antialiased;
-    text-rendering: optimizeLegibility;
-  }
-
-  * {
-    @apply font-bold text-text-primary text-center;
+    @apply scheme-dark;
   }
 
   body {
-    @apply m-0 flex place-items-center min-w-80 min-h-screen bg-bg font-[inherit] tabular-nums;
-  }
-
-  sup,
-  sub {
-    @apply text-inherit;
-  }
-
-  span {
-    @apply text-inherit;
-  }
-
-  button *,
-  a * {
-    @apply font-medium;
-  }
-
-  input[type="text"] {
-    @apply h-[1em] text-[1.25em] font-mono py-[0.75em] px-[0.1em] bg-input-bg rounded-xl
-      outline-none transition-colors duration-150 text-input-text focus:text-input-text-focus;
-    -webkit-text-fill-color: currentColor;
-  }
-
-  img {
-    @apply h-1/1;
-  }
-
-  ul {
-    @apply flex flex-col justify-center;
-  }
-
-  li {
-    @apply w-fit text-start;
+    @apply m-0 flex place-content-center min-w-80 min-h-screen bg-bg font-[system-ui,Avenir,Helvetica,Arial,sans-serif] tabular-nums antialiased font-bold text-foreground;
   }
 }

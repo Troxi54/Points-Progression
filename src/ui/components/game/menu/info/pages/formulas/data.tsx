@@ -6,6 +6,7 @@ import nuxarConfig from "@game/features/nuxar/config";
 import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
+import Caption from "@ui/components/base/Caption";
 import Log from "@ui/components/base/Log";
 import Min from "@ui/components/base/Min";
 import Pow from "@ui/components/base/Pow";
@@ -126,10 +127,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         (<Stat>tier resets</Stat> {symbols.plus} 1)
         <Pow>1.2</Pow>
         <br />
-        <span className="muted">
+        <Caption muted>
           Tier resets softcapped after {integerCommaFormat(1_000_000)} (power
           0.25)
-        </span>
+        </Caption>
       </>
     ),
   },
@@ -357,9 +358,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         {player.bestNexusLevel.greaterThanOrEqualTo(14) && (
           <>
             <br />
-            <span className="muted">
-              lvl softcapped after 40 (multiplier 0.0002)
-            </span>
+            <Caption muted>lvl softcapped after 40 (multiplier 0.0002)</Caption>
           </>
         )}
       </>
@@ -436,10 +435,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
           </Log>
         </Pow>
         <br />
-        <span className="muted">
+        <Caption muted>
           Nullions softcapped after {formatNumber(1e12)} (power 0.5), softcapped
           again after {formatNumber(1e15)} (power 0.5)
-        </span>
+        </Caption>
       </>
     ),
   },
@@ -687,10 +686,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         (<Stat>tier resets</Stat> {symbols.plus} 1)
         <Pow>1.05</Pow>
         <br />
-        <span className="muted">
+        <Caption muted>
           Tier resets softcapped after {integerCommaFormat(1_000_000)} (power
           0.1)
-        </span>
+        </Caption>
       </>
     ),
   },

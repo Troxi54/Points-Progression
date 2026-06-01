@@ -10,6 +10,8 @@ import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import NexusSign from "../../features/NexusSign";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
+import Container from "@ui/components/base/Container";
 
 function Amplivault() {
   const state = usePlayerFields(
@@ -43,6 +45,8 @@ function Amplivault() {
 
   const animationPaused = !(state.enteredAmplivault || state.amplivaultBroken);
   const animationStateClassname = animationPaused ? "paused" : "";
+  const animationLineClassName =
+    "absolute w-full h-[0.1em] bg-amplivault-div-4-bg after:content-[''] after:w-1/2 after:h-[0.2em] after:bg-amplivault-div-5-bg after:animate-[amplivault-line-animation_1.5s_linear_infinite]";
 
   const leftTime = calculateTimeForRequirement(
     state.points,
@@ -53,7 +57,7 @@ function Amplivault() {
   const levelGreaterZero = state.amplivaultLevel.greaterThan(0);
 
   return (
-    <button
+    <Button
       className={cn(
         "flex items-center flex-col w-full",
         state.amplivaultBroken
@@ -68,9 +72,9 @@ function Amplivault() {
       onClick={toggleAmplivault}
       aria-label="Enter Amplivault"
     >
-      <div
+      <Container
         className={cn(
-          "relative w-20 h-20 border-2 border-amplivault-div-border",
+          "relative w-20 h-20 border-2 border-amplivault-div-border items-center",
           state.amplivaultBroken
             ? cn(
                 "bg-black border-image-gradient",
@@ -82,22 +86,28 @@ function Amplivault() {
             : "bg-amplivault-div-bg",
         )}
       >
-        <div className="absolute-full bg-amplivault-div-2-bg border-2 border-amplivault-div-2-border rounded-full"></div>
-        <div
-          id="amplivault-line-container"
+        <Container className="absolute-full bg-amplivault-div-2-bg border-2 border-amplivault-div-2-border rounded-full" />
+        <Container
           className={cn(
-            "relative w-[calc(100%/1.4142-2px)] aspect-square bg-amplivault-div-3-bg border-2 border-amplivault-div-3-border",
-            "animate-[amplivault-animation_linear_infinite]",
+            "relative w-[calc(100%/1.4142-2px)] aspect-square bg-amplivault-div-3-bg border-2 border-amplivault-div-3-border items-center animate-[amplivault-animation_linear_infinite]",
             state.amplivaultBroken
               ? "[animation-duration:2.74s]"
               : "[animation-duration:1.5s]",
             animationStateClassname,
           )}
         >
-          <div className={animationStateClassname}></div>
-          <div className={cn(animationStateClassname, "rotate-90")}></div>
-        </div>
-      </div>
+          <Container
+            className={cn(animationLineClassName, animationStateClassname)}
+          ></Container>
+          <Container
+            className={cn(
+              animationLineClassName,
+              animationStateClassname,
+              "rotate-90",
+            )}
+          ></Container>
+        </Container>
+      </Container>
 
       {state.amplivaultBroken ? (
         <Paragraph className="broken-amplivault">
@@ -181,7 +191,7 @@ function Amplivault() {
           )}
         </Paragraph>
       )}
-    </button>
+    </Button>
   );
 }
 

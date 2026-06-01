@@ -1,6 +1,6 @@
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
-import Sliph from "@ui/components/game/buttons/Sliph";
+import Layer from "@ui/components/features/Layer";
+import SliphToggle from "@ui/components/game/buttons/SliphToggle";
 import DertointUpgrade from "@ui/components/game/repeatableUpgrades/DertointUpgrade";
 import MallirtBar from "@ui/components/game/resetLayers/MallirtBar";
 import Cappergy from "@ui/components/game/states/Cappergy";
@@ -23,8 +23,8 @@ function SliphDimensionLayer1() {
   );
 
   return (
-    <DimensionLayerLayout>
-      <Sliph />
+    <Layer>
+      <SliphToggle />
       <SliphTimeSpent />
       <Dertoints />
       <DertointUpgrade />
@@ -37,7 +37,7 @@ function SliphDimensionLayer1() {
         </>
       )}
       {state.everReachedCappergy && <Cappergy />}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

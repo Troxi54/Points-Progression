@@ -21,20 +21,19 @@ export type UpgradeId<
   N extends number = number,
 > = `${C}_${N}`;
 
-/**
- * Note: The `usePlayer` function should return selectors for the `usePlayer` hook
- * to re-render the upgrade's component. Subscribe only to properties that affect
- * the visual state (for example, ones used in `description` or `show`, if those
- * are functions).
- *
- * You don't need to include properties used in `takesCurrency`, since it's only
- * evaluated when purchasing the upgrade - the purchase logic already uses the
- * latest player state via `getState()`.
- */
-
 export interface UpgradeData {
   id: UpgradeId;
   previousUpgradeId?: UpgradeId;
+  /**
+   * Note: this function should return selections for the `usePlayer` hook
+   * to re-render the upgrade's component. Subscribe only to properties that affect
+   * the visual state (for example, ones used in `description` or `show`, if those
+   * are functions).
+   *
+   * You don't need to include properties used in `takesCurrency`, since it's only
+   * evaluated when purchasing the upgrade - the purchase logic already uses the
+   * latest player state via `getState()`.
+   */
   playerSelector?: PlayerSelectorFn;
   name?: string | "auto";
   description: string | ((state: MergedPlayer) => string);

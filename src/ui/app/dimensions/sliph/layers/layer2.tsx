@@ -1,7 +1,7 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import AmplivoidUpgrade from "@ui/components/game/repeatableUpgrades/AmplivoidUpgrade";
 import LevelBar from "@ui/components/game/resetLayers/LevelBar";
 import Amplivoid from "@ui/components/game/states/Amplivoid";
@@ -26,7 +26,7 @@ function SliphDimensionLayer2() {
   if (!(state.mallirt_4 || state.resetLayer_level_everPerformed)) return null;
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <LevelBar />
       {state.resetLayer_level_everPerformed && (
         <>
@@ -43,7 +43,7 @@ function SliphDimensionLayer2() {
           )}
         </>
       )}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

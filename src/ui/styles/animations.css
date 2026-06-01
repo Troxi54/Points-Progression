@@ -20,18 +20,18 @@
     }
   }
 
-  @keyframes amplivault-animation-2 {
+  @keyframes amplivault-line-animation {
     0% {
-      width: 0%;
+      scale: 0 1;
     }
     50% {
-      width: 0%;
+      scale: 0 1;
     }
     75% {
-      width: 50%;
+      scale: 1 1;
     }
     100% {
-      width: 0%;
+      scale: 0 1;
     }
   }
 }

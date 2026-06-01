@@ -3,7 +3,7 @@ import { calculateProgress } from "@core/utils/progress";
 import { calculateTimeForRequirement } from "@core/utils/time";
 import { formatCurrency } from "@game/currencies/utils/format";
 import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import ProgressBar from "@ui/components/base/ProgressBar";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 

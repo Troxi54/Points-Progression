@@ -1,7 +1,7 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import AmplifluxUpgrade from "@ui/components/game/repeatableUpgrades/AmplifluxUpgrade";
 import TierBar from "@ui/components/game/resetLayers/TierBar";
 import Ampliflux from "@ui/components/game/states/Ampliflux";
@@ -28,7 +28,7 @@ function NormalDimensionLayer2() {
   if (!state.resetLayer_reset_everPerformed) return null;
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <TierBar />
       {state.resetLayer_tier_everPerformed && (
         <>
@@ -43,7 +43,7 @@ function NormalDimensionLayer2() {
           )}
         </>
       )}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

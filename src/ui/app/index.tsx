@@ -6,6 +6,7 @@ import NormalDimension from "./dimensions/normal";
 import SliphDimension from "./dimensions/sliph";
 import Heading from "@ui/components/base/Heading";
 import gameConfig from "@core/config/data";
+import Container from "@ui/components/base/Container";
 
 function App() {
   useGlobalEvents();
@@ -22,10 +23,15 @@ function App() {
         {gameConfig.gameName}
       </Heading>
       <Menu />
-      <div className="size-full flex-col gap-20 pt-[calc(8vmin+1.5rem)] pb-12">
-        <NormalDimension />
-        <SliphDimension />
-      </div>
+      <Container
+        asChild
+        className="size-full flex-col gap-20 pt-[calc(8vmin+1.5rem)] pb-12"
+      >
+        <main>
+          <NormalDimension />
+          <SliphDimension />
+        </main>
+      </Container>
     </>
   );
 }

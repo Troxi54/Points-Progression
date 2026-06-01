@@ -3,13 +3,15 @@ import { gameVersionToString } from "@core/utils/version";
 import discordIcon from "@ui/assets/discord.svg";
 import githubIcon from "@ui/assets/github.svg";
 import patreonIcon from "@ui/assets/patreon.svg";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import Image from "@ui/components/base/Image";
-import LinkButton from "@ui/components/base/LinkButton";
-import VerticalContainer from "@ui/components/base/VerticalContainer";
+import Link from "@ui/components/base/Link";
 import MenuInfoMainPageGameProgress from "./endgame";
 import Paragraph from "@ui/components/base/Paragraph";
 import Heading from "@ui/components/base/Heading";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
+import Caption from "@ui/components/base/Caption";
+import List from "@ui/components/base/List";
 
 function MenuInfoMainPage() {
   return (
@@ -24,7 +26,7 @@ function MenuInfoMainPage() {
       <Paragraph>
         Before you start, there are a few important things to know:
       </Paragraph>
-      <ul className="circle-list">
+      <List>
         <li>
           When buying a repeatable upgrade, you only pay for the last level.
         </li>
@@ -35,46 +37,53 @@ function MenuInfoMainPage() {
           Export your save regularly. Clearing browser data or encountering a
           bug may reset your progress.
         </li>
-      </ul>
-      <VerticalContainer className="mt-[2em] gap-[0.75em]">
+      </List>
+      <Stack col className="mt-[2em] gap-[0.75em]">
         <Paragraph className="m-0">
-          <span className="small-text">Version: </span>
+          <Caption>Version: </Caption>
           {gameVersionToString(gameConfig.gameVersion)}
           <br />
           <MenuInfoMainPageGameProgress />
         </Paragraph>
         <Paragraph className="m-0">
-          <span className="small-text">Made by </span>Troxi
+          <Caption>Made by </Caption>Troxi
         </Paragraph>
-      </VerticalContainer>
+      </Stack>
 
-      <HorizontalContainer className="mt-[2em]">
-        <LinkButton
-          name="Discord server"
-          link="https://discord.gg/YT8R2szHXX"
-          className="menu-button bg-discord hover:bg-discord-hover"
-        >
-          <Paragraph>Discord</Paragraph>
-          <Image name="Discord" src={discordIcon} />
-        </LinkButton>
+      <Stack className="mt-[2em]">
+        <Button variant="link" size="xl" asChild>
+          <Link
+            title="Discord server"
+            href="https://discord.gg/YT8R2szHXX"
+            className="bg-discord hover:bg-discord-hover"
+          >
+            <span>Discord</span>
+            <Image alt="Discord" src={discordIcon} />
+          </Link>
+        </Button>
 
-        <LinkButton
-          name="GitHub repository"
-          link="https://github.com/Troxi54/Points-Progression"
-          className="menu-button bg-github hover:bg-github-hover"
-        >
-          <Paragraph>GitHub</Paragraph>
-          <Image name="GitHub" src={githubIcon} />
-        </LinkButton>
-        <LinkButton
-          name="Patreon"
-          link="https://patreon.com/Troxi"
-          className="menu-button bg-patreon hover:bg-patreon-hover"
-        >
-          <Paragraph>Patreon</Paragraph>
-          <Image name="Patreon" src={patreonIcon} />
-        </LinkButton>
-      </HorizontalContainer>
+        <Button variant="link" size="xl" asChild>
+          <Link
+            title="GitHub repository"
+            href="https://github.com/Troxi54/Points-Progression"
+            className="bg-github hover:bg-github-hover"
+          >
+            <span>GitHub</span>
+            <Image alt="GitHub" src={githubIcon} />
+          </Link>
+        </Button>
+
+        <Button variant="link" size="xl" asChild>
+          <Link
+            title="Patreon"
+            href="https://patreon.com/Troxi"
+            className="bg-patreon hover:bg-patreon-hover"
+          >
+            <span>Patreon</span>
+            <Image alt="Patreon" src={patreonIcon} />
+          </Link>
+        </Button>
+      </Stack>
     </>
   );
 }

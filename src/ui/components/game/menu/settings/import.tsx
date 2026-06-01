@@ -1,14 +1,14 @@
 import type { ChangeEvent } from "react";
 import { importPlayer } from "@game/player/persistence/import";
 import { resetPlayerDataAndGame } from "@game/player/utils";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import Tooltip from "@ui/components/base/Tooltip";
 import { useMenu } from "@ui/hooks/useMenu";
 import { useRef } from "react";
 import Overlay from "../overlay";
 import { showPrompt } from "../prompt/service";
-import Paragraph from "@ui/components/base/Paragraph";
 import Heading from "@ui/components/base/Heading";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
 
 function ImportMenu() {
   const { closeAll } = useMenu();
@@ -63,19 +63,15 @@ function ImportMenu() {
       <Heading level={2} className="m-0">
         Import
       </Heading>
-      <HorizontalContainer>
-        <button
-          className="menu-button"
-          aria-label="Import from text"
-          onClick={fromText}
-        >
-          <Paragraph>From text</Paragraph>
-        </button>
-        <button
-          className="menu-button"
+      <Stack>
+        <Button variant="menu" aria-label="Import from text" onClick={fromText}>
+          From text
+        </Button>
+        <Button
+          variant="menu"
           onClick={() => fromFileInputRef.current?.click()}
         >
-          <Paragraph>From file</Paragraph>
+          From file
           <input
             ref={fromFileInputRef}
             type="file"
@@ -84,17 +80,12 @@ function ImportMenu() {
             onChange={fromFile}
             accept="text/plain"
           />
-        </button>
-        <button
-          className="menu-button bg-negative-menu-button-bg hover:bg-negative-menu-button-bg-hover"
-          onClick={importDefaultData}
-        >
-          <Paragraph className="text-negative-menu-button-text">
-            Default player data
-          </Paragraph>
+        </Button>
+        <Button variant="menu-danger" onClick={importDefaultData}>
+          Default player data
           <Tooltip>Resets your data</Tooltip>
-        </button>
-      </HorizontalContainer>
+        </Button>
+      </Stack>
     </Overlay>
   );
 }

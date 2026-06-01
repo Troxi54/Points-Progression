@@ -4,6 +4,9 @@ import Overlay from "../overlay";
 import { resolvePrompt, usePromptState } from "./service";
 import Paragraph from "@ui/components/base/Paragraph";
 import Heading from "@ui/components/base/Heading";
+import Input from "@ui/components/base/Input";
+import Stack from "@ui/components/base/Stack";
+import Button from "@ui/components/base/Button";
 
 function PromptRoot() {
   const { open, close, isOpen } = useMenu();
@@ -46,7 +49,7 @@ function PromptRoot() {
       </Heading>
       <Paragraph className="m-0">{snapshot.message}</Paragraph>
 
-      <input
+      <Input
         id="prompt-input"
         autoFocus
         value={value}
@@ -56,17 +59,16 @@ function PromptRoot() {
           if (e.key === "Enter") resolvePrompt(value);
           if (e.key === "Escape") resolvePrompt(null);
         }}
-        type="text"
       />
 
-      <div className="flex justify-end gap-[0.6em]">
-        <button className="menu-button" onClick={() => resolvePrompt(value)}>
-          <Paragraph>{snapshot.confirmText ?? "OK"}</Paragraph>
-        </button>
-        <button className="menu-button" onClick={() => resolvePrompt(null)}>
-          <Paragraph>{snapshot.cancelText ?? "Cancel"}</Paragraph>
-        </button>
-      </div>
+      <Stack className="justify-end gap-[0.6em]">
+        <Button variant="menu" onClick={() => resolvePrompt(value)}>
+          {snapshot.confirmText ?? "OK"}
+        </Button>
+        <Button variant="menu" onClick={() => resolvePrompt(null)}>
+          {snapshot.cancelText ?? "Cancel"}
+        </Button>
+      </Stack>
     </Overlay>
   );
 }

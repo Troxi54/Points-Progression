@@ -5,6 +5,7 @@ import coreConfig from "@game/features/cores/config";
 import { convertEnergyIntoCores } from "@game/features/cores/utils";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
 
 function CoreButton() {
   const state = usePlayerFields(
@@ -19,7 +20,7 @@ function CoreButton() {
   );
 
   return (
-    <button
+    <Button
       id="cores-button"
       className="bg-core-bg"
       onClick={convertEnergyIntoCores}
@@ -40,7 +41,7 @@ function CoreButton() {
           </>
         )}
       </Paragraph>
-    </button>
+    </Button>
   );
 }
 

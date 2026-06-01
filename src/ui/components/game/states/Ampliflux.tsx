@@ -1,12 +1,12 @@
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
-import CurrencyComponent from "@ui/components/base/Currency";
+import Currency from "@ui/components/features/Currency";
 import NexusSign from "@ui/components/features/NexusSign";
 
 function Ampliflux() {
   return (
-    <CurrencyComponent
+    <Currency
       currencyId="ampliflux"
       containerClassName="bg-ampliflux-bg"
       textClassName="text-ampliflux"

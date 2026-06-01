@@ -1,13 +1,13 @@
 import { formatNumber } from "@core/format/number";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import cappergyConfig from "@game/features/cappergy/config";
-import CurrencyComponent from "@ui/components/base/Currency";
+import Currency from "@ui/components/features/Currency";
 
 function Cappergy() {
   return (
-    <CurrencyComponent
+    <Currency
       currencyId="cappergy"
-      containerClassName="big [background-image:var(--cappergy-bg-gradient)] "
+      containerClassName="text-xl [background-image:var(--cappergy-bg-gradient)] "
       mainTextClassName="cappergy"
       effectClassName="cappergy-effect"
       effectNodes={[
@@ -20,7 +20,7 @@ function Cappergy() {
           ),
         },
       ]}
-    ></CurrencyComponent>
+    ></Currency>
   );
 }
 

@@ -14,6 +14,7 @@ import {
 import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 import StatusText from "../base/StatusText";
+import Button from "../base/Button";
 import Paragraph from "../base/Paragraph";
 
 interface Props<T extends ResetLayerId = ResetLayerId> {
@@ -78,13 +79,13 @@ function AutoResetToggle<T extends ResetLayerId>({
   }
 
   return (
-    <button
+    <Button
       className="w-fit rounded-[0.25em] px-15"
       onClick={toggleFunction}
       aria-label={`Toggle ${autoName}`}
     >
       <Paragraph className="my-2">{text}</Paragraph>
-    </button>
+    </Button>
   );
 }
 

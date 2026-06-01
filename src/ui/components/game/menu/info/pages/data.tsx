@@ -4,20 +4,19 @@ import Image from "@ui/components/base/Image";
 import MenuInfoFormulaPage from "./formulas";
 import MenuInfoMainPage from "./main";
 import MenuInfoNotationPage from "./notation";
-import Paragraph from "@ui/components/base/Paragraph";
 
 const menuInfoPages: MenuInfoPages = [
   {
-    buttonContent: <Image name="Main" src={starIcon}></Image>,
-    buttonClassName: "image-button h-[3.25em]",
+    buttonContent: <Image className="h-full" alt="Main" src={starIcon}></Image>,
+    buttonClassName: "p-0 h-[3.25em]",
     content: MenuInfoMainPage,
   },
   {
-    buttonContent: <Paragraph>Notation</Paragraph>,
+    buttonContent: <>Notation</>,
     content: MenuInfoNotationPage,
   },
   {
-    buttonContent: <Paragraph>Formulas</Paragraph>,
+    buttonContent: <>Formulas</>,
     content: MenuInfoFormulaPage,
   },
 ];

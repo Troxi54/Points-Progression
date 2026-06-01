@@ -15,7 +15,12 @@ const levelStyles: Partial<Record<Level, string>> = {
 function Heading({ level, className, ...props }: Props) {
   const Tag = `h${level}` as `h${Level}`;
 
-  return <Tag className={cn(levelStyles[level], className)} {...props} />;
+  return (
+    <Tag
+      className={cn("text-center", levelStyles[level], className)}
+      {...props}
+    />
+  );
 }
 
 export default Heading;

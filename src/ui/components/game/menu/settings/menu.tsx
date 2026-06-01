@@ -5,14 +5,14 @@ import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";
 import { togglePlayerField } from "@game/player/utils";
 import resetLayerConfig from "@game/resetLayers/config";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import StatusText from "@ui/components/base/StatusText";
 import Tooltip from "@ui/components/base/Tooltip";
 import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useState } from "react";
 import Overlay from "../overlay";
-import Paragraph from "@ui/components/base/Paragraph";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
 
 const SettingsMenu = () => {
   const { open } = useMenu();
@@ -43,8 +43,14 @@ const SettingsMenu = () => {
 
   return (
     <Overlay menuId="settings">
-      <button
-        className={cn("menu-button big save-button", isSaving && "saved")}
+      <Button
+        variant="menu"
+        size="xl"
+        className={cn(
+          "transition-[scale,background,color] duration-(--duration) [&>span]:transition-opacity [&>span]:duration-(--duration)",
+          isSaving &&
+            "scale-110 bg-positive-menu-button-bg hover:bg-positive-menu-button-bg-hover text-positive-menu-button-text",
+        )}
         style={
           {
             "--duration": `${SAVE_BUTTON_TRANSITION_DURATION}ms`,
@@ -55,111 +61,111 @@ const SettingsMenu = () => {
           setIsSaving(true);
         }}
       >
-        <Paragraph style={{ opacity: isSaving ? 0 : 1 }}>Save</Paragraph>
-        <Paragraph className="absolute" style={{ opacity: isSaving ? 1 : 0 }}>
+        <span style={{ opacity: isSaving ? 0 : 1 }}>Save</span>
+        <span className="absolute" style={{ opacity: isSaving ? 1 : 0 }}>
           Saved!
-        </Paragraph>
-      </button>
-      <HorizontalContainer>
-        <button
-          className="menu-button"
+        </span>
+      </Button>
+      <Stack className="mb-[1em]">
+        <Button
+          variant="menu"
           aria-label="Toggle auto save"
           onClick={() => togglePlayerField("autosave")}
         >
-          <Paragraph>
+          <span>
             Auto save: <StatusText active={state.autosave} />
-          </Paragraph>
-        </button>
-        <button
-          className="menu-button"
+          </span>
+        </Button>
+        <Button
+          variant="menu"
           aria-label="Toggle save on exit"
           onClick={() => togglePlayerField("saveBeforeUnload")}
         >
-          <Paragraph>
+          <span>
             Save on exit: <StatusText active={state.saveBeforeUnload} />
-          </Paragraph>
-        </button>
-      </HorizontalContainer>
-      <div />
-      <HorizontalContainer>
-        <button
-          className="menu-button big"
+          </span>
+        </Button>
+      </Stack>
+      <Stack className="mb-[1em]">
+        <Button
+          variant="menu"
+          size="xl"
           aria-label="Open Import menu"
           onClick={() => open("settings/import")}
         >
-          <Paragraph>Import</Paragraph>
-        </button>
-        <button
-          className="menu-button big"
+          Import
+        </Button>
+        <Button
+          variant="menu"
+          size="xl"
           aria-label="Open Export menu"
           onClick={() => open("settings/export")}
         >
-          <Paragraph>Export</Paragraph>
-        </button>
-      </HorizontalContainer>
-      <div />
-      <HorizontalContainer>
-        <button
-          className="menu-button"
+          Export
+        </Button>
+      </Stack>
+      <Stack>
+        <Button
+          variant="menu"
           aria-label="Toggle hide bought upgrades"
           onClick={() => togglePlayerField("hideBoughtUpgrades")}
         >
-          <Paragraph>
+          <span>
             Hide bought upgrades:{" "}
             <StatusText active={state.hideBoughtUpgrades} />
-          </Paragraph>
-        </button>
-        <button
-          className="menu-button"
+          </span>
+        </Button>
+        <Button
+          variant="menu"
           aria-label="Toggle exponential notation"
           onClick={() => togglePlayerField("exponentialNotation")}
         >
-          <Paragraph>
+          <span>
             Exponential notation:{" "}
             <StatusText active={state.exponentialNotation} />
-          </Paragraph>
+          </span>
           <Tooltip>
             Still doesn't work for numbers less than{" "}
             {formatNumber(exponentialNotationSettingStartsWorkingAt)}
           </Tooltip>
-        </button>
-        <button
-          className="menu-button"
+        </Button>
+        <Button
+          variant="menu"
           aria-label="Toggle stable progress bars"
           onClick={() => togglePlayerField("stableProgressBars")}
         >
-          <Paragraph>
+          <span>
             Stable progress bars:{" "}
             <StatusText active={state.stableProgressBars} />
-          </Paragraph>
+          </span>
           <Tooltip>
             Prevents rapid updates of progress bars when resets per second
             exceed {resetLayerConfig.progressBarsStartLockingAt} by locking them
             at 100%. Helps reduce potential screen wear
           </Tooltip>
-        </button>
-      </HorizontalContainer>
-      <HorizontalContainer>
-        <button
-          className="menu-button"
+        </Button>
+      </Stack>
+      <Stack>
+        <Button
+          variant="menu"
           aria-label="Toggle offline progress"
           onClick={() => togglePlayerField("offlineProgressWorks")}
         >
-          <Paragraph>
+          <span>
             Offline progress: <StatusText active={state.offlineProgressWorks} />
-          </Paragraph>
-        </button>
-        <button
-          className="menu-button"
+          </span>
+        </Button>
+        <Button
+          variant="menu"
           aria-label="Toggle menu blur"
           onClick={() => togglePlayerField("menuBackgroundBlur")}
         >
-          <Paragraph>
+          <span>
             Menu background blur:{" "}
             <StatusText active={state.menuBackgroundBlur} />
-          </Paragraph>
-        </button>
-      </HorizontalContainer>
+          </span>
+        </Button>
+      </Stack>
     </Overlay>
   );
 };

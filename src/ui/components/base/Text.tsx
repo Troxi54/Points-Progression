@@ -7,7 +7,10 @@ interface Props extends ComponentPropsWithRef<"span"> {
 
 function Text({ block, className, ...props }: Props) {
   return (
-    <span className={cn("my-[1em]", block && "block", className)} {...props} />
+    <span
+      className={cn("my-[1em] text-center", block && "block", className)}
+      {...props}
+    />
   );
 }
 

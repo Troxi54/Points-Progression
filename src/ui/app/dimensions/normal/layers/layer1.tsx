@@ -1,7 +1,7 @@
 import { mergeObjects } from "@core/utils/object";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
 import { hasUpgrades } from "@game/upgrades/utils/has";
-import DimensionLayerLayout from "@ui/components/base/DimensionLayerLayout";
+import Layer from "@ui/components/features/Layer";
 import PointUpgrade from "@ui/components/game/repeatableUpgrades/PointUpgrade";
 import ResetBar from "@ui/components/game/resetLayers/ResetBar";
 import Points from "@ui/components/game/states/Points";
@@ -22,7 +22,7 @@ function NormalDimensionLayer1() {
   });
 
   return (
-    <DimensionLayerLayout>
+    <Layer>
       <TimeSpent />
       <Points />
       <PointUpgrade />
@@ -33,7 +33,7 @@ function NormalDimensionLayer1() {
           <ResetUpgrades />
         </>
       )}
-    </DimensionLayerLayout>
+    </Layer>
   );
 }
 

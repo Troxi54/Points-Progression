@@ -1,25 +1,29 @@
 import { formatEffectOnCurrency } from "@core/format/effect";
-import { integerFormatWithPlural } from "@core/format/plural";
 import {
   handleDecimalInputOnBlur,
   handleDecimalInputOnChange,
 } from "@core/utils/input";
 import cn from "@core/utils/tailwind";
-import { pluralizeCurrency } from "@game/currencies/utils/format";
+import {
+  formatCurrency,
+  formatCurrencyNameEmptylessPlural,
+  pluralizeCurrency,
+} from "@game/currencies/utils/format";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { triggerNullifice } from "@game/features/nullifice/utils";
 import { getPlayerState } from "@game/player/store";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
-import CurrencyContent from "@ui/components/base/CurrencyContent";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import pluralize from "pluralize";
 import { useCallback, useLayoutEffect, useRef } from "react";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
+import Input from "@ui/components/base/Input";
 
 function Nullifice() {
   const state = usePlayerFields(
     {
-      player: ["nullions", "nullionInput"],
+      player: ["nullionInput"],
       cachedPlayer: ["nullionInputConverted"],
     },
     { useFormat: true },
@@ -63,7 +67,7 @@ function Nullifice() {
   const isPercentage = state.nullionInput.includes("%");
 
   return (
-    <button
+    <Button
       className={cn(
         "[background-image:var(--nullifice-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nullifice-gradient-bg)]",
@@ -110,26 +114,30 @@ function Nullifice() {
           ]}
         />
       </Paragraph>
-
       <span className="nullifice">
-        Sacrifice{" "}
-        <input
+        Sacrifice {formatCurrencyNameEmptylessPlural("madeNullithResets")}:{" "}
+      </span>
+      <div>
+        <Input
           id="nullion-input"
           ref={inputRef}
-          type="text"
-          className="auto-input"
+          autoSize
           onClick={(e) => e.stopPropagation()}
           onChange={onChange}
           onBlur={onBlur}
-        />{" "}
-        {isPercentage
-          ? `= ${integerFormatWithPlural(
-              state.nullionInputConverted,
-              "Nullith Reset",
-            )}`
-          : pluralize("Nullith Reset", +state.nullionInputConverted)}
-      </span>
-    </button>
+        />
+        {isPercentage && (
+          <>
+            {" "}
+            <span className="nullifice-description">
+              (
+              {formatCurrency(state.nullionInputConverted, "madeNullithResets")}
+              )
+            </span>
+          </>
+        )}
+      </div>
+    </Button>
   );
 }
 

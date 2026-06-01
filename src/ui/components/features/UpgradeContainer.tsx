@@ -2,6 +2,7 @@ import type { ClassName } from "@core/types/react";
 import type { UpgradeDataContainer } from "@game/upgrades/types";
 import cn from "@core/utils/tailwind";
 import Upgrade from "./Upgrade";
+import Container from "../base/Container";
 
 interface props {
   id?: string;
@@ -20,10 +21,10 @@ function UpgradeContainer({
 }: props) {
   const startsAt = start ? start - 1 : 0;
   return (
-    <div
+    <Container
       id={id}
       className={cn(
-        "bg-transparent justify-evenly px-[2em] overflow-x-auto gap-[5%]",
+        "bg-transparent justify-evenly px-[2em] overflow-x-auto gap-[5%] items-center",
         className,
       )}
     >
@@ -38,7 +39,7 @@ function UpgradeContainer({
           />
         );
       })}
-    </div>
+    </Container>
   );
 }
 

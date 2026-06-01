@@ -1,7 +1,9 @@
-import type { ChildrenProps } from "@core/types/react";
+import { ComponentProps } from "react";
 
-function Pow({ children }: ChildrenProps) {
-  return <sup>{children}</sup>;
+type Props = ComponentProps<"sup">;
+
+function Pow({ ...props }: Props) {
+  return <sup {...props} />;
 }
 
 export default Pow;

@@ -3,8 +3,9 @@ import { isDimension } from "@game/dimensions/utils/compare";
 import { toggleSliph } from "@game/features/sliph/utils";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
+import Button from "@ui/components/base/Button";
 
-function Sliph() {
+function SliphToggle() {
   const state = usePlayerFields({
     player: ["dimensionId"],
   });
@@ -12,7 +13,7 @@ function Sliph() {
   const isSliph = isDimension(state.dimensionId, "sliph");
 
   return (
-    <button
+    <Button
       className={cn(
         "[background-image:var(--sliph-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--sliph-gradient-bg)] hover:[border-image-source:var(--sliph-gradient)]",
@@ -27,8 +28,8 @@ function Sliph() {
           dimension can be active at a time
         </span>
       </Paragraph>
-    </button>
+    </Button>
   );
 }
 
-export default Sliph;
+export default SliphToggle;

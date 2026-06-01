@@ -1,11 +1,16 @@
 import cn from "@core/utils/tailwind";
+import { Slot } from "@radix-ui/react-slot";
 import { ComponentPropsWithRef } from "react";
 
-type Props = ComponentPropsWithRef<"div">;
+export interface ContainerProps extends ComponentPropsWithRef<"div"> {
+  asChild?: boolean;
+}
 
-function Container({ className, ...props }: Props) {
+function Container({ asChild, className, ...props }: ContainerProps) {
+  const Comp = asChild ? Slot : "div";
+
   return (
-    <div className={cn("flex place-items-center", className)} {...props} />
+    <Comp className={cn("flex place-content-center", className)} {...props} />
   );
 }
 

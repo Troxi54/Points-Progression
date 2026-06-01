@@ -3,14 +3,15 @@ import { calculateTimeForRequirement } from "@core/utils/time";
 import offlineConfig from "@game/offline/config";
 import { skipOfflineProgress } from "@game/offline/utils/trigger";
 import { getPlayerState } from "@game/player/store";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
 import ProgressBar from "@ui/components/base/ProgressBar";
 import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 import Overlay from "../overlay";
 import Paragraph from "@ui/components/base/Paragraph";
 import Heading from "@ui/components/base/Heading";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
 
 function OfflineMenu() {
   const { open, close, closeAllExcept } = useMenu();
@@ -33,14 +34,18 @@ function OfflineMenu() {
     ],
   });
 
-  useEffect(() => {
+  const syncMenu = useEffectEvent(() => {
     if (offlineProgress) {
       closeAllExcept("offline");
       open("offline");
     } else {
       close("offline");
     }
-  }, [offlineProgress, closeAllExcept, open, close]);
+  });
+
+  useEffect(() => {
+    syncMenu();
+  }, [offlineProgress]);
 
   const progress =
     offlineProgressTicksCompleted / offlineProgressTicksOnTrigger;
@@ -68,9 +73,9 @@ function OfflineMenu() {
         Ticks: {offlineProgressTicksCompleted} / {offlineProgressTicksOnTrigger}{" "}
         <span className="text-offline-time">({formatLeftTime(leftTime)})</span>
       </ProgressBar>
-      <HorizontalContainer>
-        <button
-          className="menu-button"
+      <Stack>
+        <Button
+          variant="menu"
           onClick={() => {
             const { cachedPlayer, setCachedPlayer } = getPlayerState();
             const currentSpeed = cachedPlayer.offlineProgressSpeed;
@@ -87,12 +92,12 @@ function OfflineMenu() {
             });
           }}
         >
-          <Paragraph>Speed up</Paragraph>
-        </button>
-        <button className="menu-button" onClick={() => skipOfflineProgress()}>
-          <Paragraph>Skip</Paragraph>
-        </button>
-      </HorizontalContainer>
+          Speed up
+        </Button>
+        <Button variant="menu" onClick={() => skipOfflineProgress()}>
+          Skip
+        </Button>
+      </Stack>
     </Overlay>
   );
 }

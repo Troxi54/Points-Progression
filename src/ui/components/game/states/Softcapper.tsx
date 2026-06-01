@@ -2,6 +2,7 @@ import { formatNumber, integerCommaFormat } from "@core/format/number";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import softcapperData from "@game/softcappers/data";
+import Container from "@ui/components/base/Container";
 import Heading from "@ui/components/base/Heading";
 import Paragraph from "@ui/components/base/Paragraph";
 import Pow from "@ui/components/base/Pow";
@@ -33,7 +34,7 @@ function Softcapper() {
   const bestLvlNumber = bestLvl.toNumber();
 
   return (
-    <div
+    <Container
       className="flex-col"
       style={{
         backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber}-bg)`,
@@ -49,7 +50,7 @@ function Softcapper() {
         Softcapper
         {bestLvl.greaterThan(1) && <> ({integerCommaFormat(bestLvl)})</>}
       </Heading>
-      <div className="softcap-container flex-col gap-y-2">
+      <Container className="flex-col gap-y-2">
         {softcappers.map((softcapper, i) => {
           const index = i + 1;
 
@@ -62,7 +63,7 @@ function Softcapper() {
 
           return (
             <Paragraph
-              className="text-gradient"
+              className="text-gradient m-0 first-of-type:mt-4 last-of-type:mb-4"
               key={index}
               style={{
                 backgroundImage: `var(--gradient-softcapper-level-${index})`,
@@ -80,8 +81,8 @@ function Softcapper() {
             </Paragraph>
           );
         })}
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 }
 

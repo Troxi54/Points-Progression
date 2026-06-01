@@ -1,11 +1,11 @@
 import { formatNumber } from "@core/format/number";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
-import CurrencyComponent from "@ui/components/base/Currency";
+import Currency from "@ui/components/features/Currency";
 import StatusText from "@ui/components/base/StatusText";
 
 function Score() {
   return (
-    <CurrencyComponent
+    <Currency
       currencyId="score"
       effectClassName="text-level-effect"
       passiveGainPriority={false}

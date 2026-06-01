@@ -1,10 +1,10 @@
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { everPerformed } from "@game/resetLayers/utils/get";
-import CurrencyComponent from "@ui/components/base/Currency";
+import Currency from "@ui/components/features/Currency";
 
 function Dertoints() {
   return (
-    <CurrencyComponent
+    <Currency
       currencyId="dertoints"
       effectNodes={[
         {

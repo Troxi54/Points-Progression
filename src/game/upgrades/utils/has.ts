@@ -24,6 +24,7 @@ export function hasUpgrade(
   const container = player?.upgrades?.[containerId];
   return container?.[index] === true;
 }
+
 export function hasUpgradeById(
   playerLike: PlayerLike,
   upgradeId: UpgradeId,
@@ -31,6 +32,7 @@ export function hasUpgradeById(
   const splitId = splitUpgradeId(upgradeId);
   return hasUpgrade(playerLike, ...splitId);
 }
+
 /**
  * Note: requires `upgrades` to be 'as const' to properly define types
  */

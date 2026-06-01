@@ -1,9 +1,9 @@
-import cn from "@core/utils/tailwind";
-import HorizontalContainer from "@ui/components/base/HorizontalContainer";
-import VerticalContainer from "@ui/components/base/VerticalContainer";
 import { useState } from "react";
 import Overlay from "../overlay";
 import menuInfoPages from "./pages/data";
+import Container from "@ui/components/base/Container";
+import Stack from "@ui/components/base/Stack";
+import UnderlineButton from "@ui/components/base/UnderlineButton";
 
 const InfoMenu = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,28 +16,38 @@ const InfoMenu = () => {
       menuClassName="w-1/2 h-2/3 p-0"
       containerClassName="w-full h-9/10 overflow-x-hidden overflow-y-auto px-[2em]"
       menuChildren={
-        <HorizontalContainer className="absolute -translate-y-110/100 top-0 big bg-page-container-bg p-[0.4em] rounded-[0.5em] gap-[0.75em]">
+        <Container
+          role="tablist"
+          className="absolute -translate-y-110/100 top-0 bg-tab-container-bg p-[0.4em] rounded-[0.5em] items-center gap-[0.75em]"
+        >
           {menuInfoPages.map((page, index) => (
-            <button
-              className={cn(
-                "menu-button underline-effect-button rounded-[0.75em] bg-page-button-bg hover:bg-page-button-bg-hover",
-                currentPage === index && "active",
-                page.buttonClassName,
-              )}
+            <UnderlineButton
+              role="tab"
+              aria-selected={currentPage === index}
+              aria-controls={`tabpanel-${index}`}
+              variant="tab"
+              size="xl"
+              active={currentPage === index}
+              className={page.buttonClassName}
               onClick={() => setCurrentPage(index)}
               key={index}
+              tabIndex={currentPage === index ? 0 : -1}
             >
               {page.buttonContent}
-            </button>
+            </UnderlineButton>
           ))}
-        </HorizontalContainer>
+        </Container>
       }
     >
-      <div className="min-h-full justify-start">
-        <VerticalContainer className="my-auto">
+      <Container
+        id={`tabpanel-${currentPage}`}
+        role="tabpanel"
+        className="min-h-full"
+      >
+        <Stack col className="my-auto">
           {<CurrentContent />}
-        </VerticalContainer>
-      </div>
+        </Stack>
+      </Container>
     </Overlay>
   );
 };

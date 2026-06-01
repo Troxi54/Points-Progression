@@ -7,6 +7,7 @@ import cn from "@core/utils/tailwind";
 import { Fragment } from "react";
 import progressBarConfig from "./config";
 import Paragraph from "../Paragraph";
+import Container from "../Container";
 
 interface Props extends ProgressBarProps, ChildrenProps {
   progress: number;
@@ -32,7 +33,7 @@ function ProgressBar({
   const processedProgress = clamp(progress, 0, 1);
 
   return (
-    <div
+    <Container
       role="progressbar"
       aria-valuenow={processedProgress * 100}
       aria-valuemin={0}
@@ -53,7 +54,7 @@ function ProgressBar({
         <div
           className={cn("absolute-full origin-left", progressFillClassName)}
           style={{ transform: `scaleX(${processedProgress})` }}
-        ></div>
+        />
       ) : (
         <div
           className={cn(
@@ -71,10 +72,10 @@ function ProgressBar({
           <div
             className={cn("absolute-full origin-right", bgClassName)}
             style={{ transform: `scaleX(${1 - processedProgress})` }}
-          ></div>
+          />
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 

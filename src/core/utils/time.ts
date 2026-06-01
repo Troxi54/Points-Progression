@@ -8,17 +8,17 @@ import createDecimal from "./decimal";
 import { isNil } from "./nil";
 
 export function calculateTimeForRequirement(
-  currencyValue: DecimalSource,
-  currencyGain: DecimalSource,
+  value: DecimalSource,
+  gain: DecimalSource,
   requirement: DecimalSource,
 ): Decimal {
-  const gain = createDecimal(currencyGain);
+  gain = createDecimal(gain);
   if (gain.isNan() || !gain.isFinite() || gain.lessThanOrEqualTo(0)) {
     return createDecimal(Infinity);
   }
 
   return createDecimal(requirement)
-    .minus(currencyValue)
+    .minus(value)
     .dividedBy(gain)
     .multiply(1000)
     .max(0);
