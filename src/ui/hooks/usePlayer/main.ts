@@ -1,7 +1,8 @@
 import type { CachedPlayer } from "@game/player/cached/types";
 import type {
   PlayerSetterName,
-  PlayerState, PlayerStoreSelectorGeneric 
+  PlayerState,
+  PlayerStoreSelectorGeneric,
 } from "@game/player/store/types";
 import type { Player, UsePlayerFieldsReturn } from "@game/player/types";
 import type {

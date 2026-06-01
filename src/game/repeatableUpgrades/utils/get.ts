@@ -1,4 +1,7 @@
-import type { CachedPlayerLike, CachedRepeatableUpgrade  } from "@game/player/cached/types";
+import type {
+  CachedPlayerLike,
+  CachedRepeatableUpgrade,
+} from "@game/player/cached/types";
 import type { PlayerLike } from "@game/player/types";
 import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
 import type Decimal from "break_eternity.js";

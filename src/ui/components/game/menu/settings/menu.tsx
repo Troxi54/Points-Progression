@@ -49,7 +49,7 @@ const SettingsMenu = () => {
         className={cn(
           "transition-[scale,background,color] duration-(--duration) [&>span]:transition-opacity [&>span]:duration-(--duration)",
           isSaving &&
-            "scale-110 bg-positive-menu-button-bg hover:bg-positive-menu-button-bg-hover text-positive-menu-button-text",
+            "bg-positive-menu-button-bg hover:bg-positive-menu-button-bg-hover text-positive-menu-button-text scale-110",
         )}
         style={
           {

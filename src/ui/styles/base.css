@@ -4,6 +4,6 @@
   }
 
   body {
-    @apply m-0 flex place-content-center min-w-80 min-h-screen bg-bg font-[system-ui,Avenir,Helvetica,Arial,sans-serif] tabular-nums antialiased font-bold text-foreground;
+    @apply bg-bg text-foreground m-0 flex min-h-screen min-w-80 place-content-center font-[system-ui,Avenir,Helvetica,Arial,sans-serif] font-bold tabular-nums antialiased;
   }
 }

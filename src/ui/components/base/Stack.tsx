@@ -8,7 +8,7 @@ interface Props extends ContainerProps {
 function Stack({ className, col, ...props }: Props) {
   return (
     <Container
-      className={cn("gap-[1em] items-center", col && "flex-col", className)}
+      className={cn("items-center gap-[1em]", col && "flex-col", className)}
       {...props}
     />
   );

@@ -1,4 +1,7 @@
-import type { CachedCurrency, CachedPlayerLike } from "@game/player/cached/types";
+import type {
+  CachedCurrency,
+  CachedPlayerLike,
+} from "@game/player/cached/types";
 import type Decimal from "break_eternity.js";
 import type {
   CachedCurrencyEffectSelection,

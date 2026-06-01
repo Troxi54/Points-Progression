@@ -1,7 +1,11 @@
 import type { NotFunction } from "@core/types/function";
 import type { BooleanKeys } from "@core/types/keys";
-import type { CachedPlayer, CachedPlayerLike, PartialCachedPlayer  } from "./cached/types";
-import type { MergedPlayer, PartialMergedPlayer  } from "./merged/types";
+import type {
+  CachedPlayer,
+  CachedPlayerLike,
+  PartialCachedPlayer,
+} from "./cached/types";
+import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
 import type { PlayerState } from "./store/types";
 import type { PartialPlayer, Player, PlayerLike, ValueGetter } from "./types";
 import resetGame from "@main/resetGame";

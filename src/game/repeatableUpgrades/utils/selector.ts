@@ -1,4 +1,7 @@
-import type { CachedPlayerLike, CachedRepeatableUpgrade  } from "@game/player/cached/types";
+import type {
+  CachedPlayerLike,
+  CachedRepeatableUpgrade,
+} from "@game/player/cached/types";
 import type { PlayerLike } from "@game/player/types";
 import type {
   CachedRepeatableUpgradeSelector,
@@ -8,7 +11,10 @@ import type {
 import type Decimal from "break_eternity.js";
 import { objectFromEntries } from "@core/utils/object";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
-import { getCachedRepeatableUpgradeProp, getRepeatableUpgradeLevel  } from "./get";
+import {
+  getCachedRepeatableUpgradeProp,
+  getRepeatableUpgradeLevel,
+} from "./get";
 
 export function getRepeatableUpgradeLevelSelection<
   T extends RepeatableUpgradeId[],

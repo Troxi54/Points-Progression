@@ -18,7 +18,7 @@ const InfoMenu = () => {
       menuChildren={
         <Container
           role="tablist"
-          className="absolute -translate-y-110/100 top-0 bg-tab-container-bg p-[0.4em] rounded-[0.5em] items-center gap-[0.75em]"
+          className="bg-tab-container-bg absolute top-0 -translate-y-110/100 items-center gap-[0.75em] rounded-[0.5em] p-[0.4em]"
         >
           {menuInfoPages.map((page, index) => (
             <UnderlineButton

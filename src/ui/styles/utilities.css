@@ -42,9 +42,7 @@
 @utility animated-gradient {
   --gradient-angle: 90deg;
   --gradient-step: 200px;
-  @apply bg-linear-to-r
-         bg-size-[calc(var(--gradient-step)/sin(var(--gradient-angle)))_100%]
-         animate-[animated-gradient_linear_infinite];
+  @apply animate-[animated-gradient_linear_infinite] bg-linear-to-r bg-size-[calc(var(--gradient-step)/sin(var(--gradient-angle)))_100%];
 }
 
 @utility absolute-full {

@@ -15,27 +15,27 @@ function BreakAmplivault() {
   const noInfo = !reachedBreakAmplivault || amplivaultBroken;
 
   return !reachedBreakAmplivault ? (
-    <Container className="w-full bg-linear-to-t from-break-amplivault-bg-1 to-break-amplivault-bg-2">
+    <Container className="from-break-amplivault-bg-1 to-break-amplivault-bg-2 w-full bg-linear-to-t">
       <Heading
         level={2}
-        className="break-amplivault text-[1.5em] font-bold mb-[1em] mt-[1em]"
+        className="break-amplivault mt-[1em] mb-[1em] text-[1.5em] font-bold"
       >
         Requires a Nullith reset in Amplivault
       </Heading>
     </Container>
   ) : (
     <Button
-      className="bg-linear-to-t from-break-amplivault-bg-1 to-break-amplivault-bg-2 border-image-gradient [border-image-source:linear-gradient(to_top,var(--color-break-amplivault-bg-1),var(--color-break-amplivault-bg-2))] hover:[border-image-source:linear-gradient(to_top,var(--color-break-amplivault-1),var(--color-break-amplivault-2))]"
+      className="from-break-amplivault-bg-1 to-break-amplivault-bg-2 border-image-gradient bg-linear-to-t [border-image-source:linear-gradient(to_top,var(--color-break-amplivault-bg-1),var(--color-break-amplivault-bg-2))] hover:[border-image-source:linear-gradient(to_top,var(--color-break-amplivault-1),var(--color-break-amplivault-2))]"
       onClick={breakAmplivault}
     >
       <Heading
         level={2}
-        className="break-amplivault text-[2em] font-bold mb-[0.5em] mt-[0.5em]"
+        className="break-amplivault mt-[0.5em] mb-[0.5em] text-[2em] font-bold"
       >
         Break Amplivault
       </Heading>
       {!noInfo && (
-        <Paragraph className="text-gradient bg-linear-to-r from-break-amplivault-info-1 to-break-amplivault-info-2 text-balance">
+        <Paragraph className="text-gradient from-break-amplivault-info-1 to-break-amplivault-info-2 bg-linear-to-r text-balance">
           Breaking Amplivault allows the level of Amplivault to increase when
           you're not inside it. You can no longer enter Amplivault, and its
           effect becomes softcapped. This action is permanent.

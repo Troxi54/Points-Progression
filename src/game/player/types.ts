@@ -8,7 +8,7 @@ import type { UpgradeContainerId } from "@game/upgrades/types";
 import type Decimal from "break_eternity.js";
 import type { CachedPlayer } from "./cached/types";
 import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
-import type { PlayerSetterName, PlayerState  } from "./store/types";
+import type { PlayerSetterName, PlayerState } from "./store/types";
 
 export interface Player {
   gameVersion: GameVersion;

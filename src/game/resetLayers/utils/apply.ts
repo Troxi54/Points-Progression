@@ -1,5 +1,12 @@
-import type { CachedPlayer, CachedPlayerLike, CachedResetLayer  } from "@game/player/cached/types";
-import type { MergedPlayer, PartialMergedPlayer  } from "@game/player/merged/types";
+import type {
+  CachedPlayer,
+  CachedPlayerLike,
+  CachedResetLayer,
+} from "@game/player/cached/types";
+import type {
+  MergedPlayer,
+  PartialMergedPlayer,
+} from "@game/player/merged/types";
 import type {
   PartialPlayer,
   PartialResetLayerPlayerData,

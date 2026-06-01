@@ -1,5 +1,8 @@
 import type { DimensionId } from "@game/dimensions/types";
-import type { CachedPlayerLike, CachedResetLayer  } from "@game/player/cached/types";
+import type {
+  CachedPlayerLike,
+  CachedResetLayer,
+} from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type {
   PartialResetLayerPlayerData,

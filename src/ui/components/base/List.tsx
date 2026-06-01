@@ -7,7 +7,7 @@ function List({ className, ...props }: Props) {
   return (
     <ul
       className={cn(
-        "flex flex-col justify-center list-inside list-disc",
+        "flex list-inside list-disc flex-col justify-center",
         className,
       )}
       {...props}

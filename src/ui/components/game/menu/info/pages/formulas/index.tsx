@@ -26,7 +26,7 @@ function MenuInfoFormulaPage() {
           {!isFirst && <br />}
           <Stack col className="gap-[0.1em]">
             <span>{formula.name}:</span>
-            <Caption className="bg-formula-body-bg p-[0.5em] rounded-[0.5em] text-center">
+            <Caption className="bg-formula-body-bg rounded-[0.5em] p-[0.5em] text-center">
               {node}
             </Caption>
           </Stack>
@@ -37,7 +37,7 @@ function MenuInfoFormulaPage() {
 
   return (
     <>
-      <Stack col className="text-[1.5em] gap-[0.5em] py-[1em]">
+      <Stack col className="gap-[0.5em] py-[1em] text-[1.5em]">
         {formulas}
       </Stack>
     </>

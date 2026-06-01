@@ -10,8 +10,8 @@ function UnderlineButton({ className, active, ...props }: Props) {
     <Button
       className={cn(
         "overflow-hidden",
-        "after:content-[''] after:transition-[scale,opacity] after:duration-300 after:absolute after:w-full after:h-[0.25em] after:bottom-0 after:scale-y-0 after:opacity-0 after:origin-bottom",
-        active && "after:scale-y-100 after:opacity-100 after:bg-white",
+        "after:absolute after:bottom-0 after:h-[0.25em] after:w-full after:origin-bottom after:scale-y-0 after:opacity-0 after:transition-[scale,opacity] after:duration-300 after:content-['']",
+        active && "after:scale-y-100 after:bg-white after:opacity-100",
         className,
       )}
       {...props}

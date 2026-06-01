@@ -1,4 +1,7 @@
-import type { MergedPlayer, PartialMergedPlayer  } from "@game/player/merged/types";
+import type {
+  MergedPlayer,
+  PartialMergedPlayer,
+} from "@game/player/merged/types";
 import type { CachedPlayer } from "../cached/types";
 import type { PartialPlayer } from "../types";
 

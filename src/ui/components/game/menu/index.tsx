@@ -14,7 +14,7 @@ function Menu() {
     <MenuProvider>
       <Container
         asChild
-        className="fixed z-10 w-fit h-[8vmin] top-0 right-0 text-[1.6vmin] p-[0.6em] rounded-bl-[1em] justify-start flex-row-reverse gap-[0.5em] bg-open-menu-container-bg select-text"
+        className="bg-open-menu-container-bg fixed top-0 right-0 z-10 h-[8vmin] w-fit flex-row-reverse justify-start gap-[0.5em] rounded-bl-[1em] p-[0.6em] text-[1.6vmin] select-text"
       >
         <nav>
           <SettingsButton />

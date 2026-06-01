@@ -44,7 +44,7 @@ function Nexus() {
   return (
     <Button
       className={cn(
-        "[background-image:var(--nexus-gradient-bg)] items-center",
+        "items-center [background-image:var(--nexus-gradient-bg)]",
         "border-image-gradient [border-image-source:var(--nexus-gradient-bg)] hover:[border-image-source:var(--nexus-gradient)]",
       )}
       onClick={buyNexus}
@@ -72,7 +72,7 @@ function Nexus() {
           )
         )}
       </Paragraph>
-      <Container className="flex-col w-[50em] max-w-9/10 max-h-[9em] justify-start overflow-y-auto rounded-[1em] gap-0">
+      <Container className="max-h-[9em] w-[50em] max-w-9/10 flex-col justify-start gap-0 overflow-y-auto rounded-[1em]">
         {nexusMilestones
           .slice(0, bestNexusLevel.toNumber())
           .map(({ description }, index) => {

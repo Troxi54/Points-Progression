@@ -22,7 +22,7 @@ export function isDecimal(value: unknown): value is Decimal {
 }
 
 export function toPercentage(value: DecimalSource): string {
-  return `${createDecimal(value).multiply(100)  }%`;
+  return `${createDecimal(value).multiply(100)}%`;
 }
 
 export function decimalSoftcap(

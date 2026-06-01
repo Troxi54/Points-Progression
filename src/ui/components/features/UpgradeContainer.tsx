@@ -24,7 +24,7 @@ function UpgradeContainer({
     <Container
       id={id}
       className={cn(
-        "bg-transparent justify-evenly px-[2em] overflow-x-auto gap-[5%] items-center",
+        "items-center justify-evenly gap-[5%] overflow-x-auto bg-transparent px-[2em]",
         className,
       )}
     >

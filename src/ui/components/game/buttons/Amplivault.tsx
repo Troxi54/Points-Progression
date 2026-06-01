@@ -59,12 +59,11 @@ function Amplivault() {
   return (
     <Button
       className={cn(
-        "flex items-center flex-col w-full",
+        "flex w-full flex-col items-center",
         state.amplivaultBroken
           ? cn(
               "[background-image:var(--broken-amplivault-gradient-bg)]",
-              "border-image-gradient",
-              "[border-image-source:var(--broken-amplivault-gradient-bg)]",
+              "border-image-gradient [border-image-source:var(--broken-amplivault-gradient-bg)]",
               "hover:[border-image-source:var(--broken-amplivault-gradient)]",
             )
           : "bg-amplivault-bg hover:border-amplivault",
@@ -74,10 +73,10 @@ function Amplivault() {
     >
       <Container
         className={cn(
-          "relative w-20 h-20 border-2 border-amplivault-div-border items-center",
+          "border-amplivault-div-border relative h-20 w-20 items-center border-2",
           state.amplivaultBroken
             ? cn(
-                "bg-black border-image-gradient",
+                "border-image-gradient bg-black",
                 "shadow-[0_0_0.5em_0.1em_rgba(0,0,0,0.5)]",
                 "before-full before:z-1 before:opacity-85",
                 "[border-image-source:var(--broken-amplivault-gradient)]",
@@ -86,10 +85,10 @@ function Amplivault() {
             : "bg-amplivault-div-bg",
         )}
       >
-        <Container className="absolute-full bg-amplivault-div-2-bg border-2 border-amplivault-div-2-border rounded-full" />
+        <Container className="absolute-full bg-amplivault-div-2-bg border-amplivault-div-2-border rounded-full border-2" />
         <Container
           className={cn(
-            "relative w-[calc(100%/1.4142-2px)] aspect-square bg-amplivault-div-3-bg border-2 border-amplivault-div-3-border items-center animate-[amplivault-animation_linear_infinite]",
+            "bg-amplivault-div-3-bg border-amplivault-div-3-border relative aspect-square w-[calc(100%/1.4142-2px)] animate-[amplivault-animation_linear_infinite] items-center border-2",
             state.amplivaultBroken
               ? "[animation-duration:2.74s]"
               : "[animation-duration:1.5s]",
@@ -112,7 +111,7 @@ function Amplivault() {
       {state.amplivaultBroken ? (
         <Paragraph className="broken-amplivault">
           Broken Amplivault -{" "}
-          <span className="tracking-wider font-normal">
+          <span className="font-normal tracking-wider">
             You need to reach the requirement to increase your Amplivault level.
             Amplivault level boosts Ampliflux.
           </span>

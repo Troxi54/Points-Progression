@@ -5,11 +5,11 @@
 
   .layer > div,
   .layer > button {
-    @apply w-full bg-layer-inner-bg;
+    @apply bg-layer-inner-bg w-full;
   }
 
   .dark-energy {
-    @apply text-dark-energy text-shadow-[0_0_.1em,0_0_.1em] text-shadow-dark-energy;
+    @apply text-dark-energy text-shadow-dark-energy text-shadow-[0_0_.1em,0_0_.1em];
   }
 
   .nullith {
@@ -17,7 +17,7 @@
   }
 
   .break-amplivault {
-    @apply text-gradient bg-linear-to-r from-break-amplivault-1 to-break-amplivault-2;
+    @apply text-gradient from-break-amplivault-1 to-break-amplivault-2 bg-linear-to-r;
   }
 
   .broken-amplivault {
@@ -30,7 +30,7 @@
     background-image: var(--nullifice-gradient);
   }
   .nullifice-description {
-    @apply text-gradient bg-linear-to-r from-nullifice-description-1 to-nullifice-description-2;
+    @apply text-gradient from-nullifice-description-1 to-nullifice-description-2 bg-linear-to-r;
   }
 
   .sliph {
@@ -38,7 +38,7 @@
     background-image: var(--sliph-gradient);
   }
   .sliph-description {
-    @apply text-gradient bg-linear-to-r from-sliph-description-1 to-sliph-description-2;
+    @apply text-gradient from-sliph-description-1 to-sliph-description-2 bg-linear-to-r;
   }
 
   .cappergy {

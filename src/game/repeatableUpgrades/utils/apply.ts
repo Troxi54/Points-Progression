@@ -1,5 +1,12 @@
-import type { CachedPlayerLike, CachedRepeatableUpgrade , PartialCachedPlayer  } from "@game/player/cached/types";
-import type { MergedPlayer, PartialMergedPlayer  } from "@game/player/merged/types";
+import type {
+  CachedPlayerLike,
+  CachedRepeatableUpgrade,
+  PartialCachedPlayer,
+} from "@game/player/cached/types";
+import type {
+  MergedPlayer,
+  PartialMergedPlayer,
+} from "@game/player/merged/types";
 import type { PartialPlayer, PlayerLike } from "@game/player/types";
 import type Decimal from "break_eternity.js";
 import type { RepeatableUpgrade, RepeatableUpgradeId } from "../types";

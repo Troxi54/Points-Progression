@@ -134,7 +134,7 @@ function Overlay({
       ref={overlayRef}
       role="presentation"
       className={cn(
-        "fixed items-center bg-overlay-2 ease-[ease] transition-opacity duration-150 text-[1.5vmin] inset-0",
+        "bg-overlay-2 fixed inset-0 items-center text-[1.5vmin] transition-opacity duration-150 ease-[ease]",
         menuBackgroundBlur && "backdrop-blur-[0.25em]",
       )}
       style={overlayStyle}
@@ -147,7 +147,7 @@ function Overlay({
         aria-modal="true"
         aria-label={menuId}
         className={cn(
-          "relative size-fit items-center p-[3em] text-[1.1em] bg-overlay-menu rounded-[2em] shadow-[0_0_1.5em_1em_rgba(0,0,0,0.25)]",
+          "bg-overlay-menu relative size-fit items-center rounded-[2em] p-[3em] text-[1.1em] shadow-[0_0_1.5em_1em_rgba(0,0,0,0.25)]",
           menuBackgroundBlur && "backdrop-blur-[0.1em]",
           menuClassName,
         )}

@@ -42,7 +42,7 @@ function Softcapper() {
     >
       <Heading
         level={2}
-        className="text-gradient text-[2em] mb-[.4em]"
+        className="text-gradient mb-[.4em] text-[2em]"
         style={{
           backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber})`,
         }}

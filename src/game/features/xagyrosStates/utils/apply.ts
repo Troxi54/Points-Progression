@@ -1,4 +1,7 @@
-import type { MergedPlayer, PartialMergedPlayer } from "@game/player/merged/types";
+import type {
+  MergedPlayer,
+  PartialMergedPlayer,
+} from "@game/player/merged/types";
 import type { XagyrosState } from "../types";
 import { triggerResetLayer } from "@game/resetLayers/utils/apply";
 import { everPerformed } from "@game/resetLayers/utils/get";

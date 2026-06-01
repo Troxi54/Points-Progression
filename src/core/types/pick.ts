@@ -1,4 +1,4 @@
-import type { PlayerSetterName, PlayerState  } from "@game/player/store/types";
+import type { PlayerSetterName, PlayerState } from "@game/player/store/types";
 
 export type PickByKeys<
   T,

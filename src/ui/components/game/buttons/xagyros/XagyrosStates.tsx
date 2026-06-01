@@ -25,7 +25,7 @@ function XagyrosStatesComponent() {
       <Heading level={3} className="xagyros-states font-bold">
         Active states: {state.xagyrosStates.length} / {state.maxXagyrosStates}
       </Heading>
-      <Container className="flex-wrap w-full gap-0 items-stretch overflow-x-auto justify-start">
+      <Container className="w-full flex-wrap items-stretch justify-start gap-0 overflow-x-auto">
         <XagyrosStateComponent
           state="dertoints"
           title="Dertoints"

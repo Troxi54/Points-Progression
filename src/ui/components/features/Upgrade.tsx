@@ -148,9 +148,9 @@ function Upgrade({
   return (
     <Button
       className={cn(
-        "bg-button-bg min-w-[15em] max-w-[50em] flex-1 rounded-[0.25em]",
+        "bg-button-bg max-w-[50em] min-w-[15em] flex-1 rounded-[0.25em]",
         isPurchased &&
-          "bg-button-bought select-text hover:border-transparent cursor-auto",
+          "bg-button-bought cursor-auto select-text hover:border-transparent",
       )}
       disabled={isPurchased}
       onClick={buy}

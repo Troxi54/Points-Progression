@@ -46,7 +46,7 @@ function XagyrosStateComponent({
 
   return (
     <Button
-      className={cn("flex-1 min-w-[15em]", className)}
+      className={cn("min-w-[15em] flex-1", className)}
       onClick={() => activate(state)}
     >
       <Heading
