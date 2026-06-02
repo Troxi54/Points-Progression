@@ -1,9 +1,9 @@
-import { useState } from "react";
-import Overlay from "../overlay";
-import menuInfoPages from "./pages/data";
 import Container from "@ui/components/base/Container";
 import Stack from "@ui/components/base/Stack";
 import UnderlineButton from "@ui/components/base/UnderlineButton";
+import { useState } from "react";
+import Overlay from "../overlay";
+import menuInfoPages from "./pages/data";
 
 const InfoMenu = () => {
   const [currentPage, setCurrentPage] = useState(0);

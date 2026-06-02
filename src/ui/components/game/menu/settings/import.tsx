@@ -1,14 +1,14 @@
 import type { ChangeEvent } from "react";
 import { importPlayer } from "@game/player/persistence/import";
 import { resetPlayerDataAndGame } from "@game/player/utils";
+import Button from "@ui/components/base/Button";
+import Heading from "@ui/components/base/Heading";
+import Stack from "@ui/components/base/Stack";
 import Tooltip from "@ui/components/base/Tooltip";
 import { useMenu } from "@ui/hooks/useMenu";
 import { useRef } from "react";
 import Overlay from "../overlay";
 import { showPrompt } from "../prompt/service";
-import Heading from "@ui/components/base/Heading";
-import Button from "@ui/components/base/Button";
-import Stack from "@ui/components/base/Stack";
 
 function ImportMenu() {
   const { closeAll } = useMenu();

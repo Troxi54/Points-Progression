@@ -1,9 +1,9 @@
 import type { TimeSpentResetLayerData } from "@game/resetLayers/types";
 import { formatTime } from "@core/format/time";
 import { everPerformedResetLayers } from "@game/resetLayers/utils/selector";
-import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import Paragraph from "@ui/components/base/Paragraph";
 import Container from "@ui/components/base/Container";
+import Paragraph from "@ui/components/base/Paragraph";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
 function SliphTimeSpent() {
   const state = usePlayerFields(

@@ -1,5 +1,5 @@
+import type { ComponentProps } from "react";
 import cn from "@core/utils/tailwind";
-import { ComponentProps } from "react";
 
 interface Props extends ComponentProps<"span"> {
   muted?: boolean;

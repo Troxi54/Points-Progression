@@ -1,9 +1,9 @@
 import cn from "@core/utils/tailwind";
-import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import XagyrosStateComponent from "./XagyrosState";
+import Container from "@ui/components/base/Container";
 import Heading from "@ui/components/base/Heading";
 import Paragraph from "@ui/components/base/Paragraph";
-import Container from "@ui/components/base/Container";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
+import XagyrosStateComponent from "./XagyrosState";
 
 function XagyrosStatesComponent() {
   const state = usePlayerFields({

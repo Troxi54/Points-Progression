@@ -1,5 +1,5 @@
+import type { ComponentPropsWithRef } from "react";
 import cn from "@core/utils/tailwind";
-import { ComponentPropsWithRef } from "react";
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
 

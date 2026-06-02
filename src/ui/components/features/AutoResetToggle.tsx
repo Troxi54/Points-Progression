@@ -13,9 +13,9 @@ import {
 } from "@game/resetLayers/utils/get";
 import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import StatusText from "../base/StatusText";
 import Button from "../base/Button";
 import Paragraph from "../base/Paragraph";
+import StatusText from "../base/StatusText";
 
 interface Props<T extends ResetLayerId = ResetLayerId> {
   resetLayerId: T;

@@ -25,8 +25,8 @@ import {
   getRepeatableUpgradeLevelSelection,
 } from "@game/repeatableUpgrades/utils/selector";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
-import Text from "../base/Text";
 import Button from "../base/Button";
+import Text from "../base/Text";
 
 interface Props<T extends RepeatableUpgradeId> extends ClassNameProps {
   repeatableUpgradeId: T;

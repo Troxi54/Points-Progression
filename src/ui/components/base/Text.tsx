@@ -1,5 +1,5 @@
+import type { ComponentPropsWithRef } from "react";
 import cn from "@core/utils/tailwind";
-import { ComponentPropsWithRef } from "react";
 
 interface Props extends ComponentPropsWithRef<"span"> {
   block?: boolean;

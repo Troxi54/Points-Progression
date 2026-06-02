@@ -1,5 +1,6 @@
+import type { ContainerProps } from "./Container";
 import cn from "@core/utils/tailwind";
-import Container, { ContainerProps } from "./Container";
+import Container from "./Container";
 
 interface Props extends ContainerProps {
   col?: boolean;

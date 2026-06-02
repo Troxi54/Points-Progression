@@ -3,15 +3,15 @@ import { calculateTimeForRequirement } from "@core/utils/time";
 import offlineConfig from "@game/offline/config";
 import { skipOfflineProgress } from "@game/offline/utils/trigger";
 import { getPlayerState } from "@game/player/store";
+import Button from "@ui/components/base/Button";
+import Heading from "@ui/components/base/Heading";
+import Paragraph from "@ui/components/base/Paragraph";
 import ProgressBar from "@ui/components/base/ProgressBar";
+import Stack from "@ui/components/base/Stack";
 import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useEffectEvent } from "react";
 import Overlay from "../overlay";
-import Paragraph from "@ui/components/base/Paragraph";
-import Heading from "@ui/components/base/Heading";
-import Button from "@ui/components/base/Button";
-import Stack from "@ui/components/base/Stack";
 
 function OfflineMenu() {
   const { open, close, closeAllExcept } = useMenu();

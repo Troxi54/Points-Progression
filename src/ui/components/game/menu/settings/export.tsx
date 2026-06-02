@@ -1,9 +1,9 @@
 import { exportPlayer } from "@game/player/persistence/export";
+import Button from "@ui/components/base/Button";
+import Heading from "@ui/components/base/Heading";
+import Stack from "@ui/components/base/Stack";
 import { useMenu } from "@ui/hooks/useMenu";
 import Overlay from "../overlay";
-import Heading from "@ui/components/base/Heading";
-import Button from "@ui/components/base/Button";
-import Stack from "@ui/components/base/Stack";
 
 const ExportMenu = () => {
   const { close } = useMenu();

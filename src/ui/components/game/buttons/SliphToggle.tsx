@@ -1,9 +1,9 @@
 import cn from "@core/utils/tailwind";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { toggleSliph } from "@game/features/sliph/utils";
+import Button from "@ui/components/base/Button";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
-import Button from "@ui/components/base/Button";
 
 function SliphToggle() {
   const state = usePlayerFields({

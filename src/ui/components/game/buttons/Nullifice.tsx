@@ -1,4 +1,5 @@
 import { formatEffectOnCurrency } from "@core/format/effect";
+import { formatNumber } from "@core/format/number";
 import {
   handleDecimalInputOnBlur,
   handleDecimalInputOnChange,
@@ -12,13 +13,12 @@ import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { triggerNullifice } from "@game/features/nullifice/utils";
 import { getPlayerState } from "@game/player/store";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
+import Button from "@ui/components/base/Button";
+import Input from "@ui/components/base/Input";
 import CurrencyContent from "@ui/components/features/CurrencyContent";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useCallback, useLayoutEffect, useRef } from "react";
 import Paragraph from "../../base/Paragraph";
-import Button from "@ui/components/base/Button";
-import Input from "@ui/components/base/Input";
-import { formatNumber } from "@core/format/number";
 
 function Nullifice() {
   const state = usePlayerFields(

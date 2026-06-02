@@ -1,6 +1,6 @@
+import type { ComponentPropsWithRef } from "react";
 import cn from "@core/utils/tailwind";
 import { Slot } from "@radix-ui/react-slot";
-import { ComponentPropsWithRef } from "react";
 
 export interface ContainerProps extends ComponentPropsWithRef<"div"> {
   asChild?: boolean;

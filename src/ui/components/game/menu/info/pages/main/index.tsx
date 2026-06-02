@@ -3,15 +3,15 @@ import { gameVersionToString } from "@core/utils/version";
 import discordIcon from "@ui/assets/discord.svg";
 import githubIcon from "@ui/assets/github.svg";
 import patreonIcon from "@ui/assets/patreon.svg";
+import Button from "@ui/components/base/Button";
+import Caption from "@ui/components/base/Caption";
+import Heading from "@ui/components/base/Heading";
 import Image from "@ui/components/base/Image";
 import Link from "@ui/components/base/Link";
-import MenuInfoMainPageGameProgress from "./endgame";
-import Paragraph from "@ui/components/base/Paragraph";
-import Heading from "@ui/components/base/Heading";
-import Button from "@ui/components/base/Button";
-import Stack from "@ui/components/base/Stack";
-import Caption from "@ui/components/base/Caption";
 import List from "@ui/components/base/List";
+import Paragraph from "@ui/components/base/Paragraph";
+import Stack from "@ui/components/base/Stack";
+import MenuInfoMainPageGameProgress from "./endgame";
 
 function MenuInfoMainPage() {
   return (

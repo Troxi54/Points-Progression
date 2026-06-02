@@ -3,9 +3,9 @@ import { formatCurrency } from "@game/currencies/utils/format";
 import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
 import coreConfig from "@game/features/cores/config";
 import { convertEnergyIntoCores } from "@game/features/cores/utils";
+import Button from "@ui/components/base/Button";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
-import Button from "@ui/components/base/Button";
 
 function CoreButton() {
   const state = usePlayerFields(

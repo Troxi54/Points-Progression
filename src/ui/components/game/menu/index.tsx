@@ -5,9 +5,9 @@ import OfflineMenu from "./offline";
 import PromptRoot from "./prompt";
 import MenuProvider from "./provider";
 import SettingsButton from "./settings";
-import SettingsMenu from "./settings/menu";
 import ExportMenu from "./settings/export";
 import ImportMenu from "./settings/import";
+import SettingsMenu from "./settings/menu";
 
 function Menu() {
   return (

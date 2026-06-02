@@ -1,9 +1,9 @@
 import { breakAmplivault } from "@game/features/amplivault/utils";
-import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import Paragraph from "../../base/Paragraph";
-import Heading from "../../base/Heading";
-import Container from "@ui/components/base/Container";
 import Button from "@ui/components/base/Button";
+import Container from "@ui/components/base/Container";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
+import Heading from "../../base/Heading";
+import Paragraph from "../../base/Paragraph";
 
 function BreakAmplivault() {
   const { amplivaultBroken, reachedBreakAmplivault } = usePlayerFields({

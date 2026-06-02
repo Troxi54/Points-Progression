@@ -1,8 +1,8 @@
 import type { ClassName } from "@core/types/react";
 import type { UpgradeDataContainer } from "@game/upgrades/types";
 import cn from "@core/utils/tailwind";
-import Upgrade from "./Upgrade";
 import Container from "../base/Container";
+import Upgrade from "./Upgrade";
 
 interface props {
   id?: string;

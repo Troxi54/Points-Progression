@@ -1,8 +1,8 @@
 import { formatEffectOnCurrency } from "@core/format/effect";
 import { formatNumber } from "@core/format/number";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
-import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 import NexusSign from "@ui/components/features/NexusSign";
+import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function VermyrosBar() {
   return (

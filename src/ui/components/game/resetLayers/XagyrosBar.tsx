@@ -1,7 +1,7 @@
 import { formatNumber } from "@core/format/number";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
-import CurrencyContent from "@ui/components/features/CurrencyContent";
 import StatusText from "@ui/components/base/StatusText";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function XagyrosBar() {

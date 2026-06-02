@@ -5,9 +5,9 @@ import { clamp } from "@core/utils/number";
 import { mergeObjects } from "@core/utils/object";
 import cn from "@core/utils/tailwind";
 import { Fragment } from "react";
-import progressBarConfig from "./config";
-import Paragraph from "../Paragraph";
 import Container from "../Container";
+import Paragraph from "../Paragraph";
+import progressBarConfig from "./config";
 
 interface Props extends ProgressBarProps, ChildrenProps {
   progress: number;

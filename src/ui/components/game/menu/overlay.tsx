@@ -2,11 +2,11 @@ import type { ClassName } from "@core/types/react";
 import type { CSSProperties, ReactNode } from "react";
 import type { MenuId } from "./types";
 import cn from "@core/utils/tailwind";
+import Container from "@ui/components/base/Container";
+import Stack from "@ui/components/base/Stack";
 import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
-import Container from "@ui/components/base/Container";
-import Stack from "@ui/components/base/Stack";
 
 const TRANSITION_TIME = 150;
 
@@ -47,7 +47,7 @@ function Overlay({
   const currentlyOpen = isOpen(menuId);
   const shouldBlockClosing = blockClosing === undefined ? false : blockClosing;
 
-  useEffect(() => {
+  const syncMenu = useEffectEvent(() => {
     if (currentlyOpen) {
       previouslyFocusedRef.current = document.activeElement as HTMLElement;
 
@@ -71,6 +71,10 @@ function Overlay({
       }, TRANSITION_TIME);
       return () => clearTimeout(t);
     }
+  });
+
+  useEffect(() => {
+    syncMenu();
   }, [currentlyOpen]);
 
   const onPointerDown = useEffectEvent((e: PointerEvent) => {

@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
+import Caption from "@ui/components/base/Caption";
+import Stack from "@ui/components/base/Stack";
 import { Fragment } from "react";
 import menuInfoFormulaContainer from "./data";
 import useMenuInfoFormulaSelector from "./selector";
-import Stack from "@ui/components/base/Stack";
-import Caption from "@ui/components/base/Caption";
 
 function MenuInfoFormulaPage() {
   useMenuInfoFormulaSelector();

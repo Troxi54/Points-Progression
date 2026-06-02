@@ -1,6 +1,6 @@
+import type { ComponentProps } from "react";
 import cn from "@core/utils/tailwind";
 import Container from "../base/Container";
-import { ComponentProps } from "react";
 
 type Props = ComponentProps<"section">;
 

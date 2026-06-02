@@ -1,7 +1,8 @@
+import type { VariantProps } from "class-variance-authority";
+import type { ComponentProps } from "react";
 import cn from "@core/utils/tailwind";
 import { Slot } from "@radix-ui/react-slot";
-import { cva, VariantProps } from "class-variance-authority";
-import { ComponentProps } from "react";
+import { cva } from "class-variance-authority";
 
 export interface ButtonProps
   extends ComponentProps<"button">, VariantProps<typeof buttonVariants> {

@@ -1,12 +1,12 @@
+import Button from "@ui/components/base/Button";
+import Heading from "@ui/components/base/Heading";
+import Input from "@ui/components/base/Input";
+import Paragraph from "@ui/components/base/Paragraph";
+import Stack from "@ui/components/base/Stack";
 import { useMenu } from "@ui/hooks/useMenu";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import Overlay from "../overlay";
 import { resolvePrompt, usePromptState } from "./service";
-import Paragraph from "@ui/components/base/Paragraph";
-import Heading from "@ui/components/base/Heading";
-import Input from "@ui/components/base/Input";
-import Stack from "@ui/components/base/Stack";
-import Button from "@ui/components/base/Button";
 
 function PromptRoot() {
   const { open, close, isOpen } = useMenu();

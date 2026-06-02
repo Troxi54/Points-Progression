@@ -13,8 +13,8 @@ import {
 } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import CurrencyContent from "@ui/components/features/CurrencyContent";
-import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 import NexusSign from "@ui/components/features/NexusSign";
+import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function TierBar() {
   const data = getResetLayerData("tier");

@@ -5,14 +5,14 @@ import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";
 import { togglePlayerField } from "@game/player/utils";
 import resetLayerConfig from "@game/resetLayers/config";
+import Button from "@ui/components/base/Button";
+import Stack from "@ui/components/base/Stack";
 import StatusText from "@ui/components/base/StatusText";
 import Tooltip from "@ui/components/base/Tooltip";
 import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useState } from "react";
 import Overlay from "../overlay";
-import Button from "@ui/components/base/Button";
-import Stack from "@ui/components/base/Stack";
 
 const SettingsMenu = () => {
   const { open } = useMenu();
@@ -37,10 +37,7 @@ const SettingsMenu = () => {
 
   useEffect(() => {
     if (saveState === "idle") return;
-    const t = setTimeout(
-      () => setSaveState(saveState === "saving" ? "returning" : "idle"),
-      SAVE_BUTTON_TRANSITION_DURATION,
-    );
+    const t = setTimeout(setSaveState, SAVE_BUTTON_TRANSITION_DURATION, saveState === "saving" ? "returning" : "idle");
     return () => clearTimeout(t);
   }, [saveState]);
 

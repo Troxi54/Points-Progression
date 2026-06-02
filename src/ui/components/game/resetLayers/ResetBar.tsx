@@ -3,8 +3,8 @@ import { formatNumber } from "@core/format/number";
 import { formatBestRunTime } from "@core/format/time";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
-import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 import NexusSign from "@ui/components/features/NexusSign";
+import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function ResetBar() {
   return (

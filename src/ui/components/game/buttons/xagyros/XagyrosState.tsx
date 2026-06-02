@@ -10,9 +10,9 @@ import {
   isXagyrosStateActive,
 } from "@game/features/xagyrosStates/utils/get";
 import { getPlayerState } from "@game/player/store";
-import CurrencyContent from "@ui/components/features/CurrencyContent";
-import Heading from "@ui/components/base/Heading";
 import Button from "@ui/components/base/Button";
+import Heading from "@ui/components/base/Heading";
+import CurrencyContent from "@ui/components/features/CurrencyContent";
 
 interface Props extends ClassNameProps {
   state: XagyrosState;

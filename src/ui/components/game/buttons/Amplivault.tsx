@@ -7,11 +7,11 @@ import { calculateTimeForRequirement } from "@core/utils/time";
 import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
 import { toggleAmplivault } from "@game/features/amplivault/utils";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
-import { usePlayerFields } from "@ui/hooks/usePlayer/main";
-import NexusSign from "../../features/NexusSign";
-import Paragraph from "../../base/Paragraph";
 import Button from "@ui/components/base/Button";
 import Container from "@ui/components/base/Container";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
+import Paragraph from "../../base/Paragraph";
+import NexusSign from "../../features/NexusSign";
 
 function Amplivault() {
   const state = usePlayerFields(

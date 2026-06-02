@@ -1,5 +1,6 @@
+import type { ButtonProps } from "./Button";
 import cn from "@core/utils/tailwind";
-import Button, { ButtonProps } from "./Button";
+import Button from "./Button";
 
 interface Props extends ButtonProps {
   active?: boolean;

@@ -1,9 +1,9 @@
 import type { ClassName } from "@core/types/react";
 import type { Ref } from "react";
 import type { CurrencyComponentProps } from "./CurrencyContent";
-import CurrencyContent from "./CurrencyContent";
-import Paragraph from "../base/Paragraph";
 import Container from "../base/Container";
+import Paragraph from "../base/Paragraph";
+import CurrencyContent from "./CurrencyContent";
 
 interface Props extends CurrencyComponentProps {
   containerClassName?: ClassName;

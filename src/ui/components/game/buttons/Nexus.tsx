@@ -5,11 +5,11 @@ import nexusMilestones from "@game/features/nexus/data";
 import { buyNexus } from "@game/features/nexus/utils/buy";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
+import Button from "@ui/components/base/Button";
+import Container from "@ui/components/base/Container";
 import StatusText from "@ui/components/base/StatusText";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import Paragraph from "../../base/Paragraph";
-import Button from "@ui/components/base/Button";
-import Container from "@ui/components/base/Container";
 
 function Nexus() {
   const { nexusLevel, bestNexusLevel, nexusCost, enough } = usePlayerFields(
