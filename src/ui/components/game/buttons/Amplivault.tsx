@@ -78,14 +78,14 @@ function Amplivault() {
             ? cn(
                 "border-image-gradient bg-black",
                 "shadow-[0_0_0.5em_0.1em_rgba(0,0,0,0.5)]",
-                "before-full before:z-1 before:opacity-85",
+                "before:absolute before:inset-0 before:z-1 before:opacity-85",
                 "[border-image-source:var(--broken-amplivault-gradient)]",
                 "before:[background-image:var(--broken-amplivault-gradient-bg)]",
               )
             : "bg-amplivault-div-bg",
         )}
       >
-        <Container className="absolute-full bg-amplivault-div-2-bg border-amplivault-div-2-border rounded-full border-2" />
+        <Container className="bg-amplivault-div-2-bg border-amplivault-div-2-border absolute size-full rounded-full border-2" />
         <Container
           className={cn(
             "bg-amplivault-div-3-bg border-amplivault-div-3-border relative aspect-square w-[calc(100%/1.4142-2px)] animate-[amplivault-animation_linear_infinite] items-center border-2",

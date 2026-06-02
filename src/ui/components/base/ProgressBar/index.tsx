@@ -52,13 +52,16 @@ function ProgressBar({
 
       {barMode === "static" ? (
         <div
-          className={cn("absolute-full origin-left", progressFillClassName)}
+          className={cn(
+            "absolute size-full origin-left",
+            progressFillClassName,
+          )}
           style={{ transform: `scaleX(${processedProgress})` }}
         />
       ) : (
         <div
           className={cn(
-            "absolute-full animated-gradient",
+            "animated-gradient absolute size-full",
             progressFillClassName,
           )}
           style={
@@ -70,7 +73,7 @@ function ProgressBar({
           }
         >
           <div
-            className={cn("absolute-full origin-right", bgClassName)}
+            className={cn("absolute size-full origin-right", bgClassName)}
             style={{ transform: `scaleX(${1 - processedProgress})` }}
           />
         </div>

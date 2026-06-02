@@ -31,15 +31,18 @@ const SettingsMenu = () => {
 
   const SAVE_BUTTON_TRANSITION_DURATION = 300;
 
-  const [isSaving, setIsSaving] = useState(false);
+  const [saveState, setSaveState] = useState<"idle" | "saving" | "returning">(
+    "idle",
+  );
+
   useEffect(() => {
-    if (isSaving) {
-      const timeout = setTimeout(() => {
-        setIsSaving(false);
-      }, SAVE_BUTTON_TRANSITION_DURATION);
-      return () => clearTimeout(timeout);
-    }
-  }, [isSaving]);
+    if (saveState === "idle") return;
+    const t = setTimeout(
+      () => setSaveState(saveState === "saving" ? "returning" : "idle"),
+      SAVE_BUTTON_TRANSITION_DURATION,
+    );
+    return () => clearTimeout(t);
+  }, [saveState]);
 
   return (
     <Overlay menuId="settings">
@@ -47,8 +50,10 @@ const SettingsMenu = () => {
         variant="menu"
         size="xl"
         className={cn(
-          "transition-[scale,background,color] duration-(--duration) [&>span]:transition-opacity [&>span]:duration-(--duration)",
-          isSaving &&
+          "transition-[scale,background,color] [&>span]:transition-opacity",
+          saveState !== "idle" &&
+            "duration-(--duration) [&>span]:duration-(--duration)",
+          saveState === "saving" &&
             "bg-positive-menu-button-bg hover:bg-positive-menu-button-bg-hover text-positive-menu-button-text scale-110",
         )}
         style={
@@ -58,11 +63,14 @@ const SettingsMenu = () => {
         }
         onClick={() => {
           savePlayer();
-          setIsSaving(true);
+          setSaveState("saving");
         }}
       >
-        <span style={{ opacity: isSaving ? 0 : 1 }}>Save</span>
-        <span className="absolute" style={{ opacity: isSaving ? 1 : 0 }}>
+        <span style={{ opacity: saveState === "saving" ? 0 : 1 }}>Save</span>
+        <span
+          className="absolute"
+          style={{ opacity: saveState === "saving" ? 1 : 0 }}
+        >
           Saved!
         </span>
       </Button>

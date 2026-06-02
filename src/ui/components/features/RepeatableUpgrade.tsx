@@ -143,14 +143,14 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
 
   return (
     <Button
-      className={cn("transition-colors duration-250 ease-[ease]", className)}
+      className={cn("transition-colors duration-250", className)}
       onClick={buyMax}
       onContextMenu={buyOnce}
       aria-label={`Buy ${name} Upgrade`}
     >
       <Text
         className={cn(
-          "transition-colors duration-250 ease-[ease]",
+          "transition-colors duration-250",
           textClassName,
         )}
       >

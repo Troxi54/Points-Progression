@@ -9,7 +9,7 @@ export interface ButtonProps
 }
 
 const buttonVariants = cva(
-  "bg-button-bg flex cursor-pointer flex-col place-content-center items-center px-[1.2em] py-[0.6em] text-[1em] font-medium transition-[border-color] duration-250 ease-[ease]",
+  "bg-button-bg flex cursor-pointer flex-col place-content-center items-center px-[1.2em] py-[0.6em] text-[1em] font-medium transition-[border-color] duration-250",
   {
     variants: {
       variant: {

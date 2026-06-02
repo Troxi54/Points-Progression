@@ -23,30 +23,10 @@
   transition-property: border-image;
 }
 
-@utility full {
-  @apply absolute inset-0;
-}
-
-@utility before-full {
-  &::before {
-    @apply full;
-  }
-}
-
-@utility after-full {
-  &::after {
-    @apply full;
-  }
-}
-
 @utility animated-gradient {
   --gradient-angle: 90deg;
   --gradient-step: 200px;
   @apply animate-[animated-gradient_linear_infinite] bg-linear-to-r bg-size-[calc(var(--gradient-step)/sin(var(--gradient-angle)))_100%];
-}
-
-@utility absolute-full {
-  @apply absolute size-full;
 }
 
 @utility paused {

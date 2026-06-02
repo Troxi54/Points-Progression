@@ -50,13 +50,6 @@ function Overlay({
       setShouldRender(true);
       requestAnimationFrame(() => {
         setVisible(true);
-
-        const firstFocusable = menuContentRef.current?.querySelector(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        ) as HTMLElement;
-        if (firstFocusable) {
-          firstFocusable.focus();
-        }
       });
     } else {
       setVisible(false);
@@ -134,7 +127,7 @@ function Overlay({
       ref={overlayRef}
       role="presentation"
       className={cn(
-        "bg-overlay-2 fixed inset-0 items-center text-[1.5vmin] transition-opacity duration-150 ease-[ease]",
+        "bg-overlay-2 fixed inset-0 items-center text-[1.5vmin] transition-opacity duration-150",
         menuBackgroundBlur && "backdrop-blur-[0.25em]",
       )}
       style={overlayStyle}
