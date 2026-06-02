@@ -1,8 +1,4 @@
 @layer components {
-  #root {
-    @apply size-full flex-col gap-2;
-  }
-
   .layer > div,
   .layer > button {
     @apply bg-layer-inner-bg w-full;

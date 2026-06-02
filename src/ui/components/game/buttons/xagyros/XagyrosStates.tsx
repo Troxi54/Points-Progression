@@ -12,7 +12,7 @@ function XagyrosStatesComponent() {
   });
 
   return (
-    <Container className="flex-col gap-0 [background-image:var(--xagyros-states-gradient-bg)] font-medium">
+    <Container className="flex-col gap-0 [background-image:var(--xagyros-states-gradient-bg)] font-semibold">
       <Paragraph className="mt-6">
         <span className="xagyros-states">Xagyros states - </span>
         <span className="xagyros-states-description">

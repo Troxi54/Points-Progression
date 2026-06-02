@@ -28,7 +28,7 @@ function StatusText({
   return (
     <span
       className={cn(
-        `font-semibold transition-colors`,
+        `transition-colors`,
         className,
         active ? enabledClassName : disabledClassName,
       )}

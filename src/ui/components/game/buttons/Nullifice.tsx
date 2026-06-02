@@ -5,7 +5,6 @@ import {
 } from "@core/utils/input";
 import cn from "@core/utils/tailwind";
 import {
-  formatCurrency,
   formatCurrencyNameEmptylessPlural,
   pluralizeCurrency,
 } from "@game/currencies/utils/format";
@@ -19,6 +18,7 @@ import { useCallback, useLayoutEffect, useRef } from "react";
 import Paragraph from "../../base/Paragraph";
 import Button from "@ui/components/base/Button";
 import Input from "@ui/components/base/Input";
+import { formatNumber } from "@core/format/number";
 
 function Nullifice() {
   const state = usePlayerFields(
@@ -130,9 +130,7 @@ function Nullifice() {
           <>
             {" "}
             <span className="nullifice-description">
-              (
-              {formatCurrency(state.nullionInputConverted, "madeNullithResets")}
-              )
+              ({formatNumber(state.nullionInputConverted)})
             </span>
           </>
         )}

@@ -111,7 +111,7 @@ function Amplivault() {
       {state.amplivaultBroken ? (
         <Paragraph className="broken-amplivault">
           Broken Amplivault -{" "}
-          <span className="font-normal tracking-wider">
+          <span className="tracking-wider">
             You need to reach the requirement to increase your Amplivault level.
             Amplivault level boosts Ampliflux.
           </span>

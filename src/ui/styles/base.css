@@ -1,9 +1,27 @@
+@font-face {
+  font-family: "GameUI";
+  src:
+    local("Segoe UI Bold"),
+    url("/fonts/SelawikSubset-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GameUI";
+  src:
+    local("Segoe UI Semibold"),
+    url("/fonts/SelawikSubset-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     @apply scheme-dark;
   }
 
   body {
-    @apply bg-bg text-foreground m-0 flex min-h-screen min-w-80 place-content-center font-[system-ui,Avenir,Helvetica,Arial,sans-serif] font-bold tabular-nums antialiased;
+    @apply bg-bg text-foreground min-h-screen min-w-80 font-["GameUI"] font-bold tabular-nums antialiased;
   }
 }
