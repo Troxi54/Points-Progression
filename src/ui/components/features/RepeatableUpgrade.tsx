@@ -18,10 +18,7 @@ import { formatCurrencyName } from "@game/currencies/utils/format";
 import { hasCurrencyName } from "@game/currencies/utils/has";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import {
-  applyRepeatableUpgradeMax,
-  applyRepeatableUpgradeSingle,
-} from "@game/repeatableUpgrades/utils/apply";
+import { applyRepeatableUpgradeMax } from "@game/repeatableUpgrades/utils/apply";
 import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import {
   getCachedRepeatableUpgradePropsSelection,
@@ -91,17 +88,6 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
     return (state as Record<string, any>)[key];
   }
 
-  function buyOnce(event: React.MouseEvent) {
-    event.preventDefault();
-
-    const { mergedPlayer, setMergedPlayer } = getPlayerState();
-    const purchased = applyRepeatableUpgradeSingle(
-      mergedPlayer,
-      repeatableUpgradeId,
-    );
-    setMergedPlayer(purchased);
-  }
-
   function buyMax() {
     const { mergedPlayer, setMergedPlayer } = getPlayerState();
     const purchased = applyRepeatableUpgradeMax(
@@ -145,15 +131,9 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
     <Button
       className={cn("transition-colors duration-250", className)}
       onClick={buyMax}
-      onContextMenu={buyOnce}
       aria-label={`Buy ${name} Upgrade`}
     >
-      <Text
-        className={cn(
-          "transition-colors duration-250",
-          textClassName,
-        )}
-      >
+      <Text className={cn("transition-colors duration-250", textClassName)}>
         Upgrade: {isMaxed ? "Maxed" : fullCost}
         {shouldLevelRender && (
           <>

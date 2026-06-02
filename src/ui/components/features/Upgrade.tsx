@@ -107,11 +107,6 @@ function Upgrade({
     setPlayer(bought);
   }
 
-  function contextMenu(e: React.MouseEvent) {
-    e.preventDefault();
-    buy();
-  }
-
   const isPurchased = hasUpgrade(mergedPlayer, containerId, upgradeNumber);
 
   const containerName =
@@ -154,7 +149,6 @@ function Upgrade({
       )}
       disabled={isPurchased}
       onClick={buy}
-      onContextMenu={contextMenu}
       aria-label={`Buy ${name}`}
       style={style}
     >
