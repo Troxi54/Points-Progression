@@ -131,7 +131,7 @@ function Overlay({
         menuBackgroundBlur && "backdrop-blur-[0.25em]",
       )}
       style={overlayStyle}
-      aria-hidden={!visible}
+      inert={!visible || undefined}
     >
       {overlayChildren}
       <Container
