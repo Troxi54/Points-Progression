@@ -8,7 +8,7 @@ import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const xagyrosResetLayer = defineResetLayer<"sliph">({
   id: "xagyros",
-  goal: createDecimal("1e205"),
+  goal: createDecimal("1e204"),
   currency: "dertoints",
   reset: ({ player }, defaultMergedPlayer) => {
     const defaultPlayer = defaultMergedPlayer.player;

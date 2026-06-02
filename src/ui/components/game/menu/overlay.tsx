@@ -18,6 +18,8 @@ interface OverlayProps {
   menuClassName?: ClassName;
   containerClassName?: ClassName;
   blockClosing?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
 
 function Overlay({
@@ -28,6 +30,8 @@ function Overlay({
   menuClassName,
   containerClassName,
   blockClosing,
+  onOpen,
+  onClose,
 }: OverlayProps) {
   const { menuBackgroundBlur } = usePlayerFields({
     player: ["menuBackgroundBlur"],
@@ -50,9 +54,14 @@ function Overlay({
       setShouldRender(true);
       requestAnimationFrame(() => {
         setVisible(true);
+        requestAnimationFrame(() => {
+          onOpen?.();
+        });
       });
     } else {
       setVisible(false);
+      onClose?.();
+
       const t = setTimeout(() => {
         setShouldRender(false);
 

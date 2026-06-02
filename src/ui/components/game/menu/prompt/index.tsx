@@ -1,5 +1,5 @@
 import { useMenu } from "@ui/hooks/useMenu";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 import Overlay from "../overlay";
 import { resolvePrompt, usePromptState } from "./service";
 import Paragraph from "@ui/components/base/Paragraph";
@@ -12,11 +12,11 @@ function PromptRoot() {
   const { open, close, isOpen } = useMenu();
 
   const config = usePromptState();
-
   const menuOpen = isOpen("prompt");
 
   const [snapshot, setSnapshot] = useState(config);
   const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const syncMenu = useEffectEvent(() => {
     if (config) {
@@ -43,15 +43,15 @@ function PromptRoot() {
   if (!snapshot) return null;
 
   return (
-    <Overlay menuId="prompt" menuClassName="">
+    <Overlay menuId="prompt" onOpen={() => inputRef.current?.focus()}>
       <Heading level={2} className="m-0">
         {snapshot.title ?? "Input required"}
       </Heading>
       <Paragraph className="m-0">{snapshot.message}</Paragraph>
-
       <Input
         id="prompt-input"
-        autoFocus
+        ref={inputRef}
+        className="w-[8em]"
         value={value}
         placeholder={snapshot.placeholder}
         onChange={(e) => setValue(e.target.value)}

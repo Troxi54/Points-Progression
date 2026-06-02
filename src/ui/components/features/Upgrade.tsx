@@ -143,7 +143,7 @@ function Upgrade({
   return (
     <Button
       className={cn(
-        "bg-button-bg max-w-[50em] min-w-[15em] flex-1 rounded-[0.25em]",
+        "bg-button-bg max-w-[50em] min-w-[15em] flex-1 rounded-[0.25em] transition-[border-color,background-color]",
         isPurchased &&
           "bg-button-bought cursor-auto select-text hover:border-transparent",
       )}
