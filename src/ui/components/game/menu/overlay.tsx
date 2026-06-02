@@ -128,7 +128,7 @@ function Overlay({
       role="presentation"
       className={cn(
         "bg-overlay-2 fixed inset-0 items-center text-[1.5vmin] transition-opacity duration-150",
-        menuBackgroundBlur && "backdrop-blur-[0.25em]",
+        menuBackgroundBlur && "backdrop-blur-[0.1em]",
       )}
       style={overlayStyle}
       inert={!visible || undefined}
