@@ -76,6 +76,12 @@ export interface Player {
   xagoraPoints: Decimal;
   xagoraNullithResets: Decimal;
   xagoraNux: Decimal;
+
+  enteredAntinefit: boolean;
+  everEnteredAntinefit: boolean;
+  everLeftAntinefit: boolean;
+  antiPoints: Decimal;
+  beneflux: Decimal;
 }
 
 export interface ResetLayerPlayerData {

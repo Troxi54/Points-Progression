@@ -217,6 +217,24 @@ const currencyData = createCurrencyDataContainer({
     affects: "nux",
     passiveGainWorks: ({ player }) => isXagyrosStateActive(player, "nux"),
   },
+  antiPoints: {
+    layer: 4,
+    name: "Anti Point",
+    affects: {
+      points: {
+        works: ({ player }) => player.enteredAntinefit,
+      },
+      beneflux: {
+        works: ({ player }) => !player.enteredAntinefit,
+      },
+    },
+    passiveGainWorks: ({ player }) => player.enteredAntinefit,
+  },
+  beneflux: {
+    layer: 4,
+    passiveGainWorks: ({ player }) =>
+      player.everLeftAntinefit && !player.enteredAntinefit,
+  },
 });
 
 export default currencyData;

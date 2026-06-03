@@ -9,6 +9,7 @@ const uncountableWords = [
   "XP",
   "amplivoid",
   "xagora",
+  "beneflux",
 ] as const;
 
 export default uncountableWords;

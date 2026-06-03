@@ -63,6 +63,11 @@ export const minifiedPlayerMap = createUniqueObject({
   xagoraPoints: 54,
   xagoraNullithResets: 55,
   xagoraNux: 56,
+  enteredAntinefit: 57,
+  everEnteredAntinefit: 58,
+  antiPoints: 59,
+  beneflux: 60,
+  everLeftAntinefit: 61,
 } as const satisfies Record<keyof Player, number>);
 
 export type MinifiedPlayerMap = typeof minifiedPlayerMap;

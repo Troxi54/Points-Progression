@@ -30,6 +30,8 @@ export type CurrencyId = DecimalKeys<
     | "xagoraPoints"
     | "xagoraNullithResets"
     | "xagoraNux"
+    | "antiPoints"
+    | "beneflux"
   >
 >;
 

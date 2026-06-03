@@ -78,6 +78,12 @@ export function getDefaultPlayer(): Player {
     xagoraPoints: createDecimal(0),
     xagoraNullithResets: createDecimal(0),
     xagoraNux: createDecimal(0),
+
+    enteredAntinefit: false,
+    everEnteredAntinefit: false,
+    everLeftAntinefit: false,
+    antiPoints: createDecimal(0),
+    beneflux: createDecimal(0),
   };
 }
 
