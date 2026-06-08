@@ -3,6 +3,7 @@ import type Decimal from "break_eternity.js";
 import type { CurrencyId } from "../types";
 import createDecimal from "@core/utils/decimal";
 import { isFunction } from "@core/utils/function";
+import { hasKey } from "@core/utils/object";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
 import currencyGainFormulas from "@game/formulas/currencies/gains";
@@ -11,6 +12,7 @@ import {
   getDefaultCachedCurrency,
   getDefaultCachedCurrencyEffect,
 } from "@game/player/cached/default";
+import { parseValueGetter } from "@game/player/utils";
 import { getCurrencyData } from "./get";
 
 export function calculateCurrencyGain(
@@ -91,4 +93,30 @@ export function calculateEffectOnCurrency(
   return (
     effectProperty[effectOn]?.(mergedPlayer) ?? getDefaultCachedCurrencyEffect()
   );
+}
+
+export function currencyEffectWorks(
+  mergedPlayer: MergedPlayer,
+  currencyId: CurrencyId,
+  effectOn: CurrencyId,
+): boolean {
+  const data = getCurrencyData(currencyId);
+  const { affects } = data;
+
+  const effectWorks = parseValueGetter(data.effectWorks, mergedPlayer);
+  if (!effectWorks) return false;
+
+  const effectDataHasCurrency = hasKey(effectOn, affects);
+  if (effectDataHasCurrency) {
+    const effectData = affects[effectOn];
+    if (effectData) {
+      const works = parseValueGetter(effectData.works, mergedPlayer);
+      if (!works) return false;
+    }
+  }
+
+  const hasEffectOnIt = affects === effectOn || hasKey(effectOn, affects);
+  if (!hasEffectOnIt) return false;
+
+  return true;
 }

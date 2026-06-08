@@ -11,7 +11,7 @@ function TimeSpent() {
       cachedPlayer: ["highestResetDuration"],
     },
     {
-      additionalSelectors: (state) =>
+      selector: (state) =>
         everPerformedResetLayers(state, ["tier", "vermyros", "nullith"]),
     },
   );

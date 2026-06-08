@@ -69,8 +69,19 @@ const nullithUpgrades = createUpgradeDataContainer({
     },
     {
       id: "nullith_12",
-      description: "Generates Nullions equal to 0.01% of your Nullith Resets",
+      description:
+        "Unlocks Antinefit and generates Nullions equal to 0.01% of your Nullith Resets",
       cost: "1e5650",
+    },
+    {
+      id: "nullith_13",
+      description: "Generates Nullions equal to 0.1% of your Nullith Resets",
+      cost: "1e6300",
+    },
+    {
+      id: "nullith_14",
+      description: "Generates Nullions equal to 1% of your Nullith Resets",
+      cost: "1e9075",
     },
   ],
 });

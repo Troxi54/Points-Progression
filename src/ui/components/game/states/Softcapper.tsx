@@ -35,13 +35,13 @@ function Softcapper() {
 
   return (
     <Container
-      className="flex-col"
+      className="flex-col items-center"
       style={{
         backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber}-bg)`,
       }}
     >
       <Heading
-        level={2}
+        level={3}
         className="text-gradient mb-[.4em] text-[2em]"
         style={{
           backgroundImage: `var(--gradient-softcapper-level-${bestLvlNumber})`,
@@ -50,7 +50,7 @@ function Softcapper() {
         Softcapper
         {bestLvl.greaterThan(1) && <> ({integerCommaFormat(bestLvl)})</>}
       </Heading>
-      <Container className="flex-col gap-y-2">
+      <Container className="flex-col items-center gap-y-2">
         {softcappers.map((softcapper, i) => {
           const index = i + 1;
 

@@ -11,7 +11,7 @@ function SliphTimeSpent() {
       cachedPlayer: ["highestResetDuration"],
     },
     {
-      additionalSelectors: (state) =>
+      selector: (state) =>
         everPerformedResetLayers(state, ["level", "xagyros"]),
     },
   );

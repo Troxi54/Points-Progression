@@ -10,7 +10,7 @@ export interface UsePlayerAdditionalSelector {
 }
 
 export type UsePlayerFieldsOptions<T> = Partial<UsePlayerOptions> & {
-  additionalSelectors?: (state: PlayerState) => T;
+  selector?: (state: PlayerState) => T;
 };
 
 export type PlayerSelectorFn = (state: PlayerState) => unknown;

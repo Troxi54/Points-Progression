@@ -353,6 +353,32 @@
     var(--color-xagyros-states-description-1),
     var(--color-xagyros-states-description-2)
   );
+
+  --color-antinefit: #00ffd5;
+  --color-antinefit-bg: #122421;
+  --color-antinefit-info: #00ffd5;
+  --color-antinefit-description: #00af92;
+
+  --color-antinefit-animation-bg: #11574b;
+  --color-antinefit-animation-border: #00ffbf;
+  --color-antinefit-animation-circle-bg: #115740;
+  --color-antinefit-animation-circle-border: #00ffaa;
+  --color-antinefit-animation-line-bg: #3bffa3;
+
+  --color-anti-points-bg: #000;
+
+  --color-beneflux: #00ff9d;
+  --color-beneflux-effect: #00a164;
+  --color-beneflux-bg: #073523;
+
+  --color-beneflux-upgrade-bg: #152c24;
+  --color-beneflux-upgrade-hover: #a6ffdd;
+  --color-beneflux-upgrade-effect: #6a9c89;
+
+  --color-nullith-upgrade: #009619;
+  --color-nullith-upgrade-bg: #0e1b10;
+  --color-nullith-upgrade-hover: #588a61;
+  --color-nullith-upgrade-effect: #38523c;
 }
 
 :root {
@@ -420,6 +446,17 @@
     to right in oklab,
     rgb(51, 0, 26),
     rgb(26, 0, 51)
+  );
+
+  --gradient-softcapper-level-7: linear-gradient(
+    to right in oklab,
+    rgb(102, 0, 204),
+    rgb(204, 204, 204)
+  );
+  --gradient-softcapper-level-7-bg: linear-gradient(
+    to right in oklab,
+    rgb(26, 0, 51),
+    rgb(51, 51, 51)
   );
 
   --nexus-milestone-1: #fff;

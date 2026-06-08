@@ -3,6 +3,7 @@ import type {
   FormatNumberGroup,
   FormatNumberOptions,
   FormatNumberType,
+  PartialFormatNumberOptions,
   Unit,
 } from "./types";
 import { arrayLastItem } from "@core/utils/array";
@@ -126,7 +127,7 @@ function getNextUnit(
 
 export function formatNumber(
   value: DecimalSource,
-  options?: Partial<FormatNumberOptions>,
+  options?: PartialFormatNumberOptions,
 ): string {
   const { player } = getPlayerState();
 
@@ -157,6 +158,10 @@ export function formatNumber(
   let calculatedPrecision = calculatePrecision(abs, value, fullOptions);
 
   if (abs.lessThan(1)) {
+    if (abs.lessThan(Decimal.pow(0.1, calculatedPrecision))) {
+      return getExponential(abs, prefix, fullOptions.exponentialPrecision);
+    }
+
     return prefix + abs.toFixed(calculatedPrecision);
   }
 

@@ -131,10 +131,7 @@ export function usePlayerFields<
     );
 
     const baseState = mergeObjects(mergedPlayer, setterState);
-    const fullState = mergeObjects(
-      baseState,
-      options?.additionalSelectors?.(state),
-    );
+    const fullState = mergeObjects(baseState, options?.selector?.(state));
 
     return fullState;
   }, options);

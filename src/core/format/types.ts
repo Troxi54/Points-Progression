@@ -18,4 +18,6 @@ export interface FormatNumberOptions {
   precisionBeforeUnit: number | "auto";
 }
 
+export type PartialFormatNumberOptions = Partial<FormatNumberOptions>;
+
 export type FormatNumberType = "default" | "integer" | "integerComma";

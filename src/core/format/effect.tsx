@@ -3,12 +3,15 @@ import type { CurrencyId } from "@game/currencies/types";
 import type { DecimalSource } from "break_eternity.js";
 import type { ReactNode } from "react";
 import createDecimal from "@core/utils/decimal";
-import { formatCurrencyName } from "@game/currencies/utils/format";
+import {
+  formatCurrencyName,
+  formatCurrencyNameEmptyless,
+} from "@game/currencies/utils/format";
 import Pow from "@ui/components/base/Pow";
 import symbols from "@ui/symbols";
 import pluralize from "pluralize";
 import { formatNumber } from "./number";
-import { formatWithPlural } from "./plural";
+import Decimal from "break_eternity.js";
 
 export function formatEffectSingular(
   effect: DecimalSource,
@@ -18,7 +21,14 @@ export function formatEffectSingular(
   const decimalEffect = createDecimal(effect);
 
   if (mode === "multiply") {
-    return symbols.multiply + formatWithPlural(decimalEffect, affects);
+    const absEffect = decimalEffect.abs();
+    const currency = affects && ` ${affects}`;
+
+    if (absEffect.lessThan(1) && absEffect.greaterThan(0)) {
+      return `${symbols.divide}${formatNumber(Decimal.divide(1, decimalEffect))}${currency}`;
+    }
+
+    return `${symbols.multiply}${formatNumber(decimalEffect)}${currency}`;
   }
 
   return (
@@ -42,6 +52,10 @@ export function formatEffectOnCurrency(
   affects: CurrencyId,
   mode: EffectMode = "multiply",
 ) {
-  const currencyName = formatCurrencyName(affects);
+  let currencyName = formatCurrencyName(affects);
+  if (!currencyName && mode === "pow") {
+    currencyName = formatCurrencyNameEmptyless(affects);
+  }
+
   return formatEffect(effect, currencyName, mode);
 }

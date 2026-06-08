@@ -233,6 +233,25 @@ const currencyEffectFormulas: EffectFormulaContainer = {
 
     return value;
   },
-} as const;
+  antiPoints: {
+    points(mergedPlayer) {
+      const {
+        player: { antiPoints },
+      } = mergedPlayer;
+
+      const gain = calculateCurrencyPassiveGain(mergedPlayer, "antiPoints");
+
+      const n = antiPoints.plus(gain).max(0).plus(1);
+
+      return Decimal.divide(
+        1,
+        n.max(0).plus(1).log10().multiply("1.79e608").pow(0.005),
+      );
+    },
+    beneflux({ player: { antiPoints } }) {
+      return Decimal.pow(5, antiPoints.max(0).plus(1).log10());
+    },
+  },
+};
 
 export default currencyEffectFormulas;

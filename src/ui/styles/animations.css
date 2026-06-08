@@ -34,4 +34,25 @@
       scale: 0 1;
     }
   }
+
+  @keyframes antinefit-circle-animation {
+    0% {
+      rotate: 0deg;
+      scale: 1;
+    }
+    45% {
+      rotate: 360deg;
+      scale: 0.75;
+    }
+    50% {
+      scale: 1;
+    }
+    95% {
+      rotate: 0deg;
+      scale: 0.75;
+    }
+    100% {
+      scale: 1;
+    }
+  }
 }

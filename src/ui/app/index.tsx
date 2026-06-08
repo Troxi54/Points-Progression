@@ -25,7 +25,7 @@ function App() {
       <Menu />
       <Container
         asChild
-        className="size-full flex-col gap-20 pt-[calc(8vmin+1.5rem)] pb-12"
+        className="size-full flex-col gap-20 pt-[calc(max(0.75rem,1.6vmin)*5+1.5rem)] pb-12"
       >
         <main>
           <NormalDimension />

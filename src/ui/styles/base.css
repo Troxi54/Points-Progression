@@ -1,17 +1,17 @@
 @font-face {
   font-family: "GameUI";
-  src:
-    local("Segoe UI Bold"),
-    url("/fonts/SelawikSubset-Bold.woff2") format("woff2");
+  src: /* local("Segoe UI Bold"), */
+    /* url("/fonts/SelawikSubset-Bold.woff2")
+    format("woff2") */;
   font-weight: 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: "GameUI";
-  src:
-    local("Segoe UI Semibold"),
-    url("/fonts/SelawikSubset-Semibold.woff2") format("woff2");
+  src: /* local("Segoe UI Semibold"), */
+    /* url("/fonts/SelawikSubset-Semibold.woff2")
+    format("woff2") */;
   font-weight: 600;
   font-display: swap;
 }
@@ -22,6 +22,10 @@
   }
 
   body {
-    @apply bg-bg text-foreground min-h-screen min-w-80 font-["GameUI"] font-bold tabular-nums antialiased;
+    @apply bg-bg text-foreground flex min-h-screen min-w-80 place-content-center items-center font-[system-ui] font-bold tabular-nums antialiased;
+  }
+
+  #root {
+    @apply size-full;
   }
 }

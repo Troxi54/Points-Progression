@@ -1,3 +1,4 @@
+import { formatTime } from "@core/format/time";
 import type { MenuInfoFormulaContainer } from "./types";
 import { formatNumber, integerCommaFormat } from "@core/format/number";
 import amplivaultConfig from "@game/features/amplivault/config";
@@ -12,6 +13,7 @@ import Min from "@ui/components/base/Min";
 import Pow from "@ui/components/base/Pow";
 import Stat from "@ui/components/base/Stat";
 import symbols from "@ui/symbols";
+import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 
 const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
@@ -45,31 +47,54 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
     condition: ({ player }) => everPerformed(player, "reset"),
     name: "Best run effect",
-    node: () => {
+    node: ({ player }) => {
       const bestRun = <Stat>best run</Stat>;
-      const firstPart = (
-        <Min
-          values={[
-            <>
-              1 {symbols.plus} <Log base={"2 hours"}>{bestRun}</Log>
-            </>,
-            2,
-          ]}
-        />
-      );
 
       return (
         <>
-          If best run {symbols.lessThanOrEqualTo} 2 hours:
-          <br />
-          {firstPart} {symbols.multiply} 5
+          <Min
+            values={[
+              <>
+                1 {symbols.plus} <Log base={"2 hours"}>{bestRun}</Log>
+              </>,
+              2,
+            ]}
+          />{" "}
+          {symbols.multiply} <br />
+          (if best run {symbols.lessThanOrEqualTo} 2 hours: <br />5
           <Pow>
             (<Log>2 hours</Log> {symbols.minus} <Log>{bestRun}</Log>)
           </Pow>
           <br />
-          Otherwise:
+          Otherwise: 1)
+          {player.everLeftAntinefit && (
+            <>
+              {" "}
+              {symbols.multiply}
+              <br />
+              (if best run {symbols.lessThanOrEqualTo}{" "}
+              {formatTime(resetResetLayerConfig.bestRunLimit)}:
+              <br />
+              40
+              <Pow>
+                <Log>{formatTime(resetResetLayerConfig.bestRunLimit)}</Log>{" "}
+                {symbols.minus} <Log>{bestRun}</Log>
+              </Pow>
+              <br />
+              Otherwise: 1)
+            </>
+          )}
           <br />
-          {firstPart}
+          <Caption muted>
+            Time in milliseconds
+            {player.everLeftAntinefit && (
+              <>
+                <br />
+                {bestRun} sofcapped after{" "}
+                {formatTime("1e-30", { exponentialPrecision: 0 })} (power 0.25)
+              </>
+            )}
+          </Caption>
         </>
       );
     },
@@ -232,7 +257,6 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       const upgradeData = getRepeatableUpgradeData("vermyte");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
           {formatNumber(upgradeData.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
@@ -962,6 +986,76 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
           <Log base={formatNumber("1e10000")}>
             <Stat>cores</Stat> {symbols.plus} 1
           </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.everEnteredAntinefit,
+    name: "Anti Point gain",
+    node: () => (
+      <>
+        5
+        <Pow>
+          <Log>
+            1 {symbols.plus} (<Stat>points</Stat> {symbols.plus}{" "}
+            <Stat>point gain</Stat>) {symbols.divide} {formatNumber("1e18")}
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.everLeftAntinefit,
+    name: "Beneflux Upgrade Cost",
+    node: () => {
+      const upgradeData = getRepeatableUpgradeData("beneflux");
+      return (
+        <>
+          {formatNumber(upgradeData.costScaling)}
+          <Pow>
+            <Stat>lvl</Stat>
+          </Pow>
+        </>
+      );
+    },
+  },
+  {
+    condition: ({ player }) => player.everLeftAntinefit,
+    name: "Beneflux Upgrade Effect",
+    node: () => (
+      <>
+        1 {symbols.divide} 10
+        <Pow>
+          <Stat>lvl</Stat>
+        </Pow>
+      </>
+    ),
+  },
+  {
+    condition: ({ player }) => player.everLeftAntinefit,
+    name: "Nullith Upgrade Cost",
+    node: () => {
+      const upgradeData = getRepeatableUpgradeData("nullith");
+      return (
+        <>
+          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeData.costScaling)}
+          <Pow>
+            <Stat>lvl</Stat>
+          </Pow>
+        </>
+      );
+    },
+  },
+  {
+    condition: ({ player }) => player.everLeftAntinefit,
+    name: "Nullith Upgrade Effect",
+    node: () => (
+      <>
+        2
+        <Pow>
+          <Stat>lvl</Stat>
         </Pow>
       </>
     ),

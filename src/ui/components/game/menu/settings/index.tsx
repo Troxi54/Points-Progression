@@ -15,7 +15,7 @@ const SettingsButton = () => {
       aria-expanded={isOpen("settings")}
       aria-controls="settings"
     >
-      <Image src={settingsIcon} alt="" className="h-9/10" />
+      <Image src={settingsIcon} alt="Settings" className="h-9/10" />
     </Button>
   );
 };

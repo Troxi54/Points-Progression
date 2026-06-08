@@ -2,6 +2,7 @@ import type { FormulaContainer } from "./types";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
+import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import { getResetLayerData } from "@game/resetLayers/utils/get";
 import Decimal from "break_eternity.js";
 import formulas from "./data";
@@ -9,22 +10,40 @@ import formulas from "./data";
 const effectFormulas = {
   firstResetLayerRun({ player }) {
     const { bestRun } = player;
-    if (bestRun === null) return createDecimal(1);
+
     if (
+      bestRun === null ||
       bestRun.isNan() ||
       !bestRun.isFinite() ||
       bestRun.lessThanOrEqualTo(0)
-    ) {
+    )
       return createDecimal(1);
-    }
 
     const GROWTH_POINT = createDecimal(7.2e6);
+    const normalized = bestRun.max(0);
+    const run = Decimal.divide(
+      1,
+      decimalSoftcap(Decimal.divide(1, normalized), "1e30", 0.25),
+    );
 
-    return Decimal.plus(1, GROWTH_POINT.log(bestRun))
+    return Decimal.plus(
+      1,
+      GROWTH_POINT.log(run.max(resetResetLayerConfig.bestRunLimit)),
+    )
       .min(2)
       .times(
         bestRun.lessThanOrEqualTo(GROWTH_POINT)
-          ? Decimal.pow(5, GROWTH_POINT.log10().minus(bestRun.log10()))
+          ? Decimal.pow(5, GROWTH_POINT.log10().minus(run.log10()))
+          : 1,
+      )
+      .times(
+        bestRun.lessThanOrEqualTo(resetResetLayerConfig.bestRunLimit)
+          ? Decimal.pow(
+              40,
+              createDecimal(resetResetLayerConfig.bestRunLimit)
+                .log10()
+                .minus(run.log10()),
+            )
           : 1,
       );
   },

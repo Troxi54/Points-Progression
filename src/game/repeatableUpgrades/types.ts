@@ -6,7 +6,7 @@ import type { BooleanGetter, ValueGetter } from "@game/player/types";
 import type Decimal from "break_eternity.js";
 
 export interface RepeatableUpgradeIds {
-  normal: "point" | "ampliflux" | "vermyte" | "core";
+  normal: "point" | "ampliflux" | "vermyte" | "core" | "beneflux" | "nullith";
   sliph: "dertoint" | "amplivoid";
 }
 

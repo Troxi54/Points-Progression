@@ -17,7 +17,7 @@ const useMenuInfoFormulaSelector = () => {
       ],
     },
     {
-      additionalSelectors: ({ mergedPlayer }) => {
+      selector: ({ mergedPlayer }) => {
         const upgrades = hasUpgrades(mergedPlayer, {
           tier: [4],
           vermyros: [1, 5, 8, 10],

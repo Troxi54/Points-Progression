@@ -19,7 +19,7 @@ function Nexus() {
     },
     {
       useFormat: true,
-      additionalSelectors: ({ mergedPlayer: { player, cachedPlayer } }) => {
+      selector: ({ mergedPlayer: { player, cachedPlayer } }) => {
         const { nexusCost } = cachedPlayer;
 
         return {

@@ -22,17 +22,25 @@ function OfflineMenu() {
     offlineProgressTicksCompleted,
     offlineProgressSpeed,
     offlineProgressTicksOnTrigger,
-    ticksPerSecond,
-  } = usePlayerFields({
-    cachedPlayer: [
-      "offlineProgress",
-      "offlineProgressFullTime",
-      "offlineProgressTicksCompleted",
-      "offlineProgressTicksOnTrigger",
-      "offlineProgressSpeed",
-      "ticksPerSecond",
-    ],
-  });
+  } = usePlayerFields(
+    {
+      cachedPlayer: [
+        "offlineProgress",
+        "offlineProgressFullTime",
+        "offlineProgressTicksCompleted",
+        "offlineProgressTicksOnTrigger",
+        "offlineProgressSpeed",
+      ],
+    },
+    {
+      selector: ({ mergedPlayer: { cachedPlayer } }) => {
+        return {
+          ticksPerSecond:
+            cachedPlayer.offlineProgress && cachedPlayer.ticksPerSecond,
+        };
+      },
+    },
+  );
 
   const syncMenu = useEffectEvent(() => {
     if (offlineProgress) {
@@ -47,11 +55,15 @@ function OfflineMenu() {
     syncMenu();
   }, [offlineProgress]);
 
+  console.log(offlineProgress);
+
+  const { cachedPlayer } = getPlayerState();
+
   const progress =
     offlineProgressTicksCompleted / offlineProgressTicksOnTrigger;
   const leftTime = calculateTimeForRequirement(
     offlineProgressTicksCompleted,
-    offlineProgressSpeed * ticksPerSecond,
+    offlineProgressSpeed * cachedPlayer.ticksPerSecond,
     offlineProgressTicksOnTrigger,
   );
 

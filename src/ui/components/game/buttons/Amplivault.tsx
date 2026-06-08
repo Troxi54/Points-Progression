@@ -29,7 +29,7 @@ function Amplivault() {
       ],
     },
     {
-      additionalSelectors: (state) => {
+      selector: (state) => {
         const pointGain = getCachedCurrencyPropSelection(
           state,
           "points",
@@ -44,9 +44,7 @@ function Amplivault() {
   );
 
   const animationPaused = !(state.enteredAmplivault || state.amplivaultBroken);
-  const animationStateClassname = animationPaused ? "paused" : "";
-  const animationLineClassName =
-    "absolute w-full h-[0.1em] bg-amplivault-div-4-bg after:content-[''] after:w-1/2 after:h-[0.2em] after:bg-amplivault-div-5-bg after:animate-[amplivault-line-animation_1.5s_linear_infinite]";
+  const animationLineClassName = `absolute w-full h-[0.1em] bg-amplivault-div-4-bg after:content-[''] after:w-1/2 after:h-[0.2em] after:bg-amplivault-div-5-bg after:animate-[amplivault-line-animation_1.5s_linear_infinite] ${animationPaused ? "after:paused" : ""}`;
 
   const leftTime = calculateTimeForRequirement(
     state.points,
@@ -73,7 +71,7 @@ function Amplivault() {
     >
       <Container
         className={cn(
-          "border-amplivault-div-border relative h-20 w-20 items-center border-2",
+          "border-amplivault-div-border relative size-20 items-center border-2",
           state.amplivaultBroken
             ? cn(
                 "border-image-gradient bg-black",
@@ -92,18 +90,12 @@ function Amplivault() {
             state.amplivaultBroken
               ? "[animation-duration:2.74s]"
               : "[animation-duration:1.5s]",
-            animationStateClassname,
+            animationPaused && "paused",
           )}
         >
+          <Container className={animationLineClassName}></Container>
           <Container
-            className={cn(animationLineClassName, animationStateClassname)}
-          ></Container>
-          <Container
-            className={cn(
-              animationLineClassName,
-              animationStateClassname,
-              "rotate-90",
-            )}
+            className={cn(animationLineClassName, "rotate-90")}
           ></Container>
         </Container>
       </Container>
@@ -112,8 +104,8 @@ function Amplivault() {
         <Paragraph className="broken-amplivault">
           Broken Amplivault -{" "}
           <span className="tracking-wider">
-            You need to reach the requirement to increase your Amplivault level.
-            Amplivault level boosts Ampliflux.
+            you need to reach the requirement to increase your Amplivault level.
+            Amplivault level boosts Ampliflux
           </span>
           <br />
           <br />
@@ -147,9 +139,9 @@ function Amplivault() {
         <Paragraph className="text-amplivault-info">
           Amplivault -{" "}
           <span className={"text-amplivault-description"}>
-            Entering Amplivault triggers a Vermyros reset. While inside, you
+            entering Amplivault triggers a Vermyros reset. While inside, you
             can't buy Point Upgrade, and you need to reach the requirement to
-            increase your Amplivault Level. Amplivault Level boosts Ampliflux.
+            increase your Amplivault Level. Amplivault Level boosts Ampliflux
           </span>
           <br />
           <br />

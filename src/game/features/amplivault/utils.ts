@@ -34,7 +34,7 @@ export function toggleAmplivault() {
   setMergedPlayer({
     ...triggeredReset,
     player: {
-      ...triggeredReset?.player,
+      ...triggeredReset.player,
       enteredAmplivault: !player.enteredAmplivault,
     },
   });

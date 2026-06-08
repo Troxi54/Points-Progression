@@ -6,10 +6,8 @@ import type Decimal from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
 import { hasKey, isObject, objectEntries } from "@core/utils/object";
 import currencyData from "@game/currencies/data";
-import {
-  getCurrencyData,
-  getCurrencyEffectOn,
-} from "@game/currencies/utils/get";
+import { currencyEffectWorks } from "@game/currencies/utils/calculate";
+import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import { parseValueGetter } from "@game/player/utils";
 import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
@@ -67,23 +65,8 @@ const mainFormulas = {
   ) {
     if (!effectOn) return createDecimal(1);
 
-    const data = getCurrencyData(currencyFrom);
-    const { affects } = data;
-
-    const effectWorks = parseValueGetter(data.effectWorks, mergedPlayer);
-    if (!effectWorks) return createDecimal(1);
-
-    const effectDataHasCurrency = hasKey(effectOn, affects);
-    if (effectDataHasCurrency) {
-      const effectData = affects[effectOn];
-      if (effectData) {
-        const works = parseValueGetter(effectData.works, mergedPlayer);
-        if (!works) return createDecimal(1);
-      }
-    }
-
-    const hasEffectOnIt = affects === effectOn || hasKey(effectOn, affects);
-    if (!hasEffectOnIt) return createDecimal(1);
+    if (!currencyEffectWorks(mergedPlayer, currencyFrom, effectOn))
+      return createDecimal(1);
 
     return getCurrencyEffectOn(mergedPlayer, currencyFrom, effectOn);
   },

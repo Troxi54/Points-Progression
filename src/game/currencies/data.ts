@@ -223,6 +223,7 @@ const currencyData = createCurrencyDataContainer({
     affects: {
       points: {
         works: ({ player }) => player.enteredAntinefit,
+        mode: "pow",
       },
       beneflux: {
         works: ({ player }) => !player.enteredAntinefit,

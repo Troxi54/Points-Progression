@@ -17,6 +17,10 @@ const resetResetLayer = defineResetLayer<"normal">({
         bestPointsOfRun: player.bestPointsOfRun,
         runEffect: cachedPlayer.runEffect,
         bestPointsOfRunEffect: cachedPlayer.bestPointsOfRunEffect,
+        boughtBenefluxUpgrade: getRepeatableUpgradeLevel(
+          player,
+          "beneflux",
+        ).greaterThan(0),
       },
       hasNexusLevelsSelection(mergedPlayer, [
         [2, "2"],

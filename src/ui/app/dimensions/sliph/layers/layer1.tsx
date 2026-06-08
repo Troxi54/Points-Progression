@@ -17,8 +17,7 @@ function SliphDimensionLayer1() {
       player: ["everReachedCappergy"],
     },
     {
-      additionalSelectors: (state) =>
-        everPerformedResetLayers(state, ["mallirt"]),
+      selector: (state) => everPerformedResetLayers(state, ["mallirt"]),
     },
   );
 

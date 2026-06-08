@@ -5,6 +5,7 @@ import createDecimal from "@core/utils/decimal";
 import { calculateBulk } from "@core/utils/level";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import amplivaultConfig from "@game/features/amplivault/config";
+import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import tierResetLayerConfig from "@game/resetLayers/data/layers/tier/config";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
@@ -18,15 +19,23 @@ const formulas = {
   gameProgress({ player }) {
     return player.bestPoints.log(gameConfig.endgameAt).max(0);
   },
-  firstResetLayerRunLimit() {
-    return createDecimal(resetResetLayerConfig.bestRunLimit);
+  firstResetLayerRunLimit(mergedPlayer) {
+    const base = createDecimal(resetResetLayerConfig.bestRunLimit);
+
+    const benefluxUpgradeEffect = calculateRepeatableUpgradeEffect(
+      mergedPlayer,
+      "beneflux",
+    );
+
+    return base.multiply(benefluxUpgradeEffect);
   },
   firstResetLayerRun(
-    { player },
+    mergedPlayer,
     run: DecimalSource | null,
     override: boolean = false,
   ): Decimal | null {
-    const lowestLimit = formulas.firstResetLayerRunLimit();
+    const { player } = mergedPlayer;
+    const lowestLimit = formulas.firstResetLayerRunLimit(mergedPlayer);
 
     const hasTier_3 = hasUpgradeById(player, "tier_3");
     if (hasTier_3) return lowestLimit;

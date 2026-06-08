@@ -24,7 +24,7 @@ function NormalDimensionLayer3() {
   const state = usePlayerFields(
     { player: ["bestSoftcapperLevel", "everMadeCoreReset"] },
     {
-      additionalSelectors: (state) => {
+      selector: (state) => {
         const resetLayers = everPerformedResetLayers(state, [
           "vermyros",
           "nullith",

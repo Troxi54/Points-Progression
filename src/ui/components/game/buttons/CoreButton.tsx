@@ -13,7 +13,7 @@ function CoreButton() {
       player: ["everReachedCores"],
     },
     {
-      additionalSelectors: (state) =>
+      selector: (state) =>
         getCachedCurrencyPropSelection(state, "cores", "gain"),
       useFormat: true,
     },

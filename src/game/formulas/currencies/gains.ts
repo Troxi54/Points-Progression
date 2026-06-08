@@ -138,6 +138,8 @@ const currencyGainFormulas: GainFormulaContainer = {
       const { madeNullithResets } = player;
 
       const ofNulliths = calculateGeneration([
+        [hasUpgradeById(player, "nullith_14"), 1],
+        [hasUpgradeById(player, "nullith_13"), 0.1],
         [hasUpgradeById(player, "nullith_12"), 0.01],
         [hasUpgradeById(player, "nullith_11"), 0.001],
       ]).multiply(madeNullithResets);
@@ -251,6 +253,18 @@ const currencyGainFormulas: GainFormulaContainer = {
   },
   xagoraNux() {
     return formulas.xagora();
+  },
+  antiPoints(mergedPlayer) {
+    const { player } = mergedPlayer;
+
+    const pointGain = calculateCurrencyGain(mergedPlayer, "points");
+
+    const value = player.points.plus(pointGain);
+
+    return Decimal.pow(5, value.dividedBy("1e18").max(0).plus(1).log10());
+  },
+  beneflux() {
+    return createDecimal(0.01);
   },
 } as const satisfies GainFormulaContainer;
 

@@ -51,6 +51,22 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       affects: "Best Points effect",
       autobuy: ({ player }) => hasUpgradeById(player, "nullith_4"),
     },
+    beneflux: {
+      condition: ({ player }) => player.everLeftAntinefit,
+      startCost: createDecimal(1),
+      costScaling: createDecimal(10),
+      currency: "beneflux",
+      effectFormula: (lvl) => Decimal.divide(1, Decimal.pow(10, lvl)),
+      affects: "Best run time",
+    },
+    nullith: {
+      condition: ({ player }) => player.everLeftAntinefit,
+      startCost: createDecimal("1e44"),
+      costScaling: createDecimal(3),
+      currency: "madeNullithResets",
+      effectFormula: (lvl) => Decimal.pow(2, lvl),
+      affects: "beneflux",
+    },
   },
   sliph: {
     dertoint: {

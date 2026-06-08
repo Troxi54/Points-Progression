@@ -29,9 +29,9 @@ const tierUpgrades = createUpgradeDataContainer({
     },
     {
       id: "tier_3",
-      description: () =>
+      description: (mergedPlayer) =>
         `Unlocks offline Tier Resets, maintains ${formatBestRunTime(
-          formulas.firstResetLayerRunLimit(),
+          formulas.firstResetLayerRunLimit(mergedPlayer),
         )} best run time, and disables auto Reset on Tier reset `,
       cost: 1e40,
     },

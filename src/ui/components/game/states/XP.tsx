@@ -16,7 +16,7 @@ function XPState() {
       },
       {
         useFormat: true,
-        additionalSelectors: ({ mergedPlayer }) =>
+        selector: ({ mergedPlayer }) =>
           getCachedCurrencyPropSelection(mergedPlayer, "XP", "gain"),
       },
     );

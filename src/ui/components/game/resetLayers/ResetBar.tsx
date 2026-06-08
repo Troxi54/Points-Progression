@@ -1,7 +1,9 @@
 import { formatEffectOnCurrency } from "@core/format/effect";
 import { formatNumber } from "@core/format/number";
 import { formatBestRunTime } from "@core/format/time";
+import cn from "@core/utils/tailwind";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
+import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import NexusSign from "@ui/components/features/NexusSign";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
@@ -18,10 +20,19 @@ function ResetBar() {
 
         return [
           <>
-            Best run: {formatBestRunTime(bestRun)}{" "}
+            Best run: {formatBestRunTime(bestRun, { exponentialPrecision: 0 })}{" "}
             {bestRun &&
-              bestRun.lessThanOrEqualTo(resetResetLayerConfig.bestRunLimit) &&
-              "(limit)"}
+              bestRun.lessThanOrEqualTo(resetResetLayerConfig.bestRunLimit) && (
+                <span
+                  className={cn(
+                    getRepeatableUpgradeLevel(player, "beneflux").greaterThan(
+                      0,
+                    ) && "text-beneflux",
+                  )}
+                >
+                  (limit)
+                </span>
+              )}
             {" - "}
             <span className="text-reset-effect">
               Effect: {formatEffectOnCurrency(cachedPlayer.runEffect, "points")}

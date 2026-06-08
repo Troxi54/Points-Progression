@@ -1,5 +1,7 @@
 import type { DecimalSource } from "break_eternity.js";
+import type { PartialFormatNumberOptions } from "./types";
 import createDecimal from "@core/utils/decimal";
+import { mergeObjects } from "@core/utils/object";
 import Decimal from "break_eternity.js";
 import { formatNumber } from "./number";
 
@@ -15,7 +17,10 @@ interface Unit {
 
 const formatUnit = (value: Unit) => value.value.floor();
 
-export function formatTime(milliseconds: DecimalSource): string {
+export function formatTime(
+  milliseconds: DecimalSource,
+  formatOptions?: PartialFormatNumberOptions,
+): string {
   const ms = createDecimal(milliseconds);
 
   const units: Unit[] = [
@@ -27,7 +32,7 @@ export function formatTime(milliseconds: DecimalSource): string {
   ];
 
   if (units[0].value.greaterThanOrEqualTo(1000)) {
-    return `${formatNumber(formatUnit(units[0]))}y`;
+    return `${formatNumber(formatUnit(units[0]), formatOptions)}y`;
   }
 
   if (units[0].value.greaterThanOrEqualTo(10)) {
@@ -41,7 +46,11 @@ export function formatTime(milliseconds: DecimalSource): string {
   }
 
   if (ms.lessThan(1000)) {
-    return `${ms.floor()}ms`;
+    if (ms.lessThan(1)) {
+      return `${formatNumber(ms, formatOptions)}ms`;
+    }
+
+    return `${formatNumber(ms, mergeObjects({ autoSigFigs: -1 }, formatOptions))}ms`;
   }
 
   if (
@@ -67,15 +76,21 @@ export function formatTime(milliseconds: DecimalSource): string {
   return parts.join(". ");
 }
 
-export function formatLeftTime(milliseconds: DecimalSource): string {
+export function formatLeftTime(
+  milliseconds: DecimalSource,
+  formatOptions?: PartialFormatNumberOptions,
+): string {
   milliseconds = createDecimal(milliseconds);
   if (milliseconds.lessThanOrEqualTo(0)) return "Ready";
   if (milliseconds.greaterThanOrEqualTo("e25") || milliseconds.isNan())
     return "Never";
-  return formatTime(milliseconds);
+  return formatTime(milliseconds, formatOptions);
 }
 
-export function formatBestRunTime(milliseconds: DecimalSource | null): string {
+export function formatBestRunTime(
+  milliseconds: DecimalSource | null,
+  formatOptions?: PartialFormatNumberOptions,
+): string {
   if (!milliseconds) return "No";
-  return formatTime(milliseconds);
+  return formatTime(milliseconds, formatOptions);
 }
