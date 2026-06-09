@@ -74,7 +74,6 @@ export function handleDecimalInputOnChange(target: HTMLInputElement) {
   }
 
   target.value = value;
-  target.style.setProperty("--chars", String(Math.max(value.length + 1, 1)));
 
   return value;
 }

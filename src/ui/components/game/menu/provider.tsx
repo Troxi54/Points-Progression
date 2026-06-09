@@ -42,9 +42,22 @@ export default function MenuProvider({ children }: ChildrenProps) {
     });
   }
 
+  function openExclusive(menu: MenuId) {
+    setStack([menu]);
+  }
+
   return (
     <MenuContext
-      value={{ stack, open, close, isOpen, isTop, closeAll, closeAllExcept }}
+      value={{
+        stack,
+        open,
+        close,
+        isOpen,
+        isTop,
+        closeAll,
+        closeAllExcept,
+        openExclusive,
+      }}
     >
       {children}
     </MenuContext>

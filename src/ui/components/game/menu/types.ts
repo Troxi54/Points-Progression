@@ -14,4 +14,5 @@ export interface MenuContextValue {
   isTop: (menu: MenuId) => boolean;
   closeAll: () => void;
   closeAllExcept: (menu: MenuId) => void;
+  openExclusive: (menu: MenuId) => void;
 }

@@ -35,23 +35,22 @@ function Nullifice() {
     const input = inputRef.current;
     if (!input) return;
 
+    const { setPlayer } = getPlayerState();
+
     const processed = handleDecimalInputOnChange(input);
-    getPlayerState().setPlayer({ nullionInput: processed });
+    setPlayer({ nullionInput: processed });
   }, []);
 
   const onBlur = useCallback(() => {
     const input = inputRef.current;
     if (!input) return;
 
+    const { setPlayer } = getPlayerState();
+
     const processed = handleDecimalInputOnBlur(input);
     onChange();
-    getPlayerState().setPlayer({ nullionInput: processed });
+    setPlayer({ nullionInput: processed });
   }, [onChange]);
-
-  useLayoutEffect(() => {
-    onBlur();
-    onChange();
-  }, [onBlur, onChange]);
 
   useLayoutEffect(() => {
     const input = inputRef.current;

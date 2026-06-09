@@ -14,7 +14,7 @@ import { useEffect, useEffectEvent } from "react";
 import Overlay from "../overlay";
 
 function OfflineMenu() {
-  const { open, close, closeAllExcept } = useMenu();
+  const { close, openExclusive } = useMenu();
 
   const {
     offlineProgress,
@@ -44,8 +44,7 @@ function OfflineMenu() {
 
   const syncMenu = useEffectEvent(() => {
     if (offlineProgress) {
-      closeAllExcept("offline");
-      open("offline");
+      openExclusive("offline");
     } else {
       close("offline");
     }
@@ -54,8 +53,6 @@ function OfflineMenu() {
   useEffect(() => {
     syncMenu();
   }, [offlineProgress]);
-
-  console.log(offlineProgress);
 
   const { cachedPlayer } = getPlayerState();
 

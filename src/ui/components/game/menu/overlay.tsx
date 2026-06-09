@@ -47,34 +47,41 @@ function Overlay({
   const currentlyOpen = isOpen(menuId);
   const shouldBlockClosing = blockClosing === undefined ? false : blockClosing;
 
-  const syncMenu = useEffectEvent(() => {
+  const onOpenEvent = useEffectEvent(() => {
+    onOpen?.();
+  });
+
+  const onCloseEvent = useEffectEvent(() => {
+    onClose?.();
+  });
+
+  useEffect(() => {
     if (currentlyOpen) {
       previouslyFocusedRef.current = document.activeElement as HTMLElement;
 
       setShouldRender(true);
+
       requestAnimationFrame(() => {
         setVisible(true);
+
         requestAnimationFrame(() => {
-          onOpen?.();
+          onOpenEvent();
         });
       });
     } else {
       setVisible(false);
-      onClose?.();
+      onCloseEvent();
 
-      const t = setTimeout(() => {
+      const timeout = setTimeout(() => {
         setShouldRender(false);
 
         if (previouslyFocusedRef.current) {
           previouslyFocusedRef.current.focus();
         }
       }, TRANSITION_TIME);
-      return () => clearTimeout(t);
-    }
-  });
 
-  useEffect(() => {
-    syncMenu();
+      return clearTimeout(timeout);
+    }
   }, [currentlyOpen]);
 
   const onPointerDown = useEffectEvent((e: PointerEvent) => {
