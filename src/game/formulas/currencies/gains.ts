@@ -264,7 +264,7 @@ const currencyGainFormulas: GainFormulaContainer = {
     return Decimal.pow(5, value.dividedBy("1e18").max(0).plus(1).log10());
   },
   beneflux() {
-    return createDecimal(0.01);
+    return createDecimal(0.1);
   },
 } as const satisfies GainFormulaContainer;
 

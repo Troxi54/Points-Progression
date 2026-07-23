@@ -1006,6 +1006,41 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     ),
   },
   {
+    condition: ({ player }) => player.everEnteredAntinefit,
+    name: "Anti Point's Point effect",
+    node: () => {
+      const n = (
+        <>
+          <Stat>anti points</Stat> {symbols.plus} <Stat>anti point gain</Stat>
+        </>
+      );
+
+      return (
+        <>
+          1 {symbols.divide} (
+          <Log>
+            {n} {symbols.plus} 1
+          </Log>{" "}
+          {symbols.multiply} {formatNumber("1.79e608")})<Pow>0.005</Pow>
+        </>
+      );
+    },
+  },
+  {
+    condition: ({ player }) => player.everLeftAntinefit,
+    name: "Anti Point's Beneflux effect",
+    node: () => (
+      <>
+        5
+        <Pow>
+          <Log>
+            <Stat>anti points</Stat> {symbols.plus} 1
+          </Log>
+        </Pow>
+      </>
+    ),
+  },
+  {
     condition: ({ player }) => player.everLeftAntinefit,
     name: "Beneflux Upgrade Cost",
     node: () => {

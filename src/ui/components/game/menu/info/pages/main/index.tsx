@@ -20,7 +20,7 @@ function MenuInfoMainPage() {
         {gameConfig.gameName}
       </Heading>
       <Paragraph>
-        This is a slow-paced game designed to last over a month. New features
+        This is a slow-paced game designed to last several months. New features
         unlock gradually as you progress.
       </Paragraph>
       <Paragraph>
