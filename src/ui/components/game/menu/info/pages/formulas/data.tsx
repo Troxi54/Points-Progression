@@ -14,6 +14,7 @@ import Pow from "@ui/components/base/Pow";
 import Stat from "@ui/components/base/Stat";
 import symbols from "@ui/symbols";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
+import Max from "@ui/components/base/Max";
 
 const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {
@@ -616,7 +617,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     name: "Score effect",
     node: () => (
       <>
-        <Min
+        <Max
           values={[
             <>
               (1 {symbols.minus} 1 {symbols.divide} 2
