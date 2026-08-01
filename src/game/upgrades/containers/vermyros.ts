@@ -19,7 +19,8 @@ const vermyrosUpgrades = createUpgradeDataContainer({
     },
     {
       id: "vermyros_2",
-      description: `Enables passive Tier Reset generation, replaces Auto Tier toggle with Auto Tier Up toggle, and keeps 1st and 2nd Reset and Tier upgrades`,
+      description:
+        "Enables passive Tier Reset generation, replaces Auto Tier toggle with Auto Tier Up toggle, and keeps 1st and 2nd Reset and Tier upgrades",
       cost: 1e90,
     },
     {
@@ -30,25 +31,25 @@ const vermyrosUpgrades = createUpgradeDataContainer({
     {
       id: "vermyros_4",
       description:
-        "Prevents Tier from resetting anything, removes Auto Tier Up toggle, and generates Vermytes equal to 0.1% of your Best Vermytes per second",
+        "Prevents Tier from resetting anything, removes Auto Tier Up toggle, and generates Vermytes equal to 0.1% of your Best Vermytes each second",
       cost: 1e114,
     },
     {
       id: "vermyros_5",
       description:
-        "Unlocks Amplivault and generates Vermytes equal to 1% of your Best Vermytes per second",
+        "Unlocks Amplivault and generates Vermytes equal to 1% of your Best Vermytes each second",
       cost: 1e133,
     },
     {
       id: "vermyros_6",
       description:
-        "Generates Vermytes equal to 10% of your Best Vermytes per second",
+        "Generates Vermytes equal to 10% of your Best Vermytes each second",
       cost: 1e162,
     },
     {
       id: "vermyros_7",
       description:
-        "Generates Vermytes equal to 100% of your Best Vermytes per second",
+        "Generates Vermytes equal to 100% of your Best Vermytes each second",
       cost: 1e186,
     },
     {
