@@ -1,5 +1,5 @@
 import { formatConfig } from "@core/format/config";
-import { integerCommaFormat } from "@core/format/number";
+import { formatNumber, integerCommaFormat } from "@core/format/number";
 import { numberNotationUnitLogs } from "@core/format/units";
 import Paragraph from "@ui/components/base/Paragraph";
 import Pow from "@ui/components/base/Pow";
@@ -36,12 +36,21 @@ function MenuInfoNotationPage() {
       <Paragraph>
         {units}
         <br />
-        Scientific notation starts at 10
-        <Pow>
-          {integerCommaFormat(
-            formatConfig.scientificNotationThreshold.log10().floor(),
-          )}
-        </Pow>
+        {units.length === 0 ? (
+          <>
+            Scientific notation starts at{" "}
+            {formatNumber(formatConfig.scientificNotationModeThreshold)}
+          </>
+        ) : (
+          <>
+            Scientific notation starts at 10
+            <Pow>
+              {integerCommaFormat(
+                formatConfig.scientificNotationThreshold.log10().floor(),
+              )}
+            </Pow>
+          </>
+        )}
       </Paragraph>
     </>
   );
