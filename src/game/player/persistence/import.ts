@@ -6,8 +6,6 @@ export function importPlayer(str?: string) {
   const loaded = loadPlayer(str);
   if (!loaded) return;
 
-  console.log(loaded);
-
   const { setPlayer } = getPlayerState();
   setPlayer(loaded);
 

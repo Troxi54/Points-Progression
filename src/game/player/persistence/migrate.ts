@@ -182,8 +182,6 @@ const conversionData: Data = {
     const newValue =
       value === true ? "scientific" : value === false ? null : value;
 
-    console.log(newValue);
-
     if (newValue === null) return;
 
     return {
