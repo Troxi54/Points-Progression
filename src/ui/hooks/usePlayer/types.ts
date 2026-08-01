@@ -6,7 +6,7 @@ export interface UsePlayerOptions {
 }
 
 export interface UsePlayerAdditionalSelector {
-  exponentialNotation: Player["exponentialNotation"];
+  numberNotation: Player["numberNotation"];
 }
 
 export type UsePlayerFieldsOptions<T> = Partial<UsePlayerOptions> & {

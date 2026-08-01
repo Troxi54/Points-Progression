@@ -76,7 +76,7 @@ export function usePlayer<T>(
   const fullSelector: PlayerStoreSelectorGeneric<T> = (state) => {
     const baseSelector = selector(state);
     const additionalSelector: UsePlayerAdditionalSelector = {
-      exponentialNotation: state.mergedPlayer.player.exponentialNotation,
+      numberNotation: state.mergedPlayer.player.numberNotation,
     };
 
     return fullOptions.useFormat

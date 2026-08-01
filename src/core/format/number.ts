@@ -3,6 +3,7 @@ import type {
   FormatNumberGroup,
   FormatNumberOptions,
   FormatNumberType,
+  NumberNotation,
   PartialFormatNumberOptions,
   Unit,
 } from "./types";
@@ -16,16 +17,15 @@ import { mergeObjects } from "@core/utils/object";
 import { getPlayerState } from "@game/player/store";
 import symbols from "@ui/symbols";
 import Decimal from "break_eternity.js";
-import formatUnits, {
-  exponentialNotationSettingStartsWorkingAt,
-} from "./units";
+import numberNotations from "./units";
+import { formatConfig } from "./config";
 
 const ADD_COMMAS_AT = 1000;
 
 const baseFormatOptions: FormatNumberOptions = {
   precision: "auto",
-  exponentialPrecision: 2,
-  minExponential: "auto",
+  scientificPrecision: 2,
+  minScientific: "auto",
   autoSigFigs: 0,
   autoDefaultPrecision: 3,
   precisionBeforeUnit: "auto",
@@ -38,7 +38,7 @@ function calculatePrecision(
 ): number {
   if (
     fullOptions.precisionBeforeUnit !== "auto" &&
-    fullNum.lessThan(formatUnits[0].scaling)
+    fullNum.lessThan(formatConfig.numberUnitsThreshold)
   ) {
     return fullOptions.precisionBeforeUnit;
   }
@@ -60,7 +60,7 @@ function calculatePrecision(
   return fullOptions.precision;
 }
 
-function getExponential(
+function getScientific(
   num: Decimal,
   prefix: string,
   precision: number,
@@ -106,6 +106,7 @@ function handleSpecialNumbers(value: Decimal): string | null {
 }
 
 function getNextUnit(
+  notation: NumberNotation,
   unitGroup: FormatNumberGroup,
   currentIndex: number,
 ): Unit | null {
@@ -114,8 +115,13 @@ function getNextUnit(
   const index = currentIndex + 1;
   if (index < units.length) return units[index];
 
-  const thisGroupIndex = formatUnits.findIndex((value) => value === unitGroup);
-  const nextGroup = formatUnits[thisGroupIndex + 1];
+  const notationGroups = numberNotations[notation];
+  if (!notationGroups) return null;
+
+  const thisGroupIndex = notationGroups.findIndex(
+    (value) => value === unitGroup,
+  );
+  const nextGroup = notationGroups[thisGroupIndex + 1];
 
   if (nextGroup === undefined) return null;
 
@@ -146,49 +152,62 @@ export function formatNumber(
   const abs = value.abs();
   const prefix = isNegative ? symbols.minus : "";
 
-  if (
-    (player.exponentialNotation &&
-      abs.greaterThanOrEqualTo(exponentialNotationSettingStartsWorkingAt)) ||
-    (fullOptions.minExponential !== "auto" &&
-      abs.greaterThanOrEqualTo(fullOptions.minExponential))
-  ) {
-    return getExponential(abs, prefix, fullOptions.exponentialPrecision);
-  }
-
   let calculatedPrecision = calculatePrecision(abs, value, fullOptions);
 
   if (abs.lessThan(1)) {
     if (abs.lessThan(Decimal.pow(0.1, calculatedPrecision))) {
-      return getExponential(abs, prefix, fullOptions.exponentialPrecision);
+      return getScientific(abs, prefix, fullOptions.scientificPrecision);
     }
 
     return prefix + abs.toFixed(calculatedPrecision);
   }
 
+  const { numberNotation } = player;
+  const isScientificNotation = numberNotation === "scientific";
+
+  const notationGroups = numberNotations[numberNotation];
+
+  const shouldUseScientific = isScientificNotation || !notationGroups;
+
+  if (shouldUseScientific) {
+    if (
+      (isScientificNotation &&
+        abs.greaterThanOrEqualTo(
+          formatConfig.scientificNotationModeThreshold,
+        )) ||
+      (fullOptions.minScientific !== "auto" &&
+        abs.greaterThanOrEqualTo(fullOptions.minScientific))
+    ) {
+      return getScientific(abs, prefix, fullOptions.scientificPrecision);
+    }
+  }
+
   let postfix: string = "";
   let divided = abs;
   let unitIndex = 0;
-  let currentUnitGroup = formatUnits[0];
+  let currentUnitGroup = notationGroups?.[0];
 
-  for (const unitGroup of formatUnits) {
-    currentUnitGroup = unitGroup;
-    const unitGroupLength = unitGroup.units.length;
-    const index = divided.log(unitGroup.scaling).floor();
+  if (notationGroups) {
+    for (const unitGroup of notationGroups) {
+      currentUnitGroup = unitGroup;
+      const unitGroupLength = unitGroup.units.length;
+      const index = divided.log(unitGroup.scaling).floor();
 
-    unitIndex = index.min(unitGroupLength).toNumber();
-    const divider = Decimal.pow(unitGroup.scaling, unitIndex);
+      unitIndex = index.min(unitGroupLength).toNumber();
+      const divider = Decimal.pow(unitGroup.scaling, unitIndex);
 
-    divided = divided.dividedBy(divider);
+      divided = divided.dividedBy(divider);
 
-    if (index.greaterThanOrEqualTo(unitGroupLength)) {
-      if (unitGroup === arrayLastItem(formatUnits)) {
-        return getExponential(abs, prefix, fullOptions.exponentialPrecision);
+      if (index.greaterThanOrEqualTo(unitGroupLength)) {
+        if (unitGroup === arrayLastItem(notationGroups)) {
+          return getScientific(abs, prefix, fullOptions.scientificPrecision);
+        }
+        continue;
       }
-      continue;
-    }
 
-    postfix = unitGroup.units[unitIndex];
-    break;
+      postfix = unitGroup.units[unitIndex];
+      break;
+    }
   }
 
   calculatedPrecision = calculatePrecision(divided, value, fullOptions);
@@ -196,28 +215,34 @@ export function formatNumber(
   const floatMiddle = Number.parseFloat(middle);
   let decimalMiddle = createDecimal(floatMiddle);
 
-  const scalingStep = createDecimal(currentUnitGroup.scaling).toNumber();
+  if (notationGroups && currentUnitGroup) {
+    const scalingStep = createDecimal(currentUnitGroup.scaling).toNumber();
 
-  if (floatMiddle >= scalingStep) {
-    const nextUnit = getNextUnit(currentUnitGroup, unitIndex);
+    if (floatMiddle >= scalingStep) {
+      const nextUnit = getNextUnit(numberNotation, currentUnitGroup, unitIndex);
 
-    if (nextUnit === null) {
-      return getExponential(abs, prefix, fullOptions.exponentialPrecision);
-    }
+      if (nextUnit === null) {
+        return getScientific(abs, prefix, fullOptions.scientificPrecision);
+      }
 
-    decimalMiddle = decimalMiddle.dividedBy(scalingStep);
+      decimalMiddle = decimalMiddle.dividedBy(scalingStep);
 
-    postfix = nextUnit;
-    calculatedPrecision = calculatePrecision(decimalMiddle, value, fullOptions);
-    middle = decimalMiddle.toFixed(calculatedPrecision);
-  } else if (decimalIsGreaterByOoM(floatMiddle, divided, 1)) {
-    const updatedPrecision = calculatePrecision(
-      decimalMiddle,
-      value,
-      fullOptions,
-    );
-    if (updatedPrecision !== calculatedPrecision) {
-      middle = divided.toFixed(updatedPrecision);
+      postfix = nextUnit;
+      calculatedPrecision = calculatePrecision(
+        decimalMiddle,
+        value,
+        fullOptions,
+      );
+      middle = decimalMiddle.toFixed(calculatedPrecision);
+    } else if (decimalIsGreaterByOoM(floatMiddle, divided, 1)) {
+      const updatedPrecision = calculatePrecision(
+        decimalMiddle,
+        value,
+        fullOptions,
+      );
+      if (updatedPrecision !== calculatedPrecision) {
+        middle = divided.toFixed(updatedPrecision);
+      }
     }
   }
 

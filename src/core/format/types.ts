@@ -7,12 +7,16 @@ export interface FormatNumberGroup {
   units: Unit[];
 }
 
-export type FormatNumberGroupContainer = FormatNumberGroup[];
+export type NumberNotation = "standard" | "legacy" | "scientific";
+
+export type FormatNumberGroupContainer = Partial<
+  Record<NumberNotation, FormatNumberGroup[]>
+>;
 
 export interface FormatNumberOptions {
   precision: number | "auto";
-  exponentialPrecision: number;
-  minExponential: DecimalSource | "auto";
+  scientificPrecision: number;
+  minScientific: DecimalSource | "auto";
   autoSigFigs: number;
   autoDefaultPrecision: number;
   precisionBeforeUnit: number | "auto";

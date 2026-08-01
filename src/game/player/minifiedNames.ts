@@ -10,7 +10,7 @@ export const minifiedPlayerMap = createUniqueObject({
   lastTick: 1,
   hideBoughtUpgrades: 2,
   stableProgressBars: 3,
-  exponentialNotation: 4,
+  numberNotation: 4,
   autosave: 5,
   saveBeforeUnload: 6,
   upgrades: 7,

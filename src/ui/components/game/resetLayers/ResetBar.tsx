@@ -20,7 +20,7 @@ function ResetBar() {
 
         return [
           <>
-            Best run: {formatBestRunTime(bestRun, { exponentialPrecision: 0 })}{" "}
+            Best run: {formatBestRunTime(bestRun, { scientificPrecision: 0 })}{" "}
             {bestRun &&
               bestRun.lessThanOrEqualTo(resetResetLayerConfig.bestRunLimit) && (
                 <span

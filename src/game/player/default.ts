@@ -17,7 +17,7 @@ export function getDefaultPlayer(): Player {
 
     hideBoughtUpgrades: false,
     stableProgressBars: true,
-    exponentialNotation: false,
+    numberNotation: "standard",
     autosave: true,
     saveBeforeUnload: true,
     offlineProgressWorks: true,

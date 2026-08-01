@@ -92,7 +92,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
               <>
                 <br />
                 {bestRun} sofcapped after{" "}
-                {formatTime("1e-30", { exponentialPrecision: 0 })} (power 0.25)
+                {formatTime("1e-30", { scientificPrecision: 0 })} (power 0.25)
               </>
             )}
           </Caption>

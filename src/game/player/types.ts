@@ -9,6 +9,7 @@ import type Decimal from "break_eternity.js";
 import type { CachedPlayer } from "./cached/types";
 import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
 import type { PlayerSetterName, PlayerState } from "./store/types";
+import { NumberNotation } from "@core/format/types";
 
 export interface Player {
   gameVersion: GameVersion;
@@ -18,7 +19,7 @@ export interface Player {
 
   hideBoughtUpgrades: boolean;
   stableProgressBars: boolean;
-  exponentialNotation: boolean;
+  numberNotation: NumberNotation;
   autosave: boolean;
   saveBeforeUnload: boolean;
   offlineProgressWorks: boolean;
@@ -103,15 +104,10 @@ export type UsePlayerFieldsReturn<
 > = PickByKeys<Player, KP> & PickByKeys<CachedPlayer, KC> & PickSetters<S>;
 
 export type PlayerLike =
-  | Player
-  | PartialPlayer
-  | PartialMergedPlayer
-  | PlayerState
-  | undefined;
+  Player | PartialPlayer | PartialMergedPlayer | PlayerState | undefined;
 
 export type ValueGetter<T, P extends unknown[] = []> =
-  | T
-  | ((mergedPlayer: MergedPlayer, ...args: P) => T);
+  T | ((mergedPlayer: MergedPlayer, ...args: P) => T);
 export type BooleanGetter = ValueGetter<boolean>;
 
 export type MinifiedPlayer = (Player[keyof Player] | null)[];

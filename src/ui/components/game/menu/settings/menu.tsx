@@ -1,6 +1,4 @@
 import type { CSSProperties } from "react";
-import { formatNumber } from "@core/format/number";
-import { exponentialNotationSettingStartsWorkingAt } from "@core/format/units";
 import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";
 import { togglePlayerField } from "@game/player/utils";
@@ -13,6 +11,9 @@ import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useState } from "react";
 import Overlay from "../overlay";
+import { NumberNotation } from "@core/format/types";
+import Select from "@ui/components/base/Select";
+import { getPlayerState } from "@game/player/store";
 
 const SettingsMenu = () => {
   const { open } = useMenu();
@@ -21,7 +22,7 @@ const SettingsMenu = () => {
     player: [
       "autosave",
       "hideBoughtUpgrades",
-      "exponentialNotation",
+      "numberNotation",
       "saveBeforeUnload",
       "stableProgressBars",
       "offlineProgressWorks",
@@ -37,7 +38,11 @@ const SettingsMenu = () => {
 
   useEffect(() => {
     if (saveState === "idle") return;
-    const t = setTimeout(setSaveState, SAVE_BUTTON_TRANSITION_DURATION, saveState === "saving" ? "returning" : "idle");
+    const t = setTimeout(
+      setSaveState,
+      SAVE_BUTTON_TRANSITION_DURATION,
+      saveState === "saving" ? "returning" : "idle",
+    );
     return () => clearTimeout(t);
   }, [saveState]);
 
@@ -120,7 +125,25 @@ const SettingsMenu = () => {
             <StatusText active={state.hideBoughtUpgrades} />
           </span>
         </Button>
-        <Button
+        <Select<NumberNotation>
+          id="number-notation-select"
+          label="Number Notation"
+          onChange={(e) => {
+            const value = e.target.value as NumberNotation;
+
+            const { setPlayer } = getPlayerState();
+            setPlayer({
+              numberNotation: value,
+            });
+          }}
+          value={state.numberNotation}
+          options={[
+            { value: "standard", label: "Standard" },
+            { value: "legacy", label: "Legacy" },
+            { value: "scientific", label: "Scientific" },
+          ]}
+        />
+        {/* <Button
           variant="menu"
           aria-label="Toggle exponential notation"
           onClick={() => togglePlayerField("exponentialNotation")}
@@ -133,7 +156,7 @@ const SettingsMenu = () => {
             Still doesn't work for numbers less than{" "}
             {formatNumber(exponentialNotationSettingStartsWorkingAt)}
           </Tooltip>
-        </Button>
+        </Button> */}
         <Button
           variant="menu"
           aria-label="Toggle stable progress bars"

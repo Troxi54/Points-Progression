@@ -178,6 +178,18 @@ const conversionData: Data = {
     applyResetLayerPlayerData(player, "mallirt", {
       resetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
+  numberNotation: (_, value) => {
+    const newValue =
+      value === true ? "scientific" : value === false ? null : value;
+
+    console.log(newValue);
+
+    if (newValue === null) return;
+
+    return {
+      numberNotation: newValue,
+    };
+  },
 };
 
 export function migratePlayer<T extends Player>(player: T): Player {
