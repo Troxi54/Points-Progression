@@ -15,15 +15,11 @@ interface SelectProps<T extends Value> extends Omit<
 > {
   label?: string;
   options: SelectOption<T>[];
-  error?: string;
-  placeholder?: string;
 }
 
 function Select<T extends Value>({
   label,
   options,
-  error,
-  placeholder = "Select an option",
   className = "",
   id,
   disabled,

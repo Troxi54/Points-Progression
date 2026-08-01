@@ -127,7 +127,7 @@ const SettingsMenu = () => {
         </Button>
         <Select<NumberNotation>
           id="number-notation-select"
-          label="Number Notation"
+          label="Number notation"
           onChange={(e) => {
             const value = e.target.value as NumberNotation;
 
