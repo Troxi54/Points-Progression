@@ -76,7 +76,8 @@ function OfflineMenu() {
       </Paragraph>
       <ProgressBar
         progress={progress}
-        progressBarClassName="w-9/10 rounded-[0.5em] overflow-hidden"
+        containerClassName="w-9/10"
+        progressBarClassName="rounded-[0.5em]"
         progressFillClassName="bg-offline-bar"
       >
         Ticks: {offlineProgressTicksCompleted} / {offlineProgressTicksOnTrigger}{" "}

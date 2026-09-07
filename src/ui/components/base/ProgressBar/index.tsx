@@ -17,6 +17,7 @@ function ProgressBar({
   progress,
   children,
   mode,
+  containerClassName,
   progressBarClassName,
   progressFillClassName,
   backgroundClassName,
@@ -33,13 +34,7 @@ function ProgressBar({
   const processedProgress = clamp(progress, 0, 1);
 
   return (
-    <Container
-      role="progressbar"
-      aria-valuenow={processedProgress * 100}
-      aria-valuemin={0}
-      aria-valuemax={100}
-      className={cn("relative", progressBarClassName, bgClassName)}
-    >
+    <Container className={cn("relative w-full", containerClassName)}>
       <Paragraph className="z-1">
         {children}
         {labelParts?.map((part, index) => (
@@ -49,35 +44,46 @@ function ProgressBar({
           </Fragment>
         ))}
       </Paragraph>
-
-      {barMode === "static" ? (
-        <div
-          className={cn(
-            "absolute size-full origin-left",
-            progressFillClassName,
-          )}
-          style={{ transform: `scaleX(${processedProgress})` }}
-        />
-      ) : (
-        <div
-          className={cn(
-            "animated-gradient absolute size-full",
-            progressFillClassName,
-          )}
-          style={
-            {
-              animationDuration: fullBarOptions.animationDuration,
-              "--gradient-step": fullBarOptions.gradientStep,
-              "--gradient-angle": fullBarOptions.gradientAngle,
-            } as CSSProperties
-          }
-        >
+      <Container
+        role="progressbar"
+        aria-valuenow={processedProgress * 100}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        className={cn(
+          "absolute h-full w-full overflow-hidden",
+          progressBarClassName,
+          bgClassName,
+        )}
+      >
+        {barMode === "static" ? (
           <div
-            className={cn("absolute size-full origin-right", bgClassName)}
-            style={{ transform: `scaleX(${1 - processedProgress})` }}
+            className={cn(
+              "absolute size-full origin-left",
+              progressFillClassName,
+            )}
+            style={{ transform: `scaleX(${processedProgress})` }}
           />
-        </div>
-      )}
+        ) : (
+          <div
+            className={cn(
+              "animated-gradient absolute size-full",
+              progressFillClassName,
+            )}
+            style={
+              {
+                animationDuration: fullBarOptions.animationDuration,
+                "--gradient-step": fullBarOptions.gradientStep,
+                "--gradient-angle": fullBarOptions.gradientAngle,
+              } as CSSProperties
+            }
+          >
+            <div
+              className={cn("absolute size-full origin-right", bgClassName)}
+              style={{ transform: `scaleX(${1 - processedProgress})` }}
+            />
+          </div>
+        )}
+      </Container>
     </Container>
   );
 }

@@ -572,7 +572,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
         3.5
         <Pow>
           <Log>
-            (<Stat>points</Stat> {symbols.plus} <Stat>point gain</Stat>){" "}
+            (<Stat>dertoints</Stat> {symbols.plus} <Stat>dertoint gain</Stat>){" "}
             {symbols.divide} {formatNumber(cappergyConfig.startEarningAt)}
           </Log>
         </Pow>

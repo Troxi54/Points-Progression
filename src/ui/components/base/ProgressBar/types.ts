@@ -10,6 +10,7 @@ export interface AnimatedBarOptions {
 
 export interface ProgressBarProps {
   mode?: "static" | "animated";
+  containerClassName?: ClassName;
   progressBarClassName?: ClassName;
   progressFillClassName?: ClassName;
   backgroundClassName?: ClassName;
