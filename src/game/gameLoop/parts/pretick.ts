@@ -6,14 +6,14 @@ import { mergePlayer } from "@game/player/merged/utils";
 import { getPlayerState } from "@game/player/store";
 import { createGameLoopPartState } from "../utils/create";
 
-export default function gameLoopPreTick(currentTime: number) {
+export default function gameLoopPreTick() {
   const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
 
   const newPlayer = copyObject(player);
   const newCachedPlayer = copyObject(cachedPlayer);
 
   const mergedPlayer = mergePlayer(newPlayer, newCachedPlayer);
-  const partState = createGameLoopPartState(mergedPlayer, currentTime);
+  const partState = createGameLoopPartState(mergedPlayer);
 
   const { offlineProgress, offlineProgressFullTime } = newCachedPlayer;
 

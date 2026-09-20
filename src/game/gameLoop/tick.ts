@@ -1,14 +1,13 @@
-import { getCurrentTime } from "@core/utils/time";
 import { triggerOfflineProgress } from "@game/offline/utils/trigger";
 import gameLoopActions from "./parts/actions";
 import gameLoopUpdateCache from "./parts/cacheUpdates";
 import gameLoopPostTick from "./parts/posttick";
 import gameLoopPreTick from "./parts/pretick";
 
-export default function gameLoopTick(currentTime: number = getCurrentTime()) {
-  triggerOfflineProgress(currentTime);
+export default function gameLoopTick() {
+  triggerOfflineProgress();
 
-  const { partState, setMergedPlayer } = gameLoopPreTick(currentTime);
+  const { partState, setMergedPlayer } = gameLoopPreTick();
 
   gameLoopUpdateCache(partState);
   gameLoopActions(partState);

@@ -6,8 +6,9 @@ import { createMergedPlayerState } from "@game/player/merged/utils";
 
 export function createGameLoopPartState(
   mergedPlayer: MergedPlayer,
-  currentTime: number = getCurrentTime(),
 ): GameLoopPartState {
+  const currentTime = getCurrentTime();
+
   const { player, cachedPlayer } = mergedPlayer;
 
   const deltaTimeTPS = Math.max(currentTime - player.lastTick, 0);

@@ -4,9 +4,9 @@ import { getPlayerState } from "@game/player/store";
 import offlineConfig from "../config";
 import { calculateTicksForOfflineTime } from "./calculate";
 
-export function triggerOfflineProgress(
-  currentTime: number = getCurrentTime(),
-): void {
+export function triggerOfflineProgress(): void {
+  const currentTime = getCurrentTime();
+
   const { player, cachedPlayer, setCachedPlayer } = getPlayerState();
 
   const { lastTick, unspentOfflineTime } = player;
@@ -67,9 +67,9 @@ export function skipOfflineProgress(): void {
   });
 }
 
-export function handleVisibilityChangeOffline(
-  currentTime: number = getCurrentTime(),
-): void {
+export function handleVisibilityChangeOffline(): void {
+  const currentTime = getCurrentTime();
+
   const { player, setPlayer } = getPlayerState();
 
   const { lastTick, offlineOffset, offlineProgressWorks } = player;

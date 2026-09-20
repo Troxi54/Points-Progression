@@ -24,8 +24,18 @@ export function calculateTimeForRequirement(
     .max(0);
 }
 
-export function getCurrentTime(): number {
+export function getRealCurrentTime(): number {
   return performance.timeOrigin + performance.now();
+}
+
+let currentTime: number | null = null;
+
+export function getCurrentTime(): number {
+  return currentTime ?? updateCurrentTime();
+}
+
+export function updateCurrentTime(): number {
+  return (currentTime = getRealCurrentTime());
 }
 
 export function getCurrentGameTime(

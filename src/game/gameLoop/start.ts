@@ -1,11 +1,11 @@
-import { getCurrentTime } from "@core/utils/time";
+import { updateCurrentTime } from "@core/utils/time";
 import gameLoopTick from "./tick";
 
 const requestTick = () => requestAnimationFrame(tick);
 
 function tick() {
-  const currentTime = getCurrentTime();
-  gameLoopTick(currentTime);
+  updateCurrentTime();
+  gameLoopTick();
 
   requestTick();
 }
