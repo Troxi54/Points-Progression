@@ -30,6 +30,7 @@ export function getDefaultPlayer(): Player {
     },
 
     dimensionId: "normal",
+    enteredInfiniteMode: false,
 
     points: createDecimal(0),
     bestPoints: createDecimal(0),

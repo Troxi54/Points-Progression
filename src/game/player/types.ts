@@ -30,6 +30,7 @@ export interface Player {
   resetLayers: Partial<Record<ResetLayerId, PartialResetLayerPlayerData>>;
 
   dimensionId: DimensionId;
+  enteredInfiniteMode: boolean;
 
   points: Decimal;
   bestPoints: Decimal;

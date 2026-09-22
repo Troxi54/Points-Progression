@@ -8,6 +8,7 @@ import SettingsButton from "./settings";
 import ExportMenu from "./settings/export";
 import ImportMenu from "./settings/import";
 import SettingsMenu from "./settings/menu";
+import InfiniteModeButton from "./infiniteMode";
 
 function Menu() {
   return (
@@ -27,6 +28,8 @@ function Menu() {
 
           <ImportMenu />
           <ExportMenu />
+
+          <InfiniteModeButton />
         </nav>
       </Container>
       <OfflineMenu />

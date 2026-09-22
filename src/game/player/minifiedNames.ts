@@ -68,6 +68,7 @@ export const minifiedPlayerMap = createUniqueObject({
   antiPoints: 59,
   beneflux: 60,
   everLeftAntinefit: 61,
+  enteredInfiniteMode: 62,
 } as const satisfies Record<keyof Player, number>);
 
 export type MinifiedPlayerMap = typeof minifiedPlayerMap;

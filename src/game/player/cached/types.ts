@@ -29,6 +29,8 @@ export interface CachedPlayer {
   offlineProgressStartedDate: number | null;
   offlineProgressLastTick: number;
 
+  infiniteModeUnlocked: boolean;
+
   runEffect: Decimal;
   runDertointEffect: Decimal;
   bestPointsOfRunEffect: Decimal;

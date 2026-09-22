@@ -32,6 +32,8 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     offlineProgressStartedDate: null,
     offlineProgressLastTick: currentTime,
 
+    infiniteModeUnlocked: false,
+
     runEffect: createDecimal(1),
     runDertointEffect: createDecimal(1),
     bestPointsOfRunEffect: createDecimal(1),
