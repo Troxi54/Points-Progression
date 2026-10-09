@@ -12,7 +12,6 @@ import createDecimal, {
   decimalIsGreaterByOoM,
   isDecimal,
 } from "@core/utils/decimal";
-import { isNil } from "@core/utils/nil";
 import { mergeObjects } from "@core/utils/object";
 import { getPlayerState } from "@game/player/store";
 import symbols from "@ui/symbols";
@@ -274,7 +273,7 @@ export function parseNumberFormat(
   num: DecimalSource,
   formatType?: FormatNumberType,
 ): string {
-  if (isNil(formatType) || formatType === "default") return formatNumber(num);
+  if (formatType == null || formatType === "default") return formatNumber(num);
 
   return {
     integer: integerFormat(num),

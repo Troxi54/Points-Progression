@@ -1,4 +1,3 @@
-import type { Nil } from "@core/types/primitives";
 import type { ValueGetter } from "@game/player/types";
 import type { ResetLayerId } from "@game/resetLayers/types";
 import type Decimal from "break_eternity.js";
@@ -6,7 +5,6 @@ import type { ReactNode } from "react";
 import type { ProgressBarProps } from "../base/ProgressBar/types";
 import { formatWithPlural } from "@core/format/plural";
 import { formatLeftTime } from "@core/format/time";
-import { isNil } from "@core/utils/nil";
 import { mergeObjects } from "@core/utils/object";
 import { calculateProgress } from "@core/utils/progress";
 import { calculateTimeForRequirement } from "@core/utils/time";
@@ -26,7 +24,7 @@ import progressBarConfig from "../base/ProgressBar/config";
 interface Props extends Omit<ProgressBarProps, "labelParts"> {
   resetLayerId: ResetLayerId;
   customProgress?: ValueGetter<number, [Decimal]>;
-  labelParts?: ValueGetter<ReactNode[] | Nil, [boolean]>;
+  labelParts?: ValueGetter<ReactNode[] | null | undefined, [boolean]>;
 }
 
 function ResetLayerProgressBar({
@@ -91,7 +89,7 @@ function ResetLayerProgressBar({
 
   const parsedLabelParts = parseValueGetter(labelParts, mergedPlayer, isLocked);
   const labelPartCondition =
-    everPerformed && !isNil(parsedLabelParts) && parsedLabelParts.length > 0;
+    everPerformed && parsedLabelParts != null && parsedLabelParts.length > 0;
 
   return (
     <ProgressBar

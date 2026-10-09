@@ -1,4 +1,3 @@
-import type { Nil } from "@core/types/primitives";
 import type { ClassName } from "@core/types/react";
 import type { ReactNode } from "react";
 
@@ -15,5 +14,5 @@ export interface ProgressBarProps {
   progressFillClassName?: ClassName;
   backgroundClassName?: ClassName;
   animatedBarOptions?: Partial<AnimatedBarOptions>;
-  labelParts?: ReactNode[] | Nil;
+  labelParts?: ReactNode[] | null | undefined;
 }

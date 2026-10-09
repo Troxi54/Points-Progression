@@ -1,7 +1,6 @@
 import type { MinifiedPlayer, PartialPlayer, Player } from "@game/player/types";
 import { setWithFill } from "@core/utils/array";
 import { isDecimal } from "@core/utils/decimal";
-import { isNil } from "@core/utils/nil";
 import {
   objectEntries,
   objectFromEntries,
@@ -75,6 +74,6 @@ export function unminifyPlayer(minified: MinifiedPlayer): PartialPlayer {
           return [key, value];
         },
       )
-      .filter((value) => !isNil(value)),
+      .filter((value) => value != null),
   ) as PartialPlayer;
 }

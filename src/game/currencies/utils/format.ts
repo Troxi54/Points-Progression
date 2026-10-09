@@ -1,12 +1,10 @@
 import type { EffectMode } from "@core/types/effect";
-import type { Nil } from "@core/types/primitives";
 import type { CachedPlayerLike } from "@game/player/cached/types";
 import type { DecimalSource } from "break_eternity.js";
 import type { ReactNode } from "react";
 import type { CurrencyId } from "../types";
 import { formatEffectOnCurrency } from "@core/format/effect";
 import { formatWithPlural } from "@core/format/plural";
-import { isNil } from "@core/utils/nil";
 import { isObject } from "@core/utils/object";
 import { capitalizeString } from "@core/utils/string";
 import pluralize, { plural } from "pluralize";
@@ -31,7 +29,7 @@ export function formatCurrencyNameEmptyless(currencyId: CurrencyId): string {
   const data = getCurrencyData(currencyId);
   const name = data?.name;
 
-  if (data === undefined || isNil(name)) {
+  if (data === undefined || name == null) {
     return capitalizeString(currencyId);
   }
 
@@ -56,7 +54,7 @@ export function formatCurrencyEffect(
   const data = getCurrencyData(currencyFrom);
   const { affects } = data;
 
-  let effectModeInCurrencyData: EffectMode | Nil = null;
+  let effectModeInCurrencyData: EffectMode | null | undefined = null;
   if (isObject(affects)) {
     effectModeInCurrencyData = affects[effectOn]?.mode;
   }

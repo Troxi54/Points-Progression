@@ -1,11 +1,9 @@
-import type { Nil } from "@core/types/primitives";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { DecimalSource } from "break_eternity.js";
 import type Decimal from "break_eternity.js";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
 import { getPlayerState } from "@game/player/store";
 import createDecimal from "./decimal";
-import { isNil } from "./nil";
 
 export function calculateTimeForRequirement(
   value: DecimalSource,
@@ -50,7 +48,7 @@ export function getCurrentGameTime(
   } = cachedPlayer;
   const { offlineOffset } = player;
 
-  if (!cachedPlayer.offlineProgress || isNil(offlineProgressStartedDate))
+  if (!cachedPlayer.offlineProgress || offlineProgressStartedDate == null)
     return currentTime - offlineOffset;
 
   if (!Number.isFinite(offlineProgressStartedDate)) {
@@ -80,17 +78,17 @@ export function checkElapsedTime(time: number | null): time is number {
 }
 
 export function fixTime(
-  time: number | Nil,
+  time: number | null | undefined,
   currentTime: number = getCurrentTime(),
 ): number | null {
-  if (isNil(time)) return null;
+  if (time == null) return null;
 
   return Math.min(currentTime, time);
 }
 
 export function fixGameTime(
   mergedPlayer: MergedPlayer,
-  time: number | Nil,
+  time: number | null | undefined,
   currentTime: number = getCurrentGameTime(mergedPlayer),
 ) {
   return fixTime(time, currentTime);
