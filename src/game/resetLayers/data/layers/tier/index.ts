@@ -6,7 +6,6 @@ import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
-import { applyUpgradesById } from "@game/upgrades/utils/apply";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 
@@ -52,10 +51,6 @@ const tierResetLayer = defineResetLayer<"normal">({
         bestPointsOfRun: defaultPlayer.bestPointsOfRun,
         ...applyResetLayerPlayerData(player, "reset", {
           autoEnabled: !hasTier_3,
-        }),
-        ...applyUpgradesById(player, {
-          reset_1: hasUpgradeById(player, "tier_1"),
-          reset_2: hasUpgradeById(player, "tier_2"),
         }),
       },
     };

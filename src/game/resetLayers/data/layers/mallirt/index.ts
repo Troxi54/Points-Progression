@@ -3,8 +3,6 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
-import { applyUpgradesById } from "@game/upgrades/utils/apply";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const mallirtResetLayer = defineResetLayer<"sliph">({
   id: "mallirt",
@@ -18,11 +16,8 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
       "dertoints",
     ),
   }),
-  reset: ({ player }, defaultMergedPlayer) => {
+  reset: (_, defaultMergedPlayer) => {
     const defaultPlayer = defaultMergedPlayer.player;
-
-    const hasMallirt_1 = hasUpgradeById(player, "mallirt_1");
-    const hasMallirt_2 = hasUpgradeById(player, "mallirt_2");
 
     return {
       player: {
@@ -30,12 +25,6 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
         repeatableUpgrades: {
           dertoint: getRepeatableUpgradeLevel(defaultMergedPlayer, "dertoint"),
         },
-        ...applyUpgradesById(player, {
-          dertoint_1: hasMallirt_1,
-          dertoint_2: hasMallirt_1,
-          dertoint_3: hasMallirt_2,
-          dertoint_4: hasMallirt_2,
-        }),
         cappergy: defaultPlayer.cappergy,
       },
     };

@@ -3,20 +3,13 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import formulas from "@game/formulas/data";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
-import { applyUpgradesById } from "@game/upgrades/utils/apply";
-import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const xagyrosResetLayer = defineResetLayer<"sliph">({
   id: "xagyros",
   goal: createDecimal("1e204"),
   currency: "dertoints",
-  reset: ({ player }, defaultMergedPlayer) => {
+  reset: (_, defaultMergedPlayer) => {
     const defaultPlayer = defaultMergedPlayer.player;
-
-    const hasXagyros_1 = hasUpgradeById(player, "xagyros_1");
-    const hasXagyros_2 = hasUpgradeById(player, "xagyros_2");
-    const hasXagyros_3 = hasUpgradeById(player, "xagyros_3");
-    const hasXagyros_4 = hasUpgradeById(player, "xagyros_4");
 
     return {
       player: {
@@ -29,22 +22,6 @@ const xagyrosResetLayer = defineResetLayer<"sliph">({
             "amplivoid",
           ),
         },
-        ...applyUpgradesById(player, {
-          dertoint_1: hasXagyros_1,
-          dertoint_2: hasXagyros_1,
-          dertoint_3: hasXagyros_1,
-          dertoint_4: hasXagyros_1,
-          mallirt_1: hasXagyros_1,
-          mallirt_2: hasXagyros_1,
-          mallirt_3: hasXagyros_1,
-          mallirt_4: hasXagyros_1,
-          level_1: hasXagyros_2,
-          level_2: hasXagyros_2,
-          level_3: hasXagyros_3,
-          level_4: hasXagyros_3,
-          level_5: hasXagyros_4,
-          level_6: hasXagyros_4,
-        }),
       },
     };
   },

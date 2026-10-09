@@ -11,6 +11,7 @@ import {
   objectFromEntries,
 } from "@core/utils/object";
 import { hasUpgrade } from "@game/upgrades/utils/has";
+import { applyResetLayerUpgradeReset } from "@game/upgrades/utils/reset";
 import getDefaultResetLayerData from "../default";
 import { applyResetLayerPlayerData } from "./apply";
 
@@ -58,13 +59,12 @@ export function createResetLayer(
 
     newPlayer = mergeObjects(newPlayer, appliedData);
 
-    const result = {
-      ...existingResetValue,
-      player: newPlayer,
-    };
-
     const upgrades = newPlayer.upgrades;
-    if (!upgrades) return result;
+    if (!upgrades)
+      return {
+        ...existingResetValue,
+        player: newPlayer,
+      };
 
     const newUpgrades: typeof newPlayer.upgrades = {};
 
@@ -79,12 +79,21 @@ export function createResetLayer(
     }
 
     newPlayer.upgrades = newUpgrades;
+    const resetUpgrades = applyResetLayerUpgradeReset(
+      newPlayer,
+      sourceMergedPlayer.player,
+      resetLayerId,
+    );
+    newPlayer = mergeObjects(newPlayer, resetUpgrades);
     newPlayer.repeatableUpgrades = mergeObjects(
       mergedPlayer.player.repeatableUpgrades,
       newPlayer.repeatableUpgrades,
     );
 
-    return result;
+    return {
+      ...existingResetValue,
+      player: newPlayer,
+    };
   };
 
   return newResetLayer;

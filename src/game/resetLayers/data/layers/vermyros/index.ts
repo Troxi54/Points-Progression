@@ -7,7 +7,6 @@ import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
-import { applyUpgradesById } from "@game/upgrades/utils/apply";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const vermyrosResetLayer = defineResetLayer<"normal">({
@@ -37,16 +36,6 @@ const vermyrosResetLayer = defineResetLayer<"normal">({
             "ampliflux",
           ),
         },
-        ...applyUpgradesById(player, {
-          reset_1: hasVermyros_2,
-          reset_2: hasVermyros_2,
-          tier_1: hasVermyros_2,
-          tier_2: hasVermyros_2,
-          tier_3: hasVermyros_3,
-          tier_4: hasVermyros_3,
-          tier_5: hasVermyros_3,
-          tier_6: hasVermyros_3,
-        }),
         ...applyResetLayerPlayerData(player, "reset", {
           autoEnabled: !hasVermyros_3,
         }),
