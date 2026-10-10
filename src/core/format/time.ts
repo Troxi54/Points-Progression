@@ -81,7 +81,7 @@ export function formatLeftTime(
   formatOptions?: PartialFormatNumberOptions,
 ): string {
   milliseconds = createDecimal(milliseconds);
-  if (milliseconds.lessThanOrEqualTo(0)) return "Ready";
+  if (milliseconds.lessThan(1)) return "Ready";
   if (milliseconds.greaterThanOrEqualTo("e25") || milliseconds.isNan())
     return "Never";
   return formatTime(milliseconds, formatOptions);
