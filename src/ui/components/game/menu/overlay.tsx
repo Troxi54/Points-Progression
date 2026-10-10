@@ -56,15 +56,19 @@ function Overlay({
   });
 
   useEffect(() => {
+    let firstFrame = 0;
+    let secondFrame = 0;
+    let timeout = 0;
+
     if (currentlyOpen) {
       previouslyFocusedRef.current = document.activeElement as HTMLElement;
 
       setShouldRender(true);
 
-      requestAnimationFrame(() => {
+      firstFrame = requestAnimationFrame(() => {
         setVisible(true);
 
-        requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => {
           onOpenEvent();
         });
       });
@@ -72,16 +76,18 @@ function Overlay({
       setVisible(false);
       onCloseEvent();
 
-      const timeout = setTimeout(() => {
+      timeout = window.setTimeout(() => {
         setShouldRender(false);
 
-        if (previouslyFocusedRef.current) {
-          previouslyFocusedRef.current.focus();
-        }
+        previouslyFocusedRef.current?.focus();
       }, TRANSITION_TIME);
-
-      return clearTimeout(timeout);
     }
+
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      clearTimeout(timeout);
+    };
   }, [currentlyOpen]);
 
   const onPointerDown = useEffectEvent((e: PointerEvent) => {

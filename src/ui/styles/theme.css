@@ -47,6 +47,8 @@
   --color-tooltip-bg: #111111;
   --color-tooltip-trigger: #181818;
   --color-spoiler-bg: #202020;
+  --color-spoiler-bg-hover: #2b2b2b;
+  --color-spoiler-reveal-bg: #46464671;
 
   --color-overlay-1: rgba(0, 0, 0, 1);
   --color-overlay-2: rgba(0, 0, 0, 0.5);
