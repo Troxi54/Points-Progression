@@ -25,7 +25,7 @@ const upgradeResetData: Record<UpgradeContainerId, UpgradeResetData> = {
   },
   nullith: {
     keepsByUpgrade: {
-      2: { reset: "all", tier: "all", vermyros: [1, 4] },
+      2: { reset: "all", tier: "all", vermyros: [1, 2, 3, 4] },
       3: { vermyros: [5, 6, 7, 8] },
       4: { vermyros: [9, 10] },
     },
