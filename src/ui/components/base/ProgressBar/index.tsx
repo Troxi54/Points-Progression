@@ -35,7 +35,7 @@ function ProgressBar({
 
   return (
     <Container className={cn("relative w-full", containerClassName)}>
-      <Paragraph className="z-1">
+      <Paragraph className="z-1 px-[0.5em]">
         {children}
         {labelParts?.map((part, index) => (
           <Fragment key={index}>
