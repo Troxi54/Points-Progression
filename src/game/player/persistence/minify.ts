@@ -26,7 +26,7 @@ export function minifyPlayer(player: Player): MinifiedPlayer {
     const defaultValue = defaultPlayer[key];
 
     if (requiredPlayerProps.has(key)) {
-      result[index] = value;
+      setWithFill(result, index, value, "");
       continue;
     }
 

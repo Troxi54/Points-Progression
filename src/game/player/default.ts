@@ -102,4 +102,7 @@ export function getDefaultResetLayerPlayerData(): ResetLayerPlayerData {
   };
 }
 
-export const requiredPlayerProps = new Set<keyof Player>(["gameVersion"]);
+export const requiredPlayerProps = new Set<keyof Player>([
+  "gameVersion",
+  "lastTick",
+]);
