@@ -1,6 +1,6 @@
 import cn from "@core/utils/tailwind";
 import { ComponentProps, useId } from "react";
-import ChevronDown from "./icons/ChevronDown";
+import ChevronDownIcon from "./icons/ChevronDown";
 
 type Value = string;
 
@@ -41,7 +41,7 @@ function Select<T extends Value>({
 
       <div className="relative w-full">
         <div className="pointer-events-none absolute top-1/2 right-[0.425em] -translate-y-1/2">
-          <ChevronDown className="w-[1.5em]" />
+          <ChevronDownIcon className="w-[1.5em]" />
         </div>
         <select
           id={selectId}

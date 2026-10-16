@@ -1,6 +1,5 @@
-import infoIcon from "@ui/assets/info.svg";
 import Button from "@ui/components/base/Button";
-import Image from "@ui/components/base/Image";
+import InfoIcon from "@ui/components/base/icons/Info";
 import { useMenu } from "@ui/hooks/useMenu";
 
 const InfoButton = () => {
@@ -15,7 +14,7 @@ const InfoButton = () => {
       aria-expanded={isOpen("info")}
       aria-controls="info"
     >
-      <Image src={infoIcon} alt="" className="h-6/11" />
+      <InfoIcon className="size-7/10" />
     </Button>
   );
 };

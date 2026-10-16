@@ -1,6 +1,5 @@
-import settingsIcon from "@ui/assets/settings.svg";
 import Button from "@ui/components/base/Button";
-import Image from "@ui/components/base/Image";
+import SettingsIcon from "@ui/components/base/icons/Settings";
 import { useMenu } from "@ui/hooks/useMenu";
 
 const SettingsButton = () => {
@@ -15,7 +14,7 @@ const SettingsButton = () => {
       aria-expanded={isOpen("settings")}
       aria-controls="settings"
     >
-      <Image src={settingsIcon} alt="Settings" className="h-9/10" />
+      <SettingsIcon className="size-7/10" />
     </Button>
   );
 };
