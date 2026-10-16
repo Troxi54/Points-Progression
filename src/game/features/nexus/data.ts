@@ -23,7 +23,7 @@ const nexusMilestones = createNexusMilestoneContainer([
   },
   {
     cost: 2.745e11,
-    description: "Unlocks a Ampliflux boost for Tier Resets",
+    description: "Unlocks an Ampliflux boost for Tier Resets",
   },
   {
     cost: 5.365e12,
@@ -39,15 +39,15 @@ const nexusMilestones = createNexusMilestoneContainer([
   },
   {
     cost: 2.99e21,
-    description: "Unlocks a Amplivault boost for Amplivoid",
+    description: "Unlocks an Amplivault boost for Amplivoid",
   },
   {
     cost: 1.435e23,
-    description: "Unlocks a Energy Reactor boost for Cores",
+    description: "Unlocks an Energy Reactor boost for Cores",
   },
   {
     cost: 8.05e25,
-    description: "Unlocks a Energy boost for Xagora",
+    description: "Unlocks an Energy boost for Xagora",
   },
   {
     cost: 1.39e29,
