@@ -1,6 +1,6 @@
-import { createUpgradeDataContainer } from "../utils/create";
+import { createUpgradeContainerConfig } from "../utils/create";
 
-const xagyrosUpgrades = createUpgradeDataContainer({
+const xagyrosUpgrades = createUpgradeContainerConfig({
   id: "xagyros",
   dimensionId: "sliph",
   currency: "dertoints",

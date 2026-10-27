@@ -2,7 +2,7 @@ import type { PlayerLike } from "@game/player/types";
 import type {
   UpgradeCollection,
   UpgradeContainerId,
-  UpgradeData,
+  UpgradeConfig,
   UpgradeId,
   UpgradesFlags,
 } from "@game/upgrades/types";
@@ -105,11 +105,11 @@ export function hasPreviousUpgrade(
   playerLike: PlayerLike,
   containerId: UpgradeContainerId,
   upgradeNumber: number,
-  upgradeData: UpgradeData,
+  upgradeConfig: UpgradeConfig,
 ) {
   const player = parsePlayerLike(playerLike);
 
-  const { previousUpgradeId } = upgradeData;
+  const { previousUpgradeId } = upgradeConfig;
   if (upgradeNumber > 1 && !previousUpgradeId) {
     return hasUpgrade(player, containerId, upgradeNumber - 1);
   } else if (previousUpgradeId) {

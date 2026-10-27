@@ -1,11 +1,11 @@
 import type { UpgradeContainerId } from "@game/upgrades/types";
-import { UpgradeResetData } from "./resetTypes";
+import { UpgradeResetConfig } from "./resetTypes";
 
 /**
  * Reset behaviour is kept separate from UI upgrade definitions so reset code
  * can use it without importing upgrade containers and creating a module cycle.
  */
-const upgradeResetData: Record<UpgradeContainerId, UpgradeResetData> = {
+const upgradeResetData: Record<UpgradeContainerId, UpgradeResetConfig> = {
   reset: {
     resetsOn: "tier",
   },

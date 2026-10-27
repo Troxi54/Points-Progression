@@ -1,14 +1,14 @@
 import type {
-  BuiltUpgradeDataContainer,
-  UpgradeDataContainer,
+  BuiltUpgradeContainerConfig,
+  UpgradeContainerConfig,
 } from "@game/upgrades/types";
 import createDecimal from "@core/utils/decimal";
 
-export function createUpgradeDataContainer(
-  upgradeContainer: UpgradeDataContainer,
-): BuiltUpgradeDataContainer {
+export function createUpgradeContainerConfig(
+  upgradeContainer: UpgradeContainerConfig,
+): BuiltUpgradeContainerConfig {
   upgradeContainer.upgrades.forEach((upgrade) => {
     upgrade.cost = createDecimal(upgrade.cost);
   });
-  return upgradeContainer as BuiltUpgradeDataContainer;
+  return upgradeContainer as BuiltUpgradeContainerConfig;
 }

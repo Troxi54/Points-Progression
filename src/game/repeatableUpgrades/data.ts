@@ -1,4 +1,4 @@
-import type { FlatRepeatableUpgradeContainer } from "./types";
+import type { FlatRepeatableUpgradeContainerConfig } from "./types";
 import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
 import { objectEntries } from "@core/utils/object";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
@@ -92,7 +92,8 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
 
 export default repeatableUpgrades;
 
-export const flatRepeatableUpgrades = {} as FlatRepeatableUpgradeContainer;
+export const flatRepeatableUpgrades =
+  {} as FlatRepeatableUpgradeContainerConfig;
 
 function buildFlatRepeatableUpgrades() {
   for (const container of Object.values(repeatableUpgrades)) {

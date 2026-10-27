@@ -13,7 +13,7 @@ export interface RepeatableUpgradeIds {
 export type RepeatableUpgradeId =
   RepeatableUpgradeIds[keyof RepeatableUpgradeIds];
 
-export interface RepeatableUpgrade {
+export interface RepeatableUpgradeConfig {
   condition: BooleanGetter;
   startCost: Decimal;
   costScaling: Decimal;
@@ -25,23 +25,29 @@ export interface RepeatableUpgrade {
   autobuy: BooleanGetter;
 }
 
-export type PartialRepeatableUpgrade = Partial<RepeatableUpgrade>;
+export type PartialRepeatableUpgradeConfig = Partial<RepeatableUpgradeConfig>;
 
-export interface FullRepeatableUpgrade extends RepeatableUpgrade {
+export interface FullRepeatableUpgradeConfig extends RepeatableUpgradeConfig {
   dimensionId: DimensionId;
 }
 
-export type RepeatableUpgradeContainer = {
-  [T in DimensionId]: Record<RepeatableUpgradeIds[T], FullRepeatableUpgrade>;
+export type RepeatableUpgradeContainerConfig = {
+  [T in DimensionId]: Record<
+    RepeatableUpgradeIds[T],
+    FullRepeatableUpgradeConfig
+  >;
 };
 
-export type PartialRepeatableUpgradeContainer = {
-  [T in DimensionId]: Record<RepeatableUpgradeIds[T], PartialRepeatableUpgrade>;
+export type PartialRepeatableUpgradeContainerConfig = {
+  [T in DimensionId]: Record<
+    RepeatableUpgradeIds[T],
+    PartialRepeatableUpgradeConfig
+  >;
 };
 
-export type FlatRepeatableUpgradeContainer = Record<
+export type FlatRepeatableUpgradeContainerConfig = Record<
   RepeatableUpgradeId,
-  FullRepeatableUpgrade
+  FullRepeatableUpgradeConfig
 >;
 
 export type RepeatableUpgradeSelector<

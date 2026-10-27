@@ -1,10 +1,10 @@
 import { formatBestRunTime } from "@core/format/time";
 import formulas from "@game/formulas/data";
 import { everPerformed } from "@game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 import { hasOneOfUpgrades } from "@game/upgrades/utils/has";
 
-const tierUpgrades = createUpgradeDataContainer({
+const tierUpgrades = createUpgradeContainerConfig({
   id: "tier",
   playerSelector: ({ mergedPlayer }) => ({
     everPerformedVermyros: everPerformed(mergedPlayer, "vermyros"),

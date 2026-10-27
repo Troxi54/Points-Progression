@@ -1,8 +1,8 @@
 import { everPerformed } from "@game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 import { hasUpgrade } from "@game/upgrades/utils/has";
 
-const vermyrosUpgrades = createUpgradeDataContainer({
+const vermyrosUpgrades = createUpgradeContainerConfig({
   id: "vermyros",
   playerSelector: ({ mergedPlayer }) => ({
     everPerformedNullith: everPerformed(mergedPlayer, "nullith"),

@@ -6,13 +6,13 @@ import type {
 import type { PartialPlayer } from "@game/player/types";
 import { parseValueGetter } from "@game/player/utils";
 import type Decimal from "break_eternity.js";
-import type { RepeatableUpgradeId, RepeatableUpgrade } from "../types";
+import type { RepeatableUpgradeId, RepeatableUpgradeConfig } from "../types";
 import {
   calculateRepeatableUpgradeCost,
   calculateRepeatableUpgradeBulkWithMax,
   getRepeatableUpgradeBulkCostAndLevel,
 } from "./calculate";
-import { getRepeatableUpgradeData, getRepeatableUpgradeLevel } from "./get";
+import { getRepeatableUpgradeConfig, getRepeatableUpgradeLevel } from "./get";
 import { setRepeatableUpgradeLevel } from "./set";
 import { updateCachedRepeatableUpgrade } from "./update";
 import createDecimal from "@core/utils/decimal";
@@ -20,37 +20,40 @@ import createDecimal from "@core/utils/decimal";
 export function buyRepeatableUpgradeWithBulk(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal,
+  bulkFormula: (repeatableUpgradeConfig: RepeatableUpgradeConfig) => Decimal,
 ): PartialPlayer | undefined {
-  const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
+  const upgradeConfig = getRepeatableUpgradeConfig(repeatableUpgradeId);
 
   const { player } = mergedPlayer;
 
   const dimensionWorks = shouldDimensionWork(
     mergedPlayer,
-    upgradeData.dimensionId,
+    upgradeConfig.dimensionId,
   );
   if (!dimensionWorks) return;
 
   const upgradeCondition = parseValueGetter(
-    upgradeData.condition,
+    upgradeConfig.condition,
     mergedPlayer,
   );
   if (!upgradeCondition) return;
 
-  const { currency } = upgradeData;
+  const { currency } = upgradeConfig;
   const currencyValue = mergedPlayer.player[currency];
 
   const currentLevel = getRepeatableUpgradeLevel(player, repeatableUpgradeId);
-  const currentCost = calculateRepeatableUpgradeCost(upgradeData, currentLevel);
+  const currentCost = calculateRepeatableUpgradeCost(
+    upgradeConfig,
+    currentLevel,
+  );
   const hasEnoughCurrency = currencyValue.greaterThanOrEqualTo(currentCost);
 
   if (!hasEnoughCurrency) return;
 
-  const bulkFromFormula = bulkFormula(upgradeData);
+  const bulkFromFormula = bulkFormula(upgradeConfig);
   const bulk = calculateRepeatableUpgradeBulkWithMax(
     mergedPlayer,
-    upgradeData,
+    upgradeConfig,
     currentLevel,
     bulkFromFormula,
   );
@@ -59,7 +62,7 @@ export function buyRepeatableUpgradeWithBulk(
 
   const newLevel = currentLevel.plus(bulk);
   const costWithBulk = calculateRepeatableUpgradeCost(
-    upgradeData,
+    upgradeConfig,
     newLevel.minus(1),
   );
   const hasEnoughCurrencyWithBulk =
@@ -68,7 +71,7 @@ export function buyRepeatableUpgradeWithBulk(
   if (!hasEnoughCurrencyWithBulk) return;
 
   const spendCurrency = parseValueGetter(
-    upgradeData.spendCurrency,
+    upgradeConfig.spendCurrency,
     mergedPlayer,
   );
 
@@ -81,7 +84,7 @@ export function buyRepeatableUpgradeWithBulk(
 export function buyRepeatableUpgradeWithBulkAndUpdates(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeData: RepeatableUpgrade) => Decimal,
+  bulkFormula: (repeatableUpgradeConfig: RepeatableUpgradeConfig) => Decimal,
 ): PartialMergedPlayer {
   const purchased = buyRepeatableUpgradeWithBulk(
     mergedPlayer,

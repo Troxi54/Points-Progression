@@ -1,7 +1,7 @@
 import { everPerformed } from "@game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 
-const levelUpgrades = createUpgradeDataContainer({
+const levelUpgrades = createUpgradeContainerConfig({
   id: "level",
   dimensionId: "sliph",
   currency: "mallirtTotalDertoints",

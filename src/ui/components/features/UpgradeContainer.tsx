@@ -1,12 +1,12 @@
 import type { ClassName } from "@core/types/react";
-import type { UpgradeDataContainer } from "@game/upgrades/types";
+import type { UpgradeContainerConfig } from "@game/upgrades/types";
 import cn from "@core/utils/tailwind";
 import Container from "../base/Container";
 import Upgrade from "./Upgrade";
 
 interface props {
   id?: string;
-  upgradeContainer: UpgradeDataContainer;
+  upgradeContainer: UpgradeContainerConfig;
   className?: ClassName;
   start?: number;
   end?: number;
@@ -33,8 +33,8 @@ function UpgradeContainer({
         return (
           <Upgrade
             key={upgrade.id}
-            upgradeData={upgrade}
-            upgradeContainerData={upgradeContainer}
+            config={upgrade}
+            containerConfig={upgradeContainer}
             upgradeNumber={upgradeNumber}
           />
         );

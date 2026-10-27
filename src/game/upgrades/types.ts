@@ -21,7 +21,7 @@ export type UpgradeId<
   N extends number = number,
 > = `${C}_${N}`;
 
-export interface UpgradeData {
+export interface UpgradeConfig {
   id: UpgradeId;
   previousUpgradeId?: UpgradeId;
   /**
@@ -43,11 +43,11 @@ export interface UpgradeData {
   forceShow?: BooleanGetter;
 }
 
-export interface BuiltUpgradeData extends UpgradeData {
+export interface BuiltUpgradeConfig extends UpgradeConfig {
   cost: Decimal;
 }
 
-export interface UpgradeDataContainer {
+export interface UpgradeContainerConfig {
   id: UpgradeContainerId;
   dimensionId?: DimensionId;
   name?: string | "auto" | ((state: MergedPlayer) => string);
@@ -55,19 +55,21 @@ export interface UpgradeDataContainer {
   spendCurrency?: BooleanGetter;
   currency?: CurrencyId;
   forceShow?: BooleanGetter;
-  upgrades: UpgradeData[];
+  upgrades: UpgradeConfig[];
 }
 
-export interface BuiltUpgradeDataContainer extends UpgradeDataContainer {
-  upgrades: BuiltUpgradeData[];
+export interface BuiltUpgradeContainerConfig extends UpgradeContainerConfig {
+  upgrades: BuiltUpgradeConfig[];
 }
 
 export type UpgradeCollection = Partial<Record<UpgradeContainerId, number[]>>;
 
 export type UpgradesFlags<T extends UpgradeCollection> = {
-  [K in keyof T as T[K] extends readonly (infer N)[]
-    ? N extends number
-      ? `${K & string}_${N}`
+  [
+    K in keyof T as T[K] extends readonly (infer N)[]
+      ? N extends number
+        ? `${K & string}_${N}`
+        : never
       : never
-    : never]: boolean;
+  ]: boolean;
 };

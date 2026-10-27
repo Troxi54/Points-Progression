@@ -1,8 +1,8 @@
 import { everPerformed } from "@game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
-const mallirtUpgrades = createUpgradeDataContainer({
+const mallirtUpgrades = createUpgradeContainerConfig({
   id: "mallirt",
   dimensionId: "sliph",
   currency: "mallirtTotalDertoints",

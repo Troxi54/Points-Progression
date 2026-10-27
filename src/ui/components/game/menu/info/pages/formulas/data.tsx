@@ -4,7 +4,7 @@ import { formatNumber, integerCommaFormat } from "@core/format/number";
 import amplivaultConfig from "@game/features/amplivault/config";
 import cappergyConfig from "@game/features/cappergy/config";
 import nuxarConfig from "@game/features/nuxar/config";
-import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
+import { getRepeatableUpgradeConfig } from "@game/repeatableUpgrades/utils/get";
 import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Caption from "@ui/components/base/Caption";
@@ -21,11 +21,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: true,
     name: "Point Upgrade Cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("point");
+      const upgradeConfig = getRepeatableUpgradeConfig("point");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -180,11 +180,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       hasUpgradeById(player, "tier_4") || everPerformed(player, "vermyros"),
     name: "Ampliflux Upgrade cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("ampliflux");
+      const upgradeConfig = getRepeatableUpgradeConfig("ampliflux");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -255,10 +255,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
       hasUpgradeById(player, "vermyros_1") || everPerformed(player, "nullith"),
     name: "Vermyte Upgrade cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("vermyte");
+      const upgradeConfig = getRepeatableUpgradeConfig("vermyte");
       return (
         <>
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -359,11 +359,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => player.everMadeCoreReset,
     name: "Core Upgrade cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("core");
+      const upgradeConfig = getRepeatableUpgradeConfig("core");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -484,11 +484,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => player.everEnteredSliph,
     name: "Dertoint Upgrade cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("dertoint");
+      const upgradeConfig = getRepeatableUpgradeConfig("dertoint");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -745,11 +745,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => hasUpgradeById(player, "level_4"),
     name: "Amplivoid Upgrade cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("amplivoid");
+      const upgradeConfig = getRepeatableUpgradeConfig("amplivoid");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -1045,10 +1045,10 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => player.everLeftAntinefit,
     name: "Beneflux Upgrade Cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("beneflux");
+      const upgradeConfig = getRepeatableUpgradeConfig("beneflux");
       return (
         <>
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>
@@ -1072,11 +1072,11 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => player.everLeftAntinefit,
     name: "Nullith Upgrade Cost",
     node: () => {
-      const upgradeData = getRepeatableUpgradeData("nullith");
+      const upgradeConfig = getRepeatableUpgradeConfig("nullith");
       return (
         <>
-          {formatNumber(upgradeData.startCost)} {symbols.multiply}{" "}
-          {formatNumber(upgradeData.costScaling)}
+          {formatNumber(upgradeConfig.startCost)} {symbols.multiply}{" "}
+          {formatNumber(upgradeConfig.costScaling)}
           <Pow>
             <Stat>lvl</Stat>
           </Pow>

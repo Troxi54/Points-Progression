@@ -8,7 +8,7 @@ import { mergePlayer } from "@game/player/merged/utils";
 import { getPlayerState } from "@game/player/store";
 import { setRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/set";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
-import { applyUpgradeById } from "@game/upgrades/utils/apply";
+import { setUpgradeById } from "@game/upgrades/utils/set";
 
 type Data = Record<
   string,
@@ -58,9 +58,9 @@ const conversionData: Data = {
       resetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   boughtFirstResetUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "reset_1", value),
+    setUpgradeById(player, "reset_1", value),
   boughtSecondResetUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "reset_2", value),
+    setUpgradeById(player, "reset_2", value),
   everMadeTier: ({ player }, value) =>
     applyResetLayerPlayerData(player, "tier", { everPerformed: value }),
   tierStartedDate: ({ player }, value) =>
@@ -74,19 +74,19 @@ const conversionData: Data = {
       resetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   boughtFirstTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_1", value),
+    setUpgradeById(player, "tier_1", value),
   boughtSecondTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_2", value),
+    setUpgradeById(player, "tier_2", value),
   boughtThirdTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_3", value),
+    setUpgradeById(player, "tier_3", value),
   boughtFourthTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_4", value),
+    setUpgradeById(player, "tier_4", value),
   amplifluxUpgradeLvl: ({ player }, value) =>
     setRepeatableUpgradeLevel(player, "ampliflux", createDecimal(value)),
   boughtFifthTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_5", value),
+    setUpgradeById(player, "tier_5", value),
   boughtSixthTierUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "tier_6", value),
+    setUpgradeById(player, "tier_6", value),
   everMadeVermyros: ({ player }, value) =>
     applyResetLayerPlayerData(player, "vermyros", { everPerformed: value }),
   vermyrosStartedDate: ({ player }, value) =>
@@ -102,27 +102,27 @@ const conversionData: Data = {
   vermytesUpgradeLvl: ({ player }, value) =>
     setRepeatableUpgradeLevel(player, "vermyte", createDecimal(value)),
   boughtFirstVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_1", value),
+    setUpgradeById(player, "vermyros_1", value),
   boughtSecondVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_2", value),
+    setUpgradeById(player, "vermyros_2", value),
   boughtThirdVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_3", value),
+    setUpgradeById(player, "vermyros_3", value),
   boughtFourthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_4", value),
+    setUpgradeById(player, "vermyros_4", value),
   boughtFifthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_5", value),
+    setUpgradeById(player, "vermyros_5", value),
   boughtSixthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_6", value),
+    setUpgradeById(player, "vermyros_6", value),
   boughtSeventhVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_7", value),
+    setUpgradeById(player, "vermyros_7", value),
   boughtEighthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_8", value),
+    setUpgradeById(player, "vermyros_8", value),
   coreUpgradeLvl: ({ player }, value) =>
     setRepeatableUpgradeLevel(player, "core", createDecimal(value)),
   boughtNinthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_9", value),
+    setUpgradeById(player, "vermyros_9", value),
   boughtTenthVermyrosUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "vermyros_10", value),
+    setUpgradeById(player, "vermyros_10", value),
   everMadeNullith: ({ player }, value) =>
     applyResetLayerPlayerData(player, "nullith", { everPerformed: value }),
   nullithStartedDate: ({ player }, value) =>
@@ -136,36 +136,36 @@ const conversionData: Data = {
       resetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   boughtFirstNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_1", value),
+    setUpgradeById(player, "nullith_1", value),
   boughtSecondNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_2", value),
+    setUpgradeById(player, "nullith_2", value),
   boughtThirdNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_3", value),
+    setUpgradeById(player, "nullith_3", value),
   boughtFourthNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_4", value),
+    setUpgradeById(player, "nullith_4", value),
   boughtFifthNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_5", value),
+    setUpgradeById(player, "nullith_5", value),
   boughtSixthNullithUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "nullith_6", value),
+    setUpgradeById(player, "nullith_6", value),
   enteredSliph: (_, value) => ({ dimensionId: value ? "sliph" : "normal" }),
   dertointUpgradeLvl: ({ player }, value) =>
     setRepeatableUpgradeLevel(player, "dertoint", createDecimal(value)),
   boughtFirstDertointUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "dertoint_1", value),
+    setUpgradeById(player, "dertoint_1", value),
   boughtSecondDertointUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "dertoint_2", value),
+    setUpgradeById(player, "dertoint_2", value),
   boughtThirdDertointUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "dertoint_3", value),
+    setUpgradeById(player, "dertoint_3", value),
   boughtFourthDertointUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "dertoint_4", value),
+    setUpgradeById(player, "dertoint_4", value),
   boughtFirstMallirtUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "mallirt_1", value),
+    setUpgradeById(player, "mallirt_1", value),
   boughtSecondMallirtUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "mallirt_2", value),
+    setUpgradeById(player, "mallirt_2", value),
   boughtThirdMallirtUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "mallirt_3", value),
+    setUpgradeById(player, "mallirt_3", value),
   boughtFourthMallirtUpgrade: ({ player }, value) =>
-    applyUpgradeById(player, "mallirt_4", value),
+    setUpgradeById(player, "mallirt_4", value),
   everMadeMallirt: ({ player }, value) =>
     applyResetLayerPlayerData(player, "mallirt", { everPerformed: value }),
   mallirtStartedDate: ({ player }, value) =>

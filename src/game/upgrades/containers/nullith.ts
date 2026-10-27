@@ -1,6 +1,6 @@
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 
-const nullithUpgrades = createUpgradeDataContainer({
+const nullithUpgrades = createUpgradeContainerConfig({
   id: "nullith",
   upgrades: [
     {

@@ -1,9 +1,9 @@
 import type { DimensionId } from "@game/dimensions/types";
 import type {
-  FullRepeatableUpgrade,
-  PartialRepeatableUpgrade,
-  PartialRepeatableUpgradeContainer,
-  RepeatableUpgradeContainer,
+  FullRepeatableUpgradeConfig,
+  PartialRepeatableUpgradeConfig,
+  PartialRepeatableUpgradeContainerConfig,
+  RepeatableUpgradeContainerConfig,
   RepeatableUpgradeIds,
 } from "@game/repeatableUpgrades/types";
 import {
@@ -14,14 +14,14 @@ import {
 import getDefaultRepeatableUpgrade from "@game/repeatableUpgrades/default";
 
 export function createRepeatableUpgrade(
-  upgrade: PartialRepeatableUpgrade,
+  upgrade: PartialRepeatableUpgradeConfig,
   dimensionId: DimensionId,
-): FullRepeatableUpgrade {
+): FullRepeatableUpgradeConfig {
   const defaultUpgrade = getDefaultRepeatableUpgrade();
   const newUpgrade = mergeObjects(
     defaultUpgrade,
     upgrade,
-  ) as FullRepeatableUpgrade;
+  ) as FullRepeatableUpgradeConfig;
 
   newUpgrade.dimensionId = dimensionId;
 
@@ -29,13 +29,13 @@ export function createRepeatableUpgrade(
 }
 
 export function createRepeatableUpgradeContainer(
-  container: PartialRepeatableUpgradeContainer,
-): RepeatableUpgradeContainer {
+  container: PartialRepeatableUpgradeContainerConfig,
+): RepeatableUpgradeContainerConfig {
   return objectFromEntries(
     objectEntries(container).map(([dimensionId, dimensionUpgrades]) => {
       const upgradesRecord = dimensionUpgrades as Record<
         RepeatableUpgradeIds[typeof dimensionId],
-        PartialRepeatableUpgrade
+        PartialRepeatableUpgradeConfig
       >;
       const newDimensionUpgrades = objectFromEntries(
         objectEntries(upgradesRecord).map(([upgradeId, upgrade]) => [

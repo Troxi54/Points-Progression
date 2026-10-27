@@ -10,7 +10,7 @@ import { getDefaultRepeatableUpgradeLevel } from "@game/player/default";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
 
-export function getRepeatableUpgradeData(
+export function getRepeatableUpgradeConfig(
   repeatableUpgradeId: RepeatableUpgradeId,
 ) {
   return flatRepeatableUpgrades[repeatableUpgradeId];

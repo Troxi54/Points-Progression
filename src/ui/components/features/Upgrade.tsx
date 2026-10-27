@@ -1,4 +1,7 @@
-import type { UpgradeData, UpgradeDataContainer } from "@game/upgrades/types";
+import type {
+  UpgradeConfig,
+  UpgradeContainerConfig,
+} from "@game/upgrades/types";
 import type { CSSProperties } from "react";
 import { formatNumber } from "@core/format/number";
 import { formatWithPlural } from "@core/format/plural";
@@ -8,7 +11,7 @@ import cn from "@core/utils/tailwind";
 import { formatCurrencyName } from "@game/currencies/utils/format";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import { applyBoughtUpgrade } from "@game/upgrades/utils/apply";
+import { buyUpgrade } from "@game/upgrades/utils/buy";
 import { getUpgradeCurrency } from "@game/upgrades/utils/get";
 import { hasPreviousUpgrade, hasUpgrade } from "@game/upgrades/utils/has";
 import { createUpgradeId } from "@game/upgrades/utils/id";
@@ -22,26 +25,21 @@ import Paragraph from "../base/Paragraph";
 import StatusText from "../base/StatusText";
 
 interface Props {
-  upgradeContainerData: UpgradeDataContainer;
-  upgradeData: UpgradeData;
+  containerConfig: UpgradeContainerConfig;
+  config: UpgradeConfig;
   upgradeNumber: number;
   style?: CSSProperties;
 }
 
-function Upgrade({
-  upgradeContainerData,
-  upgradeData,
-  upgradeNumber,
-  style,
-}: Props) {
+function Upgrade({ containerConfig, config, upgradeNumber, style }: Props) {
   const [containerUsePlayer, upgradeUsePlayer] = [
-    upgradeContainerData.playerSelector,
-    upgradeData.playerSelector,
+    containerConfig.playerSelector,
+    config.playerSelector,
   ];
 
-  const containerId = upgradeContainerData.id;
-  const containerNameProperty = upgradeContainerData.name;
-  const { previousUpgradeId, cost } = upgradeData;
+  const containerId = containerConfig.id;
+  const containerNameProperty = containerConfig.name;
+  const { previousUpgradeId, cost } = config;
 
   const shouldSubscribeToPreviousUpgrade =
     previousUpgradeId || upgradeNumber > 1;
@@ -59,19 +57,14 @@ function Upgrade({
         hasUpgradeSelection(state, containerId, upgradeNumber),
       );
 
-      const currency = getUpgradeCurrency(upgradeData, upgradeContainerData);
+      const currency = getUpgradeCurrency(config, containerConfig);
       const currencyValue = mergedPlayer.player[currency];
 
       const mergedWithOptions = mergeObjects(mergedWithPurchase, {
         hideBoughtUpgrades: mergedPlayer.player.hideBoughtUpgrades,
         canBuy:
-          currencyValue.greaterThanOrEqualTo(upgradeData.cost) &&
-          hasPreviousUpgrade(
-            mergedPlayer,
-            containerId,
-            upgradeNumber,
-            upgradeData,
-          ),
+          currencyValue.greaterThanOrEqualTo(config.cost) &&
+          hasPreviousUpgrade(mergedPlayer, containerId, upgradeNumber, config),
       });
 
       let fullSelector = mergedWithOptions;
@@ -95,13 +88,7 @@ function Upgrade({
   function buy() {
     const { mergedPlayer, setPlayer } = getPlayerState();
 
-    const bought = applyBoughtUpgrade(
-      mergedPlayer,
-      containerId,
-      upgradeNumber,
-      upgradeData,
-      upgradeContainerData,
-    );
+    const bought = buyUpgrade(mergedPlayer, containerId, upgradeNumber);
     if (!bought) return;
 
     setPlayer(bought);
@@ -115,24 +102,23 @@ function Upgrade({
       : parseValueGetter(containerNameProperty, mergedPlayer);
 
   const name =
-    upgradeData.name === "auto" || upgradeData.name === undefined
+    config.name === "auto" || config.name === undefined
       ? `${containerName} Upgrade ${upgradeNumber}`
-      : upgradeData.name;
-  const description = parseValueGetter(upgradeData.description, mergedPlayer);
+      : config.name;
+  const description = parseValueGetter(config.description, mergedPlayer);
 
-  const currency = getUpgradeCurrency(upgradeData, upgradeContainerData);
+  const currency = getUpgradeCurrency(config, containerConfig);
   const currencyName = formatCurrencyName(currency);
   const fullCost = currencyName
     ? formatWithPlural(cost, currencyName)
     : `${formatNumber(cost)}`;
 
-  const forceShowValue =
-    upgradeData.forceShow ?? upgradeContainerData.forceShow ?? false;
+  const forceShowValue = config.forceShow ?? containerConfig.forceShow ?? false;
   const shouldForceShow = parseValueGetter(forceShowValue, mergedPlayer);
 
   const shouldShow = shouldForceShow
     ? true
-    : hasPreviousUpgrade(player, containerId, upgradeNumber, upgradeData);
+    : hasPreviousUpgrade(player, containerId, upgradeNumber, config);
   const shouldRender = shouldShow && !(isPurchased && state.hideBoughtUpgrades);
 
   const costInactive = isPurchased;

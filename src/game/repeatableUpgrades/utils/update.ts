@@ -9,30 +9,30 @@ import {
   getRepeatableUpgradeMaxLevel,
   calculateRepeatableUpgradeBulkWithMax,
 } from "./calculate";
-import { getRepeatableUpgradeData } from "./get";
+import { getRepeatableUpgradeConfig } from "./get";
 import { setCachedRepeatableUpgrade } from "./set";
 
 export function updateCachedRepeatableUpgrade(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
 ): PartialCachedPlayer | undefined {
-  const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
+  const upgradeConfig = getRepeatableUpgradeConfig(repeatableUpgradeId);
 
   const { cachedPlayer } = mergedPlayer;
 
-  const { effectFormula } = upgradeData;
+  const { effectFormula } = upgradeConfig;
   const [bulk, cost, level] = getRepeatableUpgradeBulkCostAndLevel(
     repeatableUpgradeId,
     mergedPlayer,
   );
 
-  const maxLevel = getRepeatableUpgradeMaxLevel(mergedPlayer, upgradeData);
+  const maxLevel = getRepeatableUpgradeMaxLevel(mergedPlayer, upgradeConfig);
 
   const newRepeatableUpgrade: CachedRepeatableUpgrade = {
     cost,
     bulk: calculateRepeatableUpgradeBulkWithMax(
       mergedPlayer,
-      upgradeData,
+      upgradeConfig,
       level,
       bulk,
     ),

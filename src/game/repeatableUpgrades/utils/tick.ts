@@ -23,8 +23,8 @@ export function tickRepeatableUpgradeAutobuy(
 ): PartialMergedPlayer {
   const result = copyObject(mergedPlayer);
 
-  for (const [id, upgradeData] of objectEntries(flatRepeatableUpgrades)) {
-    const shouldAutobuy = parseValueGetter(upgradeData.autobuy, mergedPlayer);
+  for (const [id, upgradeConfig] of objectEntries(flatRepeatableUpgrades)) {
+    const shouldAutobuy = parseValueGetter(upgradeConfig.autobuy, mergedPlayer);
 
     if (!shouldAutobuy) {
       continue;

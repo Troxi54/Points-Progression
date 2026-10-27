@@ -19,7 +19,7 @@ import { hasCurrencyName } from "@game/currencies/utils/has";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import { buyRepeatableUpgradeMax } from "@game/repeatableUpgrades/utils/buy";
-import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
+import { getRepeatableUpgradeConfig } from "@game/repeatableUpgrades/utils/get";
 import {
   getCachedRepeatableUpgradePropsSelection,
   getRepeatableUpgradeLevelSelection,
@@ -105,10 +105,10 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
   const effect = getCachedProperty("effect");
   const bulk = getCachedProperty("bulk");
 
-  const upgradeData = getRepeatableUpgradeData(repeatableUpgradeId);
+  const upgradeConfig = getRepeatableUpgradeConfig(repeatableUpgradeId);
 
   const name = capitalizeString(repeatableUpgradeId);
-  const { currency, affects } = upgradeData;
+  const { currency, affects } = upgradeConfig;
 
   const currencyName = formatCurrencyName(currency);
   const fullCost = formatWithPlural(cost, currencyName);

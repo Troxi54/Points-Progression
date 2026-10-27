@@ -1,8 +1,8 @@
 import { everPerformed } from "@game/resetLayers/utils/get";
-import { createUpgradeDataContainer } from "@game/upgrades/utils/create";
+import { createUpgradeContainerConfig } from "@game/upgrades/utils/create";
 import { hasOneOfUpgrades } from "@game/upgrades/utils/has";
 
-const resetUpgrades = createUpgradeDataContainer({
+const resetUpgrades = createUpgradeContainerConfig({
   id: "reset",
   playerSelector: ({ mergedPlayer }) => ({
     everPerformedTier: everPerformed(mergedPlayer, "tier"),
