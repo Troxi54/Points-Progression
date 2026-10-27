@@ -1,6 +1,6 @@
-import type { MissingSoftcapperData } from "./types";
+import type { MissingSoftcapperConfig } from "./types";
 
-export default function getDefaultMissingSoftcapperData(): MissingSoftcapperData {
+export default function getDefaultMissingSoftcapperConfig(): MissingSoftcapperConfig {
   return {
     mode: "pow",
   };

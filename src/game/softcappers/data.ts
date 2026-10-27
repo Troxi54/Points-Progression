@@ -1,9 +1,9 @@
 import createDecimal from "@core/utils/decimal";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import cappergyConfig from "@game/features/cappergy/config";
-import { createSoftcapperDataContainer } from "./utils/create";
+import { createSoftcapperContainerConfig } from "./utils/create";
 
-const softcapperData = createSoftcapperDataContainer({
+const softcapperConfig = createSoftcapperContainerConfig({
   points: [
     {
       startsAt: createDecimal("1e204"),
@@ -44,4 +44,4 @@ const softcapperData = createSoftcapperDataContainer({
   ],
 } as const);
 
-export default softcapperData;
+export default softcapperConfig;

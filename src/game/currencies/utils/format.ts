@@ -54,12 +54,12 @@ export function formatCurrencyEffect(
   const config = getCurrencyConfig(currencyFrom);
   const { affects } = config;
 
-  let effectModeInCurrencyData: EffectMode | null | undefined = null;
+  let effectModeInCurrencyConfig: EffectMode | null | undefined = null;
   if (isObject(affects)) {
-    effectModeInCurrencyData = affects[effectOn]?.mode;
+    effectModeInCurrencyConfig = affects[effectOn]?.mode;
   }
 
-  const effectMode = effectModeInCurrencyData ?? config.effectMode;
+  const effectMode = effectModeInCurrencyConfig ?? config.effectMode;
 
   const effect = getCurrencyEffectOn(cachedPlayerLike, currencyFrom, effectOn);
 

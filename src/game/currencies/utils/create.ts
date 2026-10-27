@@ -13,9 +13,9 @@ import getDefaultCurrencyConfig, {
   getDefaultCurrencyEffectData,
 } from "../default";
 
-function buildCurrencyConfig(currencyData?: PartialCurrencyConfig) {
+function buildCurrencyConfig(currencyConfig?: PartialCurrencyConfig) {
   const defaultConfig = getDefaultCurrencyConfig();
-  const newConfig = mergeObjects(defaultConfig, currencyData);
+  const newConfig = mergeObjects(defaultConfig, currencyConfig);
 
   const effectData = newConfig.affects;
   if (isObject(effectData)) {

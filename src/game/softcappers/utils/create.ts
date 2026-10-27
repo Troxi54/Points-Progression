@@ -1,29 +1,29 @@
 import type {
-  PartialSoftcapperData,
-  PartialSoftcapperDataContainer,
-  SoftcapperDataContainer,
+  PartialSoftcapperConfig,
+  PartialSoftcapperContainerConfig,
+  SoftcapperContainerConfig,
 } from "../types";
-import type SoftcapperData from "../types";
+import type SoftcapperConfig from "../types";
 import {
   mergeObjects,
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
-import getDefaultMissingSoftcapperData from "../default";
+import getDefaultMissingSoftcapperConfig from "../default";
 
-function createSoftcapperData(
-  softcapperData: PartialSoftcapperData,
-): SoftcapperData {
-  return mergeObjects(softcapperData, getDefaultMissingSoftcapperData());
+function createSoftcapperConfig(
+  softcapperConfig: PartialSoftcapperConfig,
+): SoftcapperConfig {
+  return mergeObjects(softcapperConfig, getDefaultMissingSoftcapperConfig());
 }
 
-export function createSoftcapperDataContainer(
-  container: PartialSoftcapperDataContainer,
-): SoftcapperDataContainer {
+export function createSoftcapperContainerConfig(
+  container: PartialSoftcapperContainerConfig,
+): SoftcapperContainerConfig {
   return objectFromEntries(
-    objectEntries(container).map(([currency, softcapperData]) => {
-      const value = softcapperData?.map((softcapper) =>
-        createSoftcapperData(softcapper),
+    objectEntries(container).map(([currency, softcapperConfig]) => {
+      const value = softcapperConfig?.map((softcapper) =>
+        createSoftcapperConfig(softcapper),
       );
       return [currency, value];
     }),

@@ -1,7 +1,7 @@
 import { formatNumber, integerCommaFormat } from "@core/format/number";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import softcapperData from "@game/softcappers/data";
+import softcapperConfig from "@game/softcappers/data";
 import Container from "@ui/components/base/Container";
 import Heading from "@ui/components/base/Heading";
 import Paragraph from "@ui/components/base/Paragraph";
@@ -19,7 +19,7 @@ function Softcapper() {
     },
   );
 
-  const pointSoftcappers = softcapperData.points;
+  const pointSoftcappers = softcapperConfig.points;
   if (!pointSoftcappers) return null;
 
   const softcappers = [];
