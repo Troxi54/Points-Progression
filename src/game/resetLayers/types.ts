@@ -17,7 +17,7 @@ export interface ResetLayerIds {
 
 export type ResetLayerId = ResetLayerIds[keyof ResetLayerIds];
 
-export interface ResetLayerData<T extends DimensionId = DimensionId> {
+export interface ResetLayerConfig<T extends DimensionId = DimensionId> {
   id: ResetLayerIds[T];
   goal: Decimal;
   currency: CurrencyId;
@@ -36,26 +36,29 @@ export interface ResetLayerData<T extends DimensionId = DimensionId> {
   ) => PartialMergedPlayer;
 }
 
-export type PartialResetLayerData<T extends DimensionId = DimensionId> =
-  PartialBut<ResetLayerData<T>, "id">;
+export type PartialResetLayerConfig<T extends DimensionId = DimensionId> =
+  PartialBut<ResetLayerConfig<T>, "id">;
 
-export interface FullResetLayerData<
+export interface BuiltResetLayerConfig<
   T extends DimensionId = DimensionId,
-> extends ResetLayerData<T> {
+> extends ResetLayerConfig<T> {
   dimensionId: T;
 }
 
-export type DefaultResetLayerData = Omit<ResetLayerData, "id">;
+export type DefaultResetLayerConfig = Omit<ResetLayerConfig, "id">;
 
-export type ResetLayerDataContainer = {
-  [K in DimensionId]: FullResetLayerData<K>[];
+export type ResetLayerContainerConfig = {
+  [K in DimensionId]: BuiltResetLayerConfig<K>[];
 };
 
-export type PartialResetLayerDataContainer = {
-  [K in DimensionId]: PartialResetLayerData<K>[];
+export type PartialResetLayerContainerConfig = {
+  [K in DimensionId]: PartialResetLayerConfig<K>[];
 };
 
-export type FlatResetLayerContainer = Record<ResetLayerId, FullResetLayerData>;
+export type FlatResetLayerContainerConfig = Record<
+  ResetLayerId,
+  BuiltResetLayerConfig
+>;
 
 export type ResetLayerPlayerSelector<
   T extends ResetLayerId = ResetLayerId,

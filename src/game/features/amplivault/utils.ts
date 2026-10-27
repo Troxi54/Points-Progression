@@ -1,7 +1,7 @@
 import type { MergedPlayer } from "@game/player/merged/types";
 import formulas from "@game/formulas/data";
 import { getPlayerState } from "@game/player/store";
-import { triggerResetLayer } from "@game/resetLayers/utils/apply";
+import { triggerResetLayer } from "@game/resetLayers/utils/trigger";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 function shouldAmplivaultIncreaseLevel({ player, cachedPlayer }: MergedPlayer) {

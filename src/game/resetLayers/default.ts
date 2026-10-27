@@ -1,7 +1,7 @@
-import type { DefaultResetLayerData } from "./types";
+import type { DefaultResetLayerConfig } from "./types";
 import createDecimal from "@core/utils/decimal";
 
-export default function getDefaultResetLayerData(): DefaultResetLayerData {
+export default function getDefaultResetLayerConfig(): DefaultResetLayerConfig {
   return {
     playerSelector: null,
     goal: createDecimal(1e6),

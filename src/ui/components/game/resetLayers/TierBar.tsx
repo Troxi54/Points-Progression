@@ -8,7 +8,7 @@ import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import {
-  getResetLayerData,
+  getResetLayerConfig,
   getResetLayerPlayerDataProp,
 } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
@@ -17,7 +17,7 @@ import NexusSign from "@ui/components/features/NexusSign";
 import ResetLayerProgressBar from "@ui/components/features/ResetLayer";
 
 function TierBar() {
-  const data = getResetLayerData("tier");
+  const data = getResetLayerConfig("tier");
   const { goal, currency } = data;
 
   return (

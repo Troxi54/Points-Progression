@@ -1,4 +1,4 @@
-import type { FlatResetLayerContainer } from "../types";
+import type { FlatResetLayerContainerConfig } from "../types";
 import { createResetLayerContainer } from "../utils/create";
 import levelResetLayer from "./layers/level";
 import mallirtResetLayer from "./layers/mallirt";
@@ -20,7 +20,7 @@ const resetLayers = createResetLayerContainer({
 
 export default resetLayers;
 
-export const flatResetLayers = {} as FlatResetLayerContainer;
+export const flatResetLayers = {} as FlatResetLayerContainerConfig;
 
 function buildFlatResetLayer() {
   for (const dimensionLayers of Object.values(resetLayers)) {

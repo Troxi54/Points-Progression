@@ -1,7 +1,7 @@
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
-import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Decimal from "break_eternity.js";
@@ -34,7 +34,7 @@ const nullithResetLayer = defineResetLayer<"normal">({
 
     return {
       player: {
-        ...applyResetLayerPlayerData(player, "vermyros", {
+        ...setResetLayerPlayerData(player, "vermyros", {
           autoEnabled: true,
         }),
         vermytes: defaultPlayer.vermytes,

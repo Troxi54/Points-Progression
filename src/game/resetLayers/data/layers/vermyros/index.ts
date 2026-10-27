@@ -4,7 +4,7 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
-import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
@@ -36,10 +36,10 @@ const vermyrosResetLayer = defineResetLayer<"normal">({
             "ampliflux",
           ),
         },
-        ...applyResetLayerPlayerData(player, "reset", {
+        ...setResetLayerPlayerData(player, "reset", {
           autoEnabled: !hasVermyros_3,
         }),
-        ...applyResetLayerPlayerData(player, "tier", {
+        ...setResetLayerPlayerData(player, "tier", {
           autoEnabled:
             getResetLayerPlayerDataProp(player, "tier", "autoEnabled") &&
             hasVermyros_2,

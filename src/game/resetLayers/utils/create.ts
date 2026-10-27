@@ -1,9 +1,9 @@
 import type { DimensionId } from "@game/dimensions/types";
 import type {
-  FullResetLayerData,
-  PartialResetLayerData,
-  PartialResetLayerDataContainer,
-  ResetLayerDataContainer,
+  BuiltResetLayerConfig,
+  PartialResetLayerConfig,
+  PartialResetLayerContainerConfig,
+  ResetLayerContainerConfig,
 } from "../types";
 import {
   mergeObjects,
@@ -12,24 +12,24 @@ import {
 } from "@core/utils/object";
 import { hasUpgrade } from "@game/upgrades/utils/has";
 import { applyResetLayerUpgradeReset } from "@game/upgrades/utils/reset";
-import getDefaultResetLayerData from "../default";
-import { applyResetLayerPlayerData } from "./apply";
+import getDefaultResetLayerConfig from "../default";
+import { setResetLayerPlayerData } from "./set";
 
 export function defineResetLayer<D extends DimensionId>(
-  resetLayer: PartialResetLayerData<D>,
-): PartialResetLayerData<D> {
+  resetLayer: PartialResetLayerConfig<D>,
+): PartialResetLayerConfig<D> {
   return resetLayer;
 }
 
-export function createResetLayer(
-  resetLayerData: PartialResetLayerData,
+export function createResetLayerConfig(
+  resetLayerConfig: PartialResetLayerConfig,
   dimensionId: DimensionId,
-): FullResetLayerData {
-  const defaultResetLayer = getDefaultResetLayerData();
+): BuiltResetLayerConfig {
+  const defaultResetLayer = getDefaultResetLayerConfig();
   const newResetLayer = mergeObjects(
     defaultResetLayer,
-    resetLayerData,
-  ) as FullResetLayerData;
+    resetLayerConfig,
+  ) as BuiltResetLayerConfig;
 
   newResetLayer.dimensionId = dimensionId;
 
@@ -52,7 +52,7 @@ export function createResetLayer(
     const { player } = existingResetValue;
     let newPlayer = mergeObjects(mergedPlayer.player, player);
 
-    const appliedData = applyResetLayerPlayerData(newPlayer, resetLayerId, {
+    const appliedData = setResetLayerPlayerData(newPlayer, resetLayerId, {
       everPerformed: true,
       startedDate: currentTime,
     });
@@ -100,14 +100,14 @@ export function createResetLayer(
 }
 
 export function createResetLayerContainer(
-  container: PartialResetLayerDataContainer,
-): ResetLayerDataContainer {
+  container: PartialResetLayerContainerConfig,
+): ResetLayerContainerConfig {
   return objectFromEntries(
     objectEntries(container).map(([dimensionId, dimensionLayers]) => {
       const newDimensionLayers = dimensionLayers.map((layer) =>
-        createResetLayer(layer, dimensionId),
+        createResetLayerConfig(layer, dimensionId),
       );
       return [dimensionId, newDimensionLayers];
     }),
-  ) as ResetLayerDataContainer;
+  ) as ResetLayerContainerConfig;
 }

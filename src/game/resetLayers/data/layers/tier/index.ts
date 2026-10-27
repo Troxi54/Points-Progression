@@ -4,7 +4,7 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
-import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
@@ -49,7 +49,7 @@ const tierResetLayer = defineResetLayer<"normal">({
       player: {
         bestRun: defaultPlayer.bestRun,
         bestPointsOfRun: defaultPlayer.bestPointsOfRun,
-        ...applyResetLayerPlayerData(player, "reset", {
+        ...setResetLayerPlayerData(player, "reset", {
           autoEnabled: !hasTier_3,
         }),
       },

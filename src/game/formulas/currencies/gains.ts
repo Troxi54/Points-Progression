@@ -12,7 +12,7 @@ import resetLayerConfig from "@game/resetLayers/config";
 import {
   canPerform,
   everPerformed,
-  getResetLayerData,
+  getResetLayerConfig,
 } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Decimal from "break_eternity.js";
@@ -52,7 +52,7 @@ const currencyGainFormulas: GainFormulaContainer = {
       if (!everPerformed(player, "vermyros")) return createDecimal(1);
 
       const { points } = player;
-      const { goal } = getResetLayerData("vermyros");
+      const { goal } = getResetLayerConfig("vermyros");
 
       return Decimal.pow(2, points.dividedBy(goal).log("1e6").max(0)).multiply(
         cachedPlayer.tierVermyteEffect,
@@ -172,7 +172,7 @@ const currencyGainFormulas: GainFormulaContainer = {
 
       if (!canPerform(mergedPlayer, "mallirt")) return createDecimal(0);
       if (!everPerformed(player, "mallirt"))
-        return getResetLayerData("mallirt").goal;
+        return getResetLayerConfig("mallirt").goal;
 
       return player.dertoints;
     },
@@ -216,7 +216,7 @@ const currencyGainFormulas: GainFormulaContainer = {
     if (!everPerformed(player, "level")) return createDecimal(1);
 
     const { dertoints } = player;
-    const { goal } = getResetLayerData("level");
+    const { goal } = getResetLayerConfig("level");
 
     return Decimal.pow(2, dertoints.dividedBy(goal).log(100).max(0));
   },
@@ -238,7 +238,7 @@ const currencyGainFormulas: GainFormulaContainer = {
     if (!everPerformed(player, "xagyros")) return createDecimal(1);
 
     const { dertoints } = player;
-    const { goal } = getResetLayerData("xagyros");
+    const { goal } = getResetLayerConfig("xagyros");
 
     return Decimal.pow(1.1, dertoints.dividedBy(goal).log10().max(0));
   },

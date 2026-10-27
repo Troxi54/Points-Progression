@@ -5,7 +5,10 @@ import amplivaultConfig from "@game/features/amplivault/config";
 import cappergyConfig from "@game/features/cappergy/config";
 import nuxarConfig from "@game/features/nuxar/config";
 import { getRepeatableUpgradeConfig } from "@game/repeatableUpgrades/utils/get";
-import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
+import {
+  everPerformed,
+  getResetLayerConfig,
+} from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Caption from "@ui/components/base/Caption";
 import Log from "@ui/components/base/Log";
@@ -121,7 +124,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => everPerformed(player, "tier"),
     name: "Tier requirement",
     node: () => {
-      const tierData = getResetLayerData("tier");
+      const tierData = getResetLayerConfig("tier");
       return (
         <>
           {formatNumber(tierData.goal)} {symbols.multiply}{" "}
@@ -209,7 +212,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => everPerformed(player, "vermyros"),
     name: "Vermyte gain",
     node: () => {
-      const resetData = getResetLayerData("vermyros");
+      const resetData = getResetLayerConfig("vermyros");
       const formattedMillion = integerCommaFormat(1_000_000);
       const points = <Stat>points</Stat>;
       const formattedGoal = formatNumber(resetData.goal);
@@ -598,7 +601,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => everPerformed(player, "level"),
     name: "Score gain",
     node: () => {
-      const formattedGoal = formatNumber(getResetLayerData("level").goal);
+      const formattedGoal = formatNumber(getResetLayerConfig("level").goal);
 
       return (
         <>
@@ -825,7 +828,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => everPerformed(player, "xagyros"),
     name: "Xagyte gain",
     node: () => {
-      const { goal } = getResetLayerData("xagyros");
+      const { goal } = getResetLayerConfig("xagyros");
 
       return (
         <>
@@ -857,7 +860,7 @@ const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
     condition: ({ player }) => everPerformed(player, "xagyros"),
     name: "Dertoint Xagora effect",
     node: () => {
-      const { goal } = getResetLayerData("xagyros");
+      const { goal } = getResetLayerConfig("xagyros");
 
       return (
         <>

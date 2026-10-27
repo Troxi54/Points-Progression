@@ -24,7 +24,7 @@ import {
 import resetLayerConfig from "../config";
 import resetLayers, { flatResetLayers } from "../data";
 
-export function getResetLayerData(resetLayerId: ResetLayerId) {
+export function getResetLayerConfig(resetLayerId: ResetLayerId) {
   return flatResetLayers[resetLayerId];
 }
 
@@ -149,7 +149,7 @@ export function canPerform(
   mergedPlayer: MergedPlayer,
   resetLayerId: ResetLayerId,
 ): boolean {
-  const data = getResetLayerData(resetLayerId);
+  const data = getResetLayerConfig(resetLayerId);
 
   const { dimensionId } = data;
   const dimensionWorks = shouldDimensionWork(mergedPlayer, dimensionId);

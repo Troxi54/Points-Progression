@@ -6,7 +6,7 @@ import { mergeObjects } from "@core/utils/object";
 import { capitalizeString } from "@core/utils/string";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import { applyToggledResetLayerAuto } from "@game/resetLayers/utils/apply";
+import { toggleResetLayerAuto } from "@game/resetLayers/utils/set";
 import {
   everPerformed,
   getResetLayerPlayerDataProp,
@@ -75,7 +75,7 @@ function AutoResetToggle<T extends ResetLayerId>({
       : true;
     if (!canToggle) return;
 
-    setPlayer(applyToggledResetLayerAuto(player, resetLayerId));
+    setPlayer(toggleResetLayerAuto(player, resetLayerId));
   }
 
   return (

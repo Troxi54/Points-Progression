@@ -3,7 +3,7 @@ import createDecimal, { decimalSoftcap } from "@core/utils/decimal";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
-import { getResetLayerData } from "@game/resetLayers/utils/get";
+import { getResetLayerConfig } from "@game/resetLayers/utils/get";
 import Decimal from "break_eternity.js";
 import formulas from "./data";
 
@@ -122,7 +122,7 @@ const effectFormulas = {
     return Decimal.pow(500, xagytes.max(1).log(2));
   },
   dertointXagora({ player: { dertoints } }) {
-    const { goal } = getResetLayerData("xagyros");
+    const { goal } = getResetLayerConfig("xagyros");
 
     return Decimal.pow(2, dertoints.dividedBy(goal).max(1).log10());
   },

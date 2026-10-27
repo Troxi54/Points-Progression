@@ -1,5 +1,5 @@
 import { getPlayerState } from "@game/player/store";
-import { triggerResetLayer } from "@game/resetLayers/utils/apply";
+import { triggerResetLayer } from "@game/resetLayers/utils/trigger";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export function toggleAntinefit() {

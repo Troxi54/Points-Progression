@@ -2,7 +2,7 @@ import type { GameLoopPartState } from "@game/gameLoop/types";
 import { getNewAmplivaultLevel } from "@game/features/amplivault/utils";
 import coreConfig from "@game/features/cores/config";
 import formulas from "@game/formulas/data";
-import { applyResetLayerAuto } from "@game/resetLayers/utils/apply";
+import { setResetLayerAuto } from "@game/resetLayers/utils/set";
 import { calculateSoftcapperLevel } from "@game/softcappers/utils/calculate";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
@@ -14,7 +14,7 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
     player.bestPointsOfRun = formulas.bestPointsOfRun(mergedPlayer);
 
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "reset", false),
+      setResetLayerAuto(player, "reset", false),
     );
   }
 
@@ -28,14 +28,12 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
     player.everReachedCores = true;
 
   if (hasUpgradeById(player, "vermyros_4")) {
-    state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "tier", true),
-    );
+    state.assignPlayerForMergedPlayer(setResetLayerAuto(player, "tier", true));
   }
 
   if (hasUpgradeById(player, "vermyros_8")) {
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(player, "vermyros", false),
+      setResetLayerAuto(player, "vermyros", false),
     );
   }
 
@@ -47,7 +45,7 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
 
   if (hasUpgradeById(player, "nullith_5")) {
     state.assignPlayerForMergedPlayer(
-      applyResetLayerAuto(
+      setResetLayerAuto(
         player,
         "nullith",
         player.enteredAmplivault && !player.reachedBreakAmplivault,

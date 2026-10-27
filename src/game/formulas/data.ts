@@ -8,7 +8,10 @@ import amplivaultConfig from "@game/features/amplivault/config";
 import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";
 import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import tierResetLayerConfig from "@game/resetLayers/data/layers/tier/config";
-import { everPerformed, getResetLayerData } from "@game/resetLayers/utils/get";
+import {
+  everPerformed,
+  getResetLayerConfig,
+} from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Decimal from "break_eternity.js";
 
@@ -56,12 +59,12 @@ const formulas = {
   bestPointsOfRun({ player }) {
     const value = everPerformed(player, "reset")
       ? player.points
-      : getResetLayerData("reset").goal;
+      : getResetLayerConfig("reset").goal;
 
     return player.bestPointsOfRun.max(value);
   },
   tierRequirement({ player }) {
-    const firstTierAt = getResetLayerData("tier").goal;
+    const firstTierAt = getResetLayerConfig("tier").goal;
     return firstTierAt.multiply(
       Decimal.pow(tierResetLayerConfig.requirementScaling, player.tier),
     );

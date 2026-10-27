@@ -3,7 +3,7 @@ import type {
   PartialMergedPlayer,
 } from "@game/player/merged/types";
 import type { XagyrosState } from "../types";
-import { triggerResetLayer } from "@game/resetLayers/utils/apply";
+import { triggerResetLayer } from "@game/resetLayers/utils/trigger";
 import { everPerformed } from "@game/resetLayers/utils/get";
 import { isXagyrosStateActive } from "./get";
 
