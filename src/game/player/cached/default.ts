@@ -32,7 +32,10 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     offlineProgressStartedDate: null,
     offlineProgressLastTick: currentTime,
 
-    infiniteModeUnlocked: false,
+    infiniteMode: {
+      unlocked: false,
+      layerCountToRender: 0,
+    },
 
     runEffect: createDecimal(1),
     runDertointEffect: createDecimal(1),

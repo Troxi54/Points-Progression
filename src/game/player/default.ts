@@ -31,6 +31,9 @@ export function getDefaultPlayer(): Player {
 
     dimensionId: "normal",
     enteredInfiniteMode: false,
+    infiniteMode: {
+      layers: [],
+    },
 
     points: createDecimal(0),
     bestPoints: createDecimal(0),

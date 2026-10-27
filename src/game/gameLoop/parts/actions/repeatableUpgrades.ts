@@ -1,8 +1,8 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import { tickAllRepeatableUpgrades } from "@game/repeatableUpgrades/utils/apply";
+import { tickRepeatableUpgradeAutobuy } from "@game/repeatableUpgrades/utils/tick";
 
 export default function gameLoopRepeatableUpgrades(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignMergedPlayer(tickAllRepeatableUpgrades(mergedPlayer));
+  state.assignMergedPlayer(tickRepeatableUpgradeAutobuy(mergedPlayer));
 }

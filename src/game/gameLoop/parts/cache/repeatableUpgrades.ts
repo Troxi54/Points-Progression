@@ -1,10 +1,10 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import { applyUpdatedRepeatableUpgrades } from "@game/repeatableUpgrades/utils/apply";
+import { tickRepeatableUpgradeCache } from "@game/repeatableUpgrades/utils/tick";
 
 export default function gameLoopUpdateRepeatableUpgradeCache(
   state: GameLoopPartState,
 ) {
   const { mergedPlayer } = state;
 
-  state.assignMergedPlayer(applyUpdatedRepeatableUpgrades(mergedPlayer));
+  state.assignMergedPlayer(tickRepeatableUpgradeCache(mergedPlayer));
 }

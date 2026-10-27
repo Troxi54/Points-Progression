@@ -29,7 +29,10 @@ export interface CachedPlayer {
   offlineProgressStartedDate: number | null;
   offlineProgressLastTick: number;
 
-  infiniteModeUnlocked: boolean;
+  infiniteMode: {
+    unlocked: boolean;
+    layerCountToRender: number;
+  };
 
   runEffect: Decimal;
   runDertointEffect: Decimal;

@@ -18,7 +18,7 @@ import { formatCurrencyName } from "@game/currencies/utils/format";
 import { hasCurrencyName } from "@game/currencies/utils/has";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import { applyRepeatableUpgradeMax } from "@game/repeatableUpgrades/utils/apply";
+import { buyRepeatableUpgradeMax } from "@game/repeatableUpgrades/utils/buy";
 import { getRepeatableUpgradeData } from "@game/repeatableUpgrades/utils/get";
 import {
   getCachedRepeatableUpgradePropsSelection,
@@ -90,7 +90,7 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
 
   function buyMax() {
     const { mergedPlayer, setMergedPlayer } = getPlayerState();
-    const purchased = applyRepeatableUpgradeMax(
+    const purchased = buyRepeatableUpgradeMax(
       mergedPlayer,
       repeatableUpgradeId,
     );

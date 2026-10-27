@@ -32,6 +32,16 @@ export interface Player {
   dimensionId: DimensionId;
   enteredInfiniteMode: boolean;
 
+  infiniteMode: {
+    layers: {
+      resetLayer: InfiniteModeResetLayerPlayerData;
+      bestRun: number;
+      currency: Decimal;
+      repeatableUpgradeLvl: Decimal;
+      upgrades: boolean[];
+    }[];
+  };
+
   points: Decimal;
   bestPoints: Decimal;
   bestRun: Decimal | null;
@@ -93,6 +103,11 @@ export interface ResetLayerPlayerData {
   autoEnabled: boolean;
   resetsPerSecond: number;
 }
+
+export type InfiniteModeResetLayerPlayerData = Omit<
+  ResetLayerPlayerData,
+  "everPerformed" | "isFirstReset"
+>;
 
 export type PartialResetLayerPlayerData = Partial<ResetLayerPlayerData>;
 

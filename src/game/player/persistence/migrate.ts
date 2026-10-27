@@ -6,7 +6,7 @@ import formulas from "@game/formulas/data";
 import { getDefaultPlayer } from "@game/player/default";
 import { mergePlayer } from "@game/player/merged/utils";
 import { getPlayerState } from "@game/player/store";
-import { applyRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/apply";
+import { setRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/set";
 import { applyResetLayerPlayerData } from "@game/resetLayers/utils/apply";
 import { applyUpgradeById } from "@game/upgrades/utils/apply";
 
@@ -41,7 +41,7 @@ function parseFiniteNonNegativeNumber(value: unknown): number {
 
 const conversionData: Data = {
   upgradeLvl: ({ player }, value) =>
-    applyRepeatableUpgradeLevel(player, "point", createDecimal(value)),
+    setRepeatableUpgradeLevel(player, "point", createDecimal(value)),
   startedRun: ({ player }, value) =>
     applyResetLayerPlayerData(player, "reset", {
       startedDate: parseFiniteTimestamp(value),
@@ -82,7 +82,7 @@ const conversionData: Data = {
   boughtFourthTierUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "tier_4", value),
   amplifluxUpgradeLvl: ({ player }, value) =>
-    applyRepeatableUpgradeLevel(player, "ampliflux", createDecimal(value)),
+    setRepeatableUpgradeLevel(player, "ampliflux", createDecimal(value)),
   boughtFifthTierUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "tier_5", value),
   boughtSixthTierUpgrade: ({ player }, value) =>
@@ -100,7 +100,7 @@ const conversionData: Data = {
       resetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   vermytesUpgradeLvl: ({ player }, value) =>
-    applyRepeatableUpgradeLevel(player, "vermyte", createDecimal(value)),
+    setRepeatableUpgradeLevel(player, "vermyte", createDecimal(value)),
   boughtFirstVermyrosUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "vermyros_1", value),
   boughtSecondVermyrosUpgrade: ({ player }, value) =>
@@ -118,7 +118,7 @@ const conversionData: Data = {
   boughtEighthVermyrosUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "vermyros_8", value),
   coreUpgradeLvl: ({ player }, value) =>
-    applyRepeatableUpgradeLevel(player, "core", createDecimal(value)),
+    setRepeatableUpgradeLevel(player, "core", createDecimal(value)),
   boughtNinthVermyrosUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "vermyros_9", value),
   boughtTenthVermyrosUpgrade: ({ player }, value) =>
@@ -149,7 +149,7 @@ const conversionData: Data = {
     applyUpgradeById(player, "nullith_6", value),
   enteredSliph: (_, value) => ({ dimensionId: value ? "sliph" : "normal" }),
   dertointUpgradeLvl: ({ player }, value) =>
-    applyRepeatableUpgradeLevel(player, "dertoint", createDecimal(value)),
+    setRepeatableUpgradeLevel(player, "dertoint", createDecimal(value)),
   boughtFirstDertointUpgrade: ({ player }, value) =>
     applyUpgradeById(player, "dertoint_1", value),
   boughtSecondDertointUpgrade: ({ player }, value) =>

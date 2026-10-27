@@ -25,8 +25,7 @@ export type GainFormulaContainer = Partial<Record<CurrencyId, GainFormulas>>;
 
 type EffectFormula = Formula;
 type EffectFormulas =
-  | EffectFormula
-  | Partial<Record<CurrencyId, EffectFormula>>;
+  EffectFormula | Partial<Record<CurrencyId, EffectFormula>>;
 
 export type EffectFormulaContainer = Partial<
   Record<CurrencyId, EffectFormulas>
