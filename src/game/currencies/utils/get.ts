@@ -11,10 +11,10 @@ import {
   getDefaultCachedCurrencyEffect,
 } from "@game/player/cached/default";
 import { parseCachedPlayerLike } from "@game/player/utils";
-import currencyData from "../data";
+import currencyConfig from "../data";
 
-export function getCurrencyData(currencyId: CurrencyId) {
-  return currencyData[currencyId];
+export function getCurrencyConfig(currencyId: CurrencyId) {
+  return currencyConfig[currencyId];
 }
 
 export function getCachedCurrencyProp<P extends keyof CachedCurrency>(

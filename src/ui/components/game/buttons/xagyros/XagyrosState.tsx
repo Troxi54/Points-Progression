@@ -3,7 +3,7 @@ import type { CurrencyId } from "@game/currencies/types";
 import type { XagyrosState } from "@game/features/xagyrosStates/types";
 import cn from "@core/utils/tailwind";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
-import { getCurrencyData } from "@game/currencies/utils/get";
+import { getCurrencyConfig } from "@game/currencies/utils/get";
 import { activateXagyrosState } from "@game/features/xagyrosStates/utils/apply";
 import {
   getXagyrosStateCurrencyId,
@@ -29,7 +29,7 @@ function XagyrosStateComponent({
   effectClassName,
 }: Props) {
   const currencyId = getXagyrosStateCurrencyId(state);
-  const affects = getCurrencyData(currencyId).affects as CurrencyId;
+  const affects = getCurrencyConfig(currencyId).affects as CurrencyId;
 
   const { mergedPlayer } = getPlayerState();
 

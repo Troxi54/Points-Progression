@@ -1,15 +1,13 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import { applyUpdatedCurrencyGains } from "@game/currencies/utils/apply";
 import { parseNullionInput } from "@game/features/nullifice/utils";
 import formulas from "@game/formulas/data";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
+import { updateCurrencyGains } from "@game/currencies/utils/update";
 
 export default function gameLoopUpdateGains(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignCachedPlayerForMergedPlayer(
-    applyUpdatedCurrencyGains(mergedPlayer),
-  );
+  state.assignCachedPlayerForMergedPlayer(updateCurrencyGains(mergedPlayer));
 
   updateRelated(state);
 }

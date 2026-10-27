@@ -1,7 +1,7 @@
 import type {
-  CurrencyDataContainer,
-  PartialCurrencyData,
-  PartialCurrencyDataContainer,
+  CurrencyContainerConfig,
+  PartialCurrencyConfig,
+  PartialCurrencyContainerConfig,
 } from "../types";
 import {
   isObject,
@@ -9,15 +9,15 @@ import {
   objectEntries,
   objectFromEntries,
 } from "@core/utils/object";
-import getDefaultCurrencyData, {
+import getDefaultCurrencyConfig, {
   getDefaultCurrencyEffectData,
 } from "../default";
 
-function createCurrencyData(currencyData?: PartialCurrencyData) {
-  const defaultData = getDefaultCurrencyData();
-  const newData = mergeObjects(defaultData, currencyData);
+function buildCurrencyConfig(currencyData?: PartialCurrencyConfig) {
+  const defaultConfig = getDefaultCurrencyConfig();
+  const newConfig = mergeObjects(defaultConfig, currencyData);
 
-  const effectData = newData.affects;
+  const effectData = newConfig.affects;
   if (isObject(effectData)) {
     const defaultEffectData = getDefaultCurrencyEffectData();
     for (const [affects, data] of objectEntries(effectData)) {
@@ -26,15 +26,15 @@ function createCurrencyData(currencyData?: PartialCurrencyData) {
     }
   }
 
-  return newData;
+  return newConfig;
 }
 
-export function createCurrencyDataContainer(
-  container: PartialCurrencyDataContainer,
-): CurrencyDataContainer {
+export function createCurrencyContainerConfig(
+  container: PartialCurrencyContainerConfig,
+): CurrencyContainerConfig {
   return objectFromEntries(
     objectEntries(container).map(([id, data]) => {
-      return [id, createCurrencyData(data)];
+      return [id, buildCurrencyConfig(data)];
     }),
   );
 }

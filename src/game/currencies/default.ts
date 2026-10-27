@@ -1,6 +1,6 @@
-import type { CurrencyData, CurrencyEffectData } from "./types";
+import type { CurrencyConfig, CurrencyEffectData } from "./types";
 
-export default function getDefaultCurrencyData(): CurrencyData {
+export default function getDefaultCurrencyConfig(): CurrencyConfig {
   return {
     dimensionId: "normal",
     layer: null,

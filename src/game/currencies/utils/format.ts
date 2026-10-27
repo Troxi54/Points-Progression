@@ -8,13 +8,13 @@ import { formatWithPlural } from "@core/format/plural";
 import { isObject } from "@core/utils/object";
 import { capitalizeString } from "@core/utils/string";
 import pluralize, { plural } from "pluralize";
-import { getCurrencyData, getCurrencyEffectOn } from "./get";
+import { getCurrencyConfig, getCurrencyEffectOn } from "./get";
 
 export function formatCurrencyName(currencyId: CurrencyId): string {
-  const data = getCurrencyData(currencyId);
-  const name = data?.name;
+  const config = getCurrencyConfig(currencyId);
+  const name = config?.name;
 
-  if (data === undefined || name === undefined) {
+  if (config === undefined || name === undefined) {
     return capitalizeString(currencyId);
   }
 
@@ -26,10 +26,10 @@ export function formatCurrencyName(currencyId: CurrencyId): string {
 }
 
 export function formatCurrencyNameEmptyless(currencyId: CurrencyId): string {
-  const data = getCurrencyData(currencyId);
-  const name = data?.name;
+  const config = getCurrencyConfig(currencyId);
+  const name = config?.name;
 
-  if (data === undefined || name == null) {
+  if (config === undefined || name == null) {
     return capitalizeString(currencyId);
   }
 
@@ -51,15 +51,15 @@ export function formatCurrencyEffect(
   currencyFrom: CurrencyId,
   effectOn: CurrencyId,
 ): ReactNode {
-  const data = getCurrencyData(currencyFrom);
-  const { affects } = data;
+  const config = getCurrencyConfig(currencyFrom);
+  const { affects } = config;
 
   let effectModeInCurrencyData: EffectMode | null | undefined = null;
   if (isObject(affects)) {
     effectModeInCurrencyData = affects[effectOn]?.mode;
   }
 
-  const effectMode = effectModeInCurrencyData ?? data.effectMode;
+  const effectMode = effectModeInCurrencyData ?? config.effectMode;
 
   const effect = getCurrencyEffectOn(cachedPlayerLike, currencyFrom, effectOn);
 

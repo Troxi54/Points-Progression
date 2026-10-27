@@ -35,7 +35,7 @@ export type CurrencyId = DecimalKeys<
   >
 >;
 
-export interface CurrencyData<PE extends boolean = false> {
+export interface CurrencyConfig<PE extends boolean = false> {
   dimensionId: DimensionId;
   layer: number | null;
   name: string | null | undefined;
@@ -58,12 +58,12 @@ export interface CurrencyEffectData {
   works: BooleanGetter;
 }
 
-export type CurrencyDataContainer = Record<CurrencyId, CurrencyData>;
+export type CurrencyContainerConfig = Record<CurrencyId, CurrencyConfig>;
 
-export type PartialCurrencyData = Partial<CurrencyData<true>>;
-export type PartialCurrencyDataContainer = Record<
+export type PartialCurrencyConfig = Partial<CurrencyConfig<true>>;
+export type PartialCurrencyContainerConfig = Record<
   CurrencyId,
-  PartialCurrencyData
+  PartialCurrencyConfig
 >;
 
 export type CachedCurrencyPropSelection<

@@ -1,7 +1,7 @@
 import type { CurrencyId } from "@game/currencies/types";
 import type { GameLoopPartState } from "@game/gameLoop/types";
 import type { ResetLayerId } from "@game/resetLayers/types";
-import { applyGeneratedCurrencies } from "@game/currencies/utils/apply";
+import { generateCurrencies } from "@game/currencies/utils/generate";
 import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import formulas from "@game/formulas/data";
 import { getResetLayerPlayerData } from "@game/resetLayers/utils/get";
@@ -12,7 +12,7 @@ export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {
   const { player } = mergedPlayer;
 
   state.assignPlayerForMergedPlayer(
-    applyGeneratedCurrencies(mergedPlayer, state.deltaTime),
+    generateCurrencies(mergedPlayer, state.deltaTime),
   );
 
   gameLoopGenerateOfflineResets(

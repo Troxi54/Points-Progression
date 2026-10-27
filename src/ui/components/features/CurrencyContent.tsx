@@ -10,7 +10,7 @@ import { arrayLastIndex, isEmpty } from "@core/utils/array";
 import { isDecimal } from "@core/utils/decimal";
 import { mergeObjects, objectEntries } from "@core/utils/object";
 import { formatCurrencyNameEmptyless } from "@game/currencies/utils/format";
-import { getCurrencyData } from "@game/currencies/utils/get";
+import { getCurrencyConfig } from "@game/currencies/utils/get";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
@@ -51,7 +51,7 @@ function CurrencyContent({
   formatType,
   setMode,
 }: CurrencyComponentProps) {
-  const currencyData = getCurrencyData(currencyId);
+  const currencyConfig = getCurrencyConfig(currencyId);
 
   const state = usePlayer(
     (state) => {
@@ -93,7 +93,7 @@ function CurrencyContent({
   const { mergedPlayer } = getPlayerState();
 
   const passiveGainWorks = parseValueGetter(
-    currencyData.passiveGainWorks,
+    currencyConfig.passiveGainWorks,
     mergedPlayer,
   );
 

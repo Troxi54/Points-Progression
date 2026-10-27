@@ -2,10 +2,10 @@ import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { isXagyrosStateActive } from "@game/features/xagyrosStates/utils/get";
 import { everPerformed } from "@game/resetLayers/utils/get";
 import { hasOneOfUpgrades, hasUpgradeById } from "@game/upgrades/utils/has";
-import { createCurrencyDataContainer } from "./utils/create";
+import { createCurrencyContainerConfig } from "./utils/create";
 import { getCachedCurrencyProp } from "./utils/get";
 
-const currencyData = createCurrencyDataContainer({
+const currencyConfig = createCurrencyContainerConfig({
   points: {
     layer: 1,
     name: null,
@@ -238,4 +238,4 @@ const currencyData = createCurrencyDataContainer({
   },
 });
 
-export default currencyData;
+export default currencyConfig;

@@ -1,13 +1,11 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import { applyUpdatedCurrencyEffects } from "@game/currencies/utils/apply";
+import { updateCurrencyEffects } from "@game/currencies/utils/generate";
 import effectFormulas from "@game/formulas/effects";
 
 export default function gameLoopUpdateEffects(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignCachedPlayerForMergedPlayer(
-    applyUpdatedCurrencyEffects(mergedPlayer),
-  );
+  state.assignCachedPlayerForMergedPlayer(updateCurrencyEffects(mergedPlayer));
 
   updateOtherEffects(state);
 }

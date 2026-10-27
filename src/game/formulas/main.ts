@@ -5,7 +5,7 @@ import type { LayerNumber } from "@game/resetLayers/types";
 import type Decimal from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
 import { hasKey, isObject, objectEntries } from "@core/utils/object";
-import currencyData from "@game/currencies/data";
+import currencyConfig from "@game/currencies/data";
 import { currencyEffectWorks } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
@@ -78,7 +78,7 @@ const mainFormulas = {
     let cumulativeMul = createDecimal(1);
     let cumulativePow = createDecimal(1);
 
-    for (const [id, currency] of objectEntries(currencyData)) {
+    for (const [id, currency] of objectEntries(currencyConfig)) {
       const { affects } = currency;
       if (!affects) continue;
 
