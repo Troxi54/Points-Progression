@@ -1,129 +1,114 @@
-import type { PickByKeys, PickSetters } from "@core/types/pick";
-import type { GameVersion } from "@core/types/version";
-import type { DimensionId } from "@game/dimensions/types";
-import type { XagyrosState } from "@game/features/xagyrosStates/types";
-import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
-import type { ResetLayerId } from "@game/resetLayers/types";
-import type { UpgradeContainerId } from "@game/upgrades/types";
-import type Decimal from "break_eternity.js";
-import type { CachedPlayer } from "./cached/types";
-import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
-import type { PlayerSetterName, PlayerState } from "./store/types";
-import { NumberNotation } from "@core/format/types";
+import type { Player, ResetLayerPlayerData } from "./types";
+import gameConfig from "@core/config/data";
+import createDecimal from "@core/utils/decimal";
+import { getCurrentTime } from "@core/utils/time";
 
-export interface Player {
-  gameVersion: GameVersion;
-  lastTick: number;
-  offlineOffset: number;
-  unspentOfflineTime: number;
+export function getDefaultPlayer(): Player {
+  const currentTime = getCurrentTime();
 
-  hideBoughtUpgrades: boolean;
-  stableProgressBars: boolean;
-  numberNotation: NumberNotation;
-  autosave: boolean;
-  saveBeforeUnload: boolean;
-  offlineProgressWorks: boolean;
-  menuBackgroundBlur: boolean;
+  const firstResetLayerData = getDefaultResetLayerPlayerData();
+  firstResetLayerData.startedDate = currentTime;
 
-  upgrades: Partial<Record<UpgradeContainerId, boolean[]>>;
-  repeatableUpgrades: Partial<Record<RepeatableUpgradeId, Decimal>>;
-  resetLayers: Partial<Record<ResetLayerId, PartialResetLayerPlayerData>>;
+  return {
+    gameVersion: gameConfig.gameVersion,
+    lastTick: currentTime,
+    offlineOffset: 0,
+    unspentOfflineTime: 0,
 
-  dimensionId: DimensionId;
-  enteredInfiniteMode: boolean;
+    hideBoughtUpgrades: false,
+    stableProgressBars: true,
+    numberNotation: "standard",
+    autosave: true,
+    saveBeforeUnload: true,
+    offlineProgressWorks: true,
+    menuBackgroundBlur: true,
 
-  infiniteMode: {
-    layers: {
-      resetLayer: InfiniteModeResetLayerPlayerData;
-      bestRun: number;
-      currency: Decimal;
-      repeatableUpgradeLvl: Decimal;
-      upgrades: boolean[];
-    }[];
+    upgrades: {},
+    repeatableUpgrades: {},
+    resetLayers: {
+      reset: firstResetLayerData,
+    },
+
+    dimensionId: "normal",
+    enteredInfiniteMode: false,
+    infiniteMode: {
+      layers: [],
+    },
+
+    points: createDecimal(0),
+    bestPoints: createDecimal(0),
+    bestRun: null,
+    bestPointsOfRun: createDecimal(0),
+    tier: createDecimal(0),
+    madeTierTimes: createDecimal(0),
+    ampliflux: createDecimal(0),
+
+    vermytes: createDecimal(0),
+    bestVermytes: createDecimal(0),
+    vermora: createDecimal(0),
+    enteredAmplivault: false,
+    amplivaultLevel: createDecimal(0),
+    bestSoftcapperLevel: createDecimal(0),
+
+    energyReactors: createDecimal(0),
+    energy: createDecimal(0),
+    everReachedCores: false,
+    everMadeCoreReset: false,
+    cores: createDecimal(0),
+    darkEnergy: createDecimal(0),
+
+    madeNullithResets: createDecimal(0),
+    reachedBreakAmplivault: false,
+    amplivaultBroken: false,
+    nullionInput: "",
+    nullions: createDecimal(0),
+    everEnteredSliph: false,
+    dertoints: createDecimal(0),
+    mallirtTotalDertoints: createDecimal(0),
+    everReachedCappergy: false,
+    cappergy: createDecimal(0),
+
+    score: createDecimal(0),
+    XP: createDecimal(0),
+    nux: createDecimal(0),
+    everTriggeredNuxar: false,
+    nexusLevel: createDecimal(0),
+    bestNexusLevel: createDecimal(0),
+    amplivoid: createDecimal(0),
+
+    xagytes: createDecimal(0),
+    xagyrosStates: ["dertoints"],
+    xagoraDertoints: createDecimal(0),
+    xagoraPoints: createDecimal(0),
+    xagoraNullithResets: createDecimal(0),
+    xagoraNux: createDecimal(0),
+
+    enteredAntinefit: false,
+    everEnteredAntinefit: false,
+    everLeftAntinefit: false,
+    antiPoints: createDecimal(0),
+    beneflux: createDecimal(0),
+
+    rank: createDecimal(0),
+    rankTier: 0,
   };
-
-  points: Decimal;
-  bestPoints: Decimal;
-  bestRun: Decimal | null;
-  bestPointsOfRun: Decimal;
-
-  tier: Decimal;
-  madeTierTimes: Decimal;
-  ampliflux: Decimal;
-
-  vermytes: Decimal;
-  bestVermytes: Decimal;
-  vermora: Decimal;
-  enteredAmplivault: boolean;
-  amplivaultLevel: Decimal;
-  bestSoftcapperLevel: Decimal;
-
-  energyReactors: Decimal;
-  energy: Decimal;
-  everReachedCores: boolean;
-  everMadeCoreReset: boolean;
-  cores: Decimal;
-  darkEnergy: Decimal;
-
-  madeNullithResets: Decimal;
-  reachedBreakAmplivault: boolean;
-  amplivaultBroken: boolean;
-  nullionInput: string;
-  nullions: Decimal;
-  everEnteredSliph: boolean;
-  dertoints: Decimal;
-  mallirtTotalDertoints: Decimal;
-  everReachedCappergy: boolean;
-  cappergy: Decimal;
-  score: Decimal;
-  XP: Decimal;
-  nux: Decimal;
-  everTriggeredNuxar: boolean;
-  nexusLevel: Decimal;
-  bestNexusLevel: Decimal;
-  amplivoid: Decimal;
-  xagytes: Decimal;
-  xagyrosStates: XagyrosState[];
-  xagoraDertoints: Decimal;
-  xagoraPoints: Decimal;
-  xagoraNullithResets: Decimal;
-  xagoraNux: Decimal;
-
-  enteredAntinefit: boolean;
-  everEnteredAntinefit: boolean;
-  everLeftAntinefit: boolean;
-  antiPoints: Decimal;
-  beneflux: Decimal;
 }
 
-export interface ResetLayerPlayerData {
-  everPerformed: boolean;
-  isFirstReset: boolean;
-  startedDate: number | null;
-  autoEnabled: boolean;
-  resetsPerSecond: number;
+export function getDefaultRepeatableUpgradeLevel() {
+  return createDecimal(0);
 }
 
-export type InfiniteModeResetLayerPlayerData = Omit<
-  ResetLayerPlayerData,
-  "everPerformed" | "isFirstReset"
->;
+export function getDefaultResetLayerPlayerData(): ResetLayerPlayerData {
+  return {
+    everPerformed: false,
+    isFirstReset: true,
+    startedDate: null,
+    autoEnabled: true,
+    resetsPerSecond: 0,
+  };
+}
 
-export type PartialResetLayerPlayerData = Partial<ResetLayerPlayerData>;
-
-export type PartialPlayer = Partial<Player>;
-
-export type UsePlayerFieldsReturn<
-  KP extends readonly (keyof Player)[] | undefined,
-  KC extends readonly (keyof CachedPlayer)[] | undefined,
-  S extends readonly PlayerSetterName[] | undefined,
-> = PickByKeys<Player, KP> & PickByKeys<CachedPlayer, KC> & PickSetters<S>;
-
-export type PlayerLike =
-  Player | PartialPlayer | PartialMergedPlayer | PlayerState | undefined;
-
-export type ValueGetter<T, P extends unknown[] = []> =
-  T | ((mergedPlayer: MergedPlayer, ...args: P) => T);
-export type BooleanGetter = ValueGetter<boolean>;
-
-export type MinifiedPlayer = (Player[keyof Player] | null)[];
+export const requiredPlayerProps = new Set<keyof Player>([
+  "gameVersion",
+  "lastTick",
+]);
