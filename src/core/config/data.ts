@@ -8,7 +8,7 @@ const gameConfig = {
     minor: 2,
     patch: 7,
   } as GameVersion,
-  endgameAt: createDecimal("1e9075"),
+  endgameAt: createDecimal("1e250000"),
 } as const;
 
 export default gameConfig;
