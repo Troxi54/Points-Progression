@@ -1,6 +1,6 @@
+import type { GameLoopPartState } from "@game/gameLoop/types";
 //import { getInfiniteModeLayerCountToRender } from "@game/features/infiniteMode/utils/get";
 import { isInfiniteModeUnlocked } from "@game/features/infiniteMode/utils/is";
-import { GameLoopPartState } from "@game/gameLoop/types";
 
 export function gameLoopUpdateStates(state: GameLoopPartState) {
   const { mergedPlayer } = state;
