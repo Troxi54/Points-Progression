@@ -1,4 +1,5 @@
-import Svg, { SvgProps } from "../Svg";
+import type { SvgProps } from "../Svg";
+import Svg from "../Svg";
 
 function StarIcon({ ...props }: SvgProps) {
   return (

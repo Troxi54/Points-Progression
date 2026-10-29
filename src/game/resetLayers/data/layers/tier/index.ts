@@ -4,8 +4,8 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
-import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import { hasUpgradeSelectionById } from "@game/upgrades/utils/selector";
 

@@ -1,3 +1,4 @@
+import type { NumberNotation } from "@core/format/types";
 import type { PickByKeys, PickSetters } from "@core/types/pick";
 import type { GameVersion } from "@core/types/version";
 import type { DimensionId } from "@game/dimensions/types";
@@ -9,7 +10,6 @@ import type Decimal from "break_eternity.js";
 import type { CachedPlayer } from "./cached/types";
 import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
 import type { PlayerSetterName, PlayerState } from "./store/types";
-import { NumberNotation } from "@core/format/types";
 
 export interface Player {
   gameVersion: GameVersion;

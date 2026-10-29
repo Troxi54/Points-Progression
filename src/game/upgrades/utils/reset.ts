@@ -1,10 +1,10 @@
 import type { PartialPlayer, Player } from "@game/player/types";
 import type { ResetLayerId } from "@game/resetLayers/types";
 import type { UpgradeContainerId } from "@game/upgrades/types";
+import type {KeptUpgrades} from "../resetTypes";
 import { copyObject, objectEntries } from "@core/utils/object";
-import upgradeResetData from "@game/upgrades/resetData";
-import { type KeptUpgrades } from "../resetTypes";
 import resetLayers from "@game/resetLayers/data";
+import upgradeResetData from "@game/upgrades/resetData";
 
 function getResetLayerPosition(resetLayerId: ResetLayerId) {
   for (const [dimensionId, layers] of objectEntries(resetLayers)) {

@@ -14,18 +14,22 @@ function MenuInfoNotationPage() {
   const unitLogs = numberNotationUnitLogs[numberNotation] ?? [];
 
   const units = unitLogs.map(([unit, startsAt], index) => {
-    if (startsAt.equals(0)) return;
+    if (startsAt.equals(0)) {
+      return null;
+    }
+
+    if (startsAt.lessThan(6)) {
+      return (
+        <span key={index}>
+          1{unit} = {integerCommaFormat(Decimal.pow(10, startsAt))}
+          <br />
+        </span>
+      );
+    }
 
     return (
       <span key={index}>
-        1{unit} ={" "}
-        {startsAt.lessThan(6) ? (
-          <>{integerCommaFormat(Decimal.pow(10, startsAt))}</>
-        ) : (
-          <>
-            10<Pow>{integerCommaFormat(startsAt)}</Pow>
-          </>
-        )}
+        1{unit} = 10<Pow>{integerCommaFormat(startsAt)}</Pow>
         <br />
       </span>
     );

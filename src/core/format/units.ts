@@ -1,7 +1,7 @@
+import type Decimal from "break_eternity.js";
 import type { FormatNumberGroupContainer, NumberNotation, Unit } from "./types";
 import createDecimal from "@core/utils/decimal";
 import { objectEntries } from "@core/utils/object";
-import Decimal from "break_eternity.js";
 
 const numberNotations: FormatNumberGroupContainer = {
   standard: [

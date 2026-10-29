@@ -1,5 +1,5 @@
 import type { UpgradeContainerId } from "@game/upgrades/types";
-import { UpgradeResetConfig } from "./resetTypes";
+import type { UpgradeResetConfig } from "./resetTypes";
 
 /**
  * Reset behaviour is kept separate from UI upgrade definitions so reset code

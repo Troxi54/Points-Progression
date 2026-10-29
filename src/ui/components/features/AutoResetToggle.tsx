@@ -6,12 +6,12 @@ import { mergeObjects } from "@core/utils/object";
 import { capitalizeString } from "@core/utils/string";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
-import { toggleResetLayerAuto } from "@game/resetLayers/utils/set";
 import {
   everPerformed,
   getResetLayerPlayerDataProp,
 } from "@game/resetLayers/utils/get";
 import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
+import { toggleResetLayerAuto } from "@game/resetLayers/utils/set";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
 import Button from "../base/Button";
 import Paragraph from "../base/Paragraph";

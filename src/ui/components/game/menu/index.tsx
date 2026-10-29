@@ -1,4 +1,5 @@
 import Container from "@ui/components/base/Container";
+import InfiniteModeButton from "./infiniteMode";
 import InfoButton from "./info";
 import InfoMenu from "./info/menu";
 import OfflineMenu from "./offline";
@@ -8,7 +9,6 @@ import SettingsButton from "./settings";
 import ExportMenu from "./settings/export";
 import ImportMenu from "./settings/import";
 import SettingsMenu from "./settings/menu";
-import InfiniteModeButton from "./infiniteMode";
 
 function Menu() {
   return (

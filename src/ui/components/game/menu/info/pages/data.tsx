@@ -1,8 +1,8 @@
 import type { MenuInfoPages } from "./types";
+import StarIcon from "@ui/components/base/icons/Star";
 import MenuInfoFormulaPage from "./formulas";
 import MenuInfoMainPage from "./main";
 import MenuInfoNotationPage from "./notation";
-import StarIcon from "@ui/components/base/icons/Star";
 
 const menuInfoPages: MenuInfoPages = [
   {

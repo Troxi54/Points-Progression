@@ -1,10 +1,10 @@
-import { mergeObjects } from "@core/utils/object";
 import type {
-  CachedPlayerLike,
   CachedCurrency,
+  CachedPlayerLike,
 } from "@game/player/cached/types";
-import { parseCachedPlayerLike } from "@game/player/utils";
 import type { CurrencyId } from "../types";
+import { mergeObjects } from "@core/utils/object";
+import { parseCachedPlayerLike } from "@game/player/utils";
 
 export function setCachedCurrency(
   cachedPlayerLike: CachedPlayerLike,

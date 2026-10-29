@@ -4,9 +4,9 @@ import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
-import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { defineResetLayer } from "@game/resetLayers/utils/create";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 const vermyrosResetLayer = defineResetLayer<"normal">({

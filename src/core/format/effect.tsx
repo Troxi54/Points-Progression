@@ -9,9 +9,9 @@ import {
 } from "@game/currencies/utils/format";
 import Pow from "@ui/components/base/Pow";
 import symbols from "@ui/symbols";
+import Decimal from "break_eternity.js";
 import pluralize from "pluralize";
 import { formatNumber } from "./number";
-import Decimal from "break_eternity.js";
 
 export function formatEffectSingular(
   effect: DecimalSource,
