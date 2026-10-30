@@ -23,7 +23,7 @@ jobs:
           fi
 
       - name: Upload to itch.io
-        uses: Ayowel/butler-to-itch@v1
+        uses: Ayowel/butler-to-itch@v2
         with:
           butler_key: ${{ secrets.BUTLER_API_KEY }}
           itch_user: Troxi
