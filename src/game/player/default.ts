@@ -1,111 +1,34 @@
-import type { Player, ResetLayerPlayerData } from "./types";
 import gameConfig from "@core/config/data";
-import createDecimal from "@core/utils/decimal";
-import { getCurrentTime } from "@core/utils/time";
+import { formatNumber } from "@core/format/number";
+import Caption from "@ui/components/base/Caption";
+import Spoiler from "@ui/components/base/Spoiler";
+import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 
-export function getDefaultPlayer(): Player {
-  const currentTime = getCurrentTime();
+function MenuInfoMainPageEndgame() {
+  const { gameProgress } = usePlayerFields({
+    cachedPlayer: ["gameProgress"],
+  });
 
-  const firstResetLayerData = getDefaultResetLayerPlayerData();
-  firstResetLayerData.startedDate = currentTime;
+  const rankTier = gameConfig.getRankTierName(gameProgress);
+  const rankTierMilestones = gameConfig.rankTiers
+    .map(({ name, progress }) => `${name} (${formatNumber(progress.multiply(100))}%)`)
+    .join(" • ");
 
-  return {
-    gameVersion: gameConfig.gameVersion,
-    lastTick: currentTime,
-    offlineOffset: 0,
-    unspentOfflineTime: 0,
-
-    hideBoughtUpgrades: false,
-    stableProgressBars: true,
-    numberNotation: "standard",
-    autosave: true,
-    saveBeforeUnload: true,
-    offlineProgressWorks: true,
-    menuBackgroundBlur: true,
-
-    upgrades: {},
-    repeatableUpgrades: {},
-    resetLayers: {
-      reset: firstResetLayerData,
-    },
-
-    dimensionId: "normal",
-    enteredInfiniteMode: false,
-    infiniteMode: {
-      layers: [],
-    },
-
-    points: createDecimal(0),
-    bestPoints: createDecimal(0),
-    bestRun: null,
-    bestPointsOfRun: createDecimal(0),
-    tier: createDecimal(0),
-    madeTierTimes: createDecimal(0),
-    ampliflux: createDecimal(0),
-
-    vermytes: createDecimal(0),
-    bestVermytes: createDecimal(0),
-    vermora: createDecimal(0),
-    enteredAmplivault: false,
-    amplivaultLevel: createDecimal(0),
-    bestSoftcapperLevel: createDecimal(0),
-
-    energyReactors: createDecimal(0),
-    energy: createDecimal(0),
-    everReachedCores: false,
-    everMadeCoreReset: false,
-    cores: createDecimal(0),
-    darkEnergy: createDecimal(0),
-
-    madeNullithResets: createDecimal(0),
-    reachedBreakAmplivault: false,
-    amplivaultBroken: false,
-    nullionInput: "",
-    nullions: createDecimal(0),
-    everEnteredSliph: false,
-    dertoints: createDecimal(0),
-    mallirtTotalDertoints: createDecimal(0),
-    everReachedCappergy: false,
-    cappergy: createDecimal(0),
-
-    score: createDecimal(0),
-    XP: createDecimal(0),
-    nux: createDecimal(0),
-    everTriggeredNuxar: false,
-    nexusLevel: createDecimal(0),
-    bestNexusLevel: createDecimal(0),
-    amplivoid: createDecimal(0),
-
-    xagytes: createDecimal(0),
-    xagyrosStates: ["dertoints"],
-    xagoraDertoints: createDecimal(0),
-    xagoraPoints: createDecimal(0),
-    xagoraNullithResets: createDecimal(0),
-    xagoraNux: createDecimal(0),
-
-    enteredAntinefit: false,
-    everEnteredAntinefit: false,
-    everLeftAntinefit: false,
-    antiPoints: createDecimal(0),
-    beneflux: createDecimal(0),
-  };
+  return (
+    <>
+      <Caption>Endgame: </Caption>
+      <Spoiler>
+        {formatNumber(gameConfig.endgameAt)} ({formatNumber(gameProgress.multiply(100))}
+        %)
+      </Spoiler>
+      <br />
+      <Caption>Rank tier: </Caption>
+      {rankTier}
+      <br />
+      <Caption>Milestones: </Caption>
+      {rankTierMilestones}
+    </>
+  );
 }
 
-export function getDefaultRepeatableUpgradeLevel() {
-  return createDecimal(0);
-}
-
-export function getDefaultResetLayerPlayerData(): ResetLayerPlayerData {
-  return {
-    everPerformed: false,
-    isFirstReset: true,
-    startedDate: null,
-    autoEnabled: true,
-    resetsPerSecond: 0,
-  };
-}
-
-export const requiredPlayerProps = new Set<keyof Player>([
-  "gameVersion",
-  "lastTick",
-]);
+export default MenuInfoMainPageEndgame;
