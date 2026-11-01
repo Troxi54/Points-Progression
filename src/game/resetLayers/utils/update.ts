@@ -1,22 +1,22 @@
-import { mergeObjects } from "@core/utils/object";
-import { getCurrentGameTime } from "@core/utils/time";
 import type { CachedResetLayer } from "@game/player/cached/types";
 import type {
   MergedPlayer,
   PartialMergedPlayer,
 } from "@game/player/merged/types";
-import { mergePartialPlayer } from "@game/player/merged/utils";
 import type {
-  ResetLayerPlayerData,
   PartialResetLayerPlayerData,
+  ResetLayerPlayerData,
 } from "@game/player/types";
 import type { ResetLayerId } from "../types";
+import { mergeObjects } from "@core/utils/object";
+import { getCurrentGameTime } from "@core/utils/time";
+import { mergePartialPlayer } from "@game/player/merged/utils";
 import {
-  getResetLayerPlayerData,
   getResetLayerCachedPlayerData,
+  getResetLayerPlayerData,
   getResetLayerPropsFromPlayerData,
 } from "./get";
-import { setResetLayerPlayerData, setResetLayerCachedPlayerData } from "./set";
+import { setResetLayerCachedPlayerData, setResetLayerPlayerData } from "./set";
 
 export function updateResetLayer(
   mergedPlayer: MergedPlayer,

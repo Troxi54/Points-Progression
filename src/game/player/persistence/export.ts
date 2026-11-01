@@ -1,7 +1,7 @@
+import gameConfig from "@core/config/data";
+import { getCurrentTime } from "@core/utils/time";
 import { getPlayerState } from "@game/player/store";
 import { serializePlayer } from "./compress";
-import { getCurrentTime } from "@core/utils/time";
-import gameConfig from "@core/config/data";
 
 export function exportPlayer(): string {
   const { player } = getPlayerState();

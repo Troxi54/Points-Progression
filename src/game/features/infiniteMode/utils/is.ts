@@ -1,5 +1,5 @@
+import type { PlayerLike } from "@game/player/types";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";
-import { PlayerLike } from "@game/player/types";
 import { parsePlayerLike } from "@game/player/utils";
 
 export function isInInfiniteMode(playerLike: PlayerLike): boolean {

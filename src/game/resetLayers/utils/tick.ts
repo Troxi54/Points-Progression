@@ -1,10 +1,10 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import { triggerAllResetLayers } from "./trigger";
-import resetLayerConfig from "../config";
 import { deepCopy } from "@core/utils/object";
-import resetLayers from "../data";
-import { updateResetLayer } from "./update";
 import { assignMergedPlayer } from "@game/player/merged/utils";
+import resetLayerConfig from "../config";
+import resetLayers from "../data";
+import { triggerAllResetLayers } from "./trigger";
+import { updateResetLayer } from "./update";
 
 export function tickAllResetLayers(
   mergedPlayer: MergedPlayer,

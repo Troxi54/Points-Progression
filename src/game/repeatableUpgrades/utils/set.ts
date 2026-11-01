@@ -1,13 +1,13 @@
-import { copyObject, mergeObjects } from "@core/utils/object";
-import type { PlayerLike, PartialPlayer } from "@game/player/types";
-import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
-import type Decimal from "break_eternity.js";
-import type { RepeatableUpgradeId } from "../types";
 import type {
   CachedPlayerLike,
   CachedRepeatableUpgrade,
   PartialCachedPlayer,
 } from "@game/player/cached/types";
+import type { PartialPlayer, PlayerLike } from "@game/player/types";
+import type Decimal from "break_eternity.js";
+import type { RepeatableUpgradeId } from "../types";
+import { copyObject, mergeObjects } from "@core/utils/object";
+import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 
 export function setRepeatableUpgradeLevel(
   playerLike: PlayerLike,

@@ -1,3 +1,4 @@
+import type { UpgradeContainerConfig, UpgradeContainerId } from "./types";
 import dertointUpgrades from "./containers/dertoint";
 import levelUpgrades from "./containers/level";
 import mallirtUpgrades from "./containers/mallirt";
@@ -6,7 +7,6 @@ import resetUpgrades from "./containers/reset";
 import tierUpgrades from "./containers/tier";
 import vermyrosUpgrades from "./containers/vermyros";
 import xagyrosUpgrades from "./containers/xagyros";
-import { UpgradeContainerId, UpgradeContainerConfig } from "./types";
 
 export const upgrades: Record<UpgradeContainerId, UpgradeContainerConfig> = {
   reset: resetUpgrades,

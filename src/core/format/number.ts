@@ -16,8 +16,8 @@ import { mergeObjects } from "@core/utils/object";
 import { getPlayerState } from "@game/player/store";
 import symbols from "@ui/symbols";
 import Decimal from "break_eternity.js";
-import numberNotations from "./units";
 import { formatConfig } from "./config";
+import numberNotations from "./units";
 
 const ADD_COMMAS_AT = 1000;
 

@@ -1,7 +1,7 @@
-import { copyObject, deepCopy, objectEntries } from "@core/utils/object";
-import type { PlayerLike, PartialPlayer } from "@game/player/types";
-import { parsePlayerLike } from "@game/player/utils";
+import type { PartialPlayer, PlayerLike } from "@game/player/types";
 import type { UpgradeContainerId, UpgradeId } from "../types";
+import { copyObject, deepCopy, objectEntries } from "@core/utils/object";
+import { parsePlayerLike } from "@game/player/utils";
 import { splitUpgradeId } from "./id";
 
 export function setUpgrade(

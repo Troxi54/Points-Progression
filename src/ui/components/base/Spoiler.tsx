@@ -1,5 +1,6 @@
-import { useState, type ComponentProps } from "react";
+import type {ComponentProps} from "react";
 import cn from "@core/utils/tailwind";
+import {  useState } from "react";
 
 type Props = ComponentProps<"span">;
 

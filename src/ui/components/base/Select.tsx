@@ -1,5 +1,6 @@
+import type { ComponentProps} from "react";
 import cn from "@core/utils/tailwind";
-import { ComponentProps, useId } from "react";
+import { useId } from "react";
 import ChevronDownIcon from "./icons/ChevronDown";
 
 type Value = string;

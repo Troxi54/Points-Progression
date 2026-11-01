@@ -1,10 +1,11 @@
-import { formatTime } from "@core/format/time";
 import type { MenuInfoFormulaContainer } from "./types";
 import { formatNumber, integerCommaFormat } from "@core/format/number";
+import { formatTime } from "@core/format/time";
 import amplivaultConfig from "@game/features/amplivault/config";
 import cappergyConfig from "@game/features/cappergy/config";
 import nuxarConfig from "@game/features/nuxar/config";
 import { getRepeatableUpgradeConfig } from "@game/repeatableUpgrades/utils/get";
+import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
 import {
   everPerformed,
   getResetLayerConfig,
@@ -12,12 +13,11 @@ import {
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import Caption from "@ui/components/base/Caption";
 import Log from "@ui/components/base/Log";
+import Max from "@ui/components/base/Max";
 import Min from "@ui/components/base/Min";
 import Pow from "@ui/components/base/Pow";
 import Stat from "@ui/components/base/Stat";
 import symbols from "@ui/symbols";
-import resetResetLayerConfig from "@game/resetLayers/data/layers/reset/config";
-import Max from "@ui/components/base/Max";
 
 const menuInfoFormulaContainer: MenuInfoFormulaContainer = [
   {

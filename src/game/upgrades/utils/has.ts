@@ -1,8 +1,8 @@
 import type { PlayerLike } from "@game/player/types";
 import type {
   UpgradeCollection,
-  UpgradeContainerId,
   UpgradeConfig,
+  UpgradeContainerId,
   UpgradeId,
   UpgradesFlags,
 } from "@game/upgrades/types";

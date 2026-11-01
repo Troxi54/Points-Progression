@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import type { Player } from "@game/player/types";
+import { describe, expect, it } from "vitest";
 import { applyResetLayerUpgradeReset } from "./reset";
 
 function playerWithUpgrades(upgrades: Player["upgrades"]): Player {

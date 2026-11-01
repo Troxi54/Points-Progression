@@ -2,8 +2,8 @@ import type { DimensionId } from "@game/dimensions/types";
 import { getCurrentGameTime } from "@core/utils/time";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";
-import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
+import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export function toggleSliph() {

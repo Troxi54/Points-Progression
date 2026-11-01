@@ -1,21 +1,21 @@
-import type { MergedPlayer } from "@game/player/merged/types";
-import { fixGameTime } from "@core/utils/time";
-import { copyObject, mergeObjects } from "@core/utils/object";
-import { getDefaultResetLayerPlayerData } from "@game/player/default";
 import type {
-  PlayerLike,
-  ResetLayerPlayerData,
-  PartialPlayer,
-} from "@game/player/types";
-import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
-import type { ResetLayerId } from "../types";
-import { getResetLayerPlayerDataProp } from "./get";
-import { getDefaultCachedResetLayer } from "@game/player/cached/default";
-import type {
+  CachedPlayer,
   CachedPlayerLike,
   CachedResetLayer,
-  CachedPlayer,
 } from "@game/player/cached/types";
+import type { MergedPlayer } from "@game/player/merged/types";
+import type {
+  PartialPlayer,
+  PlayerLike,
+  ResetLayerPlayerData,
+} from "@game/player/types";
+import type { ResetLayerId } from "../types";
+import { copyObject, mergeObjects } from "@core/utils/object";
+import { fixGameTime } from "@core/utils/time";
+import { getDefaultCachedResetLayer } from "@game/player/cached/default";
+import { getDefaultResetLayerPlayerData } from "@game/player/default";
+import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
+import { getResetLayerPlayerDataProp } from "./get";
 
 export function setFixedResetLayerDates(
   mergedPlayer: MergedPlayer,

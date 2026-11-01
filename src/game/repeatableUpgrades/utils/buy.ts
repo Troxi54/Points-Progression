@@ -1,21 +1,21 @@
-import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import type {
   MergedPlayer,
   PartialMergedPlayer,
 } from "@game/player/merged/types";
 import type { PartialPlayer } from "@game/player/types";
-import { parseValueGetter } from "@game/player/utils";
 import type Decimal from "break_eternity.js";
-import type { RepeatableUpgradeId, RepeatableUpgradeConfig } from "../types";
+import type { RepeatableUpgradeConfig, RepeatableUpgradeId } from "../types";
+import createDecimal from "@core/utils/decimal";
+import { shouldDimensionWork } from "@game/dimensions/utils/check";
+import { parseValueGetter } from "@game/player/utils";
 import {
-  calculateRepeatableUpgradeCost,
   calculateRepeatableUpgradeBulkWithMax,
+  calculateRepeatableUpgradeCost,
   getRepeatableUpgradeBulkCostAndLevel,
 } from "./calculate";
 import { getRepeatableUpgradeConfig, getRepeatableUpgradeLevel } from "./get";
 import { setRepeatableUpgradeLevel } from "./set";
 import { updateCachedRepeatableUpgrade } from "./update";
-import createDecimal from "@core/utils/decimal";
 
 export function buyRepeatableUpgradeWithBulk(
   mergedPlayer: MergedPlayer,

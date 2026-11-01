@@ -1,9 +1,12 @@
+import type { NumberNotation } from "@core/format/types";
 import type { CSSProperties } from "react";
 import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";
+import { getPlayerState } from "@game/player/store";
 import { togglePlayerField } from "@game/player/utils";
 import resetLayerConfig from "@game/resetLayers/config";
 import Button from "@ui/components/base/Button";
+import Select from "@ui/components/base/Select";
 import Stack from "@ui/components/base/Stack";
 import StatusText from "@ui/components/base/StatusText";
 import Tooltip from "@ui/components/base/Tooltip";
@@ -11,9 +14,6 @@ import { useMenu } from "@ui/hooks/useMenu";
 import { usePlayerFields } from "@ui/hooks/usePlayer/main";
 import { useEffect, useState } from "react";
 import Overlay from "../overlay";
-import { NumberNotation } from "@core/format/types";
-import Select from "@ui/components/base/Select";
-import { getPlayerState } from "@game/player/store";
 
 const SettingsMenu = () => {
   const { open } = useMenu();
