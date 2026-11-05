@@ -1,7 +1,5 @@
-import type {
-  CachedRepeatableUpgrade,
-  PartialCachedPlayer,
-} from "@game/player/cached/types";
+import type { PartialCachedPlayer } from "@game/player/cached/types";
+import type { CachedRepeatableUpgrade } from "../cachedData";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { RepeatableUpgradeId } from "../ids";
 import {

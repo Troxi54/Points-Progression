@@ -1,5 +1,5 @@
 import type { ClassName, ClassNameProps } from "@core/types/react";
-import type { CachedRepeatableUpgrade } from "@game/player/cached/types";
+import type { CachedRepeatableUpgrade } from "@game/repeatableUpgrades/cachedData";
 import type { ValueGetter } from "@game/player/types";
 import type { CachedRepeatableUpgradeSelector } from "@game/repeatableUpgrades/types";
 import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/ids";

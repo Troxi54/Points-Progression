@@ -1,13 +1,11 @@
 import type { DimensionId } from "@game/dimensions/ids";
-import type {
-  CachedPlayerLike,
-  CachedResetLayer,
-} from "@game/player/cached/types";
+import type { CachedPlayerLike } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type {
   PartialResetLayerPlayerData,
   PlayerLike,
 } from "@game/player/types";
+import type { CachedResetLayer } from "../cachedData";
 import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
 import { arrayLastIndex } from "@core/utils/array";
@@ -15,12 +13,12 @@ import { objectFromEntries } from "@core/utils/object";
 import { getCurrentGameTime } from "@core/utils/time";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 
-import { getDefaultCachedResetLayer } from "@game/player/cached/default";
 import {
   parseCachedPlayerLike,
   parsePlayerLike,
   parseValueGetter,
 } from "@game/player/utils";
+import { getDefaultCachedResetLayer } from "../cachedData";
 import resetLayerConfig from "../config";
 import resetLayers, { flatResetLayers } from "../data";
 import { getDefaultResetLayerPlayerData } from "../playerData";

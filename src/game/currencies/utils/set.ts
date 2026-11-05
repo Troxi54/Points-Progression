@@ -1,7 +1,5 @@
-import type {
-  CachedCurrency,
-  CachedPlayerLike,
-} from "@game/player/cached/types";
+import type { CachedPlayerLike } from "@game/player/cached/types";
+import type { CachedCurrency } from "../cachedData";
 import type { CurrencyId } from "../types";
 import { mergeObjects } from "@core/utils/object";
 import { parseCachedPlayerLike } from "@game/player/utils";

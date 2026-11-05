@@ -1,82 +1,8 @@
-import type { CurrencyId } from "@game/currencies/types";
 import type { PartialMergedPlayer } from "@game/player/merged/types";
 import type { PlayerState } from "@game/player/store/types";
-import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/ids";
-import type { ResetLayerId } from "@game/resetLayers/ids";
-import type Decimal from "break_eternity.js";
+import type { getDefaultCachedPlayer } from "./default";
 
-export interface CachedPlayer {
-  lastSave: number;
-  lastTickSession: number;
-  timeSpeed: number;
-
-  repeatableUpgrades: Partial<{
-    [K in RepeatableUpgradeId]: CachedRepeatableUpgrade;
-  }>;
-  resetLayers: Partial<Record<ResetLayerId, CachedResetLayer>>;
-  resetsAccumulator: number;
-  currencies: Partial<Record<CurrencyId, CachedCurrency>>;
-  highestResetDuration: number;
-  gameProgress: Decimal;
-
-  ticksPerSecond: number;
-
-  offlineProgress: boolean;
-  offlineProgressFullTime: number;
-  offlineProgressTicksOnTrigger: number;
-  offlineProgressTicksCompleted: number;
-  offlineProgressSpeed: number;
-  offlineProgressStartedDate: number | null;
-  offlineProgressLastTick: number;
-
-  infiniteMode: {
-    unlocked: boolean;
-    layerCountToRender: number;
-  };
-
-  runEffect: Decimal;
-  runDertointEffect: Decimal;
-  bestPointsOfRunEffect: Decimal;
-  bestPointsOfRunVermoraEffect: Decimal;
-  tierRequirement: Decimal;
-  tierEffect: Decimal;
-  tierVermyteEffect: Decimal;
-  bestVermytesEffect: Decimal;
-  bestVermytesPointsEffect: Decimal;
-  amplivaultRequirement: Decimal;
-  amplivaultEffect: Decimal;
-  amplivaultAmplivoidEffect: Decimal;
-  softcapperLevel: Decimal;
-  nullionInputConverted: Decimal;
-  firstDertointUpgradeEffect: Decimal;
-
-  level: Decimal;
-  XPForThisLevel: Decimal;
-  XPForNextLevel: Decimal;
-  levelDertointEffect: Decimal;
-
-  nexusCost: Decimal | null;
-
-  maxXagyrosStates: number;
-}
-
-export interface CachedRepeatableUpgrade {
-  cost: Decimal;
-  effect: Decimal;
-  bulk: Decimal;
-  maxed: boolean;
-}
-
-export interface CachedResetLayer {
-  duration: number | null;
-  lastResetDuration: number | null;
-}
-
-export interface CachedCurrency {
-  gain: Decimal;
-  passiveGain: Decimal;
-  effect: Decimal | Partial<Record<CurrencyId, Decimal>>;
-}
+export type CachedPlayer = ReturnType<typeof getDefaultCachedPlayer>;
 
 export type CachedPlayerLike =
   | CachedPlayer

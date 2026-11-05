@@ -8,10 +8,8 @@ import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
 import currencyGainFormulas from "@game/formulas/currencies/gains";
 import mainFormulas from "@game/formulas/main";
-import {
-  getDefaultCachedCurrency,
-  getDefaultCachedCurrencyEffect,
-} from "@game/player/cached/default";
+import { getDefaultCachedCurrency } from "../cachedData";
+import { getDefaultCachedCurrencyEffect } from "../cachedData";
 import { parseValueGetter } from "@game/player/utils";
 import { getCurrencyConfig } from "./get";
 

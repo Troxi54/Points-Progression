@@ -1,13 +1,14 @@
-import type {
-  CachedCurrency,
-  CachedPlayer,
-  CachedRepeatableUpgrade,
-  CachedResetLayer,
-} from "./types";
+import type { CachedCurrency } from "@game/currencies/cachedData";
+import type { CurrencyId } from "@game/currencies/types";
+import type { CachedRepeatableUpgrade } from "@game/repeatableUpgrades/cachedData";
+import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/ids";
+import type { CachedResetLayer } from "@game/resetLayers/cachedData";
+import type { ResetLayerId } from "@game/resetLayers/ids";
+import type Decimal from "break_eternity.js";
 import createDecimal from "@core/utils/decimal";
 import { getCurrentTime } from "@core/utils/time";
 
-export function getDefaultCachedPlayer(): CachedPlayer {
+export function getDefaultCachedPlayer() {
   const currentTime = getCurrentTime();
 
   return {
@@ -15,10 +16,12 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     lastTickSession: currentTime,
     timeSpeed: 1,
 
-    currencies: {},
-    resetLayers: {},
+    currencies: {} as Partial<Record<CurrencyId, CachedCurrency>>,
+    resetLayers: {} as Partial<Record<ResetLayerId, CachedResetLayer>>,
     resetsAccumulator: 0,
-    repeatableUpgrades: {},
+    repeatableUpgrades: {} as Partial<{
+      [K in RepeatableUpgradeId]: CachedRepeatableUpgrade;
+    }>,
     highestResetDuration: 0,
     gameProgress: createDecimal(0),
 
@@ -29,7 +32,7 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     offlineProgressTicksOnTrigger: 0,
     offlineProgressTicksCompleted: 0,
     offlineProgressSpeed: 1,
-    offlineProgressStartedDate: null,
+    offlineProgressStartedDate: null as number | null,
     offlineProgressLastTick: currentTime,
 
     infiniteMode: {
@@ -58,36 +61,8 @@ export function getDefaultCachedPlayer(): CachedPlayer {
     XPForNextLevel: createDecimal(Infinity),
     levelDertointEffect: createDecimal(1),
 
-    nexusCost: createDecimal(Infinity),
+    nexusCost: createDecimal(Infinity) as Decimal | null,
 
     maxXagyrosStates: 0,
-  };
-}
-
-export function getDefaultCachedRepeatableUpgrade(): CachedRepeatableUpgrade {
-  return {
-    cost: createDecimal(Infinity),
-    effect: createDecimal(1),
-    bulk: createDecimal(0),
-    maxed: false,
-  };
-}
-
-export function getDefaultCachedResetLayer(): CachedResetLayer {
-  return {
-    duration: null,
-    lastResetDuration: null,
-  };
-}
-
-export function getDefaultCachedCurrencyEffect() {
-  return createDecimal(1);
-}
-
-export function getDefaultCachedCurrency(): CachedCurrency {
-  return {
-    gain: createDecimal(0),
-    passiveGain: createDecimal(0),
-    effect: getDefaultCachedCurrencyEffect(),
   };
 }

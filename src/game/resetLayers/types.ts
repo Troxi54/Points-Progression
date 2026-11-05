@@ -1,7 +1,7 @@
 import type { PartialBut } from "@core/types/partial";
 import type { CurrencyId } from "@game/currencies/types";
 import type { DimensionId } from "@game/dimensions/ids";
-import type { CachedResetLayer } from "@game/player/cached/types";
+import type { CachedResetLayer } from "./cachedData";
 import type {
   MergedPlayer,
   PartialMergedPlayer,

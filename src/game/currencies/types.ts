@@ -1,7 +1,7 @@
 import type { EffectMode } from "@core/types/effect";
 import type { DecimalKeys } from "@core/types/keys";
 import type { DimensionId } from "@game/dimensions/ids";
-import type { CachedCurrency } from "@game/player/cached/types";
+import type { CachedCurrency } from "./cachedData";
 import type { BooleanGetter } from "@game/player/types";
 import type { Player } from "@game/player/schemas";
 

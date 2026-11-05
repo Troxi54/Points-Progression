@@ -1,4 +1,4 @@
-import type { CachedResetLayer } from "@game/player/cached/types";
+import type { CachedResetLayer } from "../cachedData";
 import type {
   MergedPlayer,
   PartialMergedPlayer,

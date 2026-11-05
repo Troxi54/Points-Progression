@@ -1,16 +1,13 @@
-import type {
-  CachedPlayer,
-  CachedPlayerLike,
-  CachedResetLayer,
-} from "@game/player/cached/types";
+import type { CachedPlayer, CachedPlayerLike } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { PartialPlayer, PlayerLike } from "@game/player/types";
+import type { CachedResetLayer } from "../cachedData";
 import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
 import { copyObject, mergeObjects } from "@core/utils/object";
 import { fixGameTime } from "@core/utils/time";
-import { getDefaultCachedResetLayer } from "@game/player/cached/default";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
+import { getDefaultCachedResetLayer } from "../cachedData";
 import { getDefaultResetLayerPlayerData } from "../playerData";
 import { getResetLayerPlayerDataProp } from "./get";
 

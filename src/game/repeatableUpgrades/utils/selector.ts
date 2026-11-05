@@ -1,7 +1,5 @@
-import type {
-  CachedPlayerLike,
-  CachedRepeatableUpgrade,
-} from "@game/player/cached/types";
+import type { CachedPlayerLike } from "@game/player/cached/types";
+import type { CachedRepeatableUpgrade } from "../cachedData";
 import type { PlayerLike } from "@game/player/types";
 import type {
   CachedRepeatableUpgradeSelector,

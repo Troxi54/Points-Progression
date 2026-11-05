@@ -1,6 +1,6 @@
 import type { CurrencyId } from "@game/currencies/types";
 import type { DimensionId } from "@game/dimensions/ids";
-import type { CachedRepeatableUpgrade } from "@game/player/cached/types";
+import type { CachedRepeatableUpgrade } from "./cachedData";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { BooleanGetter, ValueGetter } from "@game/player/types";
 import type Decimal from "break_eternity.js";
