@@ -6,11 +6,11 @@ import { createSoftcapperContainerConfig } from "./utils/create";
 const softcapperConfig = createSoftcapperContainerConfig({
   points: [
     {
-      startsAt: createDecimal("1e204"),
+      startsAt: createDecimal("1e308"),
       power: createDecimal(0.94),
     },
     {
-      startsAt: createDecimal("1e368"),
+      startsAt: createDecimal("1e500"),
       power: createDecimal(0.85),
     },
     {
@@ -22,15 +22,15 @@ const softcapperConfig = createSoftcapperContainerConfig({
       power: createDecimal(0.5),
     },
     {
-      startsAt: createDecimal("1e4025"),
+      startsAt: createDecimal("1e5000"),
       power: createDecimal(0.55),
     },
     {
-      startsAt: createDecimal("1e5650"),
+      startsAt: createDecimal("1e7500"),
       power: createDecimal(0.875),
     },
     {
-      startsAt: createDecimal("1e9000"),
+      startsAt: createDecimal("1e10000"),
       power: createDecimal(0.05),
     },
   ],
