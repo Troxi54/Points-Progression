@@ -1,4 +1,4 @@
-import type { Player } from "@game/player/types";
+import type { Player } from "@game/player/schemas";
 import { describe, expect, it } from "vitest";
 import { applyResetLayerUpgradeReset } from "./reset";
 

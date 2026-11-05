@@ -1,5 +1,6 @@
 import type Decimal from "break_eternity.js";
-import type { FormatNumberGroupContainer, NumberNotation, Unit } from "./types";
+import type { NumberNotation } from "./numberNotation";
+import type { FormatNumberGroupContainer, Unit } from "./types";
 import createDecimal from "@core/utils/decimal";
 import { objectEntries } from "@core/utils/object";
 
@@ -8,7 +9,7 @@ const numberNotations: FormatNumberGroupContainer = {
     {
       scaling: "1e3",
       units: [
-        '',
+        "",
         "k",
         "M",
         "B",
@@ -147,10 +148,7 @@ function buildNotationUnitLogs() {
 
     for (const group of groups) {
       for (const unit of group.units) {
-        result.push([
-          unit,
-          startsAt.log10()
-        ]);
+        result.push([unit, startsAt.log10()]);
 
         startsAt = startsAt.multiply(group.scaling);
       }

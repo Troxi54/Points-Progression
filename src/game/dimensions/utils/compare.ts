@@ -1,4 +1,4 @@
-import type { DimensionId } from "../types";
+import type { DimensionId } from "../ids";
 
 export function isDimension(
   dimLeft: DimensionId,

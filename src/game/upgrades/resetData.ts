@@ -1,4 +1,4 @@
-import type { UpgradeContainerId } from "@game/upgrades/types";
+import type { UpgradeContainerId } from "./ids";
 import type { UpgradeResetConfig } from "./resetTypes";
 
 /**

@@ -1,11 +1,11 @@
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type {
   FullRepeatableUpgradeConfig,
   PartialRepeatableUpgradeConfig,
   PartialRepeatableUpgradeContainerConfig,
   RepeatableUpgradeContainerConfig,
-  RepeatableUpgradeIds,
 } from "@game/repeatableUpgrades/types";
+import type { RepeatableUpgradeIds } from "../ids";
 import {
   mergeObjects,
   objectEntries,

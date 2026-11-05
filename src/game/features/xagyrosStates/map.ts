@@ -1,5 +1,5 @@
 import type { CurrencyId } from "@game/currencies/types";
-import type { XagyrosState } from "./types";
+import type { XagyrosState } from "./states";
 
 const xagyrosStateCurrencyMap = {
   dertoints: "xagoraDertoints",

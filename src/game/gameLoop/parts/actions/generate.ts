@@ -1,6 +1,6 @@
 import type { CurrencyId } from "@game/currencies/types";
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import type { ResetLayerId } from "@game/resetLayers/types";
+import type { ResetLayerId } from "@game/resetLayers/ids";
 import { generateCurrencies } from "@game/currencies/utils/generate";
 import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import formulas from "@game/formulas/data";

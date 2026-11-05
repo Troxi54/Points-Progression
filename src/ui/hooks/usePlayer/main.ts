@@ -4,7 +4,8 @@ import type {
   PlayerState,
   PlayerStoreSelectorGeneric,
 } from "@game/player/store/types";
-import type { Player, UsePlayerFieldsReturn } from "@game/player/types";
+import type { UsePlayerFieldsReturn } from "@game/player/types";
+import type { Player } from "@game/player/schemas";
 import type {
   UsePlayerAdditionalSelector,
   UsePlayerFieldsOptions,

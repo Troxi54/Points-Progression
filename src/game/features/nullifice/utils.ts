@@ -1,4 +1,4 @@
-import type { Player } from "@game/player/types";
+import type { Player } from "@game/player/schemas";
 import createDecimal from "@core/utils/decimal";
 import { clamp } from "@core/utils/number";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";

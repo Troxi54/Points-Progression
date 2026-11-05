@@ -2,7 +2,8 @@ import type {
   CachedPlayer,
   PartialCachedPlayer,
 } from "@game/player/cached/types";
-import type { PartialPlayer, Player } from "@game/player/types";
+import type { PartialPlayer } from "@game/player/types";
+import type { Player } from "../schemas";
 import type {
   MergedPlayer,
   MergedPlayerState,

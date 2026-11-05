@@ -1,4 +1,4 @@
-import type { Player } from "@game/player/types";
+import type { Player } from "../schemas";
 import { compressToEncodedURIComponent } from "lz-string";
 import { minifyPlayer } from "./minify";
 

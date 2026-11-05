@@ -1,5 +1,5 @@
 import type { ScrollPosition } from "@core/types/vector";
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import { useLayoutEffect, useRef } from "react";
 
 interface Props {

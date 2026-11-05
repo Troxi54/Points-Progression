@@ -1,6 +1,5 @@
 import type { BooleanGetter } from "@game/player/types";
-
-export type DimensionId = "normal" | "sliph";
+import type { DimensionId } from "./ids";
 
 export interface DimensionData<T extends DimensionId = DimensionId> {
   pauseOtherDimensions:

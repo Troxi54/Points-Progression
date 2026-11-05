@@ -1,5 +1,6 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { BuiltResetLayerConfig, ResetLayerId } from "../types";
+import type { BuiltResetLayerConfig } from "../types";
+import type { ResetLayerId } from "../ids";
 import { arrayLastIndex } from "@core/utils/array";
 import { deepCopy, objectEntries } from "@core/utils/object";
 import { getCurrentGameTime } from "@core/utils/time";

@@ -5,7 +5,7 @@ import type {
 } from "@game/player/cached/types";
 import type { PartialPlayer, PlayerLike } from "@game/player/types";
 import type Decimal from "break_eternity.js";
-import type { RepeatableUpgradeId } from "../types";
+import type { RepeatableUpgradeId } from "../ids";
 import { copyObject, mergeObjects } from "@core/utils/object";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 

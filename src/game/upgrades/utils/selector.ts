@@ -1,5 +1,6 @@
 import type { PlayerLike } from "@game/player/types";
-import type { UpgradeContainerId, UpgradeId } from "@game/upgrades/types";
+import type { UpgradeId } from "@game/upgrades/types";
+import type { UpgradeContainerId } from "../ids";
 import { objectFromEntries } from "@core/utils/object";
 import { parsePlayerLike } from "@game/player/utils";
 import { hasUpgrade, hasUpgradeById } from "./has";

@@ -1,4 +1,5 @@
-import type { MinifiedPlayer, PartialPlayer, Player } from "@game/player/types";
+import type { MinifiedPlayer, PartialPlayer } from "@game/player/types";
+import type { Player } from "../schemas";
 import { setWithFill } from "@core/utils/array";
 import { isDecimal } from "@core/utils/decimal";
 import {
@@ -7,14 +8,11 @@ import {
   shallowEqual,
 } from "@core/utils/object";
 import {
-  getDefaultPlayer,
-  getDefaultResetLayerPlayerData,
-  requiredPlayerProps,
-} from "@game/player/default";
-import {
   minifiedPlayerMap,
   unminifiedPlayerMap,
 } from "@game/player/minifiedNames";
+import { getDefaultPlayer, requiredPlayerProps } from "@game/player/schemas";
+import { getDefaultResetLayerPlayerData } from "@game/resetLayers/playerData";
 
 export function minifyPlayer(player: Player): MinifiedPlayer {
   const defaultPlayer = getDefaultPlayer();

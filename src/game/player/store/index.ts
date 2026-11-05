@@ -3,7 +3,7 @@ import { updateObject } from "@core/utils/object";
 import { mergePlayer } from "@game/player/merged/utils";
 import { create } from "zustand";
 import { getDefaultCachedPlayer } from "../cached/default";
-import { getDefaultPlayer } from "../default";
+import { getDefaultPlayer } from "../schemas";
 
 export const usePlayerStore = create<PlayerState>((set) => {
   const player = getDefaultPlayer();

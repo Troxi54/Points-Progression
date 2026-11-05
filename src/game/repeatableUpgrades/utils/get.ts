@@ -3,10 +3,10 @@ import type {
   CachedRepeatableUpgrade,
 } from "@game/player/cached/types";
 import type { PlayerLike } from "@game/player/types";
-import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/types";
+import type { RepeatableUpgradeId } from "../ids";
 import type Decimal from "break_eternity.js";
 import { getDefaultCachedRepeatableUpgrade } from "@game/player/cached/default";
-import { getDefaultRepeatableUpgradeLevel } from "@game/player/default";
+import { getDefaultRepeatableUpgradeLevel } from "../default";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 import { flatRepeatableUpgrades } from "@game/repeatableUpgrades/data";
 

@@ -1,5 +1,5 @@
 import type { PlayerLike } from "@game/player/types";
-import type { XagyrosState } from "../types";
+import type { XagyrosState } from "../states";
 import { parsePlayerLike } from "@game/player/utils";
 import xagyrosStateCurrencyMap from "../map";
 

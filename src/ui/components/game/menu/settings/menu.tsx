@@ -1,4 +1,4 @@
-import type { NumberNotation } from "@core/format/types";
+import type { NumberNotation } from "@core/format/numberNotation";
 import type { CSSProperties } from "react";
 import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";

@@ -1,4 +1,5 @@
-import type { UpgradeContainerConfig, UpgradeContainerId } from "./types";
+import type { UpgradeContainerConfig } from "./types";
+import type { UpgradeContainerId } from "./ids";
 import dertointUpgrades from "./containers/dertoint";
 import levelUpgrades from "./containers/level";
 import mallirtUpgrades from "./containers/mallirt";

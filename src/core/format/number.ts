@@ -3,10 +3,10 @@ import type {
   FormatNumberGroup,
   FormatNumberOptions,
   FormatNumberType,
-  NumberNotation,
   PartialFormatNumberOptions,
   Unit,
 } from "./types";
+import type { NumberNotation } from "./numberNotation";
 import { arrayLastItem } from "@core/utils/array";
 import createDecimal, {
   decimalIsGreaterByOoM,

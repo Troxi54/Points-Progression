@@ -1,5 +1,5 @@
 import type { ChildrenProps } from "@core/types/react";
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type { ComponentType } from "react";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";

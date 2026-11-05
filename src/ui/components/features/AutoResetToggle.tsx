@@ -1,5 +1,5 @@
 import type { BooleanGetter, ValueGetter } from "@game/player/types";
-import type { ResetLayerId } from "@game/resetLayers/types";
+import type { ResetLayerId } from "@game/resetLayers/ids";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type { ReactNode } from "react";
 import { mergeObjects } from "@core/utils/object";

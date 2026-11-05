@@ -15,3 +15,6 @@ export default function getDefaultRepeatableUpgrade(): RepeatableUpgradeConfig {
     autobuy: false,
   };
 }
+export function getDefaultRepeatableUpgradeLevel() {
+  return createDecimal(0);
+}

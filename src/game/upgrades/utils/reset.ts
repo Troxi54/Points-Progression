@@ -1,7 +1,8 @@
-import type { PartialPlayer, Player } from "@game/player/types";
-import type { ResetLayerId } from "@game/resetLayers/types";
-import type { UpgradeContainerId } from "@game/upgrades/types";
-import type {KeptUpgrades} from "../resetTypes";
+import type { PartialPlayer } from "@game/player/types";
+import type { Player } from "@game/player/schemas";
+import type { ResetLayerId } from "@game/resetLayers/ids";
+import type { UpgradeContainerId } from "../ids";
+import type { KeptUpgrades } from "../resetTypes";
 import { copyObject, objectEntries } from "@core/utils/object";
 import resetLayers from "@game/resetLayers/data";
 import upgradeResetData from "@game/upgrades/resetData";

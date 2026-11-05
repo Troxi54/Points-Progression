@@ -1,4 +1,5 @@
-import type { DimensionData, DimensionId } from "../types";
+import type { DimensionData } from "../types";
+import type { DimensionId } from "../ids";
 import dimensionContainer from "../data";
 import getDefaultDimensionData from "../default";
 

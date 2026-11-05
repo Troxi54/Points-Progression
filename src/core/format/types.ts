@@ -1,4 +1,5 @@
 import type { DecimalSource } from "break_eternity.js";
+import type { NumberNotation } from "./numberNotation";
 
 export type Unit = string;
 
@@ -6,8 +7,6 @@ export interface FormatNumberGroup {
   scaling: DecimalSource;
   units: Unit[];
 }
-
-export type NumberNotation = "standard" | "legacy" | "scientific";
 
 export type FormatNumberGroupContainer = Partial<
   Record<NumberNotation, FormatNumberGroup[]>

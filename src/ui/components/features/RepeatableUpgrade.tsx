@@ -1,10 +1,8 @@
 import type { ClassName, ClassNameProps } from "@core/types/react";
 import type { CachedRepeatableUpgrade } from "@game/player/cached/types";
 import type { ValueGetter } from "@game/player/types";
-import type {
-  CachedRepeatableUpgradeSelector,
-  RepeatableUpgradeId,
-} from "@game/repeatableUpgrades/types";
+import type { CachedRepeatableUpgradeSelector } from "@game/repeatableUpgrades/types";
+import type { RepeatableUpgradeId } from "@game/repeatableUpgrades/ids";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type Decimal from "break_eternity.js";
 import type { ReactNode } from "react";

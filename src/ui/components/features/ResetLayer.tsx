@@ -1,5 +1,5 @@
 import type { ValueGetter } from "@game/player/types";
-import type { ResetLayerId } from "@game/resetLayers/types";
+import type { ResetLayerId } from "@game/resetLayers/ids";
 import type Decimal from "break_eternity.js";
 import type { ReactNode } from "react";
 import type { ProgressBarProps } from "../base/ProgressBar/types";

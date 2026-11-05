@@ -1,9 +1,10 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { PartialPlayer, Player } from "@game/player/types";
+import type { PartialPlayer } from "@game/player/types";
+import type { Player } from "../schemas";
 import createDecimal from "@core/utils/decimal";
 import { mergeObjects, objectEntries } from "@core/utils/object";
 import formulas from "@game/formulas/data";
-import { getDefaultPlayer } from "@game/player/default";
+import { getDefaultPlayer } from "@game/player/schemas";
 import { mergePlayer } from "@game/player/merged/utils";
 import { getPlayerState } from "@game/player/store";
 import { setRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/set";

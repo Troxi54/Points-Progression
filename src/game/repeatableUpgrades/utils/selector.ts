@@ -5,9 +5,9 @@ import type {
 import type { PlayerLike } from "@game/player/types";
 import type {
   CachedRepeatableUpgradeSelector,
-  RepeatableUpgradeId,
   RepeatableUpgradeSelector,
 } from "@game/repeatableUpgrades/types";
+import type { RepeatableUpgradeId } from "../ids";
 import type Decimal from "break_eternity.js";
 import { objectFromEntries } from "@core/utils/object";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
@@ -44,10 +44,9 @@ export function getCachedRepeatableUpgradePropsSelection<
   repeatableUpgradeId: O,
   propertyNames: T,
 ): {
-  [K in T[number] as CachedRepeatableUpgradeSelector<
-    O,
-    K
-  >]: CachedRepeatableUpgrade[K];
+  [
+    K in T[number] as CachedRepeatableUpgradeSelector<O, K>
+  ]: CachedRepeatableUpgrade[K];
 } {
   const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
 

@@ -1,4 +1,4 @@
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type {
   BuiltResetLayerConfig,
   PartialResetLayerConfig,

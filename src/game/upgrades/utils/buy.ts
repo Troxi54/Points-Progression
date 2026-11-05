@@ -1,6 +1,7 @@
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { PartialPlayer } from "@game/player/types";
-import type { UpgradeContainerId, UpgradeId } from "@game/upgrades/types";
+import type { UpgradeId } from "@game/upgrades/types";
+import type { UpgradeContainerId } from "../ids";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import {
   getUpgradeConfig,

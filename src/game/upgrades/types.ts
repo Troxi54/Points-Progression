@@ -1,20 +1,11 @@
 import type { CurrencyId } from "@game/currencies/types";
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { BooleanGetter } from "@game/player/types";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type { DecimalSource } from "break_eternity.js";
 import type Decimal from "break_eternity.js";
-
-export type UpgradeContainerId =
-  | "reset"
-  | "tier"
-  | "vermyros"
-  | "nullith"
-  | "dertoint"
-  | "mallirt"
-  | "level"
-  | "xagyros";
+import type { UpgradeContainerId } from "./ids";
 
 export type UpgradeId<
   C extends UpgradeContainerId = UpgradeContainerId,

@@ -1,6 +1,6 @@
 import type { ClassName, ClassNameProps } from "@core/types/react";
 import type { CurrencyId } from "@game/currencies/types";
-import type { XagyrosState } from "@game/features/xagyrosStates/types";
+import type { XagyrosState } from "@game/features/xagyrosStates/states";
 import cn from "@core/utils/tailwind";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { getCurrencyConfig } from "@game/currencies/utils/get";

@@ -1,5 +1,5 @@
 import type { CurrencyId } from "@game/currencies/types";
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { LayerNumber } from "@game/resetLayers/types";
 import type Decimal from "break_eternity.js";

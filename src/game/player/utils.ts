@@ -7,10 +7,11 @@ import type {
 } from "./cached/types";
 import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
 import type { PlayerState } from "./store/types";
-import type { PartialPlayer, Player, PlayerLike, ValueGetter } from "./types";
+import type { PartialPlayer, PlayerLike, ValueGetter } from "./types";
+import type { Player } from "./schemas";
 import resetGame from "@main/resetGame";
 import { getDefaultCachedPlayer } from "./cached/default";
-import { getDefaultPlayer } from "./default";
+import { getDefaultPlayer } from "./schemas";
 import { getPlayerState } from "./store";
 
 export function resetPlayerData() {

@@ -1,4 +1,4 @@
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import { getCurrentGameTime } from "@core/utils/time";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";

@@ -1,4 +1,5 @@
-import type { PartialPlayer, Player } from "@game/player/types";
+import type { PartialPlayer } from "@game/player/types";
+import type { Player } from "../schemas";
 import gameConfig from "@core/config/data";
 import playerPersistenceConfig from "./config";
 import { decompressPlayerString } from "./decompress";

@@ -1,4 +1,4 @@
-import type { GameVersion } from "@core/types/version";
+import type { GameVersion } from "@core/schemas/version";
 import createDecimal from "@core/utils/decimal";
 
 const gameConfig = {
@@ -7,8 +7,8 @@ const gameConfig = {
     major: 1,
     minor: 2,
     patch: 7,
-  } as GameVersion,
+  } satisfies GameVersion,
   endgameAt: createDecimal("1e9075"),
-} as const;
+};
 
 export default gameConfig;

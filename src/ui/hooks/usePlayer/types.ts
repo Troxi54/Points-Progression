@@ -1,5 +1,5 @@
 import type { PlayerState } from "@game/player/store/types";
-import type { Player } from "@game/player/types";
+import type { Player } from "@game/player/schemas";
 
 export interface UsePlayerOptions {
   useFormat: boolean;

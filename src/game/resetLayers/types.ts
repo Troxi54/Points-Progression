@@ -1,21 +1,16 @@
 import type { PartialBut } from "@core/types/partial";
 import type { CurrencyId } from "@game/currencies/types";
-import type { DimensionId } from "@game/dimensions/types";
+import type { DimensionId } from "@game/dimensions/ids";
 import type { CachedResetLayer } from "@game/player/cached/types";
 import type {
   MergedPlayer,
   PartialMergedPlayer,
 } from "@game/player/merged/types";
-import type { BooleanGetter, ResetLayerPlayerData } from "@game/player/types";
+import type { BooleanGetter } from "@game/player/types";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type Decimal from "break_eternity.js";
-
-export interface ResetLayerIds {
-  normal: "reset" | "tier" | "vermyros" | "nullith";
-  sliph: "mallirt" | "level" | "xagyros";
-}
-
-export type ResetLayerId = ResetLayerIds[keyof ResetLayerIds];
+import type { ResetLayerId, ResetLayerIds } from "./ids";
+import type { ResetLayerPlayerData } from "./playerData";
 
 export interface ResetLayerConfig<T extends DimensionId = DimensionId> {
   id: ResetLayerIds[T];

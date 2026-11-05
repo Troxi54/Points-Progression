@@ -1,5 +1,5 @@
-import type { ResetLayerId } from "@game/resetLayers/types";
-import type { UpgradeContainerId } from "./types";
+import type { ResetLayerId } from "@game/resetLayers/ids";
+import type { UpgradeContainerId } from "./ids";
 
 export type KeptUpgrades = Partial<
   Record<UpgradeContainerId, readonly number[] | "all">

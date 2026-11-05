@@ -3,7 +3,7 @@ import type {
   PartialCachedPlayer,
 } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { RepeatableUpgradeId } from "../types";
+import type { RepeatableUpgradeId } from "../ids";
 import {
   calculateRepeatableUpgradeBulkWithMax,
   getRepeatableUpgradeBulkCostAndLevel,

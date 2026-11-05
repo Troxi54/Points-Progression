@@ -4,17 +4,14 @@ import type {
   CachedResetLayer,
 } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
-import type {
-  PartialPlayer,
-  PlayerLike,
-  ResetLayerPlayerData,
-} from "@game/player/types";
-import type { ResetLayerId } from "../types";
+import type { PartialPlayer, PlayerLike } from "@game/player/types";
+import type { ResetLayerId } from "../ids";
+import type { ResetLayerPlayerData } from "../playerData";
 import { copyObject, mergeObjects } from "@core/utils/object";
 import { fixGameTime } from "@core/utils/time";
 import { getDefaultCachedResetLayer } from "@game/player/cached/default";
-import { getDefaultResetLayerPlayerData } from "@game/player/default";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
+import { getDefaultResetLayerPlayerData } from "../playerData";
 import { getResetLayerPlayerDataProp } from "./get";
 
 export function setFixedResetLayerDates(
