@@ -1,7 +1,7 @@
 import type { PlayerLike } from "@game/player/types";
+import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
 import type { ResetLayerPlayerSelector } from "../types";
-import type { ResetLayerId } from "../ids";
 import { objectFromEntries } from "@core/utils/object";
 import { parsePlayerLike } from "@game/player/utils";
 import { everPerformed, getResetLayerPlayerDataProps } from "./get";

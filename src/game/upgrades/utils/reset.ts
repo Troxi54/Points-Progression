@@ -1,5 +1,5 @@
-import type { PartialPlayer } from "@game/player/types";
 import type { Player } from "@game/player/schemas";
+import type { PartialPlayer } from "@game/player/types";
 import type { ResetLayerId } from "@game/resetLayers/ids";
 import type { UpgradeContainerId } from "../ids";
 import type { KeptUpgrades } from "../resetTypes";

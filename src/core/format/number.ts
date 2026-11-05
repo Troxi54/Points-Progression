@@ -1,4 +1,5 @@
 import type { DecimalSource } from "break_eternity.js";
+import type { NumberNotation } from "./numberNotation";
 import type {
   FormatNumberGroup,
   FormatNumberOptions,
@@ -6,7 +7,6 @@ import type {
   PartialFormatNumberOptions,
   Unit,
 } from "./types";
-import type { NumberNotation } from "./numberNotation";
 import { arrayLastItem } from "@core/utils/array";
 import createDecimal, {
   decimalIsGreaterByOoM,

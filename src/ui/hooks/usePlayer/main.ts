@@ -1,11 +1,11 @@
 import type { CachedPlayer } from "@game/player/cached/types";
+import type { Player } from "@game/player/schemas";
 import type {
   PlayerSetterName,
   PlayerState,
   PlayerStoreSelectorGeneric,
 } from "@game/player/store/types";
 import type { UsePlayerFieldsReturn } from "@game/player/types";
-import type { Player } from "@game/player/schemas";
 import type {
   UsePlayerAdditionalSelector,
   UsePlayerFieldsOptions,

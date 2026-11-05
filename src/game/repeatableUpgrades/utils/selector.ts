@@ -1,12 +1,12 @@
 import type { CachedPlayerLike } from "@game/player/cached/types";
-import type { CachedRepeatableUpgrade } from "../cachedData";
 import type { PlayerLike } from "@game/player/types";
 import type {
   CachedRepeatableUpgradeSelector,
   RepeatableUpgradeSelector,
 } from "@game/repeatableUpgrades/types";
-import type { RepeatableUpgradeId } from "../ids";
 import type Decimal from "break_eternity.js";
+import type { CachedRepeatableUpgrade } from "../cachedData";
+import type { RepeatableUpgradeId } from "../ids";
 import { objectFromEntries } from "@core/utils/object";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 import {

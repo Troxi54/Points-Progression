@@ -1,7 +1,6 @@
 import type { PartialBut } from "@core/types/partial";
 import type { CurrencyId } from "@game/currencies/types";
 import type { DimensionId } from "@game/dimensions/ids";
-import type { CachedResetLayer } from "./cachedData";
 import type {
   MergedPlayer,
   PartialMergedPlayer,
@@ -9,6 +8,7 @@ import type {
 import type { BooleanGetter } from "@game/player/types";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type Decimal from "break_eternity.js";
+import type { CachedResetLayer } from "./cachedData";
 import type { ResetLayerId, ResetLayerIds } from "./ids";
 import type { ResetLayerPlayerData } from "./playerData";
 

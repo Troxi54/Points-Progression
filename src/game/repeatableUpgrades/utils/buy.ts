@@ -4,8 +4,8 @@ import type {
 } from "@game/player/merged/types";
 import type { PartialPlayer } from "@game/player/types";
 import type Decimal from "break_eternity.js";
-import type { RepeatableUpgradeConfig } from "../types";
 import type { RepeatableUpgradeId } from "../ids";
+import type { RepeatableUpgradeConfig } from "../types";
 import createDecimal from "@core/utils/decimal";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import { parseValueGetter } from "@game/player/utils";

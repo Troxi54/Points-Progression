@@ -1,11 +1,11 @@
-import type { CachedResetLayer } from "../cachedData";
 import type {
   MergedPlayer,
   PartialMergedPlayer,
 } from "@game/player/merged/types";
 import type { PartialResetLayerPlayerData } from "@game/player/types";
-import type { ResetLayerPlayerData } from "../playerData";
+import type { CachedResetLayer } from "../cachedData";
 import type { ResetLayerId } from "../ids";
+import type { ResetLayerPlayerData } from "../playerData";
 import { mergeObjects } from "@core/utils/object";
 import { getCurrentGameTime } from "@core/utils/time";
 import { mergePartialPlayer } from "@game/player/merged/utils";

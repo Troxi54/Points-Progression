@@ -6,9 +6,9 @@ import type {
   PartialCachedPlayer,
 } from "./cached/types";
 import type { MergedPlayer, PartialMergedPlayer } from "./merged/types";
+import type { Player } from "./schemas";
 import type { PlayerState } from "./store/types";
 import type { PartialPlayer, PlayerLike, ValueGetter } from "./types";
-import type { Player } from "./schemas";
 import resetGame from "@main/resetGame";
 import { getDefaultCachedPlayer } from "./cached/default";
 import { getDefaultPlayer } from "./schemas";

@@ -1,6 +1,6 @@
 import type { CachedPlayerLike } from "@game/player/cached/types";
-import type { CachedCurrency } from "../cachedData";
 import type Decimal from "break_eternity.js";
+import type { CachedCurrency } from "../cachedData";
 import type {
   CachedCurrencyEffectSelection,
   CachedCurrencyPropSelection,
@@ -8,8 +8,8 @@ import type {
 } from "../types";
 import { isDecimal } from "@core/utils/decimal";
 import { mergeObjects, objectFromEntries } from "@core/utils/object";
-import { getDefaultCachedCurrencyEffect } from "../cachedData";
 import { parseCachedPlayerLike } from "@game/player/utils";
+import { getDefaultCachedCurrencyEffect } from "../cachedData";
 import { getCachedCurrencyProp } from "./get";
 
 export function getCachedCurrencySelection<

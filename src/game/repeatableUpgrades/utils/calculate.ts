@@ -1,7 +1,7 @@
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { RepeatableUpgradeConfig } from "@game/repeatableUpgrades/types";
-import type { RepeatableUpgradeId } from "../ids";
 import type { DecimalSource } from "break_eternity.js";
+import type { RepeatableUpgradeId } from "../ids";
 import createDecimal from "@core/utils/decimal";
 import { calculateBulk } from "@core/utils/level";
 import { parseValueGetter } from "@game/player/utils";
