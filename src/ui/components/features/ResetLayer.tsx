@@ -7,7 +7,7 @@ import { formatWithPlural } from "@core/format/plural";
 import { formatLeftTime } from "@core/format/time";
 import { mergeObjects } from "@core/utils/object";
 import { calculateProgress } from "@core/utils/progress";
-import { calculateTimeForRequirement } from "@core/utils/time";
+import { calculateTimeForRequirement } from "@core/utils/gameTime";
 import { formatCurrencyName } from "@game/currencies/utils/format";
 import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { getPlayerState } from "@game/player/store";

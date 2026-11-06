@@ -2,7 +2,7 @@ import { formatEffectOnCurrency } from "@core/format/effect";
 import { formatNumber, integerCommaFormat } from "@core/format/number";
 import { formatLeftTime } from "@core/format/time";
 import { calculateProgress } from "@core/utils/progress";
-import { calculateTimeForRequirement } from "@core/utils/time";
+import { calculateTimeForRequirement } from "@core/utils/gameTime";
 import { formatCurrencyEffect } from "@game/currencies/utils/format";
 import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { hasNexusLevel } from "@game/features/nexus/utils/has";

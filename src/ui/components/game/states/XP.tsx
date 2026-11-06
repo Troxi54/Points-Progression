@@ -1,6 +1,6 @@
 import { formatLeftTime } from "@core/format/time";
 import { calculateProgress } from "@core/utils/progress";
-import { calculateTimeForRequirement } from "@core/utils/time";
+import { calculateTimeForRequirement } from "@core/utils/gameTime";
 import { formatCurrency } from "@game/currencies/utils/format";
 import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
 import ProgressBar from "@ui/components/base/ProgressBar";

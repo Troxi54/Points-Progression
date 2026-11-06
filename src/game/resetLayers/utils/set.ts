@@ -5,7 +5,7 @@ import type { CachedResetLayer } from "../cachedData";
 import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
 import { copyObject, mergeObjects } from "@core/utils/object";
-import { fixGameTime } from "@core/utils/time";
+import { fixGameTime } from "@core/utils/gameTime";
 import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
 import { getDefaultCachedResetLayer } from "../cachedData";
 import { getDefaultResetLayerPlayerData } from "../playerData";

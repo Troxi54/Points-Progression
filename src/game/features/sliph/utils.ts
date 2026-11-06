@@ -1,5 +1,5 @@
 import type { DimensionId } from "@game/dimensions/ids";
-import { getCurrentGameTime } from "@core/utils/time";
+import { getCurrentGameTime } from "@core/utils/gameTime";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";
 import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";

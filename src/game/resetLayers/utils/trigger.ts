@@ -3,7 +3,7 @@ import type { ResetLayerId } from "../ids";
 import type { BuiltResetLayerConfig } from "../types";
 import { arrayLastIndex } from "@core/utils/array";
 import { deepCopy, objectEntries } from "@core/utils/object";
-import { getCurrentGameTime } from "@core/utils/time";
+import { getCurrentGameTime } from "@core/utils/gameTime";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import getDefaultMergedPlayer from "@game/player/merged/default";
 import {

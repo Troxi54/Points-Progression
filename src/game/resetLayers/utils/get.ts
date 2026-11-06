@@ -10,7 +10,7 @@ import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
 import { arrayLastIndex } from "@core/utils/array";
 import { objectFromEntries } from "@core/utils/object";
-import { getCurrentGameTime } from "@core/utils/time";
+import { getCurrentGameTime } from "@core/utils/gameTime";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 
 import {

@@ -1,5 +1,5 @@
 import { formatLeftTime, formatTime } from "@core/format/time";
-import { calculateTimeForRequirement } from "@core/utils/time";
+import { calculateTimeForRequirement } from "@core/utils/gameTime";
 import offlineConfig from "@game/offline/config";
 import { skipOfflineProgress } from "@game/offline/utils/trigger";
 import { getPlayerState } from "@game/player/store";

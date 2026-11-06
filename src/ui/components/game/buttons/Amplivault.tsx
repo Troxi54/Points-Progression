@@ -3,7 +3,7 @@ import { formatNumber, integerFormat } from "@core/format/number";
 import { formatLeftTime } from "@core/format/time";
 import { mergeObjects } from "@core/utils/object";
 import cn from "@core/utils/tailwind";
-import { calculateTimeForRequirement } from "@core/utils/time";
+import { calculateTimeForRequirement } from "@core/utils/gameTime";
 import { getCachedCurrencyPropSelection } from "@game/currencies/utils/selector";
 import { toggleAmplivault } from "@game/features/amplivault/utils";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
