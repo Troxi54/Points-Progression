@@ -1,8 +1,8 @@
 import { triggerOfflineProgress } from "@game/offline/utils/trigger";
 import gameLoopActions from "./parts/actions";
 import gameLoopUpdateCache from "./parts/cacheUpdates";
-import gameLoopPostTick from "./parts/posttick";
-import gameLoopPreTick from "./parts/pretick";
+import gameLoopPostTick from "./parts/postTick";
+import gameLoopPreTick from "./parts/preTick";
 
 export default function gameLoopTick() {
   triggerOfflineProgress();
