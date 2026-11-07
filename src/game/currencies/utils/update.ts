@@ -1,15 +1,9 @@
-import type { PartialCachedPlayer } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
 import type Decimal from "break_eternity.js";
 import type { CurrencyId } from "../types";
 import createDecimal from "@core/utils/decimal";
 import { isFunction } from "@core/utils/function";
-import {
-  copyObject,
-  isObject,
-  objectEntries,
-  objectKeys,
-} from "@core/utils/object";
+import { isObject, objectEntries, objectKeys } from "@core/utils/object";
 import currencyEffectFormulas from "@game/formulas/currencies/effects";
 import { parseValueGetter } from "@game/player/utils";
 import currencyConfig from "../data";
@@ -18,10 +12,11 @@ import {
   calculateCurrencyPassiveGainFromGain,
   calculateEffectOnCurrency,
 } from "./calculate";
-import { setCachedCurrency } from "./set";
 
 export function updateCurrencyEffects(mergedPlayer: MergedPlayer) {
-  const { cachedPlayer } = mergedPlayer;
+  const {
+    cachedPlayer: { currencies },
+  } = mergedPlayer;
 
   for (const [currencyId, data] of objectEntries(currencyConfig)) {
     const { affects } = data;
@@ -45,9 +40,7 @@ export function updateCurrencyEffects(mergedPlayer: MergedPlayer) {
         if (newEffect) newEffects[effectCurrency] = newEffect;
       }
 
-      setCachedCurrency(cachedPlayer, currencyId, {
-        effect: newEffects,
-      });
+      currencies[currencyId].effect = newEffects;
 
       continue;
     }
@@ -59,18 +52,14 @@ export function updateCurrencyEffects(mergedPlayer: MergedPlayer) {
 
     const newEffect = effectFormula(mergedPlayer);
 
-    setCachedCurrency(cachedPlayer, currencyId, {
-      effect: newEffect,
-    });
+    currencies[currencyId].effect = newEffect;
   }
 }
 
-export function updateCurrencyGains(
-  mergedPlayer: MergedPlayer,
-): PartialCachedPlayer {
-  const result: PartialCachedPlayer = {
-    currencies: copyObject(mergedPlayer.cachedPlayer.currencies),
-  };
+export function updateCurrencyGains(mergedPlayer: MergedPlayer) {
+  const {
+    cachedPlayer: { currencies },
+  } = mergedPlayer;
 
   for (const [currencyId, data] of objectEntries(currencyConfig)) {
     const gain = calculateCurrencyGain(mergedPlayer, currencyId, false);
@@ -83,11 +72,7 @@ export function updateCurrencyGains(
       ? calculateCurrencyPassiveGainFromGain(mergedPlayer, currencyId, gain)
       : createDecimal(0);
 
-    setCachedCurrency(result, currencyId, {
-      gain,
-      passiveGain,
-    });
+    currencies[currencyId].gain = gain;
+    currencies[currencyId].passiveGain = passiveGain;
   }
-
-  return result;
 }
