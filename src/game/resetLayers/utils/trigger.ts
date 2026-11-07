@@ -65,7 +65,7 @@ function performResetLayer(
   }
 
   if (rewardCondition) {
-    data.reward(sourceMergedPlayer, resetDuration);
+    data.reward(mergedPlayer, sourceMergedPlayer, resetDuration);
   }
 
   setResetLayerPlayerData(mergedPlayer, resetLayerId, {

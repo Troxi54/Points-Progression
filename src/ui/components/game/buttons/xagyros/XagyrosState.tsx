@@ -36,12 +36,11 @@ function XagyrosStateComponent({
   const isActive = isXagyrosStateActive(mergedPlayer, state);
 
   function activate(state: XagyrosState) {
-    const { mergedPlayer, setMergedPlayer } = getPlayerState();
+    const { setMergedPlayer } = getPlayerState();
 
-    const activated = activateXagyrosState(mergedPlayer, state);
-    if (!activated) return;
-
-    setMergedPlayer(activated);
+    setMergedPlayer((mergedPlayer) => {
+      activateXagyrosState(mergedPlayer, state);
+    });
   }
 
   return (

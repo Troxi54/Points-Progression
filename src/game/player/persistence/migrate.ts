@@ -1,8 +1,7 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { PartialPlayer } from "@game/player/types";
 import type { Player } from "../schemas";
 import createDecimal from "@core/utils/decimal";
-import { mergeObjects, objectEntries } from "@core/utils/object";
+import { objectEntries } from "@core/utils/object";
 import formulas from "@game/formulas/data";
 import { mergePlayer } from "@game/player/merged/utils";
 import { getDefaultPlayer } from "@game/player/schemas";
@@ -11,10 +10,7 @@ import { setRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/set";
 import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { setUpgradeById } from "@game/upgrades/utils/set";
 
-type Data = Record<
-  string,
-  (player: MergedPlayer, value: any) => PartialPlayer | undefined
->;
+type Data = Record<string, (player: MergedPlayer, value: any) => void>;
 
 function parseFiniteTimestamp(value: unknown): number | null {
   const parsed =
@@ -192,10 +188,10 @@ const conversionData: Data = {
 };
 
 export function migratePlayer<T extends Player>(player: T): Player {
-  let result = getDefaultPlayer();
+  const result = getDefaultPlayer();
 
   const { cachedPlayer } = getPlayerState();
-  let mergedPlayer = mergePlayer(result, cachedPlayer);
+  const mergedPlayer = mergePlayer(result, cachedPlayer);
 
   for (const [key, value] of objectEntries(player)) {
     const migrate = conversionData[key as string];
@@ -205,12 +201,7 @@ export function migratePlayer<T extends Player>(player: T): Player {
       continue;
     }
 
-    const migrated = migrate(mergedPlayer, value);
-
-    if (!migrated) continue;
-
-    result = mergeObjects(result, migrated);
-    mergedPlayer = mergePlayer(result, cachedPlayer);
+    migrate(mergedPlayer, value);
   }
 
   return result;

@@ -23,10 +23,10 @@ const xagyrosResetLayer = defineResetLayer<"sliph">({
       "amplivoid",
     );
   },
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
-    const xagyteGain = calculateCurrencyGain(mergedPlayer, "xagytes");
+    const xagyteGain = calculateCurrencyGain(sourceMergedPlayer, "xagytes");
 
     player.xagytes = formulas.xagytes(mergedPlayer, xagyteGain);
   },

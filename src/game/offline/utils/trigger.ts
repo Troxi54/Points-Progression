@@ -1,4 +1,5 @@
 import { safeNumber } from "@core/utils/number";
+import { objectAssign } from "@core/utils/object";
 import { getCurrentTime } from "@core/utils/time";
 import { getPlayerState } from "@game/player/store";
 import offlineConfig from "../config";
@@ -43,7 +44,7 @@ export function triggerOfflineProgress(): void {
 }
 
 export function skipOfflineProgress(): void {
-  const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
+  const { cachedPlayer, setMergedPlayer } = getPlayerState();
 
   const { offlineProgressFullTime, offlineProgressTicksCompleted } =
     cachedPlayer;
@@ -56,14 +57,13 @@ export function skipOfflineProgress(): void {
   const remainingProgress = 1 - completedTicks / ticksOnTrigger;
   const remainingTime = Math.max(remainingProgress, 0) * fullTime;
 
-  setMergedPlayer({
-    player: {
+  setMergedPlayer(({ player, cachedPlayer }) => {
+    objectAssign(player, {
       offlineOffset: player.offlineOffset + remainingTime,
       unspentOfflineTime: 0,
-    },
-    cachedPlayer: {
-      offlineProgress: false,
-    },
+    });
+
+    cachedPlayer.offlineProgress = false;
   });
 }
 

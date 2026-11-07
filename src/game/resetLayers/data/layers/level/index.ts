@@ -12,10 +12,10 @@ const levelResetLayer = defineResetLayer<"sliph">({
 
     player.mallirtTotalDertoints = defaultPlayer.mallirtTotalDertoints;
   },
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
-    const scoreGain = calculateCurrencyGain(mergedPlayer, "score");
+    const scoreGain = calculateCurrencyGain(sourceMergedPlayer, "score");
 
     player.score = formulas.score(mergedPlayer, scoreGain);
   },

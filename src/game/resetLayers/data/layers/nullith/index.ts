@@ -59,11 +59,11 @@ const nullithResetLayer = defineResetLayer<"normal">({
       "core",
     );
   },
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
     const nullithResetGain = calculateCurrencyGain(
-      mergedPlayer,
+      sourceMergedPlayer,
       "madeNullithResets",
     );
 

@@ -45,14 +45,14 @@ const vermyrosResetLayer = defineResetLayer<"normal">({
         getResetLayerPlayerData(player, "tier").autoEnabled && hasVermyros_2,
     });
   },
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
-    const vermyteGain = calculateCurrencyGain(mergedPlayer, "vermytes");
+    const vermyteGain = calculateCurrencyGain(sourceMergedPlayer, "vermytes");
 
     objectAssign(player, {
       vermytes: player.vermytes.plus(vermyteGain),
-      bestVermytes: formulas.bestVermytes(mergedPlayer),
+      bestVermytes: formulas.bestVermytes(sourceMergedPlayer),
     });
   },
 });

@@ -22,7 +22,11 @@ export interface ResetLayerConfig<T extends DimensionId = DimensionId> {
   ) => void;
   preventReset: BooleanGetter;
   canPerform: BooleanGetter;
-  reward: (mergedPlayer: MergedPlayer, spentTime: number | null) => void;
+  reward: (
+    mergedPlayer: MergedPlayer,
+    sourceMergedPlayer: MergedPlayer,
+    spentTime: number | null,
+  ) => void;
 }
 
 export type PartialResetLayerConfig<T extends DimensionId = DimensionId> =

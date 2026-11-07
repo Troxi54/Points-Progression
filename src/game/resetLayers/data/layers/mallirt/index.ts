@@ -30,11 +30,11 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
       "dertoint",
     );
   },
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
     const totalDertointsGain = calculateCurrencyGain(
-      mergedPlayer,
+      sourceMergedPlayer,
       "mallirtTotalDertoints",
     );
 

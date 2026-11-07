@@ -35,12 +35,12 @@ const resetResetLayer = defineResetLayer<"normal">({
       "point",
     );
   },
-  reward: (mergedPlayer, spentTime) => {
+  reward: (mergedPlayer, sourceMergedPlayer, spentTime) => {
     const { player } = mergedPlayer;
 
     objectAssign(player, {
-      bestRun: formulas.firstResetLayerRun(mergedPlayer, spentTime),
-      bestPointsOfRun: formulas.bestPointsOfRun(mergedPlayer),
+      bestRun: formulas.firstResetLayerRun(sourceMergedPlayer, spentTime),
+      bestPointsOfRun: formulas.bestPointsOfRun(sourceMergedPlayer),
     });
   },
 });

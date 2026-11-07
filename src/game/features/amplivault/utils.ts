@@ -29,14 +29,10 @@ export function toggleAmplivault() {
   )
     return;
 
-  const triggeredReset = triggerResetLayer(mergedPlayer, "vermyros");
+  setMergedPlayer((mergedPlayer) => {
+    triggerResetLayer(mergedPlayer, "vermyros");
 
-  setMergedPlayer({
-    ...triggeredReset,
-    player: {
-      ...triggeredReset.player,
-      enteredAmplivault: !player.enteredAmplivault,
-    },
+    player.enteredAmplivault = !player.enteredAmplivault;
   });
 }
 

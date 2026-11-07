@@ -55,13 +55,16 @@ const tierResetLayer = defineResetLayer<"normal">({
     });
   },
   preventReset: ({ player }) => hasUpgradeById(player, "vermyros_4"),
-  reward: (mergedPlayer) => {
+  reward: (mergedPlayer, sourceMergedPlayer) => {
     const { player } = mergedPlayer;
 
-    const bulk = formulas.tierBulk(mergedPlayer);
-    const tierResetGain = calculateCurrencyGain(mergedPlayer, "madeTierTimes");
+    const bulk = formulas.tierBulk(sourceMergedPlayer);
+    const tierResetGain = calculateCurrencyGain(
+      sourceMergedPlayer,
+      "madeTierTimes",
+    );
 
-    const vermyros_4 = hasUpgradeById(mergedPlayer, "vermyros_4");
+    const vermyros_4 = hasUpgradeById(sourceMergedPlayer, "vermyros_4");
 
     objectAssign(player, {
       tier: player.tier.plus(bulk),

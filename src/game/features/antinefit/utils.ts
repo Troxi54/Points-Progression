@@ -1,3 +1,4 @@
+import { objectAssign } from "@core/utils/object";
 import { getPlayerState } from "@game/player/store";
 import { triggerResetLayer } from "@game/resetLayers/utils/trigger";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
@@ -9,18 +10,16 @@ export function toggleAntinefit() {
 
   if (!enteredAntinefit && !hasUpgradeById(player, "nullith_12")) return;
 
-  const triggeredReset = triggerResetLayer(mergedPlayer, "nullith");
+  setMergedPlayer((mergedPlayer) => {
+    triggerResetLayer(mergedPlayer, "nullith");
 
-  const newValue = !enteredAntinefit;
+    const newValue = !enteredAntinefit;
 
-  setMergedPlayer({
-    ...triggeredReset,
-    player: {
-      ...triggeredReset.player,
+    objectAssign(player, {
       enteredAntinefit: newValue,
       everEnteredAntinefit: everEnteredAntinefit || newValue,
       everLeftAntinefit:
         everLeftAntinefit || (!newValue && everEnteredAntinefit),
-    },
+    });
   });
 }

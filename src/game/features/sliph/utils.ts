@@ -23,13 +23,19 @@ export function toggleSliph() {
     "mallirt",
   ).startedDate;
 
-  setPlayer({
-    dimensionId: newValue,
-    ...(isSliph && !player.everEnteredSliph ? { everEnteredSliph: true } : {}),
-    ...(isSliph && mallirtStartedDate === null
-      ? setResetLayerPlayerData(player, "mallirt", {
+  setPlayer((player) => {
+    player.dimensionId = newValue;
+
+    if (isSliph) {
+      if (!player.everEnteredSliph) {
+        player.everEnteredSliph = true;
+      }
+
+      if (mallirtStartedDate === null) {
+        setResetLayerPlayerData(player, "mallirt", {
           startedDate: getCurrentGameTime(),
-        })
-      : {}),
+        });
+      }
+    }
   });
 }
