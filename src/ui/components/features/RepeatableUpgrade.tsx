@@ -87,12 +87,11 @@ function RepeatableUpgrade<T extends RepeatableUpgradeId>({
   }
 
   function buyMax() {
-    const { mergedPlayer, setMergedPlayer } = getPlayerState();
-    const purchased = buyRepeatableUpgradeMax(
-      mergedPlayer,
-      repeatableUpgradeId,
-    );
-    setMergedPlayer(purchased);
+    const { setMergedPlayer } = getPlayerState();
+
+    setMergedPlayer((mergedPlayer) => {
+      buyRepeatableUpgradeMax(mergedPlayer, repeatableUpgradeId);
+    });
   }
 
   const { mergedPlayer } = getPlayerState();

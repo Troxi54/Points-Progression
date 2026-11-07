@@ -4,5 +4,5 @@ import { tickRepeatableUpgradeAutobuy } from "@game/repeatableUpgrades/utils/tic
 export default function gameLoopRepeatableUpgrades(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignMergedPlayer(tickRepeatableUpgradeAutobuy(mergedPlayer));
+  tickRepeatableUpgradeAutobuy(mergedPlayer);
 }

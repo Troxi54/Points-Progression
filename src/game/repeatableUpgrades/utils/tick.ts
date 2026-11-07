@@ -1,28 +1,11 @@
-import type {
-  MergedPlayer,
-  PartialMergedPlayer,
-} from "@game/player/merged/types";
-import {
-  copyObject,
-  deepCopy,
-  mergeObjects,
-  objectEntries,
-  objectKeys,
-} from "@core/utils/object";
-import {
-  assignCachedPlayerForMergedPlayer,
-  assignMergedPlayer,
-} from "@game/player/merged/utils";
+import type { MergedPlayer } from "@game/player/merged/types";
+import { objectEntries, objectKeys } from "@core/utils/object";
 import { parseValueGetter } from "@game/player/utils";
 import { flatRepeatableUpgrades } from "../data";
 import { buyRepeatableUpgradeMax } from "./buy";
 import { updateCachedRepeatableUpgrade } from "./update";
 
-export function tickRepeatableUpgradeAutobuy(
-  mergedPlayer: MergedPlayer,
-): PartialMergedPlayer {
-  const result = copyObject(mergedPlayer);
-
+export function tickRepeatableUpgradeAutobuy(mergedPlayer: MergedPlayer) {
   for (const [id, upgradeConfig] of objectEntries(flatRepeatableUpgrades)) {
     const shouldAutobuy = parseValueGetter(upgradeConfig.autobuy, mergedPlayer);
 
@@ -30,24 +13,12 @@ export function tickRepeatableUpgradeAutobuy(
       continue;
     }
 
-    const purchased = buyRepeatableUpgradeMax(result, id);
-
-    assignMergedPlayer(result, mergeObjects(result, purchased));
+    buyRepeatableUpgradeMax(mergedPlayer, id);
   }
-
-  return result;
 }
 
-export function tickRepeatableUpgradeCache(
-  mergedPlayer: MergedPlayer,
-): PartialMergedPlayer {
-  const result = deepCopy(mergedPlayer, 2);
-
+export function tickRepeatableUpgradeCache(mergedPlayer: MergedPlayer) {
   for (const id of objectKeys(flatRepeatableUpgrades)) {
-    const updated = updateCachedRepeatableUpgrade(result, id);
-
-    assignCachedPlayerForMergedPlayer(result, updated);
+    updateCachedRepeatableUpgrade(mergedPlayer, id);
   }
-
-  return result;
 }

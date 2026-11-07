@@ -19,9 +19,10 @@ export function getDefaultCachedPlayer() {
     currencies: {} as Record<CurrencyId, CachedCurrency>,
     resetLayers: {} as Partial<Record<ResetLayerId, CachedResetLayer>>,
     resetsAccumulator: 0,
-    repeatableUpgrades: {} as Partial<{
-      [K in RepeatableUpgradeId]: CachedRepeatableUpgrade;
-    }>,
+    repeatableUpgrades: {} as Record<
+      RepeatableUpgradeId,
+      CachedRepeatableUpgrade
+    >,
     highestResetDuration: 0,
     gameProgress: createDecimal(0),
 

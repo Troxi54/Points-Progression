@@ -6,5 +6,5 @@ export default function gameLoopUpdateRepeatableUpgradeCache(
 ) {
   const { mergedPlayer } = state;
 
-  state.assignMergedPlayer(tickRepeatableUpgradeCache(mergedPlayer));
+  tickRepeatableUpgradeCache(mergedPlayer);
 }

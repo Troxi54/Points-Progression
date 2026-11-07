@@ -1,5 +1,6 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
 import { syncCachedCurrencies } from "@game/currencies/utils/sync";
+import { syncCachedRepeatableUpgrades } from "@game/repeatableUpgrades/utils/sync";
 //import { getInfiniteModeLayerCountToRender } from "@game/features/infiniteMode/utils/get";
 
 export function gameLoopUpdateStates(state: GameLoopPartState) {
@@ -7,6 +8,7 @@ export function gameLoopUpdateStates(state: GameLoopPartState) {
   const { cachedPlayer } = mergedPlayer;
 
   syncCachedCurrencies(cachedPlayer);
+  syncCachedRepeatableUpgrades(cachedPlayer);
   //cachedPlayer.infiniteMode.unlocked = isInfiniteModeUnlocked(mergedPlayer);
   /* cachedPlayer.infiniteMode.layerCountToRender =
     getInfiniteModeLayerCountToRender(mergedPlayer); */

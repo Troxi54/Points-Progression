@@ -1,8 +1,4 @@
-import type {
-  MergedPlayer,
-  PartialMergedPlayer,
-} from "@game/player/merged/types";
-import type { PartialPlayer } from "@game/player/types";
+import type { MergedPlayer } from "@game/player/merged/types";
 import type { RepeatableUpgradeId } from "../ids";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import { parseValueGetter } from "@game/player/utils";
@@ -11,13 +7,12 @@ import {
   calculateRepeatableUpgradeCost,
 } from "./calculate";
 import { getRepeatableUpgradeConfig, getRepeatableUpgradeLevel } from "./get";
-import { setRepeatableUpgradeLevel } from "./set";
 import { updateCachedRepeatableUpgrade } from "./update";
 
 export function buyRepeatableUpgradeWithBulk(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-): PartialPlayer | undefined {
+) {
   const upgradeConfig = getRepeatableUpgradeConfig(repeatableUpgradeId);
 
   const { player } = mergedPlayer;
@@ -71,27 +66,17 @@ export function buyRepeatableUpgradeWithBulk(
     mergedPlayer,
   );
 
-  return {
-    ...setRepeatableUpgradeLevel(player, repeatableUpgradeId, newLevel),
-    ...(spendCurrency ? { [currency]: currencyValue.minus(costWithBulk) } : {}),
-  };
+  if (spendCurrency) {
+    player[currency] = currencyValue.minus(costWithBulk);
+  }
+
+  player.repeatableUpgrades[repeatableUpgradeId] = newLevel;
 }
 
 export function buyRepeatableUpgradeMax(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-): PartialMergedPlayer {
-  const purchased = buyRepeatableUpgradeWithBulk(
-    mergedPlayer,
-    repeatableUpgradeId,
-  );
-  const updated = updateCachedRepeatableUpgrade(
-    mergedPlayer,
-    repeatableUpgradeId,
-  );
-
-  return {
-    player: purchased,
-    cachedPlayer: updated,
-  };
+) {
+  buyRepeatableUpgradeWithBulk(mergedPlayer, repeatableUpgradeId);
+  updateCachedRepeatableUpgrade(mergedPlayer, repeatableUpgradeId);
 }
