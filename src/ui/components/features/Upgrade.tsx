@@ -86,12 +86,11 @@ function Upgrade({ containerConfig, config, upgradeNumber, style }: Props) {
   const { player, mergedPlayer } = getPlayerState();
 
   function buy() {
-    const { mergedPlayer, setPlayer } = getPlayerState();
+    const { setMergedPlayer } = getPlayerState();
 
-    const bought = buyUpgrade(mergedPlayer, containerId, upgradeNumber);
-    if (!bought) return;
-
-    setPlayer(bought);
+    setMergedPlayer((mergedPlayer) => {
+      buyUpgrade(mergedPlayer, containerId, upgradeNumber);
+    });
   }
 
   const isPurchased = hasUpgrade(mergedPlayer, containerId, upgradeNumber);

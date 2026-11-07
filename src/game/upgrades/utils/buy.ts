@@ -1,5 +1,4 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { PartialPlayer } from "@game/player/types";
 import type { UpgradeId } from "@game/upgrades/types";
 import type { UpgradeContainerId } from "../ids";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
@@ -17,7 +16,7 @@ export function buyUpgrade(
   mergedPlayer: MergedPlayer,
   containerId: UpgradeContainerId,
   upgradeNumber: number,
-): PartialPlayer | undefined {
+) {
   const containerConfig = getUpgradeContainerConfig(containerId);
   const upgradeConfig = getUpgradeConfig(containerId, upgradeNumber);
 
@@ -42,8 +41,8 @@ export function buyUpgrade(
 
   if (!previousUpgradePurchased) return;
 
-  const currencyName = getUpgradeCurrency(upgradeConfig, containerConfig);
-  const currencyValue = player[currencyName];
+  const currencyId = getUpgradeCurrency(upgradeConfig, containerConfig);
+  const currencyValue = player[currencyId];
   const enoughCurrencyValue = currencyValue.greaterThanOrEqualTo(cost);
 
   if (!enoughCurrencyValue) return;
@@ -57,10 +56,11 @@ export function buyUpgrade(
         ? true
         : takesCurrencyProperty;
 
-  return {
-    ...setUpgrade(player, containerId, upgradeNumber),
-    ...(takesCurrency ? { [currencyName]: currencyValue.minus(cost) } : {}),
-  };
+  if (takesCurrency) {
+    player[currencyId] = currencyValue.minus(cost);
+  }
+
+  setUpgrade(player, containerId, upgradeNumber, true);
 }
 
 export function buyUpgradeById(
@@ -68,5 +68,5 @@ export function buyUpgradeById(
   upgradeId: UpgradeId,
 ) {
   const splitId = splitUpgradeId(upgradeId);
-  return buyUpgrade(mergedPlayer, ...splitId);
+  buyUpgrade(mergedPlayer, ...splitId);
 }
