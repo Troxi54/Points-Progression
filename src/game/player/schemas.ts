@@ -46,9 +46,14 @@ export const PlayerSchema = z.object({
 
   resetLayers: z.catch(
     z.partialRecord(ResetLayerIdSchema, ResetLayerPlayerDataSchema),
-    () => ({
-      reset: getDefaultResetLayerPlayerData(),
-    }),
+    () => {
+      const resetData = getDefaultResetLayerPlayerData();
+      resetData.startedDate = getCurrentTime();
+
+      return {
+        reset: resetData,
+      };
+    },
   ),
 
   dimensionId: z.catch(DimensionIdSchema, "normal"),
