@@ -6,16 +6,19 @@ import type Decimal from "break_eternity.js";
 import type { CachedRepeatableUpgrade } from "./cachedData";
 import type { RepeatableUpgradeId, RepeatableUpgradeIds } from "./ids";
 
-export interface RepeatableUpgradeConfig {
+export interface RepeatableUpgradeBaseConfig {
   condition: BooleanGetter;
   startCost: Decimal;
   costScaling: Decimal;
-  currency: CurrencyId;
   spendCurrency: BooleanGetter;
   effectFormula: (level: Decimal, mergedPlayer: MergedPlayer) => Decimal;
-  affects: string;
-  maxLevel: ValueGetter<Decimal>;
+  maxLevel: ValueGetter<Decimal | null>;
   autobuy: BooleanGetter;
+}
+
+export interface RepeatableUpgradeConfig extends RepeatableUpgradeBaseConfig {
+  currency: CurrencyId;
+  affects: string;
 }
 
 export type PartialRepeatableUpgradeConfig = Partial<RepeatableUpgradeConfig>;

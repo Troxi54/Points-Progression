@@ -3,16 +3,12 @@ import type {
   PartialMergedPlayer,
 } from "@game/player/merged/types";
 import type { PartialPlayer } from "@game/player/types";
-import type Decimal from "break_eternity.js";
 import type { RepeatableUpgradeId } from "../ids";
-import type { RepeatableUpgradeConfig } from "../types";
-import createDecimal from "@core/utils/decimal";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import { parseValueGetter } from "@game/player/utils";
 import {
-  calculateRepeatableUpgradeBulkWithMax,
+  calculateRepeatableUpgradeBulk,
   calculateRepeatableUpgradeCost,
-  getRepeatableUpgradeBulkCostAndLevel,
 } from "./calculate";
 import { getRepeatableUpgradeConfig, getRepeatableUpgradeLevel } from "./get";
 import { setRepeatableUpgradeLevel } from "./set";
@@ -21,7 +17,6 @@ import { updateCachedRepeatableUpgrade } from "./update";
 export function buyRepeatableUpgradeWithBulk(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeConfig: RepeatableUpgradeConfig) => Decimal,
 ): PartialPlayer | undefined {
   const upgradeConfig = getRepeatableUpgradeConfig(repeatableUpgradeId);
 
@@ -51,12 +46,12 @@ export function buyRepeatableUpgradeWithBulk(
 
   if (!hasEnoughCurrency) return;
 
-  const bulkFromFormula = bulkFormula(upgradeConfig);
-  const bulk = calculateRepeatableUpgradeBulkWithMax(
+  const bulk = calculateRepeatableUpgradeBulk(
     mergedPlayer,
     upgradeConfig,
+    currencyValue,
     currentLevel,
-    bulkFromFormula,
+    currentCost,
   );
 
   if (bulk.lessThanOrEqualTo(0)) return;
@@ -82,15 +77,13 @@ export function buyRepeatableUpgradeWithBulk(
   };
 }
 
-export function buyRepeatableUpgradeWithBulkAndUpdates(
+export function buyRepeatableUpgradeMax(
   mergedPlayer: MergedPlayer,
   repeatableUpgradeId: RepeatableUpgradeId,
-  bulkFormula: (repeatableUpgradeConfig: RepeatableUpgradeConfig) => Decimal,
 ): PartialMergedPlayer {
   const purchased = buyRepeatableUpgradeWithBulk(
     mergedPlayer,
     repeatableUpgradeId,
-    bulkFormula,
   );
   const updated = updateCachedRepeatableUpgrade(
     mergedPlayer,
@@ -101,33 +94,4 @@ export function buyRepeatableUpgradeWithBulkAndUpdates(
     player: purchased,
     cachedPlayer: updated,
   };
-}
-
-export function buyRepeatableUpgradeSingle(
-  mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId,
-): PartialMergedPlayer {
-  return buyRepeatableUpgradeWithBulkAndUpdates(
-    mergedPlayer,
-    repeatableUpgradeId,
-    () => createDecimal(1),
-  );
-}
-
-export function buyRepeatableUpgradeMax(
-  mergedPlayer: MergedPlayer,
-  repeatableUpgradeId: RepeatableUpgradeId,
-): PartialMergedPlayer {
-  return buyRepeatableUpgradeWithBulkAndUpdates(
-    mergedPlayer,
-    repeatableUpgradeId,
-    () => {
-      const [bulk] = getRepeatableUpgradeBulkCostAndLevel(
-        repeatableUpgradeId,
-        mergedPlayer,
-      );
-
-      return bulk;
-    },
-  );
 }

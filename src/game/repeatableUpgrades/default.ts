@@ -11,7 +11,7 @@ export default function getDefaultRepeatableUpgrade(): RepeatableUpgradeConfig {
     spendCurrency: true,
     effectFormula: (lvl) => Decimal.pow(1.5, lvl),
     affects: "points",
-    maxLevel: Decimal.dInf,
+    maxLevel: null,
     autobuy: false,
   };
 }

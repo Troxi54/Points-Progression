@@ -2,7 +2,7 @@ import type { DecimalSource } from "break_eternity.js";
 import type { FormulaContainer } from "./types";
 import gameConfig from "@core/config/data";
 import createDecimal from "@core/utils/decimal";
-import { calculateBulk } from "@core/utils/level";
+import { calculateBulk } from "@core/utils/bulk";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import amplivaultConfig from "@game/features/amplivault/config";
 import { calculateRepeatableUpgradeEffect } from "@game/repeatableUpgrades/utils/calculate";

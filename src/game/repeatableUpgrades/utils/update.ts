@@ -3,7 +3,6 @@ import type { MergedPlayer } from "@game/player/merged/types";
 import type { CachedRepeatableUpgrade } from "../cachedData";
 import type { RepeatableUpgradeId } from "../ids";
 import {
-  calculateRepeatableUpgradeBulkWithMax,
   getRepeatableUpgradeBulkCostAndLevel,
   getRepeatableUpgradeMaxLevel,
 } from "./calculate";
@@ -28,14 +27,9 @@ export function updateCachedRepeatableUpgrade(
 
   const newRepeatableUpgrade: CachedRepeatableUpgrade = {
     cost,
-    bulk: calculateRepeatableUpgradeBulkWithMax(
-      mergedPlayer,
-      upgradeConfig,
-      level,
-      bulk,
-    ),
+    bulk,
     effect: effectFormula(level, mergedPlayer),
-    maxed: level.greaterThanOrEqualTo(maxLevel),
+    maxed: maxLevel ? level.greaterThanOrEqualTo(maxLevel) : false,
   };
 
   return setCachedRepeatableUpgrade(

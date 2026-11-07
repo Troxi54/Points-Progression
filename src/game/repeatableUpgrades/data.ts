@@ -47,7 +47,7 @@ const repeatableUpgrades = createRepeatableUpgradeContainer({
       effectFormula: (lvl) =>
         Decimal.pow(1.1, decimalSoftcap(lvl, 40, 0.0002, "multiplier")),
       maxLevel: ({ player }) =>
-        hasNexusLevel(player, 14) ? createDecimal(Infinity) : createDecimal(40),
+        hasNexusLevel(player, 14) ? null : createDecimal(40),
       affects: "Best Points effect",
       autobuy: ({ player }) => hasUpgradeById(player, "nullith_4"),
     },
