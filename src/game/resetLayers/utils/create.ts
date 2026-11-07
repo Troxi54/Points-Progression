@@ -42,58 +42,37 @@ export function createResetLayerConfig(
     currentTime,
     sourceMergedPlayer = mergedPlayer,
   ) {
-    const existingResetValue = oldResetFn(
+    oldResetFn(
       mergedPlayer,
       defaultMergedPlayer,
       currentTime,
       sourceMergedPlayer,
     );
 
-    const { player } = existingResetValue;
-    let newPlayer = mergeObjects(mergedPlayer.player, player);
+    const { player } = mergedPlayer;
 
-    const appliedData = setResetLayerPlayerData(newPlayer, resetLayerId, {
+    setResetLayerPlayerData(player, resetLayerId, {
       everPerformed: true,
       startedDate: currentTime,
     });
 
-    newPlayer = mergeObjects(newPlayer, appliedData);
-
-    const upgrades = newPlayer.upgrades;
-    if (!upgrades)
-      return {
-        ...existingResetValue,
-        player: newPlayer,
-      };
-
-    const newUpgrades: typeof newPlayer.upgrades = {};
-
-    for (const [containerId, upgradeContainer] of objectEntries(upgrades)) {
+    for (const [containerId, upgradeContainer] of objectEntries(
+      player.upgrades,
+    )) {
       if (!upgradeContainer) continue;
 
       const newUpgradeContainer = upgradeContainer.map((bought, index) => {
         return bought && hasUpgrade(sourceMergedPlayer, containerId, index + 1);
       });
 
-      newUpgrades[containerId] = newUpgradeContainer;
+      player.upgrades[containerId] = newUpgradeContainer;
     }
 
-    newPlayer.upgrades = newUpgrades;
-    const resetUpgrades = applyResetLayerUpgradeReset(
-      newPlayer,
+    applyResetLayerUpgradeReset(
+      player,
       sourceMergedPlayer.player,
       resetLayerId,
     );
-    newPlayer = mergeObjects(newPlayer, resetUpgrades);
-    newPlayer.repeatableUpgrades = mergeObjects(
-      mergedPlayer.player.repeatableUpgrades,
-      newPlayer.repeatableUpgrades,
-    );
-
-    return {
-      ...existingResetValue,
-      player: newPlayer,
-    };
   };
 
   return newResetLayer;

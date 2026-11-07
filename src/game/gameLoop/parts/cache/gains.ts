@@ -7,7 +7,7 @@ import { hasUpgradeById } from "@game/upgrades/utils/has";
 export default function gameLoopUpdateGains(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignCachedPlayerForMergedPlayer(updateCurrencyGains(mergedPlayer));
+  updateCurrencyGains(mergedPlayer);
 
   updateRelated(state);
 }

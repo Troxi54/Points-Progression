@@ -9,7 +9,7 @@ import { hasNexusLevel } from "@game/features/nexus/utils/has";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
 import {
   getResetLayerConfig,
-  getResetLayerPlayerDataProp,
+  getResetLayerPlayerData,
 } from "@game/resetLayers/utils/get";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 import CurrencyContent from "@ui/components/features/CurrencyContent";
@@ -25,11 +25,7 @@ function TierBar() {
       resetLayerId="tier"
       progressFillClassName="bg-tier"
       customProgress={({ player, cachedPlayer }, currencyValue) => {
-        const autoEnabled = getResetLayerPlayerDataProp(
-          player,
-          "tier",
-          "autoEnabled",
-        );
+        const { autoEnabled } = getResetLayerPlayerData(player, "tier");
 
         const useFirstTierRequirement =
           (player.points.lessThan(goal) || autoEnabled) &&

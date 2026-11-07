@@ -17,7 +17,7 @@ export function getDefaultCachedPlayer() {
     timeSpeed: 1,
 
     currencies: {} as Record<CurrencyId, CachedCurrency>,
-    resetLayers: {} as Partial<Record<ResetLayerId, CachedResetLayer>>,
+    resetLayers: {} as Record<ResetLayerId, CachedResetLayer>,
     resetsAccumulator: 0,
     repeatableUpgrades: {} as Record<
       RepeatableUpgradeId,

@@ -13,9 +13,7 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
   if (hasUpgradeById(player, "tier_4")) {
     player.bestPointsOfRun = formulas.bestPointsOfRun(mergedPlayer);
 
-    state.assignPlayerForMergedPlayer(
-      setResetLayerAuto(player, "reset", false),
-    );
+    setResetLayerAuto(player, "reset", false);
   }
 
   const newSoftcapperLevel = (cachedPlayer.softcapperLevel =
@@ -28,13 +26,11 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
     player.everReachedCores = true;
 
   if (hasUpgradeById(player, "vermyros_4")) {
-    state.assignPlayerForMergedPlayer(setResetLayerAuto(player, "tier", true));
+    setResetLayerAuto(player, "tier", true);
   }
 
   if (hasUpgradeById(player, "vermyros_8")) {
-    state.assignPlayerForMergedPlayer(
-      setResetLayerAuto(player, "vermyros", false),
-    );
+    setResetLayerAuto(player, "vermyros", false);
   }
 
   if (player.amplivaultBroken && player.enteredAmplivault) {
@@ -44,12 +40,10 @@ export default function gameLoopPreResetLayers(state: GameLoopPartState) {
   player.amplivaultLevel = getNewAmplivaultLevel(mergedPlayer);
 
   if (hasUpgradeById(player, "nullith_5")) {
-    state.assignPlayerForMergedPlayer(
-      setResetLayerAuto(
-        player,
-        "nullith",
-        player.enteredAmplivault && !player.reachedBreakAmplivault,
-      ),
+    setResetLayerAuto(
+      player,
+      "nullith",
+      player.enteredAmplivault && !player.reachedBreakAmplivault,
     );
   }
 

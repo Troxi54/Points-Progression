@@ -1,36 +1,23 @@
-import type {
-  MergedPlayer,
-  PartialMergedPlayer,
-} from "@game/player/merged/types";
-import type { PartialResetLayerPlayerData } from "@game/player/types";
-import type { CachedResetLayer } from "../cachedData";
+import type { MergedPlayer } from "@game/player/merged/types";
 import type { ResetLayerId } from "../ids";
-import type { ResetLayerPlayerData } from "../playerData";
-import { mergeObjects } from "@core/utils/object";
 import { getCurrentGameTime } from "@core/utils/gameTime";
-import { mergePartialPlayer } from "@game/player/merged/utils";
-import {
-  getResetLayerCachedPlayerData,
-  getResetLayerPlayerData,
-  getResetLayerPropsFromPlayerData,
-} from "./get";
-import { setResetLayerCachedPlayerData, setResetLayerPlayerData } from "./set";
+import { getResetLayerCachedPlayerData, getResetLayerPlayerData } from "./get";
+import { setResetLayerPlayerData } from "./set";
 
 export function updateResetLayer(
   mergedPlayer: MergedPlayer,
   resetLayerId: ResetLayerId,
-): PartialMergedPlayer {
+) {
+  const { player, cachedPlayer } = mergedPlayer;
+
   const currentData = getResetLayerPlayerData(mergedPlayer, resetLayerId);
   const currentCachedData = getResetLayerCachedPlayerData(
     mergedPlayer,
     resetLayerId,
   );
 
-  const { startedDate } = getResetLayerPropsFromPlayerData(currentData, [
-    "startedDate",
-  ]);
+  const { startedDate } = currentData;
   const { lastResetDuration } = currentCachedData;
-  const { cachedPlayer } = mergedPlayer;
 
   const currentTime = getCurrentGameTime(mergedPlayer);
   const currentDuration =
@@ -60,34 +47,9 @@ export function updateResetLayer(
     }
   }
 
-  const additionalPlayerData: Partial<ResetLayerPlayerData> = {
+  setResetLayerPlayerData(player, resetLayerId, {
     resetsPerSecond,
-  };
+  });
 
-  const newPlayerData: PartialResetLayerPlayerData = mergeObjects(
-    currentData,
-    additionalPlayerData,
-  );
-
-  const additionalCachedData: Partial<CachedResetLayer> = {
-    duration: currentDuration,
-  };
-
-  const newCachedData: CachedResetLayer = mergeObjects(
-    currentCachedData,
-    additionalCachedData,
-  );
-
-  const applied = setResetLayerPlayerData(
-    mergedPlayer,
-    resetLayerId,
-    newPlayerData,
-  );
-  const appliedCached = setResetLayerCachedPlayerData(
-    mergedPlayer,
-    resetLayerId,
-    newCachedData,
-  );
-
-  return mergePartialPlayer(applied, appliedCached);
+  cachedPlayer.resetLayers[resetLayerId].duration = currentDuration;
 }

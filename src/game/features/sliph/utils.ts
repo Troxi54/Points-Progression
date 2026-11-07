@@ -2,7 +2,7 @@ import type { DimensionId } from "@game/dimensions/ids";
 import { getCurrentGameTime } from "@core/utils/gameTime";
 import { isDimension } from "@game/dimensions/utils/compare";
 import { getPlayerState } from "@game/player/store";
-import { getResetLayerPlayerDataProp } from "@game/resetLayers/utils/get";
+import { getResetLayerPlayerData } from "@game/resetLayers/utils/get";
 import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
@@ -18,11 +18,10 @@ export function toggleSliph() {
 
   const isSliph = isDimension(newValue, "sliph");
 
-  const mallirtStartedDate = getResetLayerPlayerDataProp(
+  const mallirtStartedDate = getResetLayerPlayerData(
     player,
     "mallirt",
-    "startedDate",
-  );
+  ).startedDate;
 
   setPlayer({
     dimensionId: newValue,

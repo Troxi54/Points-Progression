@@ -4,7 +4,7 @@ import type { ResetLayerPlayerData } from "../playerData";
 import type { ResetLayerPlayerSelector } from "../types";
 import { objectFromEntries } from "@core/utils/object";
 import { parsePlayerLike } from "@game/player/utils";
-import { everPerformed, getResetLayerPlayerDataProps } from "./get";
+import { everPerformed, getResetLayerPlayerData } from "./get";
 
 export function getResetLayerPlayerSelection<
   T extends ResetLayerId,
@@ -18,7 +18,7 @@ export function getResetLayerPlayerSelection<
 } {
   const player = parsePlayerLike(playerLike);
 
-  const data = getResetLayerPlayerDataProps(player, resetLayerId, properties);
+  const data = getResetLayerPlayerData(player, resetLayerId);
 
   return objectFromEntries(
     properties.map((property) => {

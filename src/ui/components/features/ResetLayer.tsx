@@ -14,7 +14,7 @@ import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import {
   getResetLayerConfig,
-  getResetLayerPlayerDataProps,
+  getResetLayerPlayerData,
   shouldResetLayerProgressBarLock,
 } from "@game/resetLayers/utils/get";
 import { usePlayer } from "@ui/hooks/usePlayer/main";
@@ -42,10 +42,9 @@ function ResetLayerProgressBar({
     (state) => {
       const { mergedPlayer } = state;
 
-      const { everPerformed, resetsPerSecond } = getResetLayerPlayerDataProps(
+      const { everPerformed, resetsPerSecond } = getResetLayerPlayerData(
         state,
         resetLayerId,
-        ["everPerformed", "resetsPerSecond"],
       );
 
       const basicSelection = {

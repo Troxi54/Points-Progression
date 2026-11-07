@@ -1,9 +1,8 @@
 import type { Player } from "@game/player/schemas";
-import type { PartialPlayer } from "@game/player/types";
 import type { ResetLayerId } from "@game/resetLayers/ids";
 import type { UpgradeContainerId } from "../ids";
 import type { KeptUpgrades } from "../resetTypes";
-import { copyObject, objectEntries } from "@core/utils/object";
+import { objectEntries } from "@core/utils/object";
 import resetLayers from "@game/resetLayers/data";
 import upgradeResetData from "@game/upgrades/resetData";
 
@@ -36,25 +35,20 @@ function restoreUpgrades(
   source: Player["upgrades"],
   keptUpgrades: KeptUpgrades,
 ) {
-  const result = copyObject(upgrades);
-  const copiedContainers = new Set<UpgradeContainerId>();
-
   for (const [containerId, upgradeNumbers] of objectEntries(keptUpgrades)) {
     if (!upgradeNumbers) continue;
+
     const sourceContainer = source[containerId];
     if (!sourceContainer) continue;
 
-    let targetContainer = result[containerId];
+    let targetContainer = upgrades[containerId];
+
     if (!targetContainer) {
       targetContainer = Array.from<boolean>({
         length: sourceContainer.length,
       }).fill(false);
-      result[containerId] = targetContainer;
-      copiedContainers.add(containerId);
-    } else if (!copiedContainers.has(containerId)) {
-      targetContainer = [...targetContainer];
-      result[containerId] = targetContainer;
-      copiedContainers.add(containerId);
+
+      upgrades[containerId] = targetContainer;
     }
 
     if (upgradeNumbers === "all") {
@@ -70,8 +64,6 @@ function restoreUpgrades(
       }
     }
   }
-
-  return result;
 }
 
 /**
@@ -84,28 +76,27 @@ export function applyResetLayerUpgradeReset(
   player: Player,
   sourcePlayer: Player,
   resetLayerId: ResetLayerId,
-): PartialPlayer {
-  const upgrades = copyObject(player.upgrades);
+) {
+  const { upgrades } = player;
+  const sourceUpgrades = sourcePlayer.upgrades;
 
   for (const [containerId] of objectEntries(upgradeResetData)) {
     if (!isContainerReset(containerId, resetLayerId)) continue;
 
-    const existing = upgrades[containerId];
-    if (existing) upgrades[containerId] = existing.map(() => false);
+    upgrades[containerId]?.fill(false);
   }
 
   const keepsByUpgrade = upgradeResetData[resetLayerId].keepsByUpgrade;
-  if (!keepsByUpgrade) return { upgrades };
+  if (!keepsByUpgrade) return;
 
-  let result = upgrades;
+  const sourceContainer = sourceUpgrades[resetLayerId];
+
   for (const [upgradeNumber, keptUpgrades] of objectEntries(keepsByUpgrade)) {
     if (!keptUpgrades) continue;
-    const sourceContainer = sourcePlayer.upgrades[resetLayerId];
+
     const index = Number(upgradeNumber) - 1;
     if (sourceContainer?.[index] !== true) continue;
 
-    result = restoreUpgrades(result, sourcePlayer.upgrades, keptUpgrades);
+    restoreUpgrades(upgrades, sourceUpgrades, keptUpgrades);
   }
-
-  return { upgrades: result };
 }

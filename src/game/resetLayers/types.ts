@@ -1,10 +1,7 @@
 import type { PartialBut } from "@core/types/partial";
 import type { CurrencyId } from "@game/currencies/types";
 import type { DimensionId } from "@game/dimensions/ids";
-import type {
-  MergedPlayer,
-  PartialMergedPlayer,
-} from "@game/player/merged/types";
+import type { MergedPlayer } from "@game/player/merged/types";
 import type { BooleanGetter } from "@game/player/types";
 import type { PlayerSelectorFn } from "@ui/hooks/usePlayer/types";
 import type Decimal from "break_eternity.js";
@@ -21,14 +18,11 @@ export interface ResetLayerConfig<T extends DimensionId = DimensionId> {
     mergedPlayer: MergedPlayer,
     defaultMergedPlayer: MergedPlayer,
     currentTime: number,
-    sourceMergedPlayer?: MergedPlayer,
-  ) => PartialMergedPlayer;
+    sourceMergedPlayer: MergedPlayer,
+  ) => void;
   preventReset: BooleanGetter;
   canPerform: BooleanGetter;
-  reward: (
-    mergedPlayer: MergedPlayer,
-    spentTime: number | null,
-  ) => PartialMergedPlayer;
+  reward: (mergedPlayer: MergedPlayer, spentTime: number | null) => void;
 }
 
 export type PartialResetLayerConfig<T extends DimensionId = DimensionId> =

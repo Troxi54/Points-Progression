@@ -11,9 +11,7 @@ export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {
   const { mergedPlayer } = state;
   const { player } = mergedPlayer;
 
-  state.assignPlayerForMergedPlayer(
-    generateCurrencies(mergedPlayer, state.deltaTime),
-  );
+  generateCurrencies(mergedPlayer, state.deltaTime);
 
   gameLoopGenerateOfflineResets(
     state,

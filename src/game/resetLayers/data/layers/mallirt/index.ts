@@ -1,4 +1,5 @@
 import createDecimal from "@core/utils/decimal";
+import { objectAssign } from "@core/utils/object";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
@@ -16,18 +17,18 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
       "dertoints",
     ),
   }),
-  reset: (_, defaultMergedPlayer) => {
+  reset: ({ player }, defaultMergedPlayer) => {
     const defaultPlayer = defaultMergedPlayer.player;
 
-    return {
-      player: {
-        dertoints: defaultPlayer.dertoints,
-        repeatableUpgrades: {
-          dertoint: getRepeatableUpgradeLevel(defaultMergedPlayer, "dertoint"),
-        },
-        cappergy: defaultPlayer.cappergy,
-      },
-    };
+    objectAssign(player, {
+      dertoints: defaultPlayer.dertoints,
+      cappergy: defaultPlayer.cappergy,
+    });
+
+    player.repeatableUpgrades.dertoint = getRepeatableUpgradeLevel(
+      defaultMergedPlayer,
+      "dertoint",
+    );
   },
   reward: (mergedPlayer) => {
     const { player } = mergedPlayer;
@@ -37,12 +38,8 @@ const mallirtResetLayer = defineResetLayer<"sliph">({
       "mallirtTotalDertoints",
     );
 
-    return {
-      player: {
-        mallirtTotalDertoints:
-          player.mallirtTotalDertoints.plus(totalDertointsGain),
-      },
-    };
+    player.mallirtTotalDertoints =
+      player.mallirtTotalDertoints.plus(totalDertointsGain);
   },
 });
 

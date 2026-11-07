@@ -1,6 +1,4 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import { deepCopy } from "@core/utils/object";
-import { assignMergedPlayer } from "@game/player/merged/utils";
 import resetLayerConfig from "../config";
 import resetLayers from "../data";
 import { triggerAllResetLayers } from "./trigger";
@@ -9,10 +7,8 @@ import { updateResetLayer } from "./update";
 export function tickAllResetLayers(
   mergedPlayer: MergedPlayer,
   deltaTime: number,
-): MergedPlayer {
-  const result = deepCopy(mergedPlayer, 2) as MergedPlayer;
-
-  const { cachedPlayer } = result;
+) {
+  const { cachedPlayer } = mergedPlayer;
 
   let accumulator = cachedPlayer.resetsAccumulator;
   accumulator += deltaTime;
@@ -24,7 +20,7 @@ export function tickAllResetLayers(
   resetsToApply = Math.min(resetsToApply, maxResetsPerSecond);
 
   for (let i = 0; i < resetsToApply; i++) {
-    triggerAllResetLayers(mergedPlayer, result);
+    triggerAllResetLayers(mergedPlayer);
   }
 
   if (resetsToApply >= maxResetsPerSecond) {
@@ -35,12 +31,9 @@ export function tickAllResetLayers(
 
   for (const dimensionResetLayers of Object.values(resetLayers)) {
     dimensionResetLayers.forEach((resetLayer) => {
-      const updated = updateResetLayer(result, resetLayer.id);
-      assignMergedPlayer(result, updated);
+      updateResetLayer(mergedPlayer, resetLayer.id);
     });
   }
 
   cachedPlayer.resetsAccumulator = accumulator;
-
-  return result;
 }

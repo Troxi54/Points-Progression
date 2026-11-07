@@ -1,15 +1,12 @@
-import type { CachedPlayer, CachedPlayerLike } from "@game/player/cached/types";
 import type { MergedPlayer } from "@game/player/merged/types";
-import type { PartialPlayer, PlayerLike } from "@game/player/types";
-import type { CachedResetLayer } from "../cachedData";
+import type { PlayerLike } from "@game/player/types";
 import type { ResetLayerId } from "../ids";
 import type { ResetLayerPlayerData } from "../playerData";
-import { copyObject, mergeObjects } from "@core/utils/object";
 import { fixGameTime } from "@core/utils/gameTime";
-import { parseCachedPlayerLike, parsePlayerLike } from "@game/player/utils";
-import { getDefaultCachedResetLayer } from "../cachedData";
+import { mergeObjects } from "@core/utils/object";
+import { parsePlayerLike } from "@game/player/utils";
 import { getDefaultResetLayerPlayerData } from "../playerData";
-import { getResetLayerPlayerDataProp } from "./get";
+import { getResetLayerPlayerData } from "./get";
 
 export function setFixedResetLayerDates(
   mergedPlayer: MergedPlayer,
@@ -32,66 +29,31 @@ export function setResetLayerPlayerData(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
   data: Partial<ResetLayerPlayerData>,
-): PartialPlayer {
+) {
   const player = parsePlayerLike(playerLike);
 
-  const resetLayerContainer = player.resetLayers;
-  const newContainer = resetLayerContainer
-    ? copyObject(resetLayerContainer)
-    : {};
+  const container = player.resetLayers;
+  if (!container) return;
 
-  let existingData = newContainer[resetLayerId];
+  let existingData = container[resetLayerId];
   if (!existingData) {
-    existingData = newContainer[resetLayerId] =
-      getDefaultResetLayerPlayerData();
+    existingData = container[resetLayerId] = getDefaultResetLayerPlayerData();
   }
 
-  const newData = mergeObjects(existingData, data);
-  newContainer[resetLayerId] = newData;
-
-  return {
-    resetLayers: newContainer,
-  };
-}
-
-export function setResetLayerCachedPlayerData(
-  cachedPlayerLike: CachedPlayerLike,
-  resetLayerId: ResetLayerId,
-  data: Partial<CachedResetLayer>,
-): Partial<CachedPlayer> {
-  const cachedPlayer = parseCachedPlayerLike(cachedPlayerLike);
-
-  const resetLayerContainer = cachedPlayer.resetLayers;
-  const newContainer = resetLayerContainer
-    ? copyObject(resetLayerContainer)
-    : {};
-
-  let existingData = newContainer[resetLayerId];
-  if (!existingData) {
-    existingData = newContainer[resetLayerId] = getDefaultCachedResetLayer();
-  }
-
-  const newData = mergeObjects(existingData, data);
-  newContainer[resetLayerId] = newData;
-
-  return {
-    resetLayers: newContainer,
-  };
+  container[resetLayerId] = mergeObjects(existingData, data);
 }
 
 export function setResetLayerAuto(
   playerLike: PlayerLike,
   resetLayerId: ResetLayerId,
   value: ResetLayerPlayerData["autoEnabled"],
-): PartialPlayer | undefined {
+) {
   const player = parsePlayerLike(playerLike);
 
-  if (
-    getResetLayerPlayerDataProp(player, resetLayerId, "autoEnabled") === value
-  )
+  if (getResetLayerPlayerData(player, resetLayerId).autoEnabled === value)
     return;
 
-  return setResetLayerPlayerData(player, resetLayerId, {
+  setResetLayerPlayerData(player, resetLayerId, {
     autoEnabled: value,
   });
 }
@@ -102,11 +64,7 @@ export function toggleResetLayerAuto(
 ) {
   const player = parsePlayerLike(playerLike);
 
-  return setResetLayerPlayerData(player, resetLayerId, {
-    autoEnabled: !getResetLayerPlayerDataProp(
-      player,
-      resetLayerId,
-      "autoEnabled",
-    ),
+  setResetLayerPlayerData(player, resetLayerId, {
+    autoEnabled: !getResetLayerPlayerData(player, resetLayerId).autoEnabled,
   });
 }

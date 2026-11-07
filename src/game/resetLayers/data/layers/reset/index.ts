@@ -1,5 +1,5 @@
 import createDecimal from "@core/utils/decimal";
-import { mergeObjects } from "@core/utils/object";
+import { mergeObjects, objectAssign } from "@core/utils/object";
 import { hasNexusLevelsSelection } from "@game/features/nexus/utils/selector";
 import formulas from "@game/formulas/data";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
@@ -28,23 +28,20 @@ const resetResetLayer = defineResetLayer<"normal">({
       ] as const),
     );
   },
-  reset: (_, defaultMergedPlayer) => {
-    return {
-      player: {
-        points: defaultMergedPlayer.player.points,
-        repeatableUpgrades: {
-          point: getRepeatableUpgradeLevel(defaultMergedPlayer, "point"),
-        },
-      },
-    };
+  reset: ({ player }, defaultMergedPlayer) => {
+    player.points = defaultMergedPlayer.player.points;
+    player.repeatableUpgrades.point = getRepeatableUpgradeLevel(
+      defaultMergedPlayer,
+      "point",
+    );
   },
   reward: (mergedPlayer, spentTime) => {
-    return {
-      player: {
-        bestRun: formulas.firstResetLayerRun(mergedPlayer, spentTime),
-        bestPointsOfRun: formulas.bestPointsOfRun(mergedPlayer),
-      },
-    };
+    const { player } = mergedPlayer;
+
+    objectAssign(player, {
+      bestRun: formulas.firstResetLayerRun(mergedPlayer, spentTime),
+      bestPointsOfRun: formulas.bestPointsOfRun(mergedPlayer),
+    });
   },
 });
 

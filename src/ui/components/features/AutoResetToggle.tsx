@@ -8,7 +8,7 @@ import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import {
   everPerformed,
-  getResetLayerPlayerDataProp,
+  getResetLayerPlayerData,
 } from "@game/resetLayers/utils/get";
 import { getResetLayerPlayerSelection } from "@game/resetLayers/utils/selector";
 import { toggleResetLayerAuto } from "@game/resetLayers/utils/set";
@@ -43,11 +43,7 @@ function AutoResetToggle<T extends ResetLayerId>({
   });
 
   const { player, mergedPlayer } = getPlayerState();
-  const enabled = getResetLayerPlayerDataProp(
-    player,
-    resetLayerId,
-    "autoEnabled",
-  );
+  const { autoEnabled } = getResetLayerPlayerData(player, resetLayerId);
 
   const processedName =
     name === undefined ? capitalizeString(resetLayerId) : name;
@@ -55,12 +51,12 @@ function AutoResetToggle<T extends ResetLayerId>({
 
   const text =
     customChildren !== undefined ? (
-      parseValueGetter(customChildren, mergedPlayer, enabled)
+      parseValueGetter(customChildren, mergedPlayer, autoEnabled)
     ) : (
       <>
         {autoName}
         {": "}
-        <StatusText active={enabled}></StatusText>
+        <StatusText active={autoEnabled}></StatusText>
       </>
     );
 
@@ -75,7 +71,9 @@ function AutoResetToggle<T extends ResetLayerId>({
       : true;
     if (!canToggle) return;
 
-    setPlayer(toggleResetLayerAuto(player, resetLayerId));
+    setPlayer((player) => {
+      toggleResetLayerAuto(player, resetLayerId);
+    });
   }
 
   return (

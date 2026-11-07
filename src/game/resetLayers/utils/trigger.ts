@@ -2,24 +2,20 @@ import type { MergedPlayer } from "@game/player/merged/types";
 import type { ResetLayerId } from "../ids";
 import type { BuiltResetLayerConfig } from "../types";
 import { arrayLastIndex } from "@core/utils/array";
-import { deepCopy, objectEntries } from "@core/utils/object";
 import { getCurrentGameTime } from "@core/utils/gameTime";
+import { objectEntries } from "@core/utils/object";
 import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import getDefaultMergedPlayer from "@game/player/merged/default";
-import {
-  assignCachedPlayerForMergedPlayer,
-  assignMergedPlayer,
-  assignPlayerForMergedPlayer,
-} from "@game/player/merged/utils";
 import { parseValueGetter } from "@game/player/utils";
+import { current } from "immer";
 import resetLayers from "../data";
 import {
   canPerform,
   getResetLayerConfig,
   getResetLayerDimensionContainer,
-  getResetLayerPlayerDataProp,
+  getResetLayerPlayerData,
 } from "./get";
-import { setResetLayerCachedPlayerData, setResetLayerPlayerData } from "./set";
+import { setResetLayerPlayerData } from "./set";
 
 function performResetLayer(
   mergedPlayer: MergedPlayer,
@@ -27,6 +23,8 @@ function performResetLayer(
   rewardCondition: boolean = true,
   forceReset: boolean = false,
 ) {
+  const { cachedPlayer } = mergedPlayer;
+
   const data = getResetLayerConfig(resetLayerId);
   const { dimensionId } = data;
 
@@ -37,15 +35,10 @@ function performResetLayer(
   ) as BuiltResetLayerConfig[];
   const index = resetLayerDimension.indexOf(data);
 
+  const { startedDate } = getResetLayerPlayerData(mergedPlayer, resetLayerId);
+
+  const sourceMergedPlayer = current(mergedPlayer);
   const defaultMergedPlayer = getDefaultMergedPlayer();
-
-  const result = deepCopy(mergedPlayer, 2) as MergedPlayer;
-
-  const startedDate = getResetLayerPlayerDataProp(
-    mergedPlayer,
-    resetLayerId,
-    "startedDate",
-  );
 
   const resetDuration = startedDate === null ? null : currentTime - startedDate;
 
@@ -55,106 +48,66 @@ function performResetLayer(
       const layerData = resetLayerDimension[i];
       const { id } = layerData;
 
-      const resetLayer = layerData.reset(
-        result,
+      layerData.reset(
+        mergedPlayer,
         defaultMergedPlayer,
         currentTime,
-        mergedPlayer,
+        sourceMergedPlayer,
       );
 
       const notLast = i < index;
       if (notLast) {
-        assignPlayerForMergedPlayer(
-          resetLayer,
-          setResetLayerPlayerData(resetLayer, id, {
-            isFirstReset: true,
-          }),
-        );
+        setResetLayerPlayerData(mergedPlayer, id, {
+          isFirstReset: true,
+        });
       }
-
-      assignMergedPlayer(result, {
-        ...resetLayer,
-        player: {
-          ...resetLayer.player,
-          resetLayers: {
-            ...result.player.resetLayers,
-            ...resetLayer.player?.resetLayers,
-          },
-        },
-      });
     }
   }
 
   if (rewardCondition) {
-    const { reward } = data;
-    const rewarded = reward(mergedPlayer, resetDuration);
-
-    assignMergedPlayer(result, rewarded);
+    data.reward(sourceMergedPlayer, resetDuration);
   }
 
-  const appliedPlayerProperties = setResetLayerPlayerData(
-    result,
-    resetLayerId,
-    {
-      isFirstReset: false,
-    },
-  );
+  setResetLayerPlayerData(mergedPlayer, resetLayerId, {
+    isFirstReset: false,
+  });
 
-  assignPlayerForMergedPlayer(result, appliedPlayerProperties);
-
-  const appliedCachedProperties = setResetLayerCachedPlayerData(
-    result,
-    resetLayerId,
-    {
-      lastResetDuration:
-        startedDate === null ? null : currentTime - startedDate,
-    },
-  );
-
-  assignCachedPlayerForMergedPlayer(result, appliedCachedProperties);
-
-  return result;
+  cachedPlayer.resetLayers[resetLayerId].lastResetDuration =
+    startedDate === null ? null : currentTime - startedDate;
 }
 
 export function triggerResetLayer(
   mergedPlayer: MergedPlayer,
   resetLayerId: ResetLayerId,
   forceReset: boolean = true,
-) {
+): true | undefined {
   const can = canPerform(mergedPlayer, resetLayerId);
-  if (!can && !forceReset) return mergedPlayer;
+  if (!can && !forceReset) return;
 
-  return performResetLayer(mergedPlayer, resetLayerId, can, forceReset);
+  performResetLayer(mergedPlayer, resetLayerId, can, forceReset);
+
+  return true;
 }
 
-export function triggerAllResetLayers(
-  mergedPlayer: MergedPlayer,
-  result: MergedPlayer,
-) {
+export function triggerAllResetLayers(mergedPlayer: MergedPlayer) {
   for (const [dimensionId, dimensionResetLayers] of objectEntries(
     resetLayers,
   )) {
-    const dimensionWorks = shouldDimensionWork(result, dimensionId);
+    const dimensionWorks = shouldDimensionWork(mergedPlayer, dimensionId);
     if (!dimensionWorks) continue;
 
     for (let i = arrayLastIndex(dimensionResetLayers); i >= 0; i--) {
       const resetLayerData = dimensionResetLayers[i];
       const resetLayerId = resetLayerData.id;
 
-      const autoEnabled = getResetLayerPlayerDataProp(
-        mergedPlayer.player,
+      const { autoEnabled } = getResetLayerPlayerData(
+        mergedPlayer,
         resetLayerId,
-        "autoEnabled",
       );
-
       if (!autoEnabled) continue;
 
       const triggered = triggerResetLayer(mergedPlayer, resetLayerId, false);
-
-      if (triggered) {
-        assignMergedPlayer(result, triggered);
-        break;
-      }
+      if (triggered) break;
     }
   }
 }

@@ -1,5 +1,5 @@
 import createDecimal from "@core/utils/decimal";
-import { mergeObjects } from "@core/utils/object";
+import { mergeObjects, objectAssign } from "@core/utils/object";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { hasNexusLevelSelection } from "@game/features/nexus/utils/selector";
@@ -45,15 +45,14 @@ const tierResetLayer = defineResetLayer<"normal">({
 
     const hasTier_3 = hasUpgradeById(player, "tier_3");
 
-    return {
-      player: {
-        bestRun: defaultPlayer.bestRun,
-        bestPointsOfRun: defaultPlayer.bestPointsOfRun,
-        ...setResetLayerPlayerData(player, "reset", {
-          autoEnabled: !hasTier_3,
-        }),
-      },
-    };
+    objectAssign(player, {
+      bestRun: defaultPlayer.bestRun,
+      bestPointsOfRun: defaultPlayer.bestPointsOfRun,
+    });
+
+    setResetLayerPlayerData(player, "reset", {
+      autoEnabled: !hasTier_3,
+    });
   },
   preventReset: ({ player }) => hasUpgradeById(player, "vermyros_4"),
   reward: (mergedPlayer) => {
@@ -64,14 +63,12 @@ const tierResetLayer = defineResetLayer<"normal">({
 
     const vermyros_4 = hasUpgradeById(mergedPlayer, "vermyros_4");
 
-    return {
-      player: {
-        tier: player.tier.plus(bulk),
-        ...(vermyros_4
-          ? {}
-          : { madeTierTimes: player.madeTierTimes.plus(tierResetGain) }),
-      },
-    };
+    objectAssign(player, {
+      tier: player.tier.plus(bulk),
+      ...(vermyros_4
+        ? {}
+        : { madeTierTimes: player.madeTierTimes.plus(tierResetGain) }),
+    });
   },
 });
 

@@ -1,3 +1,4 @@
+import { objectAssign } from "@core/utils/object";
 import { calculateCurrencyGain } from "@game/currencies/utils/calculate";
 import { getCurrencyEffectOn } from "@game/currencies/utils/get";
 import { getRepeatableUpgradeLevel } from "@game/repeatableUpgrades/utils/get";
@@ -32,27 +33,31 @@ const nullithResetLayer = defineResetLayer<"normal">({
 
     const hasNullith_3 = hasUpgradeById(player, "nullith_3");
 
-    return {
-      player: {
-        ...setResetLayerPlayerData(player, "vermyros", {
-          autoEnabled: true,
-        }),
-        vermytes: defaultPlayer.vermytes,
-        bestVermytes: defaultPlayer.bestVermytes,
-        vermora: defaultPlayer.vermora,
-        repeatableUpgrades: {
-          vermyte: getRepeatableUpgradeLevel(defaultMergedPlayer, "vermyte"),
-          core: getRepeatableUpgradeLevel(defaultMergedPlayer, "core"),
-        },
-        enteredAmplivault: false,
-        amplivaultLevel: hasNullith_3
-          ? player.amplivaultLevel
-          : defaultPlayer.amplivaultLevel,
-        energyReactors: defaultPlayer.energyReactors,
-        energy: defaultPlayer.energy,
-        cores: defaultPlayer.cores,
-      },
-    };
+    objectAssign(player, {
+      vermytes: defaultPlayer.vermytes,
+      bestVermytes: defaultPlayer.bestVermytes,
+      vermora: defaultPlayer.vermora,
+      enteredAmplivault: false,
+      amplivaultLevel: hasNullith_3
+        ? player.amplivaultLevel
+        : defaultPlayer.amplivaultLevel,
+      energyReactors: defaultPlayer.energyReactors,
+      energy: defaultPlayer.energy,
+      cores: defaultPlayer.cores,
+    });
+
+    setResetLayerPlayerData(player, "vermyros", {
+      autoEnabled: true,
+    });
+
+    player.repeatableUpgrades.vermyte = getRepeatableUpgradeLevel(
+      defaultMergedPlayer,
+      "vermyte",
+    );
+    player.repeatableUpgrades.core = getRepeatableUpgradeLevel(
+      defaultMergedPlayer,
+      "core",
+    );
   },
   reward: (mergedPlayer) => {
     const { player } = mergedPlayer;
@@ -62,13 +67,11 @@ const nullithResetLayer = defineResetLayer<"normal">({
       "madeNullithResets",
     );
 
-    return {
-      player: {
-        madeNullithResets: player.madeNullithResets.plus(nullithResetGain),
-        reachedBreakAmplivault:
-          player.reachedBreakAmplivault || player.enteredAmplivault,
-      },
-    };
+    objectAssign(player, {
+      madeNullithResets: player.madeNullithResets.plus(nullithResetGain),
+      reachedBreakAmplivault:
+        player.reachedBreakAmplivault || player.enteredAmplivault,
+    });
   },
 });
 

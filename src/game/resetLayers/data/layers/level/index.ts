@@ -7,23 +7,17 @@ const levelResetLayer = defineResetLayer<"sliph">({
   id: "level",
   goal: createDecimal(1e25),
   currency: "dertoints",
-  reset: (_, defaultMergedPlayer) => {
+  reset: ({ player }, defaultMergedPlayer) => {
     const defaultPlayer = defaultMergedPlayer.player;
 
-    return {
-      player: {
-        mallirtTotalDertoints: defaultPlayer.mallirtTotalDertoints,
-      },
-    };
+    player.mallirtTotalDertoints = defaultPlayer.mallirtTotalDertoints;
   },
   reward: (mergedPlayer) => {
+    const { player } = mergedPlayer;
+
     const scoreGain = calculateCurrencyGain(mergedPlayer, "score");
 
-    return {
-      player: {
-        score: formulas.score(mergedPlayer, scoreGain),
-      },
-    };
+    player.score = formulas.score(mergedPlayer, scoreGain);
   },
 });
 
