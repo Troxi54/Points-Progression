@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 
+/// <reference types="vitest/config" />
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -32,5 +34,12 @@ export default defineConfig(({ mode }) => ({
     ...(mode === "analyze" && {
       sourcemap: true,
     }),
+  },
+  test: {
+    environment: "jsdom",
+    include: ["**/*.test.ts"],
+    benchmark: {
+      include: ["benchmarks/**/*.bench.ts"],
+    },
   },
 }));
