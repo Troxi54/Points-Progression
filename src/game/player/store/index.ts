@@ -1,78 +1,48 @@
 import type { PlayerState, PlayerStateFacade } from "./types";
-import { updateObject } from "@core/utils/object";
 import { mergePlayer } from "@game/player/merged/utils";
 import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
 import { getDefaultCachedPlayer } from "../cached/default";
 import { getDefaultPlayer } from "../schemas";
 
-export const usePlayerStore = create<PlayerState>((set) => {
-  const player = getDefaultPlayer();
-  const cachedPlayer = getDefaultCachedPlayer();
-  const mergedPlayer = mergePlayer(player, cachedPlayer);
+export const usePlayerStore = create<PlayerState>()(
+  immer((set) => {
+    const player = getDefaultPlayer();
+    const cachedPlayer = getDefaultCachedPlayer();
+    const mergedPlayer = mergePlayer(player, cachedPlayer);
 
-  return {
-    mergedPlayer,
-    setPlayer: (newPlayer) =>
-      set((state) => {
-        const oldPlayer = state.mergedPlayer.player;
-        const updatedPlayer = updateObject(oldPlayer, newPlayer);
+    return {
+      mergedPlayer,
 
-        if (updatedPlayer === oldPlayer) {
-          return state;
-        }
+      setPlayer: (updater) =>
+        set((state) => {
+          if (typeof updater === "function") {
+            updater(state.mergedPlayer.player);
+          } else {
+            Object.assign(state.mergedPlayer.player, updater);
+          }
+        }),
 
-        return {
-          mergedPlayer: {
-            ...state.mergedPlayer,
-            player: updatedPlayer,
-          },
-        };
-      }),
+      setCachedPlayer: (updater) =>
+        set((state) => {
+          if (typeof updater === "function") {
+            updater(state.mergedPlayer.cachedPlayer);
+          } else {
+            Object.assign(state.mergedPlayer.cachedPlayer, updater);
+          }
+        }),
 
-    setCachedPlayer: (newCached) =>
-      set((state) => {
-        const oldCached = state.mergedPlayer.cachedPlayer;
-        const updatedCachedPlayer = updateObject(oldCached, newCached);
-
-        if (updatedCachedPlayer === oldCached) {
-          return state;
-        }
-
-        return {
-          mergedPlayer: {
-            ...state.mergedPlayer,
-            cachedPlayer: updatedCachedPlayer,
-          },
-        };
-      }),
-
-    setMergedPlayer: (newMergedPlayer) =>
-      set((state) => {
-        const oldPlayer = state.mergedPlayer.player;
-        const oldCached = state.mergedPlayer.cachedPlayer;
-
-        const updatedPlayer = updateObject(oldPlayer, newMergedPlayer?.player);
-        const updatedCached = updateObject(
-          oldCached,
-          newMergedPlayer?.cachedPlayer,
-        );
-
-        const hasPlayerChanged = updatedPlayer !== oldPlayer;
-        const hasCachedChanged = updatedCached !== oldCached;
-
-        if (!hasPlayerChanged && !hasCachedChanged) {
-          return state;
-        }
-
-        const merged = {
-          player: updatedPlayer,
-          cachedPlayer: updatedCached,
-        };
-
-        return { mergedPlayer: merged };
-      }),
-  };
-});
+      setMergedPlayer: (updater) =>
+        set((state) => {
+          if (typeof updater === "function") {
+            updater(state.mergedPlayer);
+          } else {
+            Object.assign(state.mergedPlayer, updater);
+          }
+        }),
+    };
+  }),
+);
 
 export function getPlayerState(): PlayerStateFacade {
   const { mergedPlayer, setPlayer, setCachedPlayer, setMergedPlayer } =

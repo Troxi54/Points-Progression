@@ -1,29 +1,22 @@
+import type { GameLoopPartState } from "../types";
 import { clamp, safeNumber } from "@core/utils/number";
-import { copyObject } from "@core/utils/object";
 import offlineConfig from "@game/offline/config";
 import { calculateTicksForOfflineTime } from "@game/offline/utils/calculate";
-import { mergePlayer } from "@game/player/merged/utils";
-import { getPlayerState } from "@game/player/store";
-import { createGameLoopPartState } from "../utils/create";
 
-export default function gameLoopPreTick() {
-  const { player, cachedPlayer, setMergedPlayer } = getPlayerState();
+export default function gameLoopPreTick(state: GameLoopPartState) {
+  const {
+    mergedPlayer: { cachedPlayer },
+  } = state;
 
-  const newPlayer = copyObject(player);
-  const newCachedPlayer = copyObject(cachedPlayer);
-
-  const mergedPlayer = mergePlayer(newPlayer, newCachedPlayer);
-  const partState = createGameLoopPartState(mergedPlayer);
-
-  const { offlineProgress, offlineProgressFullTime } = newCachedPlayer;
+  const { offlineProgress, offlineProgressFullTime } = cachedPlayer;
 
   let timeSpeed = 1;
   if (offlineProgress) {
     const offlineProgressSpeed = safeNumber(
-      clamp(newCachedPlayer.offlineProgressSpeed, 1, offlineConfig.maxSpeed),
+      clamp(cachedPlayer.offlineProgressSpeed, 1, offlineConfig.maxSpeed),
       1,
     );
-    newCachedPlayer.offlineProgressSpeed = offlineProgressSpeed;
+    cachedPlayer.offlineProgressSpeed = offlineProgressSpeed;
 
     const ticksOnTrigger = calculateTicksForOfflineTime(
       offlineProgressFullTime,
@@ -31,16 +24,14 @@ export default function gameLoopPreTick() {
 
     const tickTime =
       (offlineProgressSpeed / ticksOnTrigger) * offlineProgressFullTime;
-    if (partState.deltaTimeTPS > 0) {
-      timeSpeed = tickTime / partState.deltaTimeTPS;
+    if (state.deltaTimeTPS > 0) {
+      timeSpeed = tickTime / state.deltaTimeTPS;
     }
     if (!Number.isFinite(timeSpeed) || timeSpeed < 0) {
       timeSpeed = 1;
     }
   }
 
-  newCachedPlayer.timeSpeed = timeSpeed;
-  partState.deltaTime *= timeSpeed;
-
-  return { partState, setMergedPlayer };
+  cachedPlayer.timeSpeed = timeSpeed;
+  state.deltaTime *= timeSpeed;
 }

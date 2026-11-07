@@ -1,22 +1,28 @@
 import { updateCurrentTime } from "@core/utils/time";
 import { triggerOfflineProgress } from "@game/offline/utils/trigger";
+import { getPlayerState } from "@game/player/store";
 import gameLoopActions from "./parts/actions";
 import gameLoopUpdateCache from "./parts/cacheUpdates";
 import gameLoopPostTick from "./parts/postTick";
 import gameLoopPreTick from "./parts/preTick";
+import { createGameLoopPartState } from "./utils/create";
 
 export default function gameLoopTick() {
   updateCurrentTime();
 
   triggerOfflineProgress();
 
-  const { partState, setMergedPlayer } = gameLoopPreTick();
+  const { setMergedPlayer } = getPlayerState();
 
-  gameLoopUpdateCache(partState);
-  gameLoopActions(partState);
-  gameLoopUpdateCache(partState);
+  setMergedPlayer((mergedPlayer) => {
+    const state = createGameLoopPartState(mergedPlayer);
 
-  gameLoopPostTick(partState);
+    gameLoopPreTick(state);
 
-  setMergedPlayer(partState.mergedPlayer);
+    gameLoopUpdateCache(state);
+    gameLoopActions(state);
+    gameLoopUpdateCache(state);
+
+    gameLoopPostTick(state);
+  });
 }

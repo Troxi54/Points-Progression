@@ -5,7 +5,7 @@ import effectFormulas from "@game/formulas/effects";
 export default function gameLoopUpdateEffects(state: GameLoopPartState) {
   const { mergedPlayer } = state;
 
-  state.assignCachedPlayerForMergedPlayer(updateCurrencyEffects(mergedPlayer));
+  updateCurrencyEffects(mergedPlayer);
 
   updateOtherEffects(state);
 }

@@ -1,5 +1,3 @@
-import Decimal from "break_eternity.js";
-
 export function isObject(value: unknown): value is object {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -21,38 +19,6 @@ export function assignKey<T, K extends keyof T>(
   value: T[K],
 ) {
   obj[key] = value;
-}
-
-function smartMergeDecimalObject<T>(oldObj: T, newObj: Partial<T>): T {
-  const result = { ...oldObj };
-
-  for (const key in newObj) {
-    if (!Object.hasOwn(newObj, key)) continue;
-
-    const k = key as keyof T;
-    const oldVal = oldObj[k];
-    const newVal = newObj[k];
-
-    if (
-      oldVal instanceof Decimal &&
-      newVal instanceof Decimal &&
-      !oldVal.equals(newVal)
-    ) {
-      result[k] = newVal as T[typeof k];
-    } else if (
-      !(oldVal instanceof Decimal && newVal instanceof Decimal) &&
-      oldVal !== newVal
-    ) {
-      result[k] = newVal as T[typeof k];
-    }
-  }
-
-  return result;
-}
-
-export function updateObject<T>(prev: T, next?: Partial<T>) {
-  if (!next) return prev;
-  return smartMergeDecimalObject(prev, next);
 }
 
 export function copyObject<T extends Readonly<object>>(object: T): T {

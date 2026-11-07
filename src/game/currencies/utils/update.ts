@@ -20,12 +20,8 @@ import {
 } from "./calculate";
 import { setCachedCurrency } from "./set";
 
-export function updateCurrencyEffects(
-  mergedPlayer: MergedPlayer,
-): PartialCachedPlayer {
-  const result: PartialCachedPlayer = {
-    currencies: copyObject(mergedPlayer.cachedPlayer.currencies),
-  };
+export function updateCurrencyEffects(mergedPlayer: MergedPlayer) {
+  const { cachedPlayer } = mergedPlayer;
 
   for (const [currencyId, data] of objectEntries(currencyConfig)) {
     const { affects } = data;
@@ -49,7 +45,7 @@ export function updateCurrencyEffects(
         if (newEffect) newEffects[effectCurrency] = newEffect;
       }
 
-      setCachedCurrency(result, currencyId, {
+      setCachedCurrency(cachedPlayer, currencyId, {
         effect: newEffects,
       });
 
@@ -63,12 +59,10 @@ export function updateCurrencyEffects(
 
     const newEffect = effectFormula(mergedPlayer);
 
-    setCachedCurrency(result, currencyId, {
+    setCachedCurrency(cachedPlayer, currencyId, {
       effect: newEffect,
     });
   }
-
-  return result;
 }
 
 export function updateCurrencyGains(

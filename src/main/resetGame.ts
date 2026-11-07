@@ -4,9 +4,13 @@ import { triggerOfflineProgress } from "@game/offline/utils/trigger";
 import { getPlayerState } from "@game/player/store";
 
 export default function resetGame() {
-  const { mergedPlayer } = getPlayerState();
-  const gameLoopPartState = createGameLoopPartState(mergedPlayer);
+  const { setMergedPlayer } = getPlayerState();
 
-  gameLoopUpdateCache(gameLoopPartState);
+  setMergedPlayer((mergedPlayer) => {
+    const gameLoopPartState = createGameLoopPartState(mergedPlayer);
+
+    gameLoopUpdateCache(gameLoopPartState);
+  });
+
   triggerOfflineProgress();
 }
