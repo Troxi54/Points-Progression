@@ -66,11 +66,7 @@ export function createMergedPlayerState(
 ): MergedPlayerState {
   return {
     mergedPlayer,
-    assignMergedPlayer: (newMergedPlayer) =>
-      assignMergedPlayer(mergedPlayer, newMergedPlayer),
-    assignPlayerForMergedPlayer: (newPlayer) =>
-      assignPlayerForMergedPlayer(mergedPlayer, newPlayer),
-    assignCachedPlayerForMergedPlayer: (newCachedPlayer) =>
-      assignCachedPlayerForMergedPlayer(mergedPlayer, newCachedPlayer),
+    player: mergedPlayer.player,
+    cachedPlayer: mergedPlayer.cachedPlayer,
   };
 }

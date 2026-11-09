@@ -24,8 +24,8 @@ export default function gameLoopPreTick(state: GameLoopPartState) {
 
     const tickTime =
       (offlineProgressSpeed / ticksOnTrigger) * offlineProgressFullTime;
-    if (state.deltaTimeTPS > 0) {
-      timeSpeed = tickTime / state.deltaTimeTPS;
+    if (state.deltaTimeMs > 0) {
+      timeSpeed = tickTime / state.deltaTimeMs;
     }
     if (!Number.isFinite(timeSpeed) || timeSpeed < 0) {
       timeSpeed = 1;

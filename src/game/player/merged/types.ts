@@ -17,9 +17,6 @@ export interface PartialMergedPlayer {
 
 export interface MergedPlayerState {
   mergedPlayer: MergedPlayer;
-  assignMergedPlayer: (newMergedPlayer?: PartialMergedPlayer) => void;
-  assignPlayerForMergedPlayer: (newPlayer?: PartialPlayer) => void;
-  assignCachedPlayerForMergedPlayer: (
-    newCachedPlayer?: PartialCachedPlayer,
-  ) => void;
+  player: MergedPlayer["player"];
+  cachedPlayer: MergedPlayer["cachedPlayer"];
 }

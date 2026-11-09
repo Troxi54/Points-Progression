@@ -4,6 +4,6 @@ export interface GameLoopPartState extends MergedPlayerState {
   currentTime: number;
   currentGameTime: number;
   deltaTime: number;
-  deltaTimeTPS: number;
+  deltaTimeMs: number;
   deltaTimeSession: number;
 }

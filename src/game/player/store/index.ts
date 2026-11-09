@@ -1,5 +1,8 @@
 import type { PlayerState, PlayerStateFacade } from "./types";
-import { mergePlayer } from "@game/player/merged/utils";
+import {
+  createMergedPlayerState,
+  mergePlayer,
+} from "@game/player/merged/utils";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { getDefaultCachedPlayer } from "../cached/default";
@@ -45,15 +48,10 @@ export const usePlayerStore = create<PlayerState>()(
 );
 
 export function getPlayerState(): PlayerStateFacade {
-  const { mergedPlayer, setPlayer, setCachedPlayer, setMergedPlayer } =
-    usePlayerStore.getState();
+  const { mergedPlayer, ...state } = usePlayerStore.getState();
 
   return {
-    mergedPlayer,
-    player: mergedPlayer.player,
-    cachedPlayer: mergedPlayer.cachedPlayer,
-    setPlayer,
-    setCachedPlayer,
-    setMergedPlayer,
+    ...createMergedPlayerState(mergedPlayer),
+    ...state,
   };
 }

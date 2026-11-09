@@ -1,7 +1,6 @@
 import type { GameLoopPartState } from "@game/gameLoop/types";
 import type { MergedPlayer } from "@game/player/merged/types";
 import { getCurrentGameTime } from "@core/utils/gameTime";
-import { mergeObjects } from "@core/utils/object";
 import { getCurrentTime } from "@core/utils/time";
 import { createMergedPlayerState } from "@game/player/merged/utils";
 
@@ -12,22 +11,19 @@ export function createGameLoopPartState(
 
   const { player, cachedPlayer } = mergedPlayer;
 
-  const deltaTimeTPS = Math.max(currentTime - player.lastTick, 0);
-  const deltaTime = deltaTimeTPS / 1000;
+  const deltaTimeMs = Math.max(currentTime - player.lastTick, 0);
+  const deltaTime = deltaTimeMs / 1000;
   const deltaTimeSession = Math.max(
     currentTime - cachedPlayer.lastTickSession,
     0,
   );
 
-  const override = {
+  return {
+    ...createMergedPlayerState(mergedPlayer),
     currentTime,
     currentGameTime: getCurrentGameTime(mergedPlayer, currentTime),
     deltaTime,
-    deltaTimeTPS,
+    deltaTimeMs,
     deltaTimeSession,
-  } as const satisfies Partial<GameLoopPartState>;
-
-  const mergedPlayerState = createMergedPlayerState(mergedPlayer);
-
-  return mergeObjects(mergedPlayerState, override);
+  };
 }

@@ -1,10 +1,7 @@
-import type { CurrencyId } from "@game/currencies/types";
 import type { GameLoopPartState } from "@game/gameLoop/types";
-import type { ResetLayerId } from "@game/resetLayers/ids";
 import { generateCurrencies } from "@game/currencies/utils/generate";
-import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import formulas from "@game/formulas/data";
-import { getResetLayerPlayerData } from "@game/resetLayers/utils/get";
+import { generateOfflineResets } from "@game/offline/utils/generate";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {
@@ -13,50 +10,23 @@ export default function gameLoopGenerateCurrencies(state: GameLoopPartState) {
 
   generateCurrencies(mergedPlayer, state.deltaTime);
 
-  gameLoopGenerateOfflineResets(
-    state,
-    "tier",
-    "madeTierTimes",
-    hasUpgradeById(player, "tier_3"),
-  );
+  if (hasUpgradeById(player, "tier_3")) {
+    generateOfflineResets(
+      mergedPlayer,
+      "tier",
+      "madeTierTimes",
+      state.deltaTime,
+    );
+  }
 
-  gameLoopGenerateOfflineResets(
-    state,
-    "nullith",
-    "madeNullithResets",
-    hasUpgradeById(player, "nullith_4"),
-  );
+  if (hasUpgradeById(player, "nullith_4")) {
+    generateOfflineResets(
+      mergedPlayer,
+      "nullith",
+      "madeNullithResets",
+      state.deltaTime,
+    );
+  }
 
   player.bestPoints = formulas.bestPoints(mergedPlayer);
-}
-
-export function gameLoopGenerateOfflineResets(
-  state: GameLoopPartState,
-  resetLayerId: ResetLayerId,
-  currencyId: CurrencyId,
-  condition: boolean = true,
-): void {
-  const { mergedPlayer } = state;
-  const { player, cachedPlayer } = mergedPlayer;
-
-  if (!cachedPlayer.offlineProgress || !condition) return;
-
-  const { autoEnabled, resetsPerSecond } = getResetLayerPlayerData(
-    player,
-    resetLayerId,
-  );
-  if (!autoEnabled) return;
-  if (
-    !resetsPerSecond ||
-    !Number.isFinite(resetsPerSecond) ||
-    resetsPerSecond < 0
-  )
-    return;
-
-  const gain = getCachedCurrencyProp(cachedPlayer, currencyId, "gain");
-  const gainPerSecond = gain
-    .multiply(state.deltaTime)
-    .multiply(resetsPerSecond);
-
-  player[currencyId] = player[currencyId].plus(gainPerSecond);
 }
