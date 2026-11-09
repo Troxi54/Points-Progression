@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => ({
   base: "./",
   server: {
     port: 5173,
+    host: "127.0.0.1",
   },
   resolve: {
     tsconfigPaths: true,
