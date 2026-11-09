@@ -42,6 +42,7 @@ function MenuInfoMainPage() {
         <Paragraph className="m-0">
           <Caption>Version: </Caption>
           {gameVersionToString(gameConfig.gameVersion)}
+          {gameConfig.dev && " (dev)"}
           <br />
           <MenuInfoMainPageGameProgress />
         </Paragraph>

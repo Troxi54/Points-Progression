@@ -8,6 +8,7 @@ const gameConfig = {
     minor: 2,
     patch: 7,
   } satisfies GameVersion,
+  dev: true,
   endgameAt: createDecimal("1e9075"),
 };
 
