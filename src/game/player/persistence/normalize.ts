@@ -1,7 +1,6 @@
 import type { PartialPlayer } from "@game/player/types";
 import type { Player } from "../schemas";
-import { objectEntries } from "@core/utils/object";
-import { getDefaultPlayer, PlayerSchema } from "@game/player/schemas";
+import { PlayerSchema } from "@game/player/schemas";
 import * as z from "@zod/mini";
 
 export function normalizePlayer(player: PartialPlayer): Player {
@@ -9,13 +8,7 @@ export function normalizePlayer(player: PartialPlayer): Player {
 }
 
 export function sanitizePlayer(player: PartialPlayer): Player {
-  const result = getDefaultPlayer();
-
-  for (const [key, value] of objectEntries(player)) {
-    if (!(key in result)) continue;
-
-    (result[key] as unknown) = value;
-  }
+  const result = PlayerSchema.parse(player);
 
   return result;
 }
