@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --fix",
     "bench": "vitest bench",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist",
+    "deploy": "git switch main && npm run build && gh-pages -d dist && git push --force-with-lease origin HEAD:refs/heads/last-deployed",
     "test": "vitest"
   },
   "dependencies": {
