@@ -4,13 +4,16 @@ import { triggerResetLayer } from "@game/resetLayers/utils/trigger";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export function toggleAntinefit() {
-  const { mergedPlayer, setMergedPlayer } = getPlayerState();
-  const { player } = mergedPlayer;
-  const { enteredAntinefit, everEnteredAntinefit, everLeftAntinefit } = player;
-
-  if (!enteredAntinefit && !hasUpgradeById(player, "nullith_12")) return;
+  const { setMergedPlayer } = getPlayerState();
 
   setMergedPlayer((mergedPlayer) => {
+    const { player } = mergedPlayer;
+
+    const { enteredAntinefit, everEnteredAntinefit, everLeftAntinefit } =
+      player;
+
+    if (!enteredAntinefit && !hasUpgradeById(player, "nullith_12")) return;
+
     triggerResetLayer(mergedPlayer, "nullith");
 
     const newValue = !enteredAntinefit;

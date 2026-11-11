@@ -7,23 +7,24 @@ import { setResetLayerPlayerData } from "@game/resetLayers/utils/set";
 import { hasUpgradeById } from "@game/upgrades/utils/has";
 
 export function toggleSliph() {
-  const { player, setPlayer } = getPlayerState();
-
-  if (!player.enteredAmplivault && !hasUpgradeById(player, "nullith_5")) return;
-
-  const { dimensionId } = player;
-  const newValue: DimensionId = isDimension(dimensionId, "sliph")
-    ? "normal"
-    : "sliph";
-
-  const isSliph = isDimension(newValue, "sliph");
-
-  const mallirtStartedDate = getResetLayerPlayerData(
-    player,
-    "mallirt",
-  ).startedDate;
+  const { setPlayer } = getPlayerState();
 
   setPlayer((player) => {
+    if (!player.enteredAmplivault && !hasUpgradeById(player, "nullith_5"))
+      return;
+
+    const { dimensionId } = player;
+    const newValue: DimensionId = isDimension(dimensionId, "sliph")
+      ? "normal"
+      : "sliph";
+
+    const isSliph = isDimension(newValue, "sliph");
+
+    const mallirtStartedDate = getResetLayerPlayerData(
+      player,
+      "mallirt",
+    ).startedDate;
+
     player.dimensionId = newValue;
 
     if (isSliph) {

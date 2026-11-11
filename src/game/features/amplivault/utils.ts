@@ -20,16 +20,17 @@ export function getNewAmplivaultLevel(mergedPlayer: MergedPlayer) {
 }
 
 export function toggleAmplivault() {
-  const { mergedPlayer, setMergedPlayer } = getPlayerState();
-  const { player } = mergedPlayer;
-
-  if (
-    !player.enteredAmplivault &&
-    (!hasUpgradeById(player, "vermyros_5") || player.amplivaultBroken)
-  )
-    return;
+  const { setMergedPlayer } = getPlayerState();
 
   setMergedPlayer((mergedPlayer) => {
+    const { player } = mergedPlayer;
+
+    if (
+      !player.enteredAmplivault &&
+      (!hasUpgradeById(player, "vermyros_5") || player.amplivaultBroken)
+    )
+      return;
+
     triggerResetLayer(mergedPlayer, "vermyros");
 
     player.enteredAmplivault = !player.enteredAmplivault;
