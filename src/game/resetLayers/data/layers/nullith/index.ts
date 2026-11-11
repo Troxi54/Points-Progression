@@ -73,6 +73,7 @@ const nullithResetLayer = defineResetLayer<"normal">({
         player.reachedBreakAmplivault || player.enteredAmplivault,
     });
   },
+  usesResetsCurrency: true,
 });
 
 export default nullithResetLayer;

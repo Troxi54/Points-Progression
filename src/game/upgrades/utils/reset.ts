@@ -3,11 +3,11 @@ import type { ResetLayerId } from "@game/resetLayers/ids";
 import type { UpgradeContainerId } from "../ids";
 import type { KeptUpgrades } from "../resetTypes";
 import { objectEntries } from "@core/utils/object";
-import resetLayers from "@game/resetLayers/data";
+import resetLayerConfigs from "@game/resetLayers/data";
 import upgradeResetData from "@game/upgrades/resetData";
 
 function getResetLayerPosition(resetLayerId: ResetLayerId) {
-  for (const [dimensionId, layers] of objectEntries(resetLayers)) {
+  for (const [dimensionId, layers] of objectEntries(resetLayerConfigs)) {
     const index = layers.findIndex((layer) => layer.id === resetLayerId);
     if (index >= 0) return { dimensionId, index };
   }

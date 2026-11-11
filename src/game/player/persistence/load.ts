@@ -12,6 +12,16 @@ function loadPlayerDataFromLocalStorage(): string | null {
   return data;
 }
 
+export function loadPlayerFromData(player: PartialPlayer) {
+  const normalized = normalizePlayer(player);
+  const migrated = migratePlayer(normalized);
+  const sanitized = sanitizePlayer(migrated);
+
+  sanitized.gameVersion = gameConfig.gameVersion;
+
+  return sanitized;
+}
+
 export function loadPlayerFromString(str: string): Player | undefined {
   const decompressed = decompressPlayerString(str);
   if (!decompressed) return;
@@ -23,13 +33,7 @@ export function loadPlayerFromString(str: string): Player | undefined {
     unminified = decompressed;
   }
 
-  const normalized = normalizePlayer(unminified);
-  const migrated = migratePlayer(normalized);
-  const sanitized = sanitizePlayer(migrated);
-
-  sanitized.gameVersion = gameConfig.gameVersion;
-
-  return sanitized;
+  return loadPlayerFromData(unminified);
 }
 
 export function loadPlayer(str?: string): Player | undefined {

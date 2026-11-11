@@ -4,7 +4,7 @@ import cn from "@core/utils/tailwind";
 import { savePlayer } from "@game/player/persistence/save";
 import { getPlayerState } from "@game/player/store";
 import { togglePlayerField } from "@game/player/utils";
-import resetLayerConfig from "@game/resetLayers/config";
+import resetLayersConfig from "@game/resetLayers/config";
 import Button from "@ui/components/base/Button";
 import Select from "@ui/components/base/Select";
 import Stack from "@ui/components/base/Stack";
@@ -168,8 +168,8 @@ const SettingsMenu = () => {
           </span>
           <Tooltip>
             Prevents rapid updates of progress bars when resets per second
-            exceed {resetLayerConfig.progressBarsStartLockingAt} by locking them
-            at 100%. Helps reduce potential screen wear
+            exceed {resetLayersConfig.progressBarsStartLockingAt} by locking
+            them at 100%. Helps reduce potential screen wear
           </Tooltip>
         </Button>
       </Stack>

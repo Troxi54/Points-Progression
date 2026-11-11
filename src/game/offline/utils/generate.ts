@@ -14,20 +14,22 @@ export function generateOfflineResets(
 
   if (!cachedPlayer.offlineProgress) return;
 
-  const { autoEnabled, resetsPerSecond } = getResetLayerPlayerData(
+  const { autoEnabled, offlineResetsPerSecond } = getResetLayerPlayerData(
     player,
     resetLayerId,
   );
   if (!autoEnabled) return;
   if (
-    !resetsPerSecond ||
-    !Number.isFinite(resetsPerSecond) ||
-    resetsPerSecond < 0
+    !offlineResetsPerSecond ||
+    !Number.isFinite(offlineResetsPerSecond) ||
+    offlineResetsPerSecond < 0
   )
     return;
 
   const gain = getCachedCurrencyProp(cachedPlayer, currencyId, "gain");
-  const gainPerSecond = gain.multiply(deltaTime).multiply(resetsPerSecond);
+  const gainPerSecond = gain
+    .multiply(deltaTime)
+    .multiply(offlineResetsPerSecond);
 
   player[currencyId] = player[currencyId].plus(gainPerSecond);
 }

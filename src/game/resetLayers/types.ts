@@ -27,6 +27,7 @@ export interface ResetLayerConfig<T extends DimensionId = DimensionId> {
     sourceMergedPlayer: MergedPlayer,
     spentTime: number | null,
   ) => void;
+  usesResetsCurrency: boolean;
 }
 
 export type PartialResetLayerConfig<T extends DimensionId = DimensionId> =

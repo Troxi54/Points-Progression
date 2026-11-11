@@ -11,12 +11,16 @@ import type { PlayerState } from "./store/types";
 import type { PartialPlayer, PlayerLike, ValueGetter } from "./types";
 import resetGame from "@main/resetGame";
 import { getDefaultCachedPlayer } from "./cached/default";
+import { loadPlayerFromData } from "./persistence/load";
 import { getDefaultPlayer } from "./schemas";
 import { getPlayerState } from "./store";
 
 export function resetPlayerData() {
   const { setPlayer, setCachedPlayer } = getPlayerState();
-  setPlayer(getDefaultPlayer());
+
+  const loadedPlayer = loadPlayerFromData(getDefaultPlayer());
+  setPlayer(loadedPlayer);
+
   setCachedPlayer(getDefaultCachedPlayer());
 }
 

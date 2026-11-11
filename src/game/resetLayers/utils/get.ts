@@ -15,16 +15,16 @@ import {
   parseValueGetter,
 } from "@game/player/utils";
 import { getDefaultCachedResetLayer } from "../cachedData";
-import resetLayerConfig from "../config";
-import resetLayers, { flatResetLayers } from "../data";
+import resetLayersConfig from "../config";
+import resetLayerConfigs, { resetLayerConfigsById } from "../data";
 import { getDefaultResetLayerPlayerData } from "../playerData";
 
 export function getResetLayerConfig(resetLayerId: ResetLayerId) {
-  return flatResetLayers[resetLayerId];
+  return resetLayerConfigsById[resetLayerId];
 }
 
 export function getResetLayerDimensionContainer(dimensionId: DimensionId) {
-  return resetLayers[dimensionId];
+  return resetLayerConfigs[dimensionId];
 }
 
 export function getResetLayerPlayerData(
@@ -110,23 +110,23 @@ export function shouldResetLayerProgressBarLock(
   mergedPlayer: MergedPlayer,
   resetLayerId: ResetLayerId,
 ): boolean {
-  const { player } = mergedPlayer;
+  const { player, cachedPlayer } = mergedPlayer;
   if (!player.stableProgressBars) return false;
 
-  const dimensionId = flatResetLayers[resetLayerId].dimensionId;
-  const container = resetLayers[dimensionId];
+  const dimensionId = getResetLayerConfig(resetLayerId).dimensionId;
+  const container = resetLayerConfigs[dimensionId];
   const startIndex = container.findIndex((data) => data.id === resetLayerId);
 
   for (let i = startIndex; i < container.length; i++) {
     const data = container[i];
     const { id } = data;
 
-    const playerData = player.resetLayers[id];
+    const playerData = cachedPlayer.resetLayers[id];
     if (!playerData) continue;
 
     const { resetsPerSecond } = playerData;
 
-    if (resetsPerSecond >= resetLayerConfig.progressBarsStartLockingAt) {
+    if (resetsPerSecond >= resetLayersConfig.progressBarsStartLockingAt) {
       return true;
     }
   }

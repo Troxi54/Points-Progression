@@ -8,7 +8,7 @@ import { shouldDimensionWork } from "@game/dimensions/utils/check";
 import getDefaultMergedPlayer from "@game/player/merged/default";
 import { parseValueGetter } from "@game/player/utils";
 import { current } from "immer";
-import resetLayers from "../data";
+import resetLayerConfigs from "../data";
 import {
   canPerform,
   getResetLayerConfig,
@@ -91,7 +91,7 @@ export function triggerResetLayer(
 
 export function triggerAllResetLayers(mergedPlayer: MergedPlayer) {
   for (const [dimensionId, dimensionResetLayers] of objectEntries(
-    resetLayers,
+    resetLayerConfigs,
   )) {
     const dimensionWorks = shouldDimensionWork(mergedPlayer, dimensionId);
     if (!dimensionWorks) continue;

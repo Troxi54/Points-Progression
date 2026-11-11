@@ -8,7 +8,7 @@ import {
 } from "@game/currencies/utils/get";
 import cappergyConfig from "@game/features/cappergy/config";
 import nuxarConfig from "@game/features/nuxar/config";
-import resetLayerConfig from "@game/resetLayers/config";
+import resetLayersConfig from "@game/resetLayers/config";
 import {
   canPerform,
   everPerformed,
@@ -36,7 +36,7 @@ const currencyGainFormulas: GainFormulaContainer = {
       return createDecimal(1).multiply(nullionEffect);
     },
     passiveGain: (_, gain) => {
-      return gain.multiply(resetLayerConfig.maxResetsPerSecond);
+      return gain.multiply(resetLayersConfig.maxResetsPerSecond);
     },
   },
   ampliflux: {
@@ -114,7 +114,7 @@ const currencyGainFormulas: GainFormulaContainer = {
       return createDecimal(1);
     },
     passiveGain: (_, gain) => {
-      return gain.multiply(resetLayerConfig.maxResetsPerSecond);
+      return gain.multiply(resetLayersConfig.maxResetsPerSecond);
     },
   },
   nullions: {

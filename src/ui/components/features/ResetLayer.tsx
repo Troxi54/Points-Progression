@@ -13,6 +13,7 @@ import { getCachedCurrencyProp } from "@game/currencies/utils/get";
 import { getPlayerState } from "@game/player/store";
 import { parseValueGetter } from "@game/player/utils";
 import {
+  getResetLayerCachedPlayerData,
   getResetLayerConfig,
   getResetLayerPlayerData,
   shouldResetLayerProgressBarLock,
@@ -42,7 +43,9 @@ function ResetLayerProgressBar({
     (state) => {
       const { mergedPlayer } = state;
 
-      const { everPerformed, resetsPerSecond } = getResetLayerPlayerData(
+      const { everPerformed } = getResetLayerPlayerData(state, resetLayerId);
+
+      const { resetsPerSecond } = getResetLayerCachedPlayerData(
         state,
         resetLayerId,
       );

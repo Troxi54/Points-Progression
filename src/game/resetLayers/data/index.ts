@@ -8,7 +8,7 @@ import tierResetLayer from "./layers/tier";
 import vermyrosResetLayer from "./layers/vermyros";
 import xagyrosResetLayer from "./layers/xagyros";
 
-const resetLayers = createResetLayerContainer({
+const resetLayerConfigs = createResetLayerContainer({
   normal: [
     resetResetLayer,
     tierResetLayer,
@@ -18,16 +18,16 @@ const resetLayers = createResetLayerContainer({
   sliph: [mallirtResetLayer, levelResetLayer, xagyrosResetLayer],
 } as const);
 
-export default resetLayers;
+export default resetLayerConfigs;
 
-export const flatResetLayers = {} as FlatResetLayerContainerConfig;
+export const resetLayerConfigsById = {} as FlatResetLayerContainerConfig;
 
-function buildFlatResetLayer() {
-  for (const dimensionLayers of Object.values(resetLayers)) {
+function buildResetLayerConfigsById() {
+  for (const dimensionLayers of Object.values(resetLayerConfigs)) {
     for (const layer of dimensionLayers) {
-      flatResetLayers[layer.id] = layer;
+      resetLayerConfigsById[layer.id] = layer;
     }
   }
 }
 
-buildFlatResetLayer();
+buildResetLayerConfigsById();

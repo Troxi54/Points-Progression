@@ -1,10 +1,11 @@
 import type { MergedPlayer } from "@game/player/merged/types";
-import resetLayerConfig from "../config";
-import resetLayers from "../data";
+import { objectKeys } from "@core/utils/object";
+import resetLayersConfig from "../config";
+import resetLayerConfigs, { resetLayerConfigsById } from "../data";
 import { triggerAllResetLayers } from "./trigger";
-import { updateResetLayer } from "./update";
+import { updateCachedResetLayer, updateOfflineResetLayer } from "./update";
 
-export function tickAllResetLayers(
+export function tickResetLayerTriggers(
   mergedPlayer: MergedPlayer,
   deltaTime: number,
 ) {
@@ -13,7 +14,7 @@ export function tickAllResetLayers(
   let accumulator = cachedPlayer.resetsAccumulator;
   accumulator += deltaTime;
 
-  const { maxResetsPerSecond } = resetLayerConfig;
+  const { maxResetsPerSecond } = resetLayersConfig;
   const minResetInterval = 1000 / maxResetsPerSecond;
 
   let resetsToApply = Math.floor(accumulator / minResetInterval);
@@ -29,11 +30,17 @@ export function tickAllResetLayers(
     accumulator -= resetsToApply * minResetInterval;
   }
 
-  for (const dimensionResetLayers of Object.values(resetLayers)) {
+  for (const dimensionResetLayers of Object.values(resetLayerConfigs)) {
     dimensionResetLayers.forEach((resetLayer) => {
-      updateResetLayer(mergedPlayer, resetLayer.id);
+      updateOfflineResetLayer(mergedPlayer, resetLayer.id);
     });
   }
 
   cachedPlayer.resetsAccumulator = accumulator;
+}
+
+export function tickResetLayerCache(mergedPlayer: MergedPlayer) {
+  for (const resetLayerId of objectKeys(resetLayerConfigsById)) {
+    updateCachedResetLayer(mergedPlayer, resetLayerId);
+  }
 }

@@ -10,5 +10,6 @@ export default function getDefaultResetLayerConfig(): DefaultResetLayerConfig {
     preventReset: false,
     canPerform: true,
     reward: () => ({}),
+    usesResetsCurrency: false,
   };
 }

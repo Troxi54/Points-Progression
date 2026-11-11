@@ -1,55 +1,42 @@
 import type { MergedPlayer } from "@game/player/merged/types";
 import type { ResetLayerId } from "../ids";
 import { getCurrentGameTime } from "@core/utils/gameTime";
-import { getResetLayerCachedPlayerData, getResetLayerPlayerData } from "./get";
+import { objectAssign } from "@core/utils/object";
+import { calculateResetsPerSecond } from "./calculate";
+import { getResetLayerConfig, getResetLayerPlayerData } from "./get";
 import { setResetLayerPlayerData } from "./set";
 
-export function updateResetLayer(
+export function updateOfflineResetLayer(
   mergedPlayer: MergedPlayer,
   resetLayerId: ResetLayerId,
 ) {
-  const { player, cachedPlayer } = mergedPlayer;
+  if (!getResetLayerConfig(resetLayerId).usesResetsCurrency) return;
+
+  const resetsPerSecond = calculateResetsPerSecond(mergedPlayer, resetLayerId);
+
+  setResetLayerPlayerData(mergedPlayer, resetLayerId, {
+    offlineResetsPerSecond: resetsPerSecond,
+  });
+}
+
+export function updateCachedResetLayer(
+  mergedPlayer: MergedPlayer,
+  resetLayerId: ResetLayerId,
+) {
+  const { cachedPlayer } = mergedPlayer;
 
   const currentData = getResetLayerPlayerData(mergedPlayer, resetLayerId);
-  const currentCachedData = getResetLayerCachedPlayerData(
-    mergedPlayer,
-    resetLayerId,
-  );
 
   const { startedDate } = currentData;
-  const { lastResetDuration } = currentCachedData;
 
   const currentTime = getCurrentGameTime(mergedPlayer);
   const currentDuration =
     startedDate === null ? null : currentTime - startedDate;
 
-  let resetsPerSecond: number;
-  const hasValidDuration =
-    typeof lastResetDuration === "number" &&
-    Number.isFinite(lastResetDuration) &&
-    lastResetDuration > 0 &&
-    typeof currentDuration === "number" &&
-    Number.isFinite(currentDuration);
+  const resetsPerSecond = calculateResetsPerSecond(mergedPlayer, resetLayerId);
 
-  const hasValidTimeSpeed =
-    Number.isFinite(cachedPlayer.timeSpeed) && cachedPlayer.timeSpeed > 0;
-
-  if (
-    !hasValidDuration ||
-    !hasValidTimeSpeed ||
-    currentDuration > lastResetDuration
-  ) {
-    resetsPerSecond = 0;
-  } else {
-    resetsPerSecond = (cachedPlayer.timeSpeed * 1000) / lastResetDuration;
-    if (!Number.isFinite(resetsPerSecond) || resetsPerSecond < 0) {
-      resetsPerSecond = 0;
-    }
-  }
-
-  setResetLayerPlayerData(player, resetLayerId, {
+  objectAssign(cachedPlayer.resetLayers[resetLayerId], {
+    duration: currentDuration,
     resetsPerSecond,
   });
-
-  cachedPlayer.resetLayers[resetLayerId].duration = currentDuration;
 }

@@ -73,6 +73,7 @@ const tierResetLayer = defineResetLayer<"normal">({
         : { madeTierTimes: player.madeTierTimes.plus(tierResetGain) }),
     });
   },
+  usesResetsCurrency: true,
 });
 
 export default tierResetLayer;

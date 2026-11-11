@@ -1,11 +1,13 @@
-import { ResetLayerPlayerDataSchema } from "@game/resetLayers/playerData";
+import { ResetLayerPlayerDataBaseSchema } from "@game/resetLayers/playerData";
 import * as z from "@zod/mini";
 
 export const InfiniteModeResetLayerPlayerDataSchema = z.omit(
-  ResetLayerPlayerDataSchema,
+  ResetLayerPlayerDataBaseSchema,
   {
     everPerformed: true,
     isFirstReset: true,
+    resetsPerSecond: true,
+    offlineResetsPerSecond: true,
   },
 );
 

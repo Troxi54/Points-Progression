@@ -50,10 +50,6 @@ const conversionData: Data = {
     setResetLayerPlayerData(player, "reset", { everPerformed: value }),
   autoresettingEnabled: ({ player }, value) =>
     setResetLayerPlayerData(player, "reset", { autoEnabled: value }),
-  approximateResetsPerSecond: ({ player }, value) =>
-    setResetLayerPlayerData(player, "reset", {
-      resetsPerSecond: parseFiniteNonNegativeNumber(value),
-    }),
   boughtFirstResetUpgrade: ({ player }, value) =>
     setUpgradeById(player, "reset_1", value),
   boughtSecondResetUpgrade: ({ player }, value) =>
@@ -68,7 +64,7 @@ const conversionData: Data = {
     setResetLayerPlayerData(player, "tier", { autoEnabled: value }),
   approximateTiersPerSecond: ({ player }, value) =>
     setResetLayerPlayerData(player, "tier", {
-      resetsPerSecond: parseFiniteNonNegativeNumber(value),
+      offlineResetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   boughtFirstTierUpgrade: ({ player }, value) =>
     setUpgradeById(player, "tier_1", value),
@@ -92,10 +88,6 @@ const conversionData: Data = {
     }),
   autoVermyrosEnabled: ({ player }, value) =>
     setResetLayerPlayerData(player, "vermyros", { autoEnabled: value }),
-  approximateVermyrosResetsPerSecond: ({ player }, value) =>
-    setResetLayerPlayerData(player, "vermyros", {
-      resetsPerSecond: parseFiniteNonNegativeNumber(value),
-    }),
   vermytesUpgradeLvl: ({ player }, value) =>
     setRepeatableUpgradeLevel(player, "vermyte", createDecimal(value)),
   boughtFirstVermyrosUpgrade: ({ player }, value) =>
@@ -130,7 +122,7 @@ const conversionData: Data = {
     setResetLayerPlayerData(player, "nullith", { autoEnabled: value }),
   approximateNullithResetsPerSecond: ({ player }, value) =>
     setResetLayerPlayerData(player, "nullith", {
-      resetsPerSecond: parseFiniteNonNegativeNumber(value),
+      offlineResetsPerSecond: parseFiniteNonNegativeNumber(value),
     }),
   boughtFirstNullithUpgrade: ({ player }, value) =>
     setUpgradeById(player, "nullith_1", value),
@@ -171,10 +163,6 @@ const conversionData: Data = {
     }),
   autoMallirtEnabled: ({ player }, value) =>
     setResetLayerPlayerData(player, "mallirt", { autoEnabled: value }),
-  approximateMallirtResetsPerSecond: ({ player }, value) =>
-    setResetLayerPlayerData(player, "mallirt", {
-      resetsPerSecond: parseFiniteNonNegativeNumber(value),
-    }),
   numberNotation: (_, value) => {
     const newValue =
       value === true ? "scientific" : value === false ? null : value;
