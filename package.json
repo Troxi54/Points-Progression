@@ -50,7 +50,7 @@
     "rollup-plugin-visualizer": "7.3.0",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",
-    "vite": "8.3.8",
+    "vite": "8.4.0",
     "vitest": "5.1.2"
   }
 }
